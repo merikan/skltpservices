@@ -28,7 +28,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.tp</groupId>
 	<artifactId>crm-carelisting-getavailablefacilities-test-producer</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>crm-carelisting-getavailablefacilities-test-producer</name>
 	<url>http://maven.apache.org</url>
 
@@ -44,7 +44,7 @@
  		<dependency>
 			<groupId>se.riv.crm.carelisting</groupId>
 			<artifactId>crm-carelisting-schemas</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 	
 	    <!-- cxf dependencies -->
