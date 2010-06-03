@@ -51,7 +51,7 @@
 			
             <outbound>
                 <pass-through-router>
-                        <https:outbound-endpoint 
+                        <http:outbound-endpoint 
                         	address="${hvalriks.url}#[payload]"
     	                	transformer-refs="carelist2Hval" 
 	    	        		responseTransformer-refs="hval2Carelist"

@@ -15,15 +15,13 @@ import se.skl.riv.crm.carelistingresponder.v1.getlisting.GetListingRequestType;
 import se.skl.riv.crm.carelistingresponder.v1.getlisting.GetListingResponseType;
 
 public class Consumer {
-
-	public static final int NO_OF_CALLS = 1; // 5
 	
 	private GetListingResponderInterface _service = null;
 
 	public static void main(String[] args) throws PersonNotFound, TechnicalException {
 		
 		ResourceBundle rb     = ResourceBundle.getBundle("hval");
-		String serviceAddress = rb.getString("CARELISTING_URL");
+		String serviceAddress = rb.getString("carelisting.url");
     	String personId       = "196210083611";
 
 		if (args.length > 0) {
@@ -39,17 +37,13 @@ public class Consumer {
 
 	private static void executeTestCall(String personId, String serviceAddress) throws PersonNotFound, TechnicalException {
 		System.out.println("Consumer connecting to "  + serviceAddress);
-		System.out.println("Warmup call...");
 		Consumer consumer = new Consumer(serviceAddress);
 		GetListingResponseType response = consumer.callService(personId);
 
-		System.out.println("Actual calls...");
-		for (int i = 0; i < NO_OF_CALLS; i++) {
-			long ts = System.currentTimeMillis();
-			response = consumer.callService(personId);
-			ts = System.currentTimeMillis() - ts;
-			printResult(response, ts);
-		}
+		long ts = System.currentTimeMillis();
+		response = consumer.callService(personId);
+		ts = System.currentTimeMillis() - ts;
+		printResult(response, ts);
 	}
 
 	private static void printResult(GetListingResponseType repsonse, long ts) {		
