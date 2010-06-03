@@ -4,18 +4,22 @@
 	xmlns="http://www.mulesource.org/schema/mule/core/2.2"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"	
 	xmlns:scripting="http://www.mulesource.org/schema/mule/scripting/2.2" 
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans         http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/context   http://www.springframework.org/schema/context/spring-context-2.5.xsd
 		http://www.mulesource.org/schema/mule/core/2.2      http://www.mulesource.org/schema/mule/core/2.2/mule.xsd
 		http://www.mulesource.org/schema/mule/scripting/2.2 http://www.mulesource.org/schema/mule/scripting/2.2/mule-scripting.xsd">
 
  	<object-to-string-transformer name="toString"/> 	
-  
+
+	<context:property-placeholder location="classpath:hval.properties" />
+	
 	<model name="carelisting-teststubs-model">
 		<service name="carelisting-testService-HVAL">
 			<inbound>
-				<inbound-endpoint address="${CARELISTING_HVAL_URL}" transformer-refs="toString" synchronous="true" />
+				<inbound-endpoint address="${hvalriks.url}" transformer-refs="toString" synchronous="true" />
 			</inbound>
 			
 			<scripting:component>
@@ -33,11 +37,11 @@
 							"12345" +                                                             // Postnummer
 							"STADEN                                  " +                          // Postadress
 							"2244" +                                                              // Församlingskod
-							"FÖRSAMLING                              " +                          // Församlings namn
+							"FoRSAMLING                              " +                          // Församlings namn
 							"3366" +                                                              // Kommunkod
 							"KOMMUN A                                " +                          // Kommun namn
 							"7799" +                                                              // Länskod
-							"LÄN X                                   " +                          // Länsnamn
+							"LAN X                                   " +                          // Länsnamn
 							"0" +    			                                                  // Hemlig adress
 							"1990-01-01" +    			                                          // Till och med datum
 							"003" +    			                                                  // Avregistreringsorsak
@@ -45,21 +49,21 @@
 							
 							"01" +    			                                                  // Listning 1 valtyp
 							"2423423876                                                      " +  // Listning 1 kod
-							"Vårdgivare A                            " +                          // Listning 1 namn
+							"Vardgivare A                            " +                          // Listning 1 namn
 							"2009-12-01" +   			                                          // Listning 1 anmälningsdatum
 							"232237375347598347                                              " +  // Listning 1 vårdenhetskod
-							"Vårdenhet X                             " +                          // Listning 1 vårdenhetsnamn
+							"Vardenhet X                             " +                          // Listning 1 vårdenhetsnamn
 							
 							"00" +   			                                                  // Listning 2 valtyp
 							"2423423876                                                      " +  // Listning 2 kod
-							"Vårdgivare A                            " +                          // Listning 2 namn
+							"Vardgivare A                            " +                          // Listning 2 namn
 							"2009-12-01" +   			                                          // Listning 2 anmälningsdatum
 							"232237375347598347                                              " +  // Listning 2 vårdenhetskod
-							"Vårdenhet X                             " +                          // Listning 2 vårdenhetsnamn
+							"Vardenhet X                             " +                          // Listning 2 vårdenhetsnamn
 							
 							"00" +   			                                                  // Listning 3 valtyp
 							"2423423876                                                      " +  // Listning 3 kod
-							"Vårdgivare A                            " +                          // Listning 3 namn
+							"Vardgivare A                            " +                          // Listning 3 namn
 							"2009-12-01" +   			                                          // Listning 3 anmälningsdatum
 							
 							"01" +    			                                                  // Olistning 1 valtyp
