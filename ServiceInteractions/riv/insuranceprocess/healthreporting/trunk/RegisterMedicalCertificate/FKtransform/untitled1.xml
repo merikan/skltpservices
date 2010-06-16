@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ns2:ProcessRequest xmlns:ns2="urn:riv:fk:sicknessreport:ProcessRequestResponder:1">
+    <ns2:lakarutlatande>
+        <ns1:lakarutlatande-id xmlns:ns1="urn:se:fk:sicknessreport:1"
+            extension="b3619b9f-5a42-4c0d-b47b-ce6d4160af8d" root="OID ?"/>
+        <ns1:typAvUtlatande xmlns:ns1="urn:se:fk:sicknessreport:1">Medicinskt underlag för bedömning
+            av förmåga att arbeta vid sjukdom</ns1:typAvUtlatande>
+        <ns1:patient xmlns:ns1="urn:se:fk:sicknessreport:1">
+            <ns1:person-id extension="197611222394" root="1.2.752.129.2.1.3.1"/>
+            <ns1:fornamn>Test</ns1:fornamn>
+            <ns1:mellannamn/>
+            <ns1:efternamn>Larsson</ns1:efternamn>
+        </ns1:patient>
+        <ns1:skapadAvHosPersonal xmlns:ns1="urn:se:fk:sicknessreport:1">
+            <ns1:personal-id extension="SE162321000024-0010330" root="1.2.752.129.2.1.4.1"/>
+            <ns1:fullstandigtNamn>Cambio Testperson 1,</ns1:fullstandigtNamn>
+            <ns1:enhet>
+                <ns1:enhets-id extension="Enköpings lasaretts HSA-ID" root="1.2.752.129.2.1.4.1"/>
+                <ns1:enhetsnamn>1 äldre/PSYK-T</ns1:enhetsnamn>
+                <ns1:postadress/>
+                <ns1:postnummer/>
+                <ns1:postort/>
+                <ns1:telefonnummer value=""/>
+                <ns1:vardgivare>
+                    <ns1:vardgivare-id extension="SE162321000024-0016208" root="1.2.752.129.2.1.4.1"/>
+                    <ns1:vardgivarnamn>Landstinget i Uppsala län</ns1:vardgivarnamn>
+                </ns1:vardgivare>
+            </ns1:enhet>
+            <ns1:signatur>
+                <ns1:signatur>SE162321000024-0010330</ns1:signatur>
+                <ns1:signeringstidpunkt value="2010-04-20 21:35:56"/>
+            </ns1:signatur>
+        </ns1:skapadAvHosPersonal>
+        <ns1:aktivitet xmlns:ns1="urn:se:fk:sicknessreport:1"/>
+        <ns1:aktivitet xmlns:ns1="urn:se:fk:sicknessreport:1"/>
+        <ns1:aktivitet xmlns:ns1="urn:se:fk:sicknessreport:1"/>
+        <ns1:bedomtTillstand xmlns:ns1="urn:se:fk:sicknessreport:1"/>
+        <ns1:medicinsktTillstand xmlns:ns1="urn:se:fk:sicknessreport:1">
+            <ns1:tillstandskod/>
+        </ns1:medicinsktTillstand>
+        <ns1:funktionstillstand xmlns:ns1="urn:se:fk:sicknessreport:1">
+            <ns1:typAvFunktionstillstand>Kroppsfunktion</ns1:typAvFunktionstillstand>
+        </ns1:funktionstillstand>
+        <ns1:funktionstillstand xmlns:ns1="urn:se:fk:sicknessreport:1">
+            <ns1:beskrivning>fdsfsdfsdf</ns1:beskrivning>
+            <ns1:typAvFunktionstillstand>Aktivitet</ns1:typAvFunktionstillstand>
+            <ns1:arbetsformaga>
+                <ns1:motivering>ffsfsfs</ns1:motivering>
+                <ns1:prognosangivelse>Aterstallas_helt</ns1:prognosangivelse>
+                <ns1:arbetsuppgift>
+                    <ns1:typAvArbetsuppgift>eweqe</ns1:typAvArbetsuppgift>
+                </ns1:arbetsuppgift>
+                <ns1:arbetsformagaNedsattning>
+                    <ns1:varaktighet>
+                        <ns1:low value="20100421"/>
+                        <ns1:high value="20100420"/>
+                    </ns1:varaktighet>
+                    <ns1:nedsattningsgrad>Nedsatt_med_1/4</ns1:nedsattningsgrad>
+                </ns1:arbetsformagaNedsattning>
+                <ns1:sysselsattning>
+                    <ns1:typAvSysselsattning>Forvarvsarbete</ns1:typAvSysselsattning>
+                </ns1:sysselsattning>
+            </ns1:arbetsformaga>
+        </ns1:funktionstillstand>
+    </ns2:lakarutlatande>
+</ns2:ProcessRequest>
