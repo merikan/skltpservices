@@ -35,8 +35,6 @@
 	<properties>
 		<cxf.version>2.1.2</cxf.version>
 		<schema.path>${basedir}/src/main/resources/schemas/business</schema.path>
-	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
  
  	<dependencies>    
