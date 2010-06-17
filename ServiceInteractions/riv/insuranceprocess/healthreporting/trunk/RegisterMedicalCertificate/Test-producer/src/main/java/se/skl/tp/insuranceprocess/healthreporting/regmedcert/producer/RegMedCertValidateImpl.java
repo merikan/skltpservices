@@ -546,7 +546,7 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
             }
 
             // Fält 14 - Signeringstidpunkt
-            if (inLakarutlatande.getSigneringsdatum() == null && !inLakarutlatande.getSigneringsdatum().isValid()) {
+            if (inLakarutlatande.getSigneringsdatum() == null || !inLakarutlatande.getSigneringsdatum().isValid()) {
                 validationErrors.add("Signeringsdatum must be set (14)");	            	
             }
             
