@@ -427,12 +427,22 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
         			validationErrors.add("Only one ckeckbox is allowed for field 7! Arbetslivsrehab aktuell, Arbetslivsrehab ej aktuell eller Arbetslivsrehab gar ej att bedoma.");	              	
                 }
                 
-                // Fält 8 - kryssruta 1-3 validera att någon är ikryssad!
+                // Fält 8a - kryssruta 1-3 validera att någon är ikryssad!
+                if (aktivitetFunktion.getArbetsformaga() == null || aktivitetFunktion.getArbetsformaga().getSysselsattning().size() == 0) {
+        			validationErrors.add("No arbetsformaga element found for field 8a!");	
+        			throw new Exception();                	
+                }
+                if (aktivitetFunktion.getArbetsformaga().getSysselsattning().size() == 0) {
+        			validationErrors.add("No sysselsattning element found for field 8a! Nuvarande arbete, arbestloshet or foraldraledig should be set.");	
+        			throw new Exception();                	
+                }
+                
+                // Fält 8a - kryssruta 1 validera att beskrivning finns om arbete är ikryssad
                 SysselsattningType arbete = findTypAvSysselsattning(aktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.NUVARANDE_ARBETE);
                 SysselsattningType arbetslos = findTypAvSysselsattning(aktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.ARBETSLOSHET);
                 SysselsattningType foraldraledig = findTypAvSysselsattning(aktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.FORALDRALEDIGHET);
-                if (arbete == null && arbetslos == null && foraldraledig == null) {
-        			validationErrors.add("No aktivitet element found for field 8a! Nuvarande arbete, arbestloshet or foraldraledig should be set.");	
+                if (arbete==null && arbetslos==null && foraldraledig==null) {
+        			validationErrors.add("No sysselsattning element found for field 8a! Nuvarande arbete, arbestloshet or foraldraledig should be set.");	
         			throw new Exception();                	
                 }
                 
@@ -447,16 +457,17 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
         			throw new Exception();                	
                 }
             }
-             // Fält 8 - kryssruta 4
+
+            // Fält 8b - kryssruta 1
             ArbetsformagaNedsattningType nedsatt14del =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v1.Nedsattningsgrad.NEDSATT_MED_1_4);
 
-            // Fält 8 - kryssruta 5
+            // Fält 8b - kryssruta 2
             ArbetsformagaNedsattningType nedsatthalften =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v1.Nedsattningsgrad.NEDSATT_MED_1_2);
             
-            // Fält 8 - kryssruta 6
+            // Fält 8b - kryssruta 3
             ArbetsformagaNedsattningType nedsatt34delar =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v1.Nedsattningsgrad.NEDSATT_MED_3_4);
 
-            // Fält 8 - kryssruta 8
+            // Fält 8b - kryssruta 4
             ArbetsformagaNedsattningType heltNedsatt =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v1.Nedsattningsgrad.HELT_NEDSATT);
 
             if (nedsatt14del == null && nedsatthalften == null && nedsatt34delar == null && heltNedsatt == null) {
