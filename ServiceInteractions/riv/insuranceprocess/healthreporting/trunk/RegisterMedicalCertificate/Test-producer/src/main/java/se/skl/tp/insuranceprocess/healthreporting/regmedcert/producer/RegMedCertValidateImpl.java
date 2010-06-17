@@ -109,7 +109,7 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
             String emuId = parameters.getLakarutlatande().getLakarutlatandeId();
             
             // Check skickat datum
-            if (inLakarutlatande.getSkickatDatum() == null && !inLakarutlatande.getSkickatDatum().isValid()) {
+            if (inLakarutlatande.getSkickatDatum() == null || !inLakarutlatande.getSkickatDatum().isValid()) {
 				validationErrors.add("No or wrong skickatDatum found!");				
             }
 
