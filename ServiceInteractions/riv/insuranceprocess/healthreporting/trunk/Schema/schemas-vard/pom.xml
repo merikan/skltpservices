@@ -96,26 +96,26 @@
 										<extraarg>-p</extraarg>
 										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
 										<extraarg>
-											urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:1:rivtabp20=se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v1.rivtabp20
+											urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2:rivtabp20=se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2.rivtabp20
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
-											urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:1=se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v1
+											urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2=se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
-											urn:riv:insuranceprocess:healthreporting:1=se.skl.riv.insuranceprocess.healthreporting.v1
+											urn:riv:insuranceprocess:healthreporting:2=se.skl.riv.insuranceprocess.healthreporting.v2
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
-											urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:1=se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v1
+											urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:2=se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
 											http://www.w3.org/2005/08/addressing=org.w3.wsaddressing10
 										</extraarg>
 									</extraargs>
-									<wsdl>${schema.path}/RegisterMedicalCertificateInteraction_1.0_rivtabp20.wsdl</wsdl>
+									<wsdl>${schema.path}/RegisterMedicalCertificateInteraction_2.0_rivtabp20.wsdl</wsdl>
 								</wsdlOption>																
 
 								<wsdlOption>

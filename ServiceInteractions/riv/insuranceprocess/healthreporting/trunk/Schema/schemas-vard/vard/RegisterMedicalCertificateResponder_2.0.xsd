@@ -19,15 +19,15 @@
  -->
 <xs:schema  
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:core="urn:riv:insuranceprocess:healthreporting:1"
-	xmlns:certificate="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:1"
-	xmlns:tns="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:1" 
-	targetNamespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:1" 
+	xmlns:core="urn:riv:insuranceprocess:healthreporting:2"
+	xmlns:certificate="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2"
+	xmlns:tns="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:2" 
+	targetNamespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:2" 
 	elementFormDefault="qualified" 
 	attributeFormDefault="unqualified" 
-	version="1.0">
+	version="2.0">
 
-	<xs:import namespace="urn:riv:insuranceprocess:healthreporting:1" schemaLocation="MU7263-RIV_2.0.xsd"/>
+	<xs:import namespace="urn:riv:insuranceprocess:healthreporting:2" schemaLocation="MU7263-RIV_2.0.xsd"/>
 	
 	<xs:element name="RegisterMedicalCertificate"           type="tns:RegisterMedicalCertificateType"/>
 	<xs:element name="RegisterMedicalCertificateResponse"   type="tns:RegisterMedicalCertificateResponseType"/>
