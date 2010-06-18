@@ -40,10 +40,10 @@
 	<model>
 		<service name="RegisterMedicalCertificate-service">
 			<inbound>
-				<cxf:inbound-endpoint address="https://${tp.host}:${tp.port}/${tp.baseUri}/RegisterMedicalCertificate/1/rivtabp20"
-					wsdlLocation="classpath:/schemas/RegisterMedicalCertificateInteraction_1.0_rivtabp20.wsdl"
+				<cxf:inbound-endpoint address="https://${tp.host}:${tp.port}/${tp.baseUri}/RegisterMedicalCertificate/2/rivtabp20"
+					wsdlLocation="classpath:/schemas/RegisterMedicalCertificateInteraction_2.0_rivtabp20.wsdl"
 					serviceName="RegisterMedicalCertificateResponderService"
-					namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:1:rivtabp20"
+					namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2:rivtabp20"
 					proxy="true"
 					payload="envelope"
 					synchronous="true"

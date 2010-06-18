@@ -29,8 +29,8 @@ public class RegMedCertProducer {
     protected RegMedCertProducer() throws Exception {
         System.out.println("Starting Producer");
 
-        Object implementor = new RegMedCertImpl();
-        String address = "https://localhost:21000/vp/RegisterMedicalCertificate/1/rivtabp20";
+        Object implementor = new RegMedCertValidateImpl();
+        String address = "https://localhost:21000/vp/RegisterMedicalCertificate/2/rivtabp20";
         Endpoint.publish(address, implementor);
     }
 

@@ -1,9 +1,5 @@
 package se.skl.tp.regmedcert.transformers;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,11 +14,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.stream.FactoryConfigurationError;
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.XMLStreamWriter;
 
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -72,19 +64,20 @@ import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Planering.Behandling;
 import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Rekommendationer.Rekommendation;
 import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Status.Basering;
 import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Status.Basering.Ursprung;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v1.RegisterMedicalCertificateType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.AktivitetType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.Aktivitetskod;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ArbetsformagaNedsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.FunktionstillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.Prognosangivelse;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ReferensType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.Referenstyp;
-import se.skl.riv.insuranceprocess.healthreporting.v1.SysselsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.TypAvFunktionstillstand;
-import se.skl.riv.insuranceprocess.healthreporting.v1.TypAvSysselsattning;
-import se.skl.riv.insuranceprocess.healthreporting.v1.VardkontaktType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.Vardkontakttyp;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.AktivitetType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.Aktivitetskod;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ArbetsformagaNedsattningType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.FunktionstillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.Prognosangivelse;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ReferensType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.Referenstyp;
+import se.skl.riv.insuranceprocess.healthreporting.v2.SysselsattningType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.TypAvFunktionstillstand;
+import se.skl.riv.insuranceprocess.healthreporting.v2.TypAvSysselsattning;
+import se.skl.riv.insuranceprocess.healthreporting.v2.VardkontaktType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.Vardkontakttyp;
+
 
 public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 {
@@ -148,10 +141,10 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
             SysselsattningType inArbete = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.NUVARANDE_ARBETE);
             SysselsattningType inArbetslos = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.ARBETSLOSHET);
             SysselsattningType inForaldraledig = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.FORALDRALEDIGHET);
-            ArbetsformagaNedsattningType nedsatt14del =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v1.Nedsattningsgrad.NEDSATT_MED_1_2);
-            ArbetsformagaNedsattningType nedsatthalften =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v1.Nedsattningsgrad.NEDSATT_MED_1_2);
-            ArbetsformagaNedsattningType nedsatt34delar =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v1.Nedsattningsgrad.NEDSATT_MED_3_4);
-            ArbetsformagaNedsattningType heltNedsatt =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v1.Nedsattningsgrad.HELT_NEDSATT);
+            ArbetsformagaNedsattningType nedsatt14del =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v2.Nedsattningsgrad.NEDSATT_MED_1_2);
+            ArbetsformagaNedsattningType nedsatthalften =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v2.Nedsattningsgrad.NEDSATT_MED_1_2);
+            ArbetsformagaNedsattningType nedsatt34delar =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v2.Nedsattningsgrad.NEDSATT_MED_3_4);
+            ArbetsformagaNedsattningType heltNedsatt =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v2.Nedsattningsgrad.HELT_NEDSATT);
             String inMotivering = inAktivitetFunktion.getArbetsformaga().getMotivering();
             boolean inPrognosAterfaHelt = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_HELT) == 0;
             boolean inPrognosAterfaDelvis = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_DELVIS) == 0;
@@ -580,7 +573,7 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 		return foundSysselsattningType;
 	}	
 
-	private ArbetsformagaNedsattningType findArbetsformaga(List arbetsformaga, se.skl.riv.insuranceprocess.healthreporting.v1.Nedsattningsgrad arbetsformagaNedsattningTyp) {
+	private ArbetsformagaNedsattningType findArbetsformaga(List arbetsformaga, se.skl.riv.insuranceprocess.healthreporting.v2.Nedsattningsgrad arbetsformagaNedsattningTyp) {
 		ArbetsformagaNedsattningType foundArbetsformagaType = null;
 		for (int i = 0; i< arbetsformaga.size(); i++) {
 			ArbetsformagaNedsattningType listArbetsformaga = (ArbetsformagaNedsattningType)arbetsformaga.get(i);

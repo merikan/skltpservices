@@ -35,37 +35,38 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.w3.wsaddressing10.AttributedURIType;
 
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v1.rivtabp20.RegisterMedicalCertificateResponderInterface;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v1.rivtabp20.RegisterMedicalCertificateResponderService;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v1.RegisterMedicalCertificateResponseType;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v1.RegisterMedicalCertificateType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.AktivitetType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.Aktivitetskod;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ArbetsformagaNedsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ArbetsformagaType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ArbetsuppgiftType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.BedomtTillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.CD;
-import se.skl.riv.insuranceprocess.healthreporting.v1.EnhetType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.FunktionstillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.HosPersonalType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.II;
-import se.skl.riv.insuranceprocess.healthreporting.v1.LakarutlatandeType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.MedicinsktTillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.Nedsattningsgrad;
-import se.skl.riv.insuranceprocess.healthreporting.v1.PatientType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.Prognosangivelse;
-import se.skl.riv.insuranceprocess.healthreporting.v1.SysselsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.TypAvFunktionstillstand;
-import se.skl.riv.insuranceprocess.healthreporting.v1.TypAvSysselsattning;
-import se.skl.riv.insuranceprocess.healthreporting.v1.VardgivareType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.VardkontaktType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.Vardkontakttyp;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2.rivtabp20.RegisterMedicalCertificateResponderInterface;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2.rivtabp20.RegisterMedicalCertificateResponderService;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateResponseType;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.AktivitetType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.Aktivitetskod;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ArbetsformagaNedsattningType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ArbetsformagaType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ArbetsuppgiftType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.BedomtTillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.CD;
+import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.FunktionstillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.II;
+import se.skl.riv.insuranceprocess.healthreporting.v2.LakarutlatandeType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.MedicinsktTillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.Nedsattningsgrad;
+import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.Prognosangivelse;
+import se.skl.riv.insuranceprocess.healthreporting.v2.SysselsattningType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.TypAvFunktionstillstand;
+import se.skl.riv.insuranceprocess.healthreporting.v2.TypAvSysselsattning;
+import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.VardkontaktType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.Vardkontakttyp;
+
 
 public final class RegMedCertConsumer {
 
 	// Use this one to connect via Virtualiseringsplattformen
-	private static final String LOGISK_ADDRESS = "/RegisterMedicalCertificate/1/rivtabp20";
+	private static final String LOGISK_ADDRESS = "/RegisterMedicalCertificate/2/rivtabp20";
 
 	// Use this one to connect directly (just for test)
 

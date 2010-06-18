@@ -17,9 +17,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import se.fk.vardgivare.sjukvard.taemotlakarintygresponder.v1.TaEmotLakarintygResponseType;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v1.RegisterMedicalCertificateResponseType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ResultCodeEnum;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ResultOfCall;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateResponseType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
+
+
 
 public class Fk2VardTransformer extends AbstractMessageAwareTransformer
 {
@@ -94,7 +96,7 @@ public class Fk2VardTransformer extends AbstractMessageAwareTransformer
 				// Transform the JAXB object into a XML payload
 	            StringWriter writer = new StringWriter();
 	        	Marshaller marshaller = JAXBContext.newInstance(RegisterMedicalCertificateResponseType.class).createMarshaller();
-	        	marshaller.marshal(new JAXBElement(new QName("urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:1", "RegisterMedicalCertificateResponse"), RegisterMedicalCertificateResponseType.class, outResponse), writer);
+	        	marshaller.marshal(new JAXBElement(new QName("urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:2", "RegisterMedicalCertificateResponse"), RegisterMedicalCertificateResponseType.class, outResponse), writer);
 				logger.debug("Extracted information: {}", writer.toString());
 				String payload = (String)writer.toString();
 				if (payload.startsWith("<?")) {

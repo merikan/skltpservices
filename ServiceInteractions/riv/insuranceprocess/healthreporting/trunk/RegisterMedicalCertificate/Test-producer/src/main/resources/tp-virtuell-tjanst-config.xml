@@ -34,7 +34,7 @@
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://localhost:10000/test/RegisterMedicalCertificate"
-					wsdlLocation="classpath:/schemas/RegisterMedicalCertificateInteraction_1.0_rivtabp20.wsdl"/>
+					wsdlLocation="classpath:/schemas/RegisterMedicalCertificateInteraction_2.0_rivtabp20.wsdl"/>
 			</inbound>
 
 			<component>

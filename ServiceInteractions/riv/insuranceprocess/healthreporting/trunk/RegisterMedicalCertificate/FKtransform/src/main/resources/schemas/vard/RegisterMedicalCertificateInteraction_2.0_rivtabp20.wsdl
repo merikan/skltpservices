@@ -26,16 +26,18 @@
 	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
 	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
 	xmlns:wsa="http://www.w3.org/2005/08/addressing" 
-	xmlns:tjs="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:1" 
-	xmlns:tns="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:1:rivtabp20"
-	targetNamespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:1:rivtabp20">
+	xmlns:tjs="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:2" 
+	xmlns:tns="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2:rivtabp20"
+	targetNamespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2:rivtabp20">
 
 	<xs:annotation>
 		<xs:documentation>
 			Tjänsteinteraktionens namn: RegisterMedicalCertificateInteraction
 			Beskrivning: 
 				Interaction to register a new medical certificate.
-			Revisioner: 2009-12-04 Version 1.0, Mats Ekhammar - Callista Enterprise AB
+			Revisioner: 
+				2009-12-04 Version 1.0, Mats Ekhammar - Callista Enterprise AB
+				2010-06-18 Version 2.0, Mats Ekhammar - Callista Enterprise AB
 			Tjänstedomän: insuranceprocess:healthreporting
 			Tjänsteinteraktionstyp: Fråga-svar
 			RIV Teknisk Anvisning: Basic Profile 2.0
@@ -45,7 +47,7 @@
 
 	<wsdl:types>
 		<xs:schema>
-			<xs:import schemaLocation="RegisterMedicalCertificateResponder_1.0.xsd" namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:1"/>
+			<xs:import schemaLocation="RegisterMedicalCertificateResponder_2.0.xsd" namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:2"/>
 		</xs:schema>
 		<xs:schema>
 			<xs:import schemaLocation="ws-addressing-1.0.xsd" namespace="http://www.w3.org/2005/08/addressing"/>

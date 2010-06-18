@@ -36,30 +36,30 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.w3.wsaddressing10.AttributedURIType;
 
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v1.rivtabp20.RegisterMedicalCertificateResponderInterface;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v1.RegisterMedicalCertificateResponseType;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v1.RegisterMedicalCertificateType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.AktivitetType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.Aktivitetskod;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ArbetsformagaNedsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ArbetsuppgiftType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.EnhetType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.FunktionstillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.HosPersonalType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.LakarutlatandeType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.MedicinsktTillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.PatientType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.Prognosangivelse;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ReferensType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.Referenstyp;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ResultCodeEnum;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ResultOfCall;
-import se.skl.riv.insuranceprocess.healthreporting.v1.SysselsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.TypAvFunktionstillstand;
-import se.skl.riv.insuranceprocess.healthreporting.v1.TypAvSysselsattning;
-import se.skl.riv.insuranceprocess.healthreporting.v1.VardgivareType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.VardkontaktType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.Vardkontakttyp;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2.rivtabp20.RegisterMedicalCertificateResponderInterface;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateResponseType;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.AktivitetType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.Aktivitetskod;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ArbetsformagaNedsattningType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ArbetsuppgiftType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.FunktionstillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.LakarutlatandeType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.MedicinsktTillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.Prognosangivelse;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ReferensType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.Referenstyp;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
+import se.skl.riv.insuranceprocess.healthreporting.v2.SysselsattningType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.TypAvFunktionstillstand;
+import se.skl.riv.insuranceprocess.healthreporting.v2.TypAvSysselsattning;
+import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.VardkontaktType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.Vardkontakttyp;
 /**
  * Validation class that will certify a webservice call made for MU7263. We will check mandatory/optional fields and all other declared rules.
  * @author matsek
@@ -68,10 +68,10 @@ import se.skl.riv.insuranceprocess.healthreporting.v1.Vardkontakttyp;
 
 @WebService(
 		serviceName = "RegisterMedicalCertificateResponderService", 
-		endpointInterface="se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v1.rivtabp20.RegisterMedicalCertificateResponderInterface", 
+		endpointInterface="se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2.rivtabp20.RegisterMedicalCertificateResponderInterface", 
 		portName = "RegisterMedicalCertificateResponderPort", 
-		targetNamespace = "urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:1:rivtabp20",
-		wsdlLocation = "schemas/RegisterMedicalCertificateInteraction_1.0_rivtabp20.wsdl")
+		targetNamespace = "urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2:rivtabp20",
+		wsdlLocation = "schemas/RegisterMedicalCertificateInteraction_2.0_rivtabp20.wsdl")
 public class RegMedCertValidateImpl implements RegisterMedicalCertificateResponderInterface {
 
 	public RegisterMedicalCertificateResponseType registerMedicalCertificate(
@@ -459,16 +459,16 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
             }
 
             // Fält 8b - kryssruta 1
-            ArbetsformagaNedsattningType nedsatt14del =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v1.Nedsattningsgrad.NEDSATT_MED_1_4);
+            ArbetsformagaNedsattningType nedsatt14del =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v2.Nedsattningsgrad.NEDSATT_MED_1_4);
 
             // Fält 8b - kryssruta 2
-            ArbetsformagaNedsattningType nedsatthalften =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v1.Nedsattningsgrad.NEDSATT_MED_1_2);
+            ArbetsformagaNedsattningType nedsatthalften =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v2.Nedsattningsgrad.NEDSATT_MED_1_2);
             
             // Fält 8b - kryssruta 3
-            ArbetsformagaNedsattningType nedsatt34delar =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v1.Nedsattningsgrad.NEDSATT_MED_3_4);
+            ArbetsformagaNedsattningType nedsatt34delar =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v2.Nedsattningsgrad.NEDSATT_MED_3_4);
 
             // Fält 8b - kryssruta 4
-            ArbetsformagaNedsattningType heltNedsatt =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v1.Nedsattningsgrad.HELT_NEDSATT);
+            ArbetsformagaNedsattningType heltNedsatt =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.v2.Nedsattningsgrad.HELT_NEDSATT);
 
             if (nedsatt14del == null && nedsatthalften == null && nedsatt34delar == null && heltNedsatt == null) {
             	validationErrors.add("No arbetsformaganedsattning element found 8b!.");	
@@ -662,7 +662,7 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 		return foundSysselsattningType;
 	}	
 
-	private ArbetsformagaNedsattningType findArbetsformaga(List arbetsformaga, se.skl.riv.insuranceprocess.healthreporting.v1.Nedsattningsgrad arbetsformagaNedsattningTyp) {
+	private ArbetsformagaNedsattningType findArbetsformaga(List arbetsformaga, se.skl.riv.insuranceprocess.healthreporting.v2.Nedsattningsgrad arbetsformagaNedsattningTyp) {
 		ArbetsformagaNedsattningType foundArbetsformagaType = null;
 		if (arbetsformaga != null) {
 			for (int i = 0; i< arbetsformaga.size(); i++) {

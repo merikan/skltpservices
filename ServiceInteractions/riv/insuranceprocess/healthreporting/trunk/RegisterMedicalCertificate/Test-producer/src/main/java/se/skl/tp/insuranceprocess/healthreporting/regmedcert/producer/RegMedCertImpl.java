@@ -24,19 +24,19 @@ import javax.jws.WebService;
 
 import org.w3.wsaddressing10.AttributedURIType;
 
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v1.rivtabp20.RegisterMedicalCertificateResponderInterface;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v1.RegisterMedicalCertificateResponseType;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v1.RegisterMedicalCertificateType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ResultCodeEnum;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ResultOfCall;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2.rivtabp20.RegisterMedicalCertificateResponderInterface;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateResponseType;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
 
 
 @WebService(
 		serviceName = "RegisterMedicalCertificateResponderService", 
-		endpointInterface="se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v1.rivtabp20.RegisterMedicalCertificateResponderInterface", 
+		endpointInterface="se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2.rivtabp20.RegisterMedicalCertificateResponderInterface", 
 		portName = "RegisterMedicalCertificateResponderPort", 
-		targetNamespace = "urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:1:rivtabp20",
-		wsdlLocation = "schemas/RegisterMedicalCertificateInteraction_1.0_rivtabp20.wsdl")
+		targetNamespace = "urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2:rivtabp20",
+		wsdlLocation = "schemas/RegisterMedicalCertificateInteraction_2.0_rivtabp20.wsdl")
 public class RegMedCertImpl implements RegisterMedicalCertificateResponderInterface {
 
 	public RegisterMedicalCertificateResponseType registerMedicalCertificate(
