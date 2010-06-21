@@ -463,7 +463,8 @@ public final class RegMedCertConsumer {
 
 		try {
 			GregorianCalendar fromDate = new GregorianCalendar();
-			DateFormat dfm = new SimpleDateFormat("yyyyMMdd");
+			DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd");
+			dfm.setLenient(false);
 			Date date = dfm.parse(stringDate);
 			fromDate.setTime(date);
 			return (DatatypeFactory.newInstance().newXMLGregorianCalendar(fromDate));
