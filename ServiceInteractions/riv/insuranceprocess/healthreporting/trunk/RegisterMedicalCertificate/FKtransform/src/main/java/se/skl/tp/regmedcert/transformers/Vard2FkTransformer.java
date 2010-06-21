@@ -153,8 +153,7 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
             boolean inResorJa = findAktivitetWithCode(inRequest.getLakarutlatande().getAktivitet(), Aktivitetskod.FORANDRAT_RESSATT_TILL_ARBETSPLATSEN_AR_AKTUELLT) != null;
             boolean inResorNej = findAktivitetWithCode(inRequest.getLakarutlatande().getAktivitet(), Aktivitetskod.FORANDRAT_RESSATT_TILL_ARBETSPLATSEN_AR_EJ_AKTUELLT) != null;
             boolean inKontaktFK = findAktivitetWithCode(inRequest.getLakarutlatande().getAktivitet(), Aktivitetskod.KONTAKT_MED_FORSAKRINGSKASSAN_AR_AKTUELL) != null;
-            String inKommentar = inRequest.getLakarutlatande().getKommentar();
-            
+            String inKommentar = inRequest.getLakarutlatande().getKommentar();            
             
             // Create new JAXB object for the outgoing data
             TaEmotLakarintygType outRequest = new TaEmotLakarintygType();
@@ -242,7 +241,7 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
             // Skickades tidpunkt
             adressering.setSkickades(inSkickadesTid);
             
-            /********* Mottagare *******/             
+            /********* Fält *******/             
             // Smittskydd - Fält 1
         	Smittskydd smittskydd = new Smittskydd();
         	lakarintyg.setSmittskydd(smittskydd);		// Element should always be set!
