@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by Viktor Jernelöv (Mawell Svenska AB) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns="urn:riv:insuranceprocess:healthreporting:2" 
-	targetNamespace="urn:riv:insuranceprocess:healthreporting:2" 
+	xmlns:core="urn:riv:insuranceprocess:healthreporting:1"
+	xmlns:iso="urn:iso:21090:dt:1"
+	xmlns="urn:riv:insuranceprocess:healthreporting:mu7263:2" 
+	targetNamespace="urn:riv:insuranceprocess:healthreporting:mu7263:2" 
 	elementFormDefault="qualified"
-	attributeFormDefault="unqualified">
+	attributeFormDefault="unqualified"
+	version="2.0">
 
-	<xs:include schemaLocation="Insuranceprocess_healthreporting_1.0.xsd"/>
-
+	<xs:import namespace="urn:riv:insuranceprocess:healthreporting:1" schemaLocation="Insuranceprocess_healthreporting_1.0.xsd"/>
+	<xs:import namespace="urn:iso:21090:dt:1" schemaLocation="ISO_dt_subset_1.0.xsd"/>
+	
 	<xs:element name="lakarutlatande" type="lakarutlatandeType">
 		<xs:annotation>
 			<xs:documentation>Root-elementet för informationsinnehållet i MU7263. Klassen motsvarar i dagsläget själva blanketten</xs:documentation>
@@ -154,14 +158,15 @@
 					<xs:documentation>Datum och klockslag när läkarintyget skickades av systemet.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="patient" type="patientType"/>
-			<xs:element name="skapadAvHosPersonal" type="hosPersonalType"/>
+			<xs:element name="patient" type="core:patientType"/>
+			<xs:element name="skapadAvHosPersonal" type="core:hosPersonalType"/>
 			<xs:element name="vardkontakt" type="vardkontaktType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="referens" type="referensType" minOccurs="0" maxOccurs="2"/>
 			<xs:element name="aktivitet" type="aktivitetType" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="bedomtTillstand" type="bedomtTillstandType" minOccurs="0"/>
 			<xs:element name="medicinsktTillstand" type="medicinsktTillstandType" minOccurs="0"/>
 			<xs:element name="funktionstillstand" type="funktionstillstandType" minOccurs="0" maxOccurs="2"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="vardkontaktType">
@@ -179,6 +184,7 @@
 					<xs:documentation>Mappas mot fält 4 del 2 på blanketten (de två översta alternativen under "Datum")</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="referensType">
@@ -196,6 +202,7 @@
 					<xs:documentation>Mappas mot fält 4 del 2 på blanketten (de två nedersta alternativen under "Datum")</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="aktivitetType">
@@ -213,6 +220,7 @@
 					<xs:documentation>Mappas mot fält 6 i de fall aktivitetskod motsvarar någon av de kryss som har möjlighet att definieras tydligare (de med en linje efter sig).</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="bedomtTillstandType">
@@ -225,6 +233,7 @@
 					<xs:documentation>Mappas mot fält 3</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="medicinsktTillstandType">
@@ -237,11 +246,12 @@
 					<xs:documentation>Mappas mot fält 2</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="tillstandskod" type="CD" minOccurs="0">
+			<xs:element name="tillstandskod" type="iso:CD" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Mappas mot fält 2 del 2 (ICD-10-koden)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="funktionstillstandType">
@@ -260,6 +270,7 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="arbetsformaga" type="arbetsformagaType" minOccurs="0"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="arbetsformagaType">
@@ -272,6 +283,7 @@
 			<xs:element name="arbetsuppgift" type="arbetsuppgiftType" minOccurs="0"/>
 			<xs:element name="arbetsformagaNedsattning" type="arbetsformagaNedsattningType" maxOccurs="4"/>
 			<xs:element name="sysselsattning" type="sysselsattningType" minOccurs="0" maxOccurs="3"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="arbetsuppgiftType">
@@ -284,6 +296,7 @@
 					<xs:documentation>Mappas mot fält 8, de två översta strecken till höger</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="arbetsformagaNedsattningType">
@@ -306,6 +319,7 @@
 					<xs:documentation>Mappas mot fält 8, de fyra nedersta kryssrutorna</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="sysselsattningType">
@@ -318,6 +332,7 @@
 					<xs:documentation>Mappas mot fält 8, de tre översta kryssrutorna</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

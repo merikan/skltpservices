@@ -104,7 +104,15 @@
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
-											urn:riv:insuranceprocess:healthreporting:2=se.skl.riv.insuranceprocess.healthreporting.v2
+											urn:riv:insuranceprocess:healthreporting:mu7263:2=se.skl.riv.insuranceprocess.healthreporting.mu7263.v2
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:1=se.skl.riv.insuranceprocess.healthreporting.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:iso:21090:dt:1=iso.v21090.dt.v1
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
@@ -131,6 +139,14 @@
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:qa:1=se.skl.riv.insuranceprocess.healthreporting.qa.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:iso:21090:dt:1=iso.v21090.dt.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
 											urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateAnswerResponder:1=se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificateanswerresponder.v1
 										</extraarg>
 										<extraarg>-p</extraarg>
@@ -151,6 +167,14 @@
 										<extraarg>-p</extraarg>
 										<extraarg>
 											urn:riv:insuranceprocess:healthreporting:1=se.skl.riv.insuranceprocess.healthreporting.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:qa:1=se.skl.riv.insuranceprocess.healthreporting.qa.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:iso:21090:dt:1=iso.v21090.dt.v1
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>

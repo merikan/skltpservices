@@ -27,8 +27,8 @@ import org.w3.wsaddressing10.AttributedURIType;
 import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2.rivtabp20.RegisterMedicalCertificateResponderInterface;
 import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateResponseType;
 import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
-import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
+import se.skl.riv.insuranceprocess.healthreporting.v1.ResultCodeEnum;
+import se.skl.riv.insuranceprocess.healthreporting.v1.ResultOfCall;
 
 
 @WebService(

@@ -20,6 +20,9 @@
  */
 package se.skl.tp.insuranceprocess.healthreporting.regmedcert.consumer;
 
+import iso.v21090.dt.v1.CD;
+import iso.v21090.dt.v1.II;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -35,32 +38,30 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.w3.wsaddressing10.AttributedURIType;
 
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.AktivitetType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Aktivitetskod;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.ArbetsformagaNedsattningType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.ArbetsformagaType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.ArbetsuppgiftType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.BedomtTillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.FunktionstillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.LakarutlatandeType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.MedicinsktTillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Prognosangivelse;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.SysselsattningType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.TypAvFunktionstillstand;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.TypAvSysselsattning;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.VardkontaktType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Vardkontakttyp;
 import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2.rivtabp20.RegisterMedicalCertificateResponderInterface;
 import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2.rivtabp20.RegisterMedicalCertificateResponderService;
 import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateResponseType;
 import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.AktivitetType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.Aktivitetskod;
-import se.skl.riv.insuranceprocess.healthreporting.v2.ArbetsformagaNedsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.ArbetsformagaType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.ArbetsuppgiftType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.BedomtTillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.CD;
-import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.FunktionstillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.II;
-import se.skl.riv.insuranceprocess.healthreporting.v2.LakarutlatandeType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.MedicinsktTillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.Nedsattningsgrad;
-import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.Prognosangivelse;
-import se.skl.riv.insuranceprocess.healthreporting.v2.SysselsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.TypAvFunktionstillstand;
-import se.skl.riv.insuranceprocess.healthreporting.v2.TypAvSysselsattning;
-import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.VardkontaktType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.Vardkontakttyp;
+import se.skl.riv.insuranceprocess.healthreporting.v1.EnhetType;
+import se.skl.riv.insuranceprocess.healthreporting.v1.HosPersonalType;
+import se.skl.riv.insuranceprocess.healthreporting.v1.PatientType;
+import se.skl.riv.insuranceprocess.healthreporting.v1.VardgivareType;
 
 
 public final class RegMedCertConsumer {
