@@ -107,12 +107,9 @@ public class Fk2VardTransformer extends AbstractMessageAwareTransformer
 				result.append(payload);
 			}
 
-			// Now wrap it into a soap-envelope
-			result = createSoapEnvelope(result);
-
 			// Done, return the string
 			String resultStr = result.toString();
-			logger.debug("Return SOAP Envelope: {}", resultStr);
+			logger.debug("Return SOAP Body: {}", resultStr);
 			return resultStr;
 
 		} catch (Exception e) {
@@ -125,16 +122,5 @@ public class Fk2VardTransformer extends AbstractMessageAwareTransformer
 		result.append("<faultcode>soap:Server</faultcode>");
 		result.append("<faultstring>VP009 Exception when calling the service producer: " + errorText + "</faultstring>");
 		result.append("</soap:Fault>");
-	}
-	
-	private StringBuffer createSoapEnvelope(StringBuffer result) {
-		StringBuffer envelope = new StringBuffer(); 
-		envelope.append("<?xml version='1.0' encoding='UTF-8'?>");
-		envelope.append("<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">");
-		envelope.append("<soap:Body>");
-		envelope.append(result);
-		envelope.append("</soap:Body>");
-		envelope.append("</soap:Envelope>");
-		return envelope;
 	}
 }
