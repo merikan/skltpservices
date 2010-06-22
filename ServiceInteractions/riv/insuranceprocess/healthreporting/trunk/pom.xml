@@ -32,7 +32,7 @@
 
 	<modules>
 	 <module>Schema</module> 
-<!--	 <module>TaEmotLakarintyg</module> -->
+	 <module>TaEmotLakarintyg</module>
 <!--	 <module>TaEmotFraga</module> -->
 <!--	 <module>TaEmotSvar</module> -->
 	 <module>RegisterMedicalCertificate</module>
