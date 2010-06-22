@@ -37,10 +37,10 @@
 		<service name="fk-varden-registermedicalcertificate-service">
 			<inbound>
 				<cxf:inbound-endpoint 
-					address="http://localhost:12000/transformVardFk"
-					wsdlLocation="classpath:/schemas/vard/RegisterMedicalCertificateInteraction_1.0_rivtabp20.wsdl"
+					address="http://localhost:10000/adapter/transformVardFk"
+					wsdlLocation="classpath:/schemas/vard/RegisterMedicalCertificateInteraction_2.0_rivtabp20.wsdl"
 					serviceName="RegisterMedicalCertificateResponderService"
-					namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:1:rivtabp20"
+					namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2:rivtabp20"
 					proxy="true" 
 
 					synchronous="true"
@@ -53,7 +53,7 @@
 			<outbound>
                 <pass-through-router>
                         <cxf:outbound-endpoint 
-                        	address="https://localhost:19000/fk/SkickaLakarintyg/1/rivtabp20" 
+                        	address="https://localhost:19000/fk/TaEmotLakarintyg/1/rivtabp20" 
                         	wsdlLocation="classpath:/schemas/fk/TaEmotLakarintygInteraction_1.0_rivtabp20.wsdl"
                         	wsdlPort="TaEmotLakarintygResponderPort"
                         	operation="TaEmotLakarintyg" 
