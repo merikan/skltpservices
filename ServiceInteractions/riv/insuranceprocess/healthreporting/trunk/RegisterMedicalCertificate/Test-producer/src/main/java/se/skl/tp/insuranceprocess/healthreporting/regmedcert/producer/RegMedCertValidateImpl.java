@@ -20,19 +20,13 @@
  */
 package se.skl.tp.insuranceprocess.healthreporting.regmedcert.producer;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import iso.v21090.dt.v1.II;
+
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.jws.WebService;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.w3.wsaddressing10.AttributedURIType;
 
@@ -60,6 +54,7 @@ import se.skl.riv.insuranceprocess.healthreporting.v1.PatientType;
 import se.skl.riv.insuranceprocess.healthreporting.v1.ResultCodeEnum;
 import se.skl.riv.insuranceprocess.healthreporting.v1.ResultOfCall;
 import se.skl.riv.insuranceprocess.healthreporting.v1.VardgivareType;
+
 /**
  * Validation class that will certify a webservice call made for MU7263. We will check mandatory/optional fields and all other declared rules.
  * @author matsek
@@ -74,18 +69,17 @@ import se.skl.riv.insuranceprocess.healthreporting.v1.VardgivareType;
 		wsdlLocation = "schemas/RegisterMedicalCertificateInteraction_2.0_rivtabp20.wsdl")
 public class RegMedCertValidateImpl implements RegisterMedicalCertificateResponderInterface {
 
-	public RegisterMedicalCertificateResponseType registerMedicalCertificate(
-			AttributedURIType logicalAddress,
-			RegisterMedicalCertificateType parameters) {
+	public RegisterMedicalCertificateResponseType registerMedicalCertificate( AttributedURIType logicalAddress, RegisterMedicalCertificateType parameters) {
 		
-			// List of validation errors
-			ArrayList validationErrors = new ArrayList();
+		// List of validation errors
+		ArrayList<String> validationErrors = new ArrayList<String>();
 
-			// Create a response and set result of validation            
-			RegisterMedicalCertificateResponseType response = new RegisterMedicalCertificateResponseType();
-			ResultOfCall resCall = new ResultOfCall();
-			response.setResult(resCall);
+		// Create a response and set result of validation            
+		RegisterMedicalCertificateResponseType outResponse = new RegisterMedicalCertificateResponseType();
+		ResultOfCall outResCall = new ResultOfCall();
+		outResponse.setResult(outResCall);
 
+		// Validate incoming request
 		try {
 			// Check that we got any data at all
 			if (parameters == null) {
@@ -101,19 +95,25 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 			
 			LakarutlatandeType inLakarutlatande = parameters.getLakarutlatande();
 			
+			/**
+			 *  Check all meta-data, that is data not shown in the form
+			 */
+			
 			// Check that we got an id - mandatory
 			if ( inLakarutlatande.getLakarutlatandeId() == null ||
 				 inLakarutlatande.getLakarutlatandeId().length() < 1 ) {
 				validationErrors.add("No Lakarutlatande Id found!");				
 			}
-            String emuId = parameters.getLakarutlatande().getLakarutlatandeId();
-            
-            // Check skickat datum
+
+            // Check skickat datum - mandatory
             if (inLakarutlatande.getSkickatDatum() == null || !inLakarutlatande.getSkickatDatum().isValid()) {
 				validationErrors.add("No or wrong skickatDatum found!");				
             }
 
-            // Check patient information
+            /**
+             * Check patient information
+             */          
+            // Check that we got a patient element 
 			if ( inLakarutlatande.getPatient() == null) {
 				validationErrors.add("No Patient element found!");	
 				throw new Exception();
@@ -126,6 +126,7 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 				inPatient.getPersonId().getExtension().length() < 1) {
 				validationErrors.add("No Patient Id found!");								
 			}
+			// Check patient o.i.d.
 			if (inPatient.getPersonId() == null ||	
 				inPatient.getPersonId().getRoot() == null ||	
 				(!inPatient.getPersonId().getRoot().equalsIgnoreCase("1.2.752.129.2.1.3.1") && !inPatient.getPersonId().getRoot().equalsIgnoreCase("1.2.752.129.2.1.3.3"))) {
@@ -157,23 +158,27 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 			if (!fullstandigtPatientNameFound && !fornamnPatientFound && efternamnPatientFound) {
 				validationErrors.add("No Patient fornamn found!");								
 			}
-								            
-            // Check lakar information, enhets information and vardgivar information
+			
+			/**
+			 * Check hälso och sjukvårds personal information. Vårdgivare, vårdenhet och läkare.
+			 */
+            // Check that we got a skapadAvHosPersonal element
 			if ( inLakarutlatande.getSkapadAvHosPersonal() == null) {
 				validationErrors.add("No SkapadAvHosPersonal element found!");	
 				throw new Exception();
 			}			
-            HosPersonalType hosP = inLakarutlatande.getSkapadAvHosPersonal() ; 
+            HosPersonalType inHoSP = inLakarutlatande.getSkapadAvHosPersonal() ; 
             
             // Check lakar id - mandatory
-            if (hosP.getPersonalId() == null || 
-            	hosP.getPersonalId().getExtension() == null ||
-            	hosP.getPersonalId().getExtension().length() < 1) {
+            if (inHoSP.getPersonalId() == null || 
+            	inHoSP.getPersonalId().getExtension() == null ||
+            	inHoSP.getPersonalId().getExtension().length() < 1) {
 				validationErrors.add("No personal-id found!");	            	
             }
-            if (hosP.getPersonalId() == null || 
-                hosP.getPersonalId().getRoot() == null ||
-                !hosP.getPersonalId().getRoot().equalsIgnoreCase("1.2.752.129.2.1.4.1")) {
+            // Check lakar id o.i.d.
+            if (inHoSP.getPersonalId() == null || 
+            	inHoSP.getPersonalId().getRoot() == null ||
+                !inHoSP.getPersonalId().getRoot().equalsIgnoreCase("1.2.752.129.2.1.4.1")) {
 				validationErrors.add("Wrong o.i.d. for personalId! Should be 1.2.752.129.2.1.4.1");								
             }
             
@@ -181,13 +186,13 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 			boolean fullstandigtLakarNameFound = false;
 			boolean fornamnLakarFound = false;
 			boolean efternamnLakarFound = false;
-			if (hosP.getFullstandigtNamn() != null && hosP.getFullstandigtNamn().length() > 0 ) {
+			if (inHoSP.getFullstandigtNamn() != null && inHoSP.getFullstandigtNamn().length() > 0 ) {
 				fullstandigtLakarNameFound = true;
 			}
-			if (hosP.getFornamn() != null && hosP.getFornamn().length() > 0 ) {
+			if (inHoSP.getFornamn() != null && inHoSP.getFornamn().length() > 0 ) {
 				fornamnLakarFound = true;
 			}
-			if (hosP.getEfternamn() != null && hosP.getEfternamn().length() > 0 ) {
+			if (inHoSP.getEfternamn() != null && inHoSP.getEfternamn().length() > 0 ) {
 				efternamnLakarFound = true;
 			}
 			if (!fullstandigtLakarNameFound && !fornamnLakarFound && !efternamnLakarFound) {
@@ -200,28 +205,29 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 				validationErrors.add("No skapadAvHosPersonal fornamn found!");								
 			}
 
-            // Check enhet
-            if (hosP.getEnhet() == null) {
-				validationErrors.add("No enhet found!");	  
+            // Check that we got a enhet element
+            if (inHoSP.getEnhet() == null) {
+				validationErrors.add("No enhet element found!");	  
 				throw new Exception();
             }
-            EnhetType enhet = hosP.getEnhet() ;
+            EnhetType inEnhet = inHoSP.getEnhet() ;
            
             // Check enhets id - mandatory
-            if (enhet.getEnhetsId() == null ||
-            	enhet.getEnhetsId().getExtension() == null ||
-            	enhet.getEnhetsId().getExtension().length() < 1) {
+            if (inEnhet.getEnhetsId() == null ||
+            	inEnhet.getEnhetsId().getExtension() == null ||
+            	inEnhet.getEnhetsId().getExtension().length() < 1) {
 				validationErrors.add("No enhets-id found!");	            	
             }
-            if (enhet.getEnhetsId() == null || 
-            	enhet.getEnhetsId().getRoot() == null ||
-                !enhet.getEnhetsId().getRoot().equalsIgnoreCase("1.2.752.129.2.1.4.1")) {
+            // Check enhets o.i.d
+            if (inEnhet.getEnhetsId() == null || 
+            	inEnhet.getEnhetsId().getRoot() == null ||
+                !inEnhet.getEnhetsId().getRoot().equalsIgnoreCase("1.2.752.129.2.1.4.1")) {
     			validationErrors.add("Wrong o.i.d. for enhetsId! Should be 1.2.752.129.2.1.4.1");								
             }
             
             // Check enhetsnamn - mandatory
-            if (enhet.getEnhetsnamn() == null || 
-                enhet.getEnhetsnamn().length() < 1) {
+            if (inEnhet.getEnhetsnamn() == null || 
+            	inEnhet.getEnhetsnamn().length() < 1) {
             	validationErrors.add("No enhetsnamn found!");	            	
             }
 
@@ -230,16 +236,16 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 			boolean postadressEnhetFound = false;
 			boolean postnrEnhetFound = false;
 			boolean postortEnhetFound = false;
-			if (enhet.getFullstandigAdress() != null && enhet.getFullstandigAdress().length() > 0 ) {
+			if (inEnhet.getFullstandigAdress() != null && inEnhet.getFullstandigAdress().length() > 0 ) {
 				fullstandigEnhetsAdressFound = true;
 			}
-			if (enhet.getPostadress() != null && enhet.getPostadress().length() > 0 ) {
+			if (inEnhet.getPostadress() != null && inEnhet.getPostadress().length() > 0 ) {
 				postadressEnhetFound = true;
 			}
-			if (enhet.getPostnummer() != null && enhet.getPostnummer().length() > 0 ) {
+			if (inEnhet.getPostnummer() != null && inEnhet.getPostnummer().length() > 0 ) {
 				postnrEnhetFound = true;
 			}
-			if (enhet.getPostort() != null && enhet.getPostort().length() > 0 ) {
+			if (inEnhet.getPostort() != null && inEnhet.getPostort().length() > 0 ) {
 				postortEnhetFound = true;
 			}
 			if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && !postnrEnhetFound && !postortEnhetFound) {
@@ -251,7 +257,7 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 			if (!fullstandigEnhetsAdressFound && postadressEnhetFound && !postnrEnhetFound && postortEnhetFound) {
 				validationErrors.add("No postnummer found for enhet!");								
 			}
-			if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && !postnrEnhetFound && !postortEnhetFound) {
+			if (!fullstandigEnhetsAdressFound && postadressEnhetFound && postnrEnhetFound && !postortEnhetFound) {
 				validationErrors.add("No postort found for enhet!");								
 			}
 			if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && !postnrEnhetFound && postortEnhetFound) {
@@ -260,88 +266,97 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 			if (!fullstandigEnhetsAdressFound && postadressEnhetFound && !postnrEnhetFound && !postortEnhetFound) {
 				validationErrors.add("No postnummer and postort found for enhet!");								
 			}
-			if (!fullstandigEnhetsAdressFound && postadressEnhetFound && !postnrEnhetFound && postortEnhetFound) {
+			if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && postnrEnhetFound && !postortEnhetFound) {
 				validationErrors.add("No postadress and postort found for enhet!");								
 			}
 
-            // Check vardgivare
-            if (enhet.getVardgivare() == null) {
-				validationErrors.add("No vardgivare found!");	  
+            // Check that we got a vardgivare element
+            if (inEnhet.getVardgivare() == null) {
+				validationErrors.add("No vardgivare element found!");	  
 				throw new Exception();
             }
-            VardgivareType vardgivare = enhet.getVardgivare();
+            VardgivareType inVardgivare = inEnhet.getVardgivare();
            
             // Check vardgivare id - mandatory
-            if (vardgivare.getVardgivareId() == null ||
-            	vardgivare.getVardgivareId().getExtension() == null ||
-            	vardgivare.getVardgivareId().getExtension().length() < 1) {
+            if (inVardgivare.getVardgivareId() == null ||
+            	inVardgivare.getVardgivareId().getExtension() == null ||
+            	inVardgivare.getVardgivareId().getExtension().length() < 1) {
 				validationErrors.add("No vardgivare-id found!");	            	
             }
-            if (vardgivare.getVardgivareId() == null || 
-            	vardgivare.getVardgivareId().getRoot() == null ||
-                !vardgivare.getVardgivareId().getRoot().equalsIgnoreCase("1.2.752.129.2.1.4.1")) {
+            // Check vardgivare o.i.d.
+            if (inVardgivare.getVardgivareId() == null || 
+            	inVardgivare.getVardgivareId().getRoot() == null ||
+                !inVardgivare.getVardgivareId().getRoot().equalsIgnoreCase("1.2.752.129.2.1.4.1")) {
             	validationErrors.add("Wrong o.i.d. for vardgivareId! Should be 1.2.752.129.2.1.4.1");								
             }
 
-            // Check vardgivarename - mandatory?!
-            if (vardgivare.getVardgivarnamn() == null || 
-            	vardgivare.getVardgivarnamn().length() < 1) {
+            // Check vardgivarename - mandatory
+            if (inVardgivare.getVardgivarnamn() == null || 
+            	inVardgivare.getVardgivarnamn().length() < 1) {
     			validationErrors.add("No vardgivarenamn found!");	            	
             }
 
+            /**
+             * Check form data
+             */
             // Fält 1 - no rule
             boolean inSmittskydd = findAktivitetWithCode(parameters.getLakarutlatande().getAktivitet(), Aktivitetskod.AVSTANGNING_ENLIGT_SM_L_PGA_SMITTA) != null ? true:false;
 
             // Must be set as this element contains a lot of mandatory information
-            FunktionstillstandType aktivitetFunktion = findFunktionsTillstandType(inLakarutlatande.getFunktionstillstand(), TypAvFunktionstillstand.AKTIVITET);
-            if (aktivitetFunktion == null) {
+            FunktionstillstandType inAktivitetFunktion = findFunktionsTillstandType(inLakarutlatande.getFunktionstillstand(), TypAvFunktionstillstand.AKTIVITET);
+            if (inAktivitetFunktion == null) {
     			validationErrors.add("No funktionstillstand - aktivitet element found!");	
     			throw new Exception();
             }
 
             // Declared outside as it may be used further down. 
-            ReferensType annat = null;
+            ReferensType inAnnat = null;
 
             // Many fields are optional if smittskydd is checked, if not set validate these below
             if (!inSmittskydd) {
-                // Fält 2 - Both mandatory
+                // Fält 2 - Check that we got a medicinsktTillstand element
                 if (inLakarutlatande.getMedicinsktTillstand() == null) {
         			validationErrors.add("No medicinsktTillstand element found!");	
         			throw new Exception();
                 }
+                // Fält 2 - Medicinskt tillstånd kod - mandatory
                 MedicinsktTillstandType medTillstand = inLakarutlatande.getMedicinsktTillstand();
                 if (medTillstand.getTillstandskod() == null ||
                 	medTillstand.getTillstandskod().getCode() == null ||
                 	medTillstand.getTillstandskod().getCode().length() < 1) {
         			validationErrors.add("No tillstandskod in medicinsktTillstand found!");	            	
                 }
+                // Fält 2 - Medicinskt tillstånd kodsystemnamn - mandatory
                 if (medTillstand.getTillstandskod() == null || 
                 	medTillstand.getTillstandskod().getCodeSystemName() == null ||
                     !medTillstand.getTillstandskod().getCodeSystemName().equalsIgnoreCase("ICD-10")) {
                 	validationErrors.add("Wrong code system name for medicinskt tillstand - tillstandskod (diagnoskod)! Should be ICD-10");								
-                }                
+                }
+                // Fält 2 - Medicinskt tillstånd beskrivning - mandatory
                 if (medTillstand.getBeskrivning() == null ||
                     medTillstand.getBeskrivning().length() < 1) {
             		validationErrors.add("No beskrivning in medicinsktTillstand found!");	            	
                 }
                             
-                // Fält 3
+                // Fält 3 - Check that we got a bedomtTillstand element
                 if (inLakarutlatande.getBedomtTillstand() == null) {
         			validationErrors.add("No bedomtTillstand element found!");	
         			throw new Exception();
                 }
+                // Fält 3 - Bedömt tillstånd beskrivning - mandatory
                 if (inLakarutlatande.getBedomtTillstand().getBeskrivning() == null ||
                 	inLakarutlatande.getBedomtTillstand().getBeskrivning().length() < 1	) {
         			validationErrors.add("No beskrivning in bedomtTillstand found!");	
         			throw new Exception();
                 }
      
-                // Fält 4 - vänster     
+                // Fält 4 - vänster Check that we got a funktionstillstand - kroppsfunktion element  
                 FunktionstillstandType inKroppsFunktion = findFunktionsTillstandType(inLakarutlatande.getFunktionstillstand(), TypAvFunktionstillstand.KROPPSFUNKTION);
                 if (inKroppsFunktion == null ) {
         			validationErrors.add("No funktionstillstand - kroppsfunktion element found!");	
         			throw new Exception();
             	}
+                // Fält 4 - vänster Funktionstillstand - kroppsfunktion beskrivning - mandatory  
                 if (inKroppsFunktion.getBeskrivning() == null || 
                 	inKroppsFunktion.getBeskrivning().length() < 1) {
         			validationErrors.add("No beskrivning in funktionstillstand - kroppsfunktion found!");	
@@ -357,28 +372,33 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
                 ReferensType journal = findReferensTyp(inLakarutlatande.getReferens(), Referenstyp.JOURNALUPPGIFTER);
 
                 // Fält 4 - höger nedersta kryssrutan
-                annat = findReferensTyp(inLakarutlatande.getReferens(), Referenstyp.ANNAT);
+                inAnnat = findReferensTyp(inLakarutlatande.getReferens(), Referenstyp.ANNAT);
 
-                if (inUndersokning==null && telefonkontakt==null && journal==null && annat==null) {
+                // Fält 4 - höger Check that we at least got one field set
+                if (inUndersokning==null && telefonkontakt==null && journal==null && inAnnat==null) {
         			validationErrors.add("No vardkontakt or referens element found ! At least one must be set!");
         			throw new Exception();
                 }
+                // Fält 4 - höger - 1:a kryssrutan Check that we got a date if choice is set
                 if(inUndersokning != null && (inUndersokning.getVardkontaktstid() == null || !inUndersokning.getVardkontaktstid().isValid())) {
         			validationErrors.add("No or wrong date for vardkontakt - min undersokning av patienten found!");                	
                 }
+                // Fält 4 - höger - 2:a kryssrutan Check that we got a date if choice is set
                 if(telefonkontakt != null && (telefonkontakt.getVardkontaktstid() == null || !telefonkontakt.getVardkontaktstid().isValid())) {
         			validationErrors.add("No or wrong date for vardkontakt - telefonkontakt found!");                	
                 }
+                // Fält 4 - höger - 3:e kryssrutan Check that we got a date if choice is set
                 if(journal != null && (journal.getDatum() == null || !journal.getDatum().isValid())) {
         			validationErrors.add("No or wrong date for referens - journal found!");                	
                 }
-                if(annat != null && (annat.getDatum() == null || !annat.getDatum().isValid())) {
+                // Fält 4 - höger - 4:e kryssrutan Check that we got a date if choice is set
+                if(inAnnat != null && (inAnnat.getDatum() == null || !inAnnat.getDatum().isValid())) {
         			validationErrors.add("No or wrong date for referens - annat found!");                	
                 }
                        
-                // Fält 5
-                if (aktivitetFunktion.getBeskrivning() == null || 
-                	aktivitetFunktion.getBeskrivning().length() < 1) {
+                // Fält 5 - beskrivning
+                if (inAktivitetFunktion.getBeskrivning() == null || 
+                	inAktivitetFunktion.getBeskrivning().length() < 1) {
         			validationErrors.add("No beskrivning in funktionstillstand - aktivitet found!");	
                 }
               
@@ -397,29 +417,34 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
                 // Fält 6b - kryssruta 2
                 AktivitetType planeradAnnat = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PLANERAD_ELLER_PAGAENDE_ANNAN_ATGARD);
 
-                // Validera att en är ikryssad
+                // Fält 6a+6b Check that at least one is checked
                 if (kontaktAF==null && kontaktFHV==null && ovrigt==null && planeradInomSjukvard==null && planeradAnnat==null) {
         			validationErrors.add("No aktivitet element found for field 6a and 6b!Kontakt med AF, Kontakt med FHV, Ovrigt, Planerad eller pagaende behandling inom sjukvard or planerad eller pagaende annan atgard.");	
         			throw new Exception();
                 }
+                // Fält 6a - kryssruta 3 - beskrivning                
                 if (ovrigt != null && (ovrigt.getBeskrivning() == null || ovrigt.getBeskrivning().length() < 1)) {
         			validationErrors.add("No beskrivning in aktivitet element Ovrigt found!.");	                	
                 }
+                // Fält 6b - kryssruta 1 - beskrivning
                 if (planeradInomSjukvard != null && (planeradInomSjukvard.getBeskrivning() == null || planeradInomSjukvard.getBeskrivning().length() < 1)) {
         			validationErrors.add("No beskrivning in aktivitet element Planerad eller pagaende behandling inom sjukvard found!.");	                	
                 }
+                // Fält 6b - kryssruta 2 - beskrivning
                 if (planeradAnnat != null && (planeradAnnat.getBeskrivning() == null || planeradAnnat.getBeskrivning().length() < 1)) {
         			validationErrors.add("No beskrivning in aktivitet element planerad eller pagaende annan atgard found!.");	                	
                 }
                 
-                // Fält 7 - validera endast ett val!
+                // Fält 7
                 AktivitetType arbRelRehabAktuell = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.ARBETSLIVSINRIKTAD_REHABILITERING_AR_AKTUELL);
                 AktivitetType arbRelRehabEjAktuell = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.ARBETSLIVSINRIKTAD_REHABILITERING_AR_EJ_AKTUELL);
                 AktivitetType garEjAttBedommaArbRelRehab = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.GAR_EJ_ATT_BEDOMMA_OM_ARBETSLIVSINRIKTAD_REHABILITERING_AR_AKTUELL);
+                // Fält 7 - Check that at least one choice is made
                 if (arbRelRehabAktuell == null && arbRelRehabEjAktuell == null && garEjAttBedommaArbRelRehab == null) {
         			validationErrors.add("No aktivitet element found for field 7.! Arbetslivsrehab aktuell, Arbetslivsrehab ej aktuell eller Arbetslivsrehab gar ej att bedoma.");	
         			throw new Exception();                	
                 }
+                // Fält 7 - Check that only one choice is made
                 if ( (arbRelRehabAktuell != null && arbRelRehabEjAktuell != null && garEjAttBedommaArbRelRehab != null) ||
                 	 (arbRelRehabAktuell != null && arbRelRehabEjAktuell != null && garEjAttBedommaArbRelRehab == null) ||
                 	 (arbRelRehabAktuell != null && arbRelRehabEjAktuell == null && garEjAttBedommaArbRelRehab != null) ||
@@ -427,122 +452,136 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
         			validationErrors.add("Only one ckeckbox is allowed for field 7! Arbetslivsrehab aktuell, Arbetslivsrehab ej aktuell eller Arbetslivsrehab gar ej att bedoma.");	              	
                 }
                 
-                // Fält 8a - kryssruta 1-3 validera att någon är ikryssad!
-                if (aktivitetFunktion.getArbetsformaga() == null || aktivitetFunktion.getArbetsformaga().getSysselsattning().size() == 0) {
+                // Fält 8a - Check that we got a arbetsformaga element
+                if (inAktivitetFunktion.getArbetsformaga() == null) {
         			validationErrors.add("No arbetsformaga element found for field 8a!");	
         			throw new Exception();                	
                 }
-                if (aktivitetFunktion.getArbetsformaga().getSysselsattning().size() == 0) {
+
+                // Fält 8a
+                SysselsattningType inArbete = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.NUVARANDE_ARBETE);
+                SysselsattningType inArbetslos = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.ARBETSLOSHET);
+                SysselsattningType inForaldraledig = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.FORALDRALEDIGHET);
+                // Fält 8a - Check that we at least got one choice
+                if (inArbete==null && inArbetslos==null && inForaldraledig==null) {
         			validationErrors.add("No sysselsattning element found for field 8a! Nuvarande arbete, arbestloshet or foraldraledig should be set.");	
         			throw new Exception();                	
-                }
-                
-                // Fält 8a - kryssruta 1 validera att beskrivning finns om arbete är ikryssad
-                SysselsattningType arbete = findTypAvSysselsattning(aktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.NUVARANDE_ARBETE);
-                SysselsattningType arbetslos = findTypAvSysselsattning(aktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.ARBETSLOSHET);
-                SysselsattningType foraldraledig = findTypAvSysselsattning(aktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.FORALDRALEDIGHET);
-                if (arbete==null && arbetslos==null && foraldraledig==null) {
-        			validationErrors.add("No sysselsattning element found for field 8a! Nuvarande arbete, arbestloshet or foraldraledig should be set.");	
-        			throw new Exception();                	
-                }
-                
-                ArbetsuppgiftType arbetsBeskrivning = aktivitetFunktion.getArbetsformaga().getArbetsuppgift();
-                
-                if (arbete != null && arbetsBeskrivning == null) {
+                }                
+                ArbetsuppgiftType inArbetsBeskrivning = inAktivitetFunktion.getArbetsformaga().getArbetsuppgift();
+                // Fält 8a - Check that we got a arbetsuppgift element if arbete is set                
+                if (inArbete != null && inArbetsBeskrivning == null) {
                 	validationErrors.add("No arbetsuppgift element found when arbete set in field 8a!.");	
         			throw new Exception();                	
                 }
-                if (arbetsBeskrivning.getTypAvArbetsuppgift() == null || arbetsBeskrivning.getTypAvArbetsuppgift().length() < 1) {
-                	validationErrors.add("No beskrivning av arbetsuppgift found when arbete set in field 8a!.");	
+                // Fält 8a - 1:a kryssrutan - beskrivning
+                if (inArbetsBeskrivning.getTypAvArbetsuppgift() == null || inArbetsBeskrivning.getTypAvArbetsuppgift().length() < 1) {
+                	validationErrors.add("No typAvArbetsuppgift found when arbete set in field 8a!.");	
         			throw new Exception();                	
                 }
             }
 
             // Fält 8b - kryssruta 1
-            ArbetsformagaNedsattningType nedsatt14del =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.NEDSATT_MED_1_4);
+            ArbetsformagaNedsattningType nedsatt14del =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.NEDSATT_MED_1_4);
 
             // Fält 8b - kryssruta 2
-            ArbetsformagaNedsattningType nedsatthalften =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.NEDSATT_MED_1_2);
+            ArbetsformagaNedsattningType nedsatthalften =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.NEDSATT_MED_1_2);
             
             // Fält 8b - kryssruta 3
-            ArbetsformagaNedsattningType nedsatt34delar =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.NEDSATT_MED_3_4);
+            ArbetsformagaNedsattningType nedsatt34delar =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.NEDSATT_MED_3_4);
 
             // Fält 8b - kryssruta 4
-            ArbetsformagaNedsattningType heltNedsatt =  findArbetsformaga(aktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.HELT_NEDSATT);
+            ArbetsformagaNedsattningType heltNedsatt =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.HELT_NEDSATT);
 
+            // Check that we at least got one choice
             if (nedsatt14del == null && nedsatthalften == null && nedsatt34delar == null && heltNedsatt == null) {
             	validationErrors.add("No arbetsformaganedsattning element found 8b!.");	
     			throw new Exception();                	
             }            
+            // Fält 8b - kryssruta 1 - varaktighet From
             if (nedsatt14del != null && (nedsatt14del.getVaraktighetFrom() == null || !nedsatt14del.getVaraktighetFrom().isValid())) {
             	validationErrors.add("No or wrong date for nedsatt 1/4 from date found!");		
             }
+            // Fält 8b - kryssruta 1 - varaktighet Tom
             if (nedsatt14del != null && (nedsatt14del.getVaraktighetTom() == null || !nedsatt14del.getVaraktighetTom().isValid())) {
             	validationErrors.add("No or wrong date for nedsatt 1/4 tom date found!");		
             }
+            // Fält 8b - kryssruta 2 - varaktighet From
             if (nedsatthalften != null && (nedsatthalften.getVaraktighetFrom() == null || !nedsatthalften.getVaraktighetFrom().isValid())) {
             	validationErrors.add("No or wrong date for nedsatt 1/2 from date found!");		
             }
+            // Fält 8b - kryssruta 2 - varaktighet Tom
             if (nedsatthalften != null && (nedsatthalften.getVaraktighetTom() == null || !nedsatthalften.getVaraktighetTom().isValid())) {
             	validationErrors.add("No or wrong date for nedsatt 1/2 tom date found!");		
             }
+            // Fält 8b - kryssruta 3 - varaktighet From
             if (nedsatt34delar != null && (nedsatt34delar.getVaraktighetFrom() == null || !nedsatt34delar.getVaraktighetFrom().isValid())) {
             	validationErrors.add("No or wrong date for nedsatt 3/4 from date found!");		
             }
+            // Fält 8b - kryssruta 3 - varaktighet Tom
             if (nedsatt34delar != null && (nedsatt34delar.getVaraktighetTom() == null || !nedsatt34delar.getVaraktighetTom().isValid())) {
             	validationErrors.add("No or wrong date for nedsatt 3/4 tom date found!");		
             }
+            // Fält 8b - kryssruta 4 - varaktighet From
             if (heltNedsatt != null && (heltNedsatt.getVaraktighetFrom() == null || !heltNedsatt.getVaraktighetFrom().isValid())) {
             	validationErrors.add("No or wrong date for helt nedsatt from date found!");		
             }
+            // Fält 8b - kryssruta 4 - varaktighet Tom
             if (heltNedsatt != null && (heltNedsatt.getVaraktighetTom() == null || !heltNedsatt.getVaraktighetTom().isValid())) {
             	validationErrors.add("No or wrong date for helt nedsatt tom date found!");		
             }
             
             // Fält 9 - Motivering - optional
-            String motivering = aktivitetFunktion.getArbetsformaga().getMotivering();
+            String inMotivering = inAktivitetFunktion.getArbetsformaga().getMotivering();
             
-            // Fält 10 - Prognosangivelse - Validera endast 1 av 4 val giltigt
-            boolean arbetsformagaAterstallasHelt = aktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_HELT) == 0;
-            boolean arbetsformagaAterstallasDelvis = aktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_DELVIS) == 0;
-            boolean arbetsformagaEjAterstallas = aktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.INTE_ATERSTALLAS) == 0;
-            boolean arbetsformagaGarEjAttBedomma = aktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.DET_GAR_INTE_ATT_BEDOMMA) == 0;
-            if (!arbetsformagaAterstallasHelt && !arbetsformagaAterstallasDelvis && !arbetsformagaEjAterstallas && !arbetsformagaGarEjAttBedomma) {
-            	validationErrors.add("No prognosangivelse element found 10!.");	
+            // Fält 10 - Prognosangivelse
+            if (inAktivitetFunktion.getArbetsformaga().getPrognosangivelse() == null) {
+    			validationErrors.add("No prognos element found for field 10!");	
+    			throw new Exception();                	
+            }
+            boolean inArbetsformagaAterstallasHelt = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_HELT) == 0;
+            boolean inArbetsformagaAterstallasDelvis = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_DELVIS) == 0;
+            boolean inArbetsformagaEjAterstallas = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.INTE_ATERSTALLAS) == 0;
+            boolean inArbetsformagaGarEjAttBedomma = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.DET_GAR_INTE_ATT_BEDOMMA) == 0;
+            // Fält 10 - Prognosangivelse - Check that we at least got one choice
+            if (!inArbetsformagaAterstallasHelt && !inArbetsformagaAterstallasDelvis && !inArbetsformagaEjAterstallas && !inArbetsformagaGarEjAttBedomma) {
+            	validationErrors.add("No prognosangivelse element found for field 10.");	
     			throw new Exception();                	            	
             }
-            int prognosCount = 0;
-            if (arbetsformagaAterstallasHelt) {
-            	prognosCount++;
+            // If we got more then one prognoselement these will not be read as only the first is set!
+            int inPrognosCount = 0;
+            if (inArbetsformagaAterstallasHelt) {
+            	inPrognosCount++;
             }
-            if (arbetsformagaAterstallasDelvis) {
-            	prognosCount++;
+            if (inArbetsformagaAterstallasDelvis) {
+            	inPrognosCount++;
             }
-            if (arbetsformagaEjAterstallas) {
-            	prognosCount++;
+            if (inArbetsformagaEjAterstallas) {
+            	inPrognosCount++;
             }
-            if (arbetsformagaGarEjAttBedomma) {
-            	prognosCount++;
+            if (inArbetsformagaGarEjAttBedomma) {
+            	inPrognosCount++;
             }
-            if (prognosCount > 2) {
-                validationErrors.add("Only one prognosangivelse should be set! (10)");	
+            // Fält 10 - Prognosangivelse - Check that we only got one choice            
+            if (inPrognosCount > 2) {
+                validationErrors.add("Only one prognosangivelse should be set for field 10.");	
             }            
             
-            // Fält 11 - kryssruta 1 och 2 Endast 1 av 2 val möjligt!
-            AktivitetType forandratRessatt = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.FORANDRAT_RESSATT_TILL_ARBETSPLATSEN_AR_AKTUELLT);
-            AktivitetType ejForandratRessatt = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.FORANDRAT_RESSATT_TILL_ARBETSPLATSEN_AR_EJ_AKTUELLT);
-            if (forandratRessatt != null && ejForandratRessatt != null) {
-                validationErrors.add("Only one forandrat ressatt could be set! (11)");	
+            // Fält 11 - optional
+            AktivitetType inForandratRessatt = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.FORANDRAT_RESSATT_TILL_ARBETSPLATSEN_AR_AKTUELLT);
+            AktivitetType inEjForandratRessatt = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.FORANDRAT_RESSATT_TILL_ARBETSPLATSEN_AR_EJ_AKTUELLT);
+            // Fält 11 - If set only one should be set
+            if (inForandratRessatt != null && inEjForandratRessatt != null) {
+                validationErrors.add("Only one forandrat ressatt could be set for field 11.");	
             }
             
-            // Fält 12 - kryssruta 1 
-            AktivitetType kontaktFKAktuell = findAktivitetWithCode(parameters.getLakarutlatande().getAktivitet(), Aktivitetskod.KONTAKT_MED_FORSAKRINGSKASSAN_AR_AKTUELL);
+            // Fält 12 - kryssruta 1 - optional
+            AktivitetType inKontaktFKAktuell = findAktivitetWithCode(parameters.getLakarutlatande().getAktivitet(), Aktivitetskod.KONTAKT_MED_FORSAKRINGSKASSAN_AR_AKTUELL);
             
-            // Fält 13 - Upplysningar
-            // Om fält 4 annat satt eller fält 10 går ej att bedömma satt skall fält 13 innehålla information.
-            String kommentar = parameters.getLakarutlatande().getKommentar();
-            if ( (annat!=null || arbetsformagaGarEjAttBedomma) && (kommentar == null || kommentar.length() < 1) ){
-                validationErrors.add("Upplysningar should contain data as annat(4) or gar ej att bedoma(10) is checked.");	            	
+            // Fält 13 - Upplysningar - optional
+            // If field 4 annat satt or field 10 går ej att bedömma is set then field 13 should contain data.
+			String kommentar = parameters.getLakarutlatande().getKommentar();
+            if ( (inAnnat!=null || inArbetsformagaGarEjAttBedomma) && (kommentar == null || kommentar.length() < 1) ){
+                validationErrors.add("Upplysningar should contain data as field 4 or fields 10 is checked.");	            	
             }
 
             // Fält 14 - Signeringstidpunkt
@@ -550,17 +589,22 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
                 validationErrors.add("Signeringsdatum must be set (14)");	            	
             }
             
-            // Fält 17 - arbetsplatskod
-            if (enhet.getArbetsplatskod() == null || 
-            	enhet.getArbetsplatskod().getExtension() == null || 
-            	enhet.getArbetsplatskod().getExtension().length() < 1) {
+            // Fält 17 - arbetsplatskod - Check that we got an element
+            if (inEnhet.getArbetsplatskod() == null ) {
+				validationErrors.add("No Arbetsplatskod element found!");	
+				throw new Exception();
+            }
+            II inArbetsplatskod = inEnhet.getArbetsplatskod();
+            // Fält 17 arbetsplatskod id            
+            if (inArbetsplatskod.getExtension() == null || 
+            	inArbetsplatskod.getExtension().length() < 1) {
                 validationErrors.add("Arbetsplatskod for enhet not found!");	            	            	
             }
-            if (enhet.getArbetsplatskod() == null || 
-                enhet.getArbetsplatskod().getRoot() == null || 
-                !enhet.getArbetsplatskod().getRoot().equalsIgnoreCase("1.2.752.29.4.71") ) {
+            // Fält 17 arbetsplatskod o.i.d.
+            if (inArbetsplatskod.getRoot() == null || 
+                !inArbetsplatskod.getRoot().equalsIgnoreCase("1.2.752.29.4.71") ) {
     			validationErrors.add("Wrong o.i.d. for arbetsplatskod! Should be 1.2.752.29.4.71");								
-                }
+            }
             
 			// Check if we got any validation errors that not caused an Exception
 			if (validationErrors.size() > 0) {
@@ -568,21 +612,21 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 			} 
 			
 			// No validation errors! Return OK!            
-			resCall.setResultCode(ResultCodeEnum.OK);
-			response.setResult(resCall);
+			outResCall.setResultCode(ResultCodeEnum.OK);
+			outResponse.setResult(outResCall);
 
-			return response;
+			return outResponse;
 		} catch (Exception e) {
-			resCall.setErrorText(getValidationErrors(validationErrors));
-			resCall.setResultCode(ResultCodeEnum.ERROR);
-			return response;
+			outResCall.setErrorText(getValidationErrors(validationErrors));
+			outResCall.setResultCode(ResultCodeEnum.ERROR);
+			return outResponse;
 		}
 	}
 	
-	private String getValidationErrors(ArrayList validationErrors) {
+	private String getValidationErrors(ArrayList<String> validationErrors) {
 		int i = 1;
 		StringBuffer validationString = new StringBuffer();
-		Iterator iterValidationErrors = validationErrors.iterator();
+		Iterator<String> iterValidationErrors = validationErrors.iterator();
 		validationString.append("Validation error " + i++ + ":");
 		validationString.append((String)iterValidationErrors.next());
 		while (iterValidationErrors.hasNext()) {
@@ -592,7 +636,7 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 		return validationString.toString();
 	}
 
-	private AktivitetType findAktivitetWithCode(List aktiviteter, Aktivitetskod aktivitetskod) {
+	private AktivitetType findAktivitetWithCode(List<AktivitetType> aktiviteter, Aktivitetskod aktivitetskod) {
 		AktivitetType foundAktivitet = null;
 		if (aktiviteter != null) {
 			for (int i = 0; i< aktiviteter.size(); i++) {
@@ -606,7 +650,7 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 		return foundAktivitet;
 	}
 	
-	private FunktionstillstandType findFunktionsTillstandType(List funktionstillstand, TypAvFunktionstillstand funktionstillstandsTyp) {
+	private FunktionstillstandType findFunktionsTillstandType(List<FunktionstillstandType> funktionstillstand, TypAvFunktionstillstand funktionstillstandsTyp) {
 		FunktionstillstandType foundFunktionstillstand = null;
 		if (funktionstillstand != null) {
 			for (int i = 0; i< funktionstillstand.size(); i++) {
@@ -620,7 +664,7 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 		return foundFunktionstillstand;
 	}
 
-	private VardkontaktType findVardkontaktTyp(List vardkontakter, Vardkontakttyp vardkontaktTyp) {
+	private VardkontaktType findVardkontaktTyp(List<VardkontaktType> vardkontakter, Vardkontakttyp vardkontaktTyp) {
 		VardkontaktType foundVardkontaktType = null;
 		if (vardkontakter != null) {
 			for (int i = 0; i< vardkontakter.size(); i++) {
@@ -634,7 +678,7 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 		return foundVardkontaktType;
 	}
 	
-	private ReferensType findReferensTyp(List referenser, Referenstyp referensTyp) {
+	private ReferensType findReferensTyp(List<ReferensType> referenser, Referenstyp referensTyp) {
 		ReferensType foundReferensType = null;
 		if (referenser != null) {
 			for (int i = 0; i< referenser.size(); i++) {
@@ -648,7 +692,7 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 		return foundReferensType;
 	}	
 
-	private SysselsattningType findTypAvSysselsattning(List sysselsattning, TypAvSysselsattning sysselsattningsTyp) {
+	private SysselsattningType findTypAvSysselsattning(List<SysselsattningType> sysselsattning, TypAvSysselsattning sysselsattningsTyp) {
 		SysselsattningType foundSysselsattningType = null;
 		if (sysselsattning != null) {
 			for (int i = 0; i< sysselsattning.size(); i++) {
@@ -662,7 +706,7 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 		return foundSysselsattningType;
 	}	
 
-	private ArbetsformagaNedsattningType findArbetsformaga(List arbetsformaga, se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad arbetsformagaNedsattningTyp) {
+	private ArbetsformagaNedsattningType findArbetsformaga(List<ArbetsformagaNedsattningType> arbetsformaga, se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad arbetsformagaNedsattningTyp) {
 		ArbetsformagaNedsattningType foundArbetsformagaType = null;
 		if (arbetsformaga != null) {
 			for (int i = 0; i< arbetsformaga.size(); i++) {
@@ -674,21 +718,5 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 			}	
 		}
 		return foundArbetsformagaType;
-	}	
-	
-	private XMLGregorianCalendar getDate(String stringDate) throws Exception{
-		try {
-			GregorianCalendar fromDate = new GregorianCalendar();
-			DateFormat dfm = new SimpleDateFormat("yyyyMMdd");
-			Date date = dfm.parse(stringDate);
-			fromDate.setTime(date);
-			return (DatatypeFactory.newInstance().newXMLGregorianCalendar(fromDate));
-		} catch (DatatypeConfigurationException e) {
-			throw new Exception(e.getMessage());
-		} catch (ParseException pe) {
-			throw new Exception(pe.getMessage());
-		}
-	}
-	
-	
+	}		
 }
