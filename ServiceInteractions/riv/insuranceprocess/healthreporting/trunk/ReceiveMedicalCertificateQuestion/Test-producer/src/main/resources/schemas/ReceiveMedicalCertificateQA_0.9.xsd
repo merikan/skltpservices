@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by Viktor Jernelöv (Mawell Svenska AB) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:core="urn:riv:insuranceprocess:healthreporting:1"
+	xmlns:tns="urn:riv:insuranceprocess:healthreporting:qa:1" 
+	targetNamespace="urn:riv:insuranceprocess:healthreporting:qa:1" 	
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified"
+	version="0.9">
+	
+	<xs:import namespace="urn:riv:insuranceprocess:healthreporting:1" schemaLocation="Insuranceprocess_healthreporting_1.0.xsd"/>
+	
+	<xs:element name="meddelande" type="tns:meddelandeType"/>
+
+	<xs:simpleType name="Amnetyp">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Komplettering_av_lakarintyg"/>
+			<xs:enumeration value="Makulering_av_lakarintyg"/>
+			<xs:enumeration value="Avstamningsmote"/>
+			<xs:enumeration value="Kontakt"/>
+			<xs:enumeration value="Arbetstidsforlaggning"/>
+			<xs:enumeration value="Ovrigt"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Meddelandetyp">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Fraga_fran_FK"/>
+			<xs:enumeration value="Fraga_fran_varden"/>
+			<xs:enumeration value="Svar_fran_FK"/>
+			<xs:enumeration value="Svar_fran_varden"/>
+			<xs:enumeration value="Paminnelse_fran_FK"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="meddelandeType">
+		<xs:sequence>
+			<xs:element name="meddelande-id" type="xs:string"/>
+			<xs:element name="amne" type="tns:Amnetyp"/>
+			<xs:element name="meddelandetyp" type="tns:Meddelandetyp"/>
+			<xs:element name="komplettering" type="tns:kompletteringType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="meddelanderubrik" type="xs:string" minOccurs="0" />
+			<xs:element name="meddelandetext" type="xs:string" minOccurs="0" />
+			<xs:element name="avsantTidpunkt" type="xs:dateTime"/>
+			<xs:element name="sistaDatumForKomplettering" type="xs:date" minOccurs="0"/>
+			<xs:element name="forsakringskassansArende-id" type="xs:string" minOccurs="0"/>
+			<xs:element name="mottagare" type="tns:adresseringsType"/>
+			<xs:element name="avsandare" type="tns:adresseringsType"/>
+			<xs:element name="lakarutlatande" type="tns:lakarutlatandeEnkelType"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="adresseringsType">
+		<xs:choice>
+			<xs:element name="organisation" type="core:organisationType"/>
+			<xs:element name="hosPersonal" type="core:hosPersonalType"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="lakarutlatandeEnkelType">
+		<xs:sequence>
+			<xs:element name="lakarutlatande-id" type="xs:string"/>
+			<xs:element name="avsantTidpunkt" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="patient" type="core:patientType"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="kompletteringType">
+		<xs:sequence>
+			<xs:element name="falt" type="xs:string"/>
+			<xs:element name="text" type="xs:string"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
+		</xs:sequence>
+	</xs:complexType>
+	
+</xs:schema>
