@@ -77,7 +77,7 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
     		outRequest.setQuestion(outMeddelande);
 
 			// Transform between incoming and outgoing objects
-    		// Avsändare
+    		// Avsändare - FK
     		Avsandare inAvsandare = inRequest.getFKSKLTaEmotFragaAnrop().getAdressering().getAvsandare();
     		Organisation inOrganisationAvsandare = inAvsandare.getOrganisation();
     		    		
@@ -89,7 +89,7 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
     		outOrganisationAvsandare.setOrganisationsId(inOrganisationAvsandare.getId().getValue());
     		outOrganisationAvsandare.setOrganisationsnamn(inOrganisationAvsandare.getNamn().getValue());
          	
-    		// Mottagare
+    		// Mottagare - Vården
     		Mottagare inMottagare = inRequest.getFKSKLTaEmotFragaAnrop().getAdressering().getMottagare();
     		Organisation inOrganisationMottagare = inMottagare.getOrganisation();
     		Enhet inEnhetMottagare = inOrganisationMottagare.getEnhet();
@@ -215,20 +215,6 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
 			return Amnetyp.OVRIGT;
 		} else {
 			return Amnetyp.OVRIGT;
-		}
-	}
-
-	private XMLGregorianCalendar getDate(String stringDate) throws Exception{
-		try {
-			GregorianCalendar fromDate = new GregorianCalendar();
-			DateFormat dfm = new SimpleDateFormat("yyyyMMdd");
-			Date date = dfm.parse(stringDate);
-			fromDate.setTime(date);
-			return (DatatypeFactory.newInstance().newXMLGregorianCalendar(fromDate));
-		} catch (DatatypeConfigurationException e) {
-			throw new Exception(e.getMessage());
-		} catch (ParseException pe) {
-			throw new Exception(pe.getMessage());
 		}
 	}
 }
