@@ -32,11 +32,11 @@ import org.w3.wsaddressing10.AttributedURIType;
 
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificateanswerresponder.v1.ReceiveMedicalCertificateAnswerType;
 
-public class Vard2FkTransformer extends AbstractMessageAwareTransformer
+public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
-	public Vard2FkTransformer()
+	public VardRequest2FkTransformer()
     {
         super();
         registerSourceType(Object.class);

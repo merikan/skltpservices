@@ -21,11 +21,11 @@ import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateres
 import se.skl.riv.insuranceprocess.healthreporting.v1.ResultCodeEnum;
 import se.skl.riv.insuranceprocess.healthreporting.v1.ResultOfCall;
 
-public class Fk2VardTransformer extends AbstractMessageAwareTransformer
+public class FkResponse2VardTransformer extends AbstractMessageAwareTransformer
 {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
-	public Fk2VardTransformer()
+	public FkResponse2VardTransformer()
     {
         super();
         registerSourceType(Object.class);
