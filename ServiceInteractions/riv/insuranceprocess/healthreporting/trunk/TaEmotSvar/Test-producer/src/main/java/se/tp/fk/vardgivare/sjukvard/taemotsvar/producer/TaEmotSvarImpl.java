@@ -41,10 +41,6 @@ public class TaEmotSvarImpl implements TaEmotSvarResponderInterface {
 		try {
 			TaEmotSvarResponseType response = new TaEmotSvarResponseType();
 			
-			if (parameters.getFKSKLTaEmotSvarAnrop().getPatient().getFornamn().equalsIgnoreCase("Mats")) {
-				throw new RuntimeException("Bad name!");
-			}
-
 			System.out.println("response sent!");
 			return response;
 		} catch (RuntimeException e) {

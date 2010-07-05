@@ -25,58 +25,58 @@ import java.net.URL;
 
 import org.w3.wsaddressing10.AttributedURIType;
 
-import se.fk.vardgivare.sjukvard.taemotlakarintyg.v1.rivtabp20.TaEmotLakarintygResponderInterface;
-import se.fk.vardgivare.sjukvard.taemotlakarintyg.v1.rivtabp20.TaEmotLakarintygResponderService;
-import se.fk.vardgivare.sjukvard.taemotlakarintygresponder.v1.TaEmotLakarintygResponseType;
-import se.fk.vardgivare.sjukvard.taemotlakarintygresponder.v1.TaEmotLakarintygType;
+import se.fk.vardgivare.sjukvard.taemotsvar.v1.rivtabp20.TaEmotSvarResponderInterface;
+import se.fk.vardgivare.sjukvard.taemotsvar.v1.rivtabp20.TaEmotSvarResponderService;
+import se.fk.vardgivare.sjukvard.taemotsvarresponder.v1.TaEmotSvarResponseType;
+import se.fk.vardgivare.sjukvard.taemotsvarresponder.v1.TaEmotSvarType;
 import se.fk.vardgivare.sjukvard.v1.Adressering;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg;
-import se.fk.vardgivare.sjukvard.v1.TaEmotLakarintyg;
+import se.fk.vardgivare.sjukvard.v1.Lakarintygsreferens;
+import se.fk.vardgivare.sjukvard.v1.TaEmotSvar;
 
 public final class TaEmotSvarConsumer {
 
 	// Use this one to connect via Virtualiseringsplattformen
-	private static final String LOGISK_ADDRESS = "/TaEmotLakarintyg_Service";
+	private static final String LOGISK_ADDRESS = "/TaEmotSvar/1/rivtabp20";
 
 	// Use this one to connect directly (just for test)
 
 	public static void main(String[] args) {
-		String host = "localhost:19000/virtuell";
+		String host = "localhost:19000/fk";
 		if (args.length > 0) {
 			host = args[0];
 		}
 
 		// Setup ssl info for the initial ?wsdl lookup...
-		System.setProperty("javax.net.ssl.keyStore","../certs/consumer.jks");
+		System.setProperty("javax.net.ssl.keyStore","../../certs/consumer.jks");
 		System.setProperty("javax.net.ssl.keyStorePassword", "password");
-		System.setProperty("javax.net.ssl.trustStore","../certs/truststore.jks");
+		System.setProperty("javax.net.ssl.trustStore","../../certs/truststore.jks");
 		System.setProperty("javax.net.ssl.trustStorePassword", "password");
 
 		String adress = "https://" + host + LOGISK_ADDRESS;
 		System.out.println("Consumer connecting to " + adress);
-		String p = callTaEmotLakarintyg("RIV TA BP2.0 Ref App OK", adress,"Test HSA-ID");
+		String p = callTaEmotSvar("RIV TA BP2.0 Ref App OK", adress,"Test HSA-ID");
 		System.out.println("Returned: " + p);
 	}
 
-	public static String callTaEmotLakarintyg(String id, String serviceAddress,
+	public static String callTaEmotSvar(String id, String serviceAddress,
 			String logicalAddresss) {
 
-		TaEmotLakarintygResponderInterface service = new TaEmotLakarintygResponderService(
-				createEndpointUrlFromServiceAddress(serviceAddress)).getTaEmotLakarintygResponderPort();
+		TaEmotSvarResponderInterface service = new TaEmotSvarResponderService(
+				createEndpointUrlFromServiceAddress(serviceAddress)).getTaEmotSvarResponderPort();
 
 		AttributedURIType logicalAddressHeader = new AttributedURIType();
 		logicalAddressHeader.setValue(logicalAddresss);
 
-		TaEmotLakarintygType request = new TaEmotLakarintygType();
+		TaEmotSvarType request = new TaEmotSvarType();
 		
-		// Simple Intyg
-		TaEmotLakarintyg fkSklTELA = new TaEmotLakarintyg();
-		request.setFKSKLTaEmotLakarintygAnrop(fkSklTELA);
-		fkSklTELA.setAdressering(getAdressering());
-		fkSklTELA.setLakarintyg(getSimpleLakarintyg());
+		// Simple Svar
+		TaEmotSvar fkSvar = new TaEmotSvar();
+		request.setFKSKLTaEmotSvarAnrop(fkSvar);
+		fkSvar.setAdressering(getAdressering());
+		fkSvar.setLakarintyg(getSimpleLakarintyg());
 		
 		try {
-			TaEmotLakarintygResponseType result = service.taEmotLakarintyg(logicalAddressHeader, request);
+			TaEmotSvarResponseType result = service.taEmotSvar(logicalAddressHeader, request);
 
 			if (result != null) {
 				return ("Result OK");
@@ -96,14 +96,9 @@ public final class TaEmotSvarConsumer {
 		
 		return adressering;
 	}
-	private static Lakarintyg getSimpleLakarintyg() {
-		Lakarintyg lakarintyg = new Lakarintyg();
-		return lakarintyg;
-	}
-
-	private static Lakarintyg getComplexLakarintyg() {
-		Lakarintyg lakarintyg = new Lakarintyg();
-		return lakarintyg;
+	private static Lakarintygsreferens getSimpleLakarintyg() {
+		Lakarintygsreferens lakarintygRef = new Lakarintygsreferens();
+		return lakarintygRef;
 	}
 	
 	public static URL createEndpointUrlFromServiceAddress(String serviceAddress) {
