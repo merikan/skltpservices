@@ -1,30 +1,11 @@
 package se.skl.tp.recmedcertquestion.transformers;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
 import java.io.StringWriter;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.ResourceBundle;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
-import javax.xml.stream.FactoryConfigurationError;
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.XMLStreamWriter;
 
 import org.mule.api.ExceptionPayload;
 import org.mule.api.MuleMessage;
@@ -34,11 +15,9 @@ import org.mule.transformer.AbstractMessageAwareTransformer;
 import org.mule.transport.NullPayload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3.wsaddressing10.AttributedURIType;
 
-import se.fk.vardgivare.sjukvard.taemotlakarintygresponder.v1.TaEmotLakarintygResponseType;
-import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificateanswerresponder.v1.ReceiveMedicalCertificateAnswerType;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateResponseType;
+import se.fk.vardgivare.sjukvard.taemotfragaresponder.v1.TaEmotFragaResponseType;
+import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.ReceiveMedicalCertificateQuestionResponseType;
 import se.skl.riv.insuranceprocess.healthreporting.v1.ResultCodeEnum;
 import se.skl.riv.insuranceprocess.healthreporting.v1.ResultOfCall;
 
@@ -54,7 +33,6 @@ public class VardResponse2FkTransformer extends AbstractMessageAwareTransformer
     }
     
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
-		ResourceBundle rb = ResourceBundle.getBundle("fkdata");	    
 
 		boolean faultDetected = false;
 		
@@ -78,12 +56,10 @@ public class VardResponse2FkTransformer extends AbstractMessageAwareTransformer
 		            message.setExceptionPayload(null);
 		        }				
 	            faultDetected = true;
-			} else if(!(src instanceof TaEmotLakarintygResponseType)) {
+			} else if(!(src instanceof TaEmotFragaResponseType)) {
 				src = "Payload type not supported: "+ message.getPayload().getClass();
 				faultDetected = true;
 			}
-
-//			QName name = getRootElementQName(src);
 
 			StringBuffer result = new StringBuffer();
 			
@@ -98,10 +74,10 @@ public class VardResponse2FkTransformer extends AbstractMessageAwareTransformer
 
 				createSoapFault(payload, result);
 			} else {
-	            TaEmotLakarintygResponseType inResponse = (TaEmotLakarintygResponseType)src;
+	            TaEmotFragaResponseType inResponse = (TaEmotFragaResponseType)src;
 
 	            // Create new JAXB object for the outgoing data
-	            RegisterMedicalCertificateResponseType outResponse = new RegisterMedicalCertificateResponseType();
+	            ReceiveMedicalCertificateQuestionResponseType outResponse = new ReceiveMedicalCertificateQuestionResponseType();
 	            
 	            ResultOfCall resultOfCall = new ResultOfCall();
 	            
@@ -115,8 +91,8 @@ public class VardResponse2FkTransformer extends AbstractMessageAwareTransformer
 	            
 				// Transform the JAXB object into a XML payload
 	            StringWriter writer = new StringWriter();
-	        	Marshaller marshaller = JAXBContext.newInstance(RegisterMedicalCertificateResponseType.class).createMarshaller();
-	        	marshaller.marshal(new JAXBElement(new QName("urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:1", "RegisterMedicalCertificateResponse"), RegisterMedicalCertificateResponseType.class, outResponse), writer);
+	        	Marshaller marshaller = JAXBContext.newInstance(ReceiveMedicalCertificateQuestionResponseType.class).createMarshaller();
+	        	marshaller.marshal(new JAXBElement(new QName("urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateQuestionResponder:1", "ReceiveMedicalCertificateQuestionResponse"), ReceiveMedicalCertificateQuestionResponseType.class, outResponse), writer);
 				logger.debug("Extracted information: {}", writer.toString());
 				String payload = (String)writer.toString();
 				if (payload.startsWith("<?")) {
