@@ -27,6 +27,7 @@ import se.fk.vardgivare.sjukvard.v1.Falt;
 import se.fk.vardgivare.sjukvard.v1.InternIdentitetsbeteckning;
 import se.fk.vardgivare.sjukvard.v1.Kontaktuppgifter;
 import se.fk.vardgivare.sjukvard.v1.Lakarintygsreferens;
+import se.fk.vardgivare.sjukvard.v1.Meddelande;
 import se.fk.vardgivare.sjukvard.v1.Namn;
 import se.fk.vardgivare.sjukvard.v1.Organisation;
 import se.fk.vardgivare.sjukvard.v1.Patient;
@@ -62,7 +63,7 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
     }
     
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
-		ResourceBundle rb = ResourceBundle.getBundle("fkdata");	    
+		ResourceBundle rb = ResourceBundle.getBundle("fkdatameddelande");	    
 
 		try {			
 			// Transform the XML payload into a JAXB object
@@ -142,52 +143,44 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
     		outMottagare.setOrganisation(outOrganisationMottagare);
     		
     		Namn outOrganisationNamnMottagare = new Namn();
-    		outOrganisationNamnMottagare.setValue(rb.getString(""));
+    		outOrganisationNamnMottagare.setValue(rb.getString("FK"));
     		outOrganisationMottagare.setNamn(outOrganisationNamnMottagare);
     		InternIdentitetsbeteckning outOrganisationIdMottagare = new InternIdentitetsbeteckning();
-    		outOrganisationIdMottagare.setValue("");
+    		outOrganisationIdMottagare.setValue("202100-5521");
     		outOrganisationMottagare.setId(outOrganisationIdMottagare);    		
+
+    		// Patient
+    		LakarutlatandeEnkelType inLakarutlatande = inRequest.getQuestion().getLakarutlatande();
+    		PatientType inPatient = inLakarutlatande.getPatient();
+    		Patient outPatient = new Patient();
+    		outPatient.setIdentifierare(inPatient.getPersonId().getExtension());
+    		outPatient.setFornamn(inPatient.getFornamn());
+    		outPatient.setEfternamn(inPatient.getEfternamn());
+			outTaEmotFraga.setPatient(outPatient );
     		
-//    		// Avsänt tidpunkt
-//    		XMLGregorianCalendar inSkickades = inRequest.getFKSKLTaEmotFragaAnrop().getAdressering().getSkickades();
-//    		outMeddelande.setAvsantTidpunkt(inSkickades);
-//    		
-//    		// Set läkarutlåtande enkel från vården
-//    		Lakarintygsreferens inLakarutlatande = inRequest.getFKSKLTaEmotFragaAnrop().getLakarintyg();
-//    		Patient inPatient = inRequest.getFKSKLTaEmotFragaAnrop().getPatient();
-//    		
-//    		LakarutlatandeEnkelType outLakarutlatandeEnkel = new LakarutlatandeEnkelType();
-//    		PatientType outPatient = new PatientType();
-//    		II outPersonId = new II();
-//    		outPersonId.setRoot("1.2.752.129.2.1.3.1"); // OID för samordningsnummer är 1.2.752.129.2.1.3.3.
-//    		outPersonId.setExtension(inPatient.getIdentifierare());
-//    		outPatient.setPersonId(outPersonId);
-//    		// Hur göra med fullständigt namn?
-//    		outPatient.setFornamn(inPatient.getFornamn()); 
-//    		outPatient.setEfternamn(inPatient.getEfternamn());
-//    		outLakarutlatandeEnkel.setPatient(outPatient);
-//    		outLakarutlatandeEnkel.setLakarutlatandeId(inLakarutlatande.getReferens());
-//    		// Skall det vara avsänt tidpunkt eller signerades tidpunkt?
-//    		outLakarutlatandeEnkel.setAvsantTidpunkt(inLakarutlatande.getSignerades());
-//    		outMeddelande.setLakarutlatande(outLakarutlatandeEnkel);
-//    	
-//    		// Set Försäkringskassans id
-//    		outMeddelande.setForsakringskassansArendeId(inAvsandare.getReferens().getValue());
-//    		
-//    		// Set meddelandetyp
-//    		outMeddelande.setMeddelandetyp(Meddelandetyp.FRAGA_FRAN_FK);
-//
-//    		// Set ämne
-//    		Amne inAmne = inRequest.getFKSKLTaEmotFragaAnrop().getAmne();
-//    		outMeddelande.setAmne(transformAmneFromFK(inAmne));
-//    		
-//    		// Set meddelande rubrik och text
-//    		outMeddelande.setMeddelanderubrik(inAmne.getFritext());
-//    		outMeddelande.setMeddelandetext(inRequest.getFKSKLTaEmotFragaAnrop().getFraga().getText());
-//
-//    		// Sista datum för komplettering
-//    		outMeddelande.setSistaDatumForKomplettering(inRequest.getFKSKLTaEmotFragaAnrop().getBesvaras());	
-//    		
+    		// Ämne
+    		Amnetyp inAmne = inRequest.getQuestion().getAmne();
+    		Amne outAmne = new Amne();
+    		outAmne.setBeskrivning(transformAmneFromVarden(inAmne, rb));
+    		outAmne.setFritext(inRequest.getQuestion().getMeddelanderubrik());
+    		outTaEmotFraga.setAmne(outAmne);
+    		
+    		// Besvararas ?? Same as besvaras date?
+    		outTaEmotFraga.setBesvaras(inRequest.getQuestion().getSistaDatumForKomplettering());
+    		
+    		// Läkarintyg referens
+    		Lakarintygsreferens outLakarintyg = new Lakarintygsreferens();
+    		outLakarintyg.setReferens(inLakarutlatande.getLakarutlatandeId());
+    		outLakarintyg.setSignerades(inLakarutlatande.getAvsantTidpunkt());
+			outTaEmotFraga.setLakarintyg(outLakarintyg );
+    		
+			// Text
+			inRequest.getQuestion().getMeddelandetext();
+			Meddelande outMeddelande = new Meddelande();
+			outMeddelande.setText(inRequest.getQuestion().getMeddelandetext());
+			outMeddelande.setSignerades(null); // ?? Map to which value ??
+			outTaEmotFraga.setFraga(outMeddelande );
+						    		
 //    		// Meddelande id???
 //    		outMeddelande.setMeddelandeId("Referens till meddelande instansen");
     		
@@ -205,22 +198,21 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 		}
     }
 		
-	private Amnetyp transformAmneFromFK(Amne inAmne) {
-		if (inAmne.getBeskrivning().equalsIgnoreCase("Arbetstidsförläggning")) {
-			return Amnetyp.ARBETSTIDSFORLAGGNING;
-		} else if (inAmne.getBeskrivning().equalsIgnoreCase("Avstämningsmöte")) {
-			return Amnetyp.AVSTAMNINGSMOTE;
-		} else if (inAmne.getBeskrivning().equalsIgnoreCase("Komplettering")) {
-			return Amnetyp.KOMPLETTERING_AV_LAKARINTYG;
-		} else if (inAmne.getBeskrivning().equalsIgnoreCase("Kontakt")) {
-			return Amnetyp.KONTAKT;
-// Skall detta vara en egen enumeration på vårdsidan?
-		} else if (inAmne.getBeskrivning().equalsIgnoreCase("Påminnelse")) {
-			return Amnetyp.OVRIGT;
-		} else if (inAmne.getBeskrivning().equalsIgnoreCase("Övrigt")) {
-			return Amnetyp.OVRIGT;
+	private String transformAmneFromVarden(Amnetyp inAmne, ResourceBundle rb) {
+		if (inAmne.compareTo(Amnetyp.ARBETSTIDSFORLAGGNING) == 0) {
+			return rb.getString("ARBTIDFORL");
+		} else if (inAmne.compareTo(Amnetyp.AVSTAMNINGSMOTE) == 0) {
+			return  rb.getString("AVSTAMMOTE");
+		} else if (inAmne.compareTo(Amnetyp.KOMPLETTERING_AV_LAKARINTYG) == 0) {
+			return  "Komplettering";
+		} else if (inAmne.compareTo(Amnetyp.KONTAKT) == 0) {
+			return  "Kontakt";
+		} else if (inAmne.compareTo(Amnetyp.OVRIGT) == 0) {
+			return rb.getString("OVRIGT");
+		} else if (inAmne.compareTo(Amnetyp.MAKULERING_AV_LAKARINTYG) == 0) {
+			return  "Makulering";
 		} else {
-			return Amnetyp.OVRIGT;
+			return rb.getString("OVRIGT");
 		}
 	}	
 }
