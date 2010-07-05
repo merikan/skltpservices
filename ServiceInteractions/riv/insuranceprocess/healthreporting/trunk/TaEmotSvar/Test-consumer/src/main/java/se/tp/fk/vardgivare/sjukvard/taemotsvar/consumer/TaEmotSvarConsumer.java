@@ -18,7 +18,7 @@
 
  *   Boston, MA 02111-1307  USA
  */
-package se.tp.fk.vardgivare.sjukvard.taemotlakarintyg.consumer;
+package se.tp.fk.vardgivare.sjukvard.taemotsvar.consumer;
 
 import java.net.MalformedURLException;
 import java.net.URL;
