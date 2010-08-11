@@ -23,9 +23,7 @@ package se.tp.fk.vardgivare.sjukvard.taemotfraga.producer;
 
 import javax.xml.ws.Endpoint;
 
-
 public class TaEmotFragaProducer {
-
     protected TaEmotFragaProducer() throws Exception {
         System.out.println("Starting Producer");
 

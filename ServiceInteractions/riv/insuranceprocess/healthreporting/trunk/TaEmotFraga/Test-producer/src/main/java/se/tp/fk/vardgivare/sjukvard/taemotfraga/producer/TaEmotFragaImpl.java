@@ -32,6 +32,8 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3.wsaddressing10.AttributedURIType;
 
 import se.fk.vardgivare.sjukvard.taemotfraga.v1.rivtabp20.TaEmotFragaResponderInterface;
@@ -45,8 +47,10 @@ import se.fk.vardgivare.sjukvard.taemotfragaresponder.v1.TaEmotFragaType;
 		targetNamespace = "urn:riv:fk:vardgivare:sjukvard:TaEmotFraga:1:rivtabp20",
 		wsdlLocation = "schemas/TaEmotFragaInteraction_0.9_rivtabp20.wsdl")
 public class TaEmotFragaImpl implements TaEmotFragaResponderInterface {
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	static Map<String, List<String>> questionMap = new HashMap<String, List<String>>(); 
+	static Map<String, List<String>> questionMapFK = new HashMap<String, List<String>>(); 
+	static Map<String, List<String>> questionMapVard = new HashMap<String, List<String>>(); 
 	
 	public TaEmotFragaResponseType taEmotFraga(
 			AttributedURIType logicalAddress, TaEmotFragaType parameters) {
@@ -58,35 +62,58 @@ public class TaEmotFragaImpl implements TaEmotFragaResponderInterface {
         	Marshaller marshaller = JAXBContext.newInstance(TaEmotFragaType.class).createMarshaller();
         	marshaller.marshal(new JAXBElement(new QName("urn:riv:fk:vardgivare:sjukvard:TaEmotFragaResponder:1", "TaEmotFraga"), TaEmotFragaType.class, parameters), writer);
 			String payload = (String)writer.toString();
-			System.out.println(payload);
-//			if (payload.startsWith("<?")) {
-//				int pos = payload.indexOf("?>");
-//				payload = payload.substring(pos + 2);
-//			}
-
-			// Store question in an map with an array with vårdenhet HSA-id as the key
-			String vardenhetHsaId = parameters.getFKSKLTaEmotFragaAnrop().getAdressering().getMottagare().getOrganisation().getEnhet().getId().getValue();
+			logger.debug("Payload: " + payload);
 			
-			// Create an entry for this hsaid
-			if (!questionMap.containsKey(vardenhetHsaId)) {
-				List<String> questions = new ArrayList<String>();
-				questionMap.put(vardenhetHsaId, questions);
+			String vardenhetHsaId = null;
+			boolean isFromFK = false;
+			// Store question in an map with an array with vårdenhet HSA-id as the key. Questions can come from both directions so add this behaviour
+			if (parameters.getFKSKLTaEmotFragaAnrop().getAdressering().getMottagare().getOrganisation().getEnhet() != null) {
+				// Question from FK
+				vardenhetHsaId = parameters.getFKSKLTaEmotFragaAnrop().getAdressering().getMottagare().getOrganisation().getEnhet().getId().getValue();
+				isFromFK = true;
+			} else {
+				// Question from Varden
+				vardenhetHsaId = parameters.getFKSKLTaEmotFragaAnrop().getAdressering().getAvsandare().getOrganisation().getEnhet().getId().getValue();
+				isFromFK = false;
 			}
+			
+			if (isFromFK) {
+				// Create an entry for this hsaid
+				if (!questionMapFK.containsKey(vardenhetHsaId)) {
+					List<String> questions = new ArrayList<String>();
+					questionMapFK.put(vardenhetHsaId, questions);
+				}
+					
+				// Add question for this key
+				List<String> questions = questionMapFK.get(vardenhetHsaId);
+				questions.add(payload);
 				
-			// Add question for this key
-			List<String> questions = questionMap.get(vardenhetHsaId);
-			questions.add(payload);
-			
-			// Print out all questions for this id
-			for(int i = 0; i < questions.size(); i++) {
-				System.out.println("Index: " +  i + ". Value: " + questions.get(i));
+				// Print out all questions for this id from FK
+				for(int i = 0; i < questions.size(); i++) {
+					logger.debug("Questions from FK, index:" + i + ". Value: " + questions.get(i));
+				}
+				
+			} else {
+				// Create an entry for this hsaid
+				if (!questionMapVard.containsKey(vardenhetHsaId)) {
+					List<String> questions = new ArrayList<String>();
+					questionMapVard.put(vardenhetHsaId, questions);
+				}
+					
+				// Add question for this key
+				List<String> questions = questionMapVard.get(vardenhetHsaId);
+				questions.add(payload);
+				
+				// Print out all questions for this id
+				for(int i = 0; i < questions.size(); i++) {
+					logger.debug("Questions from Varden, index:" + i + ". Value: " + questions.get(i));
+				}				
 			}
 			
-			System.out.println("response sent!");
-
+			
 			return response;
 		} catch (Exception e) {
-			System.out.println("Error occured: " + e);
+			logger.error("Error occured: " + e);
 			return null;
 		}
 	}
