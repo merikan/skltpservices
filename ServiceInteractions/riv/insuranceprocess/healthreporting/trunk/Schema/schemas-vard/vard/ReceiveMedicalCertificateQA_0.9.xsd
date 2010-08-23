@@ -19,6 +19,7 @@
 			<xs:enumeration value="Avstamningsmote"/>
 			<xs:enumeration value="Kontakt"/>
 			<xs:enumeration value="Arbetstidsforlaggning"/>
+			<xs:enumeration value="Paminnelse"/>
 			<xs:enumeration value="Ovrigt"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -28,7 +29,6 @@
 			<xs:enumeration value="Fraga_fran_varden"/>
 			<xs:enumeration value="Svar_fran_FK"/>
 			<xs:enumeration value="Svar_fran_varden"/>
-			<xs:enumeration value="Paminnelse_fran_FK"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="meddelandeType">
@@ -42,17 +42,23 @@
 			<xs:element name="avsantTidpunkt" type="xs:dateTime"/>
 			<xs:element name="sistaDatumForKomplettering" type="xs:date" minOccurs="0"/>
 			<xs:element name="forsakringskassansArende-id" type="xs:string" minOccurs="0"/>
-			<xs:element name="mottagare" type="tns:adresseringsType"/>
-			<xs:element name="avsandare" type="tns:adresseringsType"/>
+			<xs:element name="adressFK" type="tns:FkAdresseringsType"/>
+			<xs:element name="adressVard" type="tns:VardAdresseringsType"/>
 			<xs:element name="lakarutlatande" type="tns:lakarutlatandeEnkelType"/>
 			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="adresseringsType">
-		<xs:choice>
+	<xs:complexType name="FkAdresseringsType">
+		<xs:sequence>
 			<xs:element name="organisation" type="core:organisationType"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VardAdresseringsType">
+		<xs:sequence>
 			<xs:element name="hosPersonal" type="core:hosPersonalType"/>
-		</xs:choice>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
+		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="lakarutlatandeEnkelType">
 		<xs:sequence>
