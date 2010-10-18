@@ -45,7 +45,7 @@ import se.fk.vardgivare.sjukvard.taemotfragaresponder.v1.TaEmotFragaType;
 		endpointInterface="se.fk.vardgivare.sjukvard.taemotfraga.v1.rivtabp20.TaEmotFragaResponderInterface", 
 		portName = "TaEmotFragaResponderPort", 
 		targetNamespace = "urn:riv:fk:vardgivare:sjukvard:TaEmotFraga:1:rivtabp20",
-		wsdlLocation = "schemas/TaEmotFragaInteraction_0.9_rivtabp20.wsdl")
+		wsdlLocation = "schemas/fk/TaEmotFragaInteraction_0.9_rivtabp20.wsdl")
 public class TaEmotFragaImpl implements TaEmotFragaResponderInterface {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -66,6 +66,7 @@ public class TaEmotFragaImpl implements TaEmotFragaResponderInterface {
 			
 			String vardenhetHsaId = null;
 			boolean isFromFK = false;
+
 			// Store question in an map with an array with vårdenhet HSA-id as the key. Questions can come from both directions so add this behaviour
 			if (parameters.getFKSKLTaEmotFragaAnrop().getAdressering().getMottagare().getOrganisation().getEnhet() != null) {
 				// Question from FK
@@ -93,6 +94,8 @@ public class TaEmotFragaImpl implements TaEmotFragaResponderInterface {
 					logger.debug("Questions from FK, index:" + i + ". Value: " + questions.get(i));
 				}
 				
+				// TEST!!!
+				
 			} else {
 				// Create an entry for this hsaid
 				if (!questionMapVard.containsKey(vardenhetHsaId)) {
@@ -108,8 +111,7 @@ public class TaEmotFragaImpl implements TaEmotFragaResponderInterface {
 				for(int i = 0; i < questions.size(); i++) {
 					logger.debug("Questions from Varden, index:" + i + ". Value: " + questions.get(i));
 				}				
-			}
-			
+			}			
 			
 			return response;
 		} catch (Exception e) {
