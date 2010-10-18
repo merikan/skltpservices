@@ -30,34 +30,33 @@
 	Name of this file is mandatory and may not be changed. 
 	 -->
 	
-	<custom-transformer name="vard2fk" class="se.skl.tp.recmedcertquestion.transformers.Vard2FkTransformer"/>
-	<custom-transformer name="fk2vard" class="se.skl.tp.recmedcertquestion.transformers.Fk2VardTransformer"/>
+	<custom-transformer name="VardReq2Fk" class="se.skl.tp.recmedcertquestion.transformers.VardRequest2FkTransformer"/>
+	<custom-transformer name="FkResp2Vard" class="se.skl.tp.recmedcertquestion.transformers.FkResponse2VardTransformer"/>
 	
-	<model name="fk-varden-model">
-		<service name="fk-varden-service">
+	<model name="fkvarden-question-model">
+		<service name="varden-fk-question-service">
 			<inbound>
 				<cxf:inbound-endpoint 
-					address="http://localhost:10000/transformVardFk"
-					wsdlLocation="classpath:/schemas/varden/ProcessRequestInteraction_0.8_ifv_rivtabp20.wsdl"
-					serviceName="ProcessRequestResponderService"
-					namespace="urn:riv:fk:sicknessreport:ProcessRequest:1:rivtabp20"
+					address="http://localhost:12000/transformVardFkQuestion"
+					wsdlLocation="classpath:/schemas/vard/ReceiveMedicalCertificateQuestionInteraction_0.9_rivtabp20.wsdl"
+					serviceName="ReceiveMedicalCertificateQuestionResponderService"
+					namespace="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateQuestion:1:rivtabp20"
 					proxy="true" 
 					synchronous="true"
 					applyTransformersToProtocol="false"
-					payload="envelope"
-					transformer-refs="vard2fk"
-					responseTransformer-refs="fk2vard"
+					transformer-refs="VardReq2Fk"
+					responseTransformer-refs="FkResp2Vard"
 				/>							
 			</inbound>
 
 			<outbound>
                 <pass-through-router>
                         <cxf:outbound-endpoint 
-                        	address="https://rivsat.forsakringskassan.sjunet.org/ws" 
-                        	wsdlLocation="classpath:/schemas/fk/SkickaLakarintygInteraction_0.9_fk_rivtabp20.wsdl"
-                        	wsdlPort="SkickaLakarintygResponderPort"
-                        	operation="SkickaLakarintyg" 
-                        	clientClass="se.skl.riv.fk.varden.v1.rivtabp20.skickalakarintyg.SkickaLakarintygResponderService"
+                        	address="https://localhost:19000/fk/TaEmotFraga/1/rivtabp20" 
+							wsdlLocation="classpath:/schemas/fk/TaEmotFragaInteraction_0.9_rivtabp20.wsdl"
+                        	wsdlPort="TaEmotFragaResponderPort"
+                        	operation="TaEmotFraga" 
+                        	clientClass="se.fk.vardgivare.sjukvard.taemotfraga.v1.rivtabp20.TaEmotFragaResponderService"
             	        	synchronous="true"
                         /> 
                 </pass-through-router>
