@@ -49,9 +49,9 @@ public class Fk2VardTransformer extends AbstractMessageAwareTransformer
 
 		            Throwable t = ep.getException();
 		            if (t instanceof ResponseTimeoutException) {
-		            	src = errorMessage + ". Unknown error.";
+		            	src = errorMessage + ". Timeout.";
 		            } else {
-		                src = errorMessage + ". Timeout";
+		                src = errorMessage + ". Unknown error.";
 		            }
 		            
 		            // Remove the ExceptionPayload!
@@ -118,9 +118,14 @@ public class Fk2VardTransformer extends AbstractMessageAwareTransformer
 	}
 			
 	private void createSoapFault(String errorText, StringBuffer result) {
+		result.append("<?xml version='1.0' encoding='UTF-8'?>");
+		result.append("<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">");
+		result.append("<soap:Body>");
 		result.append("<soap:Fault>");
 		result.append("<faultcode>soap:Server</faultcode>");
 		result.append("<faultstring>VP009 Exception when calling the service producer: " + errorText + "</faultstring>");
 		result.append("</soap:Fault>");
+		result.append("</soap:Body>");
+		result.append("</soap:Envelope>");
 	}
 }
