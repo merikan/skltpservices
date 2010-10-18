@@ -48,6 +48,14 @@
 	    </dependency>
 	    
 	    <!-- cxf dependencies -->
+  		<!-- schema dependency -->
+	    <dependency>
+	        <groupId>se.riv.fk</groupId>
+	        <artifactId>fk-vardgivare-sjukvard-schemas</artifactId>
+	        <version>1.0-SNAPSHOT</version>
+	    </dependency>
+	    
+	    <!-- cxf dependencies -->
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
@@ -62,7 +70,14 @@
              <groupId>org.apache.cxf</groupId>
              <artifactId>cxf-rt-transports-http-jetty</artifactId>
              <version>${cxf.version}</version>
-       </dependency>
+             <!-- exkludera en som stör !!! -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-jdk14</artifactId>
+                </exclusion>
+			</exclusions>
+        </dependency>
        
         <!--  för att undvika att 2.0.8 laddas in -->
         <dependency>
@@ -75,6 +90,34 @@
             <artifactId>spring-web</artifactId>
             <version>2.5.6</version>
         </dependency>
+        
+        <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.5.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.5.6</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.15</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.sun.jdmk</groupId>
+					<artifactId>jmxtools</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+        
 	</dependencies>
 
 	<build>
