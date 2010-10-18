@@ -39,7 +39,7 @@ public class RegMedCertProducer {
         new RegMedCertProducer();
         System.out.println("Producer ready...");
         
-        Thread.sleep(5 * 60 * 1000);
+        Thread.sleep(50 * 60 * 1000);
         System.out.println("Producer exiting");
         System.exit(0);
     }

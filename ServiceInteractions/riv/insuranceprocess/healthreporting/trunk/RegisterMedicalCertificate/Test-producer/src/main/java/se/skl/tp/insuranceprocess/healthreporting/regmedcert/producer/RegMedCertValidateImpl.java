@@ -401,7 +401,7 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
                 	inAktivitetFunktion.getBeskrivning().length() < 1) {
         			validationErrors.add("No beskrivning in funktionstillstand - aktivitet found!");	
                 }
-              
+/*              
                 // Fält 6a - kryssruta 1
                 AktivitetType kontaktAF = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PATIENTEN_BEHOVER_FA_KONTAKT_MED_ARBETSFORMEDLINGEN);
 
@@ -434,7 +434,7 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
                 if (planeradAnnat != null && (planeradAnnat.getBeskrivning() == null || planeradAnnat.getBeskrivning().length() < 1)) {
         			validationErrors.add("No beskrivning in aktivitet element planerad eller pagaende annan atgard found!.");	                	
                 }
-                
+*/                
                 // Fält 7
                 AktivitetType arbRelRehabAktuell = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.ARBETSLIVSINRIKTAD_REHABILITERING_AR_AKTUELL);
                 AktivitetType arbRelRehabEjAktuell = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.ARBETSLIVSINRIKTAD_REHABILITERING_AR_EJ_AKTUELL);
@@ -474,7 +474,7 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
         			throw new Exception();                	
                 }
                 // Fält 8a - 1:a kryssrutan - beskrivning
-                if (inArbetsBeskrivning.getTypAvArbetsuppgift() == null || inArbetsBeskrivning.getTypAvArbetsuppgift().length() < 1) {
+                if (inArbete != null && (inArbetsBeskrivning.getTypAvArbetsuppgift() == null || inArbetsBeskrivning.getTypAvArbetsuppgift().length() < 1)) {
                 	validationErrors.add("No typAvArbetsuppgift found when arbete set in field 8a!.");	
         			throw new Exception();                	
                 }
