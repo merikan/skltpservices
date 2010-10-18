@@ -30,11 +30,13 @@ import javax.xml.datatype.DatatypeFactory;
 
 import org.w3.wsaddressing10.AttributedURIType;
 
-import se.skl.riv.insuranceprocess.healthreporting.qa.v1.AdresseringsType;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.Amnetyp;
+import se.skl.riv.insuranceprocess.healthreporting.qa.v1.CaseType;
+import se.skl.riv.insuranceprocess.healthreporting.qa.v1.FkAdresseringsType;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.LakarutlatandeEnkelType;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.MeddelandeType;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.Meddelandetyp;
+import se.skl.riv.insuranceprocess.healthreporting.qa.v1.VardAdresseringsType;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderInterface;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderService;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.ReceiveMedicalCertificateQuestionResponseType;
@@ -101,7 +103,7 @@ public final class RecMedCertQuestionConsumer {
 		MeddelandeType meddelande = new MeddelandeType();
 		
 		// Avsändare
-		AdresseringsType avsandare = new AdresseringsType();		
+		VardAdresseringsType avsandare = new VardAdresseringsType();		
 		HosPersonalType hosPersonal = new HosPersonalType();
 		EnhetType enhet = new EnhetType();	
 		II enhetsId = new II();
@@ -127,15 +129,15 @@ public final class RecMedCertQuestionConsumer {
 		personalId.setExtension("Personal HSA-ID");
 		hosPersonal.setPersonalId(personalId);
 		avsandare.setHosPersonal(hosPersonal);
-		meddelande.setAvsandare(avsandare);
+		meddelande.setAdressVard(avsandare);
 		
 		// Mottagare
-		AdresseringsType mottagare = new AdresseringsType();
+		FkAdresseringsType mottagare = new FkAdresseringsType();
 		OrganisationType organisation = new OrganisationType();
 		organisation.setOrganisationsnamn("Försäkringskassan");
 		organisation.setOrganisationsId("202100-5521");
 		mottagare.setOrganisation(organisation);
-		meddelande.setMottagare(mottagare);
+		meddelande.setAdressFK(mottagare);
 		
 		// Avsänt tidpunkt - nu
 		meddelande.setAvsantTidpunkt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
@@ -152,7 +154,7 @@ public final class RecMedCertQuestionConsumer {
 		patient.setEfternamn("Testsson");
 		lakarutlatandeEnkel.setPatient(patient);
 		lakarutlatandeEnkel.setLakarutlatandeId("xxx");
-		lakarutlatandeEnkel.setAvsantTidpunkt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
+		lakarutlatandeEnkel.setSigneringsTidpunkt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
 		meddelande.setLakarutlatande(lakarutlatandeEnkel);
 	
 		// Set Försäkringskassans id
@@ -164,9 +166,14 @@ public final class RecMedCertQuestionConsumer {
 		// Set ämne
 		meddelande.setAmne(Amnetyp.AVSTAMNINGSMOTE);
 		
-		// Set meddelande	
+		// Set meddelanderubrik
 		meddelande.setMeddelanderubrik("Rubrik");
-		meddelande.setMeddelandetext("Meddelandetext");
+
+		// Set meddelande - fraga
+		CaseType fraga = new CaseType();
+		fraga.setMeddelandeText("Meddelandetetext");
+		fraga.setSigneringsTidpunkt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
+		meddelande.setFraga(fraga);
 
 		// Komplettering
 //		meddelande.getKomplettering().add(e);
