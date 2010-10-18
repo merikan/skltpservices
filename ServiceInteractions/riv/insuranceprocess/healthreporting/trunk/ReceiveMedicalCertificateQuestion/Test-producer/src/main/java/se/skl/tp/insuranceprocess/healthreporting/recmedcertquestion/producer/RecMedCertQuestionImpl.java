@@ -36,7 +36,7 @@ import se.skl.riv.insuranceprocess.healthreporting.v1.ResultOfCall;
 		endpointInterface="se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderInterface", 
 		portName = "ReceiveMedicalCertificateQuestionResponderPort", 
 		targetNamespace = "urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateQuestion:1:rivtabp20",
-		wsdlLocation = "schemas/ReceiveMedicalCertificateQuestionInteraction_0.9_rivtabp20.wsdl")
+		wsdlLocation = "schemas/vard/ReceiveMedicalCertificateQuestionInteraction_0.9_rivtabp20.wsdl")
 public class RecMedCertQuestionImpl implements ReceiveMedicalCertificateQuestionResponderInterface {
 
 	public ReceiveMedicalCertificateQuestionResponseType receiveMedicalCertificateQuestion(

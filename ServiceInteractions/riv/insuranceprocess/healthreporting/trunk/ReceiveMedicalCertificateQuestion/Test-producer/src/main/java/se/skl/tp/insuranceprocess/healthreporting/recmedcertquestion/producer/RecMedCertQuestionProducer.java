@@ -30,7 +30,8 @@ public class RecMedCertQuestionProducer {
         System.out.println("Starting Producer");
 
         Object implementor = new RecMedCertQuestionImpl();
-        String address = "https://localhost:21000/vp/ReceiveMedicalCertificateQuestion/1/rivtabp20";
+//        String address = "https://localhost:21000/vp/ReceiveMedicalCertificateQuestion/1/rivtabp20";
+        String address = "http://localhost:10000/test/ReceiveMedicalCertificateQuestion";
         Endpoint.publish(address, implementor);
     }
 
@@ -39,7 +40,7 @@ public class RecMedCertQuestionProducer {
         new RecMedCertQuestionProducer();
         System.out.println("Producer ready...");
         
-        Thread.sleep(5 * 60 * 1000);
+        Thread.sleep(50 * 60 * 1000);
         System.out.println("Producer exiting");
         System.exit(0);
     }

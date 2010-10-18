@@ -70,7 +70,7 @@ import se.skl.riv.insuranceprocess.healthreporting.v1.VardgivareType;
 		endpointInterface="se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderInterface", 
 		portName = "ReceiveMedicalCertificateQuestionResponderPort", 
 		targetNamespace = "urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateQuestion:1:rivtabp20",
-		wsdlLocation = "schemas/ReceiveMedicalCertificateQuestionInteraction_0.9_rivtabp20.wsdl")
+		wsdlLocation = "schemas/vard/ReceiveMedicalCertificateQuestionInteraction_0.9_rivtabp20.wsdl")
 public class RecMedCertQuestionValidateImpl implements ReceiveMedicalCertificateQuestionResponderInterface {
 
 	public ReceiveMedicalCertificateQuestionResponseType receiveMedicalCertificateQuestion(
@@ -161,7 +161,7 @@ public class RecMedCertQuestionValidateImpl implements ReceiveMedicalCertificate
 			}
 
 			// Läkarutlåtande referens - avsantTidpunkt - mandatory
-            if (inLakarUtlatande.getAvsantTidpunkt() == null || !inLakarUtlatande.getAvsantTidpunkt().isValid()) {
+            if (inLakarUtlatande.getSigneringsTidpunkt() == null || !inLakarUtlatande.getSigneringsTidpunkt().isValid()) {
 				validationErrors.add("No or wrong lakarutlatande-avsantTidpunkt found!");				
             }
 
@@ -215,44 +215,31 @@ public class RecMedCertQuestionValidateImpl implements ReceiveMedicalCertificate
 			/**
 			 *  Check avsandare data. Depending on direction of question (from varden or FK) validate avsandare.
 			 */
-			if ( inQuestion.getAvsandare() == null) {
-				validationErrors.add("No avsandare element found!");				
+			if ( inQuestion.getAdressFK() == null) {
+				validationErrors.add("No adress FK element found!");				
 				throw new Exception();
-			}
-			if (inFragaFranVarden) {
-				if ( inQuestion.getAvsandare().getHosPersonal() == null) {
-					validationErrors.add("No avsandare - hosPersonal element found!");				
-					throw new Exception();
-				}
-				checkHoSPersonal(inQuestion.getAvsandare().getHosPersonal(), validationErrors);
 			} else {
-				if ( inQuestion.getAvsandare().getOrganisation() == null) {
-					validationErrors.add("No avsandare - organisation element found!");				
+				if ( inQuestion.getAdressFK().getOrganisation() == null) {
+					validationErrors.add("No FK - organisation element found!");				
 					throw new Exception();
 				}
-				checkOrganisation(inQuestion.getAvsandare().getOrganisation(), validationErrors);				
-			} 
-			
+				checkOrganisation(inQuestion.getAdressFK().getOrganisation(), validationErrors);								
+			}
+						
 			/**
 			 *  Check mottagare data. Depending on direction of question (from varden or FK) validate mottagare.
 			 */
-			if ( inQuestion.getMottagare() == null) {
-				validationErrors.add("No mottagare element found!");				
+			if ( inQuestion.getAdressVard() == null) {
+				validationErrors.add("No Vard adress element found!");				
 				throw new Exception();
-			}
-			if (inFragaFranVarden) {
-				if ( inQuestion.getMottagare().getOrganisation() == null) {
-					validationErrors.add("No avsandare - organisation element found!");				
-					throw new Exception();
-				}
-				checkOrganisation(inQuestion.getMottagare().getOrganisation(), validationErrors);								
 			} else {
-				if ( inQuestion.getMottagare().getHosPersonal() == null) {
-					validationErrors.add("No avsandare - hosPersonal element found!");				
+				if ( inQuestion.getAdressVard().getHosPersonal() == null) {
+					validationErrors.add("No vard - hosPersonal element found!");				
 					throw new Exception();
 				}
-				checkHoSPersonal(inQuestion.getMottagare().getHosPersonal(), validationErrors);				
-			} 
+				checkHoSPersonal(inQuestion.getAdressVard().getHosPersonal(), validationErrors);				
+				
+			}
 			
 			// Check if we got any validation errors that not caused an Exception
 			if (validationErrors.size() > 0) {
@@ -302,6 +289,7 @@ public class RecMedCertQuestionValidateImpl implements ReceiveMedicalCertificate
 			validationErrors.add("Wrong o.i.d. for personalId! Should be 1.2.752.129.2.1.4.1");								
         }
         
+        // Check lakarnamn - mandatory
         // Check lakarnamn - mandatory
 		boolean fullstandigtLakarNameFound = false;
 		boolean fornamnLakarFound = false;
