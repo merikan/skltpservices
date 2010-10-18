@@ -42,7 +42,7 @@
 		<service name="ReceiveMedicalCertificateQuestion-service">
 			<inbound>
 				<cxf:inbound-endpoint address="https://${tp.host}:${tp.port}/${tp.baseUri}/ReceiveMedicalCertificateQuestion/1/rivtabp20"
-					wsdlLocation="classpath:/schemas/ReceiveMedicalCertificateQuestionInteraction_0.9_rivtabp20.wsdl"
+					wsdlLocation="classpath:/schemas/vard/ReceiveMedicalCertificateQuestionInteraction_0.9_rivtabp20.wsdl"
 					serviceName="ReceiveMedicalCertificateQuestionResponderService"
 					namespace="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateQuestion:1:rivtabp20"
 					proxy="true" 
