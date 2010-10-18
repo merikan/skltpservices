@@ -32,7 +32,16 @@
 	
 	<custom-transformer name="vard2fk" class="se.skl.tp.regmedcert.transformers.Vard2FkTransformer"/>
 	<custom-transformer name="fk2vard" class="se.skl.tp.regmedcert.transformers.Fk2VardTransformer"/>
-	
+<!--	
+	<message-properties-transformer name="newContract">
+		<add-message-property key="namespace" value="urn:riv:fk:vardgivare:sjukvard:TaEmotLakarintyg:1:rivtabp20"/>		
+	</message-properties-transformer>           
+
+	<message-properties-transformer name="newReceiverId">
+		<delete-message-property key="receiverid"/>
+		<add-message-property key="receiverid" value="FK"/>		
+	</message-properties-transformer>           
+-->
 	<model>
 		<service name="fk-varden-registermedicalcertificate-service">
 			<inbound>
@@ -42,7 +51,6 @@
 					serviceName="RegisterMedicalCertificateResponderService"
 					namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2:rivtabp20"
 					proxy="true" 
-
 					synchronous="true"
 					applyTransformersToProtocol="false"
 					transformer-refs="vard2fk"
@@ -53,7 +61,7 @@
 			<outbound>
                 <pass-through-router>
                         <cxf:outbound-endpoint 
-                        	address="https://localhost:19000/fk/TaEmotLakarintyg/1/rivtabp20" 
+                        	address="https://rivsat.forsakringskassan.sjunet.org/ws" 
                         	wsdlLocation="classpath:/schemas/fk/TaEmotLakarintygInteraction_1.0_rivtabp20.wsdl"
                         	wsdlPort="TaEmotLakarintygResponderPort"
                         	operation="TaEmotLakarintyg" 
@@ -66,6 +74,8 @@
 		
 	</model>
 </mule>
+
 <!--address="https://rivsat.forsakringskassan.sjunet.org/ws"  -->
-<!-- address="https://localhost:19000/fk/SkickaLakarintyg/1/rivtabp20" -->
+<!-- address="https://localhost:19000/fk/TaEmotLakarintyg/1/rivtabp20" -->
+<!-- address="https://${tp.host}:${tp.port}/${tp.baseUri}/TaEmotLakarintyg/1/rivtabp20" -->
 
