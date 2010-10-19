@@ -33,7 +33,7 @@ import se.fk.vardgivare.sjukvard.taemotlakarintygresponder.v1.TaEmotLakarintygTy
 		endpointInterface="se.fk.vardgivare.sjukvard.taemotlakarintyg.v1.rivtabp20.TaEmotLakarintygResponderInterface", 
 		portName = "TaEmotLakarintygResponderPort", 
 		targetNamespace = "urn:riv:fk:vardgivare:sjukvard:TaEmotLakarintyg:1:rivtabp20",
-		wsdlLocation = "schemas/TaEmotLakarintygInteraction_1.0_rivtabp20.wsdl")
+		wsdlLocation = "schemas/fk/TaEmotLakarintygInteraction_1.0_rivtabp20.wsdl")
 public class TaEmotLakarintygImpl implements TaEmotLakarintygResponderInterface {
 
 	public TaEmotLakarintygResponseType taEmotLakarintyg(
