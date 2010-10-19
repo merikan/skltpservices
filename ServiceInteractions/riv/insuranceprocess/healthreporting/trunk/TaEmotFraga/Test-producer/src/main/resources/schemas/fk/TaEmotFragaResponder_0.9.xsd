@@ -16,9 +16,8 @@
 	
    <xs:complexType name="TaEmotFragaType">
       <xs:sequence>
-      	<xs:element name="test" type="xs:string"/>
+      	<xs:element ref="vas:FK.SKL.TaEmotFraga.Anrop"/>
       	<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
-<!--          <xs:element ref="vas:FK.SKL.TaEmotFraga.Anrop"/>  -->
       </xs:sequence>
    </xs:complexType>
    
