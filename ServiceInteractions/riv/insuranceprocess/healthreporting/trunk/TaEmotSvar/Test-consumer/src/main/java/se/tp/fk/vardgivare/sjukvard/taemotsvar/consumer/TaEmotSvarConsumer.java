@@ -30,8 +30,12 @@ import se.fk.vardgivare.sjukvard.taemotsvar.v1.rivtabp20.TaEmotSvarResponderServ
 import se.fk.vardgivare.sjukvard.taemotsvarresponder.v1.TaEmotSvarResponseType;
 import se.fk.vardgivare.sjukvard.taemotsvarresponder.v1.TaEmotSvarType;
 import se.fk.vardgivare.sjukvard.v1.Adressering;
+import se.fk.vardgivare.sjukvard.v1.Enhet;
+import se.fk.vardgivare.sjukvard.v1.InternIdentitetsbeteckning;
 import se.fk.vardgivare.sjukvard.v1.Lakarintygsreferens;
+import se.fk.vardgivare.sjukvard.v1.Organisation;
 import se.fk.vardgivare.sjukvard.v1.TaEmotSvar;
+import se.fk.vardgivare.sjukvard.v1.Adressering.Mottagare;
 
 public final class TaEmotSvarConsumer {
 
@@ -92,10 +96,18 @@ public final class TaEmotSvarConsumer {
 
 	private static Adressering getAdressering() {
 		Adressering adressering = new Adressering();
-		
-		
+		Mottagare mottagare = new Mottagare();
+		Organisation mottagarOrg = new Organisation();
+		Enhet mottagarEnhet = new Enhet();
+		InternIdentitetsbeteckning mottEnhetId = new InternIdentitetsbeteckning();
+		mottEnhetId.setValue("kalle");
+		mottagarEnhet.setId(mottEnhetId);
+		mottagarOrg.setEnhet(mottagarEnhet);
+		mottagare.setOrganisation(mottagarOrg);
+		adressering.setMottagare(mottagare);
 		return adressering;
 	}
+
 	private static Lakarintygsreferens getSimpleLakarintyg() {
 		Lakarintygsreferens lakarintygRef = new Lakarintygsreferens();
 		return lakarintygRef;
