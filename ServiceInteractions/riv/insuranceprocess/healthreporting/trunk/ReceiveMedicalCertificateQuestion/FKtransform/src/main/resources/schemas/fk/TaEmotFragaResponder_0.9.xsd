@@ -6,7 +6,7 @@
 	targetNamespace="urn:riv:fk:vardgivare:sjukvard:TaEmotFragaResponder:1"  
 	elementFormDefault="qualified" 
 	attributeFormDefault="unqualified" 
-	version="1.0"
+	version="0.9"
 >
 	
    <xs:import namespace="http://schema.forsakringskassan.se/vardgivare_sjukvard" schemaLocation="vardgivare_sjukvard/TaEmotFragaAnrop.xsd"/>
@@ -16,7 +16,8 @@
 	
    <xs:complexType name="TaEmotFragaType">
       <xs:sequence>
-         <xs:element ref="vas:FK.SKL.TaEmotFraga.Anrop"/>
+      	<xs:element ref="vas:FK.SKL.TaEmotFraga.Anrop"/>
+      	<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xs:sequence>
    </xs:complexType>
    
