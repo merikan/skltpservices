@@ -30,7 +30,7 @@ public class RecMedCertAnswerProducer {
         System.out.println("Starting Producer");
 
         Object implementor = new RecMedCertAnswerImpl();
-        String address = "https://localhost:21000/vp/ReceiveMedicalCertificateAnswer/1/rivtabp20";
+        String address = "https://localhost:19000/vard/ReceiveMedicalCertificateAnswer/1/rivtabp20";
         Endpoint.publish(address, implementor);
     }
 
