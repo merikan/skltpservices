@@ -72,7 +72,7 @@ public final class RegMedCertConsumer {
 	// Use this one to connect directly (just for test)
 
 	public static void main(String[] args) {
-		String host = "localhost:21000/vp";
+		String host = "localhost:19000/vard";
 		if (args.length > 0) {
 			host = args[0];
 		}
