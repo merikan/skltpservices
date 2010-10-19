@@ -51,7 +51,7 @@
 			<outbound>
                 <pass-through-router>
                         <cxf:outbound-endpoint 
-                        	address="http://192.168.16.211:8080/casebox/ws/RecMedCertAnswer/1/rivtabp20" 
+                        	address="http://localhost:19000/vard/ReceiveMedicalCertificateAnswer/1/rivtabp20" 
 							wsdlLocation="classpath:/schemas/vard/ReceiveMedicalCertificateAnswerInteraction_0.9_rivtabp20.wsdl"
                         	wsdlPort="ReceiveMedicalCertificateAnswerResponderPort"
                         	operation="ReceiveMedicalCertificateAnswer" 
@@ -66,4 +66,5 @@
 </mule>
 <!--address="https://rivsat.forsakringskassan.sjunet.org/ws"  -->
 <!-- address="https://localhost:19000/fk/SkickaLakarintyg/1/rivtabp20" -->
+<!-- address="http://192.168.16.211:8080/casebox/ws/RecMedCertAnswer/1/rivtabp20"  -->
 
