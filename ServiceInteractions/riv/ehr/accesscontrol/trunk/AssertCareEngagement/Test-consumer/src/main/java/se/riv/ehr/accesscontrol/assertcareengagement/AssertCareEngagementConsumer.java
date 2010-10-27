@@ -33,11 +33,16 @@ import se.riv.ehr.accesscontrol.assertcareengagementresponder.v1.AssertCareEngag
 public final class AssertCareEngagementConsumer {
 
 	// Use this one to connect via Virtualiseringsplattformen
-	private static final String LOGISK_ADDRESS = "/AssertCareEngagement_Service";
+//	private static final String LOGISK_ADDRESS = "/AssertCareEngagement/1/rivtabp20";
 	// Use this one to connect directly (just for test)
+	private static final String LOGISK_ADDRESS = "/AssertCareEngagement_Service";
 
 	public static void main(String[] args) {
-		String host = "localhost:21000/test";
+		// Use this one to connect via Virtualiseringsplattformen
+//		String host = "localhost:21000/vp";
+		// Use this one to connect directly (just for test)
+		String host = "localhost:19000/test";
+
 		if (args.length > 0) {
 			host = args[0];
 		}
