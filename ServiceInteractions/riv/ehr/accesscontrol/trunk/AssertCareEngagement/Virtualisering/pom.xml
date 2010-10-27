@@ -27,9 +27,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.riv</groupId>
- <artifactId>ehr-accesscontrol-assertcareengagement-virtualisering</artifactId>
+ 	<artifactId>ehr-accesscontrol-assertcareengagement-virtualisering</artifactId>
 	<version>1.0-SNAPSHOT</version>
- <name>ehr-accesscontrol-assertcareengagement-virtualisering</name>
+ 	<name>ehr-accesscontrol-assertcareengagement-virtualisering</name>
 	<url>http://maven.apache.org</url>
+	<packaging>jar</packaging>
 	
 </project>
