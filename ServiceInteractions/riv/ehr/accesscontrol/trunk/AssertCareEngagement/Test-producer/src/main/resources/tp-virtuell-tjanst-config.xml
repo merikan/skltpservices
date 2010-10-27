@@ -29,10 +29,10 @@
 	Name of this file is mandatory and may not be changed. 
 	 -->
  	<model name="AssertCareEngagement-model-test">
-		<service name="AssertCareEngagement-service-test">
+		<service name="AssertCareEngagement-service-test1">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/test/AssertCareEngagement_Service"
+					address="http://localhost:10000/test/AssertCareEngagement_Service1"
 					wsdlLocation="classpath:/schemas/interactions/AssertCareEngagementInteraction/AssertCareEngagementInteraction_1.0_RIVTABP20.wsdl"/>
 			</inbound>
 
@@ -40,6 +40,19 @@
 				<singleton-object class="se.riv.ehr.accescontrol.assertcareengagement.AssertCareEngagementImpl" />
 			</component>
 		</service>
+
+		<service name="AssertCareEngagement-service-test2">
+			<inbound>
+				<cxf:inbound-endpoint
+					address="http://localhost:10000/test/AssertCareEngagement_Service2"
+					wsdlLocation="classpath:/schemas/interactions/AssertCareEngagementInteraction/AssertCareEngagementInteraction_1.0_RIVTABP20.wsdl"/>
+			</inbound>
+
+			<component>
+				<singleton-object class="se.riv.ehr.accescontrol.assertcareengagement.AssertCareEngagementImpl" />
+			</component>
+		</service>
+
 	</model>
 
 </mule>

@@ -30,9 +30,9 @@ public class AssertCareEngagementProducer {
 
         Object implementor = new AssertCareEngagementImpl();
         // Address when testing without TP
-//        String address = "https://localhost:21000/vp/Ping/1/rivtabp20";
+        String address = "https://localhost:19000/test/AssertCareEngagement_Service";
         // Address when testing with TP
-        String address = "http://localhost:21000/test/AssertCareEngagement_Service";
+//        String address = "http://localhost:21000/test/AssertCareEngagement_Service";
         Endpoint.publish(address, implementor);
     }
 
