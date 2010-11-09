@@ -37,28 +37,22 @@ public final class PingConsumer {
 	// Use this one to connect directly (just for test)
 
 	public static void main(String[] args) {
-		String host = "vp.prod.tp.cybercom.carelink.sjunet.org:20000/vp";
-//		String host = "localhost:21000/vp";
+		String host = "localhost:21000/vp";
 		if (args.length > 0) {
 			host = args[0];
 		}
 
 		// Setup ssl info for the initial ?wsdl lookup...
-		System.setProperty("javax.net.ssl.keyStore","../../SITHScerts/tk_qa_auth.p12");
-		System.setProperty("javax.net.ssl.keyStorePassword", "PRPWkJ9mBr");
-		System.setProperty("javax.net.ssl.keyStoreType", "pkcs12");
-		System.setProperty("javax.net.ssl.trustStore", "../../SITHScerts/truststore.jks");
+//		System.setProperty("javax.net.ssl.keyStore","../../certs/consumer.jks");
+		System.setProperty("javax.net.ssl.keyStore","../../certs/consumer.jks");
+		System.setProperty("javax.net.ssl.keyStorePassword", "password");
+		System.setProperty("javax.net.ssl.keyStoreType", "jks");
+		System.setProperty("javax.net.ssl.trustStore", "../../certs/truststore.jks");
 		System.setProperty("javax.net.ssl.trustStorePassword", "password");
-
-//		System.setProperty("javax.net.ssl.keyStore","../certs/consumer.jks");
-//		System.setProperty("javax.net.ssl.keyStorePassword", "password");
-//		System.setProperty("javax.net.ssl.keyStoreType", "jks");
-//		System.setProperty("javax.net.ssl.trustStore", "../certs/truststore.jks");
-//		System.setProperty("javax.net.ssl.trustStorePassword", "password");
 
 		String adress = "https://" + host + LOGISK_ADDRESS;
 		System.out.println("Consumer connecting to "  + adress);
-		String p = callService(adress, "Ping");
+		String p = callService(adress, "Test");
 		System.out.println("Returned: " + p);
 	}
 
