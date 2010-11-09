@@ -36,11 +36,11 @@
 		<http:tlsClientParameters disableCNCheck="true">
 			<sec:trustManagers>
 				<sec:keyStore type="JKS" password="password"
-					file="../certs/truststore.jks" />
+					file="../../certs/truststore.jks" />
 			</sec:trustManagers>
 			<sec:keyManagers keyPassword="password">
 				<sec:keyStore type="jks" password="password"
-					file="../certs/consumer.jks" />
+					file="../../certs/consumer.jks" />
 			</sec:keyManagers>
 			<sec:cipherSuitesFilter>
 				<!--
