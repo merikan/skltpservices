@@ -43,11 +43,11 @@
 			<httpj:tlsServerParameters>
 				<sec:keyManagers keyPassword="password">
 					<sec:keyStore type="JKS" password="password"
-						file="../certs/producer.jks" />
+						file="../../certs/producer.jks" />
 				</sec:keyManagers>
 				<sec:trustManagers>
 					<sec:keyStore type="JKS" password="password"
-						file="../certs/truststore.jks" />
+						file="../../certs/truststore.jks" />
 				</sec:trustManagers>
 				<sec:cipherSuitesFilter>
 					<!--
