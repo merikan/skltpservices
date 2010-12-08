@@ -33,17 +33,17 @@
 	Name of this file is mandatory and may not be changed. 
 	 -->
  	
-	<message-properties-transformer name="RegisterMedicalCertificate-add-riv-version">
+	<message-properties-transformer name="RegisterMedicalCertificate3-add-riv-version">
         <add-message-property key="rivversion" value="RIVTABP20"/>
     </message-properties-transformer>           
  
 	<model>
 		<service name="RegisterMedicalCertificate-service">
 			<inbound>
-				<cxf:inbound-endpoint address="https://${tp.host}:${tp.port}/${tp.baseUri}/RegisterMedicalCertificate/2/rivtabp20"
-					wsdlLocation="classpath:/schemas/RegisterMedicalCertificateInteraction_2.0_rivtabp20.wsdl"
+				<cxf:inbound-endpoint address="https://${tp.host}:${tp.port}/${tp.baseUri}/RegisterMedicalCertificate/3/rivtabp20"
+					wsdlLocation="classpath:/schemas/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
 					serviceName="RegisterMedicalCertificateResponderService"
-					namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2:rivtabp20"
+					namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20"
 					proxy="true"
 					payload="envelope"
 					synchronous="true"
@@ -54,7 +54,7 @@
                 <pass-through-router>
         			<outbound-endpoint address="vm://vagval-router" 
         			synchronous="true"
-        			transformer-refs="RegisterMedicalCertificate-add-riv-version" />
+        			transformer-refs="RegisterMedicalCertificate3-add-riv-version" />
                 </pass-through-router>
 			</outbound>    		
 		</service>						
