@@ -205,7 +205,10 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 			if (inEnhet.getPostort() == null || inEnhet.getPostort().length() < 1 ) {
 				validationErrors.add("No postort found for enhet!");								
 			}
-
+			if (inEnhet.getTelefonnummer() == null || inEnhet.getTelefonnummer().length() < 1 ) {
+				validationErrors.add("No telefonnummer found for enhet!");								
+			}
+			
             // Check that we got a vardgivare element
             if (inEnhet.getVardgivare() == null) {
 				validationErrors.add("No vardgivare element found!");	  
@@ -268,23 +271,23 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
                     !medTillstand.getTillstandskod().getCodeSystemName().equalsIgnoreCase("ICD-10")) {
                 	validationErrors.add("Wrong code system name for medicinskt tillstand - tillstandskod (diagnoskod)! Should be ICD-10");								
                 }
-                // Fält 2 - Medicinskt tillstånd beskrivning - mandatory
-                if (medTillstand.getBeskrivning() == null ||
-                    medTillstand.getBeskrivning().length() < 1) {
-            		validationErrors.add("No beskrivning in medicinsktTillstand found!");	            	
-                }
+//                // Fält 2 - Medicinskt tillstånd beskrivning - mandatory
+//                if (medTillstand.getBeskrivning() == null ||
+//                    medTillstand.getBeskrivning().length() < 1) {
+//            		validationErrors.add("No beskrivning in medicinsktTillstand found!");	            	
+//                }
                             
                 // Fält 3 - Check that we got a bedomtTillstand element
                 if (inLakarutlatande.getBedomtTillstand() == null) {
         			validationErrors.add("No bedomtTillstand element found!");	
         			throw new Exception();
                 }
-                // Fält 3 - Bedömt tillstånd beskrivning - mandatory
-                if (inLakarutlatande.getBedomtTillstand().getBeskrivning() == null ||
-                	inLakarutlatande.getBedomtTillstand().getBeskrivning().length() < 1	) {
-        			validationErrors.add("No beskrivning in bedomtTillstand found!");	
-        			throw new Exception();
-                }
+//                // Fält 3 - Bedömt tillstånd beskrivning - mandatory
+//                if (inLakarutlatande.getBedomtTillstand().getBeskrivning() == null ||
+//                	inLakarutlatande.getBedomtTillstand().getBeskrivning().length() < 1	) {
+//        			validationErrors.add("No beskrivning in bedomtTillstand found!");	
+//        			throw new Exception();
+//                }
      
                 // Fält 4 - vänster Check that we got a funktionstillstand - kroppsfunktion element  
                 FunktionstillstandType inKroppsFunktion = findFunktionsTillstandType(inLakarutlatande.getFunktionstillstand(), TypAvFunktionstillstand.KROPPSFUNKTION);
@@ -337,56 +340,56 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
                 	inAktivitetFunktion.getBeskrivning().length() < 1) {
         			validationErrors.add("No beskrivning in funktionstillstand - aktivitet found!");	
                 }
-/*              
-                // Fält 6a - kryssruta 1
-                AktivitetType kontaktAF = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PATIENTEN_BEHOVER_FA_KONTAKT_MED_ARBETSFORMEDLINGEN);
-
-                // Fält 6a - kryssruta 2
-                AktivitetType kontaktFHV = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PATIENTEN_BEHOVER_FA_KONTAKT_MED_FORETAGSHALSOVARDEN);
-
-                // Fält 6a - kryssruta 3
-                AktivitetType ovrigt = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.OVRIGT);
-
-                // Fält 6b - kryssruta 1
-                AktivitetType planeradInomSjukvard = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PLANERAD_ELLER_PAGAENDE_BEHANDLING_ELLER_ATGARD_INOM_SJUKVARDEN);
-
-                // Fält 6b - kryssruta 2
-                AktivitetType planeradAnnat = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PLANERAD_ELLER_PAGAENDE_ANNAN_ATGARD);
-
-                // Fält 6a+6b Check that at least one is checked
-                if (kontaktAF==null && kontaktFHV==null && ovrigt==null && planeradInomSjukvard==null && planeradAnnat==null) {
-        			validationErrors.add("No aktivitet element found for field 6a and 6b!Kontakt med AF, Kontakt med FHV, Ovrigt, Planerad eller pagaende behandling inom sjukvard or planerad eller pagaende annan atgard.");	
-        			throw new Exception();
-                }
-                // Fält 6a - kryssruta 3 - beskrivning                
-                if (ovrigt != null && (ovrigt.getBeskrivning() == null || ovrigt.getBeskrivning().length() < 1)) {
-        			validationErrors.add("No beskrivning in aktivitet element Ovrigt found!.");	                	
-                }
-                // Fält 6b - kryssruta 1 - beskrivning
-                if (planeradInomSjukvard != null && (planeradInomSjukvard.getBeskrivning() == null || planeradInomSjukvard.getBeskrivning().length() < 1)) {
-        			validationErrors.add("No beskrivning in aktivitet element Planerad eller pagaende behandling inom sjukvard found!.");	                	
-                }
-                // Fält 6b - kryssruta 2 - beskrivning
-                if (planeradAnnat != null && (planeradAnnat.getBeskrivning() == null || planeradAnnat.getBeskrivning().length() < 1)) {
-        			validationErrors.add("No beskrivning in aktivitet element planerad eller pagaende annan atgard found!.");	                	
-                }
-*/                
+              
+//                // Fält 6a - kryssruta 1
+//                AktivitetType kontaktAF = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PATIENTEN_BEHOVER_FA_KONTAKT_MED_ARBETSFORMEDLINGEN);
+//
+//                // Fält 6a - kryssruta 2
+//                AktivitetType kontaktFHV = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PATIENTEN_BEHOVER_FA_KONTAKT_MED_FORETAGSHALSOVARDEN);
+//
+//                // Fält 6a - kryssruta 3
+//                AktivitetType ovrigt = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.OVRIGT);
+//
+//                // Fält 6b - kryssruta 1
+//                AktivitetType planeradInomSjukvard = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PLANERAD_ELLER_PAGAENDE_BEHANDLING_ELLER_ATGARD_INOM_SJUKVARDEN);
+//
+//                // Fält 6b - kryssruta 2
+//                AktivitetType planeradAnnat = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PLANERAD_ELLER_PAGAENDE_ANNAN_ATGARD);
+//
+//                // Fält 6a+6b Check that at least one is checked
+//                if (kontaktAF==null && kontaktFHV==null && ovrigt==null && planeradInomSjukvard==null && planeradAnnat==null) {
+//        			validationErrors.add("No aktivitet element found for field 6a and 6b!Kontakt med AF, Kontakt med FHV, Ovrigt, Planerad eller pagaende behandling inom sjukvard or planerad eller pagaende annan atgard.");	
+//        			throw new Exception();
+//                }
+//                // Fält 6a - kryssruta 3 - beskrivning                
+//                if (ovrigt != null && (ovrigt.getBeskrivning() == null || ovrigt.getBeskrivning().length() < 1)) {
+//        			validationErrors.add("No beskrivning in aktivitet element Ovrigt found!.");	                	
+//                }
+//                // Fält 6b - kryssruta 1 - beskrivning
+//                if (planeradInomSjukvard != null && (planeradInomSjukvard.getBeskrivning() == null || planeradInomSjukvard.getBeskrivning().length() < 1)) {
+//        			validationErrors.add("No beskrivning in aktivitet element Planerad eller pagaende behandling inom sjukvard found!.");	                	
+//                }
+//                // Fält 6b - kryssruta 2 - beskrivning
+//                if (planeradAnnat != null && (planeradAnnat.getBeskrivning() == null || planeradAnnat.getBeskrivning().length() < 1)) {
+//        			validationErrors.add("No beskrivning in aktivitet element planerad eller pagaende annan atgard found!.");	                	
+//                }
+                
                 // Fält 7
-                AktivitetType arbRelRehabAktuell = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.ARBETSLIVSINRIKTAD_REHABILITERING_AR_AKTUELL);
-                AktivitetType arbRelRehabEjAktuell = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.ARBETSLIVSINRIKTAD_REHABILITERING_AR_EJ_AKTUELL);
-                AktivitetType garEjAttBedommaArbRelRehab = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.GAR_EJ_ATT_BEDOMMA_OM_ARBETSLIVSINRIKTAD_REHABILITERING_AR_AKTUELL);
-                // Fält 7 - Check that at least one choice is made
-                if (arbRelRehabAktuell == null && arbRelRehabEjAktuell == null && garEjAttBedommaArbRelRehab == null) {
-        			validationErrors.add("No aktivitet element found for field 7.! Arbetslivsrehab aktuell, Arbetslivsrehab ej aktuell eller Arbetslivsrehab gar ej att bedoma.");	
-        			throw new Exception();                	
-                }
-                // Fält 7 - Check that only one choice is made
-                if ( (arbRelRehabAktuell != null && arbRelRehabEjAktuell != null && garEjAttBedommaArbRelRehab != null) ||
-                	 (arbRelRehabAktuell != null && arbRelRehabEjAktuell != null && garEjAttBedommaArbRelRehab == null) ||
-                	 (arbRelRehabAktuell != null && arbRelRehabEjAktuell == null && garEjAttBedommaArbRelRehab != null) ||
-                	 (arbRelRehabAktuell == null && arbRelRehabEjAktuell != null && garEjAttBedommaArbRelRehab != null) ) {
-        			validationErrors.add("Only one ckeckbox is allowed for field 7! Arbetslivsrehab aktuell, Arbetslivsrehab ej aktuell eller Arbetslivsrehab gar ej att bedoma.");	              	
-                }
+//                AktivitetType arbRelRehabAktuell = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.ARBETSLIVSINRIKTAD_REHABILITERING_AR_AKTUELL);
+//                AktivitetType arbRelRehabEjAktuell = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.ARBETSLIVSINRIKTAD_REHABILITERING_AR_EJ_AKTUELL);
+//                AktivitetType garEjAttBedommaArbRelRehab = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.GAR_EJ_ATT_BEDOMMA_OM_ARBETSLIVSINRIKTAD_REHABILITERING_AR_AKTUELL);
+//                // Fält 7 - Check that at least one choice is made
+//                if (arbRelRehabAktuell == null && arbRelRehabEjAktuell == null && garEjAttBedommaArbRelRehab == null) {
+//        			validationErrors.add("No aktivitet element found for field 7.! Arbetslivsrehab aktuell, Arbetslivsrehab ej aktuell eller Arbetslivsrehab gar ej att bedoma.");	
+//        			throw new Exception();                	
+//                }
+//                // Fält 7 - Check that only one choice is made
+//                if ( (arbRelRehabAktuell != null && arbRelRehabEjAktuell != null && garEjAttBedommaArbRelRehab != null) ||
+//                	 (arbRelRehabAktuell != null && arbRelRehabEjAktuell != null && garEjAttBedommaArbRelRehab == null) ||
+//                	 (arbRelRehabAktuell != null && arbRelRehabEjAktuell == null && garEjAttBedommaArbRelRehab != null) ||
+//                	 (arbRelRehabAktuell == null && arbRelRehabEjAktuell != null && garEjAttBedommaArbRelRehab != null) ) {
+//        			validationErrors.add("Only one ckeckbox is allowed for field 7! Arbetslivsrehab aktuell, Arbetslivsrehab ej aktuell eller Arbetslivsrehab gar ej att bedoma.");	              	
+//                }
                 
                 // Fält 8a - Check that we got a arbetsformaga element
                 if (inAktivitetFunktion.getArbetsformaga() == null) {
@@ -478,11 +481,11 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
             boolean inArbetsformagaAterstallasDelvis = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_DELVIS) == 0;
             boolean inArbetsformagaEjAterstallas = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.INTE_ATERSTALLAS) == 0;
             boolean inArbetsformagaGarEjAttBedomma = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.DET_GAR_INTE_ATT_BEDOMMA) == 0;
-            // Fält 10 - Prognosangivelse - Check that we at least got one choice
-            if (!inArbetsformagaAterstallasHelt && !inArbetsformagaAterstallasDelvis && !inArbetsformagaEjAterstallas && !inArbetsformagaGarEjAttBedomma) {
-            	validationErrors.add("No prognosangivelse element found for field 10.");	
-    			throw new Exception();                	            	
-            }
+//             Fält 10 - Prognosangivelse - Check that we at least got one choice
+//            if (!inArbetsformagaAterstallasHelt && !inArbetsformagaAterstallasDelvis && !inArbetsformagaEjAterstallas && !inArbetsformagaGarEjAttBedomma) {
+//            	validationErrors.add("No prognosangivelse element found for field 10.");	
+//    			throw new Exception();                	            	
+//            }
             // If we got more then one prognoselement these will not be read as only the first is set!
             int inPrognosCount = 0;
             if (inArbetsformagaAterstallasHelt) {
