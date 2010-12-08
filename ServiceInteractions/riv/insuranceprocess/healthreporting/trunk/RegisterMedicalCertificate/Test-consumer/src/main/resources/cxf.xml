@@ -32,7 +32,7 @@
            http://www.springframework.org/schema/beans          http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<http:conduit
-		name="{urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2:rivtabp20}RegisterMedicalCertificateResponderPort.http-conduit">
+		name="{urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20}RegisterMedicalCertificateResponderPort.http-conduit">
 		<http:tlsClientParameters disableCNCheck="true">
 			
 			<sec:trustManagers>

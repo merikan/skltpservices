@@ -38,30 +38,30 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.w3.wsaddressing10.AttributedURIType;
 
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.AktivitetType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Aktivitetskod;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.ArbetsformagaNedsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.ArbetsformagaType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.ArbetsuppgiftType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.BedomtTillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.FunktionstillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.LakarutlatandeType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.MedicinsktTillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Prognosangivelse;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.SysselsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.TypAvFunktionstillstand;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.TypAvSysselsattning;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.VardkontaktType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Vardkontakttyp;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2.rivtabp20.RegisterMedicalCertificateResponderInterface;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2.rivtabp20.RegisterMedicalCertificateResponderService;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateResponseType;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.EnhetType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.HosPersonalType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.PatientType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.VardgivareType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.AktivitetType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Aktivitetskod;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.ArbetsformagaNedsattningType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.ArbetsformagaType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.ArbetsuppgiftType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.BedomtTillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.FunktionstillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.LakarutlatandeType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.MedicinsktTillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Prognosangivelse;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.SysselsattningType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.TypAvFunktionstillstand;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.TypAvSysselsattning;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.VardkontaktType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Vardkontakttyp;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v3.rivtabp20.RegisterMedicalCertificateResponderInterface;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v3.rivtabp20.RegisterMedicalCertificateResponderService;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v3.RegisterMedicalCertificateResponseType;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v3.RegisterMedicalCertificateType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 
 
 public final class RegMedCertConsumer {
@@ -135,8 +135,7 @@ public final class RegMedCertConsumer {
 		personId.setRoot("1.2.752.129.2.1.3.1"); // OID för samordningsnummer är 1.2.752.129.2.1.3.3.
 		personId.setExtension("19430811-7094");
 		patient.setPersonId(personId);
-		patient.setFornamn("Mats"); 
-		patient.setEfternamn("Testsson");
+		patient.setFullstandigtNamn("Mats Testsson"); 
 		lakarutlatande.setPatient(patient);
 
 		// Skapad av HoS personal -- Längst upp till vänster på MU och/eller fält 16 och fält 17 
@@ -301,8 +300,7 @@ public final class RegMedCertConsumer {
 		personId.setRoot("1.2.752.129.2.1.3.1"); // OID för samordningsnummer är 1.2.752.129.2.1.3.3.
 		personId.setExtension("19430811-7094");
 		patient.setPersonId(personId);
-		patient.setFornamn("Lab"); 
-		patient.setEfternamn("Testsson");
+		patient.setFullstandigtNamn("Lab Testsson"); 
 		lakarutlatande.setPatient(patient);
 
 		// Skapad av HoS personal -- Längst upp till vänster på MU och/eller fält 16 och fält 17 
