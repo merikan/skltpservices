@@ -34,7 +34,7 @@
 
 	<properties>
 		<cxf.version>2.1.2</cxf.version>
-		<schema.path>vard</schema.path>
+		<schema.path>interactions</schema.path>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
@@ -90,56 +90,23 @@
 						<phase>generate-sources</phase>
 						<configuration>
 							<sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
-							<wsdlOptions>						
+							<wsdlOptions>
+									
 								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
-										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
-										<extraarg>
-											urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2:rivtabp20=se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2.rivtabp20
-										</extraarg>
-										<extraarg>-p</extraarg>
-										<extraarg>
-											urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2=se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2
-										</extraarg>
-										<extraarg>-p</extraarg>
-										<extraarg>
-											urn:riv:insuranceprocess:healthreporting:mu7263:2=se.skl.riv.insuranceprocess.healthreporting.mu7263.v2
-										</extraarg>
-										<extraarg>-p</extraarg>
-										<extraarg>
-											urn:riv:insuranceprocess:healthreporting:1=se.skl.riv.insuranceprocess.healthreporting.v1
-										</extraarg>
-										<extraarg>-p</extraarg>
-										<extraarg>
-											urn:iso:21090:dt:1=iso.v21090.dt.v1
-										</extraarg>
-										<extraarg>-p</extraarg>
-										<extraarg>
-											urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:2=se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2
-										</extraarg>
-										<extraarg>-p</extraarg>
-										<extraarg>
-											http://www.w3.org/2005/08/addressing=org.w3.wsaddressing10
-										</extraarg>
-									</extraargs>
-									<wsdl>${schema.path}/RegisterMedicalCertificateInteraction_2.0_rivtabp20.wsdl</wsdl>
-								</wsdlOption>																
-
-								<wsdlOption>
-									<extraargs>
-										<extraarg>-p</extraarg>
-										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
+										Note: be careful when changing this - must be in sync for all
+										schemas generations in this namespace!
 										<extraarg>
 											urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateAnswer:1:rivtabp20=se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificateanswer.v1.rivtabp20
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
-											urn:riv:insuranceprocess:healthreporting:1=se.skl.riv.insuranceprocess.healthreporting.v1
+											urn:riv:insuranceprocess:healthreporting:2=se.skl.riv.insuranceprocess.healthreporting.v2
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
-											urn:riv:insuranceprocess:healthreporting:qa:1=se.skl.riv.insuranceprocess.healthreporting.qa.v1
+											urn:riv:insuranceprocess:healthreporting:medcertqa:1=se.skl.riv.insuranceprocess.healthreporting.qa.v1
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
@@ -154,23 +121,24 @@
 											http://www.w3.org/2005/08/addressing=org.w3.wsaddressing10
 										</extraarg>
 									</extraargs>
-									<wsdl>${schema.path}/ReceiveMedicalCertificateAnswerInteraction_0.9_rivtabp20.wsdl</wsdl>
-								</wsdlOption>																
-
+									<wsdl>${schema.path}/ReceiveMedicalCertificateAnswerInteraction/ReceiveMedicalCertificateAnswerInteraction_1.0_rivtabp20.wsdl</wsdl>
+								</wsdlOption>
+								
 								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
-										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
+										Note: be careful when changing this - must be in sync for all
+										schemas generations in this namespace!
 										<extraarg>
 											urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateQuestion:1:rivtabp20=se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
-											urn:riv:insuranceprocess:healthreporting:1=se.skl.riv.insuranceprocess.healthreporting.v1
+											urn:riv:insuranceprocess:healthreporting:2=se.skl.riv.insuranceprocess.healthreporting.v2
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
-											urn:riv:insuranceprocess:healthreporting:qa:1=se.skl.riv.insuranceprocess.healthreporting.qa.v1
+											urn:riv:insuranceprocess:healthreporting:medcertqa:1=se.skl.riv.insuranceprocess.healthreporting.qa.v1
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
@@ -185,9 +153,103 @@
 											http://www.w3.org/2005/08/addressing=org.w3.wsaddressing10
 										</extraarg>
 									</extraargs>
-									<wsdl>${schema.path}/ReceiveMedicalCertificateQuestionInteraction_0.9_rivtabp20.wsdl</wsdl>
-								</wsdlOption>	
-													
+									<wsdl>${schema.path}/ReceiveMedicalCertificateQuestionInteraction/ReceiveMedicalCertificateQuestionInteraction_1.0_rivtabp20.wsdl</wsdl>
+								</wsdlOption>
+								
+								<wsdlOption>
+									<extraargs>
+										<extraarg>-p</extraarg>
+										Note: be careful when changing this - must be in sync for all
+										schemas generations in this namespace!
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:SendMedicalCertificateAnswer:1:rivtabp20=se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificateanswer.v1.rivtabp20
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:2=se.skl.riv.insuranceprocess.healthreporting.v2
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:medcertqa:1=se.skl.riv.insuranceprocess.healthreporting.qa.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:iso:21090:dt:1=iso.v21090.dt.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:SendMedicalCertificateAnswerResponder:1=se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificateanswerresponder.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											http://www.w3.org/2005/08/addressing=org.w3.wsaddressing10
+										</extraarg>
+									</extraargs>
+									<wsdl>${schema.path}/SendMedicalCertificateAnswerInteraction/SendMedicalCertificateAnswerInteraction_1.0_rivtabp20.wsdl</wsdl>
+								</wsdlOption>
+								
+								<wsdlOption>
+									<extraargs>
+										<extraarg>-p</extraarg>
+										Note: be careful when changing this - must be in sync for all
+										schemas generations in this namespace!
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:SendMedicalCertificateQuestion:1:rivtabp20=se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificatequestion.v1.rivtabp20
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:2=se.skl.riv.insuranceprocess.healthreporting.v2
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:medcertqa:1=se.skl.riv.insuranceprocess.healthreporting.qa.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:iso:21090:dt:1=iso.v21090.dt.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:SendMedicalCertificateQuestionResponder:1=se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificatequestionsponder.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											http://www.w3.org/2005/08/addressing=org.w3.wsaddressing10
+										</extraarg>
+									</extraargs>
+									<wsdl>${schema.path}/SendMedicalCertificateQuestionInteraction/SendMedicalCertificateQuestionInteraction_1.0_rivtabp20.wsdl</wsdl>
+								</wsdlOption>
+								
+								<wsdlOption>
+									<extraargs>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20=se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v3.rivtabp20
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:mu7263:3=se.skl.riv.insuranceprocess.healthreporting.mu7263.v3
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:2=se.skl.riv.insuranceprocess.healthreporting.v2
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:iso:21090:dt:1=iso.v21090.dt.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:3=se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v3
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											http://www.w3.org/2005/08/addressing=org.w3.wsaddressing10
+										</extraarg>
+									</extraargs>
+									<wsdl>${schema.path}/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl</wsdl>
+								</wsdlOption>
+																				
 							</wsdlOptions>
 						</configuration>
 						<goals>

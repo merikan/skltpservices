@@ -18,7 +18,7 @@
  under the License.
  -->
 <wsdl:definitions 
-	name="ReceiveMedicalCertificateAnswerInteraction"
+	name="RegisterMedicalCertificateInteraction"
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
 	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
@@ -26,16 +26,19 @@
 	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
 	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
 	xmlns:wsa="http://www.w3.org/2005/08/addressing" 
-	xmlns:tjs="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateAnswerResponder:1" 
-	xmlns:tns="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateAnswer:1:rivtabp20"
-	targetNamespace="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateAnswer:1:rivtabp20">
+	xmlns:tjs="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:3" 
+	xmlns:tns="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20"
+	targetNamespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20">
 
 	<xs:annotation>
 		<xs:documentation>
-			Tjänsteinteraktionens namn: ReceiveMedicalCertificateAnswerInteraction
+			Tjänsteinteraktionens namn: RegisterMedicalCertificateInteraction
 			Beskrivning: 
-				Interaction to receive an answer to a previous question
-			Revisioner: 2010-05-18 Version 0.9, Mats Ekhammar - Callista Enterprise AB
+				Interaction to register a new medical certificate.
+			Revisioner: 
+				2009-12-04 Version 1.0, Mats Ekhammar - Callista Enterprise AB
+				2010-06-18 Version 2.0, Mats Ekhammar - Callista Enterprise AB
+				2010-11-18 Version 3.0, Mats Ekhammar - Callista Enterprise AB
 			Tjänstedomän: insuranceprocess:healthreporting
 			Tjänsteinteraktionstyp: Fråga-svar
 			RIV Teknisk Anvisning: Basic Profile 2.0
@@ -45,43 +48,43 @@
 
 	<wsdl:types>
 		<xs:schema>
-			<xs:import schemaLocation="ReceiveMedicalCertificateAnswerResponder_0.9.xsd" namespace="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateAnswerResponder:1"/>
+			<xs:import schemaLocation="RegisterMedicalCertificateResponder_3.0.xsd" namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:3"/>
 		</xs:schema>
 		<xs:schema>
-			<xs:import schemaLocation="ws-addressing-1.0.xsd" namespace="http://www.w3.org/2005/08/addressing"/>
+			<xs:import schemaLocation="../../core_components/ws-addressing-1.0.xsd" namespace="http://www.w3.org/2005/08/addressing"/>
 		</xs:schema>
 	</wsdl:types>
 
-	<wsdl:message name="ReceiveMedicalCertificateAnswerRequest">
+	<wsdl:message name="RegisterMedicalCertificateRequest">
 		<xs:annotation>
 			<xs:documentation>
 				LogicalAddress is the organization id for Försäkringskassan.
 			</xs:documentation>
 		</xs:annotation>
 		<wsdl:part name="LogicalAddress" element="wsa:To" />
-		<wsdl:part name="parameters" element="tjs:ReceiveMedicalCertificateAnswer" />
+		<wsdl:part name="parameters" element="tjs:RegisterMedicalCertificate" />
 	</wsdl:message>
 
-	<wsdl:message name="ReceiveMedicalCertificateAnswerResponse">
-		<wsdl:part name="parameters" element="tjs:ReceiveMedicalCertificateAnswerResponse"/>
+	<wsdl:message name="RegisterMedicalCertificateResponse">
+		<wsdl:part name="parameters" element="tjs:RegisterMedicalCertificateResponse"/>
 	</wsdl:message>
 
-	<wsdl:portType name="ReceiveMedicalCertificateAnswerResponderInterface">
+	<wsdl:portType name="RegisterMedicalCertificateResponderInterface">
 	
-		<wsdl:operation name="ReceiveMedicalCertificateAnswer">
-			<wsdl:input message="tns:ReceiveMedicalCertificateAnswerRequest"/>
-			<wsdl:output message="tns:ReceiveMedicalCertificateAnswerResponse"/>
+		<wsdl:operation name="RegisterMedicalCertificate">
+			<wsdl:input message="tns:RegisterMedicalCertificateRequest"/>
+			<wsdl:output message="tns:RegisterMedicalCertificateResponse"/>
 		</wsdl:operation>
 		
 	</wsdl:portType>
 	
-	<wsdl:binding name="ReceiveMedicalCertificateAnswerResponderBinding" type="tns:ReceiveMedicalCertificateAnswerResponderInterface">
+	<wsdl:binding name="RegisterMedicalCertificateResponderBinding" type="tns:RegisterMedicalCertificateResponderInterface">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-		<wsdl:operation name="ReceiveMedicalCertificateAnswer">
-			<soap:operation soapAction="urn:riv:fk:sicknessreport:ReceiveMedicalCertificateAnswerResponder:1"/>
+		<wsdl:operation name="RegisterMedicalCertificate">
+			<soap:operation soapAction="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:1"/>
 			<wsdl:input>
-				<soap:header use="literal" message="tns:ReceiveMedicalCertificateAnswerRequest" part="LogicalAddress"/>
+				<soap:header use="literal" message="tns:RegisterMedicalCertificateRequest" part="LogicalAddress"/>
 				<soap:body use="literal" parts="parameters"/>
 			</wsdl:input>
 			<wsdl:output>
@@ -91,8 +94,8 @@
 
 	</wsdl:binding>
 
-	<wsdl:service name="ReceiveMedicalCertificateAnswerResponderService">
-		<wsdl:port name="ReceiveMedicalCertificateAnswerResponderPort" binding="tns:ReceiveMedicalCertificateAnswerResponderBinding">
+	<wsdl:service name="RegisterMedicalCertificateResponderService">
+		<wsdl:port name="RegisterMedicalCertificateResponderPort" binding="tns:RegisterMedicalCertificateResponderBinding">
 			<soap:address location="http://tempuri.org"/>
 		</wsdl:port>
 	</wsdl:service>
