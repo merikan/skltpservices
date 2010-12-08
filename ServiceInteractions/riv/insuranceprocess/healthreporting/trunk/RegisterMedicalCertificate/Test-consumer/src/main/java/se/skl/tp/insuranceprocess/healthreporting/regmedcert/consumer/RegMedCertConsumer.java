@@ -67,7 +67,7 @@ import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 public final class RegMedCertConsumer {
 
 	// Use this one to connect via Virtualiseringsplattformen
-	private static final String LOGISK_ADDRESS = "/RegisterMedicalCertificate/2/rivtabp20";
+	private static final String LOGISK_ADDRESS = "/RegisterMedicalCertificate/3/rivtabp20";
 
 	// Use this one to connect directly (just for test)
 
