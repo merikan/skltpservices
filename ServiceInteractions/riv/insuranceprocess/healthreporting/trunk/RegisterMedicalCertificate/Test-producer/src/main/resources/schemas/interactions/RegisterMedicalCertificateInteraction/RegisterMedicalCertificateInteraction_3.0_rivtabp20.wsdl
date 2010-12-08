@@ -26,9 +26,9 @@
 	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
 	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
 	xmlns:wsa="http://www.w3.org/2005/08/addressing" 
-	xmlns:tjs="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:2" 
-	xmlns:tns="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2:rivtabp20"
-	targetNamespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2:rivtabp20">
+	xmlns:tjs="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:3" 
+	xmlns:tns="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20"
+	targetNamespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20">
 
 	<xs:annotation>
 		<xs:documentation>
@@ -38,6 +38,7 @@
 			Revisioner: 
 				2009-12-04 Version 1.0, Mats Ekhammar - Callista Enterprise AB
 				2010-06-18 Version 2.0, Mats Ekhammar - Callista Enterprise AB
+				2010-11-18 Version 3.0, Mats Ekhammar - Callista Enterprise AB
 			Tjänstedomän: insuranceprocess:healthreporting
 			Tjänsteinteraktionstyp: Fråga-svar
 			RIV Teknisk Anvisning: Basic Profile 2.0
@@ -47,10 +48,10 @@
 
 	<wsdl:types>
 		<xs:schema>
-			<xs:import schemaLocation="RegisterMedicalCertificateResponder_2.0.xsd" namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:2"/>
+			<xs:import schemaLocation="RegisterMedicalCertificateResponder_3.0.xsd" namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:3"/>
 		</xs:schema>
 		<xs:schema>
-			<xs:import schemaLocation="ws-addressing-1.0.xsd" namespace="http://www.w3.org/2005/08/addressing"/>
+			<xs:import schemaLocation="../../core_components/ws-addressing-1.0.xsd" namespace="http://www.w3.org/2005/08/addressing"/>
 		</xs:schema>
 	</wsdl:types>
 
@@ -81,7 +82,7 @@
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
 		<wsdl:operation name="RegisterMedicalCertificate">
-			<soap:operation soapAction="urn:riv:fk:sicknessreport:RegisterMedicalCertificateResponder:1"/>
+			<soap:operation soapAction="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:1"/>
 			<wsdl:input>
 				<soap:header use="literal" message="tns:RegisterMedicalCertificateRequest" part="LogicalAddress"/>
 				<soap:body use="literal" parts="parameters"/>

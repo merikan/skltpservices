@@ -35,7 +35,7 @@
             http://www.springframework.org/schema/beans                http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<http:destination
-		name="{urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:1:rivtabp20}RegisterMedicalCertificateResponderPort.http-destination">
+		name="{urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20}RegisterMedicalCertificateResponderPort.http-destination">
 	</http:destination>
 
 	<httpj:engine-factory>

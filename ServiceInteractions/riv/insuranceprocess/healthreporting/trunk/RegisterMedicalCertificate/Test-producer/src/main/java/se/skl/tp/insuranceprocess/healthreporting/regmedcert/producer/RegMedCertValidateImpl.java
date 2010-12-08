@@ -30,30 +30,30 @@ import javax.jws.WebService;
 
 import org.w3.wsaddressing10.AttributedURIType;
 
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.AktivitetType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Aktivitetskod;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.ArbetsformagaNedsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.ArbetsuppgiftType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.FunktionstillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.LakarutlatandeType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.MedicinsktTillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Prognosangivelse;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.ReferensType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Referenstyp;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.SysselsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.TypAvFunktionstillstand;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.TypAvSysselsattning;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.VardkontaktType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Vardkontakttyp;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2.rivtabp20.RegisterMedicalCertificateResponderInterface;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateResponseType;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.EnhetType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.HosPersonalType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.PatientType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ResultCodeEnum;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ResultOfCall;
-import se.skl.riv.insuranceprocess.healthreporting.v1.VardgivareType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.AktivitetType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Aktivitetskod;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.ArbetsformagaNedsattningType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.ArbetsuppgiftType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.FunktionstillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.LakarutlatandeType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.MedicinsktTillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Prognosangivelse;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.ReferensType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Referenstyp;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.SysselsattningType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.TypAvFunktionstillstand;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.TypAvSysselsattning;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.VardkontaktType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Vardkontakttyp;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v3.rivtabp20.RegisterMedicalCertificateResponderInterface;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v3.RegisterMedicalCertificateResponseType;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v3.RegisterMedicalCertificateType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
+import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 
 /**
  * Validation class that will certify a webservice call made for MU7263. We will check mandatory/optional fields and all other declared rules.
@@ -63,10 +63,10 @@ import se.skl.riv.insuranceprocess.healthreporting.v1.VardgivareType;
 
 @WebService(
 		serviceName = "RegisterMedicalCertificateResponderService", 
-		endpointInterface="se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v2.rivtabp20.RegisterMedicalCertificateResponderInterface", 
+		endpointInterface="se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v3.rivtabp20.RegisterMedicalCertificateResponderInterface", 
 		portName = "RegisterMedicalCertificateResponderPort", 
-		targetNamespace = "urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:2:rivtabp20",
-		wsdlLocation = "schemas/RegisterMedicalCertificateInteraction_2.0_rivtabp20.wsdl")
+		targetNamespace = "urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20",
+		wsdlLocation = "schemas/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl")
 public class RegMedCertValidateImpl implements RegisterMedicalCertificateResponderInterface {
 
 	public RegisterMedicalCertificateResponseType registerMedicalCertificate( AttributedURIType logicalAddress, RegisterMedicalCertificateType parameters) {
@@ -137,26 +137,8 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
             // Check format on personnummer? samordningsnummer?
             
             // Get namn for patient - mandatory
-			boolean fullstandigtPatientNameFound = false;
-			boolean fornamnPatientFound = false;
-			boolean efternamnPatientFound = false;
-			if (inPatient.getFullstandigtNamn() != null && inPatient.getFullstandigtNamn().length() > 0 ) {
-				fullstandigtPatientNameFound = true;
-			}
-			if (inPatient.getFornamn() != null && inPatient.getFornamn().length() > 0 ) {
-				fornamnPatientFound = true;
-			}
-			if (inPatient.getEfternamn() != null && inPatient.getEfternamn().length() > 0 ) {
-				efternamnPatientFound = true;
-			}
-			if (!fullstandigtPatientNameFound && !fornamnPatientFound && !efternamnPatientFound) {
-				validationErrors.add("No Patient namn elements found! fullstandigtNamn or (fornamn and efternamn) should be set.");								
-			}
-			if (!fullstandigtPatientNameFound && fornamnPatientFound && !efternamnPatientFound) {
-				validationErrors.add("No Patient efternamn found!");								
-			}
-			if (!fullstandigtPatientNameFound && !fornamnPatientFound && efternamnPatientFound) {
-				validationErrors.add("No Patient fornamn found!");								
+			if (inPatient.getFullstandigtNamn() == null || inPatient.getFullstandigtNamn().length() < 1 ) {
+				validationErrors.add("No Patient fullstandigtNamn elements found or set!");								
 			}
 			
 			/**
@@ -183,26 +165,8 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
             }
             
             // Check lakarnamn - mandatory
-			boolean fullstandigtLakarNameFound = false;
-			boolean fornamnLakarFound = false;
-			boolean efternamnLakarFound = false;
-			if (inHoSP.getFullstandigtNamn() != null && inHoSP.getFullstandigtNamn().length() > 0 ) {
-				fullstandigtLakarNameFound = true;
-			}
-			if (inHoSP.getFornamn() != null && inHoSP.getFornamn().length() > 0 ) {
-				fornamnLakarFound = true;
-			}
-			if (inHoSP.getEfternamn() != null && inHoSP.getEfternamn().length() > 0 ) {
-				efternamnLakarFound = true;
-			}
-			if (!fullstandigtLakarNameFound && !fornamnLakarFound && !efternamnLakarFound) {
-				validationErrors.add("No skapadAvHosPersonal namn elements found! fullstandigtNamn or (fornamn and efternamn) should be set.");								
-			}
-			if (!fullstandigtLakarNameFound && fornamnLakarFound && !efternamnLakarFound) {
-				validationErrors.add("No skapadAvHosPersonal efternamn found!");								
-			}
-			if (!fullstandigtLakarNameFound && !fornamnLakarFound && efternamnLakarFound) {
-				validationErrors.add("No skapadAvHosPersonal fornamn found!");								
+			if (inHoSP.getFullstandigtNamn() == null || inHoSP.getFullstandigtNamn().length() < 1 ) {
+				validationErrors.add("No skapadAvHosPersonal fullstandigtNamn elements found or set!");								
 			}
 
             // Check that we got a enhet element
@@ -232,42 +196,14 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
             }
 
             // Check enhetsadress - mandatory      
-            boolean fullstandigEnhetsAdressFound = false;
-			boolean postadressEnhetFound = false;
-			boolean postnrEnhetFound = false;
-			boolean postortEnhetFound = false;
-			if (inEnhet.getFullstandigAdress() != null && inEnhet.getFullstandigAdress().length() > 0 ) {
-				fullstandigEnhetsAdressFound = true;
-			}
-			if (inEnhet.getPostadress() != null && inEnhet.getPostadress().length() > 0 ) {
-				postadressEnhetFound = true;
-			}
-			if (inEnhet.getPostnummer() != null && inEnhet.getPostnummer().length() > 0 ) {
-				postnrEnhetFound = true;
-			}
-			if (inEnhet.getPostort() != null && inEnhet.getPostort().length() > 0 ) {
-				postortEnhetFound = true;
-			}
-			if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && !postnrEnhetFound && !postortEnhetFound) {
-				validationErrors.add("No adress found for enhet! fullstandigtAdress or (postadress and postnummer and postort) should be set.");								
-			}
-			if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && postnrEnhetFound && postortEnhetFound) {
+			if (inEnhet.getPostadress() == null || inEnhet.getPostadress().length() < 1 ) {
 				validationErrors.add("No postadress found for enhet!");								
 			}
-			if (!fullstandigEnhetsAdressFound && postadressEnhetFound && !postnrEnhetFound && postortEnhetFound) {
+			if (inEnhet.getPostnummer() == null || inEnhet.getPostnummer().length() < 1 ) {
 				validationErrors.add("No postnummer found for enhet!");								
 			}
-			if (!fullstandigEnhetsAdressFound && postadressEnhetFound && postnrEnhetFound && !postortEnhetFound) {
+			if (inEnhet.getPostort() == null || inEnhet.getPostort().length() < 1 ) {
 				validationErrors.add("No postort found for enhet!");								
-			}
-			if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && !postnrEnhetFound && postortEnhetFound) {
-				validationErrors.add("No postadress and postnummer found for enhet!");								
-			}
-			if (!fullstandigEnhetsAdressFound && postadressEnhetFound && !postnrEnhetFound && !postortEnhetFound) {
-				validationErrors.add("No postnummer and postort found for enhet!");								
-			}
-			if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && postnrEnhetFound && !postortEnhetFound) {
-				validationErrors.add("No postadress and postort found for enhet!");								
 			}
 
             // Check that we got a vardgivare element
@@ -481,16 +417,16 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
             }
 
             // Fält 8b - kryssruta 1
-            ArbetsformagaNedsattningType nedsatt14del =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.NEDSATT_MED_1_4);
+            ArbetsformagaNedsattningType nedsatt14del =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.NEDSATT_MED_1_4);
 
             // Fält 8b - kryssruta 2
-            ArbetsformagaNedsattningType nedsatthalften =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.NEDSATT_MED_1_2);
+            ArbetsformagaNedsattningType nedsatthalften =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.NEDSATT_MED_1_2);
             
             // Fält 8b - kryssruta 3
-            ArbetsformagaNedsattningType nedsatt34delar =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.NEDSATT_MED_3_4);
+            ArbetsformagaNedsattningType nedsatt34delar =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.NEDSATT_MED_3_4);
 
             // Fält 8b - kryssruta 4
-            ArbetsformagaNedsattningType heltNedsatt =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.HELT_NEDSATT);
+            ArbetsformagaNedsattningType heltNedsatt =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.HELT_NEDSATT);
 
             // Check that we at least got one choice
             if (nedsatt14del == null && nedsatthalften == null && nedsatt34delar == null && heltNedsatt == null) {
@@ -706,7 +642,7 @@ public class RegMedCertValidateImpl implements RegisterMedicalCertificateRespond
 		return foundSysselsattningType;
 	}	
 
-	private ArbetsformagaNedsattningType findArbetsformaga(List<ArbetsformagaNedsattningType> arbetsformaga, se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad arbetsformagaNedsattningTyp) {
+	private ArbetsformagaNedsattningType findArbetsformaga(List<ArbetsformagaNedsattningType> arbetsformaga, se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad arbetsformagaNedsattningTyp) {
 		ArbetsformagaNedsattningType foundArbetsformagaType = null;
 		if (arbetsformaga != null) {
 			for (int i = 0; i< arbetsformaga.size(); i++) {
