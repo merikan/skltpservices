@@ -15,7 +15,6 @@ import javax.xml.stream.XMLStreamReader;
 
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
-import org.mule.config.i18n.Message;
 import org.mule.config.i18n.MessageFactory;
 import org.mule.transformer.AbstractMessageAwareTransformer;
 import org.slf4j.Logger;
@@ -25,10 +24,33 @@ import org.w3.wsaddressing10.AttributedURIType;
 import se.fk.vardgivare.sjukvard.taemotlakarintygresponder.v1.TaEmotLakarintygType;
 import se.fk.vardgivare.sjukvard.v1.Adress;
 import se.fk.vardgivare.sjukvard.v1.Adressering;
+import se.fk.vardgivare.sjukvard.v1.Adressering.Avsandare;
+import se.fk.vardgivare.sjukvard.v1.Adressering.Mottagare;
 import se.fk.vardgivare.sjukvard.v1.Enhet;
 import se.fk.vardgivare.sjukvard.v1.InternIdentitetsbeteckning;
 import se.fk.vardgivare.sjukvard.v1.Kontaktuppgifter;
 import se.fk.vardgivare.sjukvard.v1.Lakarintyg;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Arbetsformaga;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Arbetsformaga.Nedsattningsgrad;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Begransning;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Diagnos;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Kontakt;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Lakare;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Motivering;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Planering;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Planering.Behandling;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Prognos;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Rehabilitering;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Rekommendationer;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Rekommendationer.Rekommendation;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Resor;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Sjukdomshistoria;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Smittskydd;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Status;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Status.Basering;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Status.Basering.Ursprung;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Sysselsattning;
+import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Upplysningar;
 import se.fk.vardgivare.sjukvard.v1.Land;
 import se.fk.vardgivare.sjukvard.v1.Namn;
 import se.fk.vardgivare.sjukvard.v1.NationellIdentitetsbeteckning;
@@ -40,49 +62,26 @@ import se.fk.vardgivare.sjukvard.v1.Postnummer;
 import se.fk.vardgivare.sjukvard.v1.Postort;
 import se.fk.vardgivare.sjukvard.v1.ReferensAdressering;
 import se.fk.vardgivare.sjukvard.v1.TaEmotLakarintyg;
-import se.fk.vardgivare.sjukvard.v1.Adressering.Avsandare;
-import se.fk.vardgivare.sjukvard.v1.Adressering.Mottagare;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Arbetsformaga;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Begransning;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Diagnos;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Kontakt;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Lakare;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Motivering;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Planering;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Prognos;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Rehabilitering;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Rekommendationer;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Resor;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Sjukdomshistoria;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Smittskydd;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Status;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Sysselsattning;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Upplysningar;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Arbetsformaga.Nedsattningsgrad;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Planering.Behandling;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Rekommendationer.Rekommendation;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Status.Basering;
-import se.fk.vardgivare.sjukvard.v1.Lakarintyg.Status.Basering.Ursprung;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.AktivitetType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Aktivitetskod;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.ArbetsformagaNedsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.ArbetsuppgiftType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.FunktionstillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.LakarutlatandeType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.MedicinsktTillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Prognosangivelse;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.ReferensType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Referenstyp;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.SysselsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.TypAvFunktionstillstand;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.TypAvSysselsattning;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.VardkontaktType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Vardkontakttyp;
-import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v2.RegisterMedicalCertificateType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.EnhetType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.HosPersonalType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.PatientType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.VardgivareType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.AktivitetType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Aktivitetskod;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.ArbetsformagaNedsattningType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.ArbetsuppgiftType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.FunktionstillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.LakarutlatandeType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.MedicinsktTillstandType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Prognosangivelse;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.ReferensType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Referenstyp;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.SysselsattningType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.TypAvFunktionstillstand;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.TypAvSysselsattning;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.VardkontaktType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Vardkontakttyp;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v3.RegisterMedicalCertificateType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 
 
 public class Vard2FkTransformer extends AbstractMessageAwareTransformer
@@ -114,8 +113,7 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 			// Extract all incoming data to local variables
             String emuId = inRequest.getLakarutlatande().getLakarutlatandeId();
             String inPersonnummer = inRequest.getLakarutlatande().getPatient().getPersonId().getExtension();
-            String inFornamn = inRequest.getLakarutlatande().getPatient().getFornamn();
-            String inEfternamn = inRequest.getLakarutlatande().getPatient().getEfternamn();
+            String inPatientNamn = inRequest.getLakarutlatande().getPatient().getFullstandigtNamn();
             String inLakarId = inRequest.getLakarutlatande().getSkapadAvHosPersonal().getPersonalId().getExtension();
             String inLakarNamn = inRequest.getLakarutlatande().getSkapadAvHosPersonal().getFullstandigtNamn();
             String inLakarForskrivarekod = inRequest.getLakarutlatande().getSkapadAvHosPersonal().getForskrivarkod();
@@ -150,10 +148,10 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
             SysselsattningType inArbete = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.NUVARANDE_ARBETE);
             SysselsattningType inArbetslos = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.ARBETSLOSHET);
             SysselsattningType inForaldraledig = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.FORALDRALEDIGHET);
-            ArbetsformagaNedsattningType nedsatt14del =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.NEDSATT_MED_1_4);
-            ArbetsformagaNedsattningType nedsatthalften =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.NEDSATT_MED_1_2);
-            ArbetsformagaNedsattningType nedsatt34delar =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.NEDSATT_MED_3_4);
-            ArbetsformagaNedsattningType heltNedsatt =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.HELT_NEDSATT);
+            ArbetsformagaNedsattningType nedsatt14del =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.NEDSATT_MED_1_4);
+            ArbetsformagaNedsattningType nedsatthalften =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.NEDSATT_MED_1_2);
+            ArbetsformagaNedsattningType nedsatt34delar =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.NEDSATT_MED_3_4);
+            ArbetsformagaNedsattningType heltNedsatt =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.HELT_NEDSATT);
             String inMotivering = inAktivitetFunktion.getArbetsformaga().getMotivering();
             boolean inPrognosAterfaHelt = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_HELT) == 0;
             boolean inPrognosAterfaDelvis = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_DELVIS) == 0;
@@ -187,8 +185,7 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
             // Patient
             Patient patient = new Patient();
             patient.setIdentifierare(inPersonnummer);
-            patient.setFornamn(inFornamn);
-            patient.setEfternamn(inEfternamn);
+            patient.setNamn(inPatientNamn);
             fkSklTELA.setPatient(patient);
             
             // Personal
@@ -584,26 +581,8 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 	        // Check format on personnummer? samordningsnummer?
 	        
 	        // Get namn for patient - mandatory
-			boolean fullstandigtPatientNameFound = false;
-			boolean fornamnPatientFound = false;
-			boolean efternamnPatientFound = false;
-			if (inPatient.getFullstandigtNamn() != null && inPatient.getFullstandigtNamn().length() > 0 ) {
-				fullstandigtPatientNameFound = true;
-			}
-			if (inPatient.getFornamn() != null && inPatient.getFornamn().length() > 0 ) {
-				fornamnPatientFound = true;
-			}
-			if (inPatient.getEfternamn() != null && inPatient.getEfternamn().length() > 0 ) {
-				efternamnPatientFound = true;
-			}
-			if (!fullstandigtPatientNameFound && !fornamnPatientFound && !efternamnPatientFound) {
-				validationErrors.add("No Patient namn elements found! fullstandigtNamn or (fornamn and efternamn) should be set.");								
-			}
-			if (!fullstandigtPatientNameFound && fornamnPatientFound && !efternamnPatientFound) {
-				validationErrors.add("No Patient efternamn found!");								
-			}
-			if (!fullstandigtPatientNameFound && !fornamnPatientFound && efternamnPatientFound) {
-				validationErrors.add("No Patient fornamn found!");								
+			if (inPatient.getFullstandigtNamn() == null || inPatient.getFullstandigtNamn().length() < 1 ) {
+				validationErrors.add("No Patient fullstandigtNamn elements found or set!");								
 			}
 			
 			/**
@@ -661,42 +640,14 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 	        }
 	
 	        // Check enhetsadress - mandatory      
-	        boolean fullstandigEnhetsAdressFound = false;
-			boolean postadressEnhetFound = false;
-			boolean postnrEnhetFound = false;
-			boolean postortEnhetFound = false;
-			if (inEnhet.getFullstandigAdress() != null && inEnhet.getFullstandigAdress().length() > 0 ) {
-				fullstandigEnhetsAdressFound = true;
-			}
-			if (inEnhet.getPostadress() != null && inEnhet.getPostadress().length() > 0 ) {
-				postadressEnhetFound = true;
-			}
-			if (inEnhet.getPostnummer() != null && inEnhet.getPostnummer().length() > 0 ) {
-				postnrEnhetFound = true;
-			}
-			if (inEnhet.getPostort() != null && inEnhet.getPostort().length() > 0 ) {
-				postortEnhetFound = true;
-			}
-			if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && !postnrEnhetFound && !postortEnhetFound) {
-				validationErrors.add("No adress found for enhet! fullstandigtAdress or (postadress and postnummer and postort) should be set.");								
-			}
-			if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && postnrEnhetFound && postortEnhetFound) {
+			if (inEnhet.getPostadress() == null || inEnhet.getPostadress().length() < 1 ) {
 				validationErrors.add("No postadress found for enhet!");								
 			}
-			if (!fullstandigEnhetsAdressFound && postadressEnhetFound && !postnrEnhetFound && postortEnhetFound) {
+			if (inEnhet.getPostnummer() == null || inEnhet.getPostnummer().length() < 1 ) {
 				validationErrors.add("No postnummer found for enhet!");								
 			}
-			if (!fullstandigEnhetsAdressFound && postadressEnhetFound && postnrEnhetFound && !postortEnhetFound) {
+			if (inEnhet.getPostort() == null || inEnhet.getPostort().length() < 1 ) {
 				validationErrors.add("No postort found for enhet!");								
-			}
-			if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && !postnrEnhetFound && postortEnhetFound) {
-				validationErrors.add("No postadress and postnummer found for enhet!");								
-			}
-			if (!fullstandigEnhetsAdressFound && postadressEnhetFound && !postnrEnhetFound && !postortEnhetFound) {
-				validationErrors.add("No postnummer and postort found for enhet!");								
-			}
-			if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && postnrEnhetFound && !postortEnhetFound) {
-				validationErrors.add("No postadress and postort found for enhet!");								
 			}
 	
 	        // Check that we got a vardgivare element
@@ -911,16 +862,16 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 	        }
 	
 	        // Fält 8b - kryssruta 1
-	        ArbetsformagaNedsattningType nedsatt14del =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.NEDSATT_MED_1_4);
+	        ArbetsformagaNedsattningType nedsatt14del =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.NEDSATT_MED_1_4);
 	
 	        // Fält 8b - kryssruta 2
-	        ArbetsformagaNedsattningType nedsatthalften =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.NEDSATT_MED_1_2);
+	        ArbetsformagaNedsattningType nedsatthalften =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.NEDSATT_MED_1_2);
 	        
 	        // Fält 8b - kryssruta 3
-	        ArbetsformagaNedsattningType nedsatt34delar =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.NEDSATT_MED_3_4);
+	        ArbetsformagaNedsattningType nedsatt34delar =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.NEDSATT_MED_3_4);
 	
 	        // Fält 8b - kryssruta 4
-	        ArbetsformagaNedsattningType heltNedsatt =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad.HELT_NEDSATT);
+	        ArbetsformagaNedsattningType heltNedsatt =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.HELT_NEDSATT);
 	
 	        // Check that we at least got one choice
 	        if (nedsatt14del == null && nedsatthalften == null && nedsatt34delar == null && heltNedsatt == null) {
@@ -1131,7 +1082,7 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 		return foundSysselsattningType;
 	}	
 	
-	private ArbetsformagaNedsattningType findArbetsformaga(List<ArbetsformagaNedsattningType> arbetsformaga, se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Nedsattningsgrad arbetsformagaNedsattningTyp) {
+	private ArbetsformagaNedsattningType findArbetsformaga(List<ArbetsformagaNedsattningType> arbetsformaga, se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad arbetsformagaNedsattningTyp) {
 		ArbetsformagaNedsattningType foundArbetsformagaType = null;
 		if (arbetsformaga != null) {
 			for (int i = 0; i< arbetsformaga.size(); i++) {
