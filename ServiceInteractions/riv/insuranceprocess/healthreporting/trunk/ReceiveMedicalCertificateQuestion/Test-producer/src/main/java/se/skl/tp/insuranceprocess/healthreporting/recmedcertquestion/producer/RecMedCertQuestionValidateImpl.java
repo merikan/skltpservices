@@ -20,8 +20,6 @@
  */
 package se.skl.tp.insuranceprocess.healthreporting.recmedcertquestion.producer;
 
-import iso.v21090.dt.v1.II;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -30,34 +28,18 @@ import javax.jws.WebService;
 
 import org.w3.wsaddressing10.AttributedURIType;
 
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.AktivitetType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Aktivitetskod;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.ArbetsformagaNedsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.ArbetsuppgiftType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.FunktionstillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.MedicinsktTillstandType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Prognosangivelse;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.ReferensType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Referenstyp;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.SysselsattningType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.TypAvFunktionstillstand;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.TypAvSysselsattning;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.VardkontaktType;
-import se.skl.riv.insuranceprocess.healthreporting.mu7263.v2.Vardkontakttyp;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.Amnetyp;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.LakarutlatandeEnkelType;
-import se.skl.riv.insuranceprocess.healthreporting.qa.v1.MeddelandeType;
-import se.skl.riv.insuranceprocess.healthreporting.qa.v1.Meddelandetyp;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderInterface;
+import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.QuestionFromFkType;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.ReceiveMedicalCertificateQuestionResponseType;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.ReceiveMedicalCertificateQuestionType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.EnhetType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.HosPersonalType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.OrganisationType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.PatientType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ResultCodeEnum;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ResultOfCall;
-import se.skl.riv.insuranceprocess.healthreporting.v1.VardgivareType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
+import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 
 /**
  * Validation class that will certify a webservice call made for a question regarding a medical certificate.. We will check mandatory/optional fields and all other declared rules.
@@ -70,7 +52,7 @@ import se.skl.riv.insuranceprocess.healthreporting.v1.VardgivareType;
 		endpointInterface="se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderInterface", 
 		portName = "ReceiveMedicalCertificateQuestionResponderPort", 
 		targetNamespace = "urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateQuestion:1:rivtabp20",
-		wsdlLocation = "schemas/vard/ReceiveMedicalCertificateQuestionInteraction_0.9_rivtabp20.wsdl")
+		wsdlLocation = "schemas/vard/interactions/ReceiveMedicalCertificateQuestionInteraction/ReceiveMedicalCertificateQuestionInteraction_1.0_rivtabp20.wsdl")
 public class RecMedCertQuestionValidateImpl implements ReceiveMedicalCertificateQuestionResponderInterface {
 
 	public ReceiveMedicalCertificateQuestionResponseType receiveMedicalCertificateQuestion(
@@ -99,38 +81,20 @@ public class RecMedCertQuestionValidateImpl implements ReceiveMedicalCertificate
 				throw new Exception();
 			}
 			
-			MeddelandeType inQuestion = parameters.getQuestion();
+			QuestionFromFkType inQuestion = parameters.getQuestion();
 			
 			/**
 			 *  Check meddelande data + lakarutlatande reference
 			 */
 			
-			// Meddelande id - mandatory
-			if ( inQuestion.getMeddelandeId() == null ||
-				 inQuestion.getMeddelandeId().length() < 1 ) {
-				 validationErrors.add("No Meddelande Id found!");				
-			}
-
 			// Ämne - mandatory
 			Amnetyp inAmne = inQuestion.getAmne();
 			if ( inAmne == null) {
 				validationErrors.add("No Amne element found!");				
 			}
-			
-			// Meddelande typ - mandatory
-			Meddelandetyp inMeddelandeTyp = inQuestion.getMeddelandetyp();
-			if ( inMeddelandeTyp == null) {
-				validationErrors.add("No Meddelande type element found!");				
-			}
-			boolean inFragaFranFK = inMeddelandeTyp.compareTo(Meddelandetyp.FRAGA_FRAN_FK) == 0;
-			boolean inFragaFranVarden = inMeddelandeTyp.compareTo(Meddelandetyp.FRAGA_FRAN_VARDEN) == 0;
-			if (!inFragaFranFK && !inFragaFranVarden) {
-				validationErrors.add("Wrong meddelande type found! Should be fraga fran varden or fraga fran FK.");				
-				throw new Exception();
-			}
-			
+						
 			// Komplettering - optional
-			if (inQuestion.getKomplettering() != null && inQuestion.getKomplettering().size() > 0) {
+			if (inQuestion.getFkKomplettering() != null && inQuestion.getFkKomplettering().size() > 0) {
 				// Check kompletterings data
 				
 			}
@@ -141,8 +105,8 @@ public class RecMedCertQuestionValidateImpl implements ReceiveMedicalCertificate
             }
 			
 			// Sista datum för komplettering - optional
-            if (inQuestion.getSistaDatumForKomplettering() != null) {
-            	if (!inQuestion.getSistaDatumForKomplettering().isValid()) {
+            if (inQuestion.getFkSistaDatumForSvar() != null) {
+            	if (!inQuestion.getFkSistaDatumForSvar().isValid()) {
     				validationErrors.add("Wrong sistaDatumForKomplettering found!");				
             	}
             }
@@ -190,56 +154,24 @@ public class RecMedCertQuestionValidateImpl implements ReceiveMedicalCertificate
             // Check format on personnummer? samordningsnummer?
             
 			// Läkarutlåtande referens - patient - namn - mandatory
-			boolean fullstandigtPatientNameFound = false;
-			boolean fornamnPatientFound = false;
-			boolean efternamnPatientFound = false;
-			if (inPatient.getFullstandigtNamn() != null && inPatient.getFullstandigtNamn().length() > 0 ) {
-				fullstandigtPatientNameFound = true;
-			}
-			if (inPatient.getFornamn() != null && inPatient.getFornamn().length() > 0 ) {
-				fornamnPatientFound = true;
-			}
-			if (inPatient.getEfternamn() != null && inPatient.getEfternamn().length() > 0 ) {
-				efternamnPatientFound = true;
-			}
-			if (!fullstandigtPatientNameFound && !fornamnPatientFound && !efternamnPatientFound) {
-				validationErrors.add("No lakarutlatande Patient namn elements found! fullstandigtNamn or (fornamn and efternamn) should be set.");								
-			}
-			if (!fullstandigtPatientNameFound && fornamnPatientFound && !efternamnPatientFound) {
-				validationErrors.add("No lakarutlatande Patient efternamn found!");								
-			}
-			if (!fullstandigtPatientNameFound && !fornamnPatientFound && efternamnPatientFound) {
-				validationErrors.add("No lakarutlatande Patient fornamn found!");								
+			if (inPatient.getFullstandigtNamn() == null || inPatient.getFullstandigtNamn().length() < 1 ) {
+				validationErrors.add("No lakarutlatande Patient fullstandigtNamn elements found or set!");								
 			}
 		
-			/**
-			 *  Check avsandare data. Depending on direction of question (from varden or FK) validate avsandare.
-			 */
-			if ( inQuestion.getAdressFK() == null) {
-				validationErrors.add("No adress FK element found!");				
-				throw new Exception();
-			} else {
-				if ( inQuestion.getAdressFK().getOrganisation() == null) {
-					validationErrors.add("No FK - organisation element found!");				
-					throw new Exception();
-				}
-				checkOrganisation(inQuestion.getAdressFK().getOrganisation(), validationErrors);								
-			}
-						
 			/**
 			 *  Check mottagare data. Depending on direction of question (from varden or FK) validate mottagare.
 			 */
 			if ( inQuestion.getAdressVard() == null) {
 				validationErrors.add("No Vard adress element found!");				
 				throw new Exception();
-			} else {
-				if ( inQuestion.getAdressVard().getHosPersonal() == null) {
-					validationErrors.add("No vard - hosPersonal element found!");				
-					throw new Exception();
-				}
-				checkHoSPersonal(inQuestion.getAdressVard().getHosPersonal(), validationErrors);				
-				
+			} 
+			
+			if ( inQuestion.getAdressVard().getHosPersonal() == null) {
+				validationErrors.add("No vard - hosPersonal element found!");				
+				throw new Exception();
 			}
+			checkHoSPersonal(inQuestion.getAdressVard().getHosPersonal(), validationErrors);				
+						
 			
 			// Check if we got any validation errors that not caused an Exception
 			if (validationErrors.size() > 0) {
@@ -270,9 +202,6 @@ public class RecMedCertQuestionValidateImpl implements ReceiveMedicalCertificate
 		}
 		return validationString.toString();
 	}
-
-	private void checkOrganisation(OrganisationType inOrganisation, List<String> validationErrors) throws Exception {
-	}
 	
 	private void checkHoSPersonal(HosPersonalType inHoSP, List<String> validationErrors) throws Exception {
         
@@ -290,27 +219,8 @@ public class RecMedCertQuestionValidateImpl implements ReceiveMedicalCertificate
         }
         
         // Check lakarnamn - mandatory
-        // Check lakarnamn - mandatory
-		boolean fullstandigtLakarNameFound = false;
-		boolean fornamnLakarFound = false;
-		boolean efternamnLakarFound = false;
-		if (inHoSP.getFullstandigtNamn() != null && inHoSP.getFullstandigtNamn().length() > 0 ) {
-			fullstandigtLakarNameFound = true;
-		}
-		if (inHoSP.getFornamn() != null && inHoSP.getFornamn().length() > 0 ) {
-			fornamnLakarFound = true;
-		}
-		if (inHoSP.getEfternamn() != null && inHoSP.getEfternamn().length() > 0 ) {
-			efternamnLakarFound = true;
-		}
-		if (!fullstandigtLakarNameFound && !fornamnLakarFound && !efternamnLakarFound) {
+		if (inHoSP.getFullstandigtNamn() == null || inHoSP.getFullstandigtNamn().length() < 1 ) {
 			validationErrors.add("No skapadAvHosPersonal namn elements found! fullstandigtNamn or (fornamn and efternamn) should be set.");								
-		}
-		if (!fullstandigtLakarNameFound && fornamnLakarFound && !efternamnLakarFound) {
-			validationErrors.add("No skapadAvHosPersonal efternamn found!");								
-		}
-		if (!fullstandigtLakarNameFound && !fornamnLakarFound && efternamnLakarFound) {
-			validationErrors.add("No skapadAvHosPersonal fornamn found!");								
 		}
 
         // Check that we got a enhet element
@@ -340,42 +250,14 @@ public class RecMedCertQuestionValidateImpl implements ReceiveMedicalCertificate
         }
 
         // Check enhetsadress - mandatory      
-        boolean fullstandigEnhetsAdressFound = false;
-		boolean postadressEnhetFound = false;
-		boolean postnrEnhetFound = false;
-		boolean postortEnhetFound = false;
-		if (inEnhet.getFullstandigAdress() != null && inEnhet.getFullstandigAdress().length() > 0 ) {
-			fullstandigEnhetsAdressFound = true;
-		}
-		if (inEnhet.getPostadress() != null && inEnhet.getPostadress().length() > 0 ) {
-			postadressEnhetFound = true;
-		}
-		if (inEnhet.getPostnummer() != null && inEnhet.getPostnummer().length() > 0 ) {
-			postnrEnhetFound = true;
-		}
-		if (inEnhet.getPostort() != null && inEnhet.getPostort().length() > 0 ) {
-			postortEnhetFound = true;
-		}
-		if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && !postnrEnhetFound && !postortEnhetFound) {
-			validationErrors.add("No adress found for enhet! fullstandigtAdress or (postadress and postnummer and postort) should be set.");								
-		}
-		if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && postnrEnhetFound && postortEnhetFound) {
+		if (inEnhet.getPostadress() == null && inEnhet.getPostadress().length() < 1 ) {
 			validationErrors.add("No postadress found for enhet!");								
 		}
-		if (!fullstandigEnhetsAdressFound && postadressEnhetFound && !postnrEnhetFound && postortEnhetFound) {
+		if (inEnhet.getPostnummer() == null && inEnhet.getPostnummer().length() < 1 ) {
 			validationErrors.add("No postnummer found for enhet!");								
 		}
-		if (!fullstandigEnhetsAdressFound && postadressEnhetFound && postnrEnhetFound && !postortEnhetFound) {
+		if (inEnhet.getPostort() == null && inEnhet.getPostort().length() < 1 ) {
 			validationErrors.add("No postort found for enhet!");								
-		}
-		if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && !postnrEnhetFound && postortEnhetFound) {
-			validationErrors.add("No postadress and postnummer found for enhet!");								
-		}
-		if (!fullstandigEnhetsAdressFound && postadressEnhetFound && !postnrEnhetFound && !postortEnhetFound) {
-			validationErrors.add("No postnummer and postort found for enhet!");								
-		}
-		if (!fullstandigEnhetsAdressFound && !postadressEnhetFound && postnrEnhetFound && !postortEnhetFound) {
-			validationErrors.add("No postadress and postort found for enhet!");								
 		}
 
         // Check that we got a vardgivare element

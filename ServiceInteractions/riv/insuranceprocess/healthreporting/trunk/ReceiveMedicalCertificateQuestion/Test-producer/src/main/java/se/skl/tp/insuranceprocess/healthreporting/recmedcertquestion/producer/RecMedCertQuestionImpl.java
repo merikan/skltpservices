@@ -27,8 +27,8 @@ import org.w3.wsaddressing10.AttributedURIType;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderInterface;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.ReceiveMedicalCertificateQuestionResponseType;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.ReceiveMedicalCertificateQuestionType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ResultCodeEnum;
-import se.skl.riv.insuranceprocess.healthreporting.v1.ResultOfCall;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
 
 
 @WebService(
@@ -36,7 +36,7 @@ import se.skl.riv.insuranceprocess.healthreporting.v1.ResultOfCall;
 		endpointInterface="se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderInterface", 
 		portName = "ReceiveMedicalCertificateQuestionResponderPort", 
 		targetNamespace = "urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateQuestion:1:rivtabp20",
-		wsdlLocation = "schemas/vard/ReceiveMedicalCertificateQuestionInteraction_0.9_rivtabp20.wsdl")
+		wsdlLocation = "schemas/vard/interactions/ReceiveMedicalCertificateQuestionInteraction/ReceiveMedicalCertificateQuestionInteraction_1.0_rivtabp20.wsdl")
 public class RecMedCertQuestionImpl implements ReceiveMedicalCertificateQuestionResponderInterface {
 
 	public ReceiveMedicalCertificateQuestionResponseType receiveMedicalCertificateQuestion(
