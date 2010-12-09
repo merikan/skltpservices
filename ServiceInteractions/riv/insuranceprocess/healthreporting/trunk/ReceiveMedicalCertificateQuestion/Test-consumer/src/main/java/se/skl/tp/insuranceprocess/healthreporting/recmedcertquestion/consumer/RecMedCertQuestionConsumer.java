@@ -31,21 +31,18 @@ import javax.xml.datatype.DatatypeFactory;
 import org.w3.wsaddressing10.AttributedURIType;
 
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.Amnetyp;
-import se.skl.riv.insuranceprocess.healthreporting.qa.v1.CaseType;
-import se.skl.riv.insuranceprocess.healthreporting.qa.v1.FkAdresseringsType;
+import se.skl.riv.insuranceprocess.healthreporting.qa.v1.InnehallType;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.LakarutlatandeEnkelType;
-import se.skl.riv.insuranceprocess.healthreporting.qa.v1.MeddelandeType;
-import se.skl.riv.insuranceprocess.healthreporting.qa.v1.Meddelandetyp;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.VardAdresseringsType;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderInterface;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderService;
+import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.QuestionFromFkType;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.ReceiveMedicalCertificateQuestionResponseType;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.ReceiveMedicalCertificateQuestionType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.EnhetType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.HosPersonalType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.OrganisationType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.PatientType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.VardgivareType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 
 public final class RecMedCertQuestionConsumer {
 
@@ -99,8 +96,8 @@ public final class RecMedCertQuestionConsumer {
 		}
 	}
 
-	private static MeddelandeType getQuestion() throws Exception {
-		MeddelandeType meddelande = new MeddelandeType();
+	private static QuestionFromFkType getQuestion() throws Exception {
+		QuestionFromFkType meddelande = new QuestionFromFkType();
 		
 		// Avsändare
 		VardAdresseringsType avsandare = new VardAdresseringsType();		
@@ -130,47 +127,34 @@ public final class RecMedCertQuestionConsumer {
 		hosPersonal.setPersonalId(personalId);
 		avsandare.setHosPersonal(hosPersonal);
 		meddelande.setAdressVard(avsandare);
-		
-		// Mottagare
-		FkAdresseringsType mottagare = new FkAdresseringsType();
-		OrganisationType organisation = new OrganisationType();
-		organisation.setOrganisationsnamn("Försäkringskassan");
-		organisation.setOrganisationsId("202100-5521");
-		mottagare.setOrganisation(organisation);
-		meddelande.setAdressFK(mottagare);
-		
+				
 		// Avsänt tidpunkt - nu
 		meddelande.setAvsantTidpunkt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
 
 		// Set läkarutlåtande enkel från vården
-		meddelande.setMeddelandeId("Referens till meddelande instansen");
 		LakarutlatandeEnkelType lakarutlatandeEnkel = new LakarutlatandeEnkelType();
 		PatientType patient = new PatientType();
 		II personId = new II();
 		personId.setRoot("1.2.752.129.2.1.3.1"); // OID för samordningsnummer är 1.2.752.129.2.1.3.3.
 		personId.setExtension("19430811-7094");
 		patient.setPersonId(personId);
-		patient.setFornamn("Lab"); 
-		patient.setEfternamn("Testsson");
+		patient.setFullstandigtNamn("Lab Testsson"); 
 		lakarutlatandeEnkel.setPatient(patient);
 		lakarutlatandeEnkel.setLakarutlatandeId("xxx");
 		lakarutlatandeEnkel.setSigneringsTidpunkt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
 		meddelande.setLakarutlatande(lakarutlatandeEnkel);
 	
 		// Set Försäkringskassans id
-//		meddelande.setForsakringskassansArendeId("");
-
-		// Set meddelandetyp
-		meddelande.setMeddelandetyp(Meddelandetyp.FRAGA_FRAN_VARDEN);
+		meddelande.setFkReferensId("Referens till fråga från FK");
 
 		// Set ämne
 		meddelande.setAmne(Amnetyp.AVSTAMNINGSMOTE);
 		
 		// Set meddelanderubrik
-		meddelande.setMeddelanderubrik("Rubrik");
+		meddelande.setFkMeddelanderubrik("Rubrik");
 
 		// Set meddelande - fraga
-		CaseType fraga = new CaseType();
+		InnehallType fraga = new InnehallType();
 		fraga.setMeddelandeText("Meddelandetetext");
 		fraga.setSigneringsTidpunkt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
 		meddelande.setFraga(fraga);

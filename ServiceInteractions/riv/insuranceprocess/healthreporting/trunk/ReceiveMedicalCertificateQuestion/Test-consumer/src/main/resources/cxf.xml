@@ -43,16 +43,6 @@
 				<sec:keyStore type="JKS" password="password"
 					file="../../certs/consumer.jks" />
 			</sec:keyManagers>
-			<!-- 		
-			<sec:trustManagers>
-				<sec:keyStore type="JKS" password="password"
-					file="../../certs_new/truststore.jks" />
-			</sec:trustManagers>
- 
-			<sec:keyManagers keyPassword="PRPWkJ9mBr">
-				<sec:keyStore type="PKCS12" password="PRPWkJ9mBr" file="../../certs_new/tk_qa_auth.p12"/>
-			</sec:keyManagers>
-			-->
 			<sec:cipherSuitesFilter>
 				<!--
 					these filters ensure that a ciphersuite with export-suitable or
