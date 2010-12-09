@@ -132,7 +132,7 @@
 											http://www.w3.org/2005/08/addressing=org.w3.wsaddressing10
 										</extraarg>
 									</extraargs>
-									<wsdl>${schema.path}/TaEmotFragaInteraction_0.9_rivtabp20.wsdl</wsdl>
+									<wsdl>${schema.path}/TaEmotFragaInteraction_1.0_rivtabp20.wsdl</wsdl>
 								</wsdlOption>
 
 								<wsdlOption>
@@ -155,7 +155,7 @@
 											http://www.w3.org/2005/08/addressing=org.w3.wsaddressing10
 										</extraarg>
 									</extraargs>
-									<wsdl>${schema.path}/TaEmotSvarInteraction_0.9_rivtabp20.wsdl</wsdl>
+									<wsdl>${schema.path}/TaEmotSvarInteraction_1.0_rivtabp20.wsdl</wsdl>
 								</wsdlOption>
 								
 							</wsdlOptions>
