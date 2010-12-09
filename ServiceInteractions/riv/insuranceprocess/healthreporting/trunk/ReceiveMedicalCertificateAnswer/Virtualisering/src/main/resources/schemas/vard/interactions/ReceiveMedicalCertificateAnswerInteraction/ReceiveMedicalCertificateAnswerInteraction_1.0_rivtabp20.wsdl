@@ -35,7 +35,7 @@
 			Tjänsteinteraktionens namn: ReceiveMedicalCertificateAnswerInteraction
 			Beskrivning: 
 				Interaction to receive an answer to a previous question
-			Revisioner: 2010-05-18 Version 0.9, Mats Ekhammar - Callista Enterprise AB
+			Revisioner: 2010-05-18 Version 1.0, Mats Ekhammar - Callista Enterprise AB
 			Tjänstedomän: insuranceprocess:healthreporting
 			Tjänsteinteraktionstyp: Fråga-svar
 			RIV Teknisk Anvisning: Basic Profile 2.0
@@ -45,17 +45,17 @@
 
 	<wsdl:types>
 		<xs:schema>
-			<xs:import schemaLocation="ReceiveMedicalCertificateAnswerResponder_0.9.xsd" namespace="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateAnswerResponder:1"/>
+			<xs:import schemaLocation="ReceiveMedicalCertificateAnswerResponder_1.0.xsd" namespace="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateAnswerResponder:1"/>
 		</xs:schema>
 		<xs:schema>
-			<xs:import schemaLocation="ws-addressing-1.0.xsd" namespace="http://www.w3.org/2005/08/addressing"/>
+			<xs:import schemaLocation="../../core_components/ws-addressing-1.0.xsd" namespace="http://www.w3.org/2005/08/addressing"/>
 		</xs:schema>
 	</wsdl:types>
 
 	<wsdl:message name="ReceiveMedicalCertificateAnswerRequest">
 		<xs:annotation>
 			<xs:documentation>
-				LogicalAddress is the organization id for Försäkringskassan.
+				LogicalAddress is the organization id for a "vårdenhet".
 			</xs:documentation>
 		</xs:annotation>
 		<wsdl:part name="LogicalAddress" element="wsa:To" />
@@ -79,7 +79,7 @@
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
 		<wsdl:operation name="ReceiveMedicalCertificateAnswer">
-			<soap:operation soapAction="urn:riv:fk:sicknessreport:ReceiveMedicalCertificateAnswerResponder:1"/>
+			<soap:operation soapAction="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateAnswerResponder:1"/>
 			<wsdl:input>
 				<soap:header use="literal" message="tns:ReceiveMedicalCertificateAnswerRequest" part="LogicalAddress"/>
 				<soap:body use="literal" parts="parameters"/>
