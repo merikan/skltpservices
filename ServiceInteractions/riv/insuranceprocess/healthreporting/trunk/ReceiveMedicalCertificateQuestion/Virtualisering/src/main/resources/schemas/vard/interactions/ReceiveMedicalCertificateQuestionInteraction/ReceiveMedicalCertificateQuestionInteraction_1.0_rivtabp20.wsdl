@@ -45,17 +45,17 @@
 
 	<wsdl:types>
 		<xs:schema>
-			<xs:import schemaLocation="ReceiveMedicalCertificateQuestionResponder_0.9.xsd" namespace="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateQuestionResponder:1"/>
+			<xs:import schemaLocation="ReceiveMedicalCertificateQuestionResponder_1.0.xsd" namespace="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateQuestionResponder:1"/>
 		</xs:schema>
 		<xs:schema>
-			<xs:import schemaLocation="ws-addressing-1.0.xsd" namespace="http://www.w3.org/2005/08/addressing"/>
+			<xs:import schemaLocation="../../core_components/ws-addressing-1.0.xsd" namespace="http://www.w3.org/2005/08/addressing"/>
 		</xs:schema>
 	</wsdl:types>
 
 	<wsdl:message name="ReceiveMedicalCertificateQuestionRequest">
 		<xs:annotation>
 			<xs:documentation>
-				LogicalAddress is the organization id for Försäkringskassan.
+				LogicalAddress is the organization id for "vårdenhet".
 			</xs:documentation>
 		</xs:annotation>
 		<wsdl:part name="LogicalAddress" element="wsa:To" />
@@ -79,7 +79,7 @@
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
 		<wsdl:operation name="ReceiveMedicalCertificateQuestion">
-			<soap:operation soapAction="urn:riv:fk:sicknessreport:ReceiveMedicalCertificateQuestionResponder:1"/>
+			<soap:operation soapAction="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateQuestionResponder:1"/>
 			<wsdl:input>
 				<soap:header use="literal" message="tns:ReceiveMedicalCertificateQuestionRequest" part="LogicalAddress"/>
 				<soap:body use="literal" parts="parameters"/>
