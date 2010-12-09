@@ -31,21 +31,18 @@ import javax.xml.datatype.DatatypeFactory;
 import org.w3.wsaddressing10.AttributedURIType;
 
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.Amnetyp;
-import se.skl.riv.insuranceprocess.healthreporting.qa.v1.CaseType;
-import se.skl.riv.insuranceprocess.healthreporting.qa.v1.FkAdresseringsType;
+import se.skl.riv.insuranceprocess.healthreporting.qa.v1.InnehallType;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.LakarutlatandeEnkelType;
-import se.skl.riv.insuranceprocess.healthreporting.qa.v1.MeddelandeType;
-import se.skl.riv.insuranceprocess.healthreporting.qa.v1.Meddelandetyp;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.VardAdresseringsType;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificateanswer.v1.rivtabp20.ReceiveMedicalCertificateAnswerResponderInterface;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificateanswer.v1.rivtabp20.ReceiveMedicalCertificateAnswerResponderService;
+import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificateanswerresponder.v1.AnswerFromFkType;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificateanswerresponder.v1.ReceiveMedicalCertificateAnswerResponseType;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificateanswerresponder.v1.ReceiveMedicalCertificateAnswerType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.EnhetType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.HosPersonalType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.OrganisationType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.PatientType;
-import se.skl.riv.insuranceprocess.healthreporting.v1.VardgivareType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 
 public final class RecMedCertAnswerConsumer {
 
@@ -97,8 +94,8 @@ public final class RecMedCertAnswerConsumer {
 		}
 	}
 
-	private static MeddelandeType getAnswer() throws Exception {
-		MeddelandeType meddelande = new MeddelandeType();
+	private static AnswerFromFkType getAnswer() throws Exception {
+		AnswerFromFkType meddelande = new AnswerFromFkType();
 		
 		// Avsändare
 		VardAdresseringsType avsandare = new VardAdresseringsType();		
@@ -128,52 +125,41 @@ public final class RecMedCertAnswerConsumer {
 		hosPersonal.setPersonalId(personalId);
 		avsandare.setHosPersonal(hosPersonal);
 		meddelande.setAdressVard(avsandare);
-		
-		// Mottagare
-		FkAdresseringsType mottagare = new FkAdresseringsType();
-		OrganisationType organisation = new OrganisationType();
-		organisation.setOrganisationsnamn("Försäkringskassan");
-		organisation.setOrganisationsId("202100-5521");
-		mottagare.setOrganisation(organisation);
-		meddelande.setAdressFK(mottagare);
-		
+				
 		// Avsänt tidpunkt - nu
 		meddelande.setAvsantTidpunkt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
 
 		// Set läkarutlåtande enkel från vården
-		meddelande.setMeddelandeId("Referens till meddelande instansen");
+		meddelande.setVardReferensId("Referens till fråga från vården");
 		LakarutlatandeEnkelType lakarutlatandeEnkel = new LakarutlatandeEnkelType();
 		PatientType patient = new PatientType();
 		II personId = new II();
 		personId.setRoot("1.2.752.129.2.1.3.1"); // OID för samordningsnummer är 1.2.752.129.2.1.3.3.
 		personId.setExtension("19430811-7094");
 		patient.setPersonId(personId);
-		patient.setFornamn("Lab"); 
-		patient.setEfternamn("Testsson");
+		patient.setFullstandigtNamn("Lab Testsson"); 
 		lakarutlatandeEnkel.setPatient(patient);
 		lakarutlatandeEnkel.setLakarutlatandeId("xxx");
 		lakarutlatandeEnkel.setSigneringsTidpunkt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
 		meddelande.setLakarutlatande(lakarutlatandeEnkel);
 	
 		// Set Försäkringskassans id
-//		meddelande.setForsakringskassansArendeId("");
-
-		// Set meddelandetyp
-		meddelande.setMeddelandetyp(Meddelandetyp.SVAR_FRAN_VARDEN);
+		meddelande.setFkReferensId("Referens till svaret från FK");
 
 		// Set ämne
 		meddelande.setAmne(Amnetyp.KONTAKT);
 		
-		// Set meddelande	
-		meddelande.setMeddelanderubrik("Rubrik");
-		CaseType svar = new CaseType();
+		// Set fråga
+		InnehallType fraga = new InnehallType();
+		fraga.setMeddelandeText("Meddelandetext");
+		fraga.setSigneringsTidpunkt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
+		meddelande.setSvar(fraga);
+
+		// Set svar	
+		InnehallType svar = new InnehallType();
 		svar.setMeddelandeText("Meddelandetext");
 		svar.setSigneringsTidpunkt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
 		meddelande.setSvar(svar);
-
-		// Komplettering
-//		meddelande.getKomplettering().add(e);
-//		meddelande.setSistaDatumForKomplettering(value);	
 		
 		return meddelande;
 	}
