@@ -29,23 +29,23 @@
 	<!--
 	Name of this file is mandatory and may not be changed. 
 	 -->
-	<custom-transformer name="VardReq2Fk" class="se.skl.tp.recmedcertanswer.transformers.VardRequest2FkTransformer"/>
-	<custom-transformer name="FkResp2Vard" class="se.skl.tp.recmedcertanswer.transformers.FkResponse2VardTransformer"/>
+	<custom-transformer name="FkReq2Vard" class="se.skl.tp.recmedcertanswer.transformers.FkRequest2VardTransformer"/>
+	<custom-transformer name="VardResp2Fk" class="se.skl.tp.recmedcertanswer.transformers.VardResponse2FkTransformer"/>
 	
 	
-	<model name="fkvarden-question-model">
-		<service name="varden-fk-answer-service">
+	<model name="fk-varden-answer-model">
+		<service name="fk-varden-answer-service">
 			<inbound>
 				<cxf:inbound-endpoint 
-					address="http://localhost:10000/transformVardFkAnswer"
-					wsdlLocation="classpath:/schemas/ReceiveMedicalCertificateAnswerInteraction_1.0_rivtabp20.wsdl"
+					address="http://localhost:10000/transformFkVardAnswer"
+					wsdlLocation="classpath:/schemas/vard/interactions/ReceiveMedicalCertificateAnswerInteraction/ReceiveMedicalCertificateAnswerInteraction_1.0_rivtabp20.wsdl"
 					serviceName="ReceiveMedicalCertificateAnswerResponderService"
 					namespace="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateAnswer:1:rivtabp20"
 					proxy="true" 
 					synchronous="true"
 					applyTransformersToProtocol="false"
-					transformer-refs="VardReq2Fk"
-					responseTransformer-refs="FkResp2Vard"
+					transformer-refs="FkReq2Vard"
+					responseTransformer-refs="VardResp2Fk"
 				/>							
 			</inbound>
 
@@ -53,7 +53,7 @@
                 <pass-through-router>
                         <cxf:outbound-endpoint 
                         	address="https://rivsat.forsakringskassan.sjunet.org/ws" 
-							wsdlLocation="classpath:/schemas/fk/TaEmotSvarInteraction_0.9_rivtabp20.wsdl"
+							wsdlLocation="classpath:/schemas/fk/TaEmotSvarInteraction_1.0_rivtabp20.wsdl"
                         	wsdlPort="TaEmotSvarResponderPort"
                         	operation="TaEmotSvar" 
                         	clientClass="se.fk.vardgivare.sjukvard.taemotsvar.v1.rivtabp20.TaEmotSvarResponderService"
