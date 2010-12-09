@@ -30,22 +30,22 @@
 	Name of this file is mandatory and may not be changed. 
 	 -->
 	
-	<custom-transformer name="VardReq2Fk" class="se.skl.tp.recmedcertquestion.transformers.VardRequest2FkTransformer"/>
-	<custom-transformer name="FkResp2Vard" class="se.skl.tp.recmedcertquestion.transformers.FkResponse2VardTransformer"/>
+	<custom-transformer name="FkReq2Vard" class="se.skl.tp.recmedcertquestion.transformers.FkRequest2VardTransformer"/>
+	<custom-transformer name="VardResp2Fk" class="se.skl.tp.recmedcertquestion.transformers.VardResponse2FkTransformer"/>
 	
 	<model name="fkvarden-question-model">
-		<service name="varden-fk-question-service">
+		<service name="fk-varden-question-service">
 			<inbound>
 				<cxf:inbound-endpoint 
-					address="http://localhost:12000/transformVardFkQuestion"
-					wsdlLocation="classpath:/schemas/vard/ReceiveMedicalCertificateQuestionInteraction_0.9_rivtabp20.wsdl"
+					address="http://localhost:12000/transformFkVardQuestion"
+					wsdlLocation="classpath:/schemas/vard/interactions/ReceiveMedicalCertificateQuestionInteraction/ReceiveMedicalCertificateQuestionInteraction_1.0_rivtabp20.wsdl"
 					serviceName="ReceiveMedicalCertificateQuestionResponderService"
 					namespace="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateQuestion:1:rivtabp20"
 					proxy="true" 
 					synchronous="true"
 					applyTransformersToProtocol="false"
-					transformer-refs="VardReq2Fk"
-					responseTransformer-refs="FkResp2Vard"
+					transformer-refs="FkReq2Vard"
+					responseTransformer-refs="VardResp2Fk"
 				/>							
 			</inbound>
 
