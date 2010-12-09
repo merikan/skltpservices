@@ -6,8 +6,7 @@
 	targetNamespace="urn:riv:fk:vardgivare:sjukvard:TaEmotFragaResponder:1"  
 	elementFormDefault="qualified" 
 	attributeFormDefault="unqualified" 
-	version="0.9"
->
+	version="1.0">
 	
    <xs:import namespace="http://schema.forsakringskassan.se/vardgivare_sjukvard" schemaLocation="vardgivare_sjukvard/TaEmotFragaAnrop.xsd"/>
 

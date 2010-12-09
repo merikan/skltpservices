@@ -35,7 +35,7 @@
 			Tjänsteinteraktionens namn: TaEmotFragaInteraction
 			Beskrivning: 
 				Operation för att skicka in en fråga från Försäkringskassan/vården till vården/Försäkringskassan
-			Revisioner: 2010-05-17 Version 0.9, Mats Ekhammar - Callista Enterprise AB
+			Revisioner: 2010-12-09 Version 1.0, Mats Ekhammar - Callista Enterprise AB
 			Tjänstedomän: fk:vardgivare:sjukvard
 			Tjänsteinteraktionstyp: Fråga-svar
 			RIV Teknisk Anvisning: Basic Profile 2.0
@@ -45,7 +45,7 @@
 
 	<wsdl:types>
 		<xs:schema>
-			<xs:import schemaLocation="TaEmotFragaResponder_0.9.xsd" namespace="urn:riv:fk:vardgivare:sjukvard:TaEmotFragaResponder:1"/>
+			<xs:import schemaLocation="TaEmotFragaResponder_1.0.xsd" namespace="urn:riv:fk:vardgivare:sjukvard:TaEmotFragaResponder:1"/>
 		</xs:schema>
 		<xs:schema>
 			<xs:import schemaLocation="ws-addressing-1.0.xsd" namespace="http://www.w3.org/2005/08/addressing"/>
