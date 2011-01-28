@@ -33,12 +33,12 @@
 	Name of this file is mandatory and may not be changed. 
 	 -->
  	
-	<message-properties-transformer name="RegisterMedicalCertificate3-add-riv-version">
+	<message-properties-transformer name="RegisterMedicalCertificate-3-add-riv-version">
         <add-message-property key="rivversion" value="RIVTABP20"/>
     </message-properties-transformer>           
  
 	<model>
-		<service name="RegisterMedicalCertificate-service">
+		<service name="RegisterMedicalCertificate-3-service">
 			<inbound>
 				<cxf:inbound-endpoint address="https://${tp.host}:${tp.port}/${tp.baseUri}/RegisterMedicalCertificate/3/rivtabp20"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
@@ -54,7 +54,7 @@
                 <pass-through-router>
         			<outbound-endpoint address="vm://vagval-router" 
         			synchronous="true"
-        			transformer-refs="RegisterMedicalCertificate3-add-riv-version" />
+        			transformer-refs="RegisterMedicalCertificate-3-add-riv-version" />
                 </pass-through-router>
 			</outbound>    		
 		</service>						
