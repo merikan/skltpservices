@@ -34,7 +34,7 @@
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://localhost:10000/test/TaEmotFraga_Service"
-					wsdlLocation="classpath:/schemas/fk/TaEmotFragaInteraction_0.9_rivtabp20.wsdl"/>
+					wsdlLocation="classpath:/schemas/fk/TaEmotFragaInteraction_1.0_rivtabp20.wsdl"/>
 			</inbound>
 
 			<component>
