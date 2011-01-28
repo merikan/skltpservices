@@ -53,7 +53,7 @@
                 <pass-through-router>
                         <cxf:outbound-endpoint 
                         	address="https://localhost:19000/fk/TaEmotFraga/1/rivtabp20" 
-							wsdlLocation="classpath:/schemas/fk/TaEmotFragaInteraction_0.9_rivtabp20.wsdl"
+							wsdlLocation="classpath:/schemas/fk/TaEmotFragaInteraction_1.0_rivtabp20.wsdl"
                         	wsdlPort="TaEmotFragaResponderPort"
                         	operation="TaEmotFraga" 
                         	clientClass="se.fk.vardgivare.sjukvard.taemotfraga.v1.rivtabp20.TaEmotFragaResponderService"
