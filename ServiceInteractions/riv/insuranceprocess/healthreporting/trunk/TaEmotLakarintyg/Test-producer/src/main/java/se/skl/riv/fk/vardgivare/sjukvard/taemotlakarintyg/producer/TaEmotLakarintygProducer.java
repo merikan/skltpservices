@@ -21,13 +21,24 @@
 
 package se.skl.riv.fk.vardgivare.sjukvard.taemotlakarintyg.producer;
 
+import java.net.URL;
+
 import javax.xml.ws.Endpoint;
+
+import org.apache.cxf.Bus;
+import org.apache.cxf.bus.spring.SpringBusFactory;
 
 
 public class TaEmotLakarintygProducer {
 
     protected TaEmotLakarintygProducer() throws Exception {
         System.out.println("Starting Producer");
+
+        // Loads a cxf configuration file to use
+        SpringBusFactory bf = new SpringBusFactory();
+        URL busFile = ClassLoader.getSystemResource("cxf-producer.xml");
+        Bus bus = bf.createBus(busFile.toString());
+        SpringBusFactory.setDefaultBus(bus);
 
         Object implementor = new TaEmotLakarintygImpl();
         String address = "https://localhost:19000/fk/TaEmotLakarintyg/1/rivtabp20";
