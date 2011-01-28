@@ -33,24 +33,24 @@
  		<service name="RegisterMedicalCertificate-3-service-test">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/test/RegisterMedicalCertificate/3"
+					address="http://localhost:10000/test/RegisterMedicalCertificate/v3"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"/>
 			</inbound>
 
 			<component>
-				<singleton-object class="se.skl.tp.insuranceprocess.healthreporting.regmedcert.producer.RegMedCertImpl" />
+				<singleton-object class="se.skl.tp.insuranceprocess.healthreporting.regmedcert.producer.RegisterMedCertImpl" />
 			</component>
 		</service>
 
  		<service name="RegisterMedicalCertificate-3-service-validate">
  			<inbound>
  				<cxf:inbound-endpoint
- 					address="http://localhost:10000/validate/RegisterMedicalCertificate/3"
+ 					address="http://localhost:10000/validate/RegisterMedicalCertificate/v3"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"/>
  			</inbound>
  			
  			<component>
- 				<singleton-object class="se.skl.tp.insuranceprocess.healthreporting.regmedcert.producer.RegMedCertValidateImpl" />
+ 				<singleton-object class="se.skl.tp.insuranceprocess.healthreporting.regmedcert.producer.RegisterMedCertValidateImpl" />
  			</component>
  		</service>
  	</model>

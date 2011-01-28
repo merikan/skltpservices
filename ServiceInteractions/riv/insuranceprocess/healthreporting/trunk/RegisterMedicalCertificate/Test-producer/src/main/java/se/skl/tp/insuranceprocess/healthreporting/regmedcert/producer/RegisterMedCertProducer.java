@@ -21,22 +21,33 @@
 
 package se.skl.tp.insuranceprocess.healthreporting.regmedcert.producer;
 
+import java.net.URL;
+
 import javax.xml.ws.Endpoint;
 
+import org.apache.cxf.Bus;
+import org.apache.cxf.bus.spring.SpringBusFactory;
 
-public class RegMedCertProducer {
 
-    protected RegMedCertProducer() throws Exception {
+public class RegisterMedCertProducer {
+
+    protected RegisterMedCertProducer() throws Exception {
         System.out.println("Starting Producer");
 
-        Object implementor = new RegMedCertValidateImpl();
+        // Loads a cxf configuration file to use
+        SpringBusFactory bf = new SpringBusFactory();
+        URL busFile = ClassLoader.getSystemResource("cxf-producer.xml");
+        Bus bus = bf.createBus(busFile.toString());
+        SpringBusFactory.setDefaultBus(bus);
+        
+        Object implementor = new RegisterMedCertValidateImpl();
         String address = "https://localhost:19000/vard/RegisterMedicalCertificate/3/rivtabp20";
         Endpoint.publish(address, implementor);
     }
 
 	public static void main(String[] args) throws Exception {
 		
-        new RegMedCertProducer();
+        new RegisterMedCertProducer();
         System.out.println("Producer ready...");
         
         Thread.sleep(50 * 60 * 1000);

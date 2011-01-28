@@ -37,7 +37,7 @@ import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
 		portName = "RegisterMedicalCertificateResponderPort", 
 		targetNamespace = "urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20",
 		wsdlLocation = "schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl")
-public class RegMedCertImpl implements RegisterMedicalCertificateResponderInterface {
+public class RegisterMedCertImpl implements RegisterMedicalCertificateResponderInterface {
 
 	public RegisterMedicalCertificateResponseType registerMedicalCertificate(
 			AttributedURIType logicalAddress,
