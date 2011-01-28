@@ -12,9 +12,9 @@
    </xs:annotation>
 
 <!--
-   <xs:include schemaLocation="http://schema.forsakringskassan.se/vardgivare_sjukvard/1/adressering.xsd"/>
-   <xs:include schemaLocation="http://schema.forsakringskassan.se/vardgivare_sjukvard/1/patient.xsd"/>
-   <xs:include schemaLocation="http://schema.forsakringskassan.se/vardgivare_sjukvard/1/lakarintyg.xsd"/>
+   <xs:include schemaLocation="http://schema.forsakringskassan.se/vardgivare_sjukvard/adressering.xsd"/>
+   <xs:include schemaLocation="http://schema.forsakringskassan.se/vardgivare_sjukvard/patient.xsd"/>
+   <xs:include schemaLocation="http://schema.forsakringskassan.se/vardgivare_sjukvard/lakarintyg.xsd"/>
 -->
 
    <xs:include schemaLocation="adressering.xsd"/>
