@@ -45,7 +45,7 @@ import se.fk.vardgivare.sjukvard.taemotfragaresponder.v1.TaEmotFragaType;
 		endpointInterface="se.fk.vardgivare.sjukvard.taemotfraga.v1.rivtabp20.TaEmotFragaResponderInterface", 
 		portName = "TaEmotFragaResponderPort", 
 		targetNamespace = "urn:riv:fk:vardgivare:sjukvard:TaEmotFraga:1:rivtabp20",
-		wsdlLocation = "schemas/fk/TaEmotFragaInteraction_0.9_rivtabp20.wsdl")
+		wsdlLocation = "schemas/fk/TaEmotFragaInteraction_1.0_rivtabp20.wsdl")
 public class TaEmotFragaImpl implements TaEmotFragaResponderInterface {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
