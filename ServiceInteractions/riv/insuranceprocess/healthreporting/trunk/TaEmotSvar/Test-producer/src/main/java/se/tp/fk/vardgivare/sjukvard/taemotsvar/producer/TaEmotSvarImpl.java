@@ -45,7 +45,7 @@ import se.fk.vardgivare.sjukvard.taemotsvarresponder.v1.TaEmotSvarType;
 		endpointInterface="se.fk.vardgivare.sjukvard.taemotsvar.v1.rivtabp20.TaEmotSvarResponderInterface", 
 		portName = "TaEmotSvarResponderPort", 
 		targetNamespace = "urn:riv:fk:vardgivare:sjukvard:TaEmotSvar:1:rivtabp20",
-		wsdlLocation = "schemas/fk/TaEmotSvarInteraction_0.9_rivtabp20.wsdl")
+		wsdlLocation = "schemas/fk/TaEmotSvarInteraction_1.0_rivtabp20.wsdl")
 public class TaEmotSvarImpl implements TaEmotSvarResponderInterface {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
