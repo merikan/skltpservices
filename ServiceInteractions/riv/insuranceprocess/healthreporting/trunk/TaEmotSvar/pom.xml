@@ -34,6 +34,5 @@
 		<module>Virtualisering</module>
 		<module>Test-consumer</module>
 		<module>Test-producer</module>
-	 <module>Vardtransform</module>
 	</modules>
 </project>
