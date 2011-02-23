@@ -36,12 +36,12 @@ public class SendMedCertQuestionProducer {
 
         // Loads a cxf configuration file to use
         SpringBusFactory bf = new SpringBusFactory();
-        URL busFile = ClassLoader.getSystemResource("cxf-producer.xml");
+        URL busFile = this.getClass().getClassLoader().getResource("cxf-producer.xml");
         Bus bus = bf.createBus(busFile.toString());
         SpringBusFactory.setDefaultBus(bus);
 
         Object implementor = new SendMedCertQuestionImpl();
-        String address = "https://localhost:19000/vard/ReceiveMedicalCertificateQuestion/1/rivtabp20";
+        String address = "https://localhost:19000/vard/SendMedicalCertificateQuestion/1/rivtabp20";
         Endpoint.publish(address, implementor);
     }
 

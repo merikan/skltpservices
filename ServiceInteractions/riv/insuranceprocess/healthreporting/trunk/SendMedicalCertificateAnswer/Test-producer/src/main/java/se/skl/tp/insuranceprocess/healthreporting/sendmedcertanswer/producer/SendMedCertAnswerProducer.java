@@ -36,7 +36,7 @@ public class SendMedCertAnswerProducer {
 
         // Loads a cxf configuration file to use
         SpringBusFactory bf = new SpringBusFactory();
-        URL busFile = ClassLoader.getSystemResource("cxf-producer.xml");
+        URL busFile = this.getClass().getClassLoader().getResource("cxf-producer.xml");
         Bus bus = bf.createBus(busFile.toString());
         SpringBusFactory.setDefaultBus(bus);
 
