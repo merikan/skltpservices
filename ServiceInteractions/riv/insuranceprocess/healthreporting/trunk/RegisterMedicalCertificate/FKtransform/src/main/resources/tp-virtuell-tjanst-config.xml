@@ -32,11 +32,12 @@
 	
 	<custom-transformer name="vard2fk" class="se.skl.tp.regmedcert.transformers.Vard2FkTransformer"/>
 	<custom-transformer name="fk2vard" class="se.skl.tp.regmedcert.transformers.Fk2VardTransformer"/>
-<!--	
-	<message-properties-transformer name="newContract">
-		<add-message-property key="namespace" value="urn:riv:fk:vardgivare:sjukvard:TaEmotLakarintyg:1:rivtabp20"/>		
+
+	<message-properties-transformer name="changeNamespace">
+		<add-message-property key="namespace" value="urn:riv:fk:vardgivare:sjukvard:TaEmotLakarintyg:1:rivtabp20"/>
 	</message-properties-transformer>           
 
+<!--	
 	<message-properties-transformer name="newReceiverId">
 		<delete-message-property key="receiverid"/>
 		<add-message-property key="receiverid" value="FK"/>		
@@ -46,14 +47,14 @@
 		<service name="fk-varden-registermedicalcertificate-service">
 			<inbound>
 				<cxf:inbound-endpoint 
-					address="http://localhost:10000/adapter/transformVardFk"
+					address="http://localhost:10000/adapter/transform/RegisterMedicalCertificate/3/rivtabp20"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
 					serviceName="RegisterMedicalCertificateResponderService"
 					namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20"
 					proxy="true" 
 					synchronous="true"
 					applyTransformersToProtocol="false"
-					transformer-refs="vard2fk"
+					transformer-refs="vard2fk changeNamespace"
 					responseTransformer-refs="fk2vard"
 				/>							
 			</inbound>
@@ -61,7 +62,7 @@
 			<outbound>
                 <pass-through-router>
                         <cxf:outbound-endpoint 
-                        	address="https://rivsat.forsakringskassan.sjunet.org/ws" 
+                        	address="https://${tp.host}:${tp.port}/${tp.baseUri}/TaEmotLakarintyg/1/rivtabp20" 
                         	wsdlLocation="classpath:/schemas/fk/TaEmotLakarintygInteraction_1.0_rivtabp20.wsdl"
                         	wsdlPort="TaEmotLakarintygResponderPort"
                         	operation="TaEmotLakarintyg" 

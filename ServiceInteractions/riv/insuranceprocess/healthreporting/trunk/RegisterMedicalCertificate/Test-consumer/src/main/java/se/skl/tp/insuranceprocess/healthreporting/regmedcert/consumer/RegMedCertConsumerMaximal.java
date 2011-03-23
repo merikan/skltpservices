@@ -49,6 +49,8 @@ import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.LakarutlatandeType;
 import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.MedicinsktTillstandType;
 import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad;
 import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Prognosangivelse;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.ReferensType;
+import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Referenstyp;
 import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.SysselsattningType;
 import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.TypAvFunktionstillstand;
 import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.TypAvSysselsattning;
@@ -64,7 +66,7 @@ import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 
 
-public final class RegMedCertConsumer {
+public final class RegMedCertConsumerMaximal {
 
 	// Use this one to connect via Virtualiseringsplattformen
 	private static final String LOGISK_ADDRESS = "/RegisterMedicalCertificate/3/rivtabp20";
@@ -173,63 +175,77 @@ public final class RegMedCertConsumer {
 
 		// Medicinskt tillstånd - Fält 2
 		MedicinsktTillstandType medicinsktTillstand = new MedicinsktTillstandType();
-		medicinsktTillstand.setBeskrivning("Sjukdomar i örat och mastoidutskottet");
+		medicinsktTillstand.setBeskrivning("Klämskada på överarm");
 		CD medicinsktTillstandKod = new CD();
-		medicinsktTillstandKod.setCode("H81");
+		medicinsktTillstandKod.setCode("S47");
 		medicinsktTillstandKod.setCodeSystemName("ICD-10"); // Enbart ICD-10 !			
 		medicinsktTillstand.setTillstandskod(medicinsktTillstandKod);
 		lakarutlatande.setMedicinsktTillstand(medicinsktTillstand);
 
 		// Bedömt tillstånd - Fält 3
 		BedomtTillstandType bedommtTillstand = new BedomtTillstandType();
-		bedommtTillstand.setBeskrivning("Patienten upplever svår yrsel vid häftiga rörelser och är allmänt påverkad av sjukdomen.");
+		bedommtTillstand.setBeskrivning("Patienten klämde höger överarm vid olycka i hemmet. Problemen har pågått en längre tid.");
 		lakarutlatande.setBedomtTillstand(bedommtTillstand);
 
 		// Funktionstillstånd - Fält 4 vänster
 		FunktionstillstandType funktionstillstand_falt4 = new FunktionstillstandType();
 		funktionstillstand_falt4.setTypAvFunktionstillstand(TypAvFunktionstillstand.KROPPSFUNKTION);
-		funktionstillstand_falt4.setBeskrivning("Ospecifierad rubbning i balansapparatens funktion. Svårighet att utföra handlingar som kräver bra balans och kropsskontroll.");
+		funktionstillstand_falt4.setBeskrivning("Kraftigt nedsatt rörlighet i överarmen pga skadan. Böj- och sträckförmågan är mycket dålig. Smärtar vid rörelse vilket ger att patienten inte kan använda armen särkilt mycket.");
 		lakarutlatande.getFunktionstillstand().add(funktionstillstand_falt4);
 		
 		// Vårdkontakt - Fält 4 höger och översta kryssrutan
 		VardkontaktType vardkontakt_falt4_kryss1 = new VardkontaktType();
-		vardkontakt_falt4_kryss1.setVardkontaktstid(getDate("2011-01-24"));
+		vardkontakt_falt4_kryss1.setVardkontaktstid(getDate("2011-01-26"));
 		vardkontakt_falt4_kryss1.setVardkontakttyp(Vardkontakttyp.MIN_UNDERSOKNING_AV_PATIENTEN);
 		lakarutlatande.getVardkontakt().add(vardkontakt_falt4_kryss1);
 
 		// Vårdkontakt - Fält 4 höger och näst översta kryssrutan
 		VardkontaktType vardkontakt_falt4_kryss2 = new VardkontaktType();
-		vardkontakt_falt4_kryss2.setVardkontaktstid(getDate("2011-01-27"));
+		vardkontakt_falt4_kryss2.setVardkontaktstid(getDate("2011-01-12"));
 		vardkontakt_falt4_kryss2.setVardkontakttyp(Vardkontakttyp.MIN_TELEFONKONTAKT_MED_PATIENTEN);
 		lakarutlatande.getVardkontakt().add(vardkontakt_falt4_kryss2);
 
-//		// Referens - Fält 4 höger näst nedersta kryssrutan ej ifylld!
-//		ReferensType referensJournaluppgift = new ReferensType();
-//		referensJournaluppgift.setDatum(getDate("2010-01-27"));
-//		referensJournaluppgift.setReferenstyp(Referenstyp.JOURNALUPPGIFTER);
-//		lakarutlatande.getReferens().add(referensJournaluppgift);
-//
-//		// Referens - Fält 4 höger nedersta kryssrutan ej ifylld!
-//		ReferensType referensAnnat = new ReferensType();
-//		referensJournaluppgift.setDatum(getDate("2010-01-27"));
-//		referensJournaluppgift.setReferenstyp(Referenstyp.ANNAT);
-//		lakarutlatande.getReferens().add(referensAnnat);
+		// Referens - Fält 4 höger näst nedersta kryssrutan ej ifylld!
+		ReferensType referensJournaluppgift = new ReferensType();
+		referensJournaluppgift.setDatum(getDate("2010-01-14"));
+		referensJournaluppgift.setReferenstyp(Referenstyp.JOURNALUPPGIFTER);
+		lakarutlatande.getReferens().add(referensJournaluppgift);
+
+		// Referens - Fält 4 höger nedersta kryssrutan ej ifylld!
+		ReferensType referensAnnat = new ReferensType();
+		referensJournaluppgift.setDatum(getDate("2010-01-24"));
+		referensJournaluppgift.setReferenstyp(Referenstyp.ANNAT);
+		lakarutlatande.getReferens().add(referensAnnat);
 
 		// Funktionstillstånd - Fält 5
 		FunktionstillstandType funktionstillstand_falt5 = new FunktionstillstandType();
 		funktionstillstand_falt5.setTypAvFunktionstillstand(TypAvFunktionstillstand.AKTIVITET);
-		funktionstillstand_falt5.setBeskrivning("Patienten arbetar trapetsartist på Cirkus Cirkör, sjukdomen försvårar utövandet av yrket");
+		funktionstillstand_falt5.setBeskrivning("Patienten bör/kan inte använda armen förrän skadan läkt. Skadan förvärras vid för tidigt påtvingad belastning. Patienten kan inte lyfta armen utan den ska hållas riktad nedåt och i fast läge så mycket som möjligt under tiden för läkning.");
 		lakarutlatande.getFunktionstillstand().add(funktionstillstand_falt5);
 
 		// Aktivitet - Fält 6a kan vara ett eller alla kryss!
+		AktivitetType aktivitet_falt6a_1 = new AktivitetType();
+		aktivitet_falt6a_1.setAktivitetskod(Aktivitetskod.PATIENTEN_BEHOVER_FA_KONTAKT_MED_ARBETSFORMEDLINGEN);
+		lakarutlatande.getAktivitet().add(aktivitet_falt6a_1);
+
 		AktivitetType aktivitet_falt6a_2 = new AktivitetType();
 		aktivitet_falt6a_2.setAktivitetskod(Aktivitetskod.PATIENTEN_BEHOVER_FA_KONTAKT_MED_FORETAGSHALSOVARDEN);
 		lakarutlatande.getAktivitet().add(aktivitet_falt6a_2);
 
+		AktivitetType aktivitet_falt6a_3 = new AktivitetType();
+		aktivitet_falt6a_3.setAktivitetskod(Aktivitetskod.OVRIGT);
+		aktivitet_falt6a_3.setBeskrivning("När skadan förbättrats rekommenderas muskeluppbyggande sjukgymnastik");
+		lakarutlatande.getAktivitet().add(aktivitet_falt6a_3);
+
 		// Aktivitet - Fält 6b kan vara ett eller två kryss!
+		AktivitetType aktivitet_falt6b_1 = new AktivitetType();
+		aktivitet_falt6b_1.setAktivitetskod(Aktivitetskod.PLANERAD_ELLER_PAGAENDE_BEHANDLING_ELLER_ATGARD_INOM_SJUKVARDEN);
+		aktivitet_falt6b_1.setBeskrivning("Utreds om operation är nödvändig");
+		lakarutlatande.getAktivitet().add(aktivitet_falt6b_1);
+
 		AktivitetType aktivitet_falt6b_2 = new AktivitetType();
 		aktivitet_falt6b_2.setAktivitetskod(Aktivitetskod.PLANERAD_ELLER_PAGAENDE_ANNAN_ATGARD);
-		aktivitet_falt6b_2.setBeskrivning("Avslappningsövningar och balansövningar, t ex promenad i ojämn terräng.");
+		aktivitet_falt6b_2.setBeskrivning("Patienten ansvarar för att armen hålls i stillhet");
 		lakarutlatande.getAktivitet().add(aktivitet_falt6b_2);
 		
 		// Aktivitet - Fält 7 kan vara endast en av flera val!
@@ -240,33 +256,53 @@ public final class RegMedCertConsumer {
 		// Instans av arbetsförmåga som håller flera fält definieras
 		ArbetsformagaType arbetsformaga = new ArbetsformagaType();
 	
-		// Nuvarande sysselsättning - Fält 8 övre delen här välj 1 av 3
-		SysselsattningType sysselsattning = new SysselsattningType();
-		sysselsattning.setTypAvSysselsattning(TypAvSysselsattning.NUVARANDE_ARBETE);
+		// Nuvarande sysselsättning - Fält 8 övre delen här välj 1, 2 eller 3
+		SysselsattningType sysselsattning1 = new SysselsattningType();
+		sysselsattning1.setTypAvSysselsattning(TypAvSysselsattning.NUVARANDE_ARBETE);
 		ArbetsuppgiftType arbetsuppgift = new ArbetsuppgiftType();
-		arbetsuppgift.setTypAvArbetsuppgift("Cirkusartist");
+		arbetsuppgift.setTypAvArbetsuppgift("Dirigent. Dirigerar en större orkester på deltid");
 
+		SysselsattningType sysselsattning2 = new SysselsattningType();
+		sysselsattning1.setTypAvSysselsattning(TypAvSysselsattning.ARBETSLOSHET);
+
+		SysselsattningType sysselsattning3 = new SysselsattningType();
+		sysselsattning1.setTypAvSysselsattning(TypAvSysselsattning.FORALDRALEDIGHET);
+		
 		// Bedömning arbetsförmåga - Fält 8 nedre delen Mellan 1 till 4 bedömningar kan göras med olika tidsintervall
 		ArbetsformagaNedsattningType arbetsformagaNedsattning1 = new ArbetsformagaNedsattningType();
-		arbetsformagaNedsattning1.setNedsattningsgrad(Nedsattningsgrad.NEDSATT_MED_1_2);
-		arbetsformagaNedsattning1.setVaraktighetFrom(getDate("2011-02-21"));
-		arbetsformagaNedsattning1.setVaraktighetTom(getDate("2011-03-31"));
+		arbetsformagaNedsattning1.setNedsattningsgrad(Nedsattningsgrad.NEDSATT_MED_1_4);
+		arbetsformagaNedsattning1.setVaraktighetFrom(getDate("2011-04-01"));
+		arbetsformagaNedsattning1.setVaraktighetTom(getDate("2011-05-31"));
 		arbetsformaga.getArbetsformagaNedsattning().add(arbetsformagaNedsattning1);
 
 		ArbetsformagaNedsattningType arbetsformagaNedsattning2 = new ArbetsformagaNedsattningType();
-		arbetsformagaNedsattning2.setNedsattningsgrad(Nedsattningsgrad.HELT_NEDSATT);
-		arbetsformagaNedsattning2.setVaraktighetFrom(getDate("2011-01-24"));
-		arbetsformagaNedsattning2.setVaraktighetTom(getDate("2011-02-20"));
+		arbetsformagaNedsattning2.setNedsattningsgrad(Nedsattningsgrad.NEDSATT_MED_1_2);
+		arbetsformagaNedsattning2.setVaraktighetFrom(getDate("2011-03-07"));
+		arbetsformagaNedsattning2.setVaraktighetTom(getDate("2011-03-31"));
 		arbetsformaga.getArbetsformagaNedsattning().add(arbetsformagaNedsattning2);
-		
+
+		ArbetsformagaNedsattningType arbetsformagaNedsattning3 = new ArbetsformagaNedsattningType();
+		arbetsformagaNedsattning3.setNedsattningsgrad(Nedsattningsgrad.NEDSATT_MED_3_4);
+		arbetsformagaNedsattning3.setVaraktighetFrom(getDate("2011-02-14"));
+		arbetsformagaNedsattning3.setVaraktighetTom(getDate("2011-03-06"));
+		arbetsformaga.getArbetsformagaNedsattning().add(arbetsformagaNedsattning3);
+
+		ArbetsformagaNedsattningType arbetsformagaNedsattning4 = new ArbetsformagaNedsattningType();
+		arbetsformagaNedsattning4.setNedsattningsgrad(Nedsattningsgrad.HELT_NEDSATT);
+		arbetsformagaNedsattning4.setVaraktighetFrom(getDate("2011-01-26"));
+		arbetsformagaNedsattning4.setVaraktighetTom(getDate("2011-02-13"));
+		arbetsformaga.getArbetsformagaNedsattning().add(arbetsformagaNedsattning4);
+
 		// Arbetsförmåga kommentar - Fält 9
-		arbetsformaga.setMotivering("Patienten kan inte utöva sitt yrke förrän en förbättring sker med avseende på yrseln. Det är förenat med livsfara att utföra trapetskonster och samtidigt lida av yrsel. Patientens besvär kommer dock att först minska för att därefter helt upphöra efter genomförd behandling.");
+		arbetsformaga.setMotivering("Skadan har förvärrats vid varje tillfälle patienten använt armen. Måste hållas i total stillhet tills läkningsprocessen kommit en bit på väg. Eventuellt kan utredning visa att operation är nödvändig för att läka skadan.");
 
 		// Prognos - Fält 10
-		arbetsformaga.setPrognosangivelse(Prognosangivelse.ATERSTALLAS_HELT);
+		arbetsformaga.setPrognosangivelse(Prognosangivelse.DET_GAR_INTE_ATT_BEDOMMA);
 
 		// Lägg till instansierad data
-		arbetsformaga.getSysselsattning().add(sysselsattning);
+		arbetsformaga.getSysselsattning().add(sysselsattning1);
+		arbetsformaga.getSysselsattning().add(sysselsattning2);
+		arbetsformaga.getSysselsattning().add(sysselsattning3);
 		arbetsformaga.setArbetsuppgift(arbetsuppgift);
 		funktionstillstand_falt5.setArbetsformaga(arbetsformaga);
 		
@@ -275,13 +311,16 @@ public final class RegMedCertConsumer {
 		aktivitet_falt11.setAktivitetskod(Aktivitetskod.FORANDRAT_RESSATT_TILL_ARBETSPLATSEN_AR_EJ_AKTUELLT);
 		lakarutlatande.getAktivitet().add(aktivitet_falt11);
 
-		// Kontakt med FK - Fält 12 Ingen kontakt önskas
+		// Kontakt med FK - Fält 12 
+		AktivitetType aktivitet_falt12 = new AktivitetType();
+		aktivitet_falt12.setAktivitetskod(Aktivitetskod.KONTAKT_MED_FORSAKRINGSKASSAN_AR_AKTUELL);
+		lakarutlatande.getAktivitet().add(aktivitet_falt12);
 		
 		// Kommentar - fält 13
 		lakarutlatande.setKommentar("Prognosen för patienten är god. Han kommer att kunna återgå till sitt arbete efter genomförd behandling.");
 
 		// Signeringsdatum - fält 14
-		lakarutlatande.setSigneringsdatum(getDate("2011-01-24"));
+		lakarutlatande.setSigneringsdatum(getDate("2011-01-26"));
 
 		// Arbetsplatskod - Fält 17
 		II arbetsplatskod = new II();

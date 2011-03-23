@@ -81,6 +81,7 @@ import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateres
 import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
 import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 
 
@@ -130,7 +131,10 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
             boolean inSmittskydd = findAktivitetWithCode(inRequest.getLakarutlatande().getAktivitet(), Aktivitetskod.AVSTANGNING_ENLIGT_SM_L_PGA_SMITTA) != null ? true:false;
             String inDiagnoskod = inRequest.getLakarutlatande().getMedicinsktTillstand().getTillstandskod().getCode();
             String inDiagnosBeskrivning = inRequest.getLakarutlatande().getMedicinsktTillstand().getBeskrivning();
-            String inSjukdomshistoriaBeskrivning = inRequest.getLakarutlatande().getBedomtTillstand().getBeskrivning();
+            String inSjukdomshistoriaBeskrivning = "";
+            if (inRequest.getLakarutlatande().getBedomtTillstand() != null) {
+                inSjukdomshistoriaBeskrivning = inRequest.getLakarutlatande().getBedomtTillstand().getBeskrivning();            	
+            }
             FunktionstillstandType inKroppsFunktion = findFunktionsTillstandType(inRequest.getLakarutlatande().getFunktionstillstand(), TypAvFunktionstillstand.KROPPSFUNKTION);
             VardkontaktType inUndersokning = findVardkontaktTyp(inRequest.getLakarutlatande().getVardkontakt(), Vardkontakttyp.MIN_UNDERSOKNING_AV_PATIENTEN);     
             VardkontaktType inTelefonkontakt = findVardkontaktTyp(inRequest.getLakarutlatande().getVardkontakt(), Vardkontakttyp.MIN_TELEFONKONTAKT_MED_PATIENTEN);
@@ -153,10 +157,16 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
             ArbetsformagaNedsattningType nedsatt34delar =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.NEDSATT_MED_3_4);
             ArbetsformagaNedsattningType heltNedsatt =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.HELT_NEDSATT);
             String inMotivering = inAktivitetFunktion.getArbetsformaga().getMotivering();
-            boolean inPrognosAterfaHelt = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_HELT) == 0;
-            boolean inPrognosAterfaDelvis = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_DELVIS) == 0;
-            boolean inPrognosEjAterfa = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.INTE_ATERSTALLAS) == 0;
-            boolean inPrognosGarEjAttBedomma = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.DET_GAR_INTE_ATT_BEDOMMA) == 0;
+            boolean inPrognosAterfaHelt = false;
+            boolean inPrognosAterfaDelvis = false;
+            boolean inPrognosEjAterfa = false;
+            boolean inPrognosGarEjAttBedomma = false;
+            if (inAktivitetFunktion.getArbetsformaga().getPrognosangivelse() != null) {
+            	inPrognosAterfaHelt = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_HELT) == 0;
+            	inPrognosAterfaDelvis = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_DELVIS) == 0;
+            	inPrognosEjAterfa = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.INTE_ATERSTALLAS) == 0;
+            	inPrognosGarEjAttBedomma = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.DET_GAR_INTE_ATT_BEDOMMA) == 0;
+            }
             boolean inResorJa = findAktivitetWithCode(inRequest.getLakarutlatande().getAktivitet(), Aktivitetskod.FORANDRAT_RESSATT_TILL_ARBETSPLATSEN_AR_AKTUELLT) != null;
             boolean inResorNej = findAktivitetWithCode(inRequest.getLakarutlatande().getAktivitet(), Aktivitetskod.FORANDRAT_RESSATT_TILL_ARBETSPLATSEN_AR_EJ_AKTUELLT) != null;
             boolean inKontaktFK = findAktivitetWithCode(inRequest.getLakarutlatande().getAktivitet(), Aktivitetskod.KONTAKT_MED_FORSAKRINGSKASSAN_AR_AKTUELL) != null;
@@ -385,8 +395,10 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
                                     
             // Fält 8a - kryssruta 1
             if (inArbete != null) {
-            	sysselsattning.getBeskrivning().add(rb.getString("FK_ARBETAR")); 
-            	sysselsattning.setArbetsuppgifter(inAktivitetFunktion.getArbetsformaga().getArbetsuppgift().getTypAvArbetsuppgift());
+            	sysselsattning.getBeskrivning().add(rb.getString("FK_ARBETAR"));
+            	if (inAktivitetFunktion.getArbetsformaga().getArbetsuppgift() != null && inAktivitetFunktion.getArbetsformaga().getArbetsuppgift().getTypAvArbetsuppgift() != null) {
+                	sysselsattning.setArbetsuppgifter(inAktivitetFunktion.getArbetsformaga().getArbetsuppgift().getTypAvArbetsuppgift());
+            	}
             }
 
             // Fält 8a - kryssruta 2
@@ -522,7 +534,7 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 	private void validateRequest(RegisterMedicalCertificateType inRequest) throws Exception {	
 		// List of validation errors
 		ArrayList<String> validationErrors = new ArrayList<String>();
-	
+
 		// Validate incoming request
 		try {
 			// Check that we got any data at all
@@ -712,23 +724,9 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 	                !medTillstand.getTillstandskod().getCodeSystemName().equalsIgnoreCase("ICD-10")) {
 	            	validationErrors.add("Wrong code system name for medicinskt tillstand - tillstandskod (diagnoskod)! Should be ICD-10");								
 	            }
-	            // Fält 2 - Medicinskt tillstånd beskrivning - mandatory
-	            if (medTillstand.getBeskrivning() == null ||
-	                medTillstand.getBeskrivning().length() < 1) {
-	        		validationErrors.add("No beskrivning in medicinsktTillstand found!");	            	
-	            }
+	            // Fält 2 - Medicinskt tillstånd beskrivning - optional
 	                        
-	            // Fält 3 - Check that we got a bedomtTillstand element
-	            if (inLakarutlatande.getBedomtTillstand() == null) {
-	    			validationErrors.add("No bedomtTillstand element found!");	
-	    			throw new Exception();
-	            }
-	            // Fält 3 - Bedömt tillstånd beskrivning - mandatory
-	            if (inLakarutlatande.getBedomtTillstand().getBeskrivning() == null ||
-	            	inLakarutlatande.getBedomtTillstand().getBeskrivning().length() < 1	) {
-	    			validationErrors.add("No beskrivning in bedomtTillstand found!");	
-	    			throw new Exception();
-	            }
+	            // Fält 3 - Not mandatory
 	 
 	            // Fält 4 - vänster Check that we got a funktionstillstand - kroppsfunktion element  
 	            FunktionstillstandType inKroppsFunktion = findFunktionsTillstandType(inLakarutlatande.getFunktionstillstand(), TypAvFunktionstillstand.KROPPSFUNKTION);
@@ -776,62 +774,11 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 	    			validationErrors.add("No or wrong date for referens - annat found!");                	
 	            }
 	                   
-	            // Fält 5 - beskrivning
-	            if (inAktivitetFunktion.getBeskrivning() == null || 
-	            	inAktivitetFunktion.getBeskrivning().length() < 1) {
-	    			validationErrors.add("No beskrivning in funktionstillstand - aktivitet found!");	
-	            }
+	            // Fält 5 - not mandatory
+
+	            // Fält 6 - not mandatory
 	        
-/*	          
-	            // Fält 6a - kryssruta 1
-	            AktivitetType kontaktAF = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PATIENTEN_BEHOVER_FA_KONTAKT_MED_ARBETSFORMEDLINGEN);
-	
-	            // Fält 6a - kryssruta 2
-	            AktivitetType kontaktFHV = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PATIENTEN_BEHOVER_FA_KONTAKT_MED_FORETAGSHALSOVARDEN);
-	
-	            // Fält 6a - kryssruta 3
-	            AktivitetType ovrigt = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.OVRIGT);
-	
-	            // Fält 6b - kryssruta 1
-	            AktivitetType planeradInomSjukvard = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PLANERAD_ELLER_PAGAENDE_BEHANDLING_ELLER_ATGARD_INOM_SJUKVARDEN);
-	
-	            // Fält 6b - kryssruta 2
-	            AktivitetType planeradAnnat = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PLANERAD_ELLER_PAGAENDE_ANNAN_ATGARD);
-	
-	            // Fält 6a+6b Check that at least one is checked
-	            if (kontaktAF==null && kontaktFHV==null && ovrigt==null && planeradInomSjukvard==null && planeradAnnat==null) {
-	    			validationErrors.add("No aktivitet element found for field 6a and 6b!Kontakt med AF, Kontakt med FHV, Ovrigt, Planerad eller pagaende behandling inom sjukvard or planerad eller pagaende annan atgard.");	
-	    			throw new Exception();
-	            }
-	            // Fält 6a - kryssruta 3 - beskrivning                
-	            if (ovrigt != null && (ovrigt.getBeskrivning() == null || ovrigt.getBeskrivning().length() < 1)) {
-	    			validationErrors.add("No beskrivning in aktivitet element Ovrigt found!.");	                	
-	            }
-	            // Fält 6b - kryssruta 1 - beskrivning
-	            if (planeradInomSjukvard != null && (planeradInomSjukvard.getBeskrivning() == null || planeradInomSjukvard.getBeskrivning().length() < 1)) {
-	    			validationErrors.add("No beskrivning in aktivitet element Planerad eller pagaende behandling inom sjukvard found!.");	                	
-	            }
-	            // Fält 6b - kryssruta 2 - beskrivning
-	            if (planeradAnnat != null && (planeradAnnat.getBeskrivning() == null || planeradAnnat.getBeskrivning().length() < 1)) {
-	    			validationErrors.add("No beskrivning in aktivitet element planerad eller pagaende annan atgard found!.");	                	
-	            }
-*/	            
-	            // Fält 7
-	            AktivitetType arbRelRehabAktuell = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.ARBETSLIVSINRIKTAD_REHABILITERING_AR_AKTUELL);
-	            AktivitetType arbRelRehabEjAktuell = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.ARBETSLIVSINRIKTAD_REHABILITERING_AR_EJ_AKTUELL);
-	            AktivitetType garEjAttBedommaArbRelRehab = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.GAR_EJ_ATT_BEDOMMA_OM_ARBETSLIVSINRIKTAD_REHABILITERING_AR_AKTUELL);
-	            // Fält 7 - Check that at least one choice is made
-	            if (arbRelRehabAktuell == null && arbRelRehabEjAktuell == null && garEjAttBedommaArbRelRehab == null) {
-	    			validationErrors.add("No aktivitet element found for field 7.! Arbetslivsrehab aktuell, Arbetslivsrehab ej aktuell eller Arbetslivsrehab gar ej att bedoma.");	
-	    			throw new Exception();                	
-	            }
-	            // Fält 7 - Check that only one choice is made
-	            if ( (arbRelRehabAktuell != null && arbRelRehabEjAktuell != null && garEjAttBedommaArbRelRehab != null) ||
-	            	 (arbRelRehabAktuell != null && arbRelRehabEjAktuell != null && garEjAttBedommaArbRelRehab == null) ||
-	            	 (arbRelRehabAktuell != null && arbRelRehabEjAktuell == null && garEjAttBedommaArbRelRehab != null) ||
-	            	 (arbRelRehabAktuell == null && arbRelRehabEjAktuell != null && garEjAttBedommaArbRelRehab != null) ) {
-	    			validationErrors.add("Only one ckeckbox is allowed for field 7! Arbetslivsrehab aktuell, Arbetslivsrehab ej aktuell eller Arbetslivsrehab gar ej att bedoma.");	              	
-	            }
+	            // Fält 7 - not mandatory
 	            
 	            // Fält 8a - Check that we got a arbetsformaga element
 	            if (inAktivitetFunktion.getArbetsformaga() == null) {
@@ -912,22 +859,20 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 	        }
 	        
 	        // Fält 9 - Motivering - optional
-	        String inMotivering = inAktivitetFunktion.getArbetsformaga().getMotivering();
 	        
-	        // Fält 10 - Prognosangivelse
-	        if (inAktivitetFunktion.getArbetsformaga().getPrognosangivelse() == null) {
-				validationErrors.add("No prognos element found for field 10!");	
-				throw new Exception();                	
+	        // Fält 10 - Prognosangivelse - optional
+	        boolean inArbetsformagaAterstallasHelt = false;
+	        boolean inArbetsformagaAterstallasDelvis = false;
+	        boolean inArbetsformagaEjAterstallas = false;
+	        boolean inArbetsformagaGarEjAttBedomma = false;
+
+	        if (inAktivitetFunktion.getArbetsformaga().getPrognosangivelse() != null) {
+		        inArbetsformagaAterstallasHelt = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_HELT) == 0;
+		        inArbetsformagaAterstallasDelvis = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_DELVIS) == 0;
+		        inArbetsformagaEjAterstallas = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.INTE_ATERSTALLAS) == 0;
+		        inArbetsformagaGarEjAttBedomma = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.DET_GAR_INTE_ATT_BEDOMMA) == 0;	        	
 	        }
-	        boolean inArbetsformagaAterstallasHelt = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_HELT) == 0;
-	        boolean inArbetsformagaAterstallasDelvis = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.ATERSTALLAS_DELVIS) == 0;
-	        boolean inArbetsformagaEjAterstallas = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.INTE_ATERSTALLAS) == 0;
-	        boolean inArbetsformagaGarEjAttBedomma = inAktivitetFunktion.getArbetsformaga().getPrognosangivelse().compareTo(Prognosangivelse.DET_GAR_INTE_ATT_BEDOMMA) == 0;
-	        // Fält 10 - Prognosangivelse - Check that we at least got one choice
-	        if (!inArbetsformagaAterstallasHelt && !inArbetsformagaAterstallasDelvis && !inArbetsformagaEjAterstallas && !inArbetsformagaGarEjAttBedomma) {
-	        	validationErrors.add("No prognosangivelse element found for field 10.");	
-				throw new Exception();                	            	
-	        }
+
 	        // If we got more then one prognoselement these will not be read as only the first is set!
 	        int inPrognosCount = 0;
 	        if (inArbetsformagaAterstallasHelt) {
@@ -942,6 +887,7 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 	        if (inArbetsformagaGarEjAttBedomma) {
 	        	inPrognosCount++;
 	        }
+	        
 	        // Fält 10 - Prognosangivelse - Check that we only got one choice            
 	        if (inPrognosCount > 2) {
 	            validationErrors.add("Only one prognosangivelse should be set for field 10.");	
@@ -950,13 +896,13 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 	        // Fält 11 - optional
 	        AktivitetType inForandratRessatt = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.FORANDRAT_RESSATT_TILL_ARBETSPLATSEN_AR_AKTUELLT);
 	        AktivitetType inEjForandratRessatt = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.FORANDRAT_RESSATT_TILL_ARBETSPLATSEN_AR_EJ_AKTUELLT);
+	        
 	        // Fält 11 - If set only one should be set
 	        if (inForandratRessatt != null && inEjForandratRessatt != null) {
 	            validationErrors.add("Only one forandrat ressatt could be set for field 11.");	
 	        }
 	        
 	        // Fält 12 - kryssruta 1 - optional
-	        AktivitetType inKontaktFKAktuell = findAktivitetWithCode(inRequest.getLakarutlatande().getAktivitet(), Aktivitetskod.KONTAKT_MED_FORSAKRINGSKASSAN_AR_AKTUELL);
 	        
 	        // Fält 13 - Upplysningar - optional
 	        // If field 4 annat satt or field 10 går ej att bedömma is set then field 13 should contain data.
@@ -986,7 +932,7 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 	            !inArbetsplatskod.getRoot().equalsIgnoreCase("1.2.752.29.4.71") ) {
 				validationErrors.add("Wrong o.i.d. for arbetsplatskod! Should be 1.2.752.29.4.71");								
 	        }
-	        
+       	        
 			// Check if we got any validation errors that not caused an Exception
 			if (validationErrors.size() > 0) {
 				logger.error("Validate exception:" + getValidationErrors(validationErrors));
