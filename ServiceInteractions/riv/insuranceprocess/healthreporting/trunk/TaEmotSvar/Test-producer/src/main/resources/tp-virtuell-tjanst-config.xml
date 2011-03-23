@@ -33,7 +33,7 @@
 		<service name="TaEmotSvar-service-test">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/test/TaEmotSvar_Service"
+					address="http://localhost:10000/adapter/testproducer/TaEmotSvar/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/fk/TaEmotSvarInteraction_1.0_rivtabp20.wsdl"/>
 			</inbound>
 
