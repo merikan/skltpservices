@@ -18,7 +18,7 @@
  under the License.
  -->
 <wsdl:definitions 
-	name="TaEmotFragaInteraction"
+	name="TaEmotSvarInteraction"
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
 	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
@@ -26,15 +26,15 @@
 	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
 	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
 	xmlns:wsa="http://www.w3.org/2005/08/addressing" 
-	xmlns:tjs="urn:riv:fk:vardgivare:sjukvard:TaEmotFragaResponder:1" 
-	xmlns:tns="urn:riv:fk:vardgivare:sjukvard:TaEmotFraga:1:rivtabp20"
-	targetNamespace="urn:riv:fk:vardgivare:sjukvard:TaEmotFraga:1:rivtabp20">
+	xmlns:tjs="urn:riv:fk:vardgivare:sjukvard:TaEmotSvarResponder:1" 
+	xmlns:tns="urn:riv:fk:vardgivare:sjukvard:TaEmotSvar:1:rivtabp20"
+	targetNamespace="urn:riv:fk:vardgivare:sjukvard:TaEmotSvar:1:rivtabp20">
 
 	<xs:annotation>
 		<xs:documentation>
-			Tjänsteinteraktionens namn: TaEmotFragaInteraction
+			Tjänsteinteraktionens namn: TaEmotSvarInteraction
 			Beskrivning: 
-				Operation för att skicka in en fråga från Försäkringskassan/vården till vården/Försäkringskassan
+				Operation för att skicka in ett svar på en fråga till Försäkringskassan/vården från vården/Försäkringskassan
 			Revisioner: 2010-12-09 Version 1.0, Mats Ekhammar - Callista Enterprise AB
 			Tjänstedomän: fk:vardgivare:sjukvard
 			Tjänsteinteraktionstyp: Fråga-svar
@@ -45,43 +45,43 @@
 
 	<wsdl:types>
 		<xs:schema>
-			<xs:import schemaLocation="TaEmotFragaResponder_1.0.xsd" namespace="urn:riv:fk:vardgivare:sjukvard:TaEmotFragaResponder:1"/>
+			<xs:import schemaLocation="TaEmotSvarResponder_1.0.xsd" namespace="urn:riv:fk:vardgivare:sjukvard:TaEmotSvarResponder:1"/>
 		</xs:schema>
 		<xs:schema>
 			<xs:import schemaLocation="ws-addressing-1.0.xsd" namespace="http://www.w3.org/2005/08/addressing"/>
 		</xs:schema>
 	</wsdl:types>
 
-	<wsdl:message name="TaEmotFragaRequest">
+	<wsdl:message name="TaEmotSvarRequest">
 		<xs:annotation>
 			<xs:documentation>
 				LogicalAddress is the organization id for Försäkringskassan or vårdenhet.
 			</xs:documentation>
 		</xs:annotation>
 		<wsdl:part name="LogicalAddress" element="wsa:To" />
-		<wsdl:part name="parameters" element="tjs:TaEmotFraga" />
+		<wsdl:part name="parameters" element="tjs:TaEmotSvar" />
 	</wsdl:message>
 
-	<wsdl:message name="TaEmotFragaResponse">
-		<wsdl:part name="parameters" element="tjs:TaEmotFragaResponse"/>
+	<wsdl:message name="TaEmotSvarResponse">
+		<wsdl:part name="parameters" element="tjs:TaEmotSvarResponse"/>
 	</wsdl:message>
 
-	<wsdl:portType name="TaEmotFragaResponderInterface">
+	<wsdl:portType name="TaEmotSvarResponderInterface">
 	
-		<wsdl:operation name="TaEmotFraga">
-			<wsdl:input message="tns:TaEmotFragaRequest"/>
-			<wsdl:output message="tns:TaEmotFragaResponse"/>
+		<wsdl:operation name="TaEmotSvar">
+			<wsdl:input message="tns:TaEmotSvarRequest"/>
+			<wsdl:output message="tns:TaEmotSvarResponse"/>
 		</wsdl:operation>
 		
 	</wsdl:portType>
 	
-	<wsdl:binding name="TaEmotFragaResponderBinding" type="tns:TaEmotFragaResponderInterface">
+	<wsdl:binding name="TaEmotSvarResponderBinding" type="tns:TaEmotSvarResponderInterface">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-		<wsdl:operation name="TaEmotFraga">
-			<soap:operation soapAction="urn:riv:fk:vardgivare:sjukvard:TaEmotFragaResponder:1"/>
+		<wsdl:operation name="TaEmotSvar">
+			<soap:operation soapAction="urn:riv:fk:vardgivare:sjukvard:TaEmotSvarResponder:1"/>
 			<wsdl:input>
-				<soap:header use="literal" message="tns:TaEmotFragaRequest" part="LogicalAddress"/>
+				<soap:header use="literal" message="tns:TaEmotSvarRequest" part="LogicalAddress"/>
 				<soap:body use="literal" parts="parameters"/>
 			</wsdl:input>
 			<wsdl:output>
@@ -91,8 +91,8 @@
 
 	</wsdl:binding>
 
-	<wsdl:service name="TaEmotFragaResponderService">
-		<wsdl:port name="TaEmotFragaResponderPort" binding="tns:TaEmotFragaResponderBinding">
+	<wsdl:service name="TaEmotSvarResponderService">
+		<wsdl:port name="TaEmotSvarResponderPort" binding="tns:TaEmotSvarResponderBinding">
 			<soap:address location="http://tempuri.org"/>
 		</wsdl:port>
 	</wsdl:service>

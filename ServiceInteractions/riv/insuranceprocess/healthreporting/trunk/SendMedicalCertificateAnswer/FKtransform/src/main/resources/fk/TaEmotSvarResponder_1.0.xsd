@@ -2,28 +2,26 @@
 <xs:schema  
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:vas="http://schema.forsakringskassan.se/vardgivare_sjukvard"
-	xmlns:tns="urn:riv:fk:vardgivare:sjukvard:TaEmotFragaResponder:1" 
-	targetNamespace="urn:riv:fk:vardgivare:sjukvard:TaEmotFragaResponder:1"  
+	xmlns:tns="urn:riv:fk:vardgivare:sjukvard:TaEmotSvarResponder:1" 
+	targetNamespace="urn:riv:fk:vardgivare:sjukvard:TaEmotSvarResponder:1" 
 	elementFormDefault="qualified" 
 	attributeFormDefault="unqualified" 
 	version="1.0">
 	
-   <xs:import namespace="http://schema.forsakringskassan.se/vardgivare_sjukvard" schemaLocation="vardgivare_sjukvard/TaEmotFragaAnrop.xsd"/>
+   <xs:import namespace="http://schema.forsakringskassan.se/vardgivare_sjukvard" schemaLocation="vardgivare_sjukvard/TaEmotSvarAnrop.xsd"/>
 
-   <xs:element name="TaEmotFraga" type="tns:TaEmotFragaType"/>
-   <xs:element name="TaEmotFragaResponse" type="tns:TaEmotFragaResponseType"/>
+   <xs:element name="TaEmotSvar" type="tns:TaEmotSvarType"/>
+   <xs:element name="TaEmotSvarResponse" type="tns:TaEmotSvarResponseType"/>
 	
-   <xs:complexType name="TaEmotFragaType">
+   <xs:complexType name="TaEmotSvarType">
       <xs:sequence>
-      	<xs:element ref="vas:FK.SKL.TaEmotFraga.Anrop"/>
-      	<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="vas:FK.SKL.TaEmotSvar.Anrop"/>
+		<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
       </xs:sequence>
    </xs:complexType>
    
-
    <!--  soap:Fault eller inget -->
-
-   <xs:complexType name="TaEmotFragaResponseType"/>
+   <xs:complexType name="TaEmotSvarResponseType"/>
 		
 <!--   
    <xs:complexType name="Svar">
