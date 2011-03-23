@@ -38,7 +38,7 @@ import se.fk.vardgivare.sjukvard.v1.Telefon;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.Amnetyp;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.LakarutlatandeEnkelType;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.VardAdresseringsType;
-import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificateanswerresponder.v1.ReceiveMedicalCertificateAnswerType;
+import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificateanswerresponder.v1.SendMedicalCertificateAnswerType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
@@ -60,9 +60,9 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 
 		try {			
 			// Transform the XML payload into a JAXB object
-            Unmarshaller unmarshaller = JAXBContext.newInstance(ReceiveMedicalCertificateAnswerType.class).createUnmarshaller();
+            Unmarshaller unmarshaller = JAXBContext.newInstance(SendMedicalCertificateAnswerType.class).createUnmarshaller();
             XMLStreamReader streamPayload = (XMLStreamReader)((Object[])message.getPayload())[1];
-            ReceiveMedicalCertificateAnswerType inRequest = (ReceiveMedicalCertificateAnswerType)((JAXBElement)unmarshaller.unmarshal(streamPayload)).getValue();
+            SendMedicalCertificateAnswerType inRequest = (SendMedicalCertificateAnswerType)((JAXBElement)unmarshaller.unmarshal(streamPayload)).getValue();
     		
 			// Get receiver to adress from Mule property
 			String receiverId = (String)message.getProperty("receiverid");			

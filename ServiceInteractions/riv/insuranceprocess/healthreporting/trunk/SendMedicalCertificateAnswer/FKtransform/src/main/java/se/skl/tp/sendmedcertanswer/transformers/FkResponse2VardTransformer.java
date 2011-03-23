@@ -16,10 +16,11 @@ import org.mule.transport.NullPayload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import se.fk.vardgivare.sjukvard.taemotfragaresponder.v1.TaEmotFragaResponseType;
-import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificateanswerresponder.v1.ReceiveMedicalCertificateAnswerResponseType;
-import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.ReceiveMedicalCertificateQuestionResponseType;
+import se.fk.vardgivare.sjukvard.taemotsvarresponder.v1.TaEmotSvarResponseType;
+import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v3.RegisterMedicalCertificateResponseType;
+import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificateanswerresponder.v1.SendMedicalCertificateAnswerResponseType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
 
 public class FkResponse2VardTransformer extends AbstractMessageAwareTransformer
 {
@@ -56,7 +57,7 @@ public class FkResponse2VardTransformer extends AbstractMessageAwareTransformer
 		            message.setExceptionPayload(null);
 		        }				
 	            faultDetected = true;
-			} else if(!(src instanceof ReceiveMedicalCertificateAnswerResponseType)) {
+			} else if(!(src instanceof TaEmotSvarResponseType)) {
 				src = "Payload type not supported: "+ message.getPayload().getClass();
 				faultDetected = true;
 			}
@@ -74,23 +75,25 @@ public class FkResponse2VardTransformer extends AbstractMessageAwareTransformer
 
 				createSoapFault(payload, result);
 			} else {
-	            ReceiveMedicalCertificateQuestionResponseType inResponse = (ReceiveMedicalCertificateQuestionResponseType)src;
+				TaEmotSvarResponseType inResponse = (TaEmotSvarResponseType)src;
 
 	            // Create new JAXB object for the outgoing data
-				TaEmotFragaResponseType outResponse = new TaEmotFragaResponseType();
+				SendMedicalCertificateAnswerResponseType outResponse = new SendMedicalCertificateAnswerResponseType();
+	            
+	            ResultOfCall resultOfCall = new ResultOfCall();
 	            
 	            // Check result
-	            if (inResponse != null && !(inResponse.getResult().getResultCode().compareTo(ResultCodeEnum.OK) == 0)) {
-					//TODO more error description!
-	            	createSoapFault("Error", result);	            		
+	            if (inResponse != null) {
+	            	resultOfCall.setResultCode(ResultCodeEnum.OK);
+	            	outResponse.setResult(resultOfCall);
 	            }
 	            
-	            // If payload already is a SoapFault How to use marshalling?
+	            // If payload already is a SoapFault How to use marshalling?	            
 	            
 				// Transform the JAXB object into a XML payload
 	            StringWriter writer = new StringWriter();
-	        	Marshaller marshaller = JAXBContext.newInstance(TaEmotFragaResponseType.class).createMarshaller();
-	        	marshaller.marshal(new JAXBElement(new QName("urn:riv:fk:vardgivare:sjukvard:TaEmotFragaResponder:1", "TaEmotFragaResponse"), TaEmotFragaResponseType.class, outResponse), writer);
+	        	Marshaller marshaller = JAXBContext.newInstance(SendMedicalCertificateAnswerResponseType.class).createMarshaller();
+	        	marshaller.marshal(new JAXBElement(new QName("urn:riv:fk:vardgivare:sjukvard:TaEmotSvarResponder:1", "SendMedicalCertificateAnswerResponse"), SendMedicalCertificateAnswerResponseType.class, outResponse), writer);
 				logger.debug("Extracted information: {}", writer.toString());
 				String payload = (String)writer.toString();
 				if (payload.startsWith("<?")) {

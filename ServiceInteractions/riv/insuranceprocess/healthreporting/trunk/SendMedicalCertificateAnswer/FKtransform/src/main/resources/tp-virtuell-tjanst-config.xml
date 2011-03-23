@@ -32,8 +32,8 @@
 	<custom-transformer name="VardReq2Fk" class="se.skl.tp.sendmedcertanswer.transformers.VardRequest2FkTransformer"/>
 	<custom-transformer name="FkResp2Vard" class="se.skl.tp.sendmedcertanswer.transformers.FkResponse2VardTransformer"/>
 	
-	<message-properties-transformer name="changeNamespaceSendQuestion">
-		<add-message-property key="namespace" value="urn:riv:fk:vardgivare:sjukvard:TaEmotFraga:1:rivtabp20"/>
+	<message-properties-transformer name="changeNamespaceSendAnswer">
+		<add-message-property key="namespace" value="urn:riv:fk:vardgivare:sjukvard:TaEmotSvar:1:rivtabp20"/>
 	</message-properties-transformer>           
 	
 	<model name="varden-fk-answer-model">
@@ -47,7 +47,7 @@
 					proxy="true" 
 					synchronous="true"
 					applyTransformersToProtocol="false"
-					transformer-refs="VardReq2Fk changeNamespaceSendQuestion"
+					transformer-refs="VardReq2Fk changeNamespaceSendAnswer"
 					responseTransformer-refs="FkResp2Vard"
 				/>							
 			</inbound>
