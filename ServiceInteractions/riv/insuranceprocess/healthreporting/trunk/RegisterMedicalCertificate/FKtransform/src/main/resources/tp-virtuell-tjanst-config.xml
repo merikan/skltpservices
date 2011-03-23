@@ -33,7 +33,7 @@
 	<custom-transformer name="vard2fk" class="se.skl.tp.regmedcert.transformers.Vard2FkTransformer"/>
 	<custom-transformer name="fk2vard" class="se.skl.tp.regmedcert.transformers.Fk2VardTransformer"/>
 
-	<message-properties-transformer name="changeNamespace">
+	<message-properties-transformer name="changeNamespaceRegisterCertificate">
 		<add-message-property key="namespace" value="urn:riv:fk:vardgivare:sjukvard:TaEmotLakarintyg:1:rivtabp20"/>
 	</message-properties-transformer>           
 
@@ -54,7 +54,7 @@
 					proxy="true" 
 					synchronous="true"
 					applyTransformersToProtocol="false"
-					transformer-refs="vard2fk changeNamespace"
+					transformer-refs="vard2fk changeNamespaceRegisterCertificate"
 					responseTransformer-refs="fk2vard"
 				/>							
 			</inbound>
