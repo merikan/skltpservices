@@ -15,9 +15,36 @@ import org.slf4j.LoggerFactory;
 import org.w3.wsaddressing10.AttributedURIType;
 
 import se.fk.vardgivare.sjukvard.taemotfragaresponder.v1.TaEmotFragaType;
+import se.fk.vardgivare.sjukvard.taemotsvarresponder.v1.TaEmotSvarType;
+import se.fk.vardgivare.sjukvard.v1.Adress;
+import se.fk.vardgivare.sjukvard.v1.Adressering;
+import se.fk.vardgivare.sjukvard.v1.Amne;
+import se.fk.vardgivare.sjukvard.v1.Enhet;
+import se.fk.vardgivare.sjukvard.v1.InternIdentitetsbeteckning;
+import se.fk.vardgivare.sjukvard.v1.Kontaktuppgifter;
+import se.fk.vardgivare.sjukvard.v1.Lakarintygsreferens;
+import se.fk.vardgivare.sjukvard.v1.Meddelande;
+import se.fk.vardgivare.sjukvard.v1.Namn;
+import se.fk.vardgivare.sjukvard.v1.Organisation;
+import se.fk.vardgivare.sjukvard.v1.Patient;
+import se.fk.vardgivare.sjukvard.v1.Person;
+import se.fk.vardgivare.sjukvard.v1.Postadress;
+import se.fk.vardgivare.sjukvard.v1.Postnummer;
+import se.fk.vardgivare.sjukvard.v1.Postort;
+import se.fk.vardgivare.sjukvard.v1.ReferensAdressering;
 import se.fk.vardgivare.sjukvard.v1.TaEmotFraga;
+import se.fk.vardgivare.sjukvard.v1.TaEmotSvar;
+import se.fk.vardgivare.sjukvard.v1.Telefon;
+import se.fk.vardgivare.sjukvard.v1.Adressering.Avsandare;
+import se.fk.vardgivare.sjukvard.v1.Adressering.Mottagare;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.Amnetyp;
-import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.ReceiveMedicalCertificateQuestionType;
+import se.skl.riv.insuranceprocess.healthreporting.qa.v1.LakarutlatandeEnkelType;
+import se.skl.riv.insuranceprocess.healthreporting.qa.v1.VardAdresseringsType;
+import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificatequestionsponder.v1.SendMedicalCertificateQuestionType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 
 public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 {
@@ -35,9 +62,9 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 
 		try {			
 			// Transform the XML payload into a JAXB object
-            Unmarshaller unmarshaller = JAXBContext.newInstance(ReceiveMedicalCertificateQuestionType.class).createUnmarshaller();
+            Unmarshaller unmarshaller = JAXBContext.newInstance(SendMedicalCertificateQuestionType.class).createUnmarshaller();
             XMLStreamReader streamPayload = (XMLStreamReader)((Object[])message.getPayload())[1];
-            ReceiveMedicalCertificateQuestionType inRequest = (ReceiveMedicalCertificateQuestionType)((JAXBElement)unmarshaller.unmarshal(streamPayload)).getValue();
+            SendMedicalCertificateQuestionType inRequest = (SendMedicalCertificateQuestionType)((JAXBElement)unmarshaller.unmarshal(streamPayload)).getValue();
     		
 			// Get receiver to adress from Mule property
 			String receiverId = (String)message.getProperty("receiverid");			
@@ -45,8 +72,7 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 			// Create new JAXB object for the outgoing data
 			TaEmotFragaType outRequest = new TaEmotFragaType();
     		TaEmotFraga outTaEmotFraga = new TaEmotFraga();
-    		/*
-      		outRequest.setFKSKLTaEmotFragaAnrop(outTaEmotFraga);
+    		outRequest.setFKSKLTaEmotFragaAnrop(outTaEmotFraga);
 
 			// Transform between incoming and outgoing objects
     		// Avsändare - Vården
@@ -59,7 +85,11 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
     		Adressering outAdressering = new Adressering();
     		outAdressering.setAvsandare(outAvsandare);
     		outTaEmotFraga.setAdressering(outAdressering);
-
+   		
+    		ReferensAdressering referensId = new ReferensAdressering();
+    		referensId.setValue(inRequest.getQuestion().getVardReferensId());
+			outAvsandare.setReferens(referensId);
+    		
     		Organisation outOrganisationAvsandare = new Organisation();
     		InternIdentitetsbeteckning outOrganisationIdAvsandare = new InternIdentitetsbeteckning();
     		outOrganisationIdAvsandare.setValue(inVardgivareAvsandare.getVardgivareId().getExtension()); 		
@@ -101,10 +131,7 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
     		outPersonAvsandare.setNamn(inHoSPersonalAvsandare.getFullstandigtNamn());
     		outEnhetAvsandare.setPerson(outPersonAvsandare);
     		
-    		// Mottagare - FK
-    		FkAdresseringsType inMottagare = inRequest.getQuestion().getAdressFK();
-    		OrganisationType inOrganisationMottagare = inMottagare.getOrganisation();
-    		
+    		// Mottagare - FK    		
     		Mottagare outMottagare = new Mottagare();
     		outAdressering.setMottagare(outMottagare);
     		Organisation outOrganisationMottagare = new Organisation();
@@ -122,40 +149,32 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
     		PatientType inPatient = inLakarutlatande.getPatient();
     		Patient outPatient = new Patient();
     		outPatient.setIdentifierare(inPatient.getPersonId().getExtension());
-    		outPatient.setFornamn(inPatient.getFornamn());
-    		outPatient.setEfternamn(inPatient.getEfternamn());
-			outTaEmotFraga.setPatient(outPatient );
+    		outPatient.setNamn(inPatient.getFullstandigtNamn());
+    		outTaEmotFraga.setPatient(outPatient );
     		
     		// Ämne
     		Amnetyp inAmne = inRequest.getQuestion().getAmne();
     		Amne outAmne = new Amne();
     		outAmne.setBeskrivning(transformAmneFromVarden(inAmne, rb));
-    		outAmne.setFritext(inRequest.getQuestion().getMeddelanderubrik());
     		outTaEmotFraga.setAmne(outAmne);
-    		
-    		// Besvararas ?? Same as besvaras date?
-    		outTaEmotFraga.setBesvaras(inRequest.getQuestion().getSistaDatumForKomplettering());
-    		
+    		    		
     		// Läkarintyg referens
     		Lakarintygsreferens outLakarintyg = new Lakarintygsreferens();
     		outLakarintyg.setReferens(inLakarutlatande.getLakarutlatandeId());
     		outLakarintyg.setSignerades(inLakarutlatande.getSigneringsTidpunkt());
-			outTaEmotFraga.setLakarintyg(outLakarintyg );
+    		outTaEmotFraga.setLakarintyg(outLakarintyg );
     		
 			// Fraga
-			Meddelande outMeddelande = new Meddelande();
-			outMeddelande.setText(inRequest.getQuestion().getFraga().getMeddelandeText());
-			outMeddelande.setSignerades(inRequest.getQuestion().getFraga().getSigneringsTidpunkt());
-			outTaEmotFraga.setFraga(outMeddelande );
-						    		
-//    		// Meddelande id???
-//    		outMeddelande.setMeddelandeId("Referens till meddelande instansen");
-*/    		
+			Meddelande fraga = new Meddelande();
+			fraga.setText(inRequest.getQuestion().getFraga().getMeddelandeText());
+			fraga.setSignerades(inRequest.getQuestion().getFraga().getSigneringsTidpunkt()); 
+			outTaEmotFraga.setFraga(fraga );
+									    		
     		AttributedURIType logicalAddressHeader = new AttributedURIType();
     		logicalAddressHeader.setValue(receiverId);
 
     		Object[] payloadOut = new Object[] {logicalAddressHeader, outRequest};
-            
+  		            
 	        if (logger.isDebugEnabled()) {
 	            logger.debug("transformed payload to: " + payloadOut);
 	        }

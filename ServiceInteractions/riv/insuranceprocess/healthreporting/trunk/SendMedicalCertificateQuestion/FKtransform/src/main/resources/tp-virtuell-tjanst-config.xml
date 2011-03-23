@@ -30,29 +30,33 @@
 	Name of this file is mandatory and may not be changed. 
 	 -->
 	
-	<custom-transformer name="VardReq2Fk" class="se.skl.tp.recmedcertquestion.transformers.VardRequest2FkTransformer"/>
-	<custom-transformer name="FkResp2Vard" class="se.skl.tp.recmedcertquestion.transformers.FkResponse2VardTransformer"/>
+	<custom-transformer name="VardReq2FkQuestion" class="se.skl.tp.sendmedcertquestion.transformers.VardRequest2FkTransformer"/>
+	<custom-transformer name="FkResp2VardQuestion" class="se.skl.tp.sendmedcertquestion.transformers.FkResponse2VardTransformer"/>
+
+	<message-properties-transformer name="changeNamespaceSendQuestion">
+		<add-message-property key="namespace" value="urn:riv:fk:vardgivare:sjukvard:TaEmotFraga:1:rivtabp20"/>
+	</message-properties-transformer>           
 	
 	<model name="fkvarden-question-model">
 		<service name="varden-fk-question-service">
 			<inbound>
 				<cxf:inbound-endpoint 
-					address="http://localhost:12000/transformVardFkQuestion"
+					address="http://localhost:10000/adapter/transform/SendMedCertQuestion/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/vard/interactions/SendMedicalCertificateQuestionInteraction/SendMedicalCertificateQuestionInteraction_1.0_rivtabp20.wsdl"
 					serviceName="SendMedicalCertificateQuestionResponderService"
 					namespace="urn:riv:insuranceprocess:healthreporting:SendMedicalCertificateQuestion:1:rivtabp20"
 					proxy="true" 
 					synchronous="true"
 					applyTransformersToProtocol="false"
-					transformer-refs="VardReq2Fk"
-					responseTransformer-refs="FkResp2Vard"
+					transformer-refs="VardReq2FkQuestion changeNamespaceSendQuestion"
+					responseTransformer-refs="FkResp2VardQuestion"
 				/>							
 			</inbound>
 
 			<outbound>
                 <pass-through-router>
                         <cxf:outbound-endpoint 
-                        	address="https://localhost:19000/fk/TaEmotFraga/1/rivtabp20" 
+                        	address="https://${tp.host}:${tp.port}/${tp.baseUri}/TaEmotFraga/1/rivtabp20" 
 							wsdlLocation="classpath:/schemas/fk/TaEmotFragaInteraction_1.0_rivtabp20.wsdl"
                         	wsdlPort="TaEmotFragaResponderPort"
                         	operation="TaEmotFraga" 

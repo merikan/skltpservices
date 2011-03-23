@@ -17,9 +17,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import se.fk.vardgivare.sjukvard.taemotfragaresponder.v1.TaEmotFragaResponseType;
-import se.fk.vardgivare.sjukvard.taemotlakarintygresponder.v1.TaEmotLakarintygResponseType;
-import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.ReceiveMedicalCertificateQuestionResponseType;
+import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificatequestionsponder.v1.SendMedicalCertificateQuestionResponseType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
 
 public class FkResponse2VardTransformer extends AbstractMessageAwareTransformer
 {
@@ -56,7 +56,7 @@ public class FkResponse2VardTransformer extends AbstractMessageAwareTransformer
 		            message.setExceptionPayload(null);
 		        }				
 	            faultDetected = true;
-			} else if(!(src instanceof TaEmotLakarintygResponseType)) {
+			} else if(!(src instanceof TaEmotFragaResponseType)) {
 				src = "Payload type not supported: "+ message.getPayload().getClass();
 				faultDetected = true;
 			}
@@ -74,23 +74,25 @@ public class FkResponse2VardTransformer extends AbstractMessageAwareTransformer
 
 				createSoapFault(payload, result);
 			} else {
-	            ReceiveMedicalCertificateQuestionResponseType inResponse = (ReceiveMedicalCertificateQuestionResponseType)src;
+				TaEmotFragaResponseType inResponse = (TaEmotFragaResponseType)src;
 
 	            // Create new JAXB object for the outgoing data
-				TaEmotFragaResponseType outResponse = new TaEmotFragaResponseType();
-	            
+				SendMedicalCertificateQuestionResponseType outResponse = new SendMedicalCertificateQuestionResponseType();
+
+	            ResultOfCall resultOfCall = new ResultOfCall();
+
 	            // Check result
-	            if (inResponse != null && !(inResponse.getResult().getResultCode().compareTo(ResultCodeEnum.OK) == 0)) {
-					//TODO more error description!
-	            	createSoapFault("Error", result);	            		
+	            if (inResponse != null) {
+	            	resultOfCall.setResultCode(ResultCodeEnum.OK);
+	            	outResponse.setResult(resultOfCall);
 	            }
 	            
 	            // If payload already is a SoapFault How to use marshalling?
 	            
 				// Transform the JAXB object into a XML payload
 	            StringWriter writer = new StringWriter();
-	        	Marshaller marshaller = JAXBContext.newInstance(TaEmotFragaResponseType.class).createMarshaller();
-	        	marshaller.marshal(new JAXBElement(new QName("urn:riv:fk:vardgivare:sjukvard:TaEmotFragaResponder:1", "TaEmotFragaResponse"), TaEmotFragaResponseType.class, outResponse), writer);
+	        	Marshaller marshaller = JAXBContext.newInstance(SendMedicalCertificateQuestionResponseType.class).createMarshaller();
+	        	marshaller.marshal(new JAXBElement(new QName("urn:riv:fk:vardgivare:sjukvard:TaEmotFragaResponder:1", "SendMedicalCertificateQuestionResponse"), SendMedicalCertificateQuestionResponseType.class, outResponse), writer);
 				logger.debug("Extracted information: {}", writer.toString());
 				String payload = (String)writer.toString();
 				if (payload.startsWith("<?")) {
