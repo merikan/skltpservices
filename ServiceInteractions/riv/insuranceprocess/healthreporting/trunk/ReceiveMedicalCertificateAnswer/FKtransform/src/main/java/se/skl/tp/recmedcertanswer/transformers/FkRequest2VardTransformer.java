@@ -152,6 +152,7 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
     		fraga.setMeddelandeText(inRequest.getFKSKLTaEmotSvarAnrop().getFraga().getText());
     		fraga.setSigneringsTidpunkt(inRequest.getFKSKLTaEmotSvarAnrop().getFraga().getSignerades());	
     		outMeddelande.setFraga(fraga);
+    		
     		// Set svar
     		InnehallType svar = new InnehallType();
     		svar.setMeddelandeText(inRequest.getFKSKLTaEmotSvarAnrop().getSvar().getText());

@@ -29,34 +29,41 @@
 	<!--
 	Name of this file is mandatory and may not be changed. 
 	 -->
-	<custom-transformer name="FkReq2Vard" class="se.skl.tp.recmedcertanswer.transformers.FkRequest2VardTransformer"/>
-	<custom-transformer name="VardResp2Fk" class="se.skl.tp.recmedcertanswer.transformers.VardResponse2FkTransformer"/>
+	<custom-transformer name="FkReq2VardAnswer" class="se.skl.tp.recmedcertanswer.transformers.FkRequest2VardTransformer"/>
+	<custom-transformer name="VardResp2FkAnswer" class="se.skl.tp.recmedcertanswer.transformers.VardResponse2FkTransformer"/>
 	
+	<message-properties-transformer name="changeNamespaceRecMedCertAnswer">
+		<add-message-property key="namespace" value="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateAnswer:1:rivtabp20"/>
+	</message-properties-transformer>           
+	
+	<message-properties-transformer name="newReceiverId">
+		<delete-message-property key="receiverid"/>
+	</message-properties-transformer>           
 	
 	<model name="fk-varden-answer-model">
 		<service name="fk-varden-answer-service">
 			<inbound>
 				<cxf:inbound-endpoint 
-					address="http://localhost:10000/transformFkVardAnswer"
-					wsdlLocation="classpath:/schemas/vard/interactions/ReceiveMedicalCertificateAnswerInteraction/ReceiveMedicalCertificateAnswerInteraction_1.0_rivtabp20.wsdl"
-					serviceName="ReceiveMedicalCertificateAnswerResponderService"
-					namespace="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateAnswer:1:rivtabp20"
+					address="http://localhost:10000/adapter/transform/TaEmotSvar/1/rivtabp20"
+					wsdlLocation="classpath:/schemas/fk/TaEmotSvarInteraction_1.0_rivtabp20.wsdl"
+					serviceName="TaEmotSvarResponderService"
+					namespace="urn:riv:fk:vardgivare:sjukvard:TaEmotSvar:1:rivtabp20"
 					proxy="true" 
 					synchronous="true"
 					applyTransformersToProtocol="false"
-					transformer-refs="FkReq2Vard"
-					responseTransformer-refs="VardResp2Fk"
+					transformer-refs="FkReq2VardAnswer changeNamespaceRecMedCertAnswer"
+					responseTransformer-refs="VardResp2FkAnswer"
 				/>							
 			</inbound>
 
 			<outbound>
                 <pass-through-router>
                         <cxf:outbound-endpoint 
-                        	address="https://rivsat.forsakringskassan.sjunet.org/ws" 
-							wsdlLocation="classpath:/schemas/fk/TaEmotSvarInteraction_1.0_rivtabp20.wsdl"
-                        	wsdlPort="TaEmotSvarResponderPort"
-                        	operation="TaEmotSvar" 
-                        	clientClass="se.fk.vardgivare.sjukvard.taemotsvar.v1.rivtabp20.TaEmotSvarResponderService"
+                        	address="https://${tp.host}:${tp.port}/${tp.baseUri}/ReceiveMedicalCertificateAnswer/1/rivtabp20" 
+							wsdlLocation="classpath:/schemas/vard/interactions/ReceiveMedicalCertificateAnswerInteraction/ReceiveMedicalCertificateAnswerInteraction_1.0_rivtabp20.wsdl"
+                        	wsdlPort="ReceiveMedicalCertificateAnswerResponderPort"
+                        	operation="ReceiveMedicalCertificateAnswer" 
+                        	clientClass="se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificateanswer.v1.rivtabp20.ReceiveMedicalCertificateAnswerResponderService"
             	        	synchronous="true"
                         /> 
                 </pass-through-router>
@@ -64,6 +71,4 @@
 		</service>		
 	</model>
 </mule>
-<!--address="https://rivsat.forsakringskassan.sjunet.org/ws"  -->
-<!-- address="https://localhost:19000/fk/SkickaLakarintyg/1/rivtabp20" -->
 
