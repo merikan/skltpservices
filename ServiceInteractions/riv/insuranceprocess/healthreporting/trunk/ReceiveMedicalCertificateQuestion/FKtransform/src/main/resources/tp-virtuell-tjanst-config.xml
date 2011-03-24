@@ -30,33 +30,41 @@
 	Name of this file is mandatory and may not be changed. 
 	 -->
 	
-	<custom-transformer name="FkReq2Vard" class="se.skl.tp.recmedcertquestion.transformers.FkRequest2VardTransformer"/>
-	<custom-transformer name="VardResp2Fk" class="se.skl.tp.recmedcertquestion.transformers.VardResponse2FkTransformer"/>
+	<custom-transformer name="FkReq2VardQuestion" class="se.skl.tp.recmedcertquestion.transformers.FkRequest2VardTransformer"/>
+	<custom-transformer name="VardResp2FkQuestion" class="se.skl.tp.recmedcertquestion.transformers.VardResponse2FkTransformer"/>
+
+	<message-properties-transformer name="changeNamespaceRecMedCertQuestion">
+		<add-message-property key="namespace" value="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateQuestion:1:rivtabp20"/>
+	</message-properties-transformer>           
+	
+	<message-properties-transformer name="newReceiverIdQuestion">
+		<delete-message-property key="receiverid"/>
+	</message-properties-transformer>           
 	
 	<model name="fkvarden-question-model">
 		<service name="fk-varden-question-service">
 			<inbound>
 				<cxf:inbound-endpoint 
-					address="http://localhost:12000/transformFkVardQuestion"
-					wsdlLocation="classpath:/schemas/vard/interactions/ReceiveMedicalCertificateQuestionInteraction/ReceiveMedicalCertificateQuestionInteraction_1.0_rivtabp20.wsdl"
-					serviceName="ReceiveMedicalCertificateQuestionResponderService"
-					namespace="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateQuestion:1:rivtabp20"
+					address="http://localhost:10000/adapter/transform/TaEmotFraga/1/rivtabp20"
+					wsdlLocation="classpath:/schemas/fk/TaEmotFragaInteraction_1.0_rivtabp20.wsdl"
+					serviceName="TaEmotFragaResponderService"
+					namespace="urn:riv:fk:vardgivare:sjukvard:TaEmotFraga:1:rivtabp20"
 					proxy="true" 
 					synchronous="true"
 					applyTransformersToProtocol="false"
-					transformer-refs="FkReq2Vard"
-					responseTransformer-refs="VardResp2Fk"
+					transformer-refs="newReceiverIdQuestion FkReq2VardQuestion changeNamespaceRecMedCertQuestion"
+					responseTransformer-refs="VardResp2FkQuestion"
 				/>							
 			</inbound>
 
 			<outbound>
                 <pass-through-router>
                         <cxf:outbound-endpoint 
-                        	address="https://localhost:19000/fk/TaEmotFraga/1/rivtabp20" 
-							wsdlLocation="classpath:/schemas/fk/TaEmotFragaInteraction_1.0_rivtabp20.wsdl"
-                        	wsdlPort="TaEmotFragaResponderPort"
-                        	operation="TaEmotFraga" 
-                        	clientClass="se.fk.vardgivare.sjukvard.taemotfraga.v1.rivtabp20.TaEmotFragaResponderService"
+                        	address="https://${tp.host}:${tp.port}/${tp.baseUri}/ReceiveMedicalCertificateQuestion/1/rivtabp20" 
+							wsdlLocation="classpath:/schemas/vard/interactions/ReceiveMedicalCertificateQuestionInteraction/ReceiveMedicalCertificateQuestionInteraction_1.0_rivtabp20.wsdl"
+                        	wsdlPort="ReceiveMedicalCertificateQuestionResponderPort"
+                        	operation="ReceiveMedicalCertificateQuestion" 
+                        	clientClass="se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderService"
             	        	synchronous="true"
                         /> 
                 </pass-through-router>
@@ -65,6 +73,3 @@
 		
 	</model>
 </mule>
-<!--address="https://rivsat.forsakringskassan.sjunet.org/ws"  -->
-<!-- address="https://localhost:19000/fk/SkickaLakarintyg/1/rivtabp20" -->
-

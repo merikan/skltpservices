@@ -37,7 +37,7 @@
 		<add-message-property key="namespace" value="urn:riv:fk:vardgivare:sjukvard:TaEmotFraga:1:rivtabp20"/>
 	</message-properties-transformer>           
 	
-	<model name="fkvarden-question-model">
+	<model name="vardenfk-question-model">
 		<service name="varden-fk-question-service">
 			<inbound>
 				<cxf:inbound-endpoint 
@@ -69,6 +69,3 @@
 		
 	</model>
 </mule>
-<!--address="https://rivsat.forsakringskassan.sjunet.org/ws"  -->
-<!-- address="https://localhost:19000/fk/SkickaLakarintyg/1/rivtabp20" -->
-

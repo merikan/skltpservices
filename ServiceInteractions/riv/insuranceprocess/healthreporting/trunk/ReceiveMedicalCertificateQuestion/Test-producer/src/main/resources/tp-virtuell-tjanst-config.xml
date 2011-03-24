@@ -33,7 +33,7 @@
  		<service name="ReceiveMedicalCertificateQuestion-service-test">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/test/ReceiveMedicalCertificateQuestion"
+					address="http://localhost:10000/adapter/testproducer/ReceiveMedicalCertificateQuestion/1/rivtabp20"
 					wsdlLocation = "schemas/vard/interactions/ReceiveMedicalCertificateQuestionInteraction/ReceiveMedicalCertificateQuestionInteraction_1.0_rivtabp20.wsdl"/>
 			</inbound>
 

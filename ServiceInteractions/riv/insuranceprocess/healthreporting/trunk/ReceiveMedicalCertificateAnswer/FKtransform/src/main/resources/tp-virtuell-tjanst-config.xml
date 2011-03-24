@@ -36,7 +36,7 @@
 		<add-message-property key="namespace" value="urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateAnswer:1:rivtabp20"/>
 	</message-properties-transformer>           
 	
-	<message-properties-transformer name="newReceiverId">
+	<message-properties-transformer name="newReceiverIdAnswer">
 		<delete-message-property key="receiverid"/>
 	</message-properties-transformer>           
 	
@@ -51,7 +51,7 @@
 					proxy="true" 
 					synchronous="true"
 					applyTransformersToProtocol="false"
-					transformer-refs="newReceiverId FkReq2VardAnswer changeNamespaceRecMedCertAnswer"
+					transformer-refs="newReceiverIdAnswer FkReq2VardAnswer changeNamespaceRecMedCertAnswer"
 					responseTransformer-refs="VardResp2FkAnswer"
 				/>							
 			</inbound>
