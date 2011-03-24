@@ -54,7 +54,7 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
             TaEmotSvarType inRequest = (TaEmotSvarType)((JAXBElement)unmarshaller.unmarshal(streamPayload)).getValue();
 		
 			// Get receiver to adress from Mule property
-			String receiverId = (String)message.getProperty("receiverid");			
+//			String receiverId = (String)message.getProperty("receiverid");			
 
 			// Create new JAXB object for the outgoing data
 			ReceiveMedicalCertificateAnswerType outRequest = new ReceiveMedicalCertificateAnswerType();
@@ -163,7 +163,10 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
     		outMeddelande.setVardReferensId(inMottagare.getReferens().getValue());
     		
     		AttributedURIType logicalAddressHeader = new AttributedURIType();
-    		logicalAddressHeader.setValue(receiverId);
+    		// Set new receiverid based on caregiver and careunit id
+    		String newReceiverId = inOrganisationMottagare.getId().getValue() + "#" + inEnhetMottagare.getId().getValue();
+    		logicalAddressHeader.setValue(newReceiverId);
+    		message.setProperty("receiverid", newReceiverId);			
 
     		Object[] payloadOut = new Object[] {logicalAddressHeader, outRequest};
             

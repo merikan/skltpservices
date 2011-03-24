@@ -51,7 +51,7 @@
 					proxy="true" 
 					synchronous="true"
 					applyTransformersToProtocol="false"
-					transformer-refs="FkReq2VardAnswer changeNamespaceRecMedCertAnswer"
+					transformer-refs="newReceiverId FkReq2VardAnswer changeNamespaceRecMedCertAnswer"
 					responseTransformer-refs="VardResp2FkAnswer"
 				/>							
 			</inbound>
