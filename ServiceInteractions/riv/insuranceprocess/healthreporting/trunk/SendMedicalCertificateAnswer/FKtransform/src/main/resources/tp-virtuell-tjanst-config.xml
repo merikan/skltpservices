@@ -67,6 +67,3 @@
 		</service>		
 	</model>
 </mule>
-<!--address="https://rivsat.forsakringskassan.sjunet.org/ws"  -->
-<!-- address="https://localhost:19000/fk/SkickaLakarintyg/1/rivtabp20" -->
-

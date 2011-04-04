@@ -37,12 +37,6 @@
 		<add-message-property key="namespace" value="urn:riv:fk:vardgivare:sjukvard:TaEmotLakarintyg:1:rivtabp20"/>
 	</message-properties-transformer>           
 
-<!--	
-	<message-properties-transformer name="newReceiverId">
-		<delete-message-property key="receiverid"/>
-		<add-message-property key="receiverid" value="FK"/>		
-	</message-properties-transformer>           
--->
 	<model>
 		<service name="fk-varden-registermedicalcertificate-service">
 			<inbound>
@@ -75,8 +69,3 @@
 		
 	</model>
 </mule>
-
-<!--address="https://rivsat.forsakringskassan.sjunet.org/ws"  -->
-<!-- address="https://localhost:19000/fk/TaEmotLakarintyg/1/rivtabp20" -->
-<!-- address="https://${tp.host}:${tp.port}/${tp.baseUri}/TaEmotLakarintyg/1/rivtabp20" -->
-

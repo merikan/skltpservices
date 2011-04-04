@@ -28,6 +28,7 @@ import se.fk.vardgivare.sjukvard.v1.Organisation;
 import se.fk.vardgivare.sjukvard.v1.Patient;
 import se.fk.vardgivare.sjukvard.v1.Person;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.Amnetyp;
+import se.skl.riv.insuranceprocess.healthreporting.qa.v1.FkKontaktType;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.InnehallType;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.KompletteringType;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.LakarutlatandeEnkelType;
@@ -68,6 +69,28 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
     		Avsandare inAvsandare = inRequest.getFKSKLTaEmotFragaAnrop().getAdressering().getAvsandare();
     		Organisation inOrganisationAvsandare = inAvsandare.getOrganisation();
     		    		
+    		// The only contact data from FK is the name of the person handling this question
+    		if (inAvsandare.getOrganisation() != null && inAvsandare.getOrganisation().getEnhet() != null && inAvsandare.getOrganisation().getEnhet().getPerson() != null) {
+    			// Check if we got any name data
+    			if (inAvsandare.getOrganisation().getEnhet().getPerson().getNamn() != null && inAvsandare.getOrganisation().getEnhet().getPerson().getNamn().length() > 0) {
+    				FkKontaktType kontaktInfo = new FkKontaktType();
+    				kontaktInfo.setKontakt("Kontakt: " + inAvsandare.getOrganisation().getEnhet().getPerson().getNamn());		
+					outMeddelande.getFkKontaktInfo().add(kontaktInfo);
+    			} else {
+    				String forNamn = "";
+    				String efterNamn = "";
+    				if (inAvsandare.getOrganisation().getEnhet().getPerson().getFornamn() != null && inAvsandare.getOrganisation().getEnhet().getPerson().getFornamn().length() > 0) {
+    					forNamn = inAvsandare.getOrganisation().getEnhet().getPerson().getFornamn();
+    				}
+    				if (inAvsandare.getOrganisation().getEnhet().getPerson().getEfternamn() != null && inAvsandare.getOrganisation().getEnhet().getPerson().getEfternamn().length() > 0) {
+    					efterNamn = inAvsandare.getOrganisation().getEnhet().getPerson().getEfternamn();
+    				}
+    				FkKontaktType kontaktInfo = new FkKontaktType();
+    				kontaktInfo.setKontakt("Kontakt: " + forNamn + " " + efterNamn);		
+					outMeddelande.getFkKontaktInfo().add(kontaktInfo);    				
+    			}
+    		}
+    		inAvsandare.getOrganisation().getEnhet().getPerson().getNamn();
     		outMeddelande.getFkKontaktInfo();		
 
     		inOrganisationAvsandare.getOrganisationsnummer().getValue();
@@ -203,9 +226,8 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
 			return Amnetyp.KOMPLETTERING_AV_LAKARINTYG;
 		} else if (inAmne.getBeskrivning().equalsIgnoreCase("Kontakt")) {
 			return Amnetyp.KONTAKT;
-// Skall detta vara en egen enumeration på vårdsidan?
 		} else if (inAmne.getBeskrivning().equalsIgnoreCase("Påminnelse")) {
-			return Amnetyp.OVRIGT;
+			return Amnetyp.PAMINNELSE;
 		} else if (inAmne.getBeskrivning().equalsIgnoreCase("Övrigt")) {
 			return Amnetyp.OVRIGT;
 		} else {
