@@ -97,7 +97,7 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
     }
     
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
-		ResourceBundle rb = ResourceBundle.getBundle("fkdata");	    
+		ResourceBundle rb = ResourceBundle.getBundle("fkdataRegMedCert");	    
 
 		try {			
 			// Transform the XML payload into a JAXB object
