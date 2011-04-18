@@ -36,9 +36,9 @@ import se.skl.riv.insuranceprocess.healthreporting.qa.v1.LakarutlatandeEnkelType
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.VardAdresseringsType;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderInterface;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderService;
-import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.QuestionFromFkType;
-import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.ReceiveMedicalCertificateQuestionResponseType;
-import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionsponder.v1.ReceiveMedicalCertificateQuestionType;
+import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionresponder.v1.QuestionFromFkType;
+import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionresponder.v1.ReceiveMedicalCertificateQuestionResponseType;
+import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionresponder.v1.ReceiveMedicalCertificateQuestionType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
