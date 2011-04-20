@@ -31,7 +31,7 @@ import org.apache.cxf.bus.spring.SpringBusFactory;
 
 public class RegisterMedCertProducer {
 
-    protected RegisterMedCertProducer() throws Exception {
+    protected RegisterMedCertProducer(String hostname) throws Exception {
         System.out.println("Starting Producer");
 
         // Loads a cxf configuration file to use
@@ -41,18 +41,23 @@ public class RegisterMedCertProducer {
         SpringBusFactory.setDefaultBus(bus);
         
         Object implementor = new RegisterMedCertValidateImpl();
-        String address = "https://localhost:19000/vard/RegisterMedicalCertificate/3/rivtabp20";
+        String address = "https://" + hostname + "/vard/RegisterMedicalCertificate/3/rivtabp20";
         Endpoint.publish(address, implementor);
     }
 
 	public static void main(String[] args) throws Exception {
 		
-        new RegisterMedCertProducer();
+	      String hostname = "localhost:19000";
+	      if (args.length > 0) {
+	    	  hostname = args[0];
+	      }
+	    new RegisterMedCertProducer(hostname);
+
         System.out.println("Producer ready...");
         
-        Thread.sleep(50 * 60 * 1000);
-        System.out.println("Producer exiting");
-        System.exit(0);
+        while (true) {
+            Thread.sleep(50 * 60 * 1000);        	
+        }
     }
 	
 }
