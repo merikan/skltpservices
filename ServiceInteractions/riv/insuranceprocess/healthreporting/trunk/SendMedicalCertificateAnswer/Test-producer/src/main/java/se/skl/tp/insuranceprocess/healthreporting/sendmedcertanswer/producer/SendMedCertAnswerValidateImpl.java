@@ -18,11 +18,10 @@
 
  *   Boston, MA 02111-1307  USA
  */
-package se.skl.tp.insuranceprocess.healthreporting.sendmedcertquestion.producer;
+package se.skl.tp.insuranceprocess.healthreporting.sendmedcertanswer.producer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.jws.WebService;
 
@@ -30,10 +29,10 @@ import org.w3.wsaddressing10.AttributedURIType;
 
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.Amnetyp;
 import se.skl.riv.insuranceprocess.healthreporting.qa.v1.LakarutlatandeEnkelType;
-import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificatequestion.v1.rivtabp20.SendMedicalCertificateQuestionResponderInterface;
-import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificatequestionresponder.v1.QuestionToFkType;
-import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificatequestionresponder.v1.SendMedicalCertificateQuestionResponseType;
-import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificatequestionresponder.v1.SendMedicalCertificateQuestionType;
+import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificateanswer.v1.rivtabp20.SendMedicalCertificateAnswerResponderInterface;
+import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificateanswerresponder.v1.AnswerToFkType;
+import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificateanswerresponder.v1.SendMedicalCertificateAnswerResponseType;
+import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificateanswerresponder.v1.SendMedicalCertificateAnswerType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
@@ -42,28 +41,28 @@ import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
 import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 
 /**
- * Validation class that will certify a webservice call made for a question regarding a medical certificate.. We will check mandatory/optional fields and all other declared rules.
+ * Validation class that will certify a webservice call made for an answer regarding a medical certificate.. We will check mandatory/optional fields and all other declared rules.
  * @author matsek
  *
  */
 
 @WebService(
-		serviceName = "SendMedicalCertificateQuestionResponderService", 
-		endpointInterface="se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificatequestion.v1.rivtabp20.SendMedicalCertificateQuestionResponderInterface", 
-		portName = "SendMedicalCertificateQuestionResponderPort", 
-		targetNamespace = "urn:riv:insuranceprocess:healthreporting:SendMedicalCertificateQuestion:1:rivtabp20",
-		wsdlLocation = "schemas/vard/interactions/SendMedicalCertificateQuestionInteraction/SendMedicalCertificateQuestionInteraction_1.0_rivtabp20.wsdl")
-public class SendMedCertQuestionValidateImpl implements SendMedicalCertificateQuestionResponderInterface {
+		serviceName = "SendMedicalCertificateAnswerResponderService", 
+		endpointInterface="se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificateanswer.v1.rivtabp20.SendMedicalCertificateAnswerResponderInterface", 
+		portName = "SendMedicalCertificateAnswerResponderPort", 
+		targetNamespace = "urn:riv:insuranceprocess:healthreporting:SendMedicalCertificateAnswer:1:rivtabp20",
+		wsdlLocation = "schemas/vard/interactions/SendMedicalCertificateAnswerInteraction/SendMedicalCertificateAnswerInteraction_1.0_rivtabp20.wsdl")
+public class SendMedCertAnswerValidateImpl implements SendMedicalCertificateAnswerResponderInterface {
 
-	public SendMedicalCertificateQuestionResponseType sendMedicalCertificateQuestion(
+	public SendMedicalCertificateAnswerResponseType sendMedicalCertificateAnswer(
 			AttributedURIType logicalAddress,
-			SendMedicalCertificateQuestionType parameters) {
-		
+			SendMedicalCertificateAnswerType parameters) {
+
 		// List of validation errors
 		ArrayList<String> validationErrors = new ArrayList<String>();
 
 		// Create a response and set result of validation            
-		SendMedicalCertificateQuestionResponseType outResponse = new SendMedicalCertificateQuestionResponseType();
+		SendMedicalCertificateAnswerResponseType outResponse = new SendMedicalCertificateAnswerResponseType();
 		ResultOfCall outResCall = new ResultOfCall();
 		outResponse.setResult(outResCall);
 
@@ -71,30 +70,36 @@ public class SendMedCertQuestionValidateImpl implements SendMedicalCertificateQu
 		try {
 			// Check that we got any data at all
 			if (parameters == null) {
-				validationErrors.add("No SendMedicalCertificateQuestion found in incoming data!");
+				validationErrors.add("No SendMedicalCertificateAnswer found in incoming data!");
 				throw new Exception();
 			}
 			
-			// Check that we got an question element
-			if (parameters.getQuestion() == null) {
-				validationErrors.add("No Question element found in incoming request data!");
+			// Check that we got an answer element
+			if (parameters.getAnswer() == null) {
+				validationErrors.add("No Answer element found in incoming request data!");
 				throw new Exception();
 			}
 			
-			QuestionToFkType inQuestion = parameters.getQuestion();
+			AnswerToFkType inAnswer = parameters.getAnswer();
 			
 			/**
 			 *  Check meddelande data + lakarutlatande reference
 			 */
 			
-			// Meddelande id - mandatory
-			if ( inQuestion.getVardReferensId() == null ||
-				 inQuestion.getVardReferensId().length() < 1 ) {
+			// Meddelande id vŒrden - mandatory
+			if ( inAnswer.getVardReferensId() == null ||
+					inAnswer.getVardReferensId().length() < 1 ) {
 				 validationErrors.add("No vardReferens-id found!");				
 			}
 
+			// Meddelande id FK - mandatory
+			if ( inAnswer.getFkReferensId() == null ||
+				 inAnswer.getFkReferensId().length() < 1 ) {
+				 validationErrors.add("No fkReferens-id found!");				
+			}
+
 			// €mne - mandatory
-			Amnetyp inAmne = inQuestion.getAmne();
+			Amnetyp inAmne = inAnswer.getAmne();
 			if ( inAmne == null) {
 				validationErrors.add("No Amne element found!");				
 			}
@@ -102,30 +107,47 @@ public class SendMedCertQuestionValidateImpl implements SendMedicalCertificateQu
 			/**
 			 *  Check that we got a question
 			 */
-			if (inQuestion.getFraga() == null) {
-				validationErrors.add("No Question fraga element found!");				
+			if (inAnswer.getFraga() == null) {
+				validationErrors.add("No Answer fraga element found!");				
 				throw new Exception();
 			}
-			if ( inQuestion.getFraga().getMeddelandeText() == null  ||
-				 inQuestion.getFraga().getMeddelandeText().length() < 1 ) {
-				validationErrors.add("No Question fraga meddelandeText elements found or set!");				
+			if ( inAnswer.getFraga().getMeddelandeText() == null  ||
+					inAnswer.getFraga().getMeddelandeText().length() < 1 ) {
+				validationErrors.add("No Answer fraga meddelandeText elements found or set!");				
 			}
-			if ( inQuestion.getFraga().getSigneringsTidpunkt() == null  ||
-				!inQuestion.getFraga().getSigneringsTidpunkt().isValid() ) {
-					validationErrors.add("No Question fraga signeringsTidpunkt elements found or set!");				
+			if ( inAnswer.getFraga().getSigneringsTidpunkt() == null  ||
+				!inAnswer.getFraga().getSigneringsTidpunkt().isValid() ) {
+					validationErrors.add("No Answer fraga signeringsTidpunkt elements found or set!");				
 			}
 
+			/**
+			 *  Check that we got an answer
+			 */
+			if (inAnswer.getSvar() == null) {
+				validationErrors.add("No Answer svar element found!");				
+				throw new Exception();
+			}
+			if ( inAnswer.getSvar().getMeddelandeText() == null  ||
+				 inAnswer.getSvar().getMeddelandeText().length() < 1 ) {
+				validationErrors.add("No Answer svar meddelandeText elements found or set!");				
+			}
+			if ( inAnswer.getSvar().getSigneringsTidpunkt() == null  ||
+				!inAnswer.getSvar().getSigneringsTidpunkt().isValid() ) {
+					validationErrors.add("No Answer svar signeringsTidpunkt elements found or set!");				
+			}
+			
+			
 			// AvsŠnt tidpunkt - mandatory
-            if (inQuestion.getAvsantTidpunkt() == null || !inQuestion.getAvsantTidpunkt().isValid()) {
+            if (inAnswer.getAvsantTidpunkt() == null || !inAnswer.getAvsantTidpunkt().isValid()) {
 				validationErrors.add("No or wrong avsantTidpunkt found!");				
             }
 						
 			// LŠkarutlŒtande referens - mandatory
-            if (inQuestion.getLakarutlatande() == null ) {
+            if (inAnswer.getLakarutlatande() == null ) {
 				validationErrors.add("No lakarutlatande element found!");	
 				throw new Exception();
             }
-            LakarutlatandeEnkelType inLakarUtlatande = inQuestion.getLakarutlatande();
+            LakarutlatandeEnkelType inLakarUtlatande = inAnswer.getLakarutlatande();
             
 			// LŠkarutlŒtande referens - id - mandatory
 			if ( inLakarUtlatande.getLakarutlatandeId() == null ||
@@ -171,15 +193,15 @@ public class SendMedCertQuestionValidateImpl implements SendMedicalCertificateQu
 			/**
 			 *  Check avsŠndar data.
 			 */
-			if (inQuestion.getAdressVard() == null) {
+			if (inAnswer.getAdressVard() == null) {
 				validationErrors.add("No adressVard element found!");				
 				throw new Exception();
 			}
-			if ( inQuestion.getAdressVard().getHosPersonal() == null) {
+			if ( inAnswer.getAdressVard().getHosPersonal() == null) {
 				validationErrors.add("No adressVard - hosPersonal element found!");				
 				throw new Exception();
 			}	
-			HosPersonalType inHoSP = inQuestion.getAdressVard().getHosPersonal();
+			HosPersonalType inHoSP = inAnswer.getAdressVard().getHosPersonal();
 			
 		       // Check lakar id - mandatory
 	        if (inHoSP.getPersonalId() == null || 

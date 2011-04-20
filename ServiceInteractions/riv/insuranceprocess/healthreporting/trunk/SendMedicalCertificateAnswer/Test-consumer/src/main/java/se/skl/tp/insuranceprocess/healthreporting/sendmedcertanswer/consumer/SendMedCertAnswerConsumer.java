@@ -154,6 +154,11 @@ public final class SendMedCertAnswerConsumer {
 		svar.setMeddelandeText("Meddelandetext");
 		svar.setSigneringsTidpunkt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
 		meddelande.setSvar(svar);
+		
+		InnehallType fraga = new InnehallType();
+		fraga.setMeddelandeText("Meddelandetext");
+		fraga.setSigneringsTidpunkt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
+		meddelande.setFraga(fraga);
 
 		return meddelande;
 	}

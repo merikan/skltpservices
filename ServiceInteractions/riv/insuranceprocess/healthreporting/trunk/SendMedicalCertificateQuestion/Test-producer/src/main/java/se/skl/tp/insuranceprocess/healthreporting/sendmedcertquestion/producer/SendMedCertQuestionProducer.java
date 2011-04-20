@@ -40,7 +40,7 @@ public class SendMedCertQuestionProducer {
         Bus bus = bf.createBus(busFile.toString());
         SpringBusFactory.setDefaultBus(bus);
 
-        Object implementor = new SendMedCertQuestionImpl();
+        Object implementor = new SendMedCertQuestionValidateImpl();
         String address = "https://localhost:19000/vard/SendMedicalCertificateQuestion/1/rivtabp20";
         Endpoint.publish(address, implementor);
     }
