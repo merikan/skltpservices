@@ -1,12 +1,14 @@
 package se.skl.tp.sendmedcertquestion.transformers;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.datatype.DatatypeFactory;
 import javax.xml.stream.XMLStreamReader;
 
 import org.mule.api.MuleMessage;
@@ -24,9 +26,11 @@ import se.fk.vardgivare.sjukvard.v1.Adressering.Avsandare;
 import se.fk.vardgivare.sjukvard.v1.Adressering.Mottagare;
 import se.fk.vardgivare.sjukvard.v1.Amne;
 import se.fk.vardgivare.sjukvard.v1.Enhet;
+import se.fk.vardgivare.sjukvard.v1.Epostadress;
 import se.fk.vardgivare.sjukvard.v1.InternIdentitetsbeteckning;
 import se.fk.vardgivare.sjukvard.v1.Kontaktuppgifter;
 import se.fk.vardgivare.sjukvard.v1.Lakarintygsreferens;
+import se.fk.vardgivare.sjukvard.v1.Land;
 import se.fk.vardgivare.sjukvard.v1.Meddelande;
 import se.fk.vardgivare.sjukvard.v1.Namn;
 import se.fk.vardgivare.sjukvard.v1.Organisation;
@@ -110,21 +114,57 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
     		Namn outEnhetNamnAvsandare = new Namn();
     		outEnhetNamnAvsandare.setValue(inEnhetAvsandare.getEnhetsnamn());
     		outEnhetAvsandare.setNamn(outEnhetNamnAvsandare);
+    		
+    		// Check which optional fields that we got
+    		String postnummer = inEnhetAvsandare.getPostnummer();
+    		String postort = inEnhetAvsandare.getPostort();
+    		String postadress = inEnhetAvsandare.getPostadress();
+    		String ePost = inEnhetAvsandare.getEpost();
+    		String telefonnummer = inEnhetAvsandare.getTelefonnummer();
+    		
+    		// Check which adress information to set...
     		Kontaktuppgifter outEnhetKontaktuppgifterAvsandare = new Kontaktuppgifter();
-    		Adress outEnhetAdressAvsandare = new Adress();
-    		Postadress outEnhetPostadressAvsandare = new Postadress();
-    		outEnhetPostadressAvsandare.setValue(inEnhetAvsandare.getPostadress());
-    		outEnhetAdressAvsandare.setPostadress(outEnhetPostadressAvsandare);
-    		Postnummer outEnhetPostnummerAvsandare = new Postnummer();
-    		outEnhetPostnummerAvsandare.setValue(inEnhetAvsandare.getPostnummer());
-    		outEnhetAdressAvsandare.setPostnummer(outEnhetPostnummerAvsandare);
-    		Postort outEnhetPostortAvsandare = new Postort();
-    		outEnhetPostortAvsandare.setValue(inEnhetAvsandare.getPostort());
-    		outEnhetAdressAvsandare.setPostort(outEnhetPostortAvsandare);
-    		outEnhetKontaktuppgifterAvsandare.setAdress(outEnhetAdressAvsandare);
-    		Telefon outEnhetTelefonAvsandare = new Telefon();
-    		outEnhetTelefonAvsandare.setValue(inEnhetAvsandare.getTelefonnummer());
-    		outEnhetKontaktuppgifterAvsandare.setTelefon(outEnhetTelefonAvsandare);
+
+    		// Start with adress, all fileds must be present!
+    		if (  (postnummer != null && postnummer.length() > 0) && 
+    			  (postort != null && postort.length() > 0) && 
+    			  (postadress != null && postadress.length() > 0) )
+    		{
+        		Adress outEnhetAdressAvsandare = new Adress();
+            	
+        		Postadress outEnhetPostadressAvsandare = new Postadress();
+            	outEnhetPostadressAvsandare.setValue(postadress);
+            	outEnhetAdressAvsandare.setPostadress(outEnhetPostadressAvsandare);        			
+            	
+            	Postnummer outEnhetPostnummerAvsandare = new Postnummer();
+            	outEnhetPostnummerAvsandare.setValue(postnummer);
+            	outEnhetAdressAvsandare.setPostnummer(outEnhetPostnummerAvsandare);        			
+            	
+            	Postort outEnhetPostortAvsandare = new Postort();
+            	outEnhetPostortAvsandare.setValue(postort);
+            	outEnhetAdressAvsandare.setPostort(outEnhetPostortAvsandare);        			
+        		
+            	Land land = new Land();
+        		land.setValue("Sverige");
+        		outEnhetAdressAvsandare.setLand(land);
+        		
+        		outEnhetKontaktuppgifterAvsandare.setAdress(outEnhetAdressAvsandare);    			
+    		}
+
+    		// Next telefonnummer
+    		if ( telefonnummer != null && telefonnummer.length() > 0) {
+        		Telefon outEnhetTelefonAvsandare = new Telefon();
+        		outEnhetTelefonAvsandare.setValue(telefonnummer);
+        		outEnhetKontaktuppgifterAvsandare.setTelefon(outEnhetTelefonAvsandare);    			
+    		}
+
+    		// Last ePost
+    		if (ePost != null && ePost.length() > 0) {
+    			Epostadress epost = new Epostadress();
+    			epost.setValue(ePost);
+				outEnhetKontaktuppgifterAvsandare.setEpost(epost );
+    		}
+
     		outEnhetAvsandare.setKontaktuppgifter(outEnhetKontaktuppgifterAvsandare);
     		outOrganisationAvsandare.setEnhet(outEnhetAvsandare);
 
@@ -146,7 +186,10 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
     		outOrganisationMottagare.setNamn(outOrganisationNamnMottagare);
     		InternIdentitetsbeteckning outOrganisationIdMottagare = new InternIdentitetsbeteckning();
     		outOrganisationIdMottagare.setValue("202100-5521");
-    		outOrganisationMottagare.setId(outOrganisationIdMottagare);    		
+    		outOrganisationMottagare.setId(outOrganisationIdMottagare);    
+    		
+    		// Skickades
+    		outAdressering.setSkickades(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
 
     		// Patient
     		LakarutlatandeEnkelType inLakarutlatande = inRequest.getQuestion().getLakarutlatande();
@@ -236,7 +279,7 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 			 validationErrors.add("No vardReferens-id found!");				
 		}
 
-		// €mne - mandatory
+		// ï¿½mne - mandatory
 		Amnetyp inAmne = inQuestion.getAmne();
 		if ( inAmne == null) {
 			validationErrors.add("No Amne element found!");				
@@ -258,37 +301,37 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 				validationErrors.add("No Question fraga signeringsTidpunkt elements found or set!");				
 		}
 
-		// AvsŠnt tidpunkt - mandatory
+		// Avsï¿½nt tidpunkt - mandatory
         if (inQuestion.getAvsantTidpunkt() == null || !inQuestion.getAvsantTidpunkt().isValid()) {
 			validationErrors.add("No or wrong avsantTidpunkt found!");				
         }
 					
-		// LŠkarutlŒtande referens - mandatory
+		// Lï¿½karutlï¿½tande referens - mandatory
         if (inQuestion.getLakarutlatande() == null ) {
 			validationErrors.add("No lakarutlatande element found!");	
 			throw new Exception();
         }
         LakarutlatandeEnkelType inLakarUtlatande = inQuestion.getLakarutlatande();
         
-		// LŠkarutlŒtande referens - id - mandatory
+		// Lï¿½karutlï¿½tande referens - id - mandatory
 		if ( inLakarUtlatande.getLakarutlatandeId() == null ||
 			inLakarUtlatande.getLakarutlatandeId().length() < 1 ) {
 			validationErrors.add("No lakarutlatande-id found!");				
 		}
 
-		// LŠkarutlŒtande referens - signeringsTidpunkt - mandatory
+		// Lï¿½karutlï¿½tande referens - signeringsTidpunkt - mandatory
         if (inLakarUtlatande.getSigneringsTidpunkt() == null || !inLakarUtlatande.getSigneringsTidpunkt().isValid()) {
 			validationErrors.add("No or wrong lakarutlatande-avsantTidpunkt found!");				
         }
 
-		// LŠkarutlŒtande referens - patient - mandatory
+		// Lï¿½karutlï¿½tande referens - patient - mandatory
         if (inLakarUtlatande.getPatient() == null ) {
 			validationErrors.add("No lakarutlatande patient element found!");	
 			throw new Exception();
         }
         PatientType inPatient = inLakarUtlatande.getPatient();
         
-		// LŠkarutlŒtande referens - patient - personid mandatory
+		// Lï¿½karutlï¿½tande referens - patient - personid mandatory
         // Check patient id - mandatory
 		if (inPatient.getPersonId() == null ||	
 			inPatient.getPersonId().getExtension() == null ||	
@@ -306,13 +349,13 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 
         // Check format on personnummer? samordningsnummer?
         
-		// LŠkarutlŒtande referens - patient - namn - mandatory
+		// Lï¿½karutlï¿½tande referens - patient - namn - mandatory
 		if (inPatient.getFullstandigtNamn() == null || inPatient.getFullstandigtNamn().length() < 1 ) {
 			validationErrors.add("No lakarutlatande Patient fullstandigtNamn elements found or set!");								
 		}
 							
 		/**
-		 *  Check avsŠndar data.
+		 *  Check avsï¿½ndar data.
 		 */
 		if (inQuestion.getAdressVard() == null) {
 			validationErrors.add("No adressVard element found!");				

@@ -90,11 +90,9 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
 					outMeddelande.getFkKontaktInfo().add(kontaktInfo);    				
     			}
     		}
-    		inAvsandare.getOrganisation().getEnhet().getPerson().getNamn();
-    		outMeddelande.getFkKontaktInfo();		
 
-    		inOrganisationAvsandare.getOrganisationsnummer().getValue();
-    		inOrganisationAvsandare.getNamn().getValue();
+//    		inOrganisationAvsandare.getOrganisationsnummer().getValue();
+//    		inOrganisationAvsandare.getNamn().getValue();
          	
     		// Mottagare - Vården
     		Mottagare inMottagare = inRequest.getFKSKLTaEmotFragaAnrop().getAdressering().getMottagare();
@@ -122,12 +120,43 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
     		outEnhetsIdMottagare.setRoot("1.2.752.129.2.1.4.1");
     		outEnhetsIdMottagare.setExtension(inEnhetMottagare.getId().getValue());
     		outEnhetMottagare.setEnhetsId(outEnhetsIdMottagare);
-//TODO Skydda mot null values!!!
-    		outEnhetMottagare.setTelefonnummer(inEnhetMottagare.getKontaktuppgifter().getTelefon().getValue());
-    		outEnhetMottagare.setPostadress(inEnhetMottagare.getKontaktuppgifter().getAdress().getPostadress().getValue());
-    		outEnhetMottagare.setPostnummer(inEnhetMottagare.getKontaktuppgifter().getAdress().getPostnummer().getValue());
-    		outEnhetMottagare.setPostort(inEnhetMottagare.getKontaktuppgifter().getAdress().getPostort().getValue());
-    		outEnhetMottagare.setEpost(inEnhetMottagare.getKontaktuppgifter().getEpost().getValue());
+    		
+    		if (inEnhetMottagare.getKontaktuppgifter() != null) {
+    			
+    			// Address
+    			if (inEnhetMottagare.getKontaktuppgifter().getAdress() != null) {
+        			if (inEnhetMottagare.getKontaktuppgifter().getAdress().getPostadress() != null && 
+            				inEnhetMottagare.getKontaktuppgifter().getAdress().getPostadress().getValue() != null && 
+            				inEnhetMottagare.getKontaktuppgifter().getAdress().getPostadress().getValue().length() > 0 ) {
+        				outEnhetMottagare.setPostadress(inEnhetMottagare.getKontaktuppgifter().getAdress().getPostadress().getValue());
+        			}
+        			if (inEnhetMottagare.getKontaktuppgifter().getAdress().getPostnummer() != null && 
+            				inEnhetMottagare.getKontaktuppgifter().getAdress().getPostnummer().getValue() != null && 
+            				inEnhetMottagare.getKontaktuppgifter().getAdress().getPostnummer().getValue().length() > 0 ) {
+        	    		outEnhetMottagare.setPostnummer(inEnhetMottagare.getKontaktuppgifter().getAdress().getPostnummer().getValue());
+        			}
+        			if (inEnhetMottagare.getKontaktuppgifter().getAdress().getPostort() != null && 
+            				inEnhetMottagare.getKontaktuppgifter().getAdress().getPostort().getValue() != null && 
+            				inEnhetMottagare.getKontaktuppgifter().getAdress().getPostort().getValue().length() > 0 ) {
+        	    		outEnhetMottagare.setPostort(inEnhetMottagare.getKontaktuppgifter().getAdress().getPostort().getValue());
+        			}
+    			}
+    			
+    			// Telefon
+    			if (inEnhetMottagare.getKontaktuppgifter().getTelefon() != null && 
+    				inEnhetMottagare.getKontaktuppgifter().getTelefon().getValue() != null && 
+    				inEnhetMottagare.getKontaktuppgifter().getTelefon().getValue().length() > 0 ) {
+    	    		outEnhetMottagare.setTelefonnummer(inEnhetMottagare.getKontaktuppgifter().getTelefon().getValue());    			
+    			}
+
+    			// eMail
+    			if (inEnhetMottagare.getKontaktuppgifter().getEpost() != null && 
+    				inEnhetMottagare.getKontaktuppgifter().getEpost().getValue() != null && 
+    				inEnhetMottagare.getKontaktuppgifter().getEpost().getValue().length() > 0 ) {
+    	    		outEnhetMottagare.setEpost(inEnhetMottagare.getKontaktuppgifter().getEpost().getValue());    			
+    			}	
+    		}
+    		
     		outEnhetMottagare.setEnhetsnamn(inEnhetMottagare.getNamn().getValue());
     		outHosPersonalMottagare.setEnhet(outEnhetMottagare);
     		
@@ -218,18 +247,16 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
     }
 
 	private Amnetyp transformAmneFromFK(Amne inAmne) {
-		if (inAmne.getBeskrivning().equalsIgnoreCase("Arbetstidsförläggning")) {
+		if (inAmne.getBeskrivning().startsWith("Arbe")) {
 			return Amnetyp.ARBETSTIDSFORLAGGNING;
-		} else if (inAmne.getBeskrivning().equalsIgnoreCase("Avstämningsmöte")) {
+		} else if (inAmne.getBeskrivning().startsWith("Avst")) {
 			return Amnetyp.AVSTAMNINGSMOTE;
 		} else if (inAmne.getBeskrivning().equalsIgnoreCase("Komplettering")) {
 			return Amnetyp.KOMPLETTERING_AV_LAKARINTYG;
 		} else if (inAmne.getBeskrivning().equalsIgnoreCase("Kontakt")) {
 			return Amnetyp.KONTAKT;
-		} else if (inAmne.getBeskrivning().equalsIgnoreCase("Påminnelse")) {
+		} else if (inAmne.getBeskrivning().startsWith("P")) {
 			return Amnetyp.PAMINNELSE;
-		} else if (inAmne.getBeskrivning().equalsIgnoreCase("Övrigt")) {
-			return Amnetyp.OVRIGT;
 		} else {
 			return Amnetyp.OVRIGT;
 		}
