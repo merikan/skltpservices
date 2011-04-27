@@ -263,10 +263,10 @@ public final class RegMedCertConsumerMaximal {
 		arbetsuppgift.setTypAvArbetsuppgift("Dirigent. Dirigerar en större orkester på deltid");
 
 		SysselsattningType sysselsattning2 = new SysselsattningType();
-		sysselsattning1.setTypAvSysselsattning(TypAvSysselsattning.ARBETSLOSHET);
+		sysselsattning2.setTypAvSysselsattning(TypAvSysselsattning.ARBETSLOSHET);
 
 		SysselsattningType sysselsattning3 = new SysselsattningType();
-		sysselsattning1.setTypAvSysselsattning(TypAvSysselsattning.FORALDRALEDIGHET);
+		sysselsattning3.setTypAvSysselsattning(TypAvSysselsattning.FORALDRALEDIGHET);
 		
 		// Bedömning arbetsförmåga - Fält 8 nedre delen Mellan 1 till 4 bedömningar kan göras med olika tidsintervall
 		ArbetsformagaNedsattningType arbetsformagaNedsattning1 = new ArbetsformagaNedsattningType();
