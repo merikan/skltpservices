@@ -217,8 +217,8 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
     		
 			// Fraga
 			Meddelande fraga = new Meddelande();
-			fraga.setText(inRequest.getAnswer().getSvar().getMeddelandeText());
-			fraga.setSignerades(inRequest.getAnswer().getSvar().getSigneringsTidpunkt()); 
+			fraga.setText(inRequest.getAnswer().getFraga().getMeddelandeText());
+			fraga.setSignerades(inRequest.getAnswer().getFraga().getSigneringsTidpunkt()); 
 			outTaEmotSvar.setFraga(fraga );
 			
 			// Svar
