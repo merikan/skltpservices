@@ -85,6 +85,12 @@ public class RegisterMedCertValidateImpl implements RegisterMedicalCertificateRe
 
 		// Validate incoming request
 		try {
+			// Check To field in SoapHeader
+			if (logicalAddress == null || logicalAddress.getValue() == null || logicalAddress.getValue().length() < 1 ) {
+				validationErrors.add("No To field or data found in incoming data!");
+				throw new Exception();
+			}
+				
 			// Check that we got any data at all
 			if (parameters == null) {
 				validationErrors.add("No RegisterMedicalCertificate found in incoming data!");
