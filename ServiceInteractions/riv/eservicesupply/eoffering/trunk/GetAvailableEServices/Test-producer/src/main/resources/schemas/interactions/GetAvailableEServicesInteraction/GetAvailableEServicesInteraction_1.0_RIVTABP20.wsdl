@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements. See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership. Inera AB licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License. You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied. See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ -->		
+<wsdl:definitions name='GetAvailableEServicesInteraction' xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/' xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:wsa='http://www.w3.org/2005/08/addressing' xmlns:tjsr='urn:riv:eservicesupply:eoffering:GetAvailableEServicesResponder:1' xmlns:tjsi='urn:riv:eservicesupply:eoffering:GetAvailableEServicesInitiator:1' xmlns:tns='urn:riv:eservicesupply:eoffering:GetAvailableEServices:1:rivtabp20' targetNamespace='urn:riv:eservicesupply:eoffering:GetAvailableEServices:1:rivtabp20' xmlns:xsd="urn:riv:eservicesupply:eoffering:GetAvailableEServicesResponder:1">
+  <wsdl:documentation></wsdl:documentation>
+  <xs:annotation>
+    <xs:documentation>
+			 Tjansteinteraktionens namn: GetAvailableEServicesInteraction
+			 Beskrivning: 
+			   Retrieves a healthcare facilities available  e-services.
+			 Revisioner: 
+			 Tjanstedoman: eservicesupply:eoffering
+			 Tjansteinteraktionstyp: Fraga-Svar
+			 WS-profil: RIVTABP20
+			 Farvaltas av: Inera AB
+			 </xs:documentation>
+  </xs:annotation>
+  <wsdl:types>
+    <xs:schema targetNamespace='urn:riv:eservicesupply:eoffering:GetAvailableEServices:1:rivtabp20'>
+      <xs:import schemaLocation='GetAvailableEServicesResponder_1.0.xsd' namespace='urn:riv:eservicesupply:eoffering:GetAvailableEServicesResponder:1' />
+      <xs:import schemaLocation='../../core_components/ws-addressing-1.0.xsd' namespace='http://www.w3.org/2005/08/addressing' />
+    </xs:schema>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    	<xsd:import
+    		namespace="urn:riv:eservicesupply:eoffering:GetAvailableEServicesResponder:1"
+    		schemaLocation="GetAvailableEServicesResponder_1.0.xsd">
+    	</xsd:import></xsd:schema></wsdl:types>
+  <wsdl:message name='GetAvailableEServicesRequest'>
+    <wsdl:part name='LogicalAddress' element='wsa:To'>
+      <xs:annotation>
+        <xs:documentation>LogicalAddress is the hsa-id of the healthcare_facility that is requested to present its e-services.</xs:documentation>
+      </xs:annotation>
+    </wsdl:part>
+    <wsdl:part name='parameters' element="xsd:GetAvailableEServices" />
+  </wsdl:message>
+  <wsdl:message name='GetAvailableEServicesResponse'>
+    <wsdl:part name='parameters' element='xsd:GetAvailableEServicesResponse' />
+  </wsdl:message>
+  <wsdl:portType name="GetAvailableEServicesResponderInterface">
+    <wsdl:operation name='GetAvailableEServices'>
+      <wsdl:input message='tns:GetAvailableEServicesRequest' />
+      <wsdl:output message='tns:GetAvailableEServicesResponse' />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name='GetAvailableEServicesResponderBinding' type="tns:GetAvailableEServicesResponderInterface">
+    <soap:binding style='document' transport='http://schemas.xmlsoap.org/soap/http' />
+    <wsdl:operation name='GetAvailableEServices'>
+      <soap:operation soapAction='urn:riv:eservicesupply:eoffering:GetAvailableEServicesResponder:1:GetAvailableEServices' style='document' />
+      <wsdl:input>
+        <soap:header use='literal' message='tns:GetAvailableEServicesRequest' part='LogicalAddress' />
+        <soap:body use='literal' parts='parameters' />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use='literal' />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name='GetAvailableEServicesResponderService'>
+    <wsdl:port name='GetAvailableEServicesResponderPort' binding='tns:GetAvailableEServicesResponderBinding'>
+      <soap:address location='http://tempuri.org' />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
