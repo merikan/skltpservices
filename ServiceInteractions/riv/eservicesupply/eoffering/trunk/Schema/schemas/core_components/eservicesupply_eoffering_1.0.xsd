@@ -63,7 +63,8 @@ Informationer om e-tjänsten. En e-tjänst tillhandahålls på elektronisk väg 
         	<xs:element name="restrictions" type="tns:restrictionType"
         		minOccurs="0" maxOccurs="1">
         	</xs:element>
-        	<xs:any minOccurs="0" maxOccurs="unbounded"></xs:any>
+        	<xs:any namespace='##other' processContents='lax' minOccurs='0'
+    		maxOccurs='unbounded' />
         </xs:sequence>
   </xs:complexType>
 
@@ -116,7 +117,8 @@ Information om de restriktioner som finns kopplade till e-tjänsten. T ex krav p
                 	<xs:documentation>Ålder max.</xs:documentation>
                 </xs:annotation>
         	</xs:element>
-        	<xs:any minOccurs="0" maxOccurs="unbounded"></xs:any>
+        	<xs:any namespace='##other' processContents='lax' minOccurs='0'
+    		maxOccurs='unbounded' />
         </xs:sequence>
   </xs:complexType>
 
@@ -137,7 +139,8 @@ Information om de restriktioner som finns kopplade till e-tjänsten. T ex krav p
                 	<xs:documentation>Vårdenhetens namn</xs:documentation>
                 </xs:annotation>
   		</xs:element>
-  		<xs:any minOccurs="0" maxOccurs="unbounded"></xs:any>
+  		<xs:any namespace='##other' processContents='lax' minOccurs='0'
+    		maxOccurs='unbounded' />
   	</xs:sequence>
   </xs:complexType>
 
@@ -167,7 +170,8 @@ Information om de restriktioner som finns kopplade till e-tjänsten. T ex krav p
                 	<xs:documentation>Beskriver inom vilken kommundelskod e-tjänsten erbjuds. E-tjänsten betjänar invånare i denna kommundel.</xs:documentation>
                 </xs:annotation>
   		</xs:element>
-  		<xs:any minOccurs="0" maxOccurs="unbounded"></xs:any>
+  		<xs:any namespace='##other' processContents='lax' minOccurs='0'
+    		maxOccurs='unbounded' />
   	</xs:sequence>
   </xs:complexType>
 
