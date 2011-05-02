@@ -42,7 +42,7 @@
 		<service name="Get-GetAvailableEServices-service">
 			<inbound>
 				<cxf:inbound-endpoint address="https://${tp.host}:${tp.port}/${tp.baseUri}/GetAvailableEServices/1/rivtabp20"
-					wsdlLocation="classpath:/schemas/interactions/GetAvailableEServicesInteractions/GetAvailableEServicesInteraction_1.0_RIVTABP20.wsdl"
+					wsdlLocation="classpath:/schemas/interactions/GetAvailableEServicesInteraction/GetAvailableEServicesInteraction_1.0_RIVTABP20.wsdl"
 					serviceName="GetAvailableEServicesResponderService"
 					namespace="urn:riv:eservicesupply:eoffering:GetAvailableEServices:1:rivtabp20"
 					proxy="true" 
