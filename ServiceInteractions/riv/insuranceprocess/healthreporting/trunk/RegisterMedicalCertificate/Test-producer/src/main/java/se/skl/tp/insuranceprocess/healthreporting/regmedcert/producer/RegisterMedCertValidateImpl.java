@@ -215,7 +215,10 @@ public class RegisterMedCertValidateImpl implements RegisterMedicalCertificateRe
 			if (inEnhet.getPostort() == null || inEnhet.getPostort().length() < 1 ) {
 				validationErrors.add("No postort found for enhet!");								
 			}
-	
+			if (inEnhet.getTelefonnummer() == null || inEnhet.getTelefonnummer().length() < 1 ) {
+				validationErrors.add("No telefonnummer found for enhet!");								
+			}
+
 	        // Check that we got a vardgivare element
 	        if (inEnhet.getVardgivare() == null) {
 				validationErrors.add("No vardgivare element found!");	  

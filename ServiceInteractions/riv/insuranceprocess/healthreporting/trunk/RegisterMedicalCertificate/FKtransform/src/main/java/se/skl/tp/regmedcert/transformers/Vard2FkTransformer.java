@@ -60,6 +60,8 @@ import se.fk.vardgivare.sjukvard.v1.Person;
 import se.fk.vardgivare.sjukvard.v1.Postadress;
 import se.fk.vardgivare.sjukvard.v1.Postnummer;
 import se.fk.vardgivare.sjukvard.v1.Postort;
+import se.fk.vardgivare.sjukvard.v1.Telefon;
+import se.fk.vardgivare.sjukvard.v1.Epostadress;
 import se.fk.vardgivare.sjukvard.v1.ReferensAdressering;
 import se.fk.vardgivare.sjukvard.v1.TaEmotLakarintyg;
 import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.AktivitetType;
@@ -81,7 +83,6 @@ import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateres
 import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
 import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 
 
@@ -124,13 +125,21 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
             String inEnhetsPostAdress = inRequest.getLakarutlatande().getSkapadAvHosPersonal().getEnhet().getPostadress();
             String inEnhetsPostNummer = inRequest.getLakarutlatande().getSkapadAvHosPersonal().getEnhet().getPostnummer();
             String inEnhetsPostOrt = inRequest.getLakarutlatande().getSkapadAvHosPersonal().getEnhet().getPostort();
+            String inEnhetsTelefonNummer = inRequest.getLakarutlatande().getSkapadAvHosPersonal().getEnhet().getTelefonnummer();
+            String inEnhetsEpost = inRequest.getLakarutlatande().getSkapadAvHosPersonal().getEnhet().getEpost();
             String inVardgivareId = inRequest.getLakarutlatande().getSkapadAvHosPersonal().getEnhet().getVardgivare().getVardgivareId().getExtension();
             String inVardgivarNamn = inRequest.getLakarutlatande().getSkapadAvHosPersonal().getEnhet().getVardgivare().getVardgivarnamn();
             XMLGregorianCalendar inSignerades = inRequest.getLakarutlatande().getSigneringsdatum();
             XMLGregorianCalendar inSkickadesTid = inRequest.getLakarutlatande().getSkickatDatum();
             boolean inSmittskydd = findAktivitetWithCode(inRequest.getLakarutlatande().getAktivitet(), Aktivitetskod.AVSTANGNING_ENLIGT_SM_L_PGA_SMITTA) != null ? true:false;
-            String inDiagnoskod = inRequest.getLakarutlatande().getMedicinsktTillstand().getTillstandskod().getCode();
-            String inDiagnosBeskrivning = inRequest.getLakarutlatande().getMedicinsktTillstand().getBeskrivning();
+            String inDiagnoskod = "";
+            if (inRequest.getLakarutlatande().getMedicinsktTillstand() != null && inRequest.getLakarutlatande().getMedicinsktTillstand().getTillstandskod() != null) {
+            	inDiagnoskod = inRequest.getLakarutlatande().getMedicinsktTillstand().getTillstandskod().getCode();
+            }
+            String inDiagnosBeskrivning = "";
+            if (inRequest.getLakarutlatande().getMedicinsktTillstand() != null ) {
+                inDiagnosBeskrivning = inRequest.getLakarutlatande().getMedicinsktTillstand().getBeskrivning();            
+            }
             String inSjukdomshistoriaBeskrivning = "";
             if (inRequest.getLakarutlatande().getBedomtTillstand() != null) {
                 inSjukdomshistoriaBeskrivning = inRequest.getLakarutlatande().getBedomtTillstand().getBeskrivning();            	
@@ -149,14 +158,22 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
             AktivitetType arbRelRehabAktuell = findAktivitetWithCode(inRequest.getLakarutlatande().getAktivitet(), Aktivitetskod.ARBETSLIVSINRIKTAD_REHABILITERING_AR_AKTUELL);
             AktivitetType arbRelRehabEjAktuell = findAktivitetWithCode(inRequest.getLakarutlatande().getAktivitet(), Aktivitetskod.ARBETSLIVSINRIKTAD_REHABILITERING_AR_EJ_AKTUELL);
             AktivitetType garEjAttBedommaArbRelRehab = findAktivitetWithCode(inRequest.getLakarutlatande().getAktivitet(), Aktivitetskod.GAR_EJ_ATT_BEDOMMA_OM_ARBETSLIVSINRIKTAD_REHABILITERING_AR_AKTUELL);
-            SysselsattningType inArbete = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.NUVARANDE_ARBETE);
-            SysselsattningType inArbetslos = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.ARBETSLOSHET);
-            SysselsattningType inForaldraledig = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.FORALDRALEDIGHET);
+            SysselsattningType inArbete = null;
+            SysselsattningType inArbetslos = null;
+            SysselsattningType inForaldraledig = null;
+            if (inAktivitetFunktion.getArbetsformaga().getSysselsattning() != null) {
+                inArbete = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.NUVARANDE_ARBETE);
+                inArbetslos = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.ARBETSLOSHET);
+                inForaldraledig = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.FORALDRALEDIGHET);
+            }
             ArbetsformagaNedsattningType nedsatt14del =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.NEDSATT_MED_1_4);
             ArbetsformagaNedsattningType nedsatthalften =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.NEDSATT_MED_1_2);
             ArbetsformagaNedsattningType nedsatt34delar =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.NEDSATT_MED_3_4);
             ArbetsformagaNedsattningType heltNedsatt =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.HELT_NEDSATT);
-            String inMotivering = inAktivitetFunktion.getArbetsformaga().getMotivering();
+            String inMotivering = "";
+            if (inAktivitetFunktion.getArbetsformaga() != null) {
+                inMotivering = inAktivitetFunktion.getArbetsformaga().getMotivering();
+            }
             boolean inPrognosAterfaHelt = false;
             boolean inPrognosAterfaDelvis = false;
             boolean inPrognosEjAterfa = false;
@@ -228,6 +245,14 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
             land.setValue("Sverige");
             enhetAdress.setLand(land);
             enhetKontaktuppgift.setAdress(enhetAdress);
+            Telefon telefon = new Telefon();
+            telefon.setValue(inEnhetsTelefonNummer);            
+            enhetKontaktuppgift.setTelefon(telefon);
+            if (inEnhetsEpost != null && inEnhetsEpost.length() > 0) {
+                Epostadress epost = new Epostadress();
+                epost.setValue(inEnhetsEpost);
+				enhetKontaktuppgift.setEpost(epost );            	
+            }
             enhet.setKontaktuppgifter(enhetKontaktuppgift);
             avsandarOrganisation.setEnhet(enhet);
             
@@ -284,8 +309,10 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
             
             // Status - Fält 4 - vänster
             Status status = new Status();
-            status.setBeskrivning(inKroppsFunktion.getBeskrivning());
             lakarintyg.setStatus(status);
+            if (inKroppsFunktion != null) {
+                status.setBeskrivning(inKroppsFunktion.getBeskrivning());            	
+            }
 
             // Ursprung - Fält 4
             Basering basering = new Basering();
@@ -660,6 +687,9 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 			}
 			if (inEnhet.getPostort() == null || inEnhet.getPostort().length() < 1 ) {
 				validationErrors.add("No postort found for enhet!");								
+			}
+			if (inEnhet.getTelefonnummer() == null || inEnhet.getTelefonnummer().length() < 1 ) {
+				validationErrors.add("No telefonnummer found for enhet!");								
 			}
 	
 	        // Check that we got a vardgivare element
