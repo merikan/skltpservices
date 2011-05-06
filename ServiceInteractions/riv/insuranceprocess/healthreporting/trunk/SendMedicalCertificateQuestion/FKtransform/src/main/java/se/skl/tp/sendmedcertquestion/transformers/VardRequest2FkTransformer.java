@@ -203,6 +203,7 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
     		Amnetyp inAmne = inRequest.getQuestion().getAmne();
     		Amne outAmne = new Amne();
     		outAmne.setBeskrivning(transformAmneFromVarden(inAmne, rb));
+    		outAmne.setFritext(transformAmneFromVarden(inAmne, rb));
     		outTaEmotFraga.setAmne(outAmne);
     		    		
     		// Läkarintyg referens
