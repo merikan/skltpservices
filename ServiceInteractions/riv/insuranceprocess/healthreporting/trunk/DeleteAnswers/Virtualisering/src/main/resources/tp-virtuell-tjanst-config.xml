@@ -42,7 +42,7 @@
 		<service name="Get-DeleteAnswers-service">
 			<inbound>
 				<cxf:inbound-endpoint address="https://${tp.host}:${tp.port}/${tp.baseUri}/DeleteAnswers/1/rivtabp20"
-					wsdlLocation="classpath:/schemas/interactions/DeleteAnswersInteractions/DeleteAnswersInteraction_1.0_RIVTABP20.wsdl"
+					wsdlLocation="classpath:/schemas/interactions/DeleteAnswersInteraction/DeleteAnswersInteraction_1.0_rivtabp20.wsdl"
 					serviceName="DeleteAnswersResponderService"
 					namespace="urn:riv:insuranceprocess:healthreporting:DeleteAnswers:1:rivtabp20"
 					proxy="true" 

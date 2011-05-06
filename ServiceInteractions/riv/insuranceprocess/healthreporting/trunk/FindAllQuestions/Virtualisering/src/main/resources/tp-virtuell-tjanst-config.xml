@@ -42,7 +42,7 @@
 		<service name="Get-FindAllQuestions-service">
 			<inbound>
 				<cxf:inbound-endpoint address="https://${tp.host}:${tp.port}/${tp.baseUri}/FindAllQuestions/1/rivtabp20"
-					wsdlLocation="classpath:/schemas/interactions/FindAllQuestionsInteractions/FindAllQuestionsInteraction_1.0_RIVTABP20.wsdl"
+					wsdlLocation="classpath:/schemas/interactions/FindAllQuestionsInteraction/FindAllQuestionsInteraction_1.0_rivtabp20.wsdl"
 					serviceName="FindAllQuestionsResponderService"
 					namespace="urn:riv:insuranceprocess:healthreporting:FindAllQuestions:1:rivtabp20"
 					proxy="true" 
