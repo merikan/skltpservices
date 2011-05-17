@@ -31,14 +31,18 @@
 	<url>http://maven.apache.org</url>
 
 	<modules>
-	 <module>Schema</module> 
-	 <module>TaEmotLakarintyg</module>
-	 <module>TaEmotFraga</module> 
-	 <module>TaEmotSvar</module>
-	 <module>RegisterMedicalCertificate</module>
-	 <module>ReceiveMedicalCertificateQuestion</module>
-  <module>ReceiveMedicalCertificateAnswer</module> 
-	 <module>SendMedicalCertificateQuestion</module>
-	 <module>SendMedicalCertificateAnswer</module> 
+		<module>Schema</module>
+		<module>TaEmotLakarintyg</module>
+		<module>TaEmotFraga</module>
+		<module>TaEmotSvar</module>
+		<module>RegisterMedicalCertificate</module>
+		<module>ReceiveMedicalCertificateQuestion</module>
+		<module>ReceiveMedicalCertificateAnswer</module>
+		<module>SendMedicalCertificateQuestion</module>
+		<module>SendMedicalCertificateAnswer</module>
+		<module>FindAllQuestions</module>
+		<module>FindAllAnswers</module>
+		<module>DeleteQuestions</module>
+		<module>DeleteAnswers</module>
 	</modules>
 </project>
