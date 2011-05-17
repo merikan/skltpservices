@@ -193,7 +193,7 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
     		outOrganisationMottagare.setId(outOrganisationIdMottagare);    		
 
     		// Skickades
-    		outAdressering.setSkickades(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
+    		outAdressering.setSkickades(inRequest.getAnswer().getAvsantTidpunkt());
 
     		// Patient
     		LakarutlatandeEnkelType inLakarutlatande = inRequest.getAnswer().getLakarutlatande();

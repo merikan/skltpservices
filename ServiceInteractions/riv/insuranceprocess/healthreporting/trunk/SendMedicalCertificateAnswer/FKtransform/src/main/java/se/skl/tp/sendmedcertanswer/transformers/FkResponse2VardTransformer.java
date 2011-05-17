@@ -93,7 +93,7 @@ public class FkResponse2VardTransformer extends AbstractMessageAwareTransformer
 				// Transform the JAXB object into a XML payload
 	            StringWriter writer = new StringWriter();
 	        	Marshaller marshaller = JAXBContext.newInstance(SendMedicalCertificateAnswerResponseType.class).createMarshaller();
-	        	marshaller.marshal(new JAXBElement(new QName("urn:riv:fk:vardgivare:sjukvard:TaEmotSvarResponder:1", "SendMedicalCertificateAnswerResponse"), SendMedicalCertificateAnswerResponseType.class, outResponse), writer);
+	        	marshaller.marshal(new JAXBElement(new QName("urn:riv:insuranceprocess:healthreporting:SendMedicalCertificateAnswerResponder:1", "SendMedicalCertificateAnswerResponse"), SendMedicalCertificateAnswerResponseType.class, outResponse), writer);
 				logger.debug("Extracted information: {}", writer.toString());
 				String payload = (String)writer.toString();
 				if (payload.startsWith("<?")) {
