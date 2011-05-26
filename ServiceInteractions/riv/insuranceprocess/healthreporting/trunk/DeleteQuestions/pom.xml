@@ -8,11 +8,9 @@
   <packaging>pom</packaging>
   <name>DeleteQuestions-service</name>
 
-  <parent>
-  	<groupId>se.skl.tp</groupId>
-  	<artifactId>DeleteQuestionsBundle</artifactId>
-  	<version>1.0-SNAPSHOT</version>
-  </parent>
+  <properties>
+  	<cxf.version>2.1.2</cxf.version>
+  </properties>
 
   <!-- Modules to be created for each service -->
   <modules>
@@ -20,5 +18,17 @@
     <module>Test-producer</module>
     <module>Test-consumer</module>
   </modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
