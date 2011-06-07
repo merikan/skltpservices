@@ -11,6 +11,9 @@
 # http://sial.org/howto/openssl/ca/
 #
 
+# cleanup old runs
+rm -rf *.pem exts demoCA *.jks *.chain *.crt *.log
+
 # Initialize the default openssl DataBase.
 # According to a default /usr/lib/ssl/openssl.cnf file it is ./demoCA
 # Depending on the Openssl version, comment out "crlnumber" in config file.
@@ -18,18 +21,31 @@
 
 mkdir -p demoCA/newcerts
 cp /dev/null demoCA/index.txt
-echo "1346" > demoCA/serial
+echo "1345" > demoCA/serial
 
-# Create keypairs and Cert Requests
-# This procedure must be done in JKS, because we need to use a JKS keystore.
-# The current version of CXF using PCKS12 will not work for a number of 
-# internal CXF reasons.
+# This file makes sure that the certificate for CN=TheRA can be a Certificate
+# Authority, i.e. can sign the user certificates, e.g. "CN=Wibble".
+
+cat <<EOF > exts
+[x509_extensions]
+basicConstraints=CA:true
+EOF
+
+# Create the CA's keypair and self-signed certificate
+#   -x509 means create self-sign cert
+#   -keyout means generate keypair
+#   -nodes means do not encrypt private key.
+#   -set_serial sets the serial number of the certificate
+
+    openssl req -verbose -x509 -new -nodes -set_serial 1234 \
+    -subj "/CN=TheCA/OU=NOT FOR PRODUCTION/O=SKL/ST=GBG/C=SE" \
+    -days 7300 -out cacert.pem -keyout caprivkey.pem -newkey rsa:1024
 
 # ### Consumers (Calling clients to TP) ###
 #   Consumer
     keytool -genkey \
     -alias Consumer \
-    -dname "CN=Consumer, OU=VardgivareA-IVK, O=SKL, ST=GBG, C=SE" \
+    -dname "CN=Consumer, OU=VardgivareA, O=SKL, ST=GBG, C=SE" \
     -keystore consumer.jks -storetype jks -storepass password -keypass password -keyalg RSA
 
     keytool -certreq -keystore consumer.jks -storetype jks -storepass password \
@@ -40,7 +56,7 @@ echo "1346" > demoCA/serial
 #   Producer
     keytool -genkey \
     -alias Producer \
-    -dname "CN=producer.riv.se, OU=VardgivareB-IVK, O=SKL, ST=GBG, C=SE" \
+    -dname "CN=producer.riv.se, OU=VardgivareB, O=SKL, ST=GBG, C=SE" \
     -keystore producer.jks -storetype jks -storepass password -keypass password -keyalg RSA
 
     keytool -certreq -keystore producer.jks -storetype jks -storepass password \
@@ -50,7 +66,7 @@ echo "1346" > demoCA/serial
 #   ProducerLocalhost
     keytool -genkey \
     -alias ProducerLocalhost \
-    -dname "CN=localhost, OU=VardgivareC-IVK, O=SKL, ST=GBG, C=SE" \
+    -dname "CN=localhost, OU=VardgivareC, O=SKL, ST=GBG, C=SE" \
     -keystore producer-localhost.jks -storetype jks -storepass password -keypass password -keyalg RSA
 
     keytool -certreq -keystore producer-localhost.jks -storetype jks -storepass password \
@@ -60,17 +76,18 @@ echo "1346" > demoCA/serial
 # Have the CN=TheCA issue a certificate for Consumers and Producers via
 # their Certificate Requests.
 #  Consumers 
-   openssl ca -batch -days 7200 -cert cacert.pem -keyfile caprivkey.pem \
+   openssl ca -batch -days 1820 -cert cacert.pem -keyfile caprivkey.pem \
    -in csrConsumer.pem -out Consumer-ca-cert.pem
 #  Producers
-   openssl ca -batch -days 7200 -cert cacert.pem -keyfile caprivkey.pem \
+   openssl ca -batch -days 1820 -cert cacert.pem -keyfile caprivkey.pem \
    -in csrProducer.pem -out Producer-ca-cert.pem
 
-   openssl ca -batch -days 7200 -cert cacert.pem -keyfile caprivkey.pem \
+   openssl ca -batch -days 1820 -cert cacert.pem -keyfile caprivkey.pem \
    -in csrProducerLocalhost.pem -out ProducerLocalhost-ca-cert.pem
 
 # Rewrite the certificates in PEM only format. This allows us to concatenate
 # them into chains.
+	openssl x509 -in cacert.pem -out cacert.pem -outform PEM
     openssl x509 -in Consumer-ca-cert.pem -out Consumer-ca-cert.pem -outform PEM
     openssl x509 -in Producer-ca-cert.pem -out Producer-ca-cert.pem -outform PEM
     openssl x509 -in ProducerLocalhost-ca-cert.pem -out ProducerLocalhost-ca-cert.pem -outform PEM
