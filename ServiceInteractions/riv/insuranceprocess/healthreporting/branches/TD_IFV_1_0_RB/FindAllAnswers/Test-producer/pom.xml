@@ -28,14 +28,14 @@
         <modelVersion>4.0.0</modelVersion>
         <groupId>se.skl.tp</groupId>
  <artifactId>insuranceprocess-healthreporting-findallanswers-test-producer</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0</version>
  <name>insuranceprocess-healthreporting-findallanswers-test-producer</name>
         <url>http://maven.apache.org</url>
         
         <parent>
         	<groupId>se.skl.tp</groupId>
         	<artifactId>FindAllAnswers-service</artifactId>
-        	<version>1.0-SNAPSHOT</version>
+        	<version>1.0.0</version>
         </parent>
         
         <dependencies>
@@ -43,7 +43,7 @@
          <dependency>
           <groupId>se.riv.fk</groupId>
           <artifactId>insuranceprocess-healthreporting-schemas</artifactId>
-          <version>1.0-SNAPSHOT</version>
+          <version>1.0.0</version>
          </dependency>
          
         	<!-- CXF -->
