@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:riv:TerminologyService:BaseTypes:1" targetNamespace="urn:riv:TerminologyService:BaseTypes:1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<!-- Simple types -->
+	<xs:simpleType name="HSAIdType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConceptCodeSystemType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConceptCodeType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConceptTermType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MetadataNameType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MetadataValueType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- end simple types -->
+	<!-- Complex types -->
+	<xs:complexType name="MetadataType">
+		<xs:sequence>
+			<xs:element name="Name" type="MetadataNameType">
+				<xs:annotation>
+					<xs:documentation>Identifierar typ av metadata</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Value" type="MetadataValueType">
+				<xs:annotation>
+					<xs:documentation>Metadatavärde</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConceptType">
+		<xs:sequence>
+			<xs:element name="CodeSystem" type="ConceptCodeSystemType">
+				<xs:annotation>
+					<xs:documentation>Identifierare av kodsystem</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Code" type="ConceptCodeType">
+				<xs:annotation>
+					<xs:documentation>Kod för val i listan</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Term" type="ConceptTermType">
+				<xs:annotation>
+					<xs:documentation>Term som visas upp i vallistan</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Metadata" type="MetadataType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>0..* Metadata</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- End complex types -->
+</xs:schema>
