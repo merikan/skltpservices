@@ -1,0 +1,9 @@
+20110204    ÅÄÖ i payload schema utbytt till AAO pga problem med JAXB-bindningar
+20110228    Endast koder från klassifiktioner, och inte tillhörande term, ska skickas till Infektionsverktyget och därför har termerna tagits
+	    bort från exemepelmeddelanden och mallmeddelanden.
+	    Riksskatteverket har ändrats till Skatteverket i samtliga exempelmeddelanden.
+20110309    $$logical_address tillagd i samtliga mallmeddelanden
+	    Exempel på HSA-id för vårdgivare tillagd i $$logical_address i samtliga exempelmeddelanden
+20110317    Felaktigt tidsformat korrigerat i Exempelemeddelande PrescriptionReason Activity.xml
+20110408    Ny variabel $$id_terminologi för att kunna hantera både Snomed CT och Annan-kodverk i samma element. Mallmeddelande är uppdaterade enligt detta.
+	    Nytt kodverk för attributet smittväg. Mallmeddelande och exempelmeddelande är uppdaterade enligt detta.
