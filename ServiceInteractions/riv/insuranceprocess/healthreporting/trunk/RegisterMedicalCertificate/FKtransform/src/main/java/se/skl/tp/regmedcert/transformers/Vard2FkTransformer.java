@@ -11,6 +11,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import org.mule.api.MuleMessage;
@@ -99,11 +100,12 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
     
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
 		ResourceBundle rb = ResourceBundle.getBundle("fkdataRegMedCert");	    
-
+		XMLStreamReader streamPayload = null;
+		
 		try {			
 			// Transform the XML payload into a JAXB object
             Unmarshaller unmarshaller = JAXBContext.newInstance(RegisterMedicalCertificateType.class).createUnmarshaller();
-            XMLStreamReader streamPayload = (XMLStreamReader)((Object[])message.getPayload())[1];
+            streamPayload = (XMLStreamReader)((Object[])message.getPayload())[1];
             RegisterMedicalCertificateType inRequest = (RegisterMedicalCertificateType)((JAXBElement)unmarshaller.unmarshal(streamPayload)).getValue();
 
 			// Get receiver to adress from Mule property
@@ -555,6 +557,14 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 		} catch (Exception e) {
 			logger.error("Transform exception:" + e.getMessage());
 			throw new TransformerException(MessageFactory.createStaticMessage(e.getMessage()));
+		} finally {
+			if (streamPayload != null) {
+				try {
+					streamPayload.close();
+				} catch (XMLStreamException e) {
+					e.printStackTrace();
+				}
+			}
 		}
     }
 

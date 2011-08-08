@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import se.fk.vardgivare.sjukvard.taemotlakarintygresponder.v1.TaEmotLakarintygResponseType;
 import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v3.RegisterMedicalCertificateResponseType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ErrorIdEnum;
 import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
 import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
 
@@ -37,6 +38,7 @@ public class Fk2VardTransformer extends AbstractMessageAwareTransformer
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
 
 		boolean faultDetected = false;
+		boolean validationErrorDetected = false;
 		
     	Object src = message.getPayload();
 		try {						
@@ -51,7 +53,13 @@ public class Fk2VardTransformer extends AbstractMessageAwareTransformer
 		            if (t instanceof ResponseTimeoutException) {
 		            	src = errorMessage + ". Timeout.";
 		            } else {
-		                src = errorMessage + ". Unknown error.";
+		            	// Check if we have a validation error!
+		            	if (errorMessage.contains("Validation error")) {
+		            		validationErrorDetected = true;
+			                src = ep.getMessage();
+		            	} else {
+			                src = errorMessage + ". Unknown error.";
+		            	}
 		            }
 		            
 		            // Remove the ExceptionPayload!
@@ -63,12 +71,10 @@ public class Fk2VardTransformer extends AbstractMessageAwareTransformer
 				faultDetected = true;
 			}
 
-//			QName name = getRootElementQName(src);
-
 			StringBuffer result = new StringBuffer();
 			
 			// First create the content in the body, either a fault or the response
-			if (faultDetected) {
+			if (faultDetected && !validationErrorDetected) {
 				// Strip off xml processing instructions if any
 				String payload = (String)src;
 				if (payload.startsWith("<?")) {
@@ -78,19 +84,26 @@ public class Fk2VardTransformer extends AbstractMessageAwareTransformer
 
 				createSoapFault(payload, result);
 			} else {
-	            TaEmotLakarintygResponseType inResponse = (TaEmotLakarintygResponseType)src;
-
 	            // Create new JAXB object for the outgoing data
-	            RegisterMedicalCertificateResponseType outResponse = new RegisterMedicalCertificateResponseType();
-	            
+	            RegisterMedicalCertificateResponseType outResponse = new RegisterMedicalCertificateResponseType(); 
 	            ResultOfCall resultOfCall = new ResultOfCall();
-	            
-	            // Check result
-	            if (inResponse != null) {
-	            	resultOfCall.setResultCode(ResultCodeEnum.OK);
-	            	outResponse.setResult(resultOfCall);
-	            }
-	            
+            	outResponse.setResult(resultOfCall);					
+
+	            if (validationErrorDetected) {
+	            	resultOfCall.setResultCode(ResultCodeEnum.ERROR);
+	            	resultOfCall.setErrorId(ErrorIdEnum.VALIDATION_ERROR);
+	            	resultOfCall.setErrorText((String)src);
+				} else {
+					TaEmotLakarintygResponseType inResponse = (TaEmotLakarintygResponseType)src;
+		            if (inResponse != null) {
+		            	resultOfCall.setResultCode(ResultCodeEnum.OK);
+		            } else {
+		            	resultOfCall.setResultCode(ResultCodeEnum.ERROR);
+		            	resultOfCall.setErrorId(ErrorIdEnum.TECHNICAL_ERROR);
+		            }
+				}
+
+	            	            
 	            // If payload already is a SoapFault How to use marshalling?
 	            
 				// Transform the JAXB object into a XML payload
@@ -103,7 +116,7 @@ public class Fk2VardTransformer extends AbstractMessageAwareTransformer
 					int pos = payload.indexOf("?>");
 					payload = payload.substring(pos + 2);
 				}
-
+				writer.close();
 				result.append(payload);
 			}
 
