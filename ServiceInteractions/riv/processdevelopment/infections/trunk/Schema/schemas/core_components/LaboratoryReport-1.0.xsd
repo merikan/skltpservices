@@ -241,70 +241,8 @@
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="origin" type="oe:DV_DATE_TIME" minOccurs="0"/>
-										<xs:element name="vilken_handelse_som_helst">
-											<xs:complexType>
-												<xs:sequence>
-													<xs:element name="name">
-														<xs:complexType>
-															<xs:sequence>
-																<xs:element name="value" type="xs:string" default="vilken händelse som helst"/>
-																<xs:element name="mappings" type="oe:TERM_MAPPING" minOccurs="0" maxOccurs="unbounded"/>
-																<xs:element name="defining_code" type="oe:CODE_PHRASE" minOccurs="0"/>
-															</xs:sequence>
-														</xs:complexType>
-													</xs:element>
-													<xs:element name="time" type="oe:DV_DATE_TIME"/>
-													<xs:element name="data">
-														<xs:complexType>
-															<xs:sequence>
-																<xs:element name="Mikrobiologisk_organism">
-																	<xs:complexType>
-																		<xs:sequence>
-																			<xs:element name="name">
-																				<xs:complexType>
-																					<xs:sequence>
-																						<xs:element name="value" type="xs:string" default="Mikrobiologisk organism"/>
-																						<xs:element name="mappings" type="oe:TERM_MAPPING" minOccurs="0" maxOccurs="unbounded"/>
-																						<xs:element name="defining_code" type="oe:CODE_PHRASE" minOccurs="0"/>
-																					</xs:sequence>
-																				</xs:complexType>
-																			</xs:element>
-																			<xs:element name="agenskod">
-																				<xs:complexType>
-																					<xs:sequence>
-																						<xs:element name="name">
-																							<xs:complexType>
-																								<xs:sequence>
-																									<xs:element name="value" type="xs:string" default="agenskod"/>
-																									<xs:element name="mappings" type="oe:TERM_MAPPING" minOccurs="0" maxOccurs="unbounded"/>
-																									<xs:element name="defining_code" type="oe:CODE_PHRASE" minOccurs="0"/>
-																								</xs:sequence>
-																							</xs:complexType>
-																						</xs:element>
-																						<xs:element name="value" type="oe:DV_CODED_TEXT"/>
-																						<xs:element name="null_flavour" type="oe:DV_CODED_TEXT" minOccurs="0"/>
-																					</xs:sequence>
-																					<xs:attribute name="archetype_node_id" type="oe:archetypeNodeId" fixed="at0001"/>
-																					<xs:attribute name="type" fixed="ELEMENT"/>
-																					<xs:attribute name="valueType" fixed="DV_CODED_TEXT"/>
-																				</xs:complexType>
-																			</xs:element>
-																		</xs:sequence>
-																		<xs:attribute name="archetype_node_id" type="oe:archetypeNodeId" fixed="openEHR-EHR-CLUSTER.microbial_organism.v1"/>
-																		<xs:attribute name="type" fixed="CLUSTER"/>
-																	</xs:complexType>
-																</xs:element>
-															</xs:sequence>
-															<xs:attribute name="archetype_node_id" type="oe:archetypeNodeId" fixed="at0003"/>
-															<xs:attribute name="type" fixed="ITEM_TREE"/>
-														</xs:complexType>
-													</xs:element>
-												</xs:sequence>
-												<xs:attribute name="archetype_node_id" type="oe:archetypeNodeId" fixed="at0002"/>
-												<xs:attribute name="type" fixed="POINT_EVENT"/>
-											</xs:complexType>
-										</xs:element>
-									</xs:sequence>
+										<xs:element name="vilken_handelse_som_helst" type="vilken_handelse_som_helstType"/>
+</xs:sequence>
 									<xs:attribute name="archetype_node_id" type="oe:archetypeNodeId" fixed="at0001"/>
 								</xs:complexType>
 							</xs:element>
@@ -437,4 +375,65 @@
 			<xs:attribute name="template_id" use="required" fixed="Laboratoriesvar"/>
 		</xs:complexType>
 	</xs:element>
+	<xs:complexType name="vilken_handelse_som_helstType">
+		<xs:sequence>
+						<xs:element name="name">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="value" type="xs:string" default="vilken händelse som helst"/>
+									<xs:element name="mappings" type="oe:TERM_MAPPING" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="defining_code" type="oe:CODE_PHRASE" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="time" type="oe:DV_DATE_TIME"/>
+						<xs:element name="data">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Mikrobiologisk_organism">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="name">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="value" type="xs:string" default="Mikrobiologisk organism"/>
+															<xs:element name="mappings" type="oe:TERM_MAPPING" minOccurs="0" maxOccurs="unbounded"/>
+															<xs:element name="defining_code" type="oe:CODE_PHRASE" minOccurs="0"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="agenskod">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="name">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="value" type="xs:string" default="agenskod"/>
+																		<xs:element name="mappings" type="oe:TERM_MAPPING" minOccurs="0" maxOccurs="unbounded"/>
+																		<xs:element name="defining_code" type="oe:CODE_PHRASE" minOccurs="0"/>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="value" type="oe:DV_CODED_TEXT"/>
+															<xs:element name="null_flavour" type="oe:DV_CODED_TEXT" minOccurs="0"/>
+														</xs:sequence>
+														<xs:attribute name="archetype_node_id" type="oe:archetypeNodeId" fixed="at0001"/>
+														<xs:attribute name="type" fixed="ELEMENT"/>
+														<xs:attribute name="valueType" fixed="DV_CODED_TEXT"/>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+											<xs:attribute name="archetype_node_id" type="oe:archetypeNodeId" fixed="openEHR-EHR-CLUSTER.microbial_organism.v1"/>
+											<xs:attribute name="type" fixed="CLUSTER"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute name="archetype_node_id" type="oe:archetypeNodeId" fixed="at0003"/>
+								<xs:attribute name="type" fixed="ITEM_TREE"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="archetype_node_id" type="oe:archetypeNodeId" fixed="at0002"/>
+					<xs:attribute name="type" fixed="POINT_EVENT"/>
+				</xs:complexType>
 </xs:schema>
