@@ -256,50 +256,7 @@
 									</extraargs>
 									<wsdl>${schema.path}/interactions/DeleteLaboratoryReportInteraction/DeleteLaboratoryReportInteraction_1.0_RIVTABP20.wsdl</wsdl>
 								</wsdlOption>								
-								
-								<wsdlOption>
-									<extraargs>
-										<extraarg>-p</extraarg>
-										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
-										<extraarg>
-											urn:riv:processdevelopment:infections:DeletePatientInformation:1:rivtabp20=se.riv.processdevelopment.infections.deletepatientinformation.v1
-										</extraarg>
-										<extraarg>-p</extraarg>
-										<extraarg>
-											urn:riv:processdevelopment:infections:DeletePatientInformationResponder:1=se.riv.processdevelopment.infections.deletepatientinformation.v1
-										</extraarg>
-										<extraarg>-p</extraarg>
-										<extraarg>
-											urn:riv:processdevelopment:infections:1=se.riv.processdevelopment.infections.v1
-										</extraarg>										
-										<extraarg>-p</extraarg>
-										<extraarg>
-											urn:riv:processdevelopment:infections:1:Activity=se.riv.processdevelopment.infections.activity.v1
-										</extraarg>										
-										<extraarg>-p</extraarg>
-										<extraarg>
-											urn:riv:processdevelopment:infections:1:CareEncounter=se.riv.processdevelopment.infections.careencounter.v1
-										</extraarg>										
-										<extraarg>-p</extraarg>
-										<extraarg>
-											urn:riv:processdevelopment:infections:1:Condition=se.riv.processdevelopment.infections.condition.v1
-										</extraarg>										
-										<extraarg>-p</extraarg>
-										<extraarg>
-											urn:riv:processdevelopment:infections:1:LaboratoryReport=se.riv.processdevelopment.infections.laboratoryreport.v1
-										</extraarg>										
-										<extraarg>-p</extraarg>
-										<extraarg>
-											urn:riv:processdevelopment:infections:1:PrescriptionReason=se.riv.processdevelopment.infections.prescriptionreason.v1
-										</extraarg>
-										<extraarg>-p</extraarg>
-										<extraarg>
-											http://www.w3.org/2005/08/addressing=org.w3.wsaddressing10
-										</extraarg>
-									</extraargs>
-									<wsdl>${schema.path}/interactions/DeletePatientInformationInteraction/DeletePatientInformationInteraction_1.0_RIVTABP20.wsdl</wsdl>
-								</wsdlOption>								
-								
+																
 								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
