@@ -31,7 +31,7 @@
 			 </xs:documentation>
   </xs:annotation>
   <wsdl:types>
-    <xs:schema>
+    <xs:schema targetNamespace='urn:riv:informatics:terminology:GetTerminologySubset:1:rivtabp20'>
       <xs:import schemaLocation='GetTerminologySubsetResponder_1.0.xsd' namespace='urn:riv:informatics:terminology:GetTerminologySubsetResponder:1' />
       <xs:import schemaLocation='../../core_components/ws-addressing-1.0.xsd' namespace='http://www.w3.org/2005/08/addressing' />
     </xs:schema>

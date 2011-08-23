@@ -17,8 +17,8 @@
  specific language governing permissions and limitations
  under the License.
  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bt="urn:riv:TerminologyService:BaseTypes:1" xmlns="urn:riv:informatics:terminology:GetTerminologySubsetResponder:1" targetNamespace="urn:riv:informatics:terminology:GetTerminologySubsetResponder:1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
-	<xs:import namespace="urn:riv:TerminologyService:BaseTypes:1" schemaLocation="../../core_components/TerminologyServiceBaseTypes_1.0.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bt="urn:riv:informatics:terminology:1" xmlns="urn:riv:informatics:terminology:GetTerminologySubsetResponder:1" targetNamespace="urn:riv:informatics:terminology:GetTerminologySubsetResponder:1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="urn:riv:informatics:terminology:1" schemaLocation="../../core_components/TerminologyServiceBaseTypes_1.0.xsd"/>
 	<!-- Request and response types -->
 	<xs:element name="GetTerminologySubset" type="GetTerminologySubsetRequestType"/>
 	<xs:element name="GetTerminologySubsetResponse" type="GetTerminologySubsetResponseType"/>
@@ -29,7 +29,7 @@
 					<xs:documentation>Identifierare som representerar urvalet</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="LocalOrganizationExtension" minOccurs="0" type="bt:HSAIdType">
+			<xs:element name="LocalOrganizationExtension" type="bt:HSAIdType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>HSAId för organisationspost motsvarande vårdgivare i HSA-trädet</xs:documentation>
 				</xs:annotation>
