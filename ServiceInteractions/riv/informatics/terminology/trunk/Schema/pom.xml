@@ -91,15 +91,15 @@
 										<extraarg>-p</extraarg>
 										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
 										<extraarg>
-											urn:riv:processdevelopment:infections:DeleteActivity:1:rivtabp20=se.riv.processdevelopment.infections.deleteactivity.v1
+											urn:riv:informatics:terminology:GetTerminologySubset:1:rivtabp20=se.riv.informatics.terminology.getterminologysubset.v1
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
-											urn:riv:processdevelopment:infections:DeleteActivityResponder:1=se.riv.processdevelopment.infections.deleteactivity.v1
+											urn:riv:informatics:terminology:GetTerminologySubsetResponder:1=se.riv.informatics.terminology.getterminologysubset.v1
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
-											urn:riv:processdevelopment:infections:1=se.riv.processdevelopment.infections.v1
+											urn:riv:informatics:terminology:1=se.riv.informatics.terminology.v1
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
