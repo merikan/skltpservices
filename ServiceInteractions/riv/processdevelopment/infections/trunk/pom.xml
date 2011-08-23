@@ -43,7 +43,6 @@
     <module>DeleteCareEncounter</module>
     <module>DeleteCondition</module>
     <module>DeleteLaboratoryReport</module>
-    <module>DeletePatientInformation</module>
     <module>DeletePrescriptionReason</module>
     <module>ProcessActivity</module>
     <module>ProcessCareEncounter</module>
