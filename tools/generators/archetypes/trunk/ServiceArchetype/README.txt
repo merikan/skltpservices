@@ -1,10 +1,7 @@
 Instructions for using the service-bundle-archetype
 ===================================================
 
-The bundle is, by default, providing an example for the
-PingForConfiguration service. Each service bundle created
-from the archetype will have the following structure:
-
+The archetype creates a service for domain.subdomain.
 
 |<service-name>
 |   |
@@ -15,13 +12,9 @@ Create a service
 
 1. Install the archetype.
 - Enter the /skltpservices/tools/generators/archetypes/trunk/ServiceArchetype 
-- run mvn install
-
-The archetype is now installed on your system.
+- run mvn install to install archetype on your system.
 
 2. Navigate to a place where you want to create a new service and do
-
-SAMPLE execution, replace user.dir, artifactId, domain and subdomain with correct values
 
 mvn archetype:generate\
 		-DinteractiveMode=true\
@@ -35,9 +28,12 @@ mvn archetype:generate\
 		-Ddomain=crm\ 
 		-Dsubdomain=scheduling\
 
-This should create the directory /path/where/to/be/generated/CancelBooking
+user.dir: can be . or any other path where service should be generated
+artifactId: Name of the new service, e.g CancelBooking
+domain: The main domain, e.g crm
+subdomain: the sub domain, e.g scheduling
 
-3. Finally, generate the service by entering the /path/where/to/be/generated/CancelBooking directory and do mvn install
+3. Finally, generate the service by entering the "user.dir/artifactId" directory and do mvn install
 
 Import to Eclipse
 =================
