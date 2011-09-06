@@ -60,7 +60,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
-                    <tagBase>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/local/itintegration/monitoring/tags</tagBase>
+                    <tagBase>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/local/itintegration/monitoring/tags</tagBase>
                 </configuration>
             </plugin> 
 		</plugins>
