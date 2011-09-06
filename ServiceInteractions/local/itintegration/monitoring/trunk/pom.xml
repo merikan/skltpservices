@@ -14,7 +14,7 @@
 
 	<groupId>se.skl.tp</groupId>
 	<artifactId>itintegration-monitoring</artifactId>
-	<version>1.1</version>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>itintegration-monitoring</name>
 
@@ -26,8 +26,8 @@
 	</properties>
 
 	<scm>
-		<connection>scm:svn:scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/local/itintegration/monitoring/tags/itintegration-monitoring-1.1</connection>
-		<developerConnection>scm:svn:scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/local/itintegration/monitoring/tags/itintegration-monitoring-1.1</developerConnection>
+		<connection>scm:svn:scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/local/itintegration/monitoring/trunk</connection>
+		<developerConnection>scm:svn:scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/local/itintegration/monitoring/trunk</developerConnection>
 	</scm>
 
 	<distributionManagement>
