@@ -26,8 +26,8 @@
 	</properties>
 
 	<scm>
-		<connection>scm:svn:scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/local/itintegration/monitoring/trunk</connection>
-		<developerConnection>scm:svn:scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/local/itintegration/monitoring/trunk</developerConnection>
+		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/local/itintegration/monitoring/trunk</connection>
+		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/local/itintegration/monitoring/trunk</developerConnection>
 	</scm>
 
 	<distributionManagement>
