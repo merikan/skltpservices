@@ -5,6 +5,11 @@ package se.skltpservices.tools
 import groovy.io.FileType
 
 /**
+ * This script should help us to generate many services at one time. This script is depending on the archetype named service-archetype.
+ * This archetype must be installed before running the script.
+ * 
+ * Version info:
+ * Current script is under construction.
  * 
  */
 
