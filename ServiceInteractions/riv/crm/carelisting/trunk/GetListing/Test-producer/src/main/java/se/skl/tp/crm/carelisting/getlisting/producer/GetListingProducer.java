@@ -21,12 +21,24 @@
 
 package se.skl.tp.crm.carelisting.getlisting.producer;
 
+import java.net.URL;
+
 import javax.xml.ws.Endpoint;
+
+import org.apache.cxf.Bus;
+import org.apache.cxf.bus.spring.SpringBusFactory;
 
 public class GetListingProducer {
 
     protected GetListingProducer() throws Exception {
         System.out.println("Starting Producer");
+
+        // Loads a cxf configuration file to use
+        final SpringBusFactory bf = new SpringBusFactory();
+        final URL busFile = this.getClass().getClassLoader().getResource("cxf-producer.xml");
+        final Bus bus = bf.createBus(busFile.toString());
+        
+        SpringBusFactory.setDefaultBus(bus);
 
         Object implementor = new GetListingImpl();
         String address = "https://localhost:19000/vp/GetListing/1/rivtabp20";
