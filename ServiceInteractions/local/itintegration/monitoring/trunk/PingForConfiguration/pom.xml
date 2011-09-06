@@ -3,14 +3,14 @@
 
   <groupId>se.skl.tp</groupId>
   <artifactId>PingForConfiguration-service</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>PingForConfiguration-service</name>
 
   <parent>
   	<groupId>se.skl.tp</groupId>
   	<artifactId>itintegration-monitoring</artifactId>
-  	<version>1.0-SNAPSHOT</version>
+  	<version>1.1-SNAPSHOT</version>
   </parent>
 
   <!-- Modules to be created for each service -->
