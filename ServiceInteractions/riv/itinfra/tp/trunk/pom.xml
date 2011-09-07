@@ -35,8 +35,8 @@
 	</modules>
 	
 	<scm>
-		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itnfra/tp/trunk</connection>
-		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itnfra/tp/trunk</developerConnection>
+		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/trunk</connection>
+		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/trunk</developerConnection>
 	</scm>
 	
 	<build>
@@ -45,7 +45,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
-                    <tagBase>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itnfra/tp/tags</tagBase>
+                    <tagBase>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/tags</tagBase>
                 </configuration>
             </plugin> 
 		</plugins>
