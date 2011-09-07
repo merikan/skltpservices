@@ -34,11 +34,6 @@
 	<xs:element name="ping" type="tns:pingRequestType" />
 	<xs:element name="pingResponse" type="tns:pingResponseType" />
 
-	<!-- Fel -->
-<!-- 
-	<xs:element name="PersonNotFoundException" type="core:PersonNotFoundException" />
-	<xs:element name="TechnicalException" type="core:TechnicalException" />
--->
 	<!-- data typer -->
 	<xs:complexType name="pingRequestType">
 		<xs:sequence>

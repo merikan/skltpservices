@@ -47,8 +47,7 @@
 		</xsd:schema>
 	</wsdl:types>
 
-	<!-- Meddelanden -->
-	<!-- Ping  -->
+	<!-- Meddelanden, Ping -->
 	<wsdl:message name="pingRequest">
 		<wsdl:part name="LogicalAddress" element="wsa:To" />
 		<wsdl:part name="parameters" element="tjs:ping" />
@@ -56,14 +55,6 @@
 	<wsdl:message name="pingResponse">
 		<wsdl:part name="parameters" element="tjs:pingResponse" />
 	</wsdl:message>
-<!--
-	<wsdl:message name="TechnicalException">
-		<wsdl:part name="parameters" element="tjs:TechnicalException" />
-	</wsdl:message>
-	<wsdl:message name="PersonNotFoundException">
-		<wsdl:part name="parameters" element="tjs:PersonNotFoundException" />
-	</wsdl:message>
--->
 
 	<!-- Port typer -->
 	<wsdl:portType name="PingResponderInterface">
@@ -72,11 +63,7 @@
 			</wsdl:documentation>
 			<wsdl:input message="pingRequest" />
 			<wsdl:output message="pingResponse" />
-<!-- 
-			<wsdl:fault name="PersonNotFoundException" message="PersonNotFoundException"></wsdl:fault>
-			<wsdl:fault name="TechnicalException" message="TechnicalException"></wsdl:fault>
--->
-</wsdl:operation>
+		</wsdl:operation>
 	</wsdl:portType>
 	
 	<!-- Bindningar -->
@@ -93,21 +80,13 @@
 			<wsdl:output>
 				<soap:body use="literal" />
 			</wsdl:output>
-<!-- 
-			<wsdl:fault name="PersonNotFoundException">
-				<soap:fault use="literal" name="PersonNotFoundException" />
-			</wsdl:fault>	
-			<wsdl:fault name="TechnicalException">
-				<soap:fault use="literal" name="TechnicalException" />
-			</wsdl:fault>	
--->
-	</wsdl:operation>
+		</wsdl:operation>
 	</wsdl:binding>
 
 	<!-- Servicar -->
 	<wsdl:service name="PingResponderService">
 		<wsdl:port name="PingResponderPort" binding="PingResponderBinding">
-			<soap:address location="http://temp.uri/" />
+			<soap:address location="http://www.google.com" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
