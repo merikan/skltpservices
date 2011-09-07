@@ -26,7 +26,7 @@
 
         <modelVersion>4.0.0</modelVersion>
         <groupId>se.skl.tp</groupId>
-        <artifactId>inera-ior-bestallorginalforpackning--virtualisering</artifactId>
+        <artifactId>inera-ior-bestallorginalforpackning-virtualisering</artifactId>
         <version>1.0-SNAPSHOT</version>
         <name>inera-ior-bestallorginalforpackning-virtualisering</name>
         <url>http://maven.apache.org</url>
