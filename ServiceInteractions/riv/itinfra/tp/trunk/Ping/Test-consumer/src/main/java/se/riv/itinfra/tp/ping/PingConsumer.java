@@ -33,17 +33,16 @@ import se.riv.itinfra.tp.pingresponder.v1.PingResponseType;
 public final class PingConsumer {
 
 	// Use this one to connect via Virtualiseringsplattformen
-	private static final String LOGISK_ADDRESS = "/Ping/1/rivtabp20";
+	private static final String LOGISK_ADDRESS = "/Ping_Service";
 	// Use this one to connect directly (just for test)
 
 	public static void main(String[] args) {
-		String host = "localhost:21000/vp";
+		String host = "localhost:10000/test";
 		if (args.length > 0) {
 			host = args[0];
 		}
 
 		// Setup ssl info for the initial ?wsdl lookup...
-//		System.setProperty("javax.net.ssl.keyStore","../../certs/consumer.jks");
 		System.setProperty("javax.net.ssl.keyStore","../../certs/consumer.jks");
 		System.setProperty("javax.net.ssl.keyStorePassword", "password");
 		System.setProperty("javax.net.ssl.keyStoreType", "jks");

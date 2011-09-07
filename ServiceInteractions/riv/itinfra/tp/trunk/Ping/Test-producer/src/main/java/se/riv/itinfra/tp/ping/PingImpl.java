@@ -37,14 +37,25 @@ import se.riv.itinfra.tp.pingresponder.v1.PingResponseType;
 public class PingImpl implements PingResponderInterface {
 
 	public PingResponseType ping(AttributedURIType logicalAddress, PingRequestType parameters) {
-//		try {
-			PingResponseType response = new PingResponseType();
+		PingResponseType response = new PingResponseType();
+		int sleepMillis = 0;
 
-			response.setPingUt("Ping response from: " + parameters.getPingIn());			
-			return response;
-//		} catch (RuntimeException e) {
-//			System.out.println("Error occured: " + e);
-//			throw e;
-//		}
+		// Check if to sleep
+		if (parameters.getPingIn().startsWith("sleep")) {
+			String sleepTime = parameters.getPingIn().substring(5, parameters.getPingIn().length());
+			sleepMillis = Integer.parseInt(sleepTime);
+		}
+		
+		if (sleepMillis > 0) {
+			Thread.currentThread();
+			try {
+				Thread.sleep(sleepMillis);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		response.setPingUt("Ping response from: " + parameters.getPingIn());			
+		return response;
 	}
 }

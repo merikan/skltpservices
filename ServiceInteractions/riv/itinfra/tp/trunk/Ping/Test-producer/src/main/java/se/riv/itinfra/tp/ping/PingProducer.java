@@ -21,15 +21,26 @@
 
 package se.riv.itinfra.tp.ping;
 
+import java.net.URL;
+
 import javax.xml.ws.Endpoint;
+
+import org.apache.cxf.Bus;
+import org.apache.cxf.bus.spring.SpringBusFactory;
 
 public class PingProducer {
 
     protected PingProducer() throws Exception {
         System.out.println("Starting Producer");
 
+        // Loads a cxf configuration file to use
+        SpringBusFactory bf = new SpringBusFactory();
+        URL busFile = this.getClass().getClassLoader().getResource("cxf-producer.xml");
+        Bus bus = bf.createBus(busFile.toString());
+        SpringBusFactory.setDefaultBus(bus);
+        
         Object implementor = new PingImpl();
-        String address = "https://localhost:21000/vp/Ping/1/rivtabp20";
+        String address = "https://localhost:10000/test/Ping_Service";
         Endpoint.publish(address, implementor);
     }
 
