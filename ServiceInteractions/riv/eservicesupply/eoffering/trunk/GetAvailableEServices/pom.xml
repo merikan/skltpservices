@@ -3,14 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>se.skl.tp</groupId>
-  <artifactId>GetAvailableEServices-service</artifactId>
+  <artifactId>eservicesupply-eoffering-service</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>GetAvailableEServices-service</name>
+  <name>eservicesupply-eoffering-service</name>
 
   <parent>
   	<groupId>se.skl.tp</groupId>
-  	<artifactId>GetAvailableEServicesBundle</artifactId>
+  	<artifactId>eservicesupply-eoffering</artifactId>
   	<version>1.0-SNAPSHOT</version>
   </parent>
 
