@@ -35,8 +35,8 @@
 	</modules>
 	
 	<scm>
-		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itnfra/tp/tags/itinfra-tp-1.1</connection>
-		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itnfra/tp/tags/itinfra-tp-1.1</developerConnection>
+		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itnfra/tp/trunk</connection>
+		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itnfra/tp/trunk</developerConnection>
 	</scm>
 	
 	<build>
