@@ -24,10 +24,6 @@ $symbol_escape = '\' )
 
 	<!-- Name of this file is mandatory and may not be changed. -->
 
-	<message-properties-transformer name="Add-riv-version-${service.name}">
-		<add-message-property key="rivversion" value="RIVTABP20" />
-	</message-properties-transformer>
-
 	<model name="Get-${service.name}-model">
 
 		<service name="Get-${service.name}-service">
@@ -36,13 +32,14 @@ $symbol_escape = '\' )
 					address="https://${tp.host}:${tp.port}/${tp.baseUri}/${service.relative.path}"
 					wsdlLocation="classpath:/schemas/interactions/${service.name}Interactions/${service.wsdl.file}"
 					serviceName="${service.name}ResponderService" namespace="${service.ns}"
-					proxy="true" payload="envelope" synchronous="true" />
+					proxy="true" payload="envelope" synchronous="true" 
+					protocolConnector="VPProducerConnector"/>
 			</inbound>
 
 			<outbound>
 				<pass-through-router>
 					<outbound-endpoint address="vm://vagval-router"
-						synchronous="true" transformer-refs="Add-riv-version-${service.name}" />
+						synchronous="true"/>
 				</pass-through-router>
 			</outbound>
 		</service>
