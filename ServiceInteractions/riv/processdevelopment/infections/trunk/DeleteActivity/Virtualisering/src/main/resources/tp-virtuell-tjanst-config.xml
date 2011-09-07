@@ -32,12 +32,7 @@
 	<!--
 	Name of this file is mandatory and may not be changed. 
 	 -->
- 	
-	<message-properties-transformer name="Add-riv-version-DeleteActivity">
-        <add-message-property key="rivversion" value="RIVTABP20"/>
-    </message-properties-transformer>           
- 
-	<model name="DeleteActivity-model">
+ 	<model name="DeleteActivity-model">
 		
 		<service name="DeleteActivity-service">
 			<inbound>
@@ -48,14 +43,14 @@
 					proxy="true" 
 					payload="envelope"
 					synchronous="true"
+					protocolConnector="VPProducerConnector"
 					/>
 			</inbound>
      
 			<outbound>
                 <pass-through-router>
         			<outbound-endpoint address="vm://vagval-router" 
-        			synchronous="true"
-        			transformer-refs="Add-riv-version-DeleteActivity" />
+        			synchronous="true" />
                 </pass-through-router>
 			</outbound>    		
 		</service>						
