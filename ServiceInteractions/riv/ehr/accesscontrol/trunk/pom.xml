@@ -39,14 +39,6 @@
 		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/ehr/accesscontrol/trunk</developerConnection>
 	</scm>
 	
-	<distributionManagement>
-		<repository>
-			<id>repo</id>
-			<name>Local builds</name>
-			<url>file:///${user.home}/builds</url>
-		</repository>
-	</distributionManagement>
-	
 	<build>
 		<plugins>
 			  <plugin>
