@@ -20,22 +20,19 @@
  *   Boston, MA 02111-1307  USA
  -->
 
-<project 
-        xmlns="http://maven.apache.org/POM/4.0.0" 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
         <modelVersion>4.0.0</modelVersion>
         <groupId>se.skl.tp</groupId>
  <artifactId>insuranceprocess-healthreporting-deleteanswers-test-consumer</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
  <name>insuranceprocess-healthreporting-deleteanswers-test-consumer</name>
         <url>http://maven.apache.org</url>
         
         <parent>
         	<groupId>se.skl.tp</groupId>
         	<artifactId>DeleteAnswers-service</artifactId>
-        	<version>1.0-SNAPSHOT</version>
+        	<version>1.0</version>
         </parent>
         
         <dependencies>
@@ -43,7 +40,7 @@
          <dependency>
           <groupId>se.riv.fk</groupId>
           <artifactId>insuranceprocess-healthreporting-schemas</artifactId>
-          <version>1.0-SNAPSHOT</version>
+          <version>1.0</version>
          </dependency>
          
         	<!-- CXF -->
