@@ -25,14 +25,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.tp</groupId>
 	<artifactId>itinfra-tp-ping-test-producer</artifactId>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
 	<name>itinfra-tp-ping-test-producer</name>
 	<url>http://maven.apache.org</url>
     
     <parent>
         <groupId>se.skl.tp</groupId>
         <artifactId>itinfra-tp-ping-service</artifactId>
-        <version>1.1</version>
+        <version>1.2-SNAPSHOT</version>
     </parent>
     
 	<properties>
@@ -47,7 +47,7 @@
         <dependency>
             <groupId>se.skl.tp</groupId>
             <artifactId>itinfra-tp-schemas</artifactId>
-            <version>1.1</version>
+            <version>1.2-SNAPSHOT</version>
         </dependency>
 	    <!-- cxf dependencies -->
         <dependency>

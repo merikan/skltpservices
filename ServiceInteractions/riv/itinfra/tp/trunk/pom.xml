@@ -25,7 +25,7 @@
 	<groupId>se.skl.tp</groupId>
 	<artifactId>itinfra-tp</artifactId>
 	<packaging>pom</packaging>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
  <name>itinfra-tp</name>
 	<url>http://maven.apache.org</url>
 
@@ -35,8 +35,8 @@
 	</modules>
 	
 	<scm>
-		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/tags/itinfra-tp-1.1</connection>
-		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/tags/itinfra-tp-1.1</developerConnection>
+		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/trunk</connection>
+		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/trunk</developerConnection>
 	</scm>
 	
 	<build>
