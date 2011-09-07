@@ -28,7 +28,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.tp</groupId>
 	<artifactId>crm-carelisting-getlisting-test-producer</artifactId>
-	<version>1.-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<name>crm-carelisting-getlisting-test-producer</name>
 	<url>http://maven.apache.org</url>
 
