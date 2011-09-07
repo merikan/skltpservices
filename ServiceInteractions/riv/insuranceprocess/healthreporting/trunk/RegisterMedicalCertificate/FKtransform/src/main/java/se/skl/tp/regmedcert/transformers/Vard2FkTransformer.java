@@ -561,9 +561,7 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
 			if (streamPayload != null) {
 				try {
 					streamPayload.close();
-				} catch (XMLStreamException e) {
-					e.printStackTrace();
-				}
+				} catch (XMLStreamException e) { }
 			}
 		}
     }

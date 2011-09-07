@@ -22,8 +22,6 @@ import se.skl.riv.insuranceprocess.healthreporting.v2.ErrorIdEnum;
 import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
 import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
 
-
-
 public class Fk2VardTransformer extends AbstractMessageAwareTransformer
 {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -102,10 +100,7 @@ public class Fk2VardTransformer extends AbstractMessageAwareTransformer
 		            	resultOfCall.setErrorId(ErrorIdEnum.TECHNICAL_ERROR);
 		            }
 				}
-
 	            	            
-	            // If payload already is a SoapFault How to use marshalling?
-	            
 				// Transform the JAXB object into a XML payload
 	            StringWriter writer = new StringWriter();
 	        	Marshaller marshaller = JAXBContext.newInstance(RegisterMedicalCertificateResponseType.class).createMarshaller();
