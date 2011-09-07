@@ -89,7 +89,8 @@ public class VardResponse2FkTransformer extends AbstractMessageAwareTransformer
 					int pos = payload.indexOf("?>");
 					payload = payload.substring(pos + 2);
 				}
-
+				
+				writer.close();
 				result.append(payload);
 			}
 

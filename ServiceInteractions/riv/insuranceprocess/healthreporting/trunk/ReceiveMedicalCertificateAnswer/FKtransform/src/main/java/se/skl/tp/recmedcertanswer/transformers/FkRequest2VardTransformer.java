@@ -6,10 +6,12 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
+import org.mule.config.i18n.MessageFactory;
 import org.mule.transformer.AbstractMessageAwareTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,10 +50,12 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
     }
     
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
+		XMLStreamReader streamPayload = null;
+
 		try {			
 			// Transform the XML payload into a JAXB object
             Unmarshaller unmarshaller = JAXBContext.newInstance(TaEmotSvarType.class).createUnmarshaller();
-            XMLStreamReader streamPayload = (XMLStreamReader)((Object[])message.getPayload())[1];
+            streamPayload = (XMLStreamReader)((Object[])message.getPayload())[1];
             TaEmotSvarType inRequest = (TaEmotSvarType)((JAXBElement)unmarshaller.unmarshal(streamPayload)).getValue();
 		
 			// Create new JAXB object for the outgoing data
@@ -86,9 +90,6 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
     			}
     		}
 
-//    		inOrganisationAvsandare.getOrganisationsnummer().getValue();
-//    		inOrganisationAvsandare.getNamn().getValue();
-         	
     		// Mottagare - Vården
     		Mottagare inMottagare = inRequest.getFKSKLTaEmotSvarAnrop().getAdressering().getMottagare();
     		Organisation inOrganisationMottagare = inMottagare.getOrganisation();
@@ -225,7 +226,14 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
 	        }
 	        return payloadOut;
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			logger.error("Transform exception:" + e.getMessage());
+			throw new TransformerException(MessageFactory.createStaticMessage(e.getMessage()));
+		} finally {
+			if (streamPayload != null) {
+				try {
+					streamPayload.close();
+				} catch (XMLStreamException e) { }
+			}
 		}
     }
 		
