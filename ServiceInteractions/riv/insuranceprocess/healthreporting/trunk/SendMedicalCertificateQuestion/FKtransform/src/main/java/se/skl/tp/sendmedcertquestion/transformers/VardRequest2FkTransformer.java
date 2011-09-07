@@ -1,14 +1,13 @@
 package se.skl.tp.sendmedcertquestion.transformers;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.datatype.DatatypeFactory;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import org.mule.api.MuleMessage;
@@ -65,11 +64,12 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
     
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
 		ResourceBundle rb = ResourceBundle.getBundle("fkdataSendMCQuestion");	    
+		XMLStreamReader streamPayload = null;
 
 		try {			
 			// Transform the XML payload into a JAXB object
             Unmarshaller unmarshaller = JAXBContext.newInstance(SendMedicalCertificateQuestionType.class).createUnmarshaller();
-            XMLStreamReader streamPayload = (XMLStreamReader)((Object[])message.getPayload())[1];
+            streamPayload = (XMLStreamReader)((Object[])message.getPayload())[1];
             SendMedicalCertificateQuestionType inRequest = (SendMedicalCertificateQuestionType)((JAXBElement)unmarshaller.unmarshal(streamPayload)).getValue();
     		
             validateRequest(inRequest);
@@ -214,8 +214,24 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
     		
 			// Fraga
 			Meddelande fraga = new Meddelande();
-			fraga.setText(inRequest.getQuestion().getFraga().getMeddelandeText());
-			fraga.setSignerades(inRequest.getQuestion().getFraga().getSigneringsTidpunkt()); 
+			// Lägg till extra information om ämnet är en makulering
+			if (inAmne.compareTo(Amnetyp.MAKULERING_AV_LAKARINTYG) == 0) {
+				StringBuffer newFraga = new StringBuffer();
+				newFraga.append("Intygs id: ");
+				newFraga.append(inLakarutlatande.getLakarutlatandeId());
+				newFraga.append("\n");
+				newFraga.append("Signeringstidpunkt: ");
+				newFraga.append(inLakarutlatande.getSigneringsTidpunkt().toString());
+				newFraga.append(" Patientens namn: ");
+				newFraga.append(inPatient.getFullstandigtNamn());
+				newFraga.append("\n");
+				newFraga.append("Orginal:");
+				newFraga.append(inRequest.getQuestion().getFraga().getMeddelandeText());
+				fraga.setText(newFraga.toString());
+			} else {
+				fraga.setText(inRequest.getQuestion().getFraga().getMeddelandeText());
+			}
+			fraga.setSignerades(inRequest.getQuestion().getFraga().getSigneringsTidpunkt()); 			
 			outTaEmotFraga.setFraga(fraga );
 									    		
     		AttributedURIType logicalAddressHeader = new AttributedURIType();
@@ -230,6 +246,12 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 		} catch (Exception e) {
 			logger.error("Transform exception:" + e.getMessage());
 			throw new TransformerException(MessageFactory.createStaticMessage(e.getMessage()));
+		} finally {
+			if (streamPayload != null) {
+				try {
+					streamPayload.close();
+				} catch (XMLStreamException e) { }
+			}
 		}
     }
 		

@@ -1,14 +1,13 @@
 package se.skl.tp.sendmedcertanswer.transformers;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.datatype.DatatypeFactory;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import org.mule.api.MuleMessage;
@@ -65,11 +64,12 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
     
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
 		ResourceBundle rb = ResourceBundle.getBundle("fkdataSendMCAnswer");	    
+		XMLStreamReader streamPayload = null;
 
 		try {			
 			// Transform the XML payload into a JAXB object
             Unmarshaller unmarshaller = JAXBContext.newInstance(SendMedicalCertificateAnswerType.class).createUnmarshaller();
-            XMLStreamReader streamPayload = (XMLStreamReader)((Object[])message.getPayload())[1];
+            streamPayload = (XMLStreamReader)((Object[])message.getPayload())[1];
             SendMedicalCertificateAnswerType inRequest = (SendMedicalCertificateAnswerType)((JAXBElement)unmarshaller.unmarshal(streamPayload)).getValue();
     		
             validateRequest(inRequest);
@@ -240,6 +240,12 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 		} catch (Exception e) {
 			logger.error("Transform exception:" + e.getMessage());
 			throw new TransformerException(MessageFactory.createStaticMessage(e.getMessage()));
+		} finally {
+			if (streamPayload != null) {
+				try {
+					streamPayload.close();
+				} catch (XMLStreamException e) { }
+			}
 		}
     }
 		
