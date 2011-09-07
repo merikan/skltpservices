@@ -25,7 +25,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.riv</groupId>
 	<artifactId>ehr-accesscontrol-assertcareengagement-test-consumer</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
     <name>ehr-accesscontrol-assertcareengagement-test-consumer</name>
 	<url>http://maven.apache.org</url>
 	<packaging>jar</packaging>
@@ -39,7 +39,7 @@
         <dependency>
             <groupId>se.riv</groupId>
             <artifactId>ehr-accesscontrol-schemas</artifactId>
-            <version>1.0</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
 	    <!-- cxf dependencies -->
         <dependency>

@@ -25,7 +25,7 @@
 	<groupId>se.riv.ehr.accesscontrol</groupId>
 	<artifactId>AssertCareEngagement</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
  <name>AssertCareEngagement</name>
 	<url>http://maven.apache.org</url>
 
