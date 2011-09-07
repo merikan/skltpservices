@@ -17,7 +17,15 @@
  specific language governing permissions and limitations
  under the License.
  -->		
-<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:tns='urn:riv:eservicesupply:eoffering:GetAvailableEServicesResponder:1' xmlns:core='urn:riv:eservicesupply:eoffering:1' targetNamespace='urn:riv:eservicesupply:eoffering:GetAvailableEServicesResponder:1' elementFormDefault='qualified' attributeFormDefault='unqualified' version='1.0'>
+<xs:schema 
+	xmlns:xs='http://www.w3.org/2001/XMLSchema' 
+	xmlns:tns='urn:riv:eservicesupply:eoffering:GetAvailableEServicesResponder:1' 
+	xmlns:core='urn:riv:eservicesupply:eoffering:1' 
+	targetNamespace='urn:riv:eservicesupply:eoffering:GetAvailableEServicesResponder:1' 
+	elementFormDefault='qualified' 
+	attributeFormDefault='unqualified' 
+	version='1.0'>
+	
   <xs:import schemaLocation='../../core_components/eservicesupply_eoffering_1.0.xsd' namespace='urn:riv:eservicesupply:eoffering:1' />
   <xs:element name="GetAvailableEServices" type="tns:GetAvailableEServicesType" />
   <xs:element name="GetAvailableEServicesResponse" type="tns:GetAvailableEServicesResponseType" />

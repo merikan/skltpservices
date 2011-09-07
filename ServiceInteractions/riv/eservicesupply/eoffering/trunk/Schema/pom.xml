@@ -91,7 +91,7 @@
 										<extraarg>-p</extraarg>
 										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
 										<extraarg>
-											urn:riv:eservicesupply:eoffering:GetAvailableEServices:1:rivtabp20=se.riv.eservicesupply.eoffering.getavailableeservices.v1
+											urn:riv:eservicesupply:eoffering:GetAvailableEServices:1:rivtabp21=se.riv.eservicesupply.eoffering.getavailableeservices.v1.rivtabp21
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
@@ -99,10 +99,14 @@
 										</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>
-											http://www.w3.org/2005/08/addressing=org.w3.wsaddressing10
+											urn:riv:itintegration:registry:1=se.riv.itintegration.registry.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:eservicesupply:eoffering:1=se.riv.eservicesupply.eoffering.v1
 										</extraarg>
 									</extraargs>
-									<wsdl>${schema.path}/interactions/GetAvailableEServicesInteraction/GetAvailableEServicesInteraction_1.0_RIVTABP20.wsdl</wsdl>
+									<wsdl>${schema.path}/interactions/GetAvailableEServicesInteraction/GetAvailableEServicesInteraction_1.0_RIVTABP21.wsdl</wsdl>
 								</wsdlOption>								
 							</wsdlOptions>
 						</configuration>

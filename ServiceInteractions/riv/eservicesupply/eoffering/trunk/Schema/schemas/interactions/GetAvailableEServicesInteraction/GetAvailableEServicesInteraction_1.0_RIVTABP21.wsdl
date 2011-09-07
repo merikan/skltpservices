@@ -17,24 +17,31 @@
  specific language governing permissions and limitations
  under the License.
  -->		
-<wsdl:definitions name='GetAvailableEServicesInteraction' xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/' xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:wsa='http://www.w3.org/2005/08/addressing' xmlns:tjsr='urn:riv:eservicesupply:eoffering:GetAvailableEServicesResponder:1' xmlns:tjsi='urn:riv:eservicesupply:eoffering:GetAvailableEServicesInitiator:1' xmlns:tns='urn:riv:eservicesupply:eoffering:GetAvailableEServices:1:rivtabp20' targetNamespace='urn:riv:eservicesupply:eoffering:GetAvailableEServices:1:rivtabp20' xmlns:xsd="urn:riv:eservicesupply:eoffering:GetAvailableEServicesResponder:1">
-  <wsdl:documentation></wsdl:documentation>
-  <xs:annotation>
-    <xs:documentation>
-			 Tjansteinteraktionens namn: GetAvailableEServicesInteraction
-			 Beskrivning: 
-			   Retrieves a healthcare facilities available  e-services.
-			 Revisioner: 
-			 Tjanstedoman: eservicesupply:eoffering
-			 Tjansteinteraktionstyp: Fraga-Svar
-			 WS-profil: RIVTABP20
-			 Farvaltas av: Inera AB
-			 </xs:documentation>
-  </xs:annotation>
+<wsdl:definitions name='GetAvailableEServicesInteraction' 
+	xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/' 
+	xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/' 
+	xmlns:xs='http://www.w3.org/2001/XMLSchema' 
+	xmlns:riv='urn:riv:itintegration:registry:1' 
+	xmlns:tjsr='urn:riv:eservicesupply:eoffering:GetAvailableEServicesResponder:1' 
+	xmlns:tjsi='urn:riv:eservicesupply:eoffering:GetAvailableEServicesInitiator:1' 
+	xmlns:tns='urn:riv:eservicesupply:eoffering:GetAvailableEServices:1:rivtabp21' 
+	targetNamespace='urn:riv:eservicesupply:eoffering:GetAvailableEServices:1:rivtabp21' 
+	xmlns:xsd="urn:riv:eservicesupply:eoffering:GetAvailableEServicesResponder:1">
+	
+  <wsdl:documentation>
+  	 Tjansteinteraktionens namn: GetAvailableEServicesInteraction
+	 Beskrivning: 
+	   Retrieves a healthcare facilities available  e-services.
+	 Revisioner: 
+	 Tjanstedoman: eservicesupply:eoffering
+	 Tjansteinteraktionstyp: Fraga-Svar
+	 WS-profil: RIVTABP21
+	 Farvaltas av: Inera AB
+  </wsdl:documentation>
   <wsdl:types>
-    <xs:schema targetNamespace='urn:riv:eservicesupply:eoffering:GetAvailableEServices:1:rivtabp20'>
+    <xs:schema targetNamespace='urn:riv:eservicesupply:eoffering:GetAvailableEServices:1:rivtabp21'>
       <xs:import schemaLocation='GetAvailableEServicesResponder_1.0.xsd' namespace='urn:riv:eservicesupply:eoffering:GetAvailableEServicesResponder:1' />
-      <xs:import schemaLocation='../../core_components/ws-addressing-1.0.xsd' namespace='http://www.w3.org/2005/08/addressing' />
+      <xs:import schemaLocation='../../core_components/itintegration_registry_1.0.xsd' namespace='urn:riv:itintegration:registry:1' />
     </xs:schema>
     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     	<xsd:import
@@ -42,7 +49,7 @@
     		schemaLocation="GetAvailableEServicesResponder_1.0.xsd">
     	</xsd:import></xsd:schema></wsdl:types>
   <wsdl:message name='GetAvailableEServicesRequest'>
-    <wsdl:part name='LogicalAddress' element='wsa:To'>
+    <wsdl:part name='LogicalAddress' element='riv:LogicalAddress'>
       <xs:annotation>
         <xs:documentation>LogicalAddress is the standard id for the national service provider: The HSA-id of Carlink.</xs:documentation>
       </xs:annotation>

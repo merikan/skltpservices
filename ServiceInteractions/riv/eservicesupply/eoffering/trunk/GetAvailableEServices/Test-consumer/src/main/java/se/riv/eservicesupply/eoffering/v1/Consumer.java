@@ -23,12 +23,10 @@ package se.riv.eservicesupply.eoffering.v1;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.w3.wsaddressing10.AttributedURIType;
-
-import se.riv.eservicesupply.eoffering.getavailableeservices.v1.GetAvailableEServicesResponderInterface;
-import se.riv.eservicesupply.eoffering.getavailableeservices.v1.GetAvailableEServicesResponderService;
 import se.riv.eservicesupply.eoffering.getavailableeservices.v1.GetAvailableEServicesResponseType;
 import se.riv.eservicesupply.eoffering.getavailableeservices.v1.GetAvailableEServicesType;
+import se.riv.eservicesupply.eoffering.getavailableeservices.v1.rivtabp21.GetAvailableEServicesResponderInterface;
+import se.riv.eservicesupply.eoffering.getavailableeservices.v1.rivtabp21.GetAvailableEServicesResponderService;
 
 public final class Consumer {
 
@@ -47,17 +45,15 @@ public final class Consumer {
 		System.out.println("Returned: " + p);
 	}
 
-	public static String callService(final String serviceAddress, final String logicalAddresss) {
+	public static String callService(final String serviceAddress, final String logicalAddress) {
 		
 		final GetAvailableEServicesResponderInterface service = new GetAvailableEServicesResponderService(
 			Consumer.createEndpointUrlFromServiceAddress(serviceAddress)).getGetAvailableEServicesResponderPort();
 
-		final AttributedURIType logicalAddressHeader = new AttributedURIType();
-		logicalAddressHeader.setValue(logicalAddresss);
 
 		final GetAvailableEServicesType request = new GetAvailableEServicesType();
 		
-		final GetAvailableEServicesResponseType result = service.getAvailableEServices(logicalAddressHeader, request);
+		final GetAvailableEServicesResponseType result = service.getAvailableEServices(logicalAddress, request);
 		
 		return result.toString();
 	}

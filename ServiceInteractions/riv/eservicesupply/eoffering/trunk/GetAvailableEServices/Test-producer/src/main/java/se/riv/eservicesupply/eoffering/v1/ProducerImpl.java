@@ -22,21 +22,20 @@ package se.riv.eservicesupply.eoffering.v1;
 
 import javax.jws.WebService;
 
-import org.w3.wsaddressing10.AttributedURIType;
-
-import se.riv.eservicesupply.eoffering.getavailableeservices.v1.GetAvailableEServicesResponderInterface;
-import se.riv.eservicesupply.eoffering.getavailableeservices.v1.GetAvailableEServicesType;
 import se.riv.eservicesupply.eoffering.getavailableeservices.v1.GetAvailableEServicesResponseType;
+import se.riv.eservicesupply.eoffering.getavailableeservices.v1.GetAvailableEServicesType;
+import se.riv.eservicesupply.eoffering.getavailableeservices.v1.rivtabp21.GetAvailableEServicesResponderInterface;
 
 @WebService(
 		serviceName = "GetAvailableEServicesResponderService", 
-		endpointInterface="se.riv.eservicesupply.eoffering.getavailableeservices.v1.GetAvailableEServicesResponderInterface", 
+		endpointInterface="se.riv.eservicesupply.eoffering.getavailableeservices.v1.rivtabp21.GetAvailableEServicesResponderInterface", 
 		portName = "GetAvailableEServicesResponderPort", 
-		targetNamespace = "urn:riv:eservicesupply:eoffering:GetAvailableEServices:1:rivtabp20",
-		wsdlLocation = "schemas/interactions/GetAvailableEServicesInteraction/GetAvailableEServicesInteraction_1.0_RIVTABP20.wsdl")
+		targetNamespace = "urn:riv:eservicesupply:eoffering:GetAvailableEServices:1:rivtabp21",
+		wsdlLocation = "schemas/interactions/GetAvailableEServicesInteraction/GetAvailableEServicesInteraction_1.0_RIVTABP21.wsdl")
 public class ProducerImpl implements GetAvailableEServicesResponderInterface {
 
-	public GetAvailableEServicesResponseType getAvailableEServices(final AttributedURIType logicalAddress, final GetAvailableEServicesType parameters) {
+	public GetAvailableEServicesResponseType getAvailableEServices(
+			String logicalAddress, GetAvailableEServicesType parameters) {
 		GetAvailableEServicesResponseType response = new GetAvailableEServicesResponseType();
 		return response;
 	}

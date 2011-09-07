@@ -44,7 +44,7 @@
   <wsdl:message name='GetAvailableEServicesRequest'>
     <wsdl:part name='LogicalAddress' element='wsa:To'>
       <xs:annotation>
-        <xs:documentation>LogicalAddress is the hsa-id of the healthcare_facility that is requested to present its e-services.</xs:documentation>
+        <xs:documentation>LogicalAddress is the standard id for the national service provider: The HSA-id of Carlink.</xs:documentation>
       </xs:annotation>
     </wsdl:part>
     <wsdl:part name='parameters' element="xsd:GetAvailableEServices" />
