@@ -34,6 +34,7 @@ import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificateanswerr
 import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificateanswerresponder.v1.SendMedicalCertificateAnswerResponseType;
 import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificateanswerresponder.v1.SendMedicalCertificateAnswerType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ErrorIdEnum;
 import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
@@ -86,7 +87,7 @@ public class SendMedCertAnswerValidateImpl implements SendMedicalCertificateAnsw
 			 *  Check meddelande data + lakarutlatande reference
 			 */
 			
-			// Meddelande id vŒrden - mandatory
+			// Meddelande id vï¿½rden - mandatory
 			if ( inAnswer.getVardReferensId() == null ||
 					inAnswer.getVardReferensId().length() < 1 ) {
 				 validationErrors.add("No vardReferens-id found!");				
@@ -98,7 +99,7 @@ public class SendMedCertAnswerValidateImpl implements SendMedicalCertificateAnsw
 				 validationErrors.add("No fkReferens-id found!");				
 			}
 
-			// €mne - mandatory
+			// ï¿½mne - mandatory
 			Amnetyp inAmne = inAnswer.getAmne();
 			if ( inAmne == null) {
 				validationErrors.add("No Amne element found!");				
@@ -137,37 +138,37 @@ public class SendMedCertAnswerValidateImpl implements SendMedicalCertificateAnsw
 			}
 			
 			
-			// AvsŠnt tidpunkt - mandatory
+			// Avsï¿½nt tidpunkt - mandatory
             if (inAnswer.getAvsantTidpunkt() == null || !inAnswer.getAvsantTidpunkt().isValid()) {
 				validationErrors.add("No or wrong avsantTidpunkt found!");				
             }
 						
-			// LŠkarutlŒtande referens - mandatory
+			// Lï¿½karutlï¿½tande referens - mandatory
             if (inAnswer.getLakarutlatande() == null ) {
 				validationErrors.add("No lakarutlatande element found!");	
 				throw new Exception();
             }
             LakarutlatandeEnkelType inLakarUtlatande = inAnswer.getLakarutlatande();
             
-			// LŠkarutlŒtande referens - id - mandatory
+			// Lï¿½karutlï¿½tande referens - id - mandatory
 			if ( inLakarUtlatande.getLakarutlatandeId() == null ||
 				inLakarUtlatande.getLakarutlatandeId().length() < 1 ) {
 				validationErrors.add("No lakarutlatande-id found!");				
 			}
 
-			// LŠkarutlŒtande referens - signeringsTidpunkt - mandatory
+			// Lï¿½karutlï¿½tande referens - signeringsTidpunkt - mandatory
             if (inLakarUtlatande.getSigneringsTidpunkt() == null || !inLakarUtlatande.getSigneringsTidpunkt().isValid()) {
 				validationErrors.add("No or wrong lakarutlatande-avsantTidpunkt found!");				
             }
 
-			// LŠkarutlŒtande referens - patient - mandatory
+			// Lï¿½karutlï¿½tande referens - patient - mandatory
             if (inLakarUtlatande.getPatient() == null ) {
 				validationErrors.add("No lakarutlatande patient element found!");	
 				throw new Exception();
             }
             PatientType inPatient = inLakarUtlatande.getPatient();
             
-			// LŠkarutlŒtande referens - patient - personid mandatory
+			// Lï¿½karutlï¿½tande referens - patient - personid mandatory
             // Check patient id - mandatory
 			if (inPatient.getPersonId() == null ||	
 				inPatient.getPersonId().getExtension() == null ||	
@@ -185,13 +186,13 @@ public class SendMedCertAnswerValidateImpl implements SendMedicalCertificateAnsw
 
             // Check format on personnummer? samordningsnummer?
             
-			// LŠkarutlŒtande referens - patient - namn - mandatory
+			// Lï¿½karutlï¿½tande referens - patient - namn - mandatory
 			if (inPatient.getFullstandigtNamn() == null || inPatient.getFullstandigtNamn().length() < 1 ) {
 				validationErrors.add("No lakarutlatande Patient fullstandigtNamn elements found or set!");								
 			}
 								
 			/**
-			 *  Check avsŠndar data.
+			 *  Check avsï¿½ndar data.
 			 */
 			if (inAnswer.getAdressVard() == null) {
 				validationErrors.add("No adressVard element found!");				
@@ -285,6 +286,7 @@ public class SendMedCertAnswerValidateImpl implements SendMedicalCertificateAnsw
 			return outResponse;
 		} catch (Exception e) {
 			outResCall.setErrorText(getValidationErrors(validationErrors));
+			outResCall.setErrorId(ErrorIdEnum.VALIDATION_ERROR);
 			outResCall.setResultCode(ResultCodeEnum.ERROR);
 			return outResponse;
 		}
