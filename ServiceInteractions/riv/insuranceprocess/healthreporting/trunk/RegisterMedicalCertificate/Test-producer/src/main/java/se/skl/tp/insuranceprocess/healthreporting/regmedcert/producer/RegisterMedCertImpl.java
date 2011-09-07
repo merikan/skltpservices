@@ -51,36 +51,31 @@ public class RegisterMedCertImpl implements RegisterMedicalCertificateResponderI
 			RegisterMedicalCertificateResponseType response = new RegisterMedicalCertificateResponseType();
 						
 			String logiskAdress = logicalAddress.getValue();
-			
+			String name = "dummy";
 			// Check if we should throw some kind of exception or simulate a timeout.
-			if (	parameters != null && parameters.getLakarutlatande() != null && 
+			if (    parameters != null && parameters.getLakarutlatande() != null && 
 					parameters.getLakarutlatande().getPatient() != null && 
 					parameters.getLakarutlatande().getPatient().getFullstandigtNamn() != null &&
 					parameters.getLakarutlatande().getPatient().getFullstandigtNamn().length() > 0) {
 
-				String name = parameters.getLakarutlatande().getPatient().getFullstandigtNamn();
+				name = parameters.getLakarutlatande().getPatient().getFullstandigtNamn();
+			}
 				
-				if (name.equalsIgnoreCase("Error") || logiskAdress.contains("Error") ) {
-					ResultOfCall result = new ResultOfCall();
-					result.setResultCode(ResultCodeEnum.ERROR);
-					response.setResult(result);
-					logger.debug("Returned Error for not validating!");
-				} else if (name.equalsIgnoreCase("Exception") || logiskAdress.contains("Exception")) {
-					logger.debug("Returned Exception for not validating!");
-					throw new RuntimeException("Exception called");
-				} else if (name.equalsIgnoreCase("Timeout") || logiskAdress.contains("Timeout")) {
-					logger.debug("Returned Timeout for not validating!");
-					Thread.currentThread();
-					try {
-						Thread.sleep(60000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				} else {
-					ResultOfCall resCall = new ResultOfCall();
-					resCall.setResultCode(ResultCodeEnum.OK);
-					response.setResult(resCall);				
-					logger.debug("Returned OK for not validating!");
+			if (name.equalsIgnoreCase("Error") || logiskAdress.contains("Error") ) {
+				ResultOfCall result = new ResultOfCall();
+				result.setResultCode(ResultCodeEnum.ERROR);
+				response.setResult(result);
+				logger.debug("Returned Error for not validating!");
+			} else if (name.equalsIgnoreCase("Exception") || logiskAdress.contains("Exception")) {
+				logger.debug("Returned Exception for not validating!");
+				throw new RuntimeException("Exception called");
+			} else if (name.equalsIgnoreCase("Timeout") || logiskAdress.contains("Timeout")) {
+				logger.debug("Returned Timeout for not validating!");
+				Thread.currentThread();
+				try {
+					Thread.sleep(60000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 			} else {
 				ResultOfCall resCall = new ResultOfCall();
