@@ -32,9 +32,8 @@
 		<service name="Ping-service-test">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="https://localhost:10000/test/Ping_Service"
+					address="http://localhost:10000/test/Ping_Service"
 					wsdlLocation="classpath:/schemas/PingInteraction_1.0_rivtabp20.wsdl"
-					protocolConnector="VPProducerConnector"
 					/>
 			</inbound>
 
