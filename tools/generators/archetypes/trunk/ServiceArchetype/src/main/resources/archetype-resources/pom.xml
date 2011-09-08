@@ -36,12 +36,11 @@
 	
 	<service.name>${artifactId}</service.name>
 	<service.method.name>${artifactId}</service.method.name>
-	<service.interaction.name>${artifactId}Interaction</service.interaction.name>
 	
 	<osor.cert.directory>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/certs</osor.cert.directory>
-	<osor.schema.directory.url>https://svn.forge.osor.eu/svn/rivta/ServiceInteractions/riv/${domain}/${subdomain}/trunk/schemas/interactions/${service.interaction.name}</osor.schema.directory.url>
+	<osor.schema.directory.url>https://svn.forge.osor.eu/svn/rivta/ServiceInteractions/riv/${domain}/${subdomain}/trunk/schemas/interactions/${artifactId}Interaction</osor.schema.directory.url>
 	<osor.core.schema.directory.url>https://svn.forge.osor.eu/svn/rivta/ServiceInteractions/riv/${domain}/${subdomain}/trunk/schemas/core_components</osor.core.schema.directory.url>
-    <service.wsdl.file>${service.interaction.name}_1.0_RIVTABP20.wsdl</service.wsdl.file>
+    <service.wsdl.file>${artifactId}Interaction_1.0_RIVTABP20.wsdl</service.wsdl.file>
     <service.relative.path>/${artifactId}/1/rivtabp20</service.relative.path>
     <service.producer.url>https://localhost:21000/vp${service.relative.path}</service.producer.url>
     
