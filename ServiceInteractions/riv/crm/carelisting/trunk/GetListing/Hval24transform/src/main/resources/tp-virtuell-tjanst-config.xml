@@ -30,8 +30,6 @@
 	Name of this file is mandatory and may not be changed. 
 	 -->
 
-	<context:property-placeholder location="classpath:hval.properties" />
-	
 	<custom-transformer name="carelist2Hval" class="se.skl.crm.carelisting.transformers.Carelist2HvalTransformer"/>
 	<custom-transformer name="hval2Carelist" class="se.skl.crm.carelisting.transformers.Hval2CarelistTransformer"/>
 	
@@ -57,6 +55,7 @@
 	    	        		responseTransformer-refs="hval2Carelist"
             	        	synchronous="true"
                 	    	method="GET"
+                	    	connector-ref="VPConsumerConnector"
                     /> 
                 </pass-through-router>
             </outbound>

@@ -84,7 +84,7 @@
  
 	<dependencies>
 		<!-- schema dependency -->
-		<dependency>
+ 		<dependency>
 			<groupId>se.riv.crm.carelisting</groupId>
 			<artifactId>crm-carelisting-schemas</artifactId>
 			<version>1.1-SNAPSHOT</version>
