@@ -28,12 +28,12 @@
 	<version>1.1-SNAPSHOT</version>
 	<name>crm-carelisting-createlisting-test-consumer</name>
 	<url>http://maven.apache.org</url>
-
-	<properties>
-		<cxf.version>2.1.2</cxf.version>
-	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-	</properties>
+	
+	<parent>
+  		<groupId>se.skl.tp</groupId>
+  		<artifactId>CreateListing</artifactId>
+  		<version>1.1-SNAPSHOT</version>
+   </parent>
  
  	<dependencies>    
  		<!-- schema dependency -->
@@ -66,17 +66,5 @@
             <version>2.5.6</version>
         </dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
