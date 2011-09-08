@@ -28,6 +28,13 @@
 	<version>1.1-SNAPSHOT</version>
  <name>ehr-accesscontrol</name>
 	<url>http://maven.apache.org</url>
+	
+	<properties>
+		<cxf.version>2.1.2</cxf.version>
+		<spring.version>3.0.5</spring.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  	</properties>
 
 	<modules>
 		<module>Schema</module>
@@ -48,6 +55,15 @@
                     <tagBase>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/ehr/accesscontrol/tags</tagBase>
                 </configuration>
             </plugin> 
+            <plugin>
+  				<groupId>org.apache.maven.plugins</groupId>
+  				<artifactId>maven-compiler-plugin</artifactId>
+  				<version>2.3.2</version>
+  				<configuration>
+  					<source>1.6</source>
+  					<target>1.6</target>
+  				</configuration>
+  			</plugin>
 		</plugins>
 	</build>
 	

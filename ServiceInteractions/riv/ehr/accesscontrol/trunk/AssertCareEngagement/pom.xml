@@ -28,6 +28,12 @@
 	<version>1.1-SNAPSHOT</version>
  <name>AssertCareEngagement</name>
 	<url>http://maven.apache.org</url>
+	
+	<parent>
+		<groupId>se.riv</groupId>
+		<artifactId>ehr-accesscontrol</artifactId>
+		<version>1.1-SNAPSHOT</version>
+	</parent>
 
 	<modules>
 		<module>Virtualisering</module>
@@ -35,4 +41,5 @@
 		<module>Test-producer</module>
 <!-- 	 <module>MultiAdressing</module>  -->
 	</modules>
+	
 </project>

@@ -31,9 +31,14 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<cxf.version>2.1.2</cxf.version>
 		<schema.path>schemas/interactions</schema.path>
 	</properties>
+	
+	<parent>
+		<groupId>se.riv</groupId>
+		<artifactId>ehr-accesscontrol</artifactId>
+		<version>1.1-SNAPSHOT</version>
+	</parent>
  
 	<dependencies>
 	    <!-- cxf dependencies -->
@@ -108,14 +113,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-									
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

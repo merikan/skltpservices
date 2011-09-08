@@ -30,9 +30,11 @@
 	<url>http://maven.apache.org</url>
 	<packaging>jar</packaging>
 
-	<properties>
-		<cxf.version>2.1.2</cxf.version>
-	</properties>
+	<parent>
+		<groupId>se.riv.ehr.accesscontrol</groupId>
+		<artifactId>AssertCareEngagement</artifactId>
+		<version>1.1-SNAPSHOT</version>
+	</parent>
  
 	<dependencies>
 	    <!-- schema dependency -->
@@ -70,17 +72,5 @@
             <version>2.5.6</version>
         </dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
