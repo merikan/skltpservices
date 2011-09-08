@@ -8,9 +8,9 @@
   <packaging>pom</packaging>
   <name>GetAvailableDates-service</name>
 
-  <parent>
+ <parent>
   	<groupId>se.skl.tp</groupId>
-  	<artifactId>GetAvailableDatesBundle</artifactId>
+  	<artifactId>crm-scheduling</artifactId>
   	<version>1.0-SNAPSHOT</version>
   </parent>
 

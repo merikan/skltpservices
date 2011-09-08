@@ -8,9 +8,9 @@
   <packaging>pom</packaging>
   <name>GetSubjectOfCareSchedule-service</name>
 
-  <parent>
+ <parent>
   	<groupId>se.skl.tp</groupId>
-  	<artifactId>GetSubjectOfCareScheduleBundle</artifactId>
+  	<artifactId>crm-scheduling</artifactId>
   	<version>1.0-SNAPSHOT</version>
   </parent>
 

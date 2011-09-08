@@ -8,9 +8,9 @@
   <packaging>pom</packaging>
   <name>GetCancelledAndRebooked-service</name>
 
-  <parent>
+ <parent>
   	<groupId>se.skl.tp</groupId>
-  	<artifactId>GetCancelledAndRebookedBundle</artifactId>
+  	<artifactId>crm-scheduling</artifactId>
   	<version>1.0-SNAPSHOT</version>
   </parent>
 
