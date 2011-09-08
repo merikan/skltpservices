@@ -28,6 +28,12 @@
 	<version>1.1-SNAPSHOT</version>
 	<name>ifv</name>
 	<url>http://maven.apache.org</url>
+	
+	<properties>
+  		<cxf.version>2.1.2</cxf.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  	</properties>
 
 	<modules>
 		<module>Schema</module>
