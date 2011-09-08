@@ -31,10 +31,7 @@
 
   <properties>
   	<cxf.version>2.1.2</cxf.version>
-  	<spring.version>3.0.5</spring.version>
-  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-	</properties>
+  </properties>
  
   <!-- Modules to be created for each service -->
   <modules>
@@ -56,12 +53,7 @@
                     <tagBase>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/eservicesupply/eoffering/tags</tagBase>
                 </configuration>
             </plugin> 
-		</plugins>
-	</build>
-  
-  <build>
-  	<plugins>
-  		<!-- Use Java 1.6 for source and target files -->
+            <!-- Use Java 1.6 for source and target files -->
   		<plugin>
   			<groupId>org.apache.maven.plugins</groupId>
   			<artifactId>maven-compiler-plugin</artifactId>
@@ -71,7 +63,7 @@
   				<target>1.6</target>
   			</configuration>
   		</plugin>
-  	</plugins>
-  </build>
+		</plugins>
+	</build>
 
 </project>
