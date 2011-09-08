@@ -33,7 +33,7 @@
         
         <parent>
         	<groupId>se.skl.tp</groupId>
-        	<artifactId>inera-ior</artifactId>
+        	<artifactId>inera-ior-bestallorginalforpackning-service</artifactId>
         	<version>1.0-SNAPSHOT</version>
         </parent>        
 </project>
