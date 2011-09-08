@@ -51,6 +51,23 @@
     <module>CancelBooking</module>
   </modules>
   
+  <scm>
+		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/crm/scheduling/trunk</connection>
+		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/crm/scheduling/trunk</developerConnection>
+	</scm>
+	
+	<build>
+		<plugins>
+			  <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.2.1</version>
+                <configuration>
+                    <tagBase>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/crm/scheduling/tags</tagBase>
+                </configuration>
+            </plugin> 
+		</plugins>
+	</build>
+  
   <build>
   	<plugins>
   		<!-- Use Java 1.5 for source and target files -->
