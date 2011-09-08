@@ -30,11 +30,14 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<cxf.version>2.1.2</cxf.version>
 		<schema.path>schemas</schema.path>
-	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
+	
+	<parent>
+  		<groupId>se.skl.tp</groupId>
+  		<artifactId>itinfra-tp</artifactId>
+  		<version>1.2-SNAPSHOT</version>
+   </parent>
  
 	<dependencies>
 	    <!-- cxf dependencies -->
@@ -106,14 +109,7 @@
 					</execution>
 				</executions>
 			</plugin>
-									
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
+								
 		</plugins>
 	</build>
 </project>

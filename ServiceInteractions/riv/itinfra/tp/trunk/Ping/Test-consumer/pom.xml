@@ -34,12 +34,6 @@
         <artifactId>itinfra-tp-ping-service</artifactId>
         <version>1.2-SNAPSHOT</version>
     </parent>
-     
-	<properties>
-		<cxf.version>2.1.2</cxf.version>
-	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-	</properties>
  
  	<dependencies>
 	    <!-- schema dependency -->
@@ -71,17 +65,5 @@
             <version>2.5.6</version>
         </dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
- 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>

@@ -28,6 +28,12 @@
 	<version>1.2-SNAPSHOT</version>
  <name>itinfra-tp-ping-service</name>
 	<url>http://maven.apache.org</url>
+	
+	<parent>
+  		<groupId>se.skl.tp</groupId>
+  		<artifactId>itinfra-tp</artifactId>
+  		<version>1.2-SNAPSHOT</version>
+   </parent>
 
 	<modules>
 		<module>Virtualisering</module>
