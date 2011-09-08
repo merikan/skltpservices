@@ -31,11 +31,7 @@
                
 	<!--
 	Name of this file is mandatory and may not be changed. 
-	 -->
- 	
-	<message-properties-transformer name="Add-riv-version-AvbestallOrginalforpackning">
-        <add-message-property key="rivversion" value="RIVTABP20"/>
-    </message-properties-transformer>           
+	 -->         
  
 	<model name="Get-AvbestallOriginalforpackning-model">
 		
@@ -48,14 +44,14 @@
 					proxy="true" 
 					payload="envelope"
 					synchronous="true"
+					protocolConnector="VPProducerConnector"
 					/>
 			</inbound>
      
 			<outbound>
                 <pass-through-router>
         			<outbound-endpoint address="vm://vagval-router" 
-        			synchronous="true"
-        			transformer-refs="Add-riv-version-AvbestallOrginalforpackning" />
+        			synchronous="true" />
                 </pass-through-router>
 			</outbound>    		
 		</service>						
