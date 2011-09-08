@@ -29,11 +29,6 @@
   <name>${domain}-${subdomain}-${artifactId}</name>
 
   <properties>
-  	<cxf.version>2.3.2</cxf.version>
-	<spring.version>3.0.5</spring.version>
-	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-	
 	<service.name>${artifactId}</service.name>
 	<service.method.name>${artifactId}</service.method.name>
 	
