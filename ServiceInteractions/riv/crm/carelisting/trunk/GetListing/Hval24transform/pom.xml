@@ -28,13 +28,12 @@
 	<version>1.1-SNAPSHOT</version>
 	<name>crm-carelisting-getlisting-hval24transform</name>
 	<url>http://maven.apache.org</url>
-
-	<properties>
-		<cxf.version>2.1.2</cxf.version>
-		<mule.version>2.2.1</mule.version>
-	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-	</properties>
+	
+	<parent>
+  		<groupId>se.skl.tp</groupId>
+  		<artifactId>GetListing</artifactId>
+  		<version>1.1-SNAPSHOT</version>
+   </parent>
  
  	<repositories>
 		<repository>
@@ -212,17 +211,5 @@
 		</dependency>
 
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
