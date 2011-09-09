@@ -53,7 +53,7 @@
 					applyTransformersToProtocol="false"
 					transformer-refs="newReceiverIdAnswer FkReq2VardAnswer changeNamespaceRecMedCertAnswer"
 					responseTransformer-refs="VardResp2FkAnswer"
-				/>							
+ 				/>							
 			</inbound>
 
 			<outbound>
@@ -65,6 +65,7 @@
                         	operation="ReceiveMedicalCertificateAnswer" 
                         	clientClass="se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificateanswer.v1.rivtabp20.ReceiveMedicalCertificateAnswerResponderService"
             	        	synchronous="true"
+            	        	protocolConnector="VPConsumerConnector"
                         /> 
                 </pass-through-router>
             </outbound>
