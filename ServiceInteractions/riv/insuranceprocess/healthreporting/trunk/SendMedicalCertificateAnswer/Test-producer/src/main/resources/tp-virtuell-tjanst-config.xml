@@ -33,8 +33,9 @@
  		<service name="SendMedicalCertificateAnswer-service-test">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="https://localhost:12000/adapter/testproducer/SendMedicalCertificateAnswer/1/rivtabp20/test"
-					wsdlLocation="classpath:/schemas/vard/interactions/SendMedicalCertificateAnswerInteraction/SendMedicalCertificateAnswerInteraction_1.0_rivtabp20.wsdl"/>
+					address="http://localhost:10000/adapter/testproducer/SendMedicalCertificateAnswer/1/rivtabp20/test"
+					wsdlLocation="classpath:/schemas/vard/interactions/SendMedicalCertificateAnswerInteraction/SendMedicalCertificateAnswerInteraction_1.0_rivtabp20.wsdl"
+					/>
 			</inbound>
 
 			<component>
@@ -45,8 +46,9 @@
  		<service name="SendMedicalCertificateAnswer-service-validate">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="https://localhost:12000/adapter/testproducer/SendMedicalCertificateAnswer/1/rivtabp20/validate"
-					wsdlLocation="classpath:/schemas/vard/interactions/SendMedicalCertificateAnswerInteraction/SendMedicalCertificateAnswerInteraction_1.0_rivtabp20.wsdl"/>
+					address="http://localhost:10000/adapter/testproducer/SendMedicalCertificateAnswer/1/rivtabp20/validate"
+					wsdlLocation="classpath:/schemas/vard/interactions/SendMedicalCertificateAnswerInteraction/SendMedicalCertificateAnswerInteraction_1.0_rivtabp20.wsdl"
+					/>
 			</inbound>
 
 			<component>

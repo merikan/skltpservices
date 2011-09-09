@@ -61,6 +61,7 @@
                         	operation="TaEmotSvar" 
                         	clientClass="se.fk.vardgivare.sjukvard.taemotsvar.v1.rivtabp20.TaEmotSvarResponderService"
             	        	synchronous="true"
+		            	    protocolConnector="VPConsumerConnector"
                         /> 
                 </pass-through-router>
             </outbound>
