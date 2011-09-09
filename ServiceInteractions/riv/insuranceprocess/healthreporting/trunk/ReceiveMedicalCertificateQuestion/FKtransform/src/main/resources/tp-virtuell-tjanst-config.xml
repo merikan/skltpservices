@@ -66,6 +66,7 @@
                         	operation="ReceiveMedicalCertificateQuestion" 
                         	clientClass="se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderService"
             	        	synchronous="true"
+	               	        protocolConnector="VPConsumerConnector"
                         /> 
                 </pass-through-router>
             </outbound>

@@ -60,7 +60,6 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
 		try {
 			// Transform the XML payload into a JAXB object
             Unmarshaller unmarshaller = JAXBContext.newInstance(TaEmotFragaType.class).createUnmarshaller();
-            unmarshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
             streamPayload = (XMLStreamReader)((Object[])message.getPayload())[1];
             TaEmotFragaType inRequest = (TaEmotFragaType)((JAXBElement)unmarshaller.unmarshal(streamPayload)).getValue();
 		    
@@ -95,9 +94,6 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
 					outMeddelande.getFkKontaktInfo().add(kontaktInfo);    				
     			}
     		}
-
-//    		inOrganisationAvsandare.getOrganisationsnummer().getValue();
-//    		inOrganisationAvsandare.getNamn().getValue();
          	
     		// Mottagare - Vården
     		Mottagare inMottagare = inRequest.getFKSKLTaEmotFragaAnrop().getAdressering().getMottagare();
@@ -150,7 +146,8 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
     			// Telefon
     			if (inEnhetMottagare.getKontaktuppgifter().getTelefon() != null && 
     				inEnhetMottagare.getKontaktuppgifter().getTelefon().getValue() != null && 
-    				inEnhetMottagare.getKontaktuppgifter().getTelefon().getValue().length() > 0 ) {
+    				inEnhetMottagare.getKontaktuppgifter().getTelefon().getValue().length() > 0 && 
+    				!inEnhetMottagare.getKontaktuppgifter().getTelefon().getValue().equalsIgnoreCase("0000000") ) { // Dummy value added in communication to FK
     	    		outEnhetMottagare.setTelefonnummer(inEnhetMottagare.getKontaktuppgifter().getTelefon().getValue());    			
     			}
 
