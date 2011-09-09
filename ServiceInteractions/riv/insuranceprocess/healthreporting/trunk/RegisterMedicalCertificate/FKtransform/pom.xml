@@ -30,8 +30,8 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<cxf.version>2.1.2</cxf.version>
-		<mule.version>2.2.1</mule.version>
+		<cxf.version>2.2.12</cxf.version>
+		<mule.version>2.2.8</mule.version>
 		<schema.path>${basedir}/src/main/resources/schemas/business</schema.path>
 	</properties>
  

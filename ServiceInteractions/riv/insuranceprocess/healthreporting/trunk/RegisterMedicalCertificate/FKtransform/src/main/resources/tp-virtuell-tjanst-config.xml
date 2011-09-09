@@ -62,6 +62,7 @@
                         	operation="TaEmotLakarintyg" 
                         	clientClass="se.fk.vardgivare.sjukvard.taemotlakarintyg.v1.rivtabp20.TaEmotLakarintygResponderService"
             	        	synchronous="true"
+		            	    protocolConnector="VPConsumerConnector"
                         /> 
                 </pass-through-router>
             </outbound>

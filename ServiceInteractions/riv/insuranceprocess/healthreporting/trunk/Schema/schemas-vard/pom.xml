@@ -30,7 +30,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<cxf.version>2.1.2</cxf.version>
+		<cxf.version>2.2.12</cxf.version>
 		<schema.path>interactions</schema.path>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
