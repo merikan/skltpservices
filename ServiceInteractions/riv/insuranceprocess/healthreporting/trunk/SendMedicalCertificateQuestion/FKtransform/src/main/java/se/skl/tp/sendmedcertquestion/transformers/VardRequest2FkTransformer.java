@@ -156,6 +156,11 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
         		Telefon outEnhetTelefonAvsandare = new Telefon();
         		outEnhetTelefonAvsandare.setValue(telefonnummer);
         		outEnhetKontaktuppgifterAvsandare.setTelefon(outEnhetTelefonAvsandare);    			
+    		} else {
+    			// Add dummy phonenumber to make FK systems happy!
+        		Telefon outEnhetTelefonAvsandare = new Telefon();
+        		outEnhetTelefonAvsandare.setValue("0000000");
+        		outEnhetKontaktuppgifterAvsandare.setTelefon(outEnhetTelefonAvsandare);    			    			
     		}
 
     		// Last ePost

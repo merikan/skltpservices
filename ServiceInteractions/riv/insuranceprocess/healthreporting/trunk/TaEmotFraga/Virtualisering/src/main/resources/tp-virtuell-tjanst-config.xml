@@ -32,10 +32,6 @@
 	<!--
 	Name of this file is mandatory and may not be changed. 
 	 -->
-	<message-properties-transformer name="TaEmotFraga-add-riv-version">
-		<add-message-property key="rivversion" value="RIVTABP20"/>
-	</message-properties-transformer>           
-	
 	<model>
 
 		<service name="TaEmotFraga-service">
@@ -47,14 +43,14 @@
 					proxy="true" 
 					payload="envelope"
 					synchronous="true"
+					protocolConnector="VPProducerConnector"
 				/>
 			</inbound>
 			
 			<outbound>
 				<pass-through-router>
 					<outbound-endpoint address="vm://vagval-router" 
-						synchronous="true"
-						transformer-refs="TaEmotFraga-add-riv-version" />
+						synchronous="true" />
 				</pass-through-router>
 			</outbound>    		
 		</service>						

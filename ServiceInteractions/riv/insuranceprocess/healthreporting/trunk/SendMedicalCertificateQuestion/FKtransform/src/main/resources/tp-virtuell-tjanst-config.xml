@@ -62,6 +62,7 @@
                         	operation="TaEmotFraga" 
                         	clientClass="se.fk.vardgivare.sjukvard.taemotfraga.v1.rivtabp20.TaEmotFragaResponderService"
             	        	synchronous="true"
+		            	    protocolConnector="VPConsumerConnector"
                         /> 
                 </pass-through-router>
             </outbound>
