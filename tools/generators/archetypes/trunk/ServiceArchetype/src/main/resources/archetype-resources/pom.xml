@@ -29,7 +29,8 @@
   <name>${domain}-${subdomain}-${artifactId}</name>
 
   <properties>
-	<service.name>${artifactId}</service.name>
+	
+	<service.interaction.name>${artifactId}Interaction</service.interaction.name>
 	<service.method.name>${artifactId}</service.method.name>
 	
 	<osor.cert.directory>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/certs</osor.cert.directory>
