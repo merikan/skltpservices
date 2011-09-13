@@ -24,14 +24,14 @@ $symbol_escape = '\' )
 
 	<!-- Name of this file is mandatory and may not be changed. -->
 
-	<model name="Get-${service.name}-model">
+	<model name="Get-${serviceName}-model">
 
-		<service name="Get-${service.name}-service">
+		<service name="Get-${serviceName}-service">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="https://${tp.host}:${tp.port}/${tp.baseUri}/${service.relative.path}"
-					wsdlLocation="classpath:/schemas/interactions/${service.name}Interactions/${service.wsdl.file}"
-					serviceName="${service.name}ResponderService" namespace="${service.ns}"
+					address="https://${tp.host}:${tp.port}/${tp.baseUri}/${serviceRelativePath}"
+					wsdlLocation="classpath:/schemas/interactions/${serviceInteractionName}/${serviceWsdlFile}"
+					serviceName="${serviceName}ResponderService" namespace="${serviceNamespace}"
 					proxy="true" payload="envelope" synchronous="true" 
 					protocolConnector="VPProducerConnector"/>
 			</inbound>

@@ -41,9 +41,9 @@
 						<phase>generate-sources</phase>
 						<configuration>
 							<basedir>${basedir}</basedir>
-							<checkoutDirectory>${project.build.directory}/schemas/interactions/${service.interaction.name}</checkoutDirectory>
+							<checkoutDirectory>${project.build.directory}/schemas/interactions/${serviceInteractionName}</checkoutDirectory>
 							<skipCheckoutIfExists>true</skipCheckoutIfExists>
-							<connectionUrl>scm:svn:${osor.schema.directory.url}</connectionUrl>
+							<connectionUrl>scm:svn:${osorSchemaDirectoryUrl}</connectionUrl>
 						</configuration>
 					</execution>
 					<execution>
@@ -56,7 +56,7 @@
 							<basedir>${basedir}</basedir>
 							<checkoutDirectory>${project.build.directory}/schemas/core_components</checkoutDirectory>
 							<skipCheckoutIfExists>true</skipCheckoutIfExists>
-							<connectionUrl>scm:svn:${osor.core.schema.directory.url}</connectionUrl>
+							<connectionUrl>scm:svn:${osorCoreSchemaDirectoryUrl}</connectionUrl>
 						</configuration>
 					</execution>
 				</executions>
