@@ -18,12 +18,24 @@ Create a service
 
 mvn archetype:generate -DinteractiveMode=true -DarchetypeArtifactId=service-archetype -DarchetypeGroupId=se.skl.tp.archetype -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=se.skl.tp -DartifactId=CancelBooking -Dversion=1.0-SNAPSHOT -Ddomain=crm -Dsubdomain=scheduling
 
-user.dir: can be . or any other path where service should be generated
-artifactId: Name of the new service, e.g CancelBooking
-domain: The main domain, e.g crm
-subdomain: the sub domain, e.g scheduling
 
-3. Finally, generate the service by entering the "user.dir/artifactId" directory and do mvn install
+#MANDATORY PARAMETERS, needed to fill in#
+Parameter: user.dir, can be . or any other path where service should be generated
+Parameter: artifactId, Value: e.g CancelBooking
+Parameter: groupId, Value: e.g se.skl.tp
+Parameter: domain, Value: e.g crm
+Parameter: subdomain, Value: e.g scheduling
+
+#MANDATORY PARAMETERS, but with prefilled values that can be used in most cases#
+Parameter: serviceMethodName, Value: e.g CancelBooking
+Parameter: serviceInteractionName, Value: e.g CancelBookingInteraction
+Parameter: serviceNamespace, Value: e.g urn:riv:crm:scheduling:CancelBooking:1:rivtabp20
+Parameter: serviceWsdlFile, Value: e.g CancelBookingInteraction_1.0_RIVTABP20.wsdl
+Parameter: serviceName, Value: e.g CancelBooking
+Parameter: version, Value: e.g 1.0-SNAPSHOT
+Parameter: serviceRelativePath, Value: e.g CancelBooking/1/rivtabp20
+Parameter: package, Value: e.g se.skl.tp
+Parameter: servicePackage, Value: e.g se.riv.crm.scheduling.v1
 
 Import to Eclipse
 =================
