@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema  
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:iip="http://www.idainfront.se/ns/iip/1.0"
 	xmlns:vas="http://schema.forsakringskassan.se/vardgivare_sjukvard"
 	xmlns:tns="urn:riv:fk:vardgivare:sjukvard:TaEmotLakarintygResponder:1" 
 	targetNamespace="urn:riv:fk:vardgivare:sjukvard:TaEmotLakarintygResponder:1" 
@@ -21,8 +22,11 @@
    
 
    <!--  soap:Fault eller inget -->
-
-   <xs:complexType name="TaEmotLakarintygResponseType"/>
+   <xs:complexType name="TaEmotLakarintygResponseType">
+      <xs:sequence>
+		<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
+      </xs:sequence>
+   </xs:complexType>
 		
 <!--   
    <xs:complexType name="Svar">

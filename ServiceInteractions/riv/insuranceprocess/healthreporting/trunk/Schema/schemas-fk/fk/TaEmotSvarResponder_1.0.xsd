@@ -21,8 +21,11 @@
    </xs:complexType>
    
    <!--  soap:Fault eller inget -->
-   <xs:complexType name="TaEmotSvarResponseType"/>
-		
+   <xs:complexType name="TaEmotSvarResponseType">
+      <xs:sequence>
+		<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
+      </xs:sequence>
+	</xs:complexType>
 <!--   
    <xs:complexType name="Svar">
    <xs:complexType name="Response">
