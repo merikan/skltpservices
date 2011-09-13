@@ -28,12 +28,15 @@
 	<version>1.1-SNAPSHOT</version>
     <name>insuranceprocess-healthreporting-sendmedicalcertificatequestion-test-consumer</name>
 	<url>http://maven.apache.org</url>
+	
+	<parent>
+  		<groupId>se.skl.tp</groupId>
+  		<artifactId>SendMedicalCertificateQuestion</artifactId>
+  		<version>1.1-SNAPSHOT</version>
+   </parent>
 
 	<properties>
-		<cxf.version>2.1.2</cxf.version>
 		<schema.path>${basedir}/src/main/resources/schemas/business</schema.path>
-	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
  
  	<dependencies>    
@@ -67,17 +70,5 @@
             <version>2.5.6</version>
         </dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
