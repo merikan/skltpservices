@@ -16,7 +16,7 @@ Create a service
 
 2. Navigate to a place where you want to create a new service and run this to create CancelBooking service
 
-mvn archetype:generate -DinteractiveMode=true -DarchetypeArtifactId=service-archetype -DarchetypeGroupId=se.skl -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=se.skl.tp -DartifactId=CancelBooking -Dversion=1.0-SNAPSHOT -Ddomain=crm -Dsubdomain=scheduling
+mvn archetype:generate -DinteractiveMode=true -DarchetypeArtifactId=service-archetype -DarchetypeGroupId=se.skl.tp.archetype -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=se.skl.tp -DartifactId=CancelBooking -Dversion=1.0-SNAPSHOT -Ddomain=crm -Dsubdomain=scheduling
 
 user.dir: can be . or any other path where service should be generated
 artifactId: Name of the new service, e.g CancelBooking
