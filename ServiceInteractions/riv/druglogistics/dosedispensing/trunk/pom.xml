@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
  * Copyright 2009 Sjukvardsradgivningen
  *
@@ -18,9 +18,7 @@
  *   Free Software Foundation, Inc., 59 Temple Place, Suite 330,
 
  *   Boston, MA 02111-1307  USA
- -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>se.skl.tp</groupId>
@@ -38,6 +36,16 @@
 
   <!-- Modules to be created for each service -->
   <modules>
+    <module>AvbestallOrginalforpackning</module>
+    <module>BestallOrginalforpackning</module>
+    <module>HamtaLokaltProduktsortiment</module>
+    <module>HamtaMeddelanden</module>
+    <module>HamtaOrginalforpackning</module>
+    <module>HamtaVardtagareinformation</module>
+    <module>SkapaVardtagare</module>
+    <module>SkickaMeddelanden</module>
+    <module>UppdateraMeddelandeStatus</module>
+    <module>UppdateraVardtagareinformation</module>
   </modules>
   
   	<scm>
