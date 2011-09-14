@@ -9,7 +9,11 @@ import groovy.io.FileType
  * This archetype must be installed before running the script.
  * 
  * Version info:
- * Current script is under construction.
+ * A first version is created to solve that we would like to generate several service interactions without to much manual work.
+ *
+ * TODO:
+ * Make the script more smart by
+ * - Reading actual wsdl files and fetch filename, namespace info.
  * 
  */
 
@@ -31,17 +35,26 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir, domain){
 		def subdomain =  domainArray[1] 
 		
 		def mvnCommand = """mvn archetype:generate 
-		-DinteractiveMode=false
+		-DinteractiveMode=false 
 		-DarchetypeArtifactId=service-archetype 
-		-DarchetypeGroupId=se.skl 
+		-DarchetypeGroupId=se.skl.tp.archetype 
 		-DarchetypeVersion=1.0-SNAPSHOT 
 		-Duser.dir=${targetDir} 
 		-DgroupId=se.skl.tp 
 		-DartifactId=${artifactId} 
 		-Dversion=1.0-SNAPSHOT
 		-Ddomain=${maindomain} 
-		-Dsubdomain=${subdomain} """
-
+		-Dsubdomain=${subdomain} 
+		-DserviceName=${artifactId} 
+		-DserviceInteractionName=${artifactId}Interaction 
+		-DserviceMethodName=${artifactId} 
+		-DserviceRelativePath=${artifactId}/1/rivtabp20 
+		-DserviceWsdlFile=${artifactId}Interaction_1.0_RIVTABP20.wsdl 
+		-DserviceNamespace=urn:riv:${maindomain}:${subdomain}:${artifactId}:1:rivtabp20 
+		-DservicePackage=se.riv.${maindomain}.${subdomain}.v1 
+		-DservicePackageDir=se/riv/${maindomain}/${subdomain}/v1 
+		"""
+		
 		def process = mvnCommand.execute()
 		process.waitFor()
 
