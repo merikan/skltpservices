@@ -24,19 +24,23 @@ import javax.jws.WebService;
 
 import org.w3.wsaddressing10.AttributedURIType;
 
-import se.riv.se_apotekensservice.or.hamtaaktuellaordinationer.v1.HamtaAktuellaOrdinationerResponderInterface;
-import se.riv.se_apotekensservice.or.hamtaaktuellaordinationer.v1.HamtaAktuellaOrdinationerResponseType;
-import se.riv.se_apotekensservice.or.hamtaaktuellaordinationer.v1.HamtaAktuellaOrdinationerType;
+import riv.inera.se_apotekensservice.or.hamtaaktuellaordinationer._1.rivtabp20.ApplicationException;
+import riv.inera.se_apotekensservice.or.hamtaaktuellaordinationer._1.rivtabp20.HamtaAktuellaOrdinationerResponderInterface;
+import riv.inera.se_apotekensservice.or.hamtaaktuellaordinationer._1.rivtabp20.SystemException;
+import riv.inera_se_apotekensservice.argos._1.ArgosHeaderType;
+import riv.se_apotekensservice.or.hamtaaktuellaordinationerresponder._1.HamtaAktuellaOrdinationerRequestType;
+import riv.se_apotekensservice.or.hamtaaktuellaordinationerresponder._1.HamtaAktuellaOrdinationerResponseType;
 
-@WebService(
-		serviceName = "HamtaAktuellaOrdinationerResponderService", 
-		endpointInterface="se.riv.se_apotekensservice.or.hamtaaktuellaordinationer.v1.HamtaAktuellaOrdinationerResponderInterface", 
-		portName = "HamtaAktuellaOrdinationerResponderPort", 
-		targetNamespace = "urn:riv:se_apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20",
-		wsdlLocation = "schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl")
-public class ProducerImpl implements HamtaAktuellaOrdinationerResponderInterface {
+@WebService(serviceName = "HamtaAktuellaOrdinationerResponderService", endpointInterface = "se.riv.se_apotekensservice.or.hamtaaktuellaordinationer.v1.HamtaAktuellaOrdinationerResponderInterface", portName = "HamtaAktuellaOrdinationerResponderPort", targetNamespace = "urn:riv:se_apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20", wsdlLocation = "schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl")
+public class ProducerImpl implements
+		HamtaAktuellaOrdinationerResponderInterface {
 
-	public HamtaAktuellaOrdinationerResponseType hamtaAktuellaOrdinationer(final AttributedURIType logicalAddress, final HamtaAktuellaOrdinationerType parameters) {
+	@Override
+	public HamtaAktuellaOrdinationerResponseType hamtaAktuellaOrdinationer(
+			HamtaAktuellaOrdinationerRequestType parameters,
+			AttributedURIType logicalAddress, ArgosHeaderType argosHeader)
+			throws ApplicationException, SystemException {
+
 		HamtaAktuellaOrdinationerResponseType response = new HamtaAktuellaOrdinationerResponseType();
 		return response;
 	}
