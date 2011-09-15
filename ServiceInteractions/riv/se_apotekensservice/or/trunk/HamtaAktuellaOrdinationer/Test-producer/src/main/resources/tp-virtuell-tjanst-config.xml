@@ -33,11 +33,11 @@
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://localhost:10000/test/HamtaAktuellaOrdinationer_Service"
-					wsdlLocation="classpath:/schemas/interactions/HamtaAktuellaOrdinationer/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl"/>
+					wsdlLocation="classpath:/schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl"/>
 			</inbound>
 
 			<component>
-				<singleton-object class="se.riv.se_apotekensservice.or.v1.ProducerImpl" />
+				<singleton-object class="se.riv.se_apotekensservice.or.hamtaaktuellaordinationer.v1.ProducerImpl" />
 			</component>
 		</service>
 	</model>

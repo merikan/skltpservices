@@ -31,7 +31,7 @@ import riv.inera_se_apotekensservice.argos._1.ArgosHeaderType;
 import riv.se_apotekensservice.or.hamtaaktuellaordinationerresponder._1.HamtaAktuellaOrdinationerRequestType;
 import riv.se_apotekensservice.or.hamtaaktuellaordinationerresponder._1.HamtaAktuellaOrdinationerResponseType;
 
-@WebService(serviceName = "HamtaAktuellaOrdinationerResponderService", endpointInterface = "se.riv.se_apotekensservice.or.hamtaaktuellaordinationer.v1.HamtaAktuellaOrdinationerResponderInterface", portName = "HamtaAktuellaOrdinationerResponderPort", targetNamespace = "urn:riv:se_apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20", wsdlLocation = "schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl")
+@WebService(serviceName = "HamtaAktuellaOrdinationerResponderService", endpointInterface = "riv.inera.se_apotekensservice.or.hamtaaktuellaordinationer._1.rivtabp20.HamtaAktuellaOrdinationerResponderInterface", portName = "HamtaAktuellaOrdinationerResponderPort", targetNamespace = "urn:riv:inera:se.apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20", wsdlLocation = "schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl")
 public class ProducerImpl implements
 		HamtaAktuellaOrdinationerResponderInterface {
 
