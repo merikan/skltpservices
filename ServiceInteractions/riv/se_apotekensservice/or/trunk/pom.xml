@@ -36,6 +36,7 @@
 
   <!-- Modules to be created for each service -->
   <modules>
+  	<module>schemas</module>  
     <module>HamtaAktuellaOrdinationer</module>
   </modules>
   
