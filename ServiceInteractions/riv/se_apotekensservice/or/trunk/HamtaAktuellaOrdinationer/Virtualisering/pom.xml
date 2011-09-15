@@ -16,7 +16,7 @@
 	<groupId>se.skl.tp</groupId>
 	<artifactId>se_apotekensservice-or-HamtaAktuellaOrdinationer-virtualisering</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<name>virtualisering</name>
+	<name>se_apotekensservice-or-HamtaAktuellaOrdinationer-virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
