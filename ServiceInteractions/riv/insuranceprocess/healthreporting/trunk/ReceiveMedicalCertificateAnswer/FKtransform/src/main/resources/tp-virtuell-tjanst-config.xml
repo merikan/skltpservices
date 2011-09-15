@@ -45,7 +45,7 @@
 			<inbound>
 				<cxf:inbound-endpoint 
 					address="http://localhost:10000/adapter/transform/TaEmotSvar/1/rivtabp20"
-					wsdlLocation="classpath:/schemas/fk/TaEmotSvarInteraction_1.0_rivtabp20.wsdl"
+					wsdlLocation="classpath:/schemas/fk/TaEmotSvarInteraction12_1.0_rivtabp20.wsdl"
 					serviceName="TaEmotSvarResponderService"
 					namespace="urn:riv:fk:vardgivare:sjukvard:TaEmotSvar:1:rivtabp20"
 					proxy="true" 
