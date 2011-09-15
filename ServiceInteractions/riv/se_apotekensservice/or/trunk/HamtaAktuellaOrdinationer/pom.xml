@@ -37,5 +37,6 @@
 
   <modules>
     <module>Virtualisering</module>
+    <module>Test-producer</module>
   </modules>
 </project>
