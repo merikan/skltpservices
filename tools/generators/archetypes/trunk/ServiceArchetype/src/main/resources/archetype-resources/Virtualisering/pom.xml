@@ -14,14 +14,14 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>${groupId}</groupId>
-	<artifactId>${domain}-${subdomain}-${rootArtifactId}-virtualisering</artifactId>
+	<artifactId>${domain}-${subdomain}-${serviceName}-virtualisering</artifactId>
 	<version>${version}</version>
-	<name>${domain}-${subdomain}-${rootArtifactId}-virtualisering</name>
+	<name>${artifactId}</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>${groupId}</groupId>
-		<artifactId>${domain}-${subdomain}-${rootArtifactId}</artifactId>
+		<artifactId>${domain}-${subdomain}-${serviceName}</artifactId>
 		<version>${version}</version>
 	</parent>
 

@@ -14,10 +14,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>${groupId}</groupId>
-	<artifactId>${domain}-${subdomain}-${artifactId}</artifactId>
+	<artifactId>${domain}-${subdomain}-${serviceName}</artifactId>
 	<version>${version}</version>
 	<packaging>pom</packaging>
-	<name>${domain}-${subdomain}-${artifactId}</name>
+	<name>${artifactId}</name>
 
 	<properties>
 
