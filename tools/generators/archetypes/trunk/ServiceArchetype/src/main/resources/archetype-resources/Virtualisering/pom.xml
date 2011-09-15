@@ -16,7 +16,7 @@
 	<groupId>${groupId}</groupId>
 	<artifactId>${domain}-${subdomain}-${serviceName}-virtualisering</artifactId>
 	<version>${version}</version>
-	<name>${artifactId}</name>
+	<name>${domain}-${subdomain}-${serviceName}-virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>

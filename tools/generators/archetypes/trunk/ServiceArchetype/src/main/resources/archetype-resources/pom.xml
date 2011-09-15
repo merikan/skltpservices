@@ -17,7 +17,7 @@
 	<artifactId>${domain}-${subdomain}-${serviceName}</artifactId>
 	<version>${version}</version>
 	<packaging>pom</packaging>
-	<name>${artifactId}</name>
+	<name>${domain}-${subdomain}-${serviceName}</name>
 
 	<properties>
 
