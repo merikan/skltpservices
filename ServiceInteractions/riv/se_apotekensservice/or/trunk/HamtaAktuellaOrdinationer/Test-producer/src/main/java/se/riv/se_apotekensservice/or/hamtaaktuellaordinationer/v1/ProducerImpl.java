@@ -22,6 +22,8 @@ package se.riv.se_apotekensservice.or.hamtaaktuellaordinationer.v1;
 
 import javax.jws.WebService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3.wsaddressing10.AttributedURIType;
 
 import riv.inera.se_apotekensservice.or.hamtaaktuellaordinationer._1.rivtabp20.ApplicationException;
@@ -32,16 +34,36 @@ import riv.se_apotekensservice.or.hamtaaktuellaordinationerresponder._1.HamtaAkt
 import riv.se_apotekensservice.or.hamtaaktuellaordinationerresponder._1.HamtaAktuellaOrdinationerResponseType;
 
 @WebService(serviceName = "HamtaAktuellaOrdinationerResponderService", endpointInterface = "riv.inera.se_apotekensservice.or.hamtaaktuellaordinationer._1.rivtabp20.HamtaAktuellaOrdinationerResponderInterface", portName = "HamtaAktuellaOrdinationerResponderPort", targetNamespace = "urn:riv:inera:se.apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20", wsdlLocation = "schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl")
-public class ProducerImpl implements
-		HamtaAktuellaOrdinationerResponderInterface {
+public class ProducerImpl implements HamtaAktuellaOrdinationerResponderInterface {
 
-	@Override
-	public HamtaAktuellaOrdinationerResponseType hamtaAktuellaOrdinationer(
-			HamtaAktuellaOrdinationerRequestType parameters,
-			AttributedURIType logicalAddress, ArgosHeaderType argosHeader)
-			throws ApplicationException, SystemException {
+    @Override
+    public HamtaAktuellaOrdinationerResponseType hamtaAktuellaOrdinationer(
+	    HamtaAktuellaOrdinationerRequestType parameters, AttributedURIType logicalAddress,
+	    ArgosHeaderType argosHeader) throws ApplicationException, SystemException {
 
-		HamtaAktuellaOrdinationerResponseType response = new HamtaAktuellaOrdinationerResponseType();
-		return response;
-	}
+	System.out.println("Personnr: " + parameters.getPersonnummer());
+	System.out.println("Arbetplatskod: " + argosHeader.getArbetsplatskod());
+	System.out.println("Arbetsplatsnamn: " + argosHeader.getArbetsplatsnamn());
+	System.out.println("Befattningskod: " + argosHeader.getBefattningskod());
+	System.out.println("Efternamn: " + argosHeader.getEfternamn());
+	System.out.println("Fšrnamn: " + argosHeader.getFornamn());
+	System.out.println("Forskrivarkod: " + argosHeader.getForskrivarkod());
+	System.out.println("HsaId: " + argosHeader.getHsaID());
+	System.out.println("Katalog: " + argosHeader.getKatalog());
+	System.out.println("Legitimationskod: " + argosHeader.getLegitimationskod());
+	System.out.println("Organisationsnummer: " + argosHeader.getOrganisationsnummer());
+	System.out.println("Postadress: " + argosHeader.getPostadress());
+	System.out.println("Postnummer: " + argosHeader.getPostnummer());
+	System.out.println("Postort: " + argosHeader.getPostort());
+	System.out.println("Requestid: " + argosHeader.getRequestId());
+	System.out.println("Rollnamn: " + argosHeader.getRollnamn());
+	System.out.println("SystemIp: " + argosHeader.getSystemIp());
+	System.out.println("Systemnamn: " + argosHeader.getSystemnamn());
+	System.out.println("Systemversion: " + argosHeader.getSystemversion());
+	System.out.println("Telefonnummer: " + argosHeader.getTelefonnummer());
+	System.out.println("Yrkesgrupp: " + argosHeader.getYrkesgrupp());
+
+	HamtaAktuellaOrdinationerResponseType response = new HamtaAktuellaOrdinationerResponseType();
+	return response;
+    }
 }
