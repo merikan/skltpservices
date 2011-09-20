@@ -14,14 +14,14 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>${groupId}</groupId>
-	<artifactId>${domain}-${subdomain}-${serviceName}-virtualisering</artifactId>
+	<artifactId>${parentArtifactId}-virtualisering</artifactId>
 	<version>${version}</version>
-	<name>${domain}-${subdomain}-${serviceName}-virtualisering</name>
+	<name>${parentArtifactId} service virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>${groupId}</groupId>
-		<artifactId>${domain}-${subdomain}-${serviceName}</artifactId>
+		<artifactId>${parentArtifactId}</artifactId>
 		<version>${version}</version>
 	</parent>
 
@@ -41,7 +41,7 @@
 						<phase>generate-sources</phase>
 						<configuration>
 							<basedir>${basedir}</basedir>
-							<checkoutDirectory>${project.build.directory}/schemas/interactions/${serviceInteractionName}</checkoutDirectory>
+							<checkoutDirectory>${project.build.directory}/schemas/interactions/${serviceInteraction}</checkoutDirectory>
 							<skipCheckoutIfExists>true</skipCheckoutIfExists>
 							<connectionUrl>scm:svn:${osorSchemaDirectoryUrl}</connectionUrl>
 						</configuration>

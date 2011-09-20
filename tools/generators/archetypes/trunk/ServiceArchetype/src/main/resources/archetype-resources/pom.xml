@@ -14,19 +14,15 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>${groupId}</groupId>
-	<artifactId>${domain}-${subdomain}-${serviceName}</artifactId>
+	<artifactId>${artifactId}</artifactId>
 	<version>${version}</version>
 	<packaging>pom</packaging>
-	<name>${domain}-${subdomain}-${serviceName}</name>
+	<name>${artifactId} service</name>
 
 	<properties>
-
 		<osorCertDirectory>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/certs</osorCertDirectory>
-		<osorSchemaDirectoryUrl>https://svn.forge.osor.eu/svn/rivta/ServiceInteractions/riv/${domain}/${subdomain}/trunk/schemas/interactions/${serviceInteractionName}</osorSchemaDirectoryUrl>
-		<osorCoreSchemaDirectoryUrl>https://svn.forge.osor.eu/svn/rivta/ServiceInteractions/riv/${domain}/${subdomain}/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
-
-		<serviceProducerUrl>https://localhost:21000/vp${serviceRelativePath}</serviceProducerUrl>
-
+		<osorSchemaDirectoryUrl>https://svn.forge.osor.eu/svn/rivta/ServiceInteractions/riv/${domainName}/${domainSubName}/trunk/schemas/interactions/${serviceInteraction}</osorSchemaDirectoryUrl>
+		<osorCoreSchemaDirectoryUrl>https://svn.forge.osor.eu/svn/rivta/ServiceInteractions/riv/${domainName}/${domainSubName}/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
 	</properties>
 
 	<!-- Modules to be created for each service -->
