@@ -25,14 +25,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.tp</groupId>
 	<artifactId>crm-carelisting-getpersonqueuestatus-virtualisering</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<name>crm-carelisting-getpersonqueuestatus-virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
   		<groupId>se.skl.tp</groupId>
   		<artifactId>GetPersonQueueStatus</artifactId>
-  		<version>1.1-SNAPSHOT</version>
+  		<version>1.1</version>
    </parent>
    
 </project>

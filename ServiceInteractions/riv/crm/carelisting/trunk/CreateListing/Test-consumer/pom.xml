@@ -25,14 +25,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.tp</groupId>
 	<artifactId>crm-carelisting-createlisting-test-consumer</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<name>crm-carelisting-createlisting-test-consumer</name>
 	<url>http://maven.apache.org</url>
 	
 	<parent>
   		<groupId>se.skl.tp</groupId>
   		<artifactId>CreateListing</artifactId>
-  		<version>1.1-SNAPSHOT</version>
+  		<version>1.1</version>
    </parent>
  
  	<dependencies>    
@@ -40,7 +40,7 @@
  		<dependency>
 			<groupId>se.riv.crm.carelisting</groupId>
 			<artifactId>crm-carelisting-schemas</artifactId>
-			<version>1.1-SNAPSHOT</version>
+			<version>1.1</version>
 		</dependency>
  	
 	    <!-- cxf dependencies -->
