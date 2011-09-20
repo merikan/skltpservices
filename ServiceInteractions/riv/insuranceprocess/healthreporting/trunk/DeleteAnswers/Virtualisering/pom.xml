@@ -24,14 +24,14 @@
         <modelVersion>4.0.0</modelVersion>
         <groupId>se.skl.tp</groupId>
  <artifactId>insuranceprocess-healthreporting-deleteanswers-virtualisering</artifactId>
-        <version>1.1</version>
+        <version>1.2-SNAPSHOT</version>
  <name>insuranceprocess-healthreporting-deleteanswers-test-virtualisering</name>
         <url>http://maven.apache.org</url>
         
         <parent>
         	<groupId>se.skl.tp</groupId>
         	<artifactId>DeleteAnswers-service</artifactId>
-        	<version>1.1</version>
+        	<version>1.2-SNAPSHOT</version>
         </parent>
         
 </project>
