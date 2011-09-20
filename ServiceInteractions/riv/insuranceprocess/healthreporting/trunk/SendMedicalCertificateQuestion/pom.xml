@@ -25,14 +25,14 @@
 	<groupId>se.skl.tp</groupId>
 	<artifactId>SendMedicalCertificateQuestion</artifactId>
 	<packaging>pom</packaging>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
  <name>SendMedicalCertificateQuestion</name>
 	<url>http://maven.apache.org</url>
 	
 	<parent>
   		<groupId>se.skl.tp</groupId>
   		<artifactId>ifv</artifactId>
-  		<version>1.1-SNAPSHOT</version>
+  		<version>1.1</version>
    </parent>
 
 	<modules>

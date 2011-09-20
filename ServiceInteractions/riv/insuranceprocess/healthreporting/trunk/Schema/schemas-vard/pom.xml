@@ -25,20 +25,20 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.riv.fk</groupId>
 	<artifactId>insuranceprocess-healthreporting-schemas</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<name>insuranceprocess-healthreporting-schemas</name>
 	<url>http://maven.apache.org</url>
 	
 	<parent>
   		<groupId>se.skl.tp</groupId>
   		<artifactId>Schemas</artifactId>
-  		<version>1.1-SNAPSHOT</version>
+  		<version>1.1</version>
    </parent>
 
 	<properties>
 		<schema.path>interactions</schema.path>
-		<project.build.sourceEncoding></project.build.sourceEncoding>
-		<project.reporting.outputEncoding></project.reporting.outputEncoding>
+		<project.build.sourceEncoding />
+		<project.reporting.outputEncoding />
 	</properties>
  
 	<dependencies>

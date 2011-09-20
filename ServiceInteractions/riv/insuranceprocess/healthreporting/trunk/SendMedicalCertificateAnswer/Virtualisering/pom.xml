@@ -25,14 +25,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.tp</groupId>
  <artifactId>insuranceprocess-healthreporting-sendmedicalcertificateanswer-virtualisering</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
  <name>insuranceprocess-healthreporting-sendmedicalcertificateanswer-virtualisering</name>
 	<url>http://maven.apache.org</url>
 	
 	<parent>
   		<groupId>se.skl.tp</groupId>
   		<artifactId>SendMedicalCertificateAnswer</artifactId>
-  		<version>1.1-SNAPSHOT</version>
+  		<version>1.1</version>
    </parent>
 
 </project>

@@ -25,14 +25,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.riv.fk.varden</groupId>
 	<artifactId>insuranceprocess-healthreporting-registermedicalcertificate-FKtransform</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<name>insuranceprocess-healthreporting-registermedicalcertificate-FKtransform</name>
 	<url>http://maven.apache.org</url>
 	
 	<parent>
   		<groupId>se.skl.tp</groupId>
   		<artifactId>RegisterMedicalCertificate</artifactId>
-  		<version>1.1-SNAPSHOT</version>
+  		<version>1.1</version>
    </parent>
 
 	<properties>
@@ -91,13 +91,13 @@
 		<dependency>
 			<groupId>se.riv.fk</groupId>
 			<artifactId>fk-vardgivare-sjukvard-schemas</artifactId>
-			<version>1.1-SNAPSHOT</version>
+			<version>1.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>se.riv.fk</groupId>
 			<artifactId>insuranceprocess-healthreporting-schemas</artifactId>
-			<version>1.1-SNAPSHOT</version>
+			<version>1.1</version>
 		</dependency>
 				
 	    <!-- cxf dependencies -->

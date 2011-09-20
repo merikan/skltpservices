@@ -25,7 +25,7 @@
 	<groupId>se.skl.tp</groupId>
 	<artifactId>ifv</artifactId>
 	<packaging>pom</packaging>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<name>ifv</name>
 	<url>http://maven.apache.org</url>
 	
@@ -53,8 +53,8 @@
 	</modules>
 	
 	<scm>
-		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/insuranceprocess/healthreporting/trunk</connection>
-		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/insuranceprocess/healthreporting/trunk</developerConnection>
+		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/insuranceprocess/healthreporting/tags/ifv-1.1</connection>
+		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/insuranceprocess/healthreporting/tags/ifv-1.1</developerConnection>
 	</scm>
 	
 	<build>
