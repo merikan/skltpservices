@@ -25,14 +25,14 @@
         <modelVersion>4.0.0</modelVersion>
         <groupId>se.skl.tp</groupId>
         <artifactId>GetBookingDetails-test-producer</artifactId>
-        <version>1.0</version>
+        <version>1.1-SNAPSHOT</version>
         <name>GetBookingDetails-test-producer</name>
         <url>http://maven.apache.org</url>
         
         <parent>
         	<groupId>se.skl.tp</groupId>
         	<artifactId>GetBookingDetails-service</artifactId>
-        	<version>1.0</version>
+        	<version>1.1-SNAPSHOT</version>
         </parent>
         
         <dependencies>
@@ -40,7 +40,7 @@
         	<dependency>
         		<groupId>se.skl.tp</groupId>
         		<artifactId>crm-scheduling-schemas</artifactId>
-        		<version>1.0</version>
+        		<version>1.1-SNAPSHOT</version>
         	</dependency>
         	
         	<!-- CXF -->

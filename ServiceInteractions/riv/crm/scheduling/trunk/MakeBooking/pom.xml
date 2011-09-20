@@ -3,14 +3,14 @@
 
   <groupId>se.skl.tp</groupId>
   <artifactId>MakeBooking-service</artifactId>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>MakeBooking-service</name>
 
  <parent>
   	<groupId>se.skl.tp</groupId>
   	<artifactId>crm-scheduling</artifactId>
-  	<version>1.0</version>
+  	<version>1.1-SNAPSHOT</version>
   </parent>
 
   <!-- Modules to be created for each service -->
