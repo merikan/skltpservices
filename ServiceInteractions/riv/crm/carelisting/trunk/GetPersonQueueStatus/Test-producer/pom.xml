@@ -25,7 +25,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.tp</groupId>
     <artifactId>crm-carelisting-getpersonqueuestatus-test-producer</artifactId>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
     <name>crm-carelisting-getpersonqueuestatus-test-producer</name>
 	<url>http://maven.apache.org</url>
 
@@ -36,7 +36,7 @@
 	<parent>
   		<groupId>se.skl.tp</groupId>
   		<artifactId>GetPersonQueueStatus</artifactId>
-  		<version>1.1</version>
+  		<version>1.2-SNAPSHOT</version>
    </parent>
  
 	<dependencies>
@@ -44,7 +44,7 @@
  		<dependency>
 			<groupId>se.riv.crm.carelisting</groupId>
 			<artifactId>crm-carelisting-schemas</artifactId>
-			<version>1.1</version>
+			<version>1.2-SNAPSHOT</version>
 		</dependency>
 	
 	    <!-- cxf dependencies -->

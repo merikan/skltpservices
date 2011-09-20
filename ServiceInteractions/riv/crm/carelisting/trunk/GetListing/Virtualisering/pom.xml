@@ -25,14 +25,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.tp</groupId>
 	<artifactId>crm-carelisting-getlisting-virtualisering</artifactId>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
 	<name>crm-carelisting-getlisting-virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
   		<groupId>se.skl.tp</groupId>
   		<artifactId>GetListing</artifactId>
-  		<version>1.1</version>
+  		<version>1.2-SNAPSHOT</version>
    </parent>
  
 </project>
