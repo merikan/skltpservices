@@ -7,20 +7,31 @@ import groovy.io.FileType
 /**
  * This script should help us to generate many services at one time. This script is depending on the archetype named service-archetype.
  * This archetype must be installed before running the script.
+ *
+ * TO RUN:
+ * Just execute ./VirtualiseringGenerator.groovy and follow the instruction coming up.
  * 
  * Version info:
  * A first version is created to solve that we would like to generate several service interactions without to much manual work.
  *
  * TODO:
  * Make the script more smart by
- * - Reading actual wsdl files and fetch filename, namespace info.
+ * - Today its hardcoded to rivtabp20
+ * - Today it only works for version 1
  * 
  */
 
-def getAllserviceInteractionDirectories(directory){
+def getAllFilesMatching(direcory, pattern){
+	def filesFound = []
+	direcory?.traverse(type:FileType.FILES, nameFilter: ~pattern){ fileFound -> filesFound << fileFound }
+	filesFound.each { fileFound -> println "File to process: ${fileFound.name}" }
+	return filesFound
+}
+
+def getAllDirectoriesMatching(direcory, pattern){
 	def dirsFound = []
-	directory.traverse(type:FileType.DIRECTORIES, nameFilter: ~/.*Interaction$/){ dirFound -> dirsFound << dirFound }
-	dirsFound.each { dirFound -> println "Directory to process: ${dirFound.name}" }
+	direcory?.traverse(type:FileType.DIRECTORIES, nameFilter: ~pattern){ dirFound -> dirsFound << dirFound }
+	dirsFound.each { dirFound -> println "Directory to process: ${dirFound}" }
 	return dirsFound
 }
 
@@ -29,6 +40,11 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir, domain){
 	serviceInteractionDirectories.each { serviceInteractionDirectory ->
 
 		def artifactId = serviceInteractionDirectory.name - 'Interaction'
+		def schemasFiles = getAllFilesMatching(serviceInteractionDirectory, /.*\.wsdl/)
+		def wsdlFileName = schemasFiles[0].name
+		def rivtaVersion = 'rivtabp20'
+		def serviceVersion = '1'
+		def version = '1.0-SNAPSHOT'
 		
 		def domainArray = domain.split("\\.")
 		def maindomain = domainArray[0]
@@ -40,19 +56,16 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir, domain){
 		-DarchetypeGroupId=se.skl.tp.archetype 
 		-DarchetypeVersion=1.0-SNAPSHOT 
 		-Duser.dir=${targetDir} 
-		-DgroupId=se.skl.tp 
+		-DgroupId=se.skl.skltpservices.${maindomain}.${subdomain}
 		-DartifactId=${artifactId} 
-		-Dversion=1.0-SNAPSHOT
-		-Ddomain=${maindomain} 
-		-Dsubdomain=${subdomain} 
-		-DserviceName=${artifactId} 
-		-DserviceInteractionName=${artifactId}Interaction 
-		-DserviceMethodName=${artifactId} 
-		-DserviceRelativePath=${artifactId}/1/rivtabp20 
-		-DserviceWsdlFile=${artifactId}Interaction_1.0_RIVTABP20.wsdl 
-		-DserviceNamespace=urn:riv:${maindomain}:${subdomain}:${artifactId}:1:rivtabp20 
-		-DservicePackage=se.riv.${maindomain}.${subdomain}.v1 
-		-DservicePackageDir=se/riv/${maindomain}/${subdomain}/v1 
+		-Dversion=${version}
+		-DdomainName=${maindomain} 
+		-DdomainSubName=${subdomain} 
+		-DserviceMethod=${artifactId} 
+		-DserviceInteraction=${artifactId}Interaction  
+		-DserviceRelativePath=${artifactId}/${serviceVersion}/${rivtaVersion} 
+		-DserviceWsdlFile=${wsdlFileName} 
+		-DserviceNamespace=urn:riv:${maindomain}:${subdomain}:${artifactId}:${serviceVersion}:${rivtaVersion}  
 		"""
 		
 		def process = mvnCommand.execute()
@@ -64,8 +77,39 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir, domain){
 	}
 }
 
+def copyServiceSchemas(serviceInteractionDirectories, targetDir){
+	serviceInteractionDirectories.each { serviceInteractionDirectory ->
+		def schemasFiles = getAllFilesMatching(serviceInteractionDirectory, /.*\.xsd|.*\.xml|.*\.wsdl/)
+		
+		def serviceInteraction = serviceInteractionDirectory.name
+		def serviceDirectory = serviceInteraction - 'Interaction'
+		def schemaTargetDir = "${targetDir}/${serviceDirectory}/Virtualisering/src/main/resources/schemas/interactions/${serviceInteraction}"
+		new File("${schemaTargetDir}").mkdirs()
+		
+		schemasFiles.each {new File("${schemaTargetDir}/$it.name") << it}
+		
+	}
+}
+
+def copyCoreSchemas(serviceInteractionDirectories, coreSchemaDirectory, targetDir){
+	serviceInteractionDirectories.each { serviceInteractionDirectory ->
+		def schemasFiles = getAllFilesMatching(coreSchemaDirectory, /.*\.xsd/)
+		
+		def serviceInteraction = serviceInteractionDirectory.name
+		def serviceDirectory = serviceInteraction - 'Interaction'
+		def coreSchemaTargetDir = "${targetDir}/${serviceDirectory}/Virtualisering/src/main/resources/schemas/core_components"
+		new File("${coreSchemaTargetDir}").mkdirs()
+		
+		schemasFiles.each {new File("${coreSchemaTargetDir}/$it.name") << it}
+		
+	}
+}
+
 if( args.size() < 2){
-	println "This tool generates virtualising components based on service interactions found in sourceDir."
+	println "This tool generates service virtualising components based on service interactions found in sourceDir. They are generated in the targetDir."
+	println "Point sourceDir to the schemas dir containing:"
+	println "core_components"
+	println "interactions"
 	println ""
 	println "Required parameters: source directory [sourceDir], target directory [targetDir],domain [domain] \n"
 	println "PARAMETERS DESCRIPTION:"
@@ -82,5 +126,9 @@ def sourceDir = new File(args[0])
 def targetDir = new File(args[1])
 def domain = args[2]
 
-def serviceInteractionDirectories = getAllserviceInteractionDirectories(sourceDir)
+def serviceInteractionDirectories = getAllDirectoriesMatching(sourceDir,/.*Interaction$/)
+def coreSchemaDirectory = getAllDirectoriesMatching(sourceDir,/core_components/)[0]
+
 buildVirtualServices(serviceInteractionDirectories, targetDir, domain)
+copyServiceSchemas(serviceInteractionDirectories, targetDir)
+copyCoreSchemas(serviceInteractionDirectories, coreSchemaDirectory, targetDir)
