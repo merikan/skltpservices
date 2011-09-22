@@ -4,6 +4,11 @@ package se.skltpservices.tools
 
 import groovy.io.FileType
 
+org.apache.commons.io.FileUtils
+
+@Grab(group='commons-io', module='commons-io', version='1.3.2')
+import org.apache.commons.io.FileUtils
+
 /**
  * This script should help us to generate many services at one time. This script is depending on the archetype named service-archetype.
  * This archetype must be installed before running the script.
@@ -44,7 +49,7 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir, domain){
 		def wsdlFileName = schemasFiles[0].name
 		def rivtaVersion = 'rivtabp20'
 		def serviceVersion = '1'
-		def version = '1.0-SNAPSHOT'
+		def version = '1.1-SNAPSHOT'
 		
 		def domainArray = domain.split("\\.")
 		def maindomain = domainArray[0]
@@ -86,8 +91,9 @@ def copyServiceSchemas(serviceInteractionDirectories, targetDir){
 		def schemaTargetDir = "${targetDir}/${serviceDirectory}/Virtualisering/src/main/resources/schemas/interactions/${serviceInteraction}"
 		new File("${schemaTargetDir}").mkdirs()
 		
-		schemasFiles.each {new File("${schemaTargetDir}/$it.name") << it}
-		
+		schemasFiles.each {sourceSchemaFile -> 
+			def targetSchemaFile = new File("${schemaTargetDir}/$sourceSchemaFile.name")
+			FileUtils.copyFile(sourceSchemaFile, targetSchemaFile)}
 	}
 }
 
@@ -100,7 +106,9 @@ def copyCoreSchemas(serviceInteractionDirectories, coreSchemaDirectory, targetDi
 		def coreSchemaTargetDir = "${targetDir}/${serviceDirectory}/Virtualisering/src/main/resources/schemas/core_components"
 		new File("${coreSchemaTargetDir}").mkdirs()
 		
-		schemasFiles.each {new File("${coreSchemaTargetDir}/$it.name") << it}
+		schemasFiles.each {sourceSchemaFile -> 
+			def targetSchemaFile = new File("${coreSchemaTargetDir}/$sourceSchemaFile.name")
+			FileUtils.copyFile(sourceSchemaFile, targetSchemaFile)}
 		
 	}
 }
