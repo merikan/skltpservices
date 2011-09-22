@@ -14,7 +14,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>${groupId}</groupId>
-	<artifactId>${parentArtifactId}-virtualisering</artifactId>
+	<artifactId>${domainName}-${domainSubName}-${parentArtifactId}-virtualisering</artifactId>
 	<version>${version}</version>
 	<name>${parentArtifactId} service virtualisering</name>
 	<url>http://maven.apache.org</url>
@@ -27,40 +27,6 @@
 
 	<build>
 		<plugins>
-			<!-- Checkout schemas and copy them to the classpath -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-scm-plugin</artifactId>
-				<version>1.5</version>
-				<executions>
-					<execution>
-						<id>checkout-service-schemas</id>
-						<goals>
-							<goal>checkout</goal>
-						</goals>
-						<phase>generate-sources</phase>
-						<configuration>
-							<basedir>${basedir}</basedir>
-							<checkoutDirectory>${project.build.directory}/schemas/interactions/${serviceInteraction}</checkoutDirectory>
-							<skipCheckoutIfExists>true</skipCheckoutIfExists>
-							<connectionUrl>scm:svn:${osorSchemaDirectoryUrl}</connectionUrl>
-						</configuration>
-					</execution>
-					<execution>
-						<id>checkout-core-component-schemas</id>
-						<goals>
-							<goal>checkout</goal>
-						</goals>
-						<phase>generate-sources</phase>
-						<configuration>
-							<basedir>${basedir}</basedir>
-							<checkoutDirectory>${project.build.directory}/schemas/core_components</checkoutDirectory>
-							<skipCheckoutIfExists>true</skipCheckoutIfExists>
-							<connectionUrl>scm:svn:${osorCoreSchemaDirectoryUrl}</connectionUrl>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
