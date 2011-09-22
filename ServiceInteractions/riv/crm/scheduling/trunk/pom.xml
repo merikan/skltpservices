@@ -22,7 +22,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>se.skl.tp</groupId>
+  <groupId>se.skl.skltpservices.crm.scheduling</groupId>
   <artifactId>crm-scheduling</artifactId>
   <version>1.1-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -39,15 +39,6 @@
   <!-- Modules to be created for each service -->
   <modules>
     <module>Schema</module>
-    <module>UpdateBooking</module>
-    <module>MakeBooking</module>
-    <module>GetSubjectOfCareSchedule</module>
-    <module>GetCancelledAndRebooked</module>
-    <module>GetBookingDetails</module>
-    <module>GetAvailableTimeslots</module>
-    <module>GetAvailableDates</module>
-    <module>GetAllTimeTypes</module>
-    <module>CancelBooking</module>
   </modules>
   
   <scm>
