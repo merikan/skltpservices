@@ -14,7 +14,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.skltpservices.crm.scheduling</groupId>
-	<artifactId>CancelBooking-virtualisering</artifactId>
+	<artifactId>crm-scheduling-CancelBooking-virtualisering</artifactId>
 	<version>1.1-SNAPSHOT</version>
 	<name>CancelBooking service virtualisering</name>
 	<url>http://maven.apache.org</url>

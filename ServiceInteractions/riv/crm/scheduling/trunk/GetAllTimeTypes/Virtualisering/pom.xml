@@ -14,7 +14,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.skltpservices.crm.scheduling</groupId>
-	<artifactId>GetAllTimeTypes-virtualisering</artifactId>
+	<artifactId>crm-scheduling-GetAllTimeTypes-virtualisering</artifactId>
 	<version>1.1-SNAPSHOT</version>
 	<name>GetAllTimeTypes service virtualisering</name>
 	<url>http://maven.apache.org</url>
