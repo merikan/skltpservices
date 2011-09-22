@@ -1,4 +1,4 @@
-<tns:GetSubjectOfCareScheduleResponse xmlns:tns="urn:riv:crm:scheduling:GetSubjectOfCareScheduleResponder:1" xmlns:tns1="urn:riv:crm:scheduling:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:riv:crm:scheduling:GetSubjectOfCareScheduleResponder:1 GetSubjectOfCareScheduleResponder_1.0.xsd ">
+<tns:GetCancelledAndRebookedResponse xmlns:tns="urn:riv:crm:scheduling:GetCancelledAndRebookedResponder:1" xmlns:tns1="urn:riv:crm:scheduling:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:riv:crm:scheduling:GetCancelledAndRebookedResponder:1 GetCancelledAndRebookedResponder_1.0.xsd ">
   <tns:timeslotDetail>
     <tns1:startTimeInclusive>20011231120000</tns1:startTimeInclusive>
     <tns1:endTimeExclusive>20011231220000</tns1:endTimeExclusive>
@@ -20,9 +20,9 @@
     <tns1:rebooking_allowed>true(?)</tns1:rebooking_allowed>
     <tns1:message_allowed>true(?)</tns1:message_allowed>
   </tns:timeslotDetail>
-   <tns:timeslotDetail>
-    <tns1:startTimeInclusive>20011231120000</tns1:startTimeInclusive>
-    <tns1:endTimeExclusive>20011231220000</tns1:endTimeExclusive>
+  <tns:timeslotDetail>
+    <tns1:startTimeInclusive>2001-12-31T12:00:00</tns1:startTimeInclusive>
+    <tns1:endTimeExclusive>2001-12-31T12:00:00</tns1:endTimeExclusive>
     <tns1:healthcare_facility>tns1:healthcare_facility</tns1:healthcare_facility>
     <tns1:performer>tns1:performer(?)</tns1:performer>
     <tns1:bookingId>tns1:bookingId(?)</tns1:bookingId>
@@ -40,5 +40,5 @@
     <tns1:cancel_booking_allowed>true(?)</tns1:cancel_booking_allowed>
     <tns1:rebooking_allowed>true(?)</tns1:rebooking_allowed>
     <tns1:message_allowed>true(?)</tns1:message_allowed>
-  </tns:timeslotDetail>
-</tns:GetSubjectOfCareScheduleResponse>
+  </tns:timeslotDetail>  
+</tns:GetCancelledAndRebookedResponse>
