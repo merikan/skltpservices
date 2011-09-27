@@ -44,7 +44,7 @@
 		<service name="fk-varden-answer-service">
 			<inbound>
 				<cxf:inbound-endpoint 
-					address="http://localhost:10000/adapter/transform/TaEmotSvar/1/rivtabp20"
+					address="https://${tp.host}:${tp.port}/adapter/transform/TaEmotSvar/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/fk/TaEmotSvarInteraction12_1.0_rivtabp20.wsdl"
 					serviceName="TaEmotSvarResponderService"
 					namespace="urn:riv:fk:vardgivare:sjukvard:TaEmotSvar:1:rivtabp20"
@@ -53,6 +53,7 @@
 					applyTransformersToProtocol="false"
 					transformer-refs="newReceiverIdAnswer FkReq2VardAnswer changeNamespaceRecMedCertAnswer"
 					responseTransformer-refs="VardResp2FkAnswer"
+					protocolConnector="VPProducerConnector"
  				/>							
 			</inbound>
 
