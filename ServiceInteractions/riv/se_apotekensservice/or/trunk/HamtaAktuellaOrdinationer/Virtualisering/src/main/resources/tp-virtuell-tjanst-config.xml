@@ -20,8 +20,6 @@
 
 	<!-- Name of this file is mandatory and may not be changed. -->
 	
-	<custom-transformer name="SamlTicketTransformer" class="se.skl.tp.ticket.transformers.SamlTicketTransformer"/>	
-
 	<model name="Get-HamtaAktuellaOrdinationer-model">
 
 		<service name="Get-HamtaAktuellaOrdinationer-service">
@@ -34,9 +32,7 @@
 					proxy="true" 
 					payload="envelope" 
 					synchronous="true" 
-					applyTransformersToProtocol="false"
-					protocolConnector="VPProducerConnector"
-					transformer-refs="SamlTicketTransformer"/>
+					protocolConnector="VPProducerConnector"/>
 			</inbound>
 
 			<outbound>
