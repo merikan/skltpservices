@@ -1,17 +1,28 @@
 package se.skl.tp.ticket.transformer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.jws.WebService;
 
-public class TicketTransformerTestProducer {
+import se.riv.inera.se.apotekensservice.argos.v1.ArgosHeaderType;
+import se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.HamtaAktuellaOrdinationerResponderInterface;
+import se.riv.se.apotekensservice.or.hamtaaktuellaordinationerresponder.v1.HamtaAktuellaOrdinationerRequestType;
+import se.riv.se.apotekensservice.or.hamtaaktuellaordinationerresponder.v1.HamtaAktuellaOrdinationerResponseType;
 
-    private static final Logger log = LoggerFactory.getLogger(TicketTransformerTestProducer.class);
+@WebService(	serviceName = "HamtaAktuellaOrdinationerResponderService", 
+		endpointInterface = "se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.HamtaAktuellaOrdinationerResponderInterface", 
+		portName = "HamtaAktuellaOrdinationerResponderPort", 
+		targetNamespace = "urn:riv:inera:se.apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20", 
+		wsdlLocation = "schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl")
+public class TicketTransformerTestProducer implements HamtaAktuellaOrdinationerResponderInterface {
 
-    public Object process(String xmlRequest) {
+    @Override
+    public HamtaAktuellaOrdinationerResponseType hamtaAktuellaOrdinationer(
+	    HamtaAktuellaOrdinationerRequestType parameters, org.w3c.addressing.v1.AttributedURIType logicalAddress,
+	    ArgosHeaderType argosHeader)
+	    throws se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.ApplicationException,
+	    se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.SystemException {
 
-	log.info("TicketTransformerTestProducer received the request: {}", xmlRequest);
-
-	return null;
+	HamtaAktuellaOrdinationerResponseType response = new HamtaAktuellaOrdinationerResponseType();
+	return response;
     }
 
 }

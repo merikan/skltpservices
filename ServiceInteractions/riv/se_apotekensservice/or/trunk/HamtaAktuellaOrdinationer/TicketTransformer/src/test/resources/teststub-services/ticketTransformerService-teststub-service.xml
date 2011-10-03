@@ -20,20 +20,20 @@
 
 	<!-- Name of this file is mandatory and may not be changed. -->
 
-	<custom-transformer name="SamlTicketTransformer"
-		class="se.skl.tp.ticket.transformer.SamlTicketTransformer" />
-
-	<model name="TicketTransformerService-teststub-service">
+	<model name="TicketTransformerService-teststub-model">
 
 		<service name="TicketTransformerService-teststub-service">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/transformer/SamlTicketTransformer"
-					proxy="true" payload="envelope" synchronous="true"
-					applyTransformersToProtocol="false" transformer-refs="SamlTicketTransformer" />
+					address="http://localhost:10000/serviceProvider/HamtaAktuellaOrdinationerResponder/V1"
+					wsdlLocation="schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl" />
 			</inbound>
 
-		  <component class="se.skl.tp.ticket.transformer.TicketTransformerTestProducer"/>
+
+			<component>
+				<singleton-object
+					class="se.skl.tp.ticket.transformer.TicketTransformerTestProducer" />
+			</component>
 		</service>
 	</model>
 
