@@ -33,14 +33,14 @@ public class Producer {
         System.out.println("Starting Producer");
 
         // Loads a cxf configuration file to use
-        final SpringBusFactory bf = new SpringBusFactory();
-        final URL busFile = this.getClass().getClassLoader().getResource("cxf-producer.xml");
-        final Bus bus = bf.createBus(busFile.toString());
-        
-        SpringBusFactory.setDefaultBus(bus);
+//        final SpringBusFactory bf = new SpringBusFactory();
+//        final URL busFile = this.getClass().getClassLoader().getResource("cxf-producer.xml");
+//        final Bus bus = bf.createBus(busFile.toString());
+//        
+//        SpringBusFactory.setDefaultBus(bus);
         
         final Object implementor = new ProducerImpl();
-        final String address = "https://localhost:21000/vp/HamtaAktuellaOrdinationer/1/rivtabp20";
+        final String address = "http://localhost:21000/vp/HamtaAktuellaOrdinationer/1/rivtabp20";
         Endpoint.publish(address, implementor);
     }
 
