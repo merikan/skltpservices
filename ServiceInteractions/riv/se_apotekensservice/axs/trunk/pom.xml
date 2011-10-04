@@ -29,11 +29,7 @@
 	<!-- Modules to be created for each service -->
 	<modules>
 		<module>Schema</module>
-    <module>HamtaExpeditionsId</module>
-    <module>HamtaFolkInfo</module>
-    <module>HamtaKundInfo</module>
     <module>HamtaPatientInfo</module>
-    <module>UppdateraSamtycke</module>
   </modules>
 
 	<dependencies>  <!-- Mule dependencies -->
