@@ -16,7 +16,6 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<groovy.version>1.8.1</groovy.version>
 		<project.build.sourceEncoding></project.build.sourceEncoding>
 	<project.reporting.outputEncoding></project.reporting.outputEncoding>
 	</properties>
@@ -41,12 +40,6 @@
 			<groupId>se.inera.pascal.ticket</groupId>
 			<artifactId>TicketMachine</artifactId>
 			<version>1.0</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>log4j-over-slf4j</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -66,17 +59,6 @@
 					<artifactId>jms</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-all</artifactId>
-			<version>${groovy.version}</version>
-			<scope>test</scope>
 		</dependency>
 
 		<!-- Schemas -->
