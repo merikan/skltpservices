@@ -18,17 +18,18 @@
 
  *   Boston, MA 02111-1307  USA
  */
-package se.skl.tp.ticket.transformer;
+package se.skl.tp.ticket;
 
 import org.apache.commons.lang.StringUtils;
 
 import se.inera.pascal.ticket.ArgosTicket;
+import se.skl.tp.ticket.argos.ArgosHeader;
 
 /**
  * Ticket machine provides possibilities to generate tickets that can be used
  * e.g when communicating with systems that demands this.
  */
-class TicketMachine {
+public class TicketMachine {
 
     private static final String WSSE_STARTTAG = "<wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">";
     private static final String WSSE_ENDTAG = "</wsse:Security>";
@@ -58,7 +59,7 @@ class TicketMachine {
      *            The information used when generating the SAML ticket.
      * @return A String representation of the SAML ticket in ws security format.
      */
-    String produceSamlTicket(ArgosHeader argosHeader) {
+    public String produceSamlTicket(ArgosHeader argosHeader) {
 	String samlTicket = getArgosTicketMachine().getTicket(argosHeader.getForskrivarkod(),
 		argosHeader.getLegitimationskod(), argosHeader.getFornamn(), argosHeader.getEfternamn(),
 		argosHeader.getYrkesgrupp(), argosHeader.getBefattningskod(), argosHeader.getArbetsplatskod(),

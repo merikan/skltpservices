@@ -1,30 +1,30 @@
-package se.skl.tp.ticket.transformer;
-
-import junit.framework.Assert;
+package se.skl.tp.ticket.saml;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.soitoolkit.commons.mule.test.AbstractTestCase;
 
 import se.riv.se.apotekensservice.or.hamtaaktuellaordinationerresponder.v1.HamtaAktuellaOrdinationerResponseType;
-import se.skl.tp.ticket.transformer.testconsumer.HamtaAllaAktuellaOrdinationerTestConsumer;
+import se.skl.tp.ticket.testconsumer.HamtaAllaAktuellaOrdinationerTestConsumer;
 
-public class TicketTransformerIntegrationTest extends AbstractTestCase {
+public class SamlTicketTransformerIntegrationTest extends AbstractTestCase {
 
-    public TicketTransformerIntegrationTest() {
-	super();
+    @BeforeClass
+    public void beforeClass() {
 	setDisposeManagerPerSuite(true);
 	setTestTimeoutSecs(120);
     }
 
-    protected String getConfigResources() {
-	return "services/ticketTransformerService-service.xml,"
-		+ "teststub-services/ticketTransformerService-teststub-service.xml";
+    @Before
+    public void doSetUp() throws Exception {
+	super.doSetUp();
+	setDisposeManagerPerSuite(true);
     }
 
-    @Before
-    protected void doSetUp() throws Exception {
-	super.doSetUp();
+    @Override
+    protected String getConfigResources() {
+	return "TicketTransformer-teststubs-and-services-config.xml";
     }
 
     @Test
@@ -35,7 +35,8 @@ public class TicketTransformerIntegrationTest extends AbstractTestCase {
 	HamtaAktuellaOrdinationerResponseType response = new HamtaAllaAktuellaOrdinationerTestConsumer()
 		.requestIncludingCompleteArgosInformation(ssn, to);
 
-	Assert.assertNotNull(response);
+	assertNotNull(response);
+	assertEquals(ssn, response.getOrdinationslista().getPersonnummer());
     }
 
 }

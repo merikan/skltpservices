@@ -1,4 +1,4 @@
-package se.skl.tp.ticket.transformer;
+package se.skl.tp.ticket.argos;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -12,6 +12,9 @@ import org.junit.Test;
 import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleMessage;
 import org.mule.module.xml.stax.ReversibleXMLStreamReader;
+
+import se.skl.tp.ticket.argos.ArgosHeader;
+import se.skl.tp.ticket.argos.ArgosHeaderHelper;
 
 public class ArgosHeaderHelperTest {
 

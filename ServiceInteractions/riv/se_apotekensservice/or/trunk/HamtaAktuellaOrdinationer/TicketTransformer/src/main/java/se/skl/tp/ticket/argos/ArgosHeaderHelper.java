@@ -18,7 +18,7 @@
 
  *   Boston, MA 02111-1307  USA
  */
-package se.skl.tp.ticket.transformer;
+package se.skl.tp.ticket.argos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ import org.mule.module.xml.stax.ReversibleXMLStreamReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-class ArgosHeaderHelper {
+public class ArgosHeaderHelper {
 
     private static Logger log = LoggerFactory.getLogger(ArgosHeaderHelper.class);
 
@@ -91,7 +91,7 @@ class ArgosHeaderHelper {
 	}
     };
 
-    ArgosHeaderHelper() {
+    public ArgosHeaderHelper() {
 	xmlInputFactory = XMLInputFactory.newInstance();
     }
 
@@ -106,7 +106,7 @@ class ArgosHeaderHelper {
      * @throws IllegalStateException
      *             in case of any exceptions
      */
-    ArgosHeader extractArgosHeader(MuleMessage msg) throws IllegalStateException {
+    public ArgosHeader extractArgosHeader(MuleMessage msg) throws IllegalStateException {
 	log.info("Argos header extractor executing");
 	try {
 	    final XMLEventReader argosRequestEvents = getXmlReaderWithTrackingEnabled(msg);

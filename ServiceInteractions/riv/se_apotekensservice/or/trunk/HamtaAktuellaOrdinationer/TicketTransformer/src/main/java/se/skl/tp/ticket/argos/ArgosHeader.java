@@ -18,7 +18,7 @@
 
  *   Boston, MA 02111-1307  USA
  */
-package se.skl.tp.ticket.transformer;
+package se.skl.tp.ticket.argos;
 
 /**
  * Class representing the Argos header information.

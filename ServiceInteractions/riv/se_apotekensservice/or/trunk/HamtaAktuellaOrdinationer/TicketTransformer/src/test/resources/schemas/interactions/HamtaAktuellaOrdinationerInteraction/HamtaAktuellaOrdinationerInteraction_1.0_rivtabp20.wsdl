@@ -65,7 +65,7 @@
   </wsdl:binding>
   <wsdl:service name="HamtaAktuellaOrdinationerResponderService">
     <wsdl:port name="HamtaAktuellaOrdinationerResponderPort" binding="HamtaAktuellaOrdinationerResponderBinding">
-      <soap:address location="http://localhost:10000/serviceProvider/HamtaAktuellaOrdinationerResponder/V1/"/>
+      <soap:address location="http://localhost:10000/transformer/SamlTicketTransformer"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

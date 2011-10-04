@@ -21,7 +21,7 @@
 	<!-- Name of this file is mandatory and may not be changed. -->
 
 	<custom-transformer name="SamlTicketTransformer"
-		class="se.skl.tp.ticket.transformer.SamlTicketTransformer" />
+		class="se.skl.tp.ticket.saml.SamlTicketTransformer" />
 
 	<model name="TicketTransformerService-model">
 
@@ -29,8 +29,11 @@
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://localhost:10000/transformer/SamlTicketTransformer"
-					proxy="true" payload="envelope" synchronous="true"
-					applyTransformersToProtocol="false" transformer-refs="SamlTicketTransformer" />
+					proxy="true" 
+					payload="envelope" 
+					synchronous="true"
+					applyTransformersToProtocol="false" 
+					transformer-refs="SamlTicketTransformer" />
 			</inbound>
 
 			<outbound>

@@ -1,4 +1,4 @@
-package se.skl.tp.ticket.transformer;
+package se.skl.tp.ticket.saml;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -21,6 +21,10 @@ import org.mule.module.xml.stax.ReversibleXMLStreamReader;
 import org.mule.transformer.AbstractMessageAwareTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import se.skl.tp.ticket.TicketMachine;
+import se.skl.tp.ticket.argos.ArgosHeader;
+import se.skl.tp.ticket.argos.ArgosHeaderHelper;
 
 /**
  * Transformer is responsible to add a SAML ticket to the incoming request,

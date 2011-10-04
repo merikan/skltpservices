@@ -1,4 +1,4 @@
-package se.skl.tp.ticket.transformer;
+package se.skl.tp.ticket.saml;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -15,6 +15,9 @@ import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.module.xml.stax.ReversibleXMLStreamReader;
+
+import se.skl.tp.ticket.argos.ArgosHeader;
+import se.skl.tp.ticket.saml.SamlTicketTransformer;
 
 public class SamlTicketTransformerTest {
 

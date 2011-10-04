@@ -1,4 +1,4 @@
-package se.skl.tp.ticket.transformer.testconsumer;
+package se.skl.tp.ticket.testconsumer;
 
 import java.net.URL;
 
@@ -19,6 +19,7 @@ public class HamtaAllaAktuellaOrdinationerTestConsumer {
     public HamtaAllaAktuellaOrdinationerTestConsumer() {
 	service = new HamtaAktuellaOrdinationerResponderService(getWsdlFile())
 		.getHamtaAktuellaOrdinationerResponderPort();
+
     }
 
     private URL getWsdlFile() {
@@ -58,7 +59,7 @@ public class HamtaAllaAktuellaOrdinationerTestConsumer {
 	argosHeader.setForskrivarkod("1111129");
 	argosHeader.setHsaID("TSE6565656565-1003");
 	argosHeader.setKatalog("HSA");
-	argosHeader.setLegitimationskod("");
+	argosHeader.setLegitimationskod("1");
 	argosHeader.setOrganisationsnummer("1234567890");
 	argosHeader.setPostadress("VŠgen 1");
 	argosHeader.setPostnummer("11111");

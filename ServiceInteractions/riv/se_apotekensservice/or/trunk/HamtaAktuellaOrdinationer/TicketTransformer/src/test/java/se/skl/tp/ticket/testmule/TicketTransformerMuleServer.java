@@ -1,4 +1,4 @@
-package se.skl.tp.ticket.transformer;
+package se.skl.tp.ticket.testmule;
 
  
 import org.soitoolkit.commons.mule.test.StandaloneMuleServer;

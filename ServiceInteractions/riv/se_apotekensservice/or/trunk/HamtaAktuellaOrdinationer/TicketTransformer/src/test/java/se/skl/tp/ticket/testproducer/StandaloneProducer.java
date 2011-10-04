@@ -18,11 +18,10 @@
 
  *   Boston, MA 02111-1307  USA
  */
-package se.skl.tp.ticket.transformer;
+package se.skl.tp.ticket.testproducer;
 
 import javax.xml.ws.Endpoint;
 
-import se.skl.tp.ticket.transformer.testproducer.HamtaAllaAktuellaOrdinationerTestProducer;
 
 public class StandaloneProducer {
 

@@ -1,9 +1,12 @@
-package se.skl.tp.ticket.transformer;
+package se.skl.tp.ticket;
 
 import static org.junit.matchers.JUnitMatchers.containsString;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import se.skl.tp.ticket.TicketMachine;
+import se.skl.tp.ticket.argos.ArgosHeader;
 
 public class TicketMachineTest {
 
