@@ -22,6 +22,8 @@ package se.skl.tp.ticket.transformer;
 
 import javax.xml.ws.Endpoint;
 
+import se.skl.tp.ticket.transformer.testproducer.HamtaAllaAktuellaOrdinationerTestProducer;
+
 public class StandaloneProducer {
 
     protected StandaloneProducer() throws Exception {
@@ -34,7 +36,7 @@ public class StandaloneProducer {
 //        
 //        SpringBusFactory.setDefaultBus(bus);
         
-        final Object implementor = new TicketTransformerTestProducer();
+        final Object implementor = new HamtaAllaAktuellaOrdinationerTestProducer();
         final String address = "http://localhost:21000/vp/HamtaAktuellaOrdinationer/1/rivtabp20";
         Endpoint.publish(address, implementor);
     }

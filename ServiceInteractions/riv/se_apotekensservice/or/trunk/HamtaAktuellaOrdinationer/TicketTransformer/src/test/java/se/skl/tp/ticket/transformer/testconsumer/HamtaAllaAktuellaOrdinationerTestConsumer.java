@@ -1,4 +1,4 @@
-package se.skl.tp.ticket.transformer;
+package se.skl.tp.ticket.transformer.testconsumer;
 
 import java.net.URL;
 
@@ -12,11 +12,11 @@ import se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp2
 import se.riv.se.apotekensservice.or.hamtaaktuellaordinationerresponder.v1.HamtaAktuellaOrdinationerRequestType;
 import se.riv.se.apotekensservice.or.hamtaaktuellaordinationerresponder.v1.HamtaAktuellaOrdinationerResponseType;
 
-public class TicketTransformerTestConsumer {
+public class HamtaAllaAktuellaOrdinationerTestConsumer {
 
     private HamtaAktuellaOrdinationerResponderInterface service;
 
-    public TicketTransformerTestConsumer() {
+    public HamtaAllaAktuellaOrdinationerTestConsumer() {
 	service = new HamtaAktuellaOrdinationerResponderService(getWsdlFile())
 		.getHamtaAktuellaOrdinationerResponderPort();
     }

@@ -32,7 +32,7 @@
 
 			<component>
 				<singleton-object
-					class="se.skl.tp.ticket.transformer.TicketTransformerTestProducer" />
+					class="se.skl.tp.ticket.transformer.testproducer.HamtaAllaAktuellaOrdinationerTestProducer" />
 			</component>
 		</service>
 	</model>

@@ -17,14 +17,30 @@
 
 	<properties>
 		<groovy.version>1.8.1</groovy.version>
-		<soitoolkit.version>0.3.1</soitoolkit.version>
+		<project.build.sourceEncoding></project.build.sourceEncoding>
+	<project.reporting.outputEncoding></project.reporting.outputEncoding>
 	</properties>
 
 	<dependencies>
 		<dependency>
+			<groupId>org.soitoolkit.commons.components</groupId>
+			<artifactId>soitoolkit-commons-mule</artifactId>
+			<version>${soitoolkit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.soitoolkit.commons.components</groupId>
+			<artifactId>soitoolkit-commons-log</artifactId>
+			<version>${soitoolkit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
+			<artifactId>vp-mule-2.2.8-dependencies</artifactId>
+			<version>0.3.1</version>
+		</dependency>
+		<dependency>
 			<groupId>se.inera.pascal.ticket</groupId>
 			<artifactId>TicketMachine</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
@@ -33,9 +49,23 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.6.2</version>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.15</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.sun.jdmk</groupId>
+					<artifactId>jmxtools</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.jms</groupId>
+					<artifactId>jms</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
@@ -49,25 +79,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.soitoolkit.commons.components</groupId>
-			<artifactId>soitoolkit-commons-mule</artifactId>
-			<version>${soitoolkit.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.soitoolkit.commons.components</groupId>
-			<artifactId>soitoolkit-commons-log</artifactId>
-			<version>${soitoolkit.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
-			<artifactId>vp-mule-2.2.8-dependencies</artifactId>
-			<version>0.3.1</version>
-		</dependency>
-		
-			<!-- Schemas -->
+		<!-- Schemas -->
 		<dependency>
 			<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
 			<artifactId>se_apotekensservice-or-schemas</artifactId>
@@ -76,6 +88,14 @@
 	</dependencies>
 
 	<build>
+		<testResources>
+			<testResource>
+				<directory>${basedir}/src/test/resources</directory>
+			</testResource>
+			<testResource>
+				<directory>${basedir}/src/environment</directory>
+			</testResource>
+		</testResources>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.gmaven</groupId>

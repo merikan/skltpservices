@@ -1,4 +1,4 @@
-package se.skl.tp.ticket.transformer;
+package se.skl.tp.ticket.transformer.testproducer;
 
 import javax.jws.WebService;
 
@@ -12,7 +12,7 @@ import se.riv.se.apotekensservice.or.hamtaaktuellaordinationerresponder.v1.Hamta
 		portName = "HamtaAktuellaOrdinationerResponderPort", 
 		targetNamespace = "urn:riv:inera:se.apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20", 
 		wsdlLocation = "schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl")
-public class TicketTransformerTestProducer implements HamtaAktuellaOrdinationerResponderInterface {
+public class HamtaAllaAktuellaOrdinationerTestProducer implements HamtaAktuellaOrdinationerResponderInterface {
 
     @Override
     public HamtaAktuellaOrdinationerResponseType hamtaAktuellaOrdinationer(
