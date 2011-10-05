@@ -17,7 +17,7 @@
 
 	<properties>
 		<project.build.sourceEncoding></project.build.sourceEncoding>
-	<project.reporting.outputEncoding></project.reporting.outputEncoding>
+		<project.reporting.outputEncoding></project.reporting.outputEncoding>
 	</properties>
 
 	<dependencies>
