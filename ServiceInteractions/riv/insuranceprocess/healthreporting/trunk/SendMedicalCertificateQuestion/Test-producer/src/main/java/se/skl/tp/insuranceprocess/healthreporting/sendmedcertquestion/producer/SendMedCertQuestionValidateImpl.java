@@ -23,6 +23,7 @@ package se.skl.tp.insuranceprocess.healthreporting.sendmedcertquestion.producer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.jws.WebService;
 
@@ -93,7 +94,7 @@ public class SendMedCertQuestionValidateImpl implements SendMedicalCertificateQu
 				 validationErrors.add("No vardReferens-id found!");				
 			}
 
-			// €mne - mandatory
+			// ï¿½mne - mandatory
 			Amnetyp inAmne = inQuestion.getAmne();
 			if ( inAmne == null) {
 				validationErrors.add("No Amne element found!");				
@@ -115,37 +116,37 @@ public class SendMedCertQuestionValidateImpl implements SendMedicalCertificateQu
 					validationErrors.add("No Question fraga signeringsTidpunkt elements found or set!");				
 			}
 
-			// AvsŠnt tidpunkt - mandatory
+			// Avsï¿½nt tidpunkt - mandatory
             if (inQuestion.getAvsantTidpunkt() == null || !inQuestion.getAvsantTidpunkt().isValid()) {
 				validationErrors.add("No or wrong avsantTidpunkt found!");				
             }
 						
-			// LŠkarutlŒtande referens - mandatory
+			// Lï¿½karutlï¿½tande referens - mandatory
             if (inQuestion.getLakarutlatande() == null ) {
 				validationErrors.add("No lakarutlatande element found!");	
 				throw new Exception();
             }
             LakarutlatandeEnkelType inLakarUtlatande = inQuestion.getLakarutlatande();
             
-			// LŠkarutlŒtande referens - id - mandatory
+			// Lï¿½karutlï¿½tande referens - id - mandatory
 			if ( inLakarUtlatande.getLakarutlatandeId() == null ||
 				inLakarUtlatande.getLakarutlatandeId().length() < 1 ) {
 				validationErrors.add("No lakarutlatande-id found!");				
 			}
 
-			// LŠkarutlŒtande referens - signeringsTidpunkt - mandatory
+			// Lï¿½karutlï¿½tande referens - signeringsTidpunkt - mandatory
             if (inLakarUtlatande.getSigneringsTidpunkt() == null || !inLakarUtlatande.getSigneringsTidpunkt().isValid()) {
 				validationErrors.add("No or wrong lakarutlatande-avsantTidpunkt found!");				
             }
 
-			// LŠkarutlŒtande referens - patient - mandatory
+			// Lï¿½karutlï¿½tande referens - patient - mandatory
             if (inLakarUtlatande.getPatient() == null ) {
 				validationErrors.add("No lakarutlatande patient element found!");	
 				throw new Exception();
             }
             PatientType inPatient = inLakarUtlatande.getPatient();
             
-			// LŠkarutlŒtande referens - patient - personid mandatory
+			// Lï¿½karutlï¿½tande referens - patient - personid mandatory
             // Check patient id - mandatory
 			if (inPatient.getPersonId() == null ||	
 				inPatient.getPersonId().getExtension() == null ||	
@@ -161,15 +162,18 @@ public class SendMedCertQuestionValidateImpl implements SendMedicalCertificateQu
 				}
 			String inPersonnummer = inPatient.getPersonId().getExtension();
 
-            // Check format on personnummer? samordningsnummer?
+	        // Check format of patient id - personnummer valid format is 19121212-1212 or 19121212+1212
+			if (!Pattern.matches("[0-9]{8}[-+][0-9]{4}", inPersonnummer) ) {
+				validationErrors.add("Wrong format for person-id! Valid format is YYYYMMDD-XXXX or YYYYMMDD+XXXX.");												
+			}
             
-			// LŠkarutlŒtande referens - patient - namn - mandatory
+			// Lï¿½karutlï¿½tande referens - patient - namn - mandatory
 			if (inPatient.getFullstandigtNamn() == null || inPatient.getFullstandigtNamn().length() < 1 ) {
 				validationErrors.add("No lakarutlatande Patient fullstandigtNamn elements found or set!");								
 			}
 								
 			/**
-			 *  Check avsŠndar data.
+			 *  Check avsï¿½ndar data.
 			 */
 			if (inQuestion.getAdressVard() == null) {
 				validationErrors.add("No adressVard element found!");				

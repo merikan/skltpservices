@@ -25,6 +25,7 @@ import iso.v21090.dt.v1.II;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.jws.WebService;
 
@@ -144,8 +145,11 @@ public class RegisterMedCertValidateImpl implements RegisterMedicalCertificateRe
 				}
 			String inPersonnummer = inPatient.getPersonId().getExtension();
 	
-	        // Check format on personnummer? samordningsnummer?
-	        
+	        // Check format of patient id - personnummer valid format is 19121212-1212 or 19121212+1212
+			if (!Pattern.matches("[0-9]{8}[-+][0-9]{4}", inPersonnummer) ) {
+				validationErrors.add("Wrong format for person-id! Valid format is YYYYMMDD-XXXX or YYYYMMDD+XXXX.");												
+			}
+	        			
 	        // Get namn for patient - mandatory
 			if (inPatient.getFullstandigtNamn() == null || inPatient.getFullstandigtNamn().length() < 1 ) {
 				validationErrors.add("No Patient fullstandigtNamn elements found or set!");								
