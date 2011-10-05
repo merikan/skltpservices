@@ -22,6 +22,7 @@ package se.riv.se_apotekensservice.or.hamtaaktuellaordinationer.v1;
 
 import javax.jws.WebService;
 
+import riv.se_apotekensservice.or._1.OrdinationslistaResponse;
 import se.riv.inera.se.apotekensservice.argos.v1.ArgosHeaderType;
 import se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.HamtaAktuellaOrdinationerResponderInterface;
 import se.riv.se.apotekensservice.or.hamtaaktuellaordinationerresponder.v1.HamtaAktuellaOrdinationerRequestType;
@@ -38,7 +39,14 @@ public class ProducerImpl implements HamtaAktuellaOrdinationerResponderInterface
 	    se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.SystemException {
 
 	HamtaAktuellaOrdinationerResponseType response = new HamtaAktuellaOrdinationerResponseType();
+	response.setOrdinationslista(createOrdinationsLista(parameters.getPersonnummer()));
 	return response;
+    }
+
+    private OrdinationslistaResponse createOrdinationsLista(String personnummer) {
+	OrdinationslistaResponse ordinationslistaResponse = new OrdinationslistaResponse();
+	ordinationslistaResponse.setPersonnummer(personnummer);
+	return ordinationslistaResponse;
     }
 
 }
