@@ -40,7 +40,8 @@ public class Producer {
 //        SpringBusFactory.setDefaultBus(bus);
         
         final Object implementor = new ProducerImpl();
-        final String address = "http://localhost:21000/vp/HamtaAktuellaOrdinationer/1/rivtabp20";
+        //final String address = "http://localhost:21000/vp/HamtaAktuellaOrdinationer/1/rivtabp20";
+        final String address = "http://localhost:21000/serviceProvider/HamtaAktuellaOrdinationerResponder/V1";
         Endpoint.publish(address, implementor);
     }
 
