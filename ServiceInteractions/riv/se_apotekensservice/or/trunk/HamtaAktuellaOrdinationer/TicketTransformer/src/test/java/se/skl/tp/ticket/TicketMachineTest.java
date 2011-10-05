@@ -5,13 +5,13 @@ import static org.junit.matchers.JUnitMatchers.containsString;
 import org.junit.Assert;
 import org.junit.Test;
 
-import se.skl.tp.ticket.TicketMachine;
 import se.skl.tp.ticket.argos.ArgosHeader;
+import se.skl.tp.ticket.exception.TicketMachineException;
 
 public class TicketMachineTest {
 
     @Test
-    public void testProduceCompleteSamlTicketFromArgosHeader() {
+    public void testProduceCompleteSamlTicketFromArgosHeader() throws TicketMachineException {
 
 	String forskrivarkod = "1111129";
 	String legitimationskod = "";

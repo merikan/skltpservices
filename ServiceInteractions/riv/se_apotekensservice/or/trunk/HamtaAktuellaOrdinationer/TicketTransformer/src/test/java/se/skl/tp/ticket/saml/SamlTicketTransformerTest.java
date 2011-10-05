@@ -17,7 +17,7 @@ import org.mule.api.transformer.TransformerException;
 import org.mule.module.xml.stax.ReversibleXMLStreamReader;
 
 import se.skl.tp.ticket.argos.ArgosHeader;
-import se.skl.tp.ticket.saml.SamlTicketTransformer;
+import se.skl.tp.ticket.exception.TicketMachineException;
 
 public class SamlTicketTransformerTest {
 
@@ -34,7 +34,7 @@ public class SamlTicketTransformerTest {
 
     @Test
     public void testExtractSamlTicketFromMuleMessage() throws XMLStreamException, FactoryConfigurationError,
-	    UnsupportedEncodingException {
+	    UnsupportedEncodingException, TicketMachineException {
 	MuleMessage muleMessageWithArgosHeader = createCompleteMockedMuleMessage();
 	XMLEventReader samlTicket = new SamlTicketTransformer().extractSamlTicket(muleMessageWithArgosHeader);
 

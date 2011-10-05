@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import se.skl.tp.ticket.TicketMachine;
 import se.skl.tp.ticket.argos.ArgosHeader;
 import se.skl.tp.ticket.argos.ArgosHeaderHelper;
+import se.skl.tp.ticket.exception.TicketMachineException;
 
 /**
  * Transformer is responsible to add a SAML ticket to the incoming request,
@@ -57,7 +58,8 @@ public class SamlTicketTransformer extends AbstractMessageAwareTransformer {
 	}
     }
 
-    XMLEventReader extractSamlTicket(MuleMessage msg) throws XMLStreamException, FactoryConfigurationError {
+    XMLEventReader extractSamlTicket(MuleMessage msg) throws XMLStreamException, FactoryConfigurationError,
+	    TicketMachineException {
 	ArgosHeader argosHeader = new ArgosHeaderHelper().extractArgosHeader(msg);
 	String samlTicketStr = new TicketMachine().produceSamlTicket(argosHeader);
 	StringReader stringReader = new StringReader(samlTicketStr);
