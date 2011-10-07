@@ -20,10 +20,33 @@
 
 	<!-- Name of this file is mandatory and may not be changed. -->
 
-	<custom-transformer name="SamlTicketTransformer"
+	<custom-transformer name="SamlTicketTransformerRef"
 		class="se.skl.tp.ticket.saml.SamlTicketTransformer" />
 
 	<model name="TicketTransformerService-model">
+	
+		<service name="TicketTransformerService-service-ext0">
+			<inbound>
+				<cxf:inbound-endpoint
+					address="http://localhost:10000/transformer/SamlTicketTransformerExt0"
+					proxy="true" 
+					payload="envelope" 
+					synchronous="true"
+					applyTransformersToProtocol="false" 
+					transformer-refs="SamlTicketTransformerRef" />
+			</inbound>
+				<outbound>
+				<pass-through-router>
+					<cxf:outbound-endpoint
+						address="https://stpwsp-exttest0.receptpartner.sjunet.org/serviceProvider/HamtaAktuellaOrdinationerResponder/V1"
+						synchronous="true" 
+						proxy="true" 
+						payload="envelope"
+						protocolConnector="VPConsumerConnector"
+						 />
+				</pass-through-router>	
+			</outbound>
+		</service>
 
 		<service name="TicketTransformerService-service">
 			<inbound>
@@ -33,7 +56,7 @@
 					payload="envelope" 
 					synchronous="true"
 					applyTransformersToProtocol="false" 
-					transformer-refs="SamlTicketTransformer" />
+					transformer-refs="SamlTicketTransformerRef" />
 			</inbound>
 
 			<outbound>
