@@ -20,51 +20,43 @@
 
 	<!-- Name of this file is mandatory and may not be changed. -->
 
-	<custom-transformer name="SamlTicketTransformerRef"
+	<custom-transformer name="HamtaAktuellaOrdinationerSamlTicketTransformer"
 		class="se.skl.tp.ticket.saml.SamlTicketTransformer" />
 
-	<model name="TicketTransformerService-model">
-	
-		<service name="TicketTransformerService-service-ext0">
+	<model name="HamtaAktuellaOrdinationer-TicketTransformerService-model">
+
+		<service
+			name="HamtaAktuellaOrdinationer-TicketTransformerService-service-ext0">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://localhost:10000/transformer/SamlTicketTransformerExt0"
-					proxy="true" 
-					payload="envelope" 
-					synchronous="true"
-					applyTransformersToProtocol="false" 
-					transformer-refs="SamlTicketTransformerRef" />
+					proxy="true" payload="envelope" synchronous="true"
+					applyTransformersToProtocol="false"
+					transformer-refs="HamtaAktuellaOrdinationerSamlTicketTransformer" />
 			</inbound>
-				<outbound>
+			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
 						address="https://stpwsp-exttest0.receptpartner.sjunet.org/serviceProvider/HamtaAktuellaOrdinationerResponder/V1"
-						synchronous="true" 
-						proxy="true" 
-						payload="envelope"
-						protocolConnector="VPConsumerConnector"
-						 />
-				</pass-through-router>	
+						synchronous="true" proxy="true" payload="envelope"
+						protocolConnector="VPConsumerConnector" />
+				</pass-through-router>
 			</outbound>
 		</service>
 
-		<service name="TicketTransformerService-service">
+		<service name="HamtaAktuellaOrdinationer-TicketTransformerService-service">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://localhost:10000/transformer/SamlTicketTransformer"
-					proxy="true" 
-					payload="envelope" 
-					synchronous="true"
-					applyTransformersToProtocol="false" 
-					transformer-refs="SamlTicketTransformerRef" />
+					proxy="true" payload="envelope" synchronous="true"
+					applyTransformersToProtocol="false" transformer-refs="HamtaAktuellaOrdinationerSamlTicketTransformer" />
 			</inbound>
 
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
 						address="http://localhost:10000/serviceProvider/HamtaAktuellaOrdinationerResponder/V1"
-						synchronous="true" proxy="true" payload="envelope"
-						 />
+						synchronous="true" proxy="true" payload="envelope" />
 				</pass-through-router>
 			</outbound>
 		</service>
