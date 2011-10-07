@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>se.skl.skltpservices.se_apotekensservice.ticket</groupId>
+	<artifactId>se_apotekensservice-ticket-ArgosHeaderTicketTransformer</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>se_apotekensservice-ticket-ArgosHeaderTicketTransformer</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<soitoolkit.version>0.3.1</soitoolkit.version>
+		<mule.version>2.2.8</mule.version>
+		<project.build.sourceEncoding></project.build.sourceEncoding>
+		<project.reporting.outputEncoding></project.reporting.outputEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.soitoolkit.commons.components</groupId>
+			<artifactId>soitoolkit-commons-mule</artifactId>
+			<version>${soitoolkit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.soitoolkit.commons.components</groupId>
+			<artifactId>soitoolkit-commons-log</artifactId>
+			<version>${soitoolkit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
+			<artifactId>vp-mule-2.2.8-dependencies</artifactId>
+			<version>0.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>se.inera.pascal.ticket</groupId>
+			<artifactId>TicketMachine</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.2.1</version>
+				<configuration>
+					<tagBase>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/ticket/tags</tagBase>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+		<testResources>
+			<testResource>
+				<directory>${basedir}/src/test/resources</directory>
+			</testResource>
+			<testResource>
+				<directory>${basedir}/src/environment</directory>
+			</testResource>
+		</testResources>
+	</build>
+</project>
