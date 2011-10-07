@@ -20,45 +20,20 @@
 
 	<!-- Name of this file is mandatory and may not be changed. -->
 
-	<custom-transformer name="HamtaPatientInfoSamlTicketTransformer"
-		class="se.skl.tp.ticket.saml.SamlTicketTransformer" />
+	<model name="TicketTransformerService-teststub-model">
 
-	<model name="ApotekenService-HamtaPatientInfo-TicketTransformerService-model">
-
-		<service
-			name="ApotekenService-HamtaPatientInfo-TicketTransformer-service-ext0">
+		<service name="TicketTransformerService-teststub-service">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/transformer/apotekensservice/HamtaPatientInfo/SamlTicketTransformerExt0"
-					proxy="true" payload="envelope" synchronous="true"
-					applyTransformersToProtocol="false"
-					transformer-refs="HamtaPatientInfoSamlTicketTransformer" />
-			</inbound>
-			<outbound>
-				<pass-through-router>
-					<cxf:outbound-endpoint
-						address="https://stpwsp-exttest0.receptpartner.sjunet.org/serviceProvider/HamtaPatientInfoResponder/V1"
-						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" />
-				</pass-through-router>
-			</outbound>
-		</service>
-
-		<service name="ApotekenService-HamtaPatientInfo-TicketTransformer-service">
-			<inbound>
-				<cxf:inbound-endpoint
-					address="http://localhost:10000/transformer/apotekensservice/HamtaPatientInfo/SamlTicketTransformer"
-					proxy="true" payload="envelope" synchronous="true"
-					applyTransformersToProtocol="false" transformer-refs="HamtaPatientInfoSamlTicketTransformer" />
+					address="http://localhost:10000/serviceProvider/HamtaPatientInfoResponder/V1"
+					wsdlLocation="schemas/interactions/HamtaPatientInfoInteraction/HamtaPatientInfoInteraction_1.0_rivtabp20.wsdl" />
 			</inbound>
 
-			<outbound>
-				<pass-through-router>
-					<cxf:outbound-endpoint
-						address="http://localhost:10000/serviceProvider/HamtaPatientInfoResponder/V1"
-						synchronous="true" proxy="true" payload="envelope" />
-				</pass-through-router>
-			</outbound>
+
+			<component>
+				<singleton-object
+					class="se.skl.tp.ticket.testproducer.HamtaPatientInfoTestProducer" />
+			</component>
 		</service>
 	</model>
 
