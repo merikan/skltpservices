@@ -21,7 +21,7 @@
 		<soitoolkit.version>0.3.1</soitoolkit.version>
 		<mule.version>2.2.8</mule.version>
 		<cxf.version>2.2.12</cxf.version>
-		<spring.version>3.0.5</spring.version>
+		<spring.version>2.5.6</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
@@ -32,53 +32,12 @@
     <module>HamtaPatientInfo</module>
   </modules>
 
-	<dependencies>  <!-- Mule dependencies -->
+	<dependencies>
 		<dependency>
-			<groupId>org.mule</groupId>
-			<artifactId>mule-core</artifactId>
-			<version>${mule.version}</version>
-			<scope>provided</scope>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.5.6</version>
 		</dependency>
-		<dependency>
-			<groupId>org.soitoolkit.commons.components</groupId>
-			<artifactId>soitoolkit-commons-mule</artifactId>
-			<version>${soitoolkit.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.soitoolkit.commons.components</groupId>
-			<artifactId>soitoolkit-commons-log</artifactId>
-			<version>${soitoolkit.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
-			<artifactId>vp-mule-2.2.8-dependencies</artifactId>
-			<version>0.3.1</version>
-		</dependency>
-		<!-- CXF -->
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxws</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http-jetty</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.tests</groupId>
-			<artifactId>mule-tests-functional</artifactId>
-			<version>${mule.version}</version>
-			<!-- Needs to be in the compile scope since commons-mule contains a base 
-				class, AbstractTestCase, that depends on this module -->
-			<scope>compile</scope>
-		</dependency>
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -97,9 +56,7 @@
 			<version>1.8.5</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
-
 	<scm>
 		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/axs/trunk</connection>
 		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/axs/trunk</developerConnection>
