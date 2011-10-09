@@ -8,9 +8,7 @@
 	License for more details. * * You should have received a copy of the GNU 
 	Lesser General Public * License along with this library; if not, write to 
 	the * Free Software Foundation, Inc., 59 Temple Place, Suite 330, * Boston, 
-	MA 02111-1307 USA -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	MA 02111-1307 USA --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
@@ -32,7 +30,34 @@
 	<modules>
 		<module>Schema</module>
 		<module>HamtaAktuellaOrdinationer</module>
-	</modules>
+    <module>AvregistreraDosunderlag</module>
+    <module>BackaKrediteraUttag</module>
+    <module>GodkannDosunderlag</module>
+    <module>GodkannUttag</module>
+    <module>HamtaAktuellaOrdinationerFoddatum</module>
+    <module>HamtaEjGodkandaDosunderlag</module>
+    <module>HamtaGallandeOrdinationsversion</module>
+    <module>HamtaIckeAktuellaOrdinationerFoddatum</module>
+    <module>HamtaIckeAktuellaOrdinationer</module>
+    <module>HamtaOrdinationFoddatum</module>
+    <module>HamtaOrdinationshistorik</module>
+    <module>HamtaProduktionsunderlag</module>
+    <module>KontrolleraUttag</module>
+    <module>KorrigeraOrdinationApotek</module>
+    <module>KorrigeraOrdinationVard</module>
+    <module>MakuleraOrdinationApotek</module>
+    <module>MakuleraOrdinationVard</module>
+    <module>NotifieringsTest</module>
+    <module>SattUtOrdinationApotek</module>
+    <module>SattUtOrdinationVard</module>
+    <module>SkapaDosunderlagApotek</module>
+    <module>SkapaDosunderlagVard</module>
+    <module>SkapaOrdinationApotek</module>
+    <module>SkapaOrdinationVard</module>
+    <module>SkrivUtDosRecept</module>
+    <module>UppdateraDostillhorighet</module>
+    <module>UppdateraDosunderlagAvliden</module>
+  </modules>
 
 	<dependencies>
 		<dependency>
