@@ -65,7 +65,7 @@ public class TicketMachine {
      */
     public String produceSamlTicket(ArgosHeader argosHeader) throws TicketMachineException {
 
-	log.info("Executing ticketmachine to get SAML ticket");
+	log.info("Executing ticketmachine to get SAML ticket, argos header " + argosHeader);
 	try {
 	    String samlTicket = getArgosTicketMachine().getTicket(argosHeader.getForskrivarkod(),
 		    argosHeader.getLegitimationskod(), argosHeader.getFornamn(), argosHeader.getEfternamn(),
@@ -75,10 +75,10 @@ public class TicketMachine {
 		    argosHeader.getRollnamn(), argosHeader.getHsaID(), argosHeader.getKatalog(),
 		    argosHeader.getOrganisationsnummer(), argosHeader.getSystemnamn(), argosHeader.getSystemversion(),
 		    argosHeader.getSystemIp());
-	    
+
 	    return applyWsSecurityToSamlTicket(samlTicket);
 	} catch (Exception e) {
-	    throw new TicketMachineException("Exception generating saml ticket from ticket machine",e);
+	    throw new TicketMachineException("Exception generating saml ticket from ticket machine", e);
 	}
 
     }
