@@ -10,7 +10,7 @@
 	</parent>
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.axs</groupId>
-	<artifactId>se_apotekensservice-axs-TicketTransformer</artifactId>
+	<artifactId>se_apotekensservice-axs-HamtaPatientInfo-TicketTransformer</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>se_apotekensservice-axs-TicketTransformer</name>
 	<url>http://maven.apache.org</url>
