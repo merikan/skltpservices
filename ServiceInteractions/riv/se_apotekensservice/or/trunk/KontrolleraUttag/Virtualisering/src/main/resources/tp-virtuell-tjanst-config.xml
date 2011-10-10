@@ -28,7 +28,7 @@
 				<cxf:inbound-endpoint
 					address="https://${tp.host}:${tp.port}/${tp.baseUri}/KontrolleraUttag/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/interactions/KontrolleraUttagInteraction/KontrolleraUttagInteraction_1.0_rivtabp20.wsdl"
-					serviceName="KontrolleraUttagResponderService" namespace="urn:riv:se_apotekensservice:or:KontrolleraUttag:1:rivtabp20"
+					serviceName="KontrolleraUttagResponderService" namespace="urn:riv:inera:se.apotekensservice:or:KontrolleraUttag:1:rivtabp20"
 					proxy="true" payload="envelope" synchronous="true" 
 					protocolConnector="VPProducerConnector"/>
 			</inbound>

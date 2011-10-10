@@ -28,7 +28,7 @@
 				<cxf:inbound-endpoint
 					address="https://${tp.host}:${tp.port}/${tp.baseUri}/BackaKrediteraUttag/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/interactions/BackaKrediteraUttagInteraction/BackaKrediteraUttagInteraction_1.0_rivtabp20.wsdl"
-					serviceName="BackaKrediteraUttagResponderService" namespace="urn:riv:se_apotekensservice:or:BackaKrediteraUttag:1:rivtabp20"
+					serviceName="BackaKrediteraUttagResponderService" namespace="urn:riv:inera:se.apotekensservice:or:BackaKrediteraUttag:1:rivtabp20"
 					proxy="true" payload="envelope" synchronous="true" 
 					protocolConnector="VPProducerConnector"/>
 			</inbound>

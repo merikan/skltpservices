@@ -28,7 +28,7 @@
 				<cxf:inbound-endpoint
 					address="https://${tp.host}:${tp.port}/${tp.baseUri}/AvregistreraDosunderlag/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/interactions/AvregistreraDosunderlagInteraction/AvregistreraDosunderlagInteraction_1.0_rivtabp20.wsdl"
-					serviceName="AvregistreraDosunderlagResponderService" namespace="urn:riv:se_apotekensservice:or:AvregistreraDosunderlag:1:rivtabp20"
+					serviceName="AvregistreraDosunderlagResponderService" namespace="urn:riv:inera:se.apotekensservice:or:AvregistreraDosunderlag:1:rivtabp20"
 					proxy="true" payload="envelope" synchronous="true" 
 					protocolConnector="VPProducerConnector"/>
 			</inbound>

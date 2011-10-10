@@ -28,7 +28,7 @@
 				<cxf:inbound-endpoint
 					address="https://${tp.host}:${tp.port}/${tp.baseUri}/HamtaProduktionsunderlag/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/interactions/HamtaProduktionsunderlagInteraction/HamtaProduktionsunderlagInteraction_1.0_rivtabp20.wsdl"
-					serviceName="HamtaProduktionsunderlagResponderService" namespace="urn:riv:se_apotekensservice:or:HamtaProduktionsunderlag:1:rivtabp20"
+					serviceName="HamtaProduktionsunderlagResponderService" namespace="urn:riv:inera:se.apotekensservice:or:HamtaProduktionsunderlag:1:rivtabp20"
 					proxy="true" payload="envelope" synchronous="true" 
 					protocolConnector="VPProducerConnector"/>
 			</inbound>

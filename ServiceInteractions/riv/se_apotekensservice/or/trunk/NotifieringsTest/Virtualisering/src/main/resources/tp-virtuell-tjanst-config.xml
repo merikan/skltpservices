@@ -28,7 +28,7 @@
 				<cxf:inbound-endpoint
 					address="https://${tp.host}:${tp.port}/${tp.baseUri}/NotifieringsTest/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/interactions/NotifieringsTestInteraction/NotifieringsTestInteraction_1.0_rivtabp20.wsdl"
-					serviceName="NotifieringsTestResponderService" namespace="urn:riv:se_apotekensservice:or:NotifieringsTest:1:rivtabp20"
+					serviceName="NotifieringsTestResponderService" namespace="urn:riv:inera:se.apotekensservice:or:NotifieringsTest:1:rivtabp20"
 					proxy="true" payload="envelope" synchronous="true" 
 					protocolConnector="VPProducerConnector"/>
 			</inbound>

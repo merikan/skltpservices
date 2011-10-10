@@ -28,7 +28,7 @@
 				<cxf:inbound-endpoint
 					address="https://${tp.host}:${tp.port}/${tp.baseUri}/HamtaIckeAktuellaOrdinationerFoddatum/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/interactions/HamtaIckeAktuellaOrdinationerFoddatumInteraction/HamtaIckeAktuellaOrdinationerFoddatumInteraction_1.0_rivtabp20.wsdl"
-					serviceName="HamtaIckeAktuellaOrdinationerFoddatumResponderService" namespace="urn:riv:se_apotekensservice:or:HamtaIckeAktuellaOrdinationerFoddatum:1:rivtabp20"
+					serviceName="HamtaIckeAktuellaOrdinationerFoddatumResponderService" namespace="urn:riv:inera:se.apotekensservice:or:HamtaIckeAktuellaOrdinationerFoddatum:1:rivtabp20"
 					proxy="true" payload="envelope" synchronous="true" 
 					protocolConnector="VPProducerConnector"/>
 			</inbound>

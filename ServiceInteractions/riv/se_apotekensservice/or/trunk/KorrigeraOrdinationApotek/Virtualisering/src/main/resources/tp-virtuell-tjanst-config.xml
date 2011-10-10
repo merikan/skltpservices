@@ -28,7 +28,7 @@
 				<cxf:inbound-endpoint
 					address="https://${tp.host}:${tp.port}/${tp.baseUri}/KorrigeraOrdinationApotek/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/interactions/KorrigeraOrdinationApotekInteraction/KorrigeraOrdinationApotekInteraction_1.0_rivtabp20.wsdl"
-					serviceName="KorrigeraOrdinationApotekResponderService" namespace="urn:riv:se_apotekensservice:or:KorrigeraOrdinationApotek:1:rivtabp20"
+					serviceName="KorrigeraOrdinationApotekResponderService" namespace="urn:riv:inera:se.apotekensservice:or:KorrigeraOrdinationApotek:1:rivtabp20"
 					proxy="true" payload="envelope" synchronous="true" 
 					protocolConnector="VPProducerConnector"/>
 			</inbound>

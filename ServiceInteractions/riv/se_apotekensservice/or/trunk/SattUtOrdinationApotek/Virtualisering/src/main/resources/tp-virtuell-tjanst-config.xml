@@ -28,7 +28,7 @@
 				<cxf:inbound-endpoint
 					address="https://${tp.host}:${tp.port}/${tp.baseUri}/SattUtOrdinationApotek/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/interactions/SattUtOrdinationApotekInteraction/SattUtOrdinationApotekInteraction_1.0_rivtabp20.wsdl"
-					serviceName="SattUtOrdinationApotekResponderService" namespace="urn:riv:se_apotekensservice:or:SattUtOrdinationApotek:1:rivtabp20"
+					serviceName="SattUtOrdinationApotekResponderService" namespace="urn:riv:inera:se.apotekensservice:or:SattUtOrdinationApotek:1:rivtabp20"
 					proxy="true" payload="envelope" synchronous="true" 
 					protocolConnector="VPProducerConnector"/>
 			</inbound>

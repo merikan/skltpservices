@@ -28,7 +28,7 @@
 				<cxf:inbound-endpoint
 					address="https://${tp.host}:${tp.port}/${tp.baseUri}/SkapaOrdinationApotek/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/interactions/SkapaOrdinationApotekInteraction/SkapaOrdinationApotekInteraction_1.0_rivtabp20.wsdl"
-					serviceName="SkapaOrdinationApotekResponderService" namespace="urn:riv:se_apotekensservice:or:SkapaOrdinationApotek:1:rivtabp20"
+					serviceName="SkapaOrdinationApotekResponderService" namespace="urn:riv:inera:se.apotekensservice:or:SkapaOrdinationApotek:1:rivtabp20"
 					proxy="true" payload="envelope" synchronous="true" 
 					protocolConnector="VPProducerConnector"/>
 			</inbound>

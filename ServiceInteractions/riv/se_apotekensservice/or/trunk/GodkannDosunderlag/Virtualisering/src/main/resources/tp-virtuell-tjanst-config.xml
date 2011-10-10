@@ -28,7 +28,7 @@
 				<cxf:inbound-endpoint
 					address="https://${tp.host}:${tp.port}/${tp.baseUri}/GodkannDosunderlag/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/interactions/GodkannDosunderlagInteraction/GodkannDosunderlagInteraction_1.0_rivtabp20.wsdl"
-					serviceName="GodkannDosunderlagResponderService" namespace="urn:riv:se_apotekensservice:or:GodkannDosunderlag:1:rivtabp20"
+					serviceName="GodkannDosunderlagResponderService" namespace="urn:riv:inera:se.apotekensservice:or:GodkannDosunderlag:1:rivtabp20"
 					proxy="true" payload="envelope" synchronous="true" 
 					protocolConnector="VPProducerConnector"/>
 			</inbound>

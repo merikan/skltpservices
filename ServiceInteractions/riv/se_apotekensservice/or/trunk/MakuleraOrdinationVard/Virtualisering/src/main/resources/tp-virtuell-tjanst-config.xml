@@ -28,7 +28,7 @@
 				<cxf:inbound-endpoint
 					address="https://${tp.host}:${tp.port}/${tp.baseUri}/MakuleraOrdinationVard/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/interactions/MakuleraOrdinationVardInteraction/MakuleraOrdinationVardInteraction_1.0_rivtabp20.wsdl"
-					serviceName="MakuleraOrdinationVardResponderService" namespace="urn:riv:se_apotekensservice:or:MakuleraOrdinationVard:1:rivtabp20"
+					serviceName="MakuleraOrdinationVardResponderService" namespace="urn:riv:inera:se.apotekensservice:or:MakuleraOrdinationVard:1:rivtabp20"
 					proxy="true" payload="envelope" synchronous="true" 
 					protocolConnector="VPProducerConnector"/>
 			</inbound>
