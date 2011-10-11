@@ -33,5 +33,6 @@
   <modules>
     <module>Virtualisering</module>
     <module>TicketTransformer</module>
+    <module>Test-producer</module>
   </modules>
 </project>
