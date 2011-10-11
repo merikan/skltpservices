@@ -26,10 +26,10 @@
 	<model name="HamtaAktuellaOrdinationer-TicketTransformerService-model">
 
 		<service
-			name="HamtaAktuellaOrdinationer-TicketTransformerService-service-ext0">
+			name="HamtaAktuellaOrdinationer-TicketTransformerService-service">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/transformer/SamlTicketTransformerExt0"
+					address="http://localhost:10000/transformer/apotekensservice/or/SamlTicketTransformer"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false"
 					transformer-refs="HamtaAktuellaOrdinationerSamlTicketTransformer" />
@@ -37,17 +37,17 @@
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
-						address="https://stpwsp-exttest0.receptpartner.sjunet.org/serviceProvider/HamtaAktuellaOrdinationerResponder/V1"
+						address="${endpoint.apotekensservice.or.hamtaaktuellaordinationer}"
 						synchronous="true" proxy="true" payload="envelope"
 						protocolConnector="VPConsumerConnector" />
 				</pass-through-router>
 			</outbound>
 		</service>
 
-		<service name="HamtaAktuellaOrdinationer-TicketTransformerService-service">
+		<service name="HamtaAktuellaOrdinationer-TicketTransformerService-service-local">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/transformer/SamlTicketTransformer"
+					address="http://localhost:10000/transformer/apotekensservice/or/SamlTicketTransformer/local"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false" transformer-refs="HamtaAktuellaOrdinationerSamlTicketTransformer" />
 			</inbound>
@@ -55,7 +55,7 @@
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
-						address="http://localhost:10000/serviceProvider/HamtaAktuellaOrdinationerResponder/V1"
+						address="${endpoint.apotekensservice.or.hamtaaktuellaordinationer}"
 						synchronous="true" proxy="true" payload="envelope" />
 				</pass-through-router>
 			</outbound>

@@ -8,7 +8,7 @@ import org.soitoolkit.commons.mule.test.AbstractTestCase;
 import se.riv.se.apotekensservice.or.hamtaaktuellaordinationerresponder.v1.HamtaAktuellaOrdinationerResponseType;
 import se.skl.tp.ticket.testconsumer.HamtaAllaAktuellaOrdinationerTestConsumer;
 
-public class SamlTicketTransformerIntegrationTest extends AbstractTestCase {
+public class HamtaAktuellaOrdinationerIntegrationTest extends AbstractTestCase {
 
     @BeforeClass
     public void beforeClass() {

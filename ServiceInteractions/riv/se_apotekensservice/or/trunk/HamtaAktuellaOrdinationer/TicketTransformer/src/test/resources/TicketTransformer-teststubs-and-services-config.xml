@@ -9,9 +9,13 @@
 	">
 
     <spring:beans>
+    	<!--For junit test, import the config file for ticket transformer -->
+    	<spring:import resource="classpath:TicketTransformer-spring-properties.xml" />
+    
     	<!-- TODO: Add import of connector specific configuration files here as required -->
         <spring:import resource="classpath:tp-virtuell-tjanst-config.xml"/>
         <spring:import resource="classpath:teststub-services/*-teststub-service.xml"/>
     </spring:beans>
+    
 
 </mule>
