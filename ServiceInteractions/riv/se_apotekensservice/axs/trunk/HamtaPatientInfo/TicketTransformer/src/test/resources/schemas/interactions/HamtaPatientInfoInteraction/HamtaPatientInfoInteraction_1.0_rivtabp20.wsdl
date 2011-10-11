@@ -65,7 +65,7 @@
   </wsdl:binding>
   <wsdl:service name="HamtaPatientInfoResponderService">
     <wsdl:port name="HamtaPatientInfoResponderPort" binding="HamtaPatientInfoResponderBinding">
-      <soap:address location="http://localhost:10000/transformer/apotekensservice/HamtaPatientInfo/SamlTicketTransformer"/>
+      <soap:address location="http://localhost:10000/transformer/apotekensservice/axs/HamtaPatientInfo/SamlTicketTransformer/local"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -20,7 +20,7 @@
 
 	<!-- Name of this file is mandatory and may not be changed. -->
 
-	<model name="TicketTransformerService-teststub-model">
+	<model name="ApotekenService-HamtaPatientInfo-TicketTransformer-teststub-model">
 
 		<service name="TicketTransformerService-teststub-service">
 			<inbound>

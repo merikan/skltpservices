@@ -26,10 +26,10 @@
 	<model name="ApotekenService-HamtaPatientInfo-TicketTransformerService-model">
 
 		<service
-			name="ApotekenService-HamtaPatientInfo-TicketTransformer-service-ext0">
+			name="ApotekenService-HamtaPatientInfo-TicketTransformer-service">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/transformer/apotekensservice/HamtaPatientInfo/SamlTicketTransformerExt0"
+					address="http://localhost:10000/transformer/apotekensservice/axs/HamtaPatientInfo/SamlTicketTransformer"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false"
 					transformer-refs="HamtaPatientInfoSamlTicketTransformer" />
@@ -37,17 +37,17 @@
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
-						address="https://stpwsp-exttest0.receptpartner.sjunet.org/serviceProvider/HamtaPatientInfoResponder/V1"
+						address="${endpoint.apotekensservice.axs.hamtapatientinfo}"
 						synchronous="true" proxy="true" payload="envelope"
 						protocolConnector="VPConsumerConnector" />
 				</pass-through-router>
 			</outbound>
 		</service>
-
-		<service name="ApotekenService-HamtaPatientInfo-TicketTransformer-service">
+		
+		<service name="ApotekenService-HamtaPatientInfo-TicketTransformer-service-local">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/transformer/apotekensservice/HamtaPatientInfo/SamlTicketTransformer"
+					address="http://localhost:10000/transformer/apotekensservice/axs/HamtaPatientInfo/SamlTicketTransformer/local"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false" transformer-refs="HamtaPatientInfoSamlTicketTransformer" />
 			</inbound>
@@ -55,11 +55,12 @@
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
-						address="http://localhost:10000/serviceProvider/HamtaPatientInfoResponder/V1"
+						address="${endpoint.apotekensservice.axs.hamtapatientinfo}"
 						synchronous="true" proxy="true" payload="envelope" />
 				</pass-through-router>
 			</outbound>
 		</service>
+		
 	</model>
 
 </mule>

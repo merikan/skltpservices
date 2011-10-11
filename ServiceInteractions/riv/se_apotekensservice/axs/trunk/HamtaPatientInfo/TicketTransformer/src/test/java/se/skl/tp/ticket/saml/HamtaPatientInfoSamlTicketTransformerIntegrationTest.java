@@ -8,7 +8,7 @@ import org.soitoolkit.commons.mule.test.AbstractTestCase;
 import se.riv.se.apotekensservice.axs.hamtapatientinforesponder.v1.HamtaPatientInfoResponseType;
 import se.skl.tp.ticket.testconsumer.HamtaPatientInfoTestConsumer;
 
-public class SamlTicketTransformerIntegrationTest extends AbstractTestCase {
+public class HamtaPatientInfoSamlTicketTransformerIntegrationTest extends AbstractTestCase {
 
     @BeforeClass
     public void beforeClass() {
@@ -24,7 +24,7 @@ public class SamlTicketTransformerIntegrationTest extends AbstractTestCase {
 
     @Override
     protected String getConfigResources() {
-	return "TicketTransformer-teststubs-and-services-config.xml";
+	return "HamtaPatientInfo-teststubs-and-services-config.xml";
     }
 
     @Test
