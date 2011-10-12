@@ -29,8 +29,13 @@
 	<!--
 	Name of this file is mandatory and may not be changed. 
 	 -->
-	
-	<custom-transformer name="FkReq2VardQuestion" class="se.skl.tp.recmedcertquestion.transformers.FkRequest2VardTransformer"/>
+	<!--	
+	<custom-transformer name="FkReq2VardQuestion" class="se.skl.tp.recmedcertquestion.transformers.FkRequest2VardTransformer">
+		<spring:property name="senderIdPropertyName" value="${VAGVALROUTER_SENDERID}" />
+	</custom-transformer>
+	 -->
+	 
+	<custom-transformer name="FkReq2VardQuestion" class="se.skl.tp.recmedcertquestion.transformers.FkRequest2VardTransformer"/>	
 	<custom-transformer name="VardResp2FkQuestion" class="se.skl.tp.recmedcertquestion.transformers.VardResponse2FkTransformer"/>
 
 	<message-properties-transformer name="changeNamespaceRecMedCertQuestion">

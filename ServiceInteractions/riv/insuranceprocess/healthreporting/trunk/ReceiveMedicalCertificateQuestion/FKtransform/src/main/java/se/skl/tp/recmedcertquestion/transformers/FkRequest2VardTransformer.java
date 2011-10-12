@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.stream.XMLStreamException;
@@ -46,6 +45,17 @@ import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
 {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
+
+//	private Pattern pattern;
+//	private String senderIdPropertyName;
+
+//	public void setSenderIdPropertyName(String senderIdPropertyName) {
+//		this.senderIdPropertyName = senderIdPropertyName;
+//		pattern = Pattern.compile(this.senderIdPropertyName + "=([^,]+)");
+//		if (logger.isInfoEnabled()) {
+//			logger.info("senderIdPropertyName set to: " + senderIdPropertyName);
+//		}
+//	}
 	
 	public FkRequest2VardTransformer()
     {
@@ -57,6 +67,9 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
 		XMLStreamReader streamPayload = null;
 
+		// Check caller certificate ID!
+//		String callerCertificateId = getSenderIdFromCertificate(message, pattern);
+		
 		try {
 			// Transform the XML payload into a JAXB object
             Unmarshaller unmarshaller = JAXBContext.newInstance(TaEmotFragaType.class).createUnmarshaller();
@@ -254,6 +267,55 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
 			}
 		}
     }
+
+//	private String getSenderIdFromCertificate(MuleMessage message, final Pattern pattern) {
+//		String senderId = null;
+//		Certificate[] peerCertificateChain = (Certificate[]) message
+//				.getProperty("PEER_CERTIFICATES");
+//
+//		if (peerCertificateChain != null) {
+//			// Check type of first certificate in the chain, this should be the
+//			// clients certificate
+//			if (peerCertificateChain[0] instanceof X509Certificate) {
+//				X509Certificate cert = (X509Certificate) peerCertificateChain[0];
+//				String principalName = cert.getSubjectX500Principal().getName();
+//				Matcher matcher = pattern.matcher(principalName);
+//				if (matcher.find()) {
+//					senderId = matcher.group(1);
+//				} else {
+//					String errorMessage = ("VP002 No senderId found in Certificate: " + principalName);
+//					logger.info(errorMessage);
+////					throw new VpSemanticException(errorMessage);
+//
+//				}
+//			} else {
+//				String errorMessage = ("VP002 No senderId found in Certificate: First certificate in chain is not X509Certificate: " + peerCertificateChain[0]);
+//				logger.info(errorMessage);
+////				throw new VpSemanticException(errorMessage);
+//			}
+//		} else {
+//			String errorMessage = ("VP002 No senderId found in Certificate: No certificate chain found from client");
+//			logger.info(errorMessage);
+////			throw new VpSemanticException(errorMessage);
+//		}
+//		
+//		// Check if this is coded in hex (HCC Funktionscertifikat does that!)
+//		if (senderId.startsWith("#")) {
+//			return convertFromHexToString(senderId.substring(5));
+//		} else {
+//			return senderId;			
+//		}
+//	}
+//
+//	private String convertFromHexToString(final String hexString) {
+//		byte [] txtInByte = new byte [hexString.length() / 2];
+//		int j = 0;
+//		for (int i = 0; i < hexString.length(); i += 2)
+//		{
+//			txtInByte[j++] = Byte.parseByte(hexString.substring(i, i + 2), 16);
+//		}
+//		return new String(txtInByte);
+//	}
 
 	private Amnetyp transformAmneFromFK(Amne inAmne) {
 		if (inAmne.getBeskrivning().startsWith("Arbe")) {
