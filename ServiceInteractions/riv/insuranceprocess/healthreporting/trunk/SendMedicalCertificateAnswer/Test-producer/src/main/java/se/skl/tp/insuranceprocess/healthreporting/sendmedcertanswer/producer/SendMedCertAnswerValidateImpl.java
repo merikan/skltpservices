@@ -186,9 +186,9 @@ public class SendMedCertAnswerValidateImpl implements SendMedicalCertificateAnsw
 			String inPersonnummer = inPatient.getPersonId().getExtension();
 
 	        // Check format of patient id - personnummer valid format is 19121212-1212 or 19121212+1212
-			if (!Pattern.matches("[0-9]{8}[-+][0-9]{4}", inPersonnummer) ) {
-				validationErrors.add("Wrong format for person-id! Valid format is YYYYMMDD-XXXX or YYYYMMDD+XXXX.");												
-			}
+//			if (!Pattern.matches("[0-9]{8}[-+][0-9]{4}", inPersonnummer) ) {
+//				validationErrors.add("Wrong format for person-id! Valid format is YYYYMMDD-XXXX or YYYYMMDD+XXXX.");												
+//			}
             
 			// L�karutl�tande referens - patient - namn - mandatory
 			if (inPatient.getFullstandigtNamn() == null || inPatient.getFullstandigtNamn().length() < 1 ) {
