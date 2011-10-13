@@ -88,11 +88,11 @@ public class SamlTicketTransformer extends AbstractMessageAwareTransformer {
 	    if (isNextEventArgusStartHeader(event)) {
 		addSamlTicketToHeader(outgoingMessageWriter, samlTicket);
 		insideArgosHeader = true;
-		outgoingMessageWriter.add(event);
 	    }
 
 	    if (isNextEventArgusEndHeader(event)) {
 		insideArgosHeader = false;
+		continue;
 	    }
 
 	    if (!insideArgosHeader) {

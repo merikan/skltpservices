@@ -1,44 +1,46 @@
 package se.skl.tp.ticket.saml;
 
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
-import javax.xml.stream.FactoryConfigurationError;
-import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleMessage;
-import org.mule.api.transformer.TransformerException;
 import org.mule.module.xml.stax.ReversibleXMLStreamReader;
+import org.soitoolkit.commons.mule.util.XmlUtil;
 
 import se.skl.tp.ticket.argos.ArgosHeader;
-import se.skl.tp.ticket.exception.TicketMachineException;
 
 public class SamlTicketTransformerTest {
 
-    @Test
-    public void testTransformMuleMessage() throws TransformerException, UnsupportedEncodingException,
-	    XMLStreamException {
-	String encoding = "UTF-8";
-	MuleMessage muleMessageWithArgosHeader = createCompleteMockedMuleMessage();
-	MuleMessage muleMessageWithSamlTicket = (MuleMessage) new SamlTicketTransformer().transform(
-		muleMessageWithArgosHeader, encoding);
+    private static final String UTF8 = "UTF-8";
 
-	assert muleMessageWithSamlTicket != null;
+    @Test
+    public void testSamlTicketReplacesArgosHeader() throws Exception {
+
+	MuleMessage msgIncludingArgos = createCompleteMockedMuleMessage();
+	MuleMessage msgIncludingSaml = (MuleMessage) new SamlTicketTransformer().doTransform(msgIncludingArgos, UTF8);
+	String xml = payloadAsString(msgIncludingSaml);
+	
+	Assert.assertThat(
+		xml,
+		containsString("<wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">"));
+	Assert.assertThat(xml, not(containsString("<urn:ArgosHeader />")));
     }
 
-    @Test
-    public void testExtractSamlTicketFromMuleMessage() throws XMLStreamException, FactoryConfigurationError,
-	    UnsupportedEncodingException, TicketMachineException {
-	MuleMessage muleMessageWithArgosHeader = createCompleteMockedMuleMessage();
-	XMLEventReader samlTicket = new SamlTicketTransformer().extractSamlTicket(muleMessageWithArgosHeader);
-
-	assert samlTicket.hasNext();
+    private String payloadAsString(MuleMessage msgIncludingSaml) {
+	final ReversibleXMLStreamReader payload = (ReversibleXMLStreamReader) msgIncludingSaml.getPayload();
+	String xml = XmlUtil.convertReversibleXMLStreamReaderToString(payload, UTF8);
+	return xml;
     }
 
     private MuleMessage createCompleteMockedMuleMessage() throws UnsupportedEncodingException, XMLStreamException {
