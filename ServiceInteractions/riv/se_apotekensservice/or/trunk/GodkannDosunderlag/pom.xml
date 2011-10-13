@@ -18,7 +18,7 @@
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
 	<artifactId>GodkannDosunderlag</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>GodkannDosunderlag service</name>
 
