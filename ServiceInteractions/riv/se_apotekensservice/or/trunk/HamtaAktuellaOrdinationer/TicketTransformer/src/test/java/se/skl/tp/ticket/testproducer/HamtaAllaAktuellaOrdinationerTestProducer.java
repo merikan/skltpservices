@@ -23,7 +23,6 @@ public class HamtaAllaAktuellaOrdinationerTestProducer implements HamtaAktuellaO
 	    throws se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.ApplicationException,
 	    se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.SystemException {
 
-	System.out.println(argosHeader.getArbetsplatsnamn());
 	String personnummer = parameters.getPersonnummer();
 
 	HamtaAktuellaOrdinationerResponseType response = new HamtaAktuellaOrdinationerResponseType();

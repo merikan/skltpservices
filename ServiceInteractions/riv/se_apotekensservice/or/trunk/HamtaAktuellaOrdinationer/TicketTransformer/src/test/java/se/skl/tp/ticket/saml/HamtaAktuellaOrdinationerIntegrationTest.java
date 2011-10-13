@@ -38,5 +38,17 @@ public class HamtaAktuellaOrdinationerIntegrationTest extends AbstractTestCase {
 	assertNotNull(response);
 	assertEquals(ssn, response.getOrdinationslista().getPersonnummer());
     }
+    
+    @Test
+    public void testRequestWithEncoding() throws Exception {
+	String ssn = "ÅÄÖ";
+	String to = "1234567";
+
+	HamtaAktuellaOrdinationerResponseType response = new HamtaAllaAktuellaOrdinationerTestConsumer()
+		.requestIncludingCompleteArgosInformation(ssn, to);
+
+	assertNotNull(response);
+	assertEquals("ÅÄÖ", response.getOrdinationslista().getPersonnummer());
+    }
 
 }
