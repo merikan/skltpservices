@@ -44,6 +44,7 @@ public class TicketMachineTest {
 	
 
 	Assert.assertThat(ticket, containsString("<saml2:Issuer>pascalonline</saml2:Issuer>"));
+	Assert.assertThat(ticket, containsString("LŠkare"));
 
     }
 
