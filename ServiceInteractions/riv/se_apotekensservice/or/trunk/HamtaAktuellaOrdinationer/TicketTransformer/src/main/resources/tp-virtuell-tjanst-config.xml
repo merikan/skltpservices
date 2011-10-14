@@ -22,6 +22,10 @@
 
 	<custom-transformer name="HamtaAktuellaOrdinationerSamlTicketTransformer"
 		class="se.skl.tp.ticket.saml.SamlTicketTransformer" />
+		
+	<message-properties-transformer name="addContentType">
+		<add-message-property key="Content-Type" value="text/xml;charset=UTF-8" />
+	</message-properties-transformer>
 
 	<model name="HamtaAktuellaOrdinationer-TicketTransformerService-model">
 
@@ -39,7 +43,7 @@
 					<cxf:outbound-endpoint
 						address="${endpoint.apotekensservice.or.hamtaaktuellaordinationer}"
 						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" />
+						protocolConnector="VPConsumerConnector" transformer-refs="addContentType"/>
 				</pass-through-router>
 			</outbound>
 		</service>
@@ -56,7 +60,7 @@
 				<pass-through-router>
 					<cxf:outbound-endpoint
 						address="${endpoint.apotekensservice.or.hamtaaktuellaordinationer}"
-						synchronous="true" proxy="true" payload="envelope" />
+						synchronous="true" proxy="true" payload="envelope" transformer-refs="addContentType"/>
 				</pass-through-router>
 			</outbound>
 		</service>
