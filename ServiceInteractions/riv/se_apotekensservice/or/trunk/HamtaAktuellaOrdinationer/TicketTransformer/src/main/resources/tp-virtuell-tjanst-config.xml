@@ -22,7 +22,9 @@
 
 	<custom-transformer name="HamtaAktuellaOrdinationerSamlTicketTransformer"
 		class="se.skl.tp.ticket.saml.SamlTicketTransformer" />
-		
+	
+	<!-- To make sure contenttype is sent to producer.
+	http://www.mulesoft.org/documentation/display/MULE2USER/HTTP+Transport#HTTPTransport-HandlingHTTPContentTypeandEncoding -->
 	<message-properties-transformer name="addContentType">
 		<add-message-property key="Content-Type" value="text/xml;charset=UTF-8" />
 	</message-properties-transformer>
