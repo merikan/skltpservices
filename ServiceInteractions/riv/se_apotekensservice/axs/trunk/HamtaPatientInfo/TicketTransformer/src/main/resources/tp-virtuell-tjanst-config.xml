@@ -20,9 +20,6 @@
 
 	<!-- Name of this file is mandatory and may not be changed. -->
 
-	<custom-transformer name="HamtaPatientInfoSamlTicketTransformer"
-		class="se.skl.tp.ticket.saml.SamlTicketTransformer" />
-
 	<model name="ApotekenService-HamtaPatientInfo-TicketTransformerService-model">
 
 		<service
@@ -32,14 +29,14 @@
 					address="http://localhost:10000/transformer/apotekensservice/axs/HamtaPatientInfo/SamlTicketTransformer"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false"
-					transformer-refs="HamtaPatientInfoSamlTicketTransformer" />
+					transformer-refs="ArgosHeaderToSamlTicket" />
 			</inbound>
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
 						address="${endpoint.apotekensservice.axs.hamtapatientinfo}"
 						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" />
+						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8"/>
 				</pass-through-router>
 			</outbound>
 		</service>
@@ -49,14 +46,14 @@
 				<cxf:inbound-endpoint
 					address="http://localhost:10000/transformer/apotekensservice/axs/HamtaPatientInfo/SamlTicketTransformer/local"
 					proxy="true" payload="envelope" synchronous="true"
-					applyTransformersToProtocol="false" transformer-refs="HamtaPatientInfoSamlTicketTransformer" />
+					applyTransformersToProtocol="false" transformer-refs="ArgosHeaderToSamlTicket" />
 			</inbound>
 
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
 						address="${endpoint.apotekensservice.axs.hamtapatientinfo}"
-						synchronous="true" proxy="true" payload="envelope" />
+						synchronous="true" proxy="true" payload="envelope" transformer-refs="addContentTypeXmlUtf8"/>
 				</pass-through-router>
 			</outbound>
 		</service>
