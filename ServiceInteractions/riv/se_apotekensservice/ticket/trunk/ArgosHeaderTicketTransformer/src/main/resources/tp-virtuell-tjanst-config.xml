@@ -17,4 +17,13 @@
 
 	<!-- Name of this file is mandatory and may not be changed. -->
 
+	<!-- To make sure contenttype is sent to producer. http://www.mulesoft.org/documentation/display/MULE2USER/HTTP+Transport#HTTPTransport-HandlingHTTPContentTypeandEncoding -->
+	<message-properties-transformer name="addContentTypeXmlUtf8">
+		<add-message-property key="Content-Type"
+			value="text/xml;charset=UTF-8" />
+	</message-properties-transformer>
+
+	<custom-transformer name="ArgosHeaderToSamlTicket"
+		class="se.skl.tp.ticket.saml.SamlTicketTransformer" />
+
 </mule>
