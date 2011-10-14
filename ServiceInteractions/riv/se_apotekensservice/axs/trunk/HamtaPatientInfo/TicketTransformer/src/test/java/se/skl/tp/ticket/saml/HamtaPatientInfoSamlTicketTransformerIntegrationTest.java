@@ -39,4 +39,16 @@ public class HamtaPatientInfoSamlTicketTransformerIntegrationTest extends Abstra
 	assertTrue(response.isFinnsOrdination());
     }
 
+    @Test
+    public void testEncodingIsProperThroughIntegration() throws Exception {
+	String ssn = "ÅÖÄ";
+	String to = "1234567";
+
+	HamtaPatientInfoResponseType response = new HamtaPatientInfoTestConsumer()
+		.requestIncludingCompleteArgosInformation(ssn, to);
+
+	assertNotNull(response);
+	assertEquals("ÅÖÄ", response.getDosproducent());
+    }
+
 }
