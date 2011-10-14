@@ -20,15 +20,6 @@
 
 	<!-- Name of this file is mandatory and may not be changed. -->
 
-	<custom-transformer name="HamtaAktuellaOrdinationerSamlTicketTransformer"
-		class="se.skl.tp.ticket.saml.SamlTicketTransformer" />
-	
-	<!-- To make sure contenttype is sent to producer.
-	http://www.mulesoft.org/documentation/display/MULE2USER/HTTP+Transport#HTTPTransport-HandlingHTTPContentTypeandEncoding -->
-	<message-properties-transformer name="addContentType">
-		<add-message-property key="Content-Type" value="text/xml;charset=UTF-8" />
-	</message-properties-transformer>
-
 	<model name="HamtaAktuellaOrdinationer-TicketTransformerService-model">
 
 		<service
@@ -38,14 +29,14 @@
 					address="http://localhost:10000/transformer/apotekensservice/or/SamlTicketTransformer"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false"
-					transformer-refs="HamtaAktuellaOrdinationerSamlTicketTransformer" />
+					transformer-refs="ArgosHeaderToSamlTicket" />
 			</inbound>
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
 						address="${endpoint.apotekensservice.or.hamtaaktuellaordinationer}"
 						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" transformer-refs="addContentType"/>
+						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8"/>
 				</pass-through-router>
 			</outbound>
 		</service>
@@ -55,14 +46,14 @@
 				<cxf:inbound-endpoint
 					address="http://localhost:10000/transformer/apotekensservice/or/SamlTicketTransformer/local"
 					proxy="true" payload="envelope" synchronous="true"
-					applyTransformersToProtocol="false" transformer-refs="HamtaAktuellaOrdinationerSamlTicketTransformer" />
+					applyTransformersToProtocol="false" transformer-refs="ArgosHeaderToSamlTicket" />
 			</inbound>
 
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
 						address="${endpoint.apotekensservice.or.hamtaaktuellaordinationer}"
-						synchronous="true" proxy="true" payload="envelope" transformer-refs="addContentType"/>
+						synchronous="true" proxy="true" payload="envelope" transformer-refs="addContentTypeXmlUtf8"/>
 				</pass-through-router>
 			</outbound>
 		</service>
