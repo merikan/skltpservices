@@ -1,0 +1,108 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header>
+        <ns3:To xmlns:ns3="http://www.w3.org/2005/08/addressing"
+            xmlns:ns2="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:1"
+            xmlns="urn:riv:insuranceprocess:healthreporting:1">FKTransform</ns3:To>
+    </soap:Header>
+    <soap:Body>
+        <ns2:RegisterMedicalCertificate xmlns="urn:riv:insuranceprocess:healthreporting:1"
+            xmlns:ns2="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:1"
+            xmlns:ns3="http://www.w3.org/2005/08/addressing">
+            <ns2:lakarutlatande>
+                <lakarutlatande-id>076764f7-3417-48dd-8a0c-5a958a842fda</lakarutlatande-id>
+                <typAvUtlatande>Medicinskt underlag för bedömning av förmåga att arbeta vid
+                    sjukdom</typAvUtlatande>
+                <kommentar>Beroende på vilka åtgärder som kan bli aktuella vid kliniska fynd
+                    under artroskopiundersökningen, så ser prognosen för patienten olika ut. En
+                    mera korrekt bedömning av återgång till arbete kan göras först efter denna
+                    undersöking.</kommentar>
+                <signeringsdatum>2009-12-01T00:00:00.000+01:00</signeringsdatum>
+                <skickatDatum>2010-05-31T10:44:44.380+02:00</skickatDatum>
+                <patient>
+                    <person-id extension="19430811-7094" root="1.2.752.129.2.1.3.1"/>
+                    <fornamn>Lab</fornamn>
+                    <efternamn>Testsson</efternamn>
+                </patient>
+                <skapadAvHosPersonal>
+                    <personal-id extension="Personal HSA-ID" root="1.2.752.129.2.1.4.1"/>
+                    <fullstandigtNamn>Erik Åselius</fullstandigtNamn>
+                    <enhet>
+                        <enhets-id extension="Enköpings lasaretts HSA-ID" root="1.2.752.129.2.1.4.1"/>
+                        <arbetsplatskod extension="Arbetsplatskoden" root="1.2.752.29.4.71"/>
+                        <enhetsnamn>Kir mott UAS/KIR</enhetsnamn>
+                        <postadress>Akademiska sjukhuset</postadress>
+                        <postnummer>751 85</postnummer>
+                        <postort>Uppsala</postort>
+                        <telefonnummer>018-611 45 30</telefonnummer>
+                        <vardgivare>
+                            <vardgivare-id extension="Uppsala landstings HSA-ID"
+                                root="1.2.752.129.2.1.4.1"/>
+                            <vardgivarnamn>Landstinget i Uppsala</vardgivarnamn>
+                        </vardgivare>
+                    </enhet>
+                </skapadAvHosPersonal>
+                <vardkontakt>
+                    <vardkontakttyp>Min_undersokning_av_patienten</vardkontakttyp>
+                    <vardkontaktstid>2009-12-01+01:00</vardkontaktstid>
+                </vardkontakt>
+                <aktivitet>
+                    <aktivitetskod>Ovrigt</aktivitetskod>
+                    <beskrivning>Undvika full belastning av knäleden.</beskrivning>
+                </aktivitet>
+                <aktivitet>
+                    <aktivitetskod>Planerad_eller_pagaende_behandling_eller_atgard_inom_sjukvarden</aktivitetskod>
+                    <beskrivning>Given ordination sjukgymnastik x 3 per vecka. Väntar på artroskopi.
+                        Fortsatt poliklinisk kontakt.</beskrivning>
+                </aktivitet>
+                <aktivitet>
+                    <aktivitetskod>Arbetslivsinriktad_rehabilitering_ar_ej_aktuell</aktivitetskod>
+                </aktivitet>
+                <aktivitet>
+                    <aktivitetskod>Forandrat_ressatt_till_arbetsplatsen_ar_ej_aktuellt</aktivitetskod>
+                </aktivitet>
+                <bedomtTillstand>
+                    <beskrivning>Patient med hastigt uppkommen smärta och rörelseinskränkning i
+                        höger knä.Behandlas initialt med analgetika och steroider, samt ortos.
+                        Sjukgymnastik x 3 per vecka</beskrivning>
+                </bedomtTillstand>
+                <medicinsktTillstand>
+                    <beskrivning>Sjukdomar i muskuloskeletala systemet och bindväven</beskrivning>
+                    <tillstandskod codeSystemName="ICD-10" code="M25"/>
+                </medicinsktTillstand>
+                <funktionstillstand>
+                    <beskrivning>Svullnad och värmeökning. Smärta vid manipulation.</beskrivning>
+                    <typAvFunktionstillstand>Kroppsfunktion</typAvFunktionstillstand>
+                </funktionstillstand>
+                <funktionstillstand>
+                    <beskrivning>Patienten arbetar som postiljon i distrikt med höghus, sjukdomen
+                        omöjliggör gång i trappor.</beskrivning>
+                    <typAvFunktionstillstand>Aktivitet</typAvFunktionstillstand>
+                    <arbetsformaga>
+                        <motivering>Patientens besvär beror med all säkerhet på förslitningar i
+                            knäleden, vilket kan bekräftas vid beställd men inte genomförd
+                            artroskopi. Om förändringarna är omfattande måste ytterligare
+                            åtgärder vidtas, men patientens besvär kommer inte att upphöra
+                            förrän dessa åtgärder är vidtagna.</motivering>
+                        <prognosangivelse>Aterstallas_delvis</prognosangivelse>
+                        <arbetsuppgift>
+                            <typAvArbetsuppgift>Brevbärare</typAvArbetsuppgift>
+                        </arbetsuppgift>
+                        <arbetsformagaNedsattning>
+                            <varaktighetFrom>2009-12-02+01:00</varaktighetFrom>
+                            <varaktighetTom>2009-12-03+01:00</varaktighetTom>
+                            <nedsattningsgrad>Nedsatt_med_1/2</nedsattningsgrad>
+                        </arbetsformagaNedsattning>
+                        <arbetsformagaNedsattning>
+                            <varaktighetFrom>2009-12-01+01:00</varaktighetFrom>
+                            <varaktighetTom>2009-12-02+01:00</varaktighetTom>
+                            <nedsattningsgrad>Helt_nedsatt</nedsattningsgrad>
+                        </arbetsformagaNedsattning>
+                        <sysselsattning>
+                            <typAvSysselsattning>Nuvarande_arbete</typAvSysselsattning>
+                        </sysselsattning>
+                    </arbetsformaga>
+                </funktionstillstand>
+            </ns2:lakarutlatande>
+        </ns2:RegisterMedicalCertificate>
+    </soap:Body>
+</soap:Envelope>
