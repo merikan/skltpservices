@@ -29,6 +29,16 @@
 	<!-- Modules to be created for each service -->
 	<modules>
 		<module>Schema</module>
+    <module>HamtaApoteksinfoEget</module>
+    <module>HamtaApoteksInfo</module>
+    <module>KontaktuppgifterHamta</module>
+    <module>KontaktuppgifterUppdatera</module>
+    <module>SkapaApotek</module>
+    <module>SkapaDosmottagare</module>
+    <module>SokDosmottagare</module>
+    <module>TaBortDosmottagare</module>
+    <module>UppdateraDosmottagare</module>
+    <module>UppdateraExpoMedApotek</module>
   </modules>
 
 	<dependencies>
