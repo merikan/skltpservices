@@ -10,7 +10,7 @@
 	</parent>
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
-	<artifactId>HamtaOrdinationsHistorik-TicketTransformer</artifactId>
+	<artifactId>se_apotekensservice-or-HamtaOrdinationsHistorik-TicketTransformer</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>HamtaOrdinationsHistorik-TicketTransformer</name>
 	<url>http://maven.apache.org</url>

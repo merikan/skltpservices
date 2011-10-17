@@ -10,7 +10,7 @@
 	</parent>
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
-	<artifactId>SattUtOrdinationVard-TicketTransformer</artifactId>
+	<artifactId>se_apotekensservice-or-SattUtOrdinationVard-TicketTransformer</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>SattUtOrdinationVard-TicketTransformer</name>
 	<url>http://maven.apache.org</url>

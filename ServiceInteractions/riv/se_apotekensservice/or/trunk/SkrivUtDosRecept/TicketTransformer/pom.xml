@@ -10,7 +10,7 @@
 	</parent>
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
-	<artifactId>SkrivUtDosRecept-TicketTransformer</artifactId>
+	<artifactId>se_apotekensservice-or-SkrivUtDosRecept-TicketTransformer</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>SkrivUtDosRecept-TicketTransformer</name>
 	<url>http://maven.apache.org</url>

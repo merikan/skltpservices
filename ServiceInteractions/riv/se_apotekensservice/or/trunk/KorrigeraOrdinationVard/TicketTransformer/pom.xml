@@ -10,7 +10,7 @@
 	</parent>
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
-	<artifactId>KorrigeraOrdinationVard-TicketTransformer</artifactId>
+	<artifactId>se_apotekensservice-or-KorrigeraOrdinationVard-TicketTransformer</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>KorrigeraOrdinationVard-TicketTransformer</name>
 	<url>http://maven.apache.org</url>
