@@ -25,14 +25,14 @@
 	<groupId>se.skl.tp</groupId>
 	<artifactId>TaEmotSvar</artifactId>
 	<packaging>pom</packaging>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2</version>
 	<name>TaEmotSvar</name>
 	<url>http://maven.apache.org</url>
 	
 	<parent>
   		<groupId>se.skl.tp</groupId>
   		<artifactId>ifv</artifactId>
-  		<version>1.2-SNAPSHOT</version>
+  		<version>1.2</version>
    </parent>
 
 	<modules>

@@ -25,14 +25,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.tp</groupId>
  <artifactId>insuranceprocess-healthreporting-receivemedicalcertificatequestion-virtualisering</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2</version>
  <name>insuranceprocess-healthreporting-receivemedicalcertificatequestion-virtualisering</name>
 	<url>http://maven.apache.org</url>
 	
 	<parent>
   		<groupId>se.skl.tp</groupId>
   		<artifactId>ReceiveMedicalCertificateQuestion</artifactId>
-  		<version>1.2-SNAPSHOT</version>
+  		<version>1.2</version>
    </parent>
 
 </project>

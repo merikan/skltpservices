@@ -25,14 +25,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.tp</groupId>
  <artifactId>fk-vardgivare-sjukvard-taemotsvar-virtualisering</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2</version>
  <name>fk-vardgivare-sjukvard-taemotsvar-virtualisering</name>
 	<url>http://maven.apache.org</url>
 	
 	<parent>
   		<groupId>se.skl.tp</groupId>
   		<artifactId>TaEmotSvar</artifactId>
-  		<version>1.2-SNAPSHOT</version>
+  		<version>1.2</version>
     </parent>
 
 </project>
