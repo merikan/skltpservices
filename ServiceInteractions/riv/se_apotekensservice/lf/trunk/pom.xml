@@ -29,6 +29,21 @@
 	<!-- Modules to be created for each service -->
 	<modules>
 		<module>Schema</module>
+    <module>AterkallaSamtyckeVardsystem</module>
+    <module>AterkallaSamtyckeWebb</module>
+    <module>KontrolleraForskrivarbehorighet</module>
+    <module>KontrolleraSamtycke</module>
+    <module>KontrolleraSamtyckeVardsystem</module>
+    <module>LasLFForskrivare</module>
+    <module>LasLFPrivatperson</module>
+    <module>LasLFPrivatpersonPDF</module>
+    <module>LasLFVardsystem</module>
+    <module>LFUtskrift</module>
+    <module>RapporteraBorttagLF</module>
+    <module>RapporteraExpeditionLF</module>
+    <module>RegistreraSamtyckeVardsystem</module>
+    <module>RegistreraSamtyckeWebb</module>
+    <module>SkrivUtLakemedelsforteckning</module>
   </modules>
 
 	<dependencies>
