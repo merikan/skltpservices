@@ -29,6 +29,20 @@
 	<!-- Modules to be created for each service -->
 	<modules>
 		<module>Schema</module>
+    <module>AvslutaFullmakt</module>
+    <module>HamtaArbetsstalle</module>
+    <module>HamtaFolkbokforingsinformation</module>
+    <module>HamtaFullmakt</module>
+    <module>HamtaSparInformation</module>
+    <module>HamtaVardenhet</module>
+    <module>KontrolleraFullmakt</module>
+    <module>RegistreraFullmakt</module>
+    <module>RegistreraVardenhetAnstalld</module>
+    <module>RegistreraVardenhet</module>
+    <module>TabortDosTillhorighet</module>
+    <module>UppdateraDosTillhorighet</module>
+    <module>UppdateraVardenhetAnstalld</module>
+    <module>UppdateraVardenhet</module>
   </modules>
 
 	<dependencies>
