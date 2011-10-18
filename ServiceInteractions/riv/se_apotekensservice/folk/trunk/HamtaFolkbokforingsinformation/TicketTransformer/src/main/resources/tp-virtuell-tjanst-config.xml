@@ -25,7 +25,7 @@
 			name="HamtaFolkbokforingsinformation-TicketTransformerService-service">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/transformer/apotekensservice/or/HamtaFolkbokforingsinformation/SamlTicketTransformer"
+					address="http://localhost:10000/transformer/apotekensservice/folk/HamtaFolkbokforingsinformation/SamlTicketTransformer"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false"
 					transformer-refs="ArgosHeaderToSamlTicket" />
