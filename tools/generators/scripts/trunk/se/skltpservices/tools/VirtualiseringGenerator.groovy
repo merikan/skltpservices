@@ -10,8 +10,12 @@ org.apache.commons.io.FileUtils
 import org.apache.commons.io.FileUtils
 
 /**
- * This script should help us to generate many services at one time. This script is depending on the archetype named service-archetype.
+ * This script should help us to generate many services at one time. 
+ *
+ * PREREQUISITES:
+ * This script is depending on the archetype named service-archetype.
  * This archetype must be installed before running the script.
+ * Check the TODO below to see any flaws still not fixed.
  *
  * TO RUN:
  * Just execute ./VirtualiseringGenerator.groovy and follow the instruction coming up.
@@ -22,7 +26,8 @@ import org.apache.commons.io.FileUtils
  * TODO:
  * Make the script more smart by
  * - Today its hardcoded to rivtabp20
- * - Today it only works for version 1
+ * - Today it only works for version 1 of TP services
+ * - Fix that it reads namepace from WSDL not as today with hardcoded values (URN:RIV is hardcoded)
  * 
  */
 
@@ -49,7 +54,10 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir, domain){
 		def wsdlFileName = schemasFiles[0].name
 		def rivtaVersion = 'rivtabp20'
 		def serviceVersion = '1'
-		def version = '1.1-SNAPSHOT'
+		def version = '1.0-SNAPSHOT'
+		
+		
+		def namespacePrefix = 'urn:riv'
 		
 		def domainArray = domain.split("\\.")
 		def maindomain = domainArray[0]
@@ -70,7 +78,7 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir, domain){
 		-DserviceInteraction=${artifactId}Interaction  
 		-DserviceRelativePath=${artifactId}/${serviceVersion}/${rivtaVersion} 
 		-DserviceWsdlFile=${wsdlFileName} 
-		-DserviceNamespace=urn:riv:${maindomain}:${subdomain}:${artifactId}:${serviceVersion}:${rivtaVersion}  
+		-DserviceNamespace=${namespacePrefix}:${maindomain}:${subdomain}:${artifactId}:${serviceVersion}:${rivtaVersion}  
 		"""
 		
 		def process = mvnCommand.execute()
