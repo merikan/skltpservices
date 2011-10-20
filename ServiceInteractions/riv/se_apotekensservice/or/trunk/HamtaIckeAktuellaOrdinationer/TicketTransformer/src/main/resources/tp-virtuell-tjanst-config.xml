@@ -25,7 +25,7 @@
 			name="HamtaIckeAktuellaOrdinationer-TicketTransformerService-service">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/transformer/apotekensservice/or/HamtaIckeAktuellaOrdinationer/SamlTicketTransformer"
+					address="http://localhost:10000/tickettransformer/HamtaIckeAktuellaOrdinationer/SamlTicketTransformer"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false"
 					transformer-refs="ArgosHeaderToSamlTicket" />
@@ -34,6 +34,63 @@
 				<pass-through-router>
 					<cxf:outbound-endpoint
 						address="${endpoint.apotekensservice.or.hamtaickeaktuellaordinationer}"
+						synchronous="true" proxy="true" payload="envelope"
+						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8"/>
+				</pass-through-router>
+			</outbound>
+		</service>
+		
+		<service
+			name="HamtaIckeAktuellaOrdinationer-TicketTransformerService-ext0">
+			<inbound>
+				<cxf:inbound-endpoint
+					address="http://localhost:10000/testenvironment/ext0/tickettransformer/HamtaIckeAktuellaOrdinationerResponder/V1"
+					proxy="true" payload="envelope" synchronous="true"
+					applyTransformersToProtocol="false"
+					transformer-refs="ArgosHeaderToSamlTicket" />
+			</inbound>
+			<outbound>
+				<pass-through-router>
+					<cxf:outbound-endpoint
+						address="https://stpwsp-exttest0.receptpartner.sjunet.org:42901/serviceProvider/HamtaIckeAktuellaOrdinationerResponder/V1"
+						synchronous="true" proxy="true" payload="envelope"
+						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8"/>
+				</pass-through-router>
+			</outbound>
+		</service>
+		
+		<service
+			name="HamtaIckeAktuellaOrdinationer-TicketTransformerService-ext8">
+			<inbound>
+				<cxf:inbound-endpoint
+					address="http://localhost:10000/testenvironment/ext8/tickettransformer/HamtaIckeAktuellaOrdinationerResponder/V1"
+					proxy="true" payload="envelope" synchronous="true"
+					applyTransformersToProtocol="false"
+					transformer-refs="ArgosHeaderToSamlTicket" />
+			</inbound>
+			<outbound>
+				<pass-through-router>
+					<cxf:outbound-endpoint
+						address="https://ext08-02.receptpartner.sjunet.org:42901/serviceProvider/HamtaIckeAktuellaOrdinationerResponder/V1"
+						synchronous="true" proxy="true" payload="envelope"
+						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8"/>
+				</pass-through-router>
+			</outbound>
+		</service>
+		
+		<service
+			name="HamtaIckeAktuellaOrdinationer-TicketTransformerService-ext11">
+			<inbound>
+				<cxf:inbound-endpoint
+					address="http://localhost:10000/testenvironment/ext11/tickettransformer/HamtaIckeAktuellaOrdinationerResponder/V1"
+					proxy="true" payload="envelope" synchronous="true"
+					applyTransformersToProtocol="false"
+					transformer-refs="ArgosHeaderToSamlTicket" />
+			</inbound>
+			<outbound>
+				<pass-through-router>
+					<cxf:outbound-endpoint
+						address="https://ext11-02.receptpartner.sjunet.org:42901/serviceProvider/HamtaIckeAktuellaOrdinationerResponder/V1"
 						synchronous="true" proxy="true" payload="envelope"
 						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8"/>
 				</pass-through-router>
