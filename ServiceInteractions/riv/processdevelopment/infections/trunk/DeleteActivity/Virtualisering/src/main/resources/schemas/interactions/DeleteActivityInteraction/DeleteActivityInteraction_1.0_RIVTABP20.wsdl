@@ -31,7 +31,7 @@
 			 </xs:documentation>
   </xs:annotation>
   <wsdl:types>
-    <xs:schema targetNamespace='urn:riv:processdevelopment:infections:DeleteActivityResponder:1'>
+    <xs:schema targetNamespace='urn:riv:processdevelopment:infections:DeleteActivityResponder:1:rivtabp20'>
       <xs:import schemaLocation='DeleteActivityResponder_1.0.xsd' namespace='urn:riv:processdevelopment:infections:DeleteActivityResponder:1' />
     </xs:schema>
     <xs:schema targetNamespace='http://www.w3.org/2005/08/addressing'>

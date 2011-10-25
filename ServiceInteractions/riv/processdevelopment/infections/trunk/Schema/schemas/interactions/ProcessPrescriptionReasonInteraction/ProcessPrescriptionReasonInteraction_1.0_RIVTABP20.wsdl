@@ -33,6 +33,8 @@
   <wsdl:types>
     <xs:schema targetNamespace='urn:riv:processdevelopment:infections:ProcessPrescriptionReasonResponder:1:rivtabp20'>
       <xs:import schemaLocation='ProcessPrescriptionReasonResponder_1.0.xsd' namespace='urn:riv:processdevelopment:infections:ProcessPrescriptionReasonResponder:1' />
+    </xs:schema>
+    <xs:schema targetNamespace='http://www.w3.org/2005/08/addressing'>
       <xs:import schemaLocation='../../core_components/ws-addressing-1.0.xsd' namespace='http://www.w3.org/2005/08/addressing' />
     </xs:schema>
   </wsdl:types>

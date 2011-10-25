@@ -39,8 +39,10 @@
 			 </xs:documentation>
   </xs:annotation>
   <wsdl:types>
-    <xs:schema targetNamespace='urn:riv:processdevelopment:infections:DeletePrescriptionReason:1:rivtabp20'>
+    <xs:schema targetNamespace='urn:riv:processdevelopment:infections:DeletePrescriptionReasonResponder:1:rivtabp20'>
       <xs:import schemaLocation='DeletePrescriptionReasonResponder_1.0.xsd' namespace='urn:riv:processdevelopment:infections:DeletePrescriptionReasonResponder:1' />
+    </xs:schema>
+    <xs:schema targetNamespace='http://www.w3.org/2005/08/addressing'>
       <xs:import schemaLocation='../../core_components/ws-addressing-1.0.xsd' namespace='http://www.w3.org/2005/08/addressing' />
     </xs:schema>
   </wsdl:types>
