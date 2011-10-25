@@ -24,7 +24,7 @@
 
   <groupId>se.skl.tp</groupId>
   <artifactId>processdevelopment-infections</artifactId>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>processdevelopment-infections</name>
 
@@ -51,8 +51,8 @@
   </modules>
   
   	<scm>
-		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/processdevelopment/infections/tags/processdevelopment-infections-1.0</connection>
-		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/processdevelopment/infections/tags/processdevelopment-infections-1.0</developerConnection>
+		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/processdevelopment/infections/trunk</connection>
+		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/processdevelopment/infections/trunk</developerConnection>
 	</scm>
 	
 	<build>

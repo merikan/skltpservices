@@ -3,14 +3,14 @@
 
   <groupId>se.skl.tp</groupId>
   <artifactId>processdevelopment-infections-deleteactivity-service</artifactId>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>processdevelopment-infections-deleteactivity-service</name>
 
   <parent>
   	<groupId>se.skl.tp</groupId>
     <artifactId>processdevelopment-infections</artifactId>
-  	<version>1.0</version>
+  	<version>1.1-SNAPSHOT</version>
   </parent>
 
   <!-- Modules to be created for each service -->

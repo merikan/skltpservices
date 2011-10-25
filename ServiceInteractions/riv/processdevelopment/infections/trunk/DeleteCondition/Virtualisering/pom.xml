@@ -24,13 +24,13 @@
         <modelVersion>4.0.0</modelVersion>
         <groupId>se.skl.tp</groupId>
         <artifactId>processdevelopment-infections-deletecondition-virtualisering</artifactId>
-        <version>1.0</version>
+        <version>1.1-SNAPSHOT</version>
         <name>processdevelopment-infections-deletecondition-virtualisering</name>
         <url>http://maven.apache.org</url>
         
         <parent>
         	<groupId>se.skl.tp</groupId>
          <artifactId>processdevelopment-infections-deletecondition-service</artifactId>
-        	<version>1.0</version>
+        	<version>1.1-SNAPSHOT</version>
         </parent>        
 </project>

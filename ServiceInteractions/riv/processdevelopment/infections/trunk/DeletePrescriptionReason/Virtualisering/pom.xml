@@ -24,13 +24,13 @@
         <modelVersion>4.0.0</modelVersion>
         <groupId>se.skl.tp</groupId>
         <artifactId>processdevelopment-infections-deleteprescriptionreason-virtualisering</artifactId>
-        <version>1.0</version>
+        <version>1.1-SNAPSHOT</version>
         <name>processdevelopment-infections-deleteprescriptionreason-virtualisering</name>
         <url>http://maven.apache.org</url>
         
         <parent>
         	<groupId>se.skl.tp</groupId>
          <artifactId>processdevelopment-infections-deleteprescriptionreason-service</artifactId>
-        	<version>1.0</version>
+        	<version>1.1-SNAPSHOT</version>
         </parent>        
 </project>
