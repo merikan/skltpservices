@@ -24,7 +24,7 @@
 
   <groupId>se.skl.tp</groupId>
   <artifactId>eservicesupply-eoffering</artifactId>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>eservicesupply-eoffering</name>
 
@@ -39,8 +39,8 @@
   </modules>
   
   <scm>
-		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/eservicesupply/eoffering/tags/eservicesupply-eoffering-1.0</connection>
-		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/eservicesupply/eoffering/tags/eservicesupply-eoffering-1.0</developerConnection>
+		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/eservicesupply/eoffering/trunk</connection>
+		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/eservicesupply/eoffering/trunk</developerConnection>
 	</scm>
 	
 	<build>
