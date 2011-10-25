@@ -25,14 +25,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.tp</groupId>
 	<artifactId>informatics-terminology-schemas</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>informatics-terminology-schemas</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>se.skl.tp</groupId>
 		<artifactId>informatics-terminology</artifactId>
-		<version>1.0</version>
+		<version>1.1-SNAPSHOT</version>
 	</parent>
 	
 	<properties>

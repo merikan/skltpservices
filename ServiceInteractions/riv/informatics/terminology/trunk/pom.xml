@@ -24,7 +24,7 @@
 
   <groupId>se.skl.tp</groupId>
   <artifactId>informatics-terminology</artifactId>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>informatics-terminology</name>
 
@@ -42,8 +42,8 @@
   </modules>
   
   <scm>
-		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/informatics/terminology/tags/informatics-terminology-1.0</connection>
-		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/informatics/terminology/tags/informatics-terminology-1.0</developerConnection>
+		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/informatics/terminology/trunk</connection>
+		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/informatics/terminology/trunk</developerConnection>
 	</scm>
 	
 	<build>
