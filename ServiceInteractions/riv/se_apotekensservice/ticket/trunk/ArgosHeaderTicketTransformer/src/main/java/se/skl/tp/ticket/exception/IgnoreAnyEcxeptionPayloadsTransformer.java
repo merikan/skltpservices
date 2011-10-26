@@ -19,10 +19,18 @@ public class IgnoreAnyEcxeptionPayloadsTransformer extends AbstractMessageAwareT
 
     @Override
     public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
-	if (message.getExceptionPayload() != null) {
-	    logger.debug("Exception payload detected! Exception payload will be removed to return correct producer error");
-	    message.setExceptionPayload(null);
+	if (containsBothPayloadAndExceptionPayload(message)) {
+	    removeExceptionPayload(message);
 	}
 	return message;
+    }
+
+    private void removeExceptionPayload(MuleMessage message) {
+	logger.debug("Exception payload detected together with payload! Exception payload will be removed to return payload only");
+	message.setExceptionPayload(null);
+    }
+
+    private boolean containsBothPayloadAndExceptionPayload(MuleMessage message) {
+	return message.getPayload() != null && message.getExceptionPayload() != null;
     }
 }
