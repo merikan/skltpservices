@@ -35,7 +35,7 @@
 					<cxf:outbound-endpoint
 						address="${endpoint.apotekensservice.or.hamtaordinationshistorik}"
 						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8"/>
+						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
 			</outbound>
 		</service>
@@ -54,7 +54,7 @@
 					<cxf:outbound-endpoint
 						address="https://stpwsp-exttest0.receptpartner.sjunet.org:42901/serviceProvider/HamtaOrdinationshistorikResponder/V1"
 						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8"/>
+						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
 			</outbound>
 		</service>
@@ -73,7 +73,7 @@
 					<cxf:outbound-endpoint
 						address="https://ext08-02.receptpartner.sjunet.org:42901/serviceProvider/HamtaOrdinationshistorikResponder/V1"
 						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8"/>
+						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
 			</outbound>
 		</service>
@@ -92,7 +92,7 @@
 					<cxf:outbound-endpoint
 						address="https://ext11-02.receptpartner.sjunet.org:42901/serviceProvider/HamtaOrdinationshistorikResponder/V1"
 						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8"/>
+						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
 			</outbound>
 		</service>
