@@ -36,7 +36,7 @@ public class StandaloneProducer {
 //        SpringBusFactory.setDefaultBus(bus);
         
         final Object implementor = new HamtaAllaAktuellaOrdinationerTestProducer();
-        final String address = "http://localhost:21000/vp/HamtaAktuellaOrdinationer/1/rivtabp20";
+        final String address = "http://localhost:21000/serviceProvider/HamtaAktuellaOrdinationerResponder/V1";
         Endpoint.publish(address, implementor);
     }
 
@@ -45,7 +45,7 @@ public class StandaloneProducer {
         new StandaloneProducer();
         System.out.println("Producer ready...");
         
-        Thread.sleep(5 * 60 * 1000);
+        Thread.sleep(5 * 60 * 10000);
         System.out.println("Producer exiting");
         System.exit(0);
     }

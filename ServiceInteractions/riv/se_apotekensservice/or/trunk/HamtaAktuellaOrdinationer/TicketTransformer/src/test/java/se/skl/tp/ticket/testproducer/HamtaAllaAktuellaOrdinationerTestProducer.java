@@ -25,6 +25,20 @@ public class HamtaAllaAktuellaOrdinationerTestProducer implements HamtaAktuellaO
 
 	String personnummer = parameters.getPersonnummer();
 
+	if (personnummer == null || "".equals(personnummer)) {
+	    throw new RuntimeException("Personnummer is mandatory!");
+	}
+
+	if ("APPLICATIONEXCEPTION".equals(personnummer)) {
+	    throw new se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.ApplicationException(
+		    "APPLICATIONEXCEPTION");
+	}
+
+	if ("SYSTEMEXCEPTION".equals(personnummer)) {
+	    throw new se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.SystemException(
+		    "SYSTEMEXCEPTION");
+	}
+
 	HamtaAktuellaOrdinationerResponseType response = new HamtaAktuellaOrdinationerResponseType();
 	response.getApoteksInformationLista().add(createApoteksInformation());
 	response.getArbetsplatsInfoLista().add(createArbetsplatsInfo());
