@@ -26,4 +26,7 @@
 	<custom-transformer name="ArgosHeaderToSamlTicket"
 		class="se.skl.tp.ticket.saml.SamlTicketTransformer" />
 
+	<custom-transformer name="IgnoreExceptionPayloads"
+		class="se.skl.tp.ticket.exception.IgnoreAnyEcxeptionPayloadsTransformer" />
+
 </mule>
