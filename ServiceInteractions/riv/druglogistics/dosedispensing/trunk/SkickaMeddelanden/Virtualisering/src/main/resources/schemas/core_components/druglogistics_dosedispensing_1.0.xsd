@@ -70,6 +70,8 @@
       <xs:element name="anhorigkontakttelefon2" type="xs:string" minOccurs="0"/>
       <xs:element name="vardandeenhetid" type="xs:string" minOccurs="0"/>
       <xs:element name="vardandeenhetnamn" type="xs:string" minOccurs="0"/>
+      <xs:element name="vardandeenhetpostort" type="xs:string" minOccurs="0"/>
+      <xs:element name="vardandeenhetpostnummer" type="xs:string" minOccurs="0"/>
 
       <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
@@ -594,11 +596,30 @@
               <xs:element name="vilandestatusorsak" type="xs:string" minOccurs="0" maxOccurs="unbounded">
               </xs:element>
   
-  <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+              <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
   
           </xs:sequence>
     </xs:complexType>
+
+  <xs:complexType name="VardandeEnhetResponse">
+          <xs:sequence>
+                
+        	<xs:element name="vardandeenhetid" type="xs:string" minOccurs="1">
+        	</xs:element>
   
+        	<xs:element name="vardandeenhetnamn" type="xs:string" minOccurs="1">
+        	</xs:element>            
+
+        	<xs:element name="vardandeenhetpostort" type="xs:string" minOccurs="1">
+        	</xs:element>            
+
+        	<xs:element name="glnkod" type="xs:string" minOccurs="1">
+        	</xs:element>            
+
+          </xs:sequence>
+  </xs:complexType>
+
+
   <xs:complexType name="ProduktsortimentResponse">
           <xs:sequence>
                 

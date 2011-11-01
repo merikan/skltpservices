@@ -46,6 +46,7 @@
     <module>SkickaMeddelanden</module>
     <module>UppdateraMeddelandeStatus</module>
     <module>UppdateraVardtagareinformation</module>
+    <module>SokVardandeEnhet</module>
   </modules>
   
   	<scm>
