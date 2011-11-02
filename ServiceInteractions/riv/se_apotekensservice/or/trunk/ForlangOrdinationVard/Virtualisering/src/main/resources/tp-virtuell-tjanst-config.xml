@@ -28,7 +28,7 @@
 				<cxf:inbound-endpoint
 					address="https://${tp.host}:${tp.port}/${tp.baseUri}/ForlangOrdinationVard/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/interactions/ForlangOrdinationVardInteraction/ForlangOrdinationVardInteraction_1.0_rivtabp20.wsdl"
-					serviceName="ForlangOrdinationVardResponderService" namespace="urn:riv:inera:se_apotekensservice:or:ForlangOrdinationVard:1:rivtabp20"
+					serviceName="ForlangOrdinationVardResponderService" namespace="urn:riv:inera:se.apotekensservice:or:ForlangOrdinationVard:1:rivtabp20"
 					proxy="true" payload="envelope" synchronous="true" 
 					protocolConnector="VPProducerConnector"/>
 			</inbound>
