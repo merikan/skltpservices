@@ -37,7 +37,8 @@
     	<module>SattUtOrdinationVard</module>
     	<module>SkapaOrdinationVard</module>
     	<module>SkrivUtDosRecept</module>
-     </modules>
+    	<module>ForlangOrdinationVard</module>
+  </modules>
 
 	<dependencies>
 		<dependency>

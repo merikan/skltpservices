@@ -438,6 +438,21 @@
 										<extraarg>urn:riv:inera:se.apotekensservice:or:UppdateraDosunderlagAvliden:1:rivtabp20=se.riv.inera.se.apotekensservice.or.uppdateradosunderlagavliden.v1.rivtabp20</extraarg>
 									</extraargs>
 								</wsdloption>
+								<wsdloption>
+               				   		<wsdl>${schema.path}/interactions/ForlangOrdinationVardInteraction/ForlangOrdinationVardInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  					<extraargs>
+                    					<extraarg>-p</extraarg>
+                    					<extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
+                    					<extraarg>-p</extraarg>
+                    					<extraarg>urn:riv:inera.se.apotekensservice:argos:1=se.riv.inera.se.apotekensservice.argos.v1</extraarg>
+                    					<extraarg>-p</extraarg>
+                    					<extraarg>urn:riv:se.apotekensservice:or:ForlangOrdinationVardResponder:1=se.riv.se.apotekensservice.or.forlangordinationvardresponder.v1</extraarg>
+                    					<extraarg>-p</extraarg>
+                    					<extraarg>urn:riv:inera:se.apotekensservice:or:ForlangOrdinationVard:1:rivtabp20=se.riv.inera.se.apotekensservice.or.forlangordinationvard.v1.rivtabp20</extraarg>
+                    					<extraarg>-p</extraarg>
+                    					<extraarg>urn:riv:se.apotekensservice:or:1=se.riv.se.apotekensservice.or.v1</extraarg>
+                  					</extraargs>
+                				</wsdloption>
 							</wsdlOptions>
 						</configuration>
 						<goals>

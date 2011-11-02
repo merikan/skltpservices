@@ -10,7 +10,7 @@
     <xs:annotation>
         <xs:documentation>
             Beskrivning: Meddelandetyper som är gemensamma för or.
-            Revisioner: 2011-04-05, version 1.0
+            Revisioner: 2011-05-05, version 1.0
         </xs:documentation>
     </xs:annotation>
 
@@ -1334,6 +1334,13 @@ ska innefattas i förmånen.</xs:documentation>
                         <xs:documentation>Datum när patienten skall påbörja intag.</xs:documentation>
                     </xs:annotation>
                 </xs:element>
+                
+                <!--  Change to V1.0 -->
+                <xs:element name="sistaGiltighetsdag" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Ordinationens sista giltighetsdag.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
             
             </xs:sequence>
         </xs:complexType>
@@ -1379,6 +1386,26 @@ ska innefattas i förmånen.</xs:documentation>
             </xs:sequence>
         </xs:complexType>
     
+    
+                
+        <xs:complexType name="DispenseringsunderlagRequest">
+            <xs:sequence>                
+                <xs:element name="dispenseratuttag" type="DispenseratUttagRequest" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Information om dispenseratuttag.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="ordinationsId" type="xs:long" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Id för ordinationen som uttaget tillhör.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+        
     
                 
         <xs:complexType name="DoseringRequest">
@@ -1958,6 +1985,67 @@ Obligatorisk parameter utom vid makulering med orsakskod annan än 4.</xs:docume
     
     
                 
+        <xs:complexType name="ForlangOrdinationRequest">
+            <xs:sequence>                
+                <xs:element name="ordinationsId" type="xs:long" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Unikt id för en ordination</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="ordinationstidpunkt" type="xs:dateTime" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Datum och eventuell tid då ordinationen förlängs.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="originalOrdinationsId" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Unikt id för ordinationens original</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="underlagsversion" type="xs:int" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Ordinationslistans underlagsversion.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+                
+        <xs:complexType name="ForlangOrdinationResponse">
+            <xs:sequence>                
+                <xs:element name="affResultat" type="AFFResultatResponse" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>AffResultat</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="ordinationsId" type="xs:long" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Unikt id för en ordination</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="ordinationsstatus" type="OrdinationsstatusResponse" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Objekt innehållande alla parametrar från Ordinationsstatus (och Tillståndsstatus)</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="underlagsversion" type="xs:int" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Ordinationslistans underlagsversion.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+                
         <xs:complexType name="ForskrivareRequest">
             <xs:sequence>                
                 <xs:element name="arbetsplatskod" type="xs:string" nillable="false">
@@ -2499,6 +2587,13 @@ Sker inte någon expedition på receptet innan detta datum sätts hela ordinatio
                 <xs:element name="insattningstidpunkt" type="xs:dateTime" minOccurs="0">
                     <xs:annotation>
                         <xs:documentation>Datum när patienten skall påbörja intag.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                
+                <!--  Change to V1.0 -->
+                <xs:element name="sistaGiltighetsdag" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Ordinationens sista giltighetsdag.</xs:documentation>
                     </xs:annotation>
                 </xs:element>
                             
