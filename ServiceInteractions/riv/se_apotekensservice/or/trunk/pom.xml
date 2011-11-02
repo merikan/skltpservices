@@ -30,34 +30,14 @@
 	<modules>
 		<module>Schema</module>
 		<module>HamtaAktuellaOrdinationer</module>
-    <module>AvregistreraDosunderlag</module>
-    <module>BackaKrediteraUttag</module>
-    <module>GodkannDosunderlag</module>
-    <module>GodkannUttag</module>
-    <module>HamtaAktuellaOrdinationerFoddatum</module>
-    <module>HamtaEjGodkandaDosunderlag</module>
-    <module>HamtaGallandeOrdinationsversion</module>
-    <module>HamtaIckeAktuellaOrdinationerFoddatum</module>
-    <module>HamtaIckeAktuellaOrdinationer</module>
-    <module>HamtaOrdinationFoddatum</module>
-    <module>HamtaOrdinationshistorik</module>
-    <module>HamtaProduktionsunderlag</module>
-    <module>KontrolleraUttag</module>
-    <module>KorrigeraOrdinationApotek</module>
-    <module>KorrigeraOrdinationVard</module>
-    <module>MakuleraOrdinationApotek</module>
-    <module>MakuleraOrdinationVard</module>
-    <module>NotifieringsTest</module>
-    <module>SattUtOrdinationApotek</module>
-    <module>SattUtOrdinationVard</module>
-    <module>SkapaDosunderlagApotek</module>
-    <module>SkapaDosunderlagVard</module>
-    <module>SkapaOrdinationApotek</module>
-    <module>SkapaOrdinationVard</module>
-    <module>SkrivUtDosRecept</module>
-    <module>UppdateraDostillhorighet</module>
-    <module>UppdateraDosunderlagAvliden</module>
-  </modules>
+    	<module>HamtaIckeAktuellaOrdinationer</module>
+    	<module>HamtaOrdinationshistorik</module>
+    	<module>KorrigeraOrdinationVard</module>
+    	<module>MakuleraOrdinationVard</module>
+    	<module>SattUtOrdinationVard</module>
+    	<module>SkapaOrdinationVard</module>
+    	<module>SkrivUtDosRecept</module>
+     </modules>
 
 	<dependencies>
 		<dependency>
