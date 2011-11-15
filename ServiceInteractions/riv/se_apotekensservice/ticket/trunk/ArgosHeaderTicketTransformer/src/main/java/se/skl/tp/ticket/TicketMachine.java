@@ -34,67 +34,70 @@ import se.skl.tp.ticket.exception.TicketMachineException;
  */
 public class TicketMachine {
 
-    private static final String WSSE_STARTTAG = "<wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">";
-    private static final String WSSE_ENDTAG = "</wsse:Security>";
-    private static Logger log = LoggerFactory.getLogger(TicketMachine.class);
-    private static ArgosTicket argosSamlTicketMachine;
+	private static final String WSSE_STARTTAG = "<wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">";
+	private static final String WSSE_ENDTAG = "</wsse:Security>";
+	private static Logger log = LoggerFactory.getLogger(TicketMachine.class);
+	private static ArgosTicket argosSamlTicketMachine;
 
-    /**
-     * For testing the ticketmachine with e.g a mock
-     * 
-     * @param argosTicketMachine
-     */
-    void setArgosTicketMachine(ArgosTicket argosTicketMachine) {
-	argosSamlTicketMachine = argosTicketMachine;
-    }
-
-    private ArgosTicket getArgosTicketMachine() {
-	if (argosSamlTicketMachine == null) {
-	    argosSamlTicketMachine = new ArgosTicket();
-	}
-	return argosSamlTicketMachine;
-    }
-
-    /**
-     * Get a SAML ticket based on ArgosHeader information.
-     * 
-     * @param argosHeader
-     *            The information used when generating the SAML ticket.
-     * @return A String representation of the SAML ticket in ws security format.
-     * @throws TicketMachineException
-     */
-    public String produceSamlTicket(ArgosHeader argosHeader) throws TicketMachineException {
-
-	log.info("Executing ticketmachine to get SAML ticket, argos header " + argosHeader);
-	try {
-	    String samlTicket = getArgosTicketMachine().getTicket(argosHeader.getForskrivarkod(),
-		    argosHeader.getLegitimationskod(), argosHeader.getFornamn(), argosHeader.getEfternamn(),
-		    argosHeader.getYrkesgrupp(), argosHeader.getBefattningskod(), argosHeader.getArbetsplatskod(),
-		    argosHeader.getArbetsplatsnamn(), argosHeader.getPostort(), argosHeader.getPostadress(),
-		    argosHeader.getPostnummer(), argosHeader.getTelefonnummer(), argosHeader.getRequestId(),
-		    argosHeader.getRollnamn(), argosHeader.getHsaID(), argosHeader.getKatalog(),
-		    argosHeader.getOrganisationsnummer(), argosHeader.getSystemnamn(), argosHeader.getSystemversion(),
-		    argosHeader.getSystemIp());
-
-	    return applyWsSecurityToSamlTicket(samlTicket);
-	} catch (Exception e) {
-	    throw new TicketMachineException("Exception generating saml ticket from ticket machine", e);
+	/**
+	 * For testing the ticketmachine with e.g a mock
+	 * 
+	 * @param argosTicketMachine
+	 */
+	void setArgosTicketMachine(ArgosTicket argosTicketMachine) {
+		argosSamlTicketMachine = argosTicketMachine;
 	}
 
-    }
-
-    /**
-     * Apply ws security information to saml ticket.
-     * 
-     * @param samlTicket
-     *            The ticket to apply ws security to
-     * @return The samlTicket including ws security information
-     */
-    String applyWsSecurityToSamlTicket(String samlTicket) {
-	if (StringUtils.isEmpty(samlTicket)) {
-	    return WSSE_STARTTAG + WSSE_ENDTAG;
+	private ArgosTicket getArgosTicketMachine() {
+		if (argosSamlTicketMachine == null) {
+			argosSamlTicketMachine = new ArgosTicket();
+		}
+		return argosSamlTicketMachine;
 	}
-	return WSSE_STARTTAG + samlTicket + WSSE_ENDTAG;
-    }
+
+	/**
+	 * Get a SAML ticket based on ArgosHeader information.
+	 * 
+	 * @param argosHeader
+	 *            The information used when generating the SAML ticket.
+	 * @return A String representation of the SAML ticket in ws security format.
+	 * @throws TicketMachineException
+	 */
+	public String produceSamlTicket(ArgosHeader argosHeader) throws TicketMachineException {
+
+		log.info("Entering produce saml ticket");
+		log.debug("Argos header " + argosHeader);
+		try {
+			String samlTicket = getArgosTicketMachine().getTicket(argosHeader.getForskrivarkod(),
+					argosHeader.getLegitimationskod(), argosHeader.getFornamn(), argosHeader.getEfternamn(),
+					argosHeader.getYrkesgrupp(), argosHeader.getBefattningskod(), argosHeader.getArbetsplatskod(),
+					argosHeader.getArbetsplatsnamn(), argosHeader.getPostort(), argosHeader.getPostadress(),
+					argosHeader.getPostnummer(), argosHeader.getTelefonnummer(), argosHeader.getRequestId(),
+					argosHeader.getRollnamn(), argosHeader.getHsaID(), argosHeader.getKatalog(),
+					argosHeader.getOrganisationsnummer(), argosHeader.getSystemnamn(), argosHeader.getSystemversion(),
+					argosHeader.getSystemIp());
+
+			return applyWsSecurityToSamlTicket(samlTicket);
+		} catch (Exception e) {
+			throw new TicketMachineException("Exception generating saml ticket from ticket machine", e);
+		} finally {
+			log.info("Exiting produce saml ticket");
+		}
+
+	}
+
+	/**
+	 * Apply ws security information to saml ticket.
+	 * 
+	 * @param samlTicket
+	 *            The ticket to apply ws security to
+	 * @return The samlTicket including ws security information
+	 */
+	String applyWsSecurityToSamlTicket(String samlTicket) {
+		if (StringUtils.isEmpty(samlTicket)) {
+			return WSSE_STARTTAG + WSSE_ENDTAG;
+		}
+		return WSSE_STARTTAG + samlTicket + WSSE_ENDTAG;
+	}
 
 }
