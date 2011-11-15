@@ -51,12 +51,12 @@ public class SamlTicketTransformerTest {
 		+ "<urn:forskrivarkod>1111129</urn:forskrivarkod>"
 		+ "<urn:legitimationskod>KOD</urn:legitimationskod>"
 		+ "<urn:fornamn>Lars</urn:fornamn>"
-		+ "<urn:efternamn>LŠkare</urn:efternamn>"
+		+ "<urn:efternamn>Lakare</urn:efternamn>"
 		+ "<urn:befattningskod>123456</urn:befattningskod>"
 		+ "<urn:arbetsplatskod>1234567890</urn:arbetsplatskod>"
 		+ "<urn:arbetsplatsnamn>Sjukhuset</urn:arbetsplatsnamn>"
 		+ "<urn:postort>Staden</urn:postort>"
-		+ "<urn:postadress>VŠgen 1</urn:postadress>"
+		+ "<urn:postadress>Vagen 1</urn:postadress>"
 		+ "<urn:postnummer>11111</urn:postnummer>"
 		+ "<urn:telefonnummer>08-1234567</urn:telefonnummer>"
 		+ "<urn:requestId>123456</urn:requestId>"
@@ -68,7 +68,7 @@ public class SamlTicketTransformerTest {
 		+ "<urn:systemnamn>Melior</urn:systemnamn>"
 		+ "<urn:systemversion>1.0</urn:systemversion>"
 		+ "<urn:systemIp>192.0.0.1</urn:systemIp>"
-		+ "<urn:yrkesgrupp>LŠkare</urn:yrkesgrupp>"
+		+ "<urn:yrkesgrupp>Lakare</urn:yrkesgrupp>"
 		+ "</urn:ArgosHeader>"
 		+ "<add:To>1234567</add:To>"
 		+ "</soapenv:Header>"
@@ -92,13 +92,13 @@ public class SamlTicketTransformerTest {
 	String forskrivarkod = "1111129";
 	String legitimationskod = "KOD";
 	String fornamn = "Lars";
-	String efternamn = "LŠkare";
-	String yrkesgrupp = "LŠkare";
+	String efternamn = "Lakare";
+	String yrkesgrupp = "Lakare";
 	String befattningskod = "123456";
 	String arbetsplatskod = "1234567890";
 	String arbetsplatsnamn = "Sjukhuset";
 	String postort = "Staden";
-	String postadress = "VŠgen 1";
+	String postadress = "Vagen 1";
 	String postnummer = "11111";
 	String telefonnummer = "08-1234567";
 	String requestId = "123456";
