@@ -16,13 +16,13 @@ public class TicketMachineTest {
 	String forskrivarkod = "1111152";
 	String legitimationskod = "1111111";
 	String fornamn = "Lars";
-	String efternamn = "LŠkare";
+	String efternamn = "Lakare";
 	String yrkesgrupp = "FORSKRIVARE";
 	String befattningskod = "1111111";
 	String arbetsplatskod = "4000000000001";
 	String arbetsplatsnamn = "VC Test";
 	String postort = "Staden";
-	String postadress = "VŠgen 1";
+	String postadress = "Vagen 1";
 	String postnummer = "11111";
 	String telefonnummer = "0987654321";
 	String requestId = "12345676";
@@ -44,7 +44,7 @@ public class TicketMachineTest {
 	
 
 	Assert.assertThat(ticket, containsString("<saml2:Issuer>pascalonline</saml2:Issuer>"));
-	Assert.assertThat(ticket, containsString("LŠkare"));
+	Assert.assertThat(ticket, containsString("Lakare"));
 
     }
 
