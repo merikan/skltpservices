@@ -95,13 +95,13 @@ public class ArgosHeaderHelperTest {
 	String forskrivarkod = "1111129";
 	String legitimationskod = "123";
 	String fornamn = "Lars";
-	String efternamn = "LŠkare";
-	String yrkesgrupp = "LŠkare";
+	String efternamn = "Lakare";
+	String yrkesgrupp = "Lakare";
 	String befattningskod = "123456";
 	String arbetsplatskod = "1234567890";
 	String arbetsplatsnamn = "Sjukhuset";
 	String postort = "Staden";
-	String postadress = "VŠgen 1";
+	String postadress = "Vagen 1";
 	String postnummer = "11111";
 	String telefonnummer = "08-1234567";
 	String requestId = "123456";
