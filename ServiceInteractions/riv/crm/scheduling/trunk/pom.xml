@@ -23,7 +23,7 @@
 
   <groupId>se.skl.skltpservices.crm.scheduling</groupId>
   <artifactId>crm-scheduling</artifactId>
-  <version>1.1</version>
+  <version>1.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>crm-scheduling</name>
 
@@ -50,8 +50,8 @@
   </modules>
   
   <scm>
-		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/crm/scheduling/tags/crm-scheduling-1.1</connection>
-		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/crm/scheduling/tags/crm-scheduling-1.1</developerConnection>
+		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/crm/scheduling/trunk</connection>
+		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/crm/scheduling/trunk</developerConnection>
 	</scm>
 	
 	<build>
