@@ -4,14 +4,14 @@
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.ticket</groupId>
 	<artifactId>se_apotekensservice-ticket-ArgosHeaderTicketTransformer</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>se_apotekensservice-ticket-ArgosHeaderTicketTransformer</name>
 	<url>http://maven.apache.org</url>
 	
 	<parent>
     	<groupId>se.skl.skltpservices.se_apotekensservice.ticket</groupId>
 		<artifactId>Ticket</artifactId>
-		<version>1.0</version>
+		<version>1.1-SNAPSHOT</version>
   	</parent>
 
 	<dependencies>
@@ -33,7 +33,7 @@
 		<dependency>
 			<groupId>se.inera.pascal.ticket</groupId>
 			<artifactId>TicketMachine</artifactId>
-			<version>1.0</version>
+			<version>1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jmock</groupId>
