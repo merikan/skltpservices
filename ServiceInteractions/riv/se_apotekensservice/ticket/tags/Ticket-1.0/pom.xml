@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOING!
+[soi-toolkit.gen.version=0.3.1]
+[soi-toolkit.gen.type=integrationComponent]
+[soi-toolkit.gen.createDate=2011-06-30T14:55:14.006+02:00]
+[soi-toolkit.gen.artifactId=vp]
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>se.skl.skltpservices.se_apotekensservice.ticket</groupId>
+	<artifactId>Ticket</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+	<name>Ticket</name>
+	
+	<properties>
+		<soitoolkit.version>0.3.1</soitoolkit.version>
+		<mule.version>2.2.8</mule.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+
+	<modules>
+        <module>ArgosHeaderTicketTransformer</module>
+		<module>TicketMachine</module>	
+	</modules>
+	
+	<scm>
+		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/ticket/tags/Ticket-1.0</connection>
+		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/ticket/tags/Ticket-1.0</developerConnection>
+	</scm>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.2.1</version>
+				<configuration>
+					<tagBase>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/ticket/tags</tagBase>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
