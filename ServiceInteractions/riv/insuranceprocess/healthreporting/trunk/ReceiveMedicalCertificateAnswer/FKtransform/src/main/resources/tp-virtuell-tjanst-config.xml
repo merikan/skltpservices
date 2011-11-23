@@ -39,6 +39,10 @@
 	<message-properties-transformer name="newReceiverIdAnswer">
 		<delete-message-property key="receiverid"/>
 	</message-properties-transformer>           
+
+	<message-properties-transformer name="deleteSoapAction">
+		<delete-message-property key="soapaction"/>
+	</message-properties-transformer>           
 	
 	<model name="fk-varden-answer-model">
 		<service name="fk-varden-answer-service">
@@ -66,6 +70,7 @@
                         	operation="ReceiveMedicalCertificateAnswer" 
                         	clientClass="se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificateanswer.v1.rivtabp20.ReceiveMedicalCertificateAnswerResponderService"
             	        	synchronous="true"
+							transformer-refs="deleteSoapAction"
             	        	protocolConnector="VPConsumerConnector"
                         /> 
                 </pass-through-router>

@@ -45,6 +45,10 @@
 	<message-properties-transformer name="newReceiverIdQuestion">
 		<delete-message-property key="receiverid"/>
 	</message-properties-transformer>           
+
+	<message-properties-transformer name="deleteSoapAction">
+		<delete-message-property key="soapaction"/>
+	</message-properties-transformer>           
 	
 	<model name="fkvarden-question-model">
 		<service name="fk-varden-question-service">
@@ -71,6 +75,7 @@
                         	wsdlPort="ReceiveMedicalCertificateQuestionResponderPort"
                         	operation="ReceiveMedicalCertificateQuestion" 
                         	clientClass="se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderService"
+							transformer-refs="deleteSoapAction"
             	        	synchronous="true"
 	               	        protocolConnector="VPConsumerConnector"
                         /> 
