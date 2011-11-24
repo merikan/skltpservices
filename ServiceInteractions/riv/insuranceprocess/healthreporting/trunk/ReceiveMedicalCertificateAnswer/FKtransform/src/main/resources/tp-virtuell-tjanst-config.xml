@@ -40,7 +40,7 @@
 		<delete-message-property key="receiverid"/>
 	</message-properties-transformer>           
 
-	<message-properties-transformer name="deleteSoapAction">
+	<message-properties-transformer name="deleteSoapActionAnswer">
 		<delete-message-property key="soapaction"/>
 	</message-properties-transformer>           
 	
@@ -70,7 +70,7 @@
                         	operation="ReceiveMedicalCertificateAnswer" 
                         	clientClass="se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificateanswer.v1.rivtabp20.ReceiveMedicalCertificateAnswerResponderService"
             	        	synchronous="true"
-							transformer-refs="deleteSoapAction"
+							transformer-refs="deleteSoapActionAnswer"
             	        	protocolConnector="VPConsumerConnector"
                         /> 
                 </pass-through-router>
