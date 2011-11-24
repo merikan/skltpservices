@@ -9,7 +9,7 @@
 	<url>http://maven.apache.org</url>
 	
 	<parent>
-    	<groupId>se.skl.skltpservices.se_apotekensservice.ticket</groupId>
+    	<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
 		<artifactId>Ticket</artifactId>
 		<version>1.1-SNAPSHOT</version>
   	</parent>
