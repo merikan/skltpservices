@@ -11,7 +11,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
 	<artifactId>Ticket</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<packaging>pom</packaging>
 	<name>Ticket parent pom</name>
 	
@@ -28,8 +28,8 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 	</modules>
 	
 	<scm>
-		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/ticket/trunk</connection>
-		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/ticket/trunk</developerConnection>
+		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/ticket/tags/Ticket-1.1</connection>
+		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/ticket/tags/Ticket-1.1</developerConnection>
 	</scm>
 	
 	<build>

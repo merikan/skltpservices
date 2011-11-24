@@ -3,7 +3,7 @@
 
 	<groupId>se.inera.pascal.ticket</groupId>
 	<artifactId>TicketMachine</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<packaging>jar</packaging>
 	<name>TicketMachine</name>
 	<url>http://maven.apache.org</url>
@@ -11,7 +11,7 @@
 	<parent>
     	<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
 		<artifactId>Ticket</artifactId>
-		<version>1.1-SNAPSHOT</version>
+		<version>1.1</version>
   	</parent>
 
 	<properties>
