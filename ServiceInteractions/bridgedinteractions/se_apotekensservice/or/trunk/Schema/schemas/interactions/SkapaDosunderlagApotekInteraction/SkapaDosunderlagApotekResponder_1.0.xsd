@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:or="urn:riv:se.apotekensservice:or:1" xmlns="urn:riv:se.apotekensservice:or:SkapaDosunderlagApotekResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:or:SkapaDosunderlagApotekResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_or_1.0.xsd" namespace="urn:riv:se.apotekensservice:or:1"/>
+  <xs:element name="SkapaDosunderlagApotek" type="SkapaDosunderlagApotekRequestType"/>
+  <xs:element name="SkapaDosunderlagApotekResponse" type="SkapaDosunderlagApotekResponseType"/>
+  <xs:element name="ApplicationException" type="or:ApplicationException"/>
+  <xs:element name="SystemException" type="or:SystemException"/>
+  <xs:complexType name="SkapaDosunderlagApotekRequestType">
+    <xs:sequence>
+      <xs:element nillable="false" name="personnummer" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Giltigt personnummer för patient.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="samtyckeDos" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Markering att samtycke för dos har inhämtats för patient av förskrivare</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="skapandeDosordinator" type="or:DosordinatorRequest">
+        <xs:annotation>
+          <xs:documentation>Den förskrivare som har ordinerat dos-tjänsten.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SkapaDosunderlagApotekResponseType">
+    <xs:sequence>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
