@@ -5,15 +5,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<groupId>se.skl.skltpservices.se_apotekensservice.folk</groupId>
-		<artifactId>HamtaVardenhet</artifactId>
+		<groupId>se.skl.bridgedinteractions.se_apotekensservice.folk</groupId>
+		<artifactId>HamtaFolkbokforingsinformation</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>se.skl.skltpservices.se_apotekensservice.folk</groupId>
-	<artifactId>se_apotekensservice-folk-HamtaVardenhet-TicketTransformer</artifactId>
+	<groupId>se.skl.bridgedinteractions.se_apotekensservice.folk</groupId>
+	<artifactId>HamtaVardenhet-TicketTransformer</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<name>HamtaVardenhet-TicketTransformer</name>
+	<name>HamtaVardenhet TicketTransformer</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -35,12 +35,12 @@
 		<dependency>
 			<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
 			<artifactId>vp-mule-2.2.8-dependencies</artifactId>
-			<version>0.3.1</version>
+			<version>${soitoolkit.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>se.skl.skltpservices.se_apotekensservice.ticket</groupId>
-			<artifactId>se_apotekensservice-ticket-ArgosHeaderTicketTransformer</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
+			<artifactId>ArgosHeaderTicketTransformer</artifactId>
+			<version>1.1</version>
 		</dependency>
 
 		<!-- Schemas -->

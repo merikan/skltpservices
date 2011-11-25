@@ -19,13 +19,13 @@
                http://www.mulesource.org/schema/mule/cxf/2.2  http://www.mulesource.org/schema/mule/cxf/2.2/mule-cxf.xsd">
 
 	<!-- Name of this file is mandatory and may not be changed. -->
-<model name="HamtaVardenhet-TicketTransformerService-model">
+<model name="ApotekenService-HamtaVardenhet-model">
 
 		<service
-			name="HamtaVardenhet-TicketTransformerService-service">
+			name="ApotekenService-HamtaVardenhet-service">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/tickettransformer/HamtaVardenhetResponder/V1"
+					address="http://${tb.host}:${tb.port}/${tb.baseUri}/HamtaVardenhetResponder/V1"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false"
 					transformer-refs="ArgosHeaderToSamlTicket" />
@@ -35,16 +35,16 @@
 					<cxf:outbound-endpoint
 						address="${endpoint.apotekensservice.folk.hamtavardenhet}"
 						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
+						protocolConnector="TBProducerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
 			</outbound>
 		</service>
 		
 		<service
-			name="HamtaVardenhet-TicketTransformerService-ext0">
+			name="ApotekenService-HamtaVardenhet-service-ext0">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/testenvironment/ext0/tickettransformer/HamtaVardenhetResponder/V1"
+					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext0/HamtaVardenhetResponder/V1"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false"
 					transformer-refs="ArgosHeaderToSamlTicket" />
@@ -54,16 +54,16 @@
 					<cxf:outbound-endpoint
 						address="https://stpwsp-exttest0.receptpartner.sjunet.org:42901/serviceProvider/HamtaVardenhetResponder/V1"
 						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
+						protocolConnector="TBProducerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
 			</outbound>
 		</service>
 		
 		<service
-			name="HamtaVardenhet-TicketTransformerService-ext8">
+			name="ApotekenService-HamtaVardenhet-service-ext8">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/testenvironment/ext8/tickettransformer/HamtaVardenhetResponder/V1"
+					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext8/HamtaVardenhetResponder/V1"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false"
 					transformer-refs="ArgosHeaderToSamlTicket" />
@@ -73,16 +73,16 @@
 					<cxf:outbound-endpoint
 						address="https://ext08-02.receptpartner.sjunet.org:42901/serviceProvider/HamtaVardenhetResponder/V1"
 						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
+						protocolConnector="TBProducerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
 			</outbound>
 		</service>
 		
 		<service
-			name="HamtaVardenhet-TicketTransformerService-ext11">
+			name="ApotekenService-HamtaVardenhet-service-ext11">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/testenvironment/ext11/tickettransformer/HamtaVardenhetResponder/V1"
+					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext11/HamtaVardenhetResponder/V1"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false"
 					transformer-refs="ArgosHeaderToSamlTicket" />
@@ -92,7 +92,7 @@
 					<cxf:outbound-endpoint
 						address="https://ext11-02.receptpartner.sjunet.org:42901/serviceProvider/HamtaVardenhetResponder/V1"
 						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
+						protocolConnector="TBProducerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
 			</outbound>
 		</service>
