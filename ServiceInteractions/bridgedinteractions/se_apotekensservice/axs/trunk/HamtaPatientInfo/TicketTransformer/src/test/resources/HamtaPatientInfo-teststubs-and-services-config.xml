@@ -23,7 +23,7 @@
 
 		<!-- TODO: Add import of connector specific configuration files here as 
 			required -->
-		<spring:import resource="classpath:tp-virtuell-tjanst-config.xml" />
+		<spring:import resource="classpath:tb-bryggad-tjanst-config.xml" />
 		<spring:import resource="classpath:teststub-services/*-teststub-service.xml" />
 	</spring:beans>
 

@@ -48,14 +48,14 @@ public class HamtaPatientInfoTestConsumer {
 	argosHeader.setArbetsplatskod("1234567890");
 	argosHeader.setArbetsplatsnamn("Sjukhuset");
 	argosHeader.setBefattningskod("123456");
-	argosHeader.setEfternamn("LŠkare");
+	argosHeader.setEfternamn("LÃ¤kare");
 	argosHeader.setFornamn("Lars");
 	argosHeader.setForskrivarkod("1111129");
 	argosHeader.setHsaID("TSE6565656565-1003");
 	argosHeader.setKatalog("HSA");
 	argosHeader.setLegitimationskod("1");
 	argosHeader.setOrganisationsnummer("1234567890");
-	argosHeader.setPostadress("VŠgen 1");
+	argosHeader.setPostadress("VÃ¤gen 1");
 	argosHeader.setPostnummer("11111");
 	argosHeader.setPostort("Staden");
 	argosHeader.setRequestId("123456");
@@ -64,7 +64,7 @@ public class HamtaPatientInfoTestConsumer {
 	argosHeader.setSystemnamn("Melior");
 	argosHeader.setSystemversion("1.0");
 	argosHeader.setTelefonnummer("08-1234567");
-	argosHeader.setYrkesgrupp("LŠkare");
+	argosHeader.setYrkesgrupp("LÃ¤kare");
 	return argosHeader;
     }
 

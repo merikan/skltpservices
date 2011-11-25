@@ -31,13 +31,13 @@ public class HamtaPatientInfoTestProducer implements HamtaPatientInfoResponderIn
 
     private ApoteksinformationResponse createApoteksInformationResponse(String ssn) {
 	ApoteksinformationResponse apoteksinformationResponse = new ApoteksinformationResponse();
-	apoteksinformationResponse.setAktorsnamn("Aktörsnamn");
+	apoteksinformationResponse.setAktorsnamn("Akt√∂rsnamn");
 	return null;
     }
 
     private PatientInformationResponse createPatientInformationResponse() {
 	PatientInformationResponse informationResponse = new PatientInformationResponse();
-	informationResponse.setOmradeskod("Områdeskod");
+	informationResponse.setOmradeskod("Omr√•deskod");
 	return null;
     }
 

@@ -25,7 +25,7 @@
 		<service name="TicketTransformerService-teststub-service">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/serviceProvider/HamtaPatientInfoResponder/V1"
+					address="http://localhost:10000/serviceProvider/local/HamtaPatientInfoResponder/V1"
 					wsdlLocation="schemas/interactions/HamtaPatientInfoInteraction/HamtaPatientInfoInteraction_1.0_rivtabp20.wsdl" />
 			</inbound>
 
