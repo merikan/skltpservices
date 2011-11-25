@@ -11,11 +11,11 @@
 	MA 02111-1307 USA --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>se.skl.skltpservices.se_apotekensservice.lf</groupId>
-	<artifactId>se_apotekensservice-lf</artifactId>
+	<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
+	<artifactId>lf</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>se_apotekensservice-lf</name>
+	<name>bridgedinteraction se_apotekensservice lf</name>
 
 	<properties>
 		<soitoolkit.version>0.3.1</soitoolkit.version>
@@ -28,22 +28,11 @@
 
 	<!-- Modules to be created for each service -->
 	<modules>
-		<module>Schema</module>
     <module>AterkallaSamtyckeVardsystem</module>
-    <module>AterkallaSamtyckeWebb</module>
-    <module>KontrolleraForskrivarbehorighet</module>
-    <module>KontrolleraSamtycke</module>
     <module>KontrolleraSamtyckeVardsystem</module>
-    <module>LasLFForskrivare</module>
-    <module>LasLFPrivatperson</module>
-    <module>LasLFPrivatpersonPDF</module>
     <module>LasLFVardsystem</module>
     <module>LFUtskrift</module>
-    <module>RapporteraBorttagLF</module>
-    <module>RapporteraExpeditionLF</module>
     <module>RegistreraSamtyckeVardsystem</module>
-    <module>RegistreraSamtyckeWebb</module>
-    <module>SkrivUtLakemedelsforteckning</module>
   </modules>
 
 	<dependencies>
@@ -73,8 +62,8 @@
 	</dependencies>
 
 	<scm>
-		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/lf/trunk</connection>
-		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/lf/trunk</developerConnection>
+		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/lf/trunk</connection>
+		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/lf/trunk</developerConnection>
 	</scm>
 
 	<build>
@@ -83,7 +72,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.2.1</version>
 				<configuration>
-					<tagBase>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/lf/tags</tagBase>
+					<tagBase>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/lf/tags</tagBase>
 				</configuration>
 			</plugin>
 			<plugin>
