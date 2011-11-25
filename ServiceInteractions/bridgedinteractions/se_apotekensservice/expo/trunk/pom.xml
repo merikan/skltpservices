@@ -11,11 +11,11 @@
 	MA 02111-1307 USA --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>se.skl.skltpservices.se_apotekensservice.expo</groupId>
-	<artifactId>se_apotekensservice-expo</artifactId>
+	<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
+	<artifactId>expo</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>se_apotekensservice-expo</name>
+	<name>bridgedinteraction se_apotekensservice expo</name>
 
 	<properties>
 		<soitoolkit.version>0.3.1</soitoolkit.version>
@@ -28,17 +28,7 @@
 
 	<!-- Modules to be created for each service -->
 	<modules>
-		<module>Schema</module>
-    <module>HamtaApoteksinfoEget</module>
-    <module>HamtaApoteksInfo</module>
-    <module>KontaktuppgifterHamta</module>
-    <module>KontaktuppgifterUppdatera</module>
-    <module>SkapaApotek</module>
-    <module>SkapaDosmottagare</module>
     <module>SokDosmottagare</module>
-    <module>TaBortDosmottagare</module>
-    <module>UppdateraDosmottagare</module>
-    <module>UppdateraExpoMedApotek</module>
   </modules>
 
 	<dependencies>
@@ -68,8 +58,8 @@
 	</dependencies>
 
 	<scm>
-		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/expo/trunk</connection>
-		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/expo/trunk</developerConnection>
+		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/expo/trunk</connection>
+		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/expo/trunk</developerConnection>
 	</scm>
 
 	<build>
@@ -78,7 +68,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.2.1</version>
 				<configuration>
-					<tagBase>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/expo/tags</tagBase>
+					<tagBase>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/expo/tags</tagBase>
 				</configuration>
 			</plugin>
 			<plugin>

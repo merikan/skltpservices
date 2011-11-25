@@ -11,27 +11,18 @@
 	MA 02111-1307 USA --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-    <artifactId>se_apotekensservice-expo</artifactId>
-    <groupId>se.skl.skltpservices.se_apotekensservice.expo</groupId>
+    <artifactId>expo</artifactId>
+    <groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-	<groupId>se.skl.skltpservices.se_apotekensservice.expo</groupId>
+	<groupId>se.skl.bridgedinteractions.se_apotekensservice.expo</groupId>
 	<artifactId>SokDosmottagare</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>SokDosmottagare service</name>
-
-	<properties>
-		<osorCertDirectory>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/certs</osorCertDirectory>
-		<osorSchemaDirectoryUrl>https://svn.forge.osor.eu/svn/rivta/ServiceInteractions/riv/se_apotekensservice/expo/trunk/schemas/interactions/SokDosmottagareInteraction</osorSchemaDirectoryUrl>
-		<osorCoreSchemaDirectoryUrl>https://svn.forge.osor.eu/svn/rivta/ServiceInteractions/riv/se_apotekensservice/expo/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
-	</properties>
-
-	<!-- Modules to be created for each service -->
+	<name>SokDosmottagare bridged transformer service</name>
 
   <modules>
-    <module>Virtualisering</module>
     <module>TicketTransformer</module>
   </modules>
 </project>
