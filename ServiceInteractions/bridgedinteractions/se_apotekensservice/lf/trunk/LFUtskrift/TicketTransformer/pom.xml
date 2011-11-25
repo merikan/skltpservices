@@ -4,15 +4,15 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>se.skl.skltpservices.se_apotekensservice.lf</groupId>
+		<groupId>se.skl.bridgedinteractions.se_apotekensservice.lf</groupId>
 		<artifactId>LFUtskrift</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>se.skl.skltpservices.se_apotekensservice.lf</groupId>
-	<artifactId>se_apotekensservice-lf-LFUtskrift-TicketTransformer</artifactId>
+	<groupId>se.skl.bridgedinteractions.se_apotekensservice.lf</groupId>
+	<artifactId>LFUtskrift-TicketTransformer</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<name>LFUtskrift-TicketTransformer</name>
+	<name>LFUtskrift TicketTransformer</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -34,12 +34,12 @@
 		<dependency>
 			<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
 			<artifactId>vp-mule-2.2.8-dependencies</artifactId>
-			<version>0.3.1</version>
+			<version>${soitoolkit.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>se.skl.skltpservices.se_apotekensservice.ticket</groupId>
-			<artifactId>se_apotekensservice-ticket-ArgosHeaderTicketTransformer</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
+			<artifactId>ArgosHeaderTicketTransformer</artifactId>
+			<version>1.1</version>
 		</dependency>
 
 		<!-- Schemas -->
