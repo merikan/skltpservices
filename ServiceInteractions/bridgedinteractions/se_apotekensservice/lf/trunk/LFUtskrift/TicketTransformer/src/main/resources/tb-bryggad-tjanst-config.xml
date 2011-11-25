@@ -19,13 +19,13 @@
                http://www.mulesource.org/schema/mule/cxf/2.2  http://www.mulesource.org/schema/mule/cxf/2.2/mule-cxf.xsd">
 
 	<!-- Name of this file is mandatory and may not be changed. -->
-<model name="LFUtskrift-TicketTransformerService-model">
+<model name="ApotekenService-LFUtskrift-model">
 
 		<service
-			name="LFUtskrift-TicketTransformerService-service">
+			name="ApotekenService-LFUtskrift-service">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/tickettransformer/LFUtskriftResponder/V1"
+					address="http://${tb.host}:${tb.port}/${tb.baseUri}/LFUtskriftResponder/V1"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false"
 					transformer-refs="ArgosHeaderToSamlTicket" />
@@ -35,16 +35,16 @@
 					<cxf:outbound-endpoint
 						address="${endpoint.apotekensservice.lf.LFUtskrift}"
 						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
+						protocolConnector="TBProducerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
 			</outbound>
 		</service>
 		
 		<service
-			name="LFUtskrift-TicketTransformerService-ext0">
+			name="ApotekenService-LFUtskrift-service-ext0">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/testenvironment/ext0/tickettransformer/LFUtskriftResponder/V1"
+					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext0/LFUtskriftResponder/V1"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false"
 					transformer-refs="ArgosHeaderToSamlTicket" />
@@ -54,16 +54,16 @@
 					<cxf:outbound-endpoint
 						address="https://stpwsp-exttest0.receptpartner.sjunet.org:42901/serviceProvider/LFUtskriftResponder/V1"
 						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
+						protocolConnector="TBProducerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
 			</outbound>
 		</service>
 		
 		<service
-			name="LFUtskrift-TicketTransformerService-ext8">
+			name="ApotekenService-LFUtskrift-service-ext8">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/testenvironment/ext8/tickettransformer/LFUtskriftResponder/V1"
+					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext8/LFUtskriftResponder/V1"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false"
 					transformer-refs="ArgosHeaderToSamlTicket" />
@@ -73,16 +73,16 @@
 					<cxf:outbound-endpoint
 						address="https://ext08-02.receptpartner.sjunet.org:42901/serviceProvider/LFUtskriftResponder/V1"
 						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
+						protocolConnector="TBProducerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
 			</outbound>
 		</service>
 		
 		<service
-			name="LFUtskrift-TicketTransformerService-ext11">
+			name="ApotekenService-LFUtskrift-service-ext11">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="http://localhost:10000/testenvironment/ext11/tickettransformer/LFUtskriftResponder/V1"
+					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext11/LFUtskriftResponder/V1"
 					proxy="true" payload="envelope" synchronous="true"
 					applyTransformersToProtocol="false"
 					transformer-refs="ArgosHeaderToSamlTicket" />
@@ -92,7 +92,7 @@
 					<cxf:outbound-endpoint
 						address="https://ext11-02.receptpartner.sjunet.org:42901/serviceProvider/LFUtskriftResponder/V1"
 						synchronous="true" proxy="true" payload="envelope"
-						protocolConnector="VPConsumerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
+						protocolConnector="TBProducerConnector" transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
 			</outbound>
 		</service>
