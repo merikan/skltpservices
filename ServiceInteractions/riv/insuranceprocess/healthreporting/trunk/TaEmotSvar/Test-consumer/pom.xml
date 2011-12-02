@@ -25,14 +25,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.tp</groupId>
     <artifactId>fk-vardgivare-sjukvard-taemotsvar-test-consumer</artifactId>
-	<version>1.3</version>
+	<version>1.4-SNAPSHOT</version>
     <name>fk-vardgivare-sjukvard-taemotsvar-test-consumer</name>
 	<url>http://maven.apache.org</url>
 	
 	<parent>
   		<groupId>se.skl.tp</groupId>
   		<artifactId>TaEmotSvar</artifactId>
-  		<version>1.3</version>
+  		<version>1.4-SNAPSHOT</version>
     </parent>
 
 	<properties>
@@ -44,7 +44,7 @@
  	    <dependency>
  	        <groupId>se.riv.fk</groupId>
  	        <artifactId>fk-vardgivare-sjukvard-schemas</artifactId>
- 	        <version>1.3</version>
+ 	        <version>1.4-SNAPSHOT</version>
  	    </dependency>
  	    
 	    <!-- cxf dependencies -->
