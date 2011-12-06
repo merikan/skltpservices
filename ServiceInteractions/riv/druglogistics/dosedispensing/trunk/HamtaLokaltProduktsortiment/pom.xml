@@ -24,9 +24,9 @@
 
 	<properties>
 
-		<osorCertDirectory>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/certs</osorCertDirectory>
-		<osorSchemaDirectoryUrl>https://svn.forge.osor.eu/svn/rivta/ServiceInteractions/riv/druglogistics/dosedispensing/trunk/schemas/interactions/HamtaLokaltProduktsortimentInteraction</osorSchemaDirectoryUrl>
-		<osorCoreSchemaDirectoryUrl>https://svn.forge.osor.eu/svn/rivta/ServiceInteractions/riv/druglogistics/dosedispensing/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
+		<osorCertDirectory>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/certs</osorCertDirectory>
+		<osorSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/druglogistics/dosedispensing/trunk/schemas/interactions/HamtaLokaltProduktsortimentInteraction</osorSchemaDirectoryUrl>
+		<osorCoreSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/druglogistics/dosedispensing/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
 
 		<serviceProducerUrl>https://localhost:21000/vpHamtaLokaltProduktsortiment/1/rivtabp20</serviceProducerUrl>
 

@@ -23,9 +23,9 @@
 	<name>UppdateraDosmottagare service</name>
 
 	<properties>
-		<osorCertDirectory>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/certs</osorCertDirectory>
-		<osorSchemaDirectoryUrl>https://svn.forge.osor.eu/svn/rivta/ServiceInteractions/riv/se_apotekensservice/expo/trunk/schemas/interactions/UppdateraDosmottagareInteraction</osorSchemaDirectoryUrl>
-		<osorCoreSchemaDirectoryUrl>https://svn.forge.osor.eu/svn/rivta/ServiceInteractions/riv/se_apotekensservice/expo/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
+		<osorCertDirectory>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/certs</osorCertDirectory>
+		<osorSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/se_apotekensservice/expo/trunk/schemas/interactions/UppdateraDosmottagareInteraction</osorSchemaDirectoryUrl>
+		<osorCoreSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/se_apotekensservice/expo/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
 	</properties>
 
 	<!-- Modules to be created for each service -->

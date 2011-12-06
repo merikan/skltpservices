@@ -41,8 +41,8 @@
 	</modules>
 	
 	<scm>
-		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/tags/itinfra-tp-1.2</connection>
-		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/tags/itinfra-tp-1.2</developerConnection>
+		<connection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/tags/itinfra-tp-1.2</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/tags/itinfra-tp-1.2</developerConnection>
 	</scm>
 	
 	<build>
@@ -51,7 +51,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
-                    <tagBase>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/tags</tagBase>
+                    <tagBase>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/tags</tagBase>
                 </configuration>
             </plugin> 
              <!-- Use Java 1.6 for source and target files -->
