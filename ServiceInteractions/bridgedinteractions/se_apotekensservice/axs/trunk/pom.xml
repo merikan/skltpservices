@@ -57,8 +57,8 @@
 		</dependency>
 	</dependencies>
 	<scm>
-		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/axs/trunk</connection>
-		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/axs/trunk</developerConnection>
+		<connection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/axs/trunk</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/axs/trunk</developerConnection>
 	</scm>
 
 	<build>
@@ -67,7 +67,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.2.1</version>
 				<configuration>
-					<tagBase>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/axs/tags</tagBase>
+					<tagBase>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/axs/tags</tagBase>
 				</configuration>
 			</plugin>
 			<plugin>
