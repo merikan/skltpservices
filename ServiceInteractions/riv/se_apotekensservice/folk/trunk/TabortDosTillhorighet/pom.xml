@@ -23,9 +23,9 @@
 	<name>TabortDosTillhorighet service</name>
 
 	<properties>
-		<osorCertDirectory>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/certs</osorCertDirectory>
-		<osorSchemaDirectoryUrl>https://svn.forge.osor.eu/svn/rivta/ServiceInteractions/riv/se_apotekensservice/folk/trunk/schemas/interactions/TabortDosTillhorighetInteraction</osorSchemaDirectoryUrl>
-		<osorCoreSchemaDirectoryUrl>https://svn.forge.osor.eu/svn/rivta/ServiceInteractions/riv/se_apotekensservice/folk/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
+		<osorCertDirectory>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/certs</osorCertDirectory>
+		<osorSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/se_apotekensservice/folk/trunk/schemas/interactions/TabortDosTillhorighetInteraction</osorSchemaDirectoryUrl>
+		<osorCoreSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/se_apotekensservice/folk/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
 	</properties>
 
 	<!-- Modules to be created for each service -->

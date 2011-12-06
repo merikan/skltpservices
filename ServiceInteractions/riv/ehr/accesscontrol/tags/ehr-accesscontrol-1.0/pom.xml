@@ -35,8 +35,8 @@
 	</modules>
 	
 	<scm>
-		<connection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/ehr/accesscontrol/tags/ehr-accesscontrol-1.0</connection>
-		<developerConnection>scm:svn:https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/ehr/accesscontrol/tags/ehr-accesscontrol-1.0</developerConnection>
+		<connection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/ehr/accesscontrol/tags/ehr-accesscontrol-1.0</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/ehr/accesscontrol/tags/ehr-accesscontrol-1.0</developerConnection>
 	</scm>
 	
 	<build>
@@ -45,7 +45,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
-                    <tagBase>https://svn.forge.osor.eu/svn/skltpservices/ServiceInteractions/riv/ehr/accesscontrol/tags</tagBase>
+                    <tagBase>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/ehr/accesscontrol/tags</tagBase>
                 </configuration>
             </plugin> 
 		</plugins>
