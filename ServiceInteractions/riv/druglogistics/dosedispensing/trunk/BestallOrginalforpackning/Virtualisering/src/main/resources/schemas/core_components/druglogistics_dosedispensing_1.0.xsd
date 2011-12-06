@@ -5,7 +5,9 @@
             Revisioner: 2011-04-05, version 1.0.1
             Revisioner: 2011-05-15, version 1.0.2
             Revisioner: 2011-06-02, version 1.0.3
-            Revisioner: 2011-09-08, version 1.0.4</xs:documentation>
+            Revisioner: 2011-09-08, version 1.0.4
+            Revisioner: 2011-10-10, version 1.0.5
+   </xs:documentation>
   </xs:annotation>
  
   <xs:complexType name='SomeElementType'>
@@ -64,10 +66,12 @@
       <xs:element name="anhorigkontaktnamn" type="xs:string" minOccurs="0"/>
       <xs:element name="anhorigkontaktemail" type="xs:string" minOccurs="0"/>
       <xs:element name="ansvarigkontaktnamn" type="xs:string" minOccurs="0"/>
-      <xs:element name="ansvarigkontakttelefon" type="xs:string" minOccurs="0"/>
       <xs:element name="ansvarigkontaktemail" type="xs:string" minOccurs="0"/>
-      <xs:element name="anhorigkontakttelefon1" type="xs:string" minOccurs="0"/>
-      <xs:element name="anhorigkontakttelefon2" type="xs:string" minOccurs="0"/>
+      <xs:element name="ansvarigkontaktadress" type="xs:string" minOccurs="0"/>
+      <xs:element name="ansvarigkontaktpostnummer" type="xs:string" minOccurs="0"/>
+      <xs:element name="ansvarigkontaktpostort" type="xs:string" minOccurs="0"/>
+      <xs:element name="ansvarigkontakttelefon1" type="xs:string" minOccurs="0"/>
+      <xs:element name="ansvarigkontakttelefon2" type="xs:string" minOccurs="0"/>
       <xs:element name="vardandeenhetid" type="xs:string" minOccurs="0"/>
       <xs:element name="vardandeenhetnamn" type="xs:string" minOccurs="0"/>
       <xs:element name="vardandeenhetpostort" type="xs:string" minOccurs="0"/>
