@@ -1,0 +1,9 @@
+#summary Status of upgrading from Osor to googlecode.
+
+= Status on the migration to googlecode=
+
+|| *Action* || *Status* ||
+|| Source code migration || done ||
+|| Update links in pom.xml || not started ||
+|| Move documentation || not started ||
+
