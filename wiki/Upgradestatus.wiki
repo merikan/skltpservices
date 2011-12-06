@@ -5,4 +5,4 @@
 || *Action* || *Status* ||
 || Source code migration || done ||
 || Update links in pom.xml || done ||
-|| Move documentation || not started ||
+|| Move documentation || done ||
