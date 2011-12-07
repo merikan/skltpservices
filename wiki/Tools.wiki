@@ -8,8 +8,17 @@ Add your content here.
 
 ==Generate deployable service artifacts==
 
+*Description*
 A script to generate deployable jar files for the Virtualized Platform.
 
+*Prerequisites*
 Requires [http://groovy.codehaus.org/ groovy] 1.8.2 or newer. [http://groovy.codehaus.org/Installing+Groovy See installation instructions]
 
+*To run*
+
+On Linux/mac run ./VirtualiseringGenerator.groovy to get further instructions on parameters and usage
+
+On Windos run 
+
+*Source*
 [http://code.google.com/p/skltpservices/source/browse/tools/generators/scripts/trunk/se/skltpservices/tools/VirtualiseringGenerator.groovy VirtualiseringGenerator]
