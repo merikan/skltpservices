@@ -1,0 +1,15 @@
+#summary Tools to help you in your daily work with services creation
+
+= Introduction =
+
+Add your content here.
+
+= Tools =
+
+==Generate deployable service artifacts==
+
+A script to generate deployable jar files for the Virtualized Platform.
+
+Requires [http://groovy.codehaus.org/ groovy] 1.8.2 or newer. [http://groovy.codehaus.org/Installing+Groovy See installation instructions]
+
+[http://code.google.com/p/skltpservices/source/browse/tools/generators/scripts/trunk/se/skltpservices/tools/VirtualiseringGenerator.groovy VirtualiseringGenerator]
