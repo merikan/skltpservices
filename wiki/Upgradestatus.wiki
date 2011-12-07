@@ -1,4 +1,5 @@
 #summary Status of upgrading from Osor to googlecode.
+#labels Featured
 
 = Status on the migration to googlecode=
 
