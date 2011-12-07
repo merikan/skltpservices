@@ -16,7 +16,7 @@ Requires [http://groovy.codehaus.org/ groovy] 1.8.2 or newer. [http://groovy.cod
 
 *To run*
 
-On Linux/mac run ./VirtualiseringGenerator.groovy to get further instructions on parameters and usage
+On Linux/mac run `./VirtualiseringGenerator.groovy` to get further instructions on parameters and usage
 
 On Windos run 
 
