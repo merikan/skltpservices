@@ -22,9 +22,9 @@ Requires [http://groovy.codehaus.org/ groovy] 1.8.2 or newer. [http://groovy.cod
 
 Run the script to get further information in parameters and usage, to run on different environemnts see below:
 
-On Linux/mac termianl run _`<path to script>./VirtualiseringGenerator.groovy`_ 
+On Linux/mac termianl run _`<path to script folder>./VirtualiseringGenerator.groovy`_ 
 
-On Windos terminal run _`groovy VirtualiseringGenerator.groovy`_
+On Windos terminal run _`<path to script folder> groovy VirtualiseringGenerator.groovy`_
 
 *Source*
 
