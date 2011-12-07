@@ -14,7 +14,7 @@ A script to generate deployable jar files for the Virtualized Platform.
 
 *Prerequisites*
 
-Requires [http://groovy.codehaus.org/ groovy] 1.8.2 or newer. [http://groovy.codehaus.org/Installing+Groovy See installation instructions]
+Requires [http://groovy.codehaus.org/ groovy] 1.8.2 or newer. [http://groovy.codehaus.org/Installing+Groovy See groovy installation instructions]
 
 *To run*
 
