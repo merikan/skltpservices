@@ -20,9 +20,9 @@ Requires [http://groovy.codehaus.org/ groovy] 1.8.2 or newer. [http://groovy.cod
 
 *To run*
 
-On Linux/mac run `<path to script>./VirtualiseringGenerator.groovy` to get further instructions on parameters and usage
+On Linux/mac run _`<path to script>./VirtualiseringGenerator.groovy`_ 
 
-On Windos run 
+On Windos terminal run _`>groovy VirtualiseringGenerator.groovy`_
 
 *Source*
 
