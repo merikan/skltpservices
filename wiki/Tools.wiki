@@ -1,10 +1,10 @@
 #summary Tools to help you in your daily work with services creation
 
-= Introduction =
-
-Add your content here.
+<wiki:toc max_depth="3" />
 
 = Tools =
+
+Tools to help you in your daily work with services creation
 
 ==Generate deployable service artifacts==
 
