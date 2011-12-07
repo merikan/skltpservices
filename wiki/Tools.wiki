@@ -1,4 +1,5 @@
 #summary Tools to help you in your daily work with services creation
+#labels Featured
 
 <wiki:toc max_depth="3" />
 
