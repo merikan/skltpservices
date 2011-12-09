@@ -61,7 +61,7 @@ public class HamtaAllaAktuellaOrdinationerTestConsumer {
 	argosHeader.setKatalog("HSA");
 	argosHeader.setLegitimationskod("1");
 	argosHeader.setOrganisationsnummer("1234567890");
-	argosHeader.setPostadress("VŠgen 1");
+	argosHeader.setPostadress("Gatan 1");
 	argosHeader.setPostnummer("11111");
 	argosHeader.setPostort("Staden");
 	argosHeader.setRequestId("123456");
@@ -70,7 +70,7 @@ public class HamtaAllaAktuellaOrdinationerTestConsumer {
 	argosHeader.setSystemnamn("Melior");
 	argosHeader.setSystemversion("1.0");
 	argosHeader.setTelefonnummer("08-1234567");
-	argosHeader.setYrkesgrupp("LŠkare");
+	argosHeader.setYrkesgrupp("LK");
 	return argosHeader;
     }
 
