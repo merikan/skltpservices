@@ -12,32 +12,20 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-    	<artifactId>se_apotekensservice-or</artifactId>
-    	<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
+    	<artifactId>or</artifactId>
+    	<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
     	<version>1.0-SNAPSHOT</version>
   	</parent>
 
-	<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
-	<artifactId>se_apotekensservice-or-HamtaAktuellaOrdinationer</artifactId>
+	<groupId>se.skl.bridgedinteractions.se_apotekensservice.or</groupId>
+	<artifactId>HamtaAktuellaOrdinationer</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>se_apotekensservice-or-HamtaAktuellaOrdinationer</name>
-
-	<properties>
-
-		<osorCertDirectory>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/certs</osorCertDirectory>
-		<osorSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/se_apotekensservice/or/trunk/schemas/interactions/HamtaAktuellaOrdinationerInteraction</osorSchemaDirectoryUrl>
-		<osorCoreSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/se_apotekensservice/or/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
-
-		<serviceProducerUrl>https://localhost:21000/vpHamtaAktuellaOrdinationer/1/rivtabp20</serviceProducerUrl>
-
-	</properties>
+	<name>HamtaAktuellaOrdinationer  bridged transformer service</name>
 
 	<!-- Modules to be created for each service -->
 
   <modules>
-    <module>Virtualisering</module>
-    <module>Test-producer</module>
     <module>TicketTransformer</module>
   </modules>
 </project>
