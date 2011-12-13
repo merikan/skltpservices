@@ -51,7 +51,7 @@
   </modules>
   
   	<scm>
-		<connection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/processdevelopment/infections/tags/processdevelopment-infections-1.0</connection>
+		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/processdevelopment/infections/tags/processdevelopment-infections-1.0</connection>
 		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/processdevelopment/infections/tags/processdevelopment-infections-1.0</developerConnection>
 	</scm>
 	

@@ -67,7 +67,7 @@
 	</dependencies>
 
 	<scm>
-		<connection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/or/trunk</connection>
+		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/se_apotekensservice/or/trunk</connection>
 		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/or/trunk</developerConnection>
 	</scm>
 

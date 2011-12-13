@@ -39,7 +39,7 @@
   </modules>
   
   <scm>
-		<connection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/eservicesupply/eoffering/tags/eservicesupply-eoffering-1.0</connection>
+		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/eservicesupply/eoffering/tags/eservicesupply-eoffering-1.0</connection>
 		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/eservicesupply/eoffering/tags/eservicesupply-eoffering-1.0</developerConnection>
 	</scm>
 	
