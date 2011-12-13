@@ -47,7 +47,7 @@
 	
 	<scm>
 		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/crm/carelisting/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/crm/carelisting/trunk</developerConnection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/crm/carelisting/trunk</developerConnection>
 	</scm>
 	
 	<build>
