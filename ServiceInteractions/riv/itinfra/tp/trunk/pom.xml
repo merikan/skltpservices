@@ -41,7 +41,7 @@
 	</modules>
 	
 	<scm>
-		<connection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/trunk</connection>
+		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/itinfra/tp/trunk</connection>
 		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/trunk</developerConnection>
 	</scm>
 	

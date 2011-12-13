@@ -42,7 +42,7 @@
   </modules>
   
   <scm>
-		<connection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/informatics/terminology/trunk</connection>
+		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/informatics/terminology/trunk</connection>
 		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/informatics/terminology/trunk</developerConnection>
 	</scm>
 	
