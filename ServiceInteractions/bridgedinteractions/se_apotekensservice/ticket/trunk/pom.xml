@@ -28,8 +28,8 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 	</modules>
 	
 	<scm>
-		<connection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/ticket/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/ticket/trunk</developerConnection>
+		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/se_apotekensservice/ticket/trunk</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/se_apotekensservice/ticket/trunk</developerConnection>
 	</scm>
 	
 	<build>
@@ -38,7 +38,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.2.1</version>
 				<configuration>
-					<tagBase>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/ticket/tags</tagBase>
+					<tagBase>https://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/se_apotekensservice/ticket/tags</tagBase>
 				</configuration>
 			</plugin>
 			<plugin>

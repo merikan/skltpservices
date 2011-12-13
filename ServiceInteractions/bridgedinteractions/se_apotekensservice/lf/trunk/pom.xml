@@ -62,8 +62,8 @@
 	</dependencies>
 
 	<scm>
-		<connection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/lf/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/lf/trunk</developerConnection>
+		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/se_apotekensservice/lf/trunk</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/se_apotekensservice/lf/trunk</developerConnection>
 	</scm>
 
 	<build>
@@ -72,7 +72,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.2.1</version>
 				<configuration>
-					<tagBase>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/bridgedinteractions/se_apotekensservice/lf/tags</tagBase>
+					<tagBase>https://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/se_apotekensservice/lf/tags</tagBase>
 				</configuration>
 			</plugin>
 			<plugin>
