@@ -21,7 +21,9 @@ Some values in the service definition is resolved from system configuration file
 
 Together these properties can form a url like:
 
-{{{https://localhost:10000/tjanstebryggan}}}
+{{{
+https://localhost:10000/tjanstebryggan
+}}}
 
 Sample tb-bryggad-tjanst-config.xml:
 
