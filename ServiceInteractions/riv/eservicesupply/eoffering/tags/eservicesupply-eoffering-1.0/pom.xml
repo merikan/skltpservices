@@ -49,7 +49,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
-                    <tagBase>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/eservicesupply/eoffering/tags</tagBase>
+                    <tagBase>https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/eservicesupply/eoffering/tags</tagBase>
                 </configuration>
             </plugin> 
             <!-- Use Java 1.6 for source and target files -->
