@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>se.skl.bridgedinteractions.se_apotekensservice.folk</groupId>
 		<artifactId>HamtaFolkbokforingsinformation</artifactId>
-		<version>1.0</version>
+		<version>1.1-SNAPSHOT</version>
 	</parent>
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.folk</groupId>
 	<artifactId>HamtaFolkbokforingsinformation-TicketTransformer</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>HamtaFolkbokforingsinformation TicketTransformer</name>
 	<url>http://maven.apache.org</url>
 
@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>se.skl.skltpservices.se_apotekensservice.folk</groupId>
 			<artifactId>se_apotekensservice-folk-schemas</artifactId>
-			<version>1.0</version>
+			<version>1.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
