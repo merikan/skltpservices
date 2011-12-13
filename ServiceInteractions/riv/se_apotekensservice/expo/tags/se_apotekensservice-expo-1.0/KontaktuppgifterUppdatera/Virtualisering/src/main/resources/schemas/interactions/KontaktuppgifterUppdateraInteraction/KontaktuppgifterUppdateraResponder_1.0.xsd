@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="urn:riv:se.apotekensservice:expo:KontaktuppgifterUppdateraResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:expo="urn:riv:se.apotekensservice:expo:1" targetNamespace="urn:riv:se.apotekensservice:expo:KontaktuppgifterUppdateraResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_expo_1.0.xsd" namespace="urn:riv:se.apotekensservice:expo:1"/>
+  <xs:element name="KontaktuppgifterUppdatera" type="KontaktuppgifterUppdateraRequestType"/>
+  <xs:element name="KontaktuppgifterUppdateraResponse" type="KontaktuppgifterUppdateraResponseType"/>
+  <xs:element name="ApplicationException" type="expo:ApplicationException"/>
+  <xs:element name="SystemException" type="expo:SystemException"/>
+  <xs:complexType name="KontaktuppgifterUppdateraRequestType">
+    <xs:sequence>
+      <xs:element nillable="false" name="epostadressServicedesk" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>E-postadress till aktörens servicedesk</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="kontaktpersonLista" maxOccurs="unbounded" type="expo:KontaktpersonRequest">
+        <xs:annotation>
+          <xs:documentation>Kontaktpersoner. Minst en kontaktperson måste anges.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="orgNr" type="xs:long">
+        <xs:annotation>
+          <xs:documentation>Aktörens organisationsnummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="telefonnummerServicedesk" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Telefonnummer till aktörens servicedesk</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="username" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Anropandes stp username.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KontaktuppgifterUppdateraResponseType">
+    <xs:sequence>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
