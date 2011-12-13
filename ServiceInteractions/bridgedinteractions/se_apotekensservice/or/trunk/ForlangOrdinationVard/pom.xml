@@ -13,12 +13,12 @@
 	<parent>
     	<artifactId>or</artifactId>
     	<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
-    	<version>1.0-SNAPSHOT</version>
+    	<version>1.0</version>
   	</parent>
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.or</groupId>
 	<artifactId>ForlangOrdinationVard</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>pom</packaging>
 	<name>ForlangOrdinationVard  bridged transformer service</name>
 
