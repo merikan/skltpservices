@@ -51,7 +51,7 @@
   
   <scm>
 		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/crm/scheduling/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/crm/scheduling/trunk</developerConnection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/crm/scheduling/trunk</developerConnection>
 	</scm>
 	
 	<build>

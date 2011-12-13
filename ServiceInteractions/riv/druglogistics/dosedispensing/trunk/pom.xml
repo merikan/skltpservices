@@ -51,7 +51,7 @@
   
   	<scm>
 		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/druglogistics/dosedispensing/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/druglogistics/dosedispensing/trunk</developerConnection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/druglogistics/dosedispensing/trunk</developerConnection>
 	</scm>
 	
 	<build>

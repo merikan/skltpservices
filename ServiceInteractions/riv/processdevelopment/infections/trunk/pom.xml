@@ -52,7 +52,7 @@
   
   	<scm>
 		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/processdevelopment/infections/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/processdevelopment/infections/trunk</developerConnection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/processdevelopment/infections/trunk</developerConnection>
 	</scm>
 	
 	<build>

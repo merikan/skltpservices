@@ -44,7 +44,7 @@
   
  	<scm>
 		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/itintegration/monitoring/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/itintegration/monitoring/trunk</developerConnection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/itintegration/monitoring/trunk</developerConnection>
 	</scm>
 	
 	<build>

@@ -74,7 +74,7 @@
 
 	<scm>
 		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/se_apotekensservice/lf/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/lf/trunk</developerConnection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/se_apotekensservice/lf/trunk</developerConnection>
 	</scm>
 
 	<build>
