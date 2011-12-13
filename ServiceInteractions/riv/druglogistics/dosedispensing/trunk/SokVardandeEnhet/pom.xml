@@ -24,7 +24,7 @@
 
 	<properties>
 		<osorCertDirectory>http://skltpservices.googlecode.com/svn/ServiceInteractions/certs</osorCertDirectory>
-		<osorSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/druglogistics/dosedispensing/trunk/schemas/interactions/SokVardandeEnhetInteraction</osorSchemaDirectoryUrl>
+		<osorSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/druglogistics/dosedispensing/trunk/schemas/interactions/SokVardandeEnhetInteraction</osorSchemaDirectoryUrl>
 		<osorCoreSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/druglogistics/dosedispensing/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
 	</properties>
 
