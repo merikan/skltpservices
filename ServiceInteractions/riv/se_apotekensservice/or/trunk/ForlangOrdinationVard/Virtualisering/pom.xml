@@ -15,7 +15,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
 	<artifactId>se_apotekensservice-or-ForlangOrdinationVard-virtualisering</artifactId>
-	<version>1.0-SNAPSHOT</version>
 	<name>ForlangOrdinationVard service virtualisering</name>
 	<url>http://maven.apache.org</url>
 
