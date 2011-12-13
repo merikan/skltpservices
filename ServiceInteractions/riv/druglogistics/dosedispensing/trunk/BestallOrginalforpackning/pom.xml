@@ -26,7 +26,7 @@
 
 		<osorCertDirectory>http://skltpservices.googlecode.com/svn/ServiceInteractions/certs</osorCertDirectory>
 		<osorSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/druglogistics/dosedispensing/trunk/schemas/interactions/BestallOrginalforpackningInteraction</osorSchemaDirectoryUrl>
-		<osorCoreSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/druglogistics/dosedispensing/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
+		<osorCoreSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/druglogistics/dosedispensing/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
 
 		<serviceProducerUrl>https://localhost:21000/vpBestallOrginalforpackning/1/rivtabp20</serviceProducerUrl>
 
