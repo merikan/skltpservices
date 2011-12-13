@@ -38,6 +38,5 @@
   <modules>
     <module>Virtualisering</module>
     <module>Test-producer</module>
-    <module>TicketTransformer</module>
   </modules>
 </project>
