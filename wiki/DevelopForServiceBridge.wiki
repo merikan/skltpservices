@@ -15,9 +15,9 @@ A deployable artifact for the service bridge is a Java jar file containing a ser
 
 Some values in the service definition is resolved from system configuration file but is good to be familiar with.
 
-  * tb.host, the host that service bridge is configured to run under 
-  * tb.port, the port that service bridge is configured to run under
-  * tb.baseUri, the uri to service bridge
+  * *tb.host*, the host that service bridge is configured to run under 
+  * *tb.port*, the port that service bridge is configured to run under
+  * *tb.baseUri*, the uri to service bridge
 
 Together these properties can form a url like:
 
