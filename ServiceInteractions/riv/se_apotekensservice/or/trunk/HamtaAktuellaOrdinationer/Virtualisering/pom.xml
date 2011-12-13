@@ -14,14 +14,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
 	<artifactId>se_apotekensservice-or-HamtaAktuellaOrdinationer-virtualisering</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>se_apotekensservice-or-HamtaAktuellaOrdinationer-virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
 		<artifactId>se_apotekensservice-or-HamtaAktuellaOrdinationer</artifactId>
-		<version>1.0</version>
+		<version>1.1-SNAPSHOT</version>
 	</parent>
 
 	<build>
