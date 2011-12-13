@@ -45,7 +45,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
-                    <tagBase>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/itinfra/tp/tags</tagBase>
+                    <tagBase>https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/itinfra/tp/tags</tagBase>
                 </configuration>
             </plugin> 
 		</plugins>

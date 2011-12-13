@@ -61,7 +61,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
-                    <tagBase>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/crm/scheduling/tags</tagBase>
+                    <tagBase>https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/crm/scheduling/tags</tagBase>
                 </configuration>
             </plugin> 
             <!-- Use Java 1.5 for source and target files -->

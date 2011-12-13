@@ -62,7 +62,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
-                    <tagBase>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/inera/ior/tags</tagBase>
+                    <tagBase>https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/inera/ior/tags</tagBase>
                 </configuration>
             </plugin> 
             <!-- Use Java 1.6 for source and target files -->
