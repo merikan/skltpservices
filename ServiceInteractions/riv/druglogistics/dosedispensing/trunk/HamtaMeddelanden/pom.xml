@@ -24,7 +24,7 @@
 
 	<properties>
 
-		<osorCertDirectory>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/certs</osorCertDirectory>
+		<osorCertDirectory>http://skltpservices.googlecode.com/svn/ServiceInteractions/certs</osorCertDirectory>
 		<osorSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/druglogistics/dosedispensing/trunk/schemas/interactions/HamtaMeddelandenInteraction</osorSchemaDirectoryUrl>
 		<osorCoreSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/druglogistics/dosedispensing/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
 
