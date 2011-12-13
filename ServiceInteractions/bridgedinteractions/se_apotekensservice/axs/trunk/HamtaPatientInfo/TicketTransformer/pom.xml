@@ -11,7 +11,6 @@
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.axs</groupId>
 	<artifactId>HamtaPatientInfo-TicketTransformer</artifactId>
-	<version>1.0-SNAPSHOT</version>
 	<name>HamtaPatientInfo tickettransformer</name>
 	<url>http://maven.apache.org</url>
 
@@ -42,7 +41,7 @@
 			<version>1.1</version>
 		</dependency>
 
-		<!-- Schemas -->
+		<!-- Schemas-->
 		<dependency>
 			<groupId>se.skl.skltpservices.se_apotekensservice.axs</groupId>
 			<artifactId>se_apotekensservice-axs-schemas</artifactId>
