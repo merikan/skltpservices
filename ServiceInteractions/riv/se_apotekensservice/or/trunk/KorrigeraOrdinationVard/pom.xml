@@ -32,6 +32,5 @@
 
   <modules>
     <module>Virtualisering</module>
-    <module>TicketTransformer</module>
   </modules>
 </project>
