@@ -13,7 +13,7 @@
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
 	<artifactId>lf</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>bridgedinteraction se_apotekensservice lf</name>
 
@@ -62,8 +62,8 @@
 	</dependencies>
 
 	<scm>
-		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/se_apotekensservice/lf/tags/lf-1.0</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/se_apotekensservice/lf/tags/lf-1.0</developerConnection>
+		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/se_apotekensservice/lf/trunk</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/se_apotekensservice/lf/trunk</developerConnection>
 	</scm>
 
 	<build>

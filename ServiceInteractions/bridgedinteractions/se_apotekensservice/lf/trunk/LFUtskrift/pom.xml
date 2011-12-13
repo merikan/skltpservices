@@ -13,12 +13,12 @@
 	<parent>
     <artifactId>lf</artifactId>
     <groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
   </parent>
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.lf</groupId>
 	<artifactId>LFUtskrift</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>LFUtskrift bridged service</name>
 
