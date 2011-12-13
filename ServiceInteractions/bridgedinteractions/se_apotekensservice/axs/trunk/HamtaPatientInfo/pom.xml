@@ -19,7 +19,6 @@
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.axs</groupId>
 	<artifactId>HamtaPatientInfo</artifactId>
-	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>HamtaPatientInfo bridged transformer service</name>
 
