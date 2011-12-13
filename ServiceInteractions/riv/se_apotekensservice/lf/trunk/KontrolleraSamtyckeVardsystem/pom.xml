@@ -25,7 +25,7 @@
 	<properties>
 		<osorCertDirectory>http://skltpservices.googlecode.com/svn/ServiceInteractions/certs</osorCertDirectory>
 		<osorSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/se_apotekensservice/lf/trunk/schemas/interactions/KontrolleraSamtyckeVardsystemInteraction</osorSchemaDirectoryUrl>
-		<osorCoreSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/se_apotekensservice/lf/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
+		<osorCoreSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/se_apotekensservice/lf/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
 	</properties>
 
 	<!-- Modules to be created for each service -->
