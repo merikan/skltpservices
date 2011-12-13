@@ -22,7 +22,7 @@
 	<name>HamtaPatientInfo service</name>
 
 	<properties>
-		<osorCertDirectory>https://skltpservices.googlecode.com/svn/ServiceInteractions/certs/</osorCertDirectory>
+		<osorCertDirectory>http://skltpservices.googlecode.com/svn/ServiceInteractions/certs/</osorCertDirectory>
 		<osorSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/se_apotekensservice/axs/trunk/schemas/interactions/HamtaPatientInfoInteraction/</osorSchemaDirectoryUrl>
 		<osorCoreSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/se_apotekensservice/axs/trunk/schemas/core_components/</osorCoreSchemaDirectoryUrl>
 	</properties>
