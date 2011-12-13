@@ -3,7 +3,7 @@
 <wiki:toc max_depth="3" />
 
 = Introduction=
-This page contains information needed to develop services for the service bridge (Tjänstebryggan).
+This page contains information needed to develop services for the service bridge (Tjänstebryggan). Existing services can be found at [http://code.google.com/p/skltpservices/source/browse/#svn%2FServiceInteractions%2Fbridgedinteractions services in svn]
 
 =Develop services=
 
