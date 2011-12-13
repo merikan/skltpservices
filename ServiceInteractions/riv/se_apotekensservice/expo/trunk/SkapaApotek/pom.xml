@@ -24,7 +24,7 @@
 
 	<properties>
 		<osorCertDirectory>http://skltpservices.googlecode.com/svn/ServiceInteractions/certs</osorCertDirectory>
-		<osorSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/se_apotekensservice/expo/trunk/schemas/interactions/SkapaApotekInteraction</osorSchemaDirectoryUrl>
+		<osorSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/se_apotekensservice/expo/trunk/schemas/interactions/SkapaApotekInteraction</osorSchemaDirectoryUrl>
 		<osorCoreSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/se_apotekensservice/expo/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
 	</properties>
 
