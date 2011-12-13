@@ -13,12 +13,12 @@
 	<parent>
     <artifactId>se_apotekensservice-folk</artifactId>
     <groupId>se.skl.skltpservices.se_apotekensservice.folk</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
   </parent>
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.folk</groupId>
 	<artifactId>HamtaFullmakt</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>pom</packaging>
 	<name>HamtaFullmakt service</name>
 
