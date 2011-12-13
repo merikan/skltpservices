@@ -14,14 +14,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.skltpservices.se_apotekensservice.folk</groupId>
 	<artifactId>se_apotekensservice-folk-UppdateraVardenhetAnstalld-virtualisering</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>UppdateraVardenhetAnstalld service virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>se.skl.skltpservices.se_apotekensservice.folk</groupId>
 		<artifactId>UppdateraVardenhetAnstalld</artifactId>
-		<version>1.0</version>
+		<version>1.1-SNAPSHOT</version>
 	</parent>
 
 	<build>
