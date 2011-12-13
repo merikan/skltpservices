@@ -13,12 +13,12 @@
 	<parent>
     <artifactId>expo</artifactId>
     <groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
   </parent>
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.expo</groupId>
 	<artifactId>SokDosmottagare</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>SokDosmottagare bridged transformer service</name>
 
