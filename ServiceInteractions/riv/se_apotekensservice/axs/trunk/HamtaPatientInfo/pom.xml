@@ -18,21 +18,18 @@
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.axs</groupId>
 	<artifactId>HamtaPatientInfo</artifactId>
-	<version>1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>HamtaPatientInfo service</name>
 
 	<properties>
-		<osorCertDirectory>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/certs</osorCertDirectory>
-		<osorSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/se_apotekensservice/axs/trunk/schemas/interactions/HamtaPatientInfoInteraction</osorSchemaDirectoryUrl>
-		<osorCoreSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/se_apotekensservice/axs/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
+		<osorCertDirectory>https://skltpservices.googlecode.com/svn/ServiceInteractions/certs/</osorCertDirectory>
+		<osorSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/se_apotekensservice/axs/trunk/schemas/interactions/HamtaPatientInfoInteraction/</osorSchemaDirectoryUrl>
+		<osorCoreSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/se_apotekensservice/axs/trunk/schemas/core_components/</osorCoreSchemaDirectoryUrl>
 	</properties>
 
 	<!-- Modules to be created for each service -->
 
   <modules>
     <module>Virtualisering</module>
-    <module>TicketTransformer</module>
-    <module>Test-producer</module>
   </modules>
 </project>

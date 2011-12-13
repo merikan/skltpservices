@@ -58,7 +58,7 @@
 		</dependency>
 	</dependencies>
 	<scm>
-		<connection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/axs/trunk</connection>
+		<connection>http://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/axs/trunk</connection>
 		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/riv/se_apotekensservice/axs/trunk</developerConnection>
 	</scm>
 
