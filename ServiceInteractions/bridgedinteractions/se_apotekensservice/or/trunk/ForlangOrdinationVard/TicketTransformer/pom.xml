@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>se.skl.bridgedinteractions.se_apotekensservice.or</groupId>
 		<artifactId>ForlangOrdinationVard</artifactId>
-		<version>1.0</version>
+		<version>1.1-SNAPSHOT</version>
 	</parent>
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.or</groupId>
 	<artifactId>ForlangOrdinationVard-TicketTransformer</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>ForlangOrdinationVard TicketTransformer</name>
 	<url>http://maven.apache.org</url>
 
@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
 			<artifactId>se_apotekensservice-or-schemas</artifactId>
-			<version>1.0</version>
+			<version>1.1-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
