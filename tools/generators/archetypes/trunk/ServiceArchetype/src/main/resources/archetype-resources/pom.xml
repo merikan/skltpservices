@@ -20,9 +20,9 @@
 	<name>${artifactId} service</name>
 
 	<properties>
-		<osorCertDirectory>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/certs</osorCertDirectory>
-		<osorSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/${domainName}/${domainSubName}/trunk/schemas/interactions/${serviceInteraction}</osorSchemaDirectoryUrl>
-		<osorCoreSchemaDirectoryUrl>https://skltpservices.googlecode.com/svn/rivta/ServiceInteractions/riv/${domainName}/${domainSubName}/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
+		<osorCertDirectory>http://skltpservices.googlecode.com/svn/ServiceInteractions/certs/</osorCertDirectory>
+		<osorSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/${domainName}/${domainSubName}/trunk/schemas/interactions/${serviceInteraction}</osorSchemaDirectoryUrl>
+		<osorCoreSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/${domainName}/${domainSubName}/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
 	</properties>
 
 	<!-- Modules to be created for each service -->
