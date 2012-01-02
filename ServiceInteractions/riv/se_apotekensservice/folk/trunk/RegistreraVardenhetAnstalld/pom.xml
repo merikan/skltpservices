@@ -13,12 +13,12 @@
 	<parent>
     <artifactId>se_apotekensservice-folk</artifactId>
     <groupId>se.skl.skltpservices.se_apotekensservice.folk</groupId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
   </parent>
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.folk</groupId>
 	<artifactId>RegistreraVardenhetAnstalld</artifactId>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>RegistreraVardenhetAnstalld service</name>
 
