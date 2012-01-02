@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="urn:riv:se.apotekensservice:folk:1"
+           targetNamespace="urn:riv:se.apotekensservice:folk:1"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           version="1.0">
+
+            
+    <xs:annotation>
+        <xs:documentation>
+            Beskrivning: Meddelandetyper som är gemensamma för folk.
+            Revisioner: 2011-04-05, version 1.0
+        </xs:documentation>
+    </xs:annotation>
+
+    
+        
+                
+        <xs:complexType name="AdressInfoResponse">
+            <xs:sequence>                
+                <xs:element name="adresstyp" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Adresstyp</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="andradDat" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Ändringsdatum</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="coAdress" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Coadress</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="foadress" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Fortsättningsadress på gatuadress</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="gatuadress" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Gatuadress</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="land" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>land</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="landkod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>landkod</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="postkod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>postkod</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="postnr" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>PostNr</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="postort" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Postort</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="skapadDat" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Skapad datum</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+        
+                
+        <xs:complexType name="AnstalldResponse">
+            <xs:sequence>                
+                <xs:element name="avregApotek" type="ApotekInfoResponse" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Apotek vid avregistrering.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="avregDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Avregistrerings-datum
+Datum då anställd uppdaterades som avregistrerad</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="avregistrerad" type="xs:boolean" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Avregistrerad
+Status om anställd är avregistrerade och ej längre aktiv</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="efternamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Anställds efternamn
+Efternamn anställd vårdenhet</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="fornamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Anställds förnamn
+Förnamn anställd vårdenhet</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="giltigTom" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Giltig tom
+Datum då anställd eventuellt upphör att tillhöra en vårdenhet</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="legPersNr" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Legitimerat personnummer
+Personnummer på person som lämnat in blankett och legitimerats av apotekspersonalen</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="personnummer" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Personnummer
+Giltigt personnummer för anställd vårdenhet</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="regApotek" type="ApotekInfoResponse" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Apotek vid registrering.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="regDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Registrerings-datum
+Datum då anställd registrerades i vårdregistret</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="updApotek" type="ApotekInfoResponse" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Apotek vid registrering.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="updDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Uppdaterings-datum
+Datum då anställd uppdaterades i vårdregistret</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+        
+                
+        <xs:complexType name="ApotekInfoResponse">
+            <xs:sequence>                
+                <xs:element name="gln" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Apoteks-id.
+GLN-kod för apotek</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="namn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Namn på apotek.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="ort" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Ort där apoteket finns.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+        
+                
+        <xs:complexType name="ArbetsstalleResponse">
+            <xs:sequence>                
+                <xs:element name="arbetstalleId" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>ArbetsställeID motsvarar CFAR-numret som är arbetsställes åttasiffriga identitet som tilldelas av Statistiska centralbyråns företagsregister.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="arbstallenamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Underliggande namnet på arbetsstället för vårdenheten.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="gatuadress" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Vårdenhetens gatuadress.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="postort" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Vårdenhetens ort.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+        
+                
+        <xs:complexType name="FullmaktResponse">
+            <xs:sequence>                
+                <xs:element name="avslutApotek" type="ApotekInfoResponse" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Apotek vid avslut.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="avslutDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Datum då fullmakten eventuellt är avslutad.
+Sammankopplad med flagga avslutad.
+Speglar endast om fullmakten är fysiskt avslutad av aktör och
+har ingen koppling till giltigTom</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="avslutId" type="xs:int" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>ID för avslut.
+Fördefinierade värden som kan anges vid avslut av fullmakt.
+Externa system kan ange värden 1 till 5, övriga är för intern registervård.
+
+<para>1 - Kundens begäran</para>
+<para>2 - Ombudets begäran</para>
+<para>3 - Annan</para>
+<para>4 - Vårdnadshavarens begäran</para>
+<para>5 - Vårdenhetens begäran</para>
+<para>6 - Automatisk registervård (Fullmakts giltighetstid utgången)</para>
+<para>7 - Automatisk registervård (Person avliden)</para>
+<para>8 - Automatisk registervård (Fullmaktsgivare myndig)</para>
+<para>9 - Automatisk registervård (Vårdenhet avregistrerad)</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="avslutText" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Fritextfält där anledningen till avslutet kan anges.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="avslutVhavEfternamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Vårdnadshavare efternamn avslutad</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="avslutVhavFornamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Vårdnadshavare förnamn avslutad</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="avslutVhavPersNr" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Vårdnadshavare personnummer avslutad</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="enhetId" type="xs:long" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Enhets-id.
+Giltigt enhets-id för vårdenhet</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="giltigTom" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Datum då fullmakten eventuellt slutar gälla.
+Speglar endast om fullmakten är automatiskt avslutad av giltighetsdatum och
+har ingen koppling till flaggan avslutad.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="givareEfternamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>fullmaktsgivare efternamn</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="givareFornamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>fullmaktsgivare förnamn</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="givarePersNr" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>fullmaktsgivare personnummer</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="hsaId" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>HSA-id.
+Giltigt HSA-id för vårdenhet</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="legPersNr" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Legitimerat personnummer
+Personnummer på person som lämnat in blankett och legitimerats av apotekspersonalen</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="orgId" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Organisations-id.
+Giltigt organisationsnummer, personnummer eller VAT-nr för vårdenhet</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="regApotek" type="ApotekInfoResponse" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Apotek vid registrering.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="regDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Datum då fullmakten registrerades</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="regVhavEfternamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Vårdnadshavare efternamn registrerad</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="regVhavFornamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Vårdnadshavare förnamn registrerad</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="regVhavPersNr" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Vårdnadshavare personnummer registrerad</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="tagareEfternamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>fullmaktstagare efternamn</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="tagareFornamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>fullmaktstagare förnamn</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="tagarePersNr" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>fullmaktstagare personnummer</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="tagartyp" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Typ av fullmaktstagare.
+<para>P=Privatperson</para>
+<para>V=Vårdnadshavare</para>
+<para>E=Vårdenhet</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="vardenhetNamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Namn på vårdenhet.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+                
+        <xs:complexType name="KlientinformationRequest">
+            <xs:sequence>                
+                <xs:element name="anvandare" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Unikt användarid i anropande system.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="session" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Sessionens id i anropande system.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="system" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>GLN-kod för anropande system.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+        
+    
+        
+                
+        <xs:complexType name="RelationResponse">
+            <xs:sequence>                
+                <xs:element name="personnr" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Person som har relation till personen "tillPersonnr"</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="reltyp" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Relationstyp. Kan vara
+<para>M eller MAK för maka/make</para>
+<para>V eller VHAV för vårdnadshavare</para>
+<para>P eller PARTNER för partner</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="tillPersonnr" type="xs:string" nillable="false" />
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+        
+                
+        <xs:complexType name="VardenhetResponse">
+            <xs:sequence>                
+                <xs:element name="anstallda" type="AnstalldResponse" minOccurs="0" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation>List med anställda registrerade på vårdenheten.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="arbetstalleId" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>ArbetsställeID motsvarar CFAR-numret som är arbetsställes åttasiffriga identitet som tilldelas av Statistiska centralbyråns företagsregister.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="arbetstalleNamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Arbetsställe-namn.
+Underliggande namnet på arbetsstället för vårdenheten</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="avregApotek" type="ApotekInfoResponse" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Apotek vid avregistrering.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="avregDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Avregistrerings-datum.
+Datum då vårdenheten uppdaterades som avregistrerad</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="avregistrerad" type="xs:boolean" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Avregistrerad.
+Status om vårdenhet är avregistrerade och ej längre aktiv</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="enhetId" type="xs:long" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Enhets-id.
+Giltigt enhets-id för vårdenhet</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="gatuadress" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Gatuadress.
+Vårdenhetens gatuadress</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="hsaId" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>HSA-id.
+Giltigt HSA-id för vårdenhet</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="kontaktperson" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Kontaktperson.
+Namn på kontaktperson hos vårdenheten</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="legPersNr" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Legitimerat personnummer
+Personnummer på person som lämnat in blankett och legitimerats av apotekspersonalen</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="namn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Företagsnamn.
+Övergripande företagsnamnet för vårdenhet</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="orgId" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Organisations-id.
+Giltigt organisationsnummer, personnummer eller VAT-nr för vårdenhet</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="postnummer" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Postnummer.
+Vårdenhetens postnummer</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="postort" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Postort.
+Vårdenhetens ort</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="regApotek" type="ApotekInfoResponse" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Apotek vid registrering.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="regDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Registrerings-datum.
+Datum då vårdenheten registrerades i vårdregistret</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="telefonnummer" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Telefon.
+Vårdenhetens telefonnummer</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="updApotek" type="ApotekInfoResponse" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Apotek vid senaste uppdatering.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="updDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Uppdaterings-datum.
+Datum då vårdenheten uppdaterades i vårdregistret</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="vaEfternamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Efternamn på verksamhetsansvarig för vårdenheten</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="vaFornamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Förnamn på verksamhetsansvarig för vårdenheten</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="vaPersNr" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Personnummer på verksamhetsansvarig för vårdenheten</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="vardenhetNamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Namn på vårdenheten.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+    <xs:complexType name="ApplicationException">
+        <xs:annotation>
+            <xs:documentation>Applikationsfel</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="description" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SystemException">
+        <xs:annotation>
+            <xs:documentation>Systemfel</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="code" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="char">
+        <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
