@@ -13,7 +13,7 @@
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.expo</groupId>
 	<artifactId>se_apotekensservice-expo</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<packaging>pom</packaging>
 	<name>se_apotekensservice-expo</name>
 
@@ -68,8 +68,8 @@
 	</dependencies>
 
 	<scm>
-		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/se_apotekensservice/expo/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/se_apotekensservice/expo/trunk</developerConnection>
+		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/se_apotekensservice/expo/tags/se_apotekensservice-expo-1.1</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/se_apotekensservice/expo/tags/se_apotekensservice-expo-1.1</developerConnection>
 	</scm>
 
 	<build>
