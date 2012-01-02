@@ -14,14 +14,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.skltpservices.se_apotekensservice.lf</groupId>
 	<artifactId>se_apotekensservice-lf-AterkallaSamtyckeWebb-virtualisering</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<name>AterkallaSamtyckeWebb service virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>se.skl.skltpservices.se_apotekensservice.lf</groupId>
 		<artifactId>AterkallaSamtyckeWebb</artifactId>
-		<version>1.1-SNAPSHOT</version>
+		<version>1.1</version>
 	</parent>
 
 	<build>
