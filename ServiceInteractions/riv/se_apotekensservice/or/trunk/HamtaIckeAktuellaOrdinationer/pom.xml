@@ -13,12 +13,12 @@
 	<parent>
     <artifactId>se_apotekensservice-or</artifactId>
     <groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
   </parent>
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
 	<artifactId>HamtaIckeAktuellaOrdinationer</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<packaging>pom</packaging>
 	<name>HamtaIckeAktuellaOrdinationer service</name>
 
