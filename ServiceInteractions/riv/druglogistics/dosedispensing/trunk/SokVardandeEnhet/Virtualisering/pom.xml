@@ -14,14 +14,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.skltpservices.druglogistics.dosedispensing</groupId>
 	<artifactId>druglogistics-dosedispensing-SokVardandeEnhet-virtualisering</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>druglogistics-dosedispensing-SokVardandeEnhet-virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>se.skl.skltpservices.druglogistics.dosedispensing</groupId>
 		<artifactId>druglogistics-dosedispensing-SokVardandeEnhet</artifactId>
-		<version>1.0</version>
+		<version>1.1-SNAPSHOT</version>
 	</parent>
 
 	<build>

@@ -13,12 +13,12 @@
 	<parent>
     <artifactId>druglogistics-dosedispensing</artifactId>
     <groupId>se.skl.tp</groupId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
   </parent>
 
 	<groupId>se.skl.tp</groupId>
 	<artifactId>druglogistics-dosedispensing-SkickaMeddelanden</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>druglogistics-dosedispensing-SkickaMeddelanden</name>
 
