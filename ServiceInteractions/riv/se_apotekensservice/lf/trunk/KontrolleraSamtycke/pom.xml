@@ -13,12 +13,12 @@
 	<parent>
     <artifactId>se_apotekensservice-lf</artifactId>
     <groupId>se.skl.skltpservices.se_apotekensservice.lf</groupId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
   </parent>
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.lf</groupId>
 	<artifactId>KontrolleraSamtycke</artifactId>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>KontrolleraSamtycke service</name>
 
