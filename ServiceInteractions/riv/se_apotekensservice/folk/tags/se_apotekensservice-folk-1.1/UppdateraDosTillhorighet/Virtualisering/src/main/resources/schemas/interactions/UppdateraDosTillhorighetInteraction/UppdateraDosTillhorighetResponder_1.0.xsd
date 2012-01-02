@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:folk="urn:riv:se.apotekensservice:folk:1" xmlns="urn:riv:se.apotekensservice:folk:UppdateraDosTillhorighetResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:folk:UppdateraDosTillhorighetResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_folk_1.0.xsd" namespace="urn:riv:se.apotekensservice:folk:1"/>
+  <xs:element name="UppdateraDosTillhorighet" type="UppdateraDosTillhorighetRequestType"/>
+  <xs:element name="UppdateraDosTillhorighetResponse" type="UppdateraDosTillhorighetResponseType"/>
+  <xs:element name="ApplicationException" type="folk:ApplicationException"/>
+  <xs:element name="SystemException" type="folk:SystemException"/>
+  <xs:complexType name="UppdateraDosTillhorighetRequestType">
+    <xs:sequence>
+      <xs:element nillable="false" name="dosApotek" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>DOS apotek - GLN-kod för DOS-apotek som kunden är kopplad till</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="klientinformation" type="folk:KlientinformationRequest">
+        <xs:annotation>
+          <xs:documentation>KlientInformation - innehåller information om anropande klient.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="personNummer" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Personnummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UppdateraDosTillhorighetResponseType">
+    <xs:sequence>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
