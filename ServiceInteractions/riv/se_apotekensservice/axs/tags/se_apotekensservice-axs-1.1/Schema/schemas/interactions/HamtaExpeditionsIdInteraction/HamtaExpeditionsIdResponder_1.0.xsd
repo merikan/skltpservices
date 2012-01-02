@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="urn:riv:se.apotekensservice:axs:HamtaExpeditionsIdResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:axs="urn:riv:se.apotekensservice:axs:1" targetNamespace="urn:riv:se.apotekensservice:axs:HamtaExpeditionsIdResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_axs_1.0.xsd" namespace="urn:riv:se.apotekensservice:axs:1"/>
+  <xs:element name="HamtaExpeditionsId" type="HamtaExpeditionsIdRequestType"/>
+  <xs:element name="HamtaExpeditionsIdResponse" type="HamtaExpeditionsIdResponseType"/>
+  <xs:element name="ApplicationException" type="axs:ApplicationException"/>
+  <xs:element name="SystemException" type="axs:SystemException"/>
+  <xs:complexType name="HamtaExpeditionsIdRequestType">
+    <xs:sequence>
+      <xs:element name="aktorsExpId" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Aktörens expeditions-id.
+<para>Måste vara unik.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="aktorsExpIdSaknas" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            <para>Flagga som anger att anropande system inte har ett eget
+expeditions-id utan avser att använda det som returneras
+av denna tjänst.</para>
+            <para>Är denna parameter inte sann måste parametern aktorsExpId vara angiven.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="klientinformation" type="axs:KlientinformationRequest">
+        <xs:annotation>
+          <xs:documentation>Objekt innehållande information om anropande klientsystem.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HamtaExpeditionsIdResponseType">
+    <xs:sequence>
+      <xs:element nillable="false" name="expeditionsId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Apotekens Service expeditions-id.
+<para>Unikt värde för varje anrop.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
