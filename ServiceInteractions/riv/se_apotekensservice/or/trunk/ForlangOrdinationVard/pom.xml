@@ -13,12 +13,12 @@
 	<parent>
     <artifactId>se_apotekensservice-or</artifactId>
     <groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
   </parent>
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
 	<artifactId>ForlangOrdinationVard</artifactId>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>ForlangOrdinationVard service</name>
 
