@@ -40,6 +40,13 @@
   </modules>
 
 	<dependencies>
+		<!-- Schemas -->
+		<dependency>
+			<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
+			<artifactId>se_apotekensservice-or-schemas</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
