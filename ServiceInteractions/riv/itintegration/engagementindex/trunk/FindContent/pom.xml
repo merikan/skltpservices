@@ -13,12 +13,12 @@
 	<parent>
     <artifactId>itintegration-engagementindex</artifactId>
     <groupId>se.skl.skltpservices</groupId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
   </parent>
 
 	<groupId>se.skl.skltpservices.itintegration.engagementindex</groupId>
 	<artifactId>FindContent</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>FindContent service</name>
 
