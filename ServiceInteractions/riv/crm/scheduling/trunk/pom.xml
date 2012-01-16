@@ -37,7 +37,17 @@
 
   <!-- Modules to be created for each service -->
   <modules>
-   
+    <module>CancelBooking</module>
+    <module>GetAllCareTypes</module>
+    <module>GetAllHealthcareFacilities</module>
+    <module>GetAllPerformers</module>
+    <module>GetAllTimeTypes</module>
+    <module>GetAvailableDates</module>
+    <module>GetAvailableTimeslots</module>
+    <module>GetBookingDetails</module>
+    <module>GetSubjectOfCareSchedule</module>
+    <module>MakeBooking</module>
+    <module>UpdateBooking</module>
   </modules>
   
   <scm>
