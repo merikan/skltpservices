@@ -291,7 +291,7 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 			 *  Check meddelande data + lakarutlatande reference
 			 */
 			
-			// Meddelande id v�rden - mandatory
+			// Meddelande id vården - mandatory
 			if ( inAnswer.getVardReferensId() == null ||
 					inAnswer.getVardReferensId().length() < 1 ) {
 				 validationErrors.add("No vardReferens-id found!");				
@@ -303,7 +303,7 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 				 validationErrors.add("No fkReferens-id found!");				
 			}
 
-			// �mne - mandatory
+			// Ämne - mandatory
 			Amnetyp inAmne = inAnswer.getAmne();
 			if ( inAmne == null) {
 				validationErrors.add("No Amne element found!");				
@@ -342,37 +342,37 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 			}
 			
 			
-			// Avs�nt tidpunkt - mandatory
+			// Avsänt tidpunkt - mandatory
             if (inAnswer.getAvsantTidpunkt() == null || !inAnswer.getAvsantTidpunkt().isValid()) {
 				validationErrors.add("No or wrong avsantTidpunkt found!");				
             }
 						
-			// L�karutl�tande referens - mandatory
+			// Läkarutlåtande referens - mandatory
             if (inAnswer.getLakarutlatande() == null ) {
 				validationErrors.add("No lakarutlatande element found!");	
 				throw new Exception();
             }
             LakarutlatandeEnkelType inLakarUtlatande = inAnswer.getLakarutlatande();
             
-			// L�karutl�tande referens - id - mandatory
+			// Läkarutlåtande referens - id - mandatory
 			if ( inLakarUtlatande.getLakarutlatandeId() == null ||
 				inLakarUtlatande.getLakarutlatandeId().length() < 1 ) {
 				validationErrors.add("No lakarutlatande-id found!");				
 			}
 
-			// L�karutl�tande referens - signeringsTidpunkt - mandatory
+			// Läkarutlåtande referens - signeringsTidpunkt - mandatory
             if (inLakarUtlatande.getSigneringsTidpunkt() == null || !inLakarUtlatande.getSigneringsTidpunkt().isValid()) {
-				validationErrors.add("No or wrong lakarutlatande-avsantTidpunkt found!");				
+				validationErrors.add("No or wrong lakarutlatande-signeringsTidpunkt found!");				
             }
 
-			// L�karutl�tande referens - patient - mandatory
+			// Läkarutlåtande referens - patient - mandatory
             if (inLakarUtlatande.getPatient() == null ) {
 				validationErrors.add("No lakarutlatande patient element found!");	
 				throw new Exception();
             }
             PatientType inPatient = inLakarUtlatande.getPatient();
             
-			// L�karutl�tande referens - patient - personid mandatory
+			// Läkarutlåtande referens - patient - personid mandatory
             // Check patient id - mandatory
 			if (inPatient.getPersonId() == null ||	
 				inPatient.getPersonId().getExtension() == null ||	
@@ -393,13 +393,13 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 //				validationErrors.add("Wrong format for person-id! Valid format is YYYYMMDD-XXXX or YYYYMMDD+XXXX.");												
 //			}
             
-			// L�karutl�tande referens - patient - namn - mandatory
+			// Läkarutlåtande referens - patient - namn - mandatory
 			if (inPatient.getFullstandigtNamn() == null || inPatient.getFullstandigtNamn().length() < 1 ) {
 				validationErrors.add("No lakarutlatande Patient fullstandigtNamn elements found or set!");								
 			}
 								
 			/**
-			 *  Check avs�ndar data.
+			 *  Check avsändar data.
 			 */
 			if (inAnswer.getAdressVard() == null) {
 				validationErrors.add("No adressVard element found!");				
