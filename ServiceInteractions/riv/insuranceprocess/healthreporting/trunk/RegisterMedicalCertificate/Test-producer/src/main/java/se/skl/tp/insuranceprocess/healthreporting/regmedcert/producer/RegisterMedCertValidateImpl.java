@@ -337,7 +337,21 @@ public class RegisterMedCertValidateImpl implements RegisterMedicalCertificateRe
 	                   
 	            // Fält 5 - not mandatory
 
-	            // Fält 6 - not mandatory
+	            // Fält 6 - not mandatory but if we have checked a box that needs more information this should be provided
+//	            AktivitetType ovrigt = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.OVRIGT);
+//	            if (ovrigt != null && (ovrigt.getBeskrivning() == null || ovrigt.getBeskrivning().length() < 1)) {
+//	    			validationErrors.add("No corresponding beskrivning for rekommendationer - ovrigt found!");                		
+//	            }
+//
+//	            AktivitetType planeradAtgardInomSjukvarden = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PLANERAD_ELLER_PAGAENDE_BEHANDLING_ELLER_ATGARD_INOM_SJUKVARDEN);
+//	            if (planeradAtgardInomSjukvarden != null && (planeradAtgardInomSjukvarden.getBeskrivning() == null || planeradAtgardInomSjukvarden.getBeskrivning().length() < 1)) {
+//	    			validationErrors.add("No corresponding beskrivning for planerad eller pagaende behandling eller atgard - inom sjukvarden found!");                		
+//	            }
+//
+//	            AktivitetType planeradAtgardAnnan = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PLANERAD_ELLER_PAGAENDE_ANNAN_ATGARD);
+//	            if (planeradAtgardAnnan != null && (planeradAtgardAnnan.getBeskrivning() == null || planeradAtgardAnnan.getBeskrivning().length() < 1)) {
+//	    			validationErrors.add("No corresponding beskrivning for planerad eller pagaende behandling eller atgard - annan atgard found!");                		
+//	            }
 	        
 	            // Fält 7 - not mandatory
 	            
@@ -367,7 +381,76 @@ public class RegisterMedCertValidateImpl implements RegisterMedicalCertificateRe
                 	validationErrors.add("No typAvArbetsuppgift found when arbete set in field 8a!.");	
         			throw new Exception();                	
                 }
+	        	        
+   	        // Many fields are optional if smittskydd is checked but some values depend on each other if a part is set like a checkbox
+	        } else {
+	            // Fält 2 - No check necessary
+	                        
+	            // Fält 3 - No check necessary
+	 
+	            // Fält 4 - vänster No check necessary  
+	
+	            // Fält 4 - höger översta kryssrutan
+	            VardkontaktType inUndersokning = findVardkontaktTyp(inLakarutlatande.getVardkontakt(), Vardkontakttyp.MIN_UNDERSOKNING_AV_PATIENTEN);     
+	            
+	            // Fält 4 - höger näst översta kryssrutan
+	            VardkontaktType telefonkontakt = findVardkontaktTyp(inLakarutlatande.getVardkontakt(), Vardkontakttyp.MIN_TELEFONKONTAKT_MED_PATIENTEN);
+	
+	            // Fält 4 - höger näst nedersta kryssrutan
+	            ReferensType journal = findReferensTyp(inLakarutlatande.getReferens(), Referenstyp.JOURNALUPPGIFTER);
+	
+	            // Fält 4 - höger nedersta kryssrutan
+	            inAnnat = findReferensTyp(inLakarutlatande.getReferens(), Referenstyp.ANNAT);
+	
+	            // Fält 4 - höger - 1:a kryssrutan Check that we got a date if choice is set
+	            if(inUndersokning != null && (inUndersokning.getVardkontaktstid() == null || !inUndersokning.getVardkontaktstid().isValid())) {
+	    			validationErrors.add("No or wrong date for vardkontakt - min undersokning av patienten found!");                	
+	            }
+	            // Fält 4 - höger - 2:a kryssrutan Check that we got a date if choice is set
+	            if(telefonkontakt != null && (telefonkontakt.getVardkontaktstid() == null || !telefonkontakt.getVardkontaktstid().isValid())) {
+	    			validationErrors.add("No or wrong date for vardkontakt - telefonkontakt found!");                	
+	            }
+	            // Fält 4 - höger - 3:e kryssrutan Check that we got a date if choice is set
+	            if(journal != null && (journal.getDatum() == null || !journal.getDatum().isValid())) {
+	    			validationErrors.add("No or wrong date for referens - journal found!");                	
+	            }
+	            // Fält 4 - höger - 4:e kryssrutan Check that we got a date if choice is set
+	            if(inAnnat != null && (inAnnat.getDatum() == null || !inAnnat.getDatum().isValid())) {
+	    			validationErrors.add("No or wrong date for referens - annat found!");                	
+	            }
+	                   
+	            // Fält 5 - not mandatory
+	
+	            // Fält 6 - not mandatory
+	            AktivitetType ovrigt = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.OVRIGT);
+	            if (ovrigt != null && (ovrigt.getBeskrivning() == null || ovrigt.getBeskrivning().length() < 1)) {
+	    			validationErrors.add("No corresponding beskrivning for rekommendationer - ovrigt found!");                		
+	            }
+	
+	            AktivitetType planeradAtgardInomSjukvarden = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PLANERAD_ELLER_PAGAENDE_BEHANDLING_ELLER_ATGARD_INOM_SJUKVARDEN);
+	            if (planeradAtgardInomSjukvarden != null && (planeradAtgardInomSjukvarden.getBeskrivning() == null || planeradAtgardInomSjukvarden.getBeskrivning().length() < 1)) {
+	    			validationErrors.add("No corresponding beskrivning for planerad eller pagaende behandling eller atgard - inom sjukvarden found!");                		
+	            }
+	
+	            AktivitetType planeradAtgardAnnan = findAktivitetWithCode(inLakarutlatande.getAktivitet(), Aktivitetskod.PLANERAD_ELLER_PAGAENDE_ANNAN_ATGARD);
+	            if (planeradAtgardAnnan != null && (planeradAtgardAnnan.getBeskrivning() == null || planeradAtgardAnnan.getBeskrivning().length() < 1)) {
+	    			validationErrors.add("No corresponding beskrivning for planerad eller pagaende behandling eller atgard - annan atgard found!");                		
+	            }
+	        
+	            // Fält 7 - not mandatory
+	            
+	            // Fält 8a - Check that we got a description if arbete is set
+	            if (inAktivitetFunktion.getArbetsformaga() != null ) {
+	            	SysselsattningType inArbete = findTypAvSysselsattning(inAktivitetFunktion.getArbetsformaga().getSysselsattning(), TypAvSysselsattning.NUVARANDE_ARBETE);
+	
+	            	ArbetsuppgiftType inArbetsBeskrivning = inAktivitetFunktion.getArbetsformaga().getArbetsuppgift();
+	            	
+		            if (inArbete != null &&  ( inArbetsBeskrivning.getTypAvArbetsuppgift() == null || inArbetsBeskrivning.getTypAvArbetsuppgift().length() < 1)) {
+		    			validationErrors.add("No typAvArbetsuppgift found when arbete set in field 8a!.");                		
+		            }
+	            }
 	        }
+
 	
 	        // Fält 8b - kryssruta 1
 	        ArbetsformagaNedsattningType nedsatt14del =  findArbetsformaga(inAktivitetFunktion.getArbetsformaga().getArbetsformagaNedsattning(), se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.Nedsattningsgrad.NEDSATT_MED_1_4);

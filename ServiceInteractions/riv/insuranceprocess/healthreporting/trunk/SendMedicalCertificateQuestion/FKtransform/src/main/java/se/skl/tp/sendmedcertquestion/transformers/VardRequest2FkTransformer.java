@@ -350,7 +350,7 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 
 		// L�karutl�tande referens - signeringsTidpunkt - mandatory
         if (inLakarUtlatande.getSigneringsTidpunkt() == null || !inLakarUtlatande.getSigneringsTidpunkt().isValid()) {
-			validationErrors.add("No or wrong lakarutlatande-avsantTidpunkt found!");				
+			validationErrors.add("No or wrong lakarutlatande-signeringsTidpunkt found!");				
         }
 
 		// L�karutl�tande referens - patient - mandatory
