@@ -39,6 +39,7 @@
 		<module>Virtualisering</module>
 		<module>Test-consumer</module>
 		<module>Test-producer</module>
-	 <module>FKtransform</module>
+ 	  <module>FKtransform</module>
+	  <module>Autosvar</module>
 	</modules>
 </project>
