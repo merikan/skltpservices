@@ -46,7 +46,7 @@
 		<delete-message-property key="receiverid"/>
 	</message-properties-transformer>           
 
-	<message-properties-transformer name="deleteSoapAction">
+	<message-properties-transformer name="deleteSoapActionQuestion">
 		<delete-message-property key="soapaction"/>
 	</message-properties-transformer>           
 	
@@ -75,7 +75,7 @@
                         	wsdlPort="ReceiveMedicalCertificateQuestionResponderPort"
                         	operation="ReceiveMedicalCertificateQuestion" 
                         	clientClass="se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderService"
-							transformer-refs="deleteSoapAction"
+							transformer-refs="deleteSoapActionQuestion"
             	        	synchronous="true"
 	               	        protocolConnector="VPConsumerConnector"
                         /> 
