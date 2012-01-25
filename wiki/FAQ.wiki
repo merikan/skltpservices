@@ -1,13 +1,16 @@
 #FAQ for SKLTP services
 
-= Introduction =
+<wiki:toc max_depth="1" />
 
-Add your content here.
+= Release management =
 
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Q: How do i perform a release of a complete domain, e-g crm:scheduling <br>
+A: All interactions are wrapped with maven support and a release is done using the following steps
+  # Create a release, step up SNAPSHOT version: 
+{{{
+<domain>/trunk/$ mvn release:prepare
+}}}
+  # We do not perform the actual release. When done with step 1 just clean up using:
+{{{
+<domain>/trunk/$ mvn release:clean
+}}}
