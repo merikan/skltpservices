@@ -39,6 +39,7 @@
     <module>FindContent</module>
     <module>ProcessNotification</module>
     <module>Update</module>
+    <module>Schema</module>
   </modules>
   
  	<scm>
