@@ -28,8 +28,8 @@
 	<!--
 	Name of this file is mandatory and may not be changed. 
 	 -->
- 	<model name="HamtaAktuellaOrdinationer-model-test">
-		<service name="HamtaAktuellaOrdinationer-service-test">
+ 	<model name="Get-FindContent-model-testproducer">
+		<service name="Get-FindContent-service-testproducer">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://localhost:10000/serviceProvider/FindContentResponder/V1"
