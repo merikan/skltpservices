@@ -20,21 +20,35 @@
  */
 package se.riv.itintegration.engagementindex.findcontent.v1;
 
+import java.net.URL;
+
 import javax.xml.ws.Endpoint;
+
+import org.apache.cxf.Bus;
+import org.apache.cxf.bus.spring.SpringBusFactory;
 
 public class Producer {
 
 	protected Producer() throws Exception {
 		System.out.println("Starting Producer");
+
+		// Loads a cxf configuration file to use
+		final SpringBusFactory bf = new SpringBusFactory();
+		final URL busFile = this.getClass().getClassLoader().getResource("cxf-producer.xml");
+		final Bus bus = bf.createBus(busFile.toString());
+
+		SpringBusFactory.setDefaultBus(bus);
+
 		final Object implementor = new ProducerImpl();
-		// "https://localhost:23000/vp/FindContent/1/rivtabp21";
-		final String address = "http://localhost:23000/vp/FindContent/1/rivtabp21";
+		final String address = "https://localhost:21000/vp/FindContent/1/rivtabp21";
 		Endpoint.publish(address, implementor);
 	}
 
 	public static void main(String[] args) throws Exception {
+
 		new Producer();
 		System.out.println("Producer ready...");
+
 		Thread.sleep(5 * 60 * 1000);
 		System.out.println("Producer exiting");
 		System.exit(0);
