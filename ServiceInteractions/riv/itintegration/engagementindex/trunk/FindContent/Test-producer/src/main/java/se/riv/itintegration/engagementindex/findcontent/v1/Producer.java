@@ -29,18 +29,25 @@ import org.apache.cxf.bus.spring.SpringBusFactory;
 
 public class Producer {
 
+//	protected Producer() throws Exception {
+//		System.out.println("Starting Producer");
+//
+//		// Loads a cxf configuration file to use
+//		final SpringBusFactory bf = new SpringBusFactory();
+//		final URL busFile = this.getClass().getClassLoader().getResource("cxf-producer.xml");
+//		final Bus bus = bf.createBus(busFile.toString());
+//
+//		SpringBusFactory.setDefaultBus(bus);
+//
+//		final Object implementor = new ProducerImpl();
+//		final String address = "https://localhost:21000/vp/FindContent/1/rivtabp21";
+//		Endpoint.publish(address, implementor);
+//	}
+	
 	protected Producer() throws Exception {
 		System.out.println("Starting Producer");
-
-		// Loads a cxf configuration file to use
-		final SpringBusFactory bf = new SpringBusFactory();
-		final URL busFile = this.getClass().getClassLoader().getResource("cxf-producer.xml");
-		final Bus bus = bf.createBus(busFile.toString());
-
-		SpringBusFactory.setDefaultBus(bus);
-
 		final Object implementor = new ProducerImpl();
-		final String address = "https://localhost:21000/vp/FindContent/1/rivtabp21";
+		final String address = "http://localhost:21000/vp/FindContent/1/rivtabp21";
 		Endpoint.publish(address, implementor);
 	}
 
