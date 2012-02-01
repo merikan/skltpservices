@@ -1,0 +1,13 @@
+#summary How to deploy services
+
+<wiki:toc max_depth="3" />
+
+= Introduction=
+
+This pages contains instructions on how to deploy a already built service onto theService Virtualization Platform for Service Oriented integration. 
+
+=Steps=
+
+# Download jar file/s from [Downloads]
+# Copy jar files to /<vp_home>/vp/services/ directory
+# Restart server
