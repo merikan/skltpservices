@@ -5,7 +5,7 @@
 
 = Introduction=
 
-This pages contains instructions on how to deploy a already built service onto theService Virtualization Platform for Service Oriented integration. 
+This pages contains instructions on how to deploy an already built service onto the Service Virtualization Platform for Service Oriented integration. 
 
 =Steps=
 
