@@ -8,6 +8,6 @@ This pages contains instructions on how to deploy a already built service onto t
 
 =Steps=
 
-# Download jar file/s from [Downloads]
+# Download jar file/s from [downloads]
 # Copy jar files to /<vp_home>/vp/services/ directory
 # Restart server
