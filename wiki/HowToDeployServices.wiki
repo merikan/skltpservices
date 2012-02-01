@@ -10,6 +10,7 @@ This pages contains instructions on how to deploy an already built service onto 
 ==Deploy Steps==
 
   # Download jar/zip file/s containing services from [http://code.google.com/p/skltpservices/downloads/list downloads]
+  # If download is a zip, unzip all the containing jars
   # Copy jar files to *`/<vp_home>/vp/services/`* directory
   # Restart server
   # Verify no error occurred during startup in logs, `/<mule_home>/logs/vp.log`
