@@ -7,7 +7,7 @@
 
 This pages contains instructions on how to deploy an already built service onto the Service Virtualization Platform for Service Oriented integration. 
 
-=Steps=
+==Deploy Steps==
 
   # Download jar/zip file/s containing services from [http://code.google.com/p/skltpservices/downloads/list downloads]
   # Copy jar files to *`/<vp_home>/vp/services/`* directory
