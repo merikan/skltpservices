@@ -8,6 +8,6 @@ This pages contains instructions on how to deploy a already built service onto t
 
 =Steps=
 
-  # Download jar file/s from [http://code.google.com/p/skltpservices/downloads/list downloads]
+  # Download jar/zip file/s containing services from [http://code.google.com/p/skltpservices/downloads/list downloads]
   # Copy jar files to *`/<vp_home>/vp/services/`* directory
   # Restart server
