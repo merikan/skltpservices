@@ -14,3 +14,8 @@ This pages contains instructions on how to deploy an already built service onto 
   # Copy jar files to *`/<vp_home>/vp/services/`* directory
   # Restart server
   # Verify no error occurred during startup in logs, `/<mule_home>/logs/vp.log`
+
+In case the service platform does not start because of the new services deployed
+  * Capture the errorlog to use when reporting the error
+  * Remove the newly deployed service
+  * Restart server
