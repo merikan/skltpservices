@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>se.skl.bridgedinteractions.se_apotekensservice.or</groupId>
 		<artifactId>MakuleraOrdinationVard</artifactId>
-		<version>1.2-SNAPSHOT</version>
+		<version>1.2</version>
 	</parent>
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.or</groupId>
 	<artifactId>MakuleraOrdinationVard-TicketTransformer</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2</version>
 	<name>MakuleraOrdinationVard TicketTransformer</name>
 	<url>http://maven.apache.org</url>
 
