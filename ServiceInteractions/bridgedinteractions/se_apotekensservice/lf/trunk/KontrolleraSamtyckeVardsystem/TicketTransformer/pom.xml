@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>se.skl.bridgedinteractions.se_apotekensservice.lf</groupId>
 		<artifactId>KontrolleraSamtyckeVardsystem</artifactId>
-		<version>1.1</version>
+		<version>1.2-SNAPSHOT</version>
 	</parent>
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.lf</groupId>
 	<artifactId>KontrolleraSamtyckeVardsystem-TicketTransformer</artifactId>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
 	<name>KontrolleraSamtyckeVardsystem TicketTransformer</name>
 	<url>http://maven.apache.org</url>
 
