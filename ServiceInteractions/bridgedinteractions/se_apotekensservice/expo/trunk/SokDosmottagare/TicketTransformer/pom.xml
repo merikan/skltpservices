@@ -18,36 +18,6 @@
 		<project.reporting.outputEncoding />
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.soitoolkit.commons.components</groupId>
-			<artifactId>soitoolkit-commons-mule</artifactId>
-			<version>${soitoolkit.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.soitoolkit.commons.components</groupId>
-			<artifactId>soitoolkit-commons-log</artifactId>
-			<version>${soitoolkit.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
-			<artifactId>vp-mule-2.2.8-dependencies</artifactId>
-			<version>${soitoolkit.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
-			<artifactId>ArgosHeaderTicketTransformer</artifactId>
-			<version>1.1</version>
-		</dependency>
-
-		<!-- Schemas -->
-		<dependency>
-			<groupId>se.skl.skltpservices.se_apotekensservice.expo</groupId>
-			<artifactId>se_apotekensservice-expo-schemas</artifactId>
-			<version>1.1-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
-
 	<build>
 		<testResources>
 			<testResource>
