@@ -13,10 +13,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>se.skl.tp</groupId>
-	<artifactId>itintegration-monitoring</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<artifactId>clinicalprocess-requestworkflow</artifactId>
+	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>itintegration-monitoring</name>
+	<name>clinicalprocess-requestworkflow</name>
 
 	<properties>
 		<cxf.version>2.1.2</cxf.version>
@@ -26,8 +26,8 @@
 	</properties>
 
 	<scm>
-		<connection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/local/itintegration/monitoring/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/local/itintegration/monitoring/trunk</developerConnection>
+		<connection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/local/clinicalprocess/requestworkflow/trunk</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/local/clinicalprocess/requestworkflow/trunk</developerConnection>
 	</scm>
 
 	<distributionManagement>
@@ -41,7 +41,6 @@
 	<!-- Modules to be created for each service -->
 	<modules>
 		<module>Schema</module>
-		<module>PingForConfiguration</module>
 	</modules>
 
 	<build>
@@ -60,7 +59,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
-                    <tagBase>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/local/itintegration/monitoring/tags</tagBase>
+                	<tagBase>https://skltpservices.googlecode.com/svn/skltpservices/ServiceInteractions/local/clinicalprocess/requestworkflow/tags</tagBase>
                 </configuration>
             </plugin> 
 		</plugins>
