@@ -29,16 +29,9 @@
   </xs:complexType>
   <xs:complexType name='ProcessRequestResponseType'>
     <xs:sequence>
-      <xs:element name='ResultCode' type='tns:ResultCodeEnum' />
+      <xs:element name='ResultCode' type='core:ResultCodeEnum' />
       <xs:element name='comment' type='xs:string' minOccurs='0' />
       <xs:any namespace='##other' processContents='lax' minOccurs='0' maxOccurs='unbounded' />
     </xs:sequence>
   </xs:complexType>
-  <xs:simpleType name='ResultCodeEnum'>
-    <xs:restriction base='xs:string'>
-      <xs:enumeration value='OK' />
-      <xs:enumeration value='ERROR' />
-      <xs:enumeration value='INFO' />
-    </xs:restriction>
-  </xs:simpleType>
 </xs:schema>
