@@ -105,6 +105,96 @@
 									</extraargs>
 									<wsdl>${schema.path}/interactions/ProcessRequestInteraction/ProcessRequestInteraction_1.0_RIVTABP21.wsdl</wsdl>
 								</wsdlOption>								
+								<wsdlOption>
+									<extraargs>
+										<extraarg>-p</extraarg>
+										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
+										<extraarg>
+											urn:riv:clinicalprocess:requestworkflow:ProcessRequestOutcome:1:rivtabp21=se.riv.clinicalprocess.requestworkflow.processrequestoutcome.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:clinicalprocess:requestworkflow:ProcessRequestOutcomeResponder:1=se.riv.clinicalprocess.requestworkflow.processrequestoutcome.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:clinicalprocess:requestworkflow:1=se.riv.clinicalprocess.requestworkflow.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:itintegration:registry:1=se.riv.itintegration.registry.v1
+										</extraarg>
+									</extraargs>
+									<wsdl>${schema.path}/interactions/ProcessRequestOutcomeInteraction/ProcessRequestOutcomeInteraction_1.0_RIVTABP21.wsdl</wsdl>
+								</wsdlOption>								
+								<wsdlOption>
+									<extraargs>
+										<extraarg>-p</extraarg>
+										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
+										<extraarg>
+											urn:riv:clinicalprocess:requestworkflow:ProcessRequestForAmendments:1:rivtabp21=se.riv.clinicalprocess.requestworkflow.processrequestforamendments.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:clinicalprocess:requestworkflow:ProcessRequestForAmendmentsResponder:1=se.riv.clinicalprocess.requestworkflow.processrequestforamendments.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:clinicalprocess:requestworkflow:1=se.riv.clinicalprocess.requestworkflow.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:itintegration:registry:1=se.riv.itintegration.registry.v1
+										</extraarg>
+									</extraargs>
+									<wsdl>${schema.path}/interactions/ProcessRequestForAmendmentsInteraction/ProcessRequestForAmendmentsInteraction_1.0_RIVTABP21.wsdl</wsdl>
+								</wsdlOption>								
+								<wsdlOption>
+									<extraargs>
+										<extraarg>-p</extraarg>
+										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
+										<extraarg>
+											urn:riv:clinicalprocess:requestworkflow:ProcessRequestForRedirection:1:rivtabp21=se.riv.clinicalprocess.requestworkflow.processrequestforredirection.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:clinicalprocess:requestworkflow:ProcessRequestForRedirectionResponder:1=se.riv.clinicalprocess.requestworkflow.processrequestforredirection.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:clinicalprocess:requestworkflow:1=se.riv.clinicalprocess.requestworkflow.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:itintegration:registry:1=se.riv.itintegration.registry.v1
+										</extraarg>
+									</extraargs>
+									<wsdl>${schema.path}/interactions/ProcessRequestForRedirectionInteraction/ProcessRequestForRedirectionInteraction_1.0_RIVTABP21.wsdl</wsdl>
+								</wsdlOption>								
+								<wsdlOption>
+									<extraargs>
+										<extraarg>-p</extraarg>
+										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
+										<extraarg>
+											urn:riv:clinicalprocess:requestworkflow:ProcessRequestReceivedConfirmation:1:rivtabp21=se.riv.clinicalprocess.requestworkflow.processrequestrecaivedconfirmation.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:clinicalprocess:requestworkflow:ProcessRequestReceivedConfirmationResponder:1=se.riv.clinicalprocess.requestworkflow.processrequestreceivedconfirmation.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:clinicalprocess:requestworkflow:1=se.riv.clinicalprocess.requestworkflow.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:itintegration:registry:1=se.riv.itintegration.registry.v1
+										</extraarg>
+									</extraargs>
+									<wsdl>${schema.path}/interactions/ProcessRequestReceivedConfirmationInteraction/ProcessRequestReceivedConfirmationInteraction_1.0_RIVTABP21.wsdl</wsdl>
+								</wsdlOption>								
+
+
 							</wsdlOptions>
 						</configuration>
 						<goals>
