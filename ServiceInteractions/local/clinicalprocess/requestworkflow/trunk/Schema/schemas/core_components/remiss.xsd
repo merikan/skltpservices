@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn:riv:qwe" xmlns="urn:riv:qwe" xmlns:gcda="AlschulerAssociates::GreenCDA" attributeFormDefault="unqualified">
+<xs:schema 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+			elementFormDefault="qualified" 
+			targetNamespace="urn:riv:clinicalprocess:requestworkflow:request" 
+			xmlns="urn:riv:clinicalprocess:requestworkflow:request" 
+			xmlns:gcda="AlschulerAssociates::GreenCDA" 
+			attributeFormDefault="unqualified">
+			
     <xs:import schemaLocation='green_ccd.xsd' namespace='AlschulerAssociates::GreenCDA' />
  
-    <xs:element name="remiss" type="ERemissTyp"/>
-    
-    <xs:complexType name="DatumIntervall">
+     <xs:complexType name="DatumIntervall">
         <xs:sequence>
             <xs:element name="startdatum" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="slutdatum" type="xs:string" minOccurs="0" maxOccurs="1"/>
@@ -194,9 +198,8 @@
             <xs:element name="fragestallningar" type="FrageStallningTyp" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="betalningsansvar" type="BetalningsansvarTyp" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>        
-    </xs:complexType>
-    
-    
+    </xs:complexType>   
+     
     <xs:simpleType name="HalsorelateratTillstand">
         <xs:annotation>
             <xs:documentation></xs:documentation>

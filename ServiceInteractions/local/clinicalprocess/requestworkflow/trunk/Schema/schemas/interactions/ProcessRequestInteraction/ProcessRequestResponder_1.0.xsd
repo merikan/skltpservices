@@ -23,7 +23,7 @@
   <xs:element name='ProcessRequestResponse' type='tns:ProcessRequestResponseType' />
   <xs:complexType name='ProcessRequestType'>
     <xs:sequence>
-      <xs:element name='SomeElement' type='core:SomeElementType' />
+      <xs:element ref="core:request" />
       <xs:any namespace='##other' processContents='lax' minOccurs='0' maxOccurs='unbounded' />
     </xs:sequence>
   </xs:complexType>
