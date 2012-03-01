@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+			elementFormDefault="qualified" 
+			targetNamespace="urn:riv:clinicalprocess:requestworkflow:request" 
+			xmlns="urn:riv:clinicalprocess:requestworkflow:request" 
+			xmlns:gcda="AlschulerAssociates::GreenCDA" 
+			attributeFormDefault="unqualified">
+			
+    <xs:import schemaLocation='green_ccd.xsd' namespace='AlschulerAssociates::GreenCDA' />
+ 
+     <xs:complexType name="DatumIntervall">
+        <xs:sequence>
+            <xs:element name="startdatum" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="slutdatum" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TelefonNummerTyp">
+        <xs:sequence>
+            <xs:element name="telekomadress" type="xs:string"/>
+            <xs:element name="datumfortelekomadress" type="gcda:ts"/>
+            <xs:element name="typavtelekomadress" type="gcda:ce"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AdressTyp">
+        <xs:sequence>
+            <xs:element name="utdelningsadress1" type="xs:string"/>
+            <xs:element name="utdelningsadress2" type="xs:string"/>
+            <xs:element name="utdelningsadress3" type="xs:string"/>
+            <xs:element name="postnummer" type="xs:string"/>
+            <xs:element name="postort" type="xs:string"/>
+            <xs:element name="datumforadress" type="gcda:ivlTs"/>
+            <xs:element name="typavadress" type="gcda:ce"/>            
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="KontaktuppgiftTyp">
+        <xs:sequence>
+            <xs:element name="telefonnummmer" type="TelefonNummerTyp" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="mobiltelefonnummer" type="TelefonNummerTyp" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="folkbokforingsadress" type="AdressTyp"/>
+            <xs:element name="tillfalligadress" type="AdressTyp"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="NamnOchPersonIdentitetTyp">
+        <xs:sequence>
+            <xs:element name="namn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="identitet" type="gcda:ii" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="SlaktskapTyp">
+        <xs:sequence>
+            <xs:element name="biologiskmor" type="NamnOchPersonIdentitetTyp" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="biologiskfar" type="NamnOchPersonIdentitetTyp" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="adoptivmor" type="NamnOchPersonIdentitetTyp" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="adoptivfar" type="NamnOchPersonIdentitetTyp" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="kontaktuppgift" type="KontaktuppgiftTyp" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ForetradareTyp">
+        <xs:sequence>
+            <xs:element name="vardnadshavare" type="NamnOchPersonIdentitetTyp" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="forvaltare" type="NamnOchPersonIdentitetTyp" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="kontaktuppgift" type="KontaktuppgiftTyp" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="SprakligKommunikationTyp">
+        <xs:sequence>
+            <xs:element name="kommentarTolkbehov" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="UppmarksamhetsinformationTyp">
+        <xs:sequence>
+            <xs:element name="uppmarksamhetsText" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="kliniskInformation" type="KlininskInformationTyp" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>    
+    
+    <xs:complexType name="ERemissSambandTyp">
+        <xs:sequence>
+            <xs:element name="beskrivning" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ERemissStatusTyp">
+        <xs:sequence>
+            <xs:element name="eremissstatus" type="gcda:ce"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RemissSpecifikRollTyp">
+        <xs:sequence>
+            <xs:element name="rollinstansid" type="gcda:ii"/>
+            <xs:element name="remissrolltyp" type="gcda:ce"/>
+            <xs:element name="personid" type="gcda:ii" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="personnamn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="personalid" type="gcda:ii" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="personalnamn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="enhetid" type="gcda:ii" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="enhetnamn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="typavhalsoochsjukvardspersonal" type="gcda:ce" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ERemissMomentTyp">
+        <xs:sequence>
+            <xs:element name="eremissmomentid" type="gcda:ii"/>
+            <xs:element name="eremissmomenttyp" type="gcda:ce"/>
+            <xs:element name="momentstatus" type="gcda:ce"/>
+            <xs:element name="momenttidpunkt" type="gcda:ts"/>
+            <xs:element name="remissspecifikroll" type="RemissSpecifikRollTyp"/>
+            <xs:element name="remissstatus" type="ERemissStatusTyp" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="AtgardTyp">
+        <xs:sequence>
+            <xs:element name="atgardid" type="gcda:ii"/>
+            <xs:element name="atgardtyp" type="gcda:ce" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="atgardbeskrivning" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="betalningsansvar" type="BetalningsansvarTyp" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="BetalningsansvarTyp">
+        <xs:sequence>
+            <xs:element name="betalningsansvar" type="gcda:ii" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="betalningsansvarnamn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="giltighetstid" type="gcda:ivlTs" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="betalningsansvarstyp" type="gcda:ce"/>
+            <xs:element name="betalningsansvarsbeskrivning" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="FrageStallningTyp">
+        <xs:sequence>
+            <xs:element name="fragestallningsid" type="gcda:ii"/>
+            <xs:element name="fragestallningstext" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="kliniskinformation" type="KlininskInformationTyp" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="KlininskInformationTyp">
+        <xs:sequence>
+            <xs:element name="kliniskinformationsid" type="gcda:ii"/>
+            <xs:element name="kliniskinformationsbilaga" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="tillstand" type="gcda:ce" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="beskrivning" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="atgarder" type="AtgardTyp" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="PatientTyp">
+        <xs:sequence>
+            <xs:element name="personid" type="gcda:ii"/>
+            <xs:element name="efternamn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="mellannamn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="tilltalsnamn" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="fornamn"  type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="fodelsetidpunkt" type="gcda:ts" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="kon" type="gcda:ce" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="medborgarskap" type="gcda:ce" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="kontaktuppgift" type="KontaktuppgiftTyp" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="slaktskap" type="SlaktskapTyp" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="foretradare" type="ForetradareTyp" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="sprakligkommunikation" type="SprakligKommunikationTyp" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="uppmarksamhetsInformation" type="UppmarksamhetsinformationTyp" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ERemissTyp">
+        <xs:sequence>
+            <xs:element name="eremissid" type="gcda:ii"/>
+            <xs:element name="versionsid" type="gcda:ii"/>
+            <xs:element name="versionstidpunkt" type="gcda:ts" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="versionsorsak" type="gcda:ce" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="versionsorsaktext" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="remissdatum" type="gcda:ts" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="efterfragadtidforutforande" type="gcda:ivlTs" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="onskemalomremissmottagare" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="kompletterandeadministrativinformation" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="eremisstyp" type="gcda:ce" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="signatur" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="signerad" type="xs:boolean"/>
+            <xs:element name="signeringstid" type="gcda:ts" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="patient" type="PatientTyp"/>
+            <xs:element name="remissamband" type="ERemissSambandTyp" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="remisstatus" type="ERemissStatusTyp"/>
+            <xs:element name="involverarroller" type="RemissSpecifikRollTyp" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="eremissmoment" type="ERemissMomentTyp" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="atgarder" type="AtgardTyp" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="fragestallningar" type="FrageStallningTyp" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="betalningsansvar" type="BetalningsansvarTyp" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>        
+    </xs:complexType>   
+     
+    <xs:simpleType name="HalsorelateratTillstand">
+        <xs:annotation>
+            <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="XX"/>
+        </xs:restriction>      
+    </xs:simpleType>
+        
+</xs:schema>
