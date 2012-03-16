@@ -34,7 +34,7 @@ On Windos terminal run _`<path to script folder> groovy VirtualiseringGenerator.
 
 You need to install Maven service archetype in order to run the script
 
-1. cd /skltpservices/tools/generators/archetypes/trunk/ServiceArchetype 
+1. cd `/skltpservices/tools/generators/archetypes/trunk/ServiceArchetype`
 
 2. mvn install
 
