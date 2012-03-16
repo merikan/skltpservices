@@ -32,13 +32,32 @@ public class ArgosTicket {
 			String systemIp) {
 		String retval = "";
 		if (launcher != null) {
-			ApseAuthorizationAttributes authoAttr = new ApseAuthorizationAttributes(rollnamn, hsaID, katalog,
-					forskrivarkod, legitimationskod, Yrkesgrupp, befattningskod, fornamn, efternamn, arbetsplatskod,
-					arbetsplatsnamn, postadress, postnummer, postort, telefonnummer);
+			ApseAuthorizationAttributes authoAttr = new ApseAuthorizationAttributes();
+			authoAttr.setArbetsplats(arbetsplatsnamn);
+			authoAttr.setArbetsplatskod(arbetsplatskod);
+			authoAttr.setBefattningskod(befattningskod);
+			authoAttr.setEfternamn(efternamn);
+			authoAttr.setFornamn(fornamn);
+			authoAttr.setForskrivarkod(forskrivarkod);
+			authoAttr.setKatalog(katalog);
+			authoAttr.setKatalogId(hsaID);
+			authoAttr.setLegitimationskod(legitimationskod);
+			authoAttr.setPostadress(postadress);
+			authoAttr.setPostnummer(postnummer);
+			authoAttr.setPostort(postort);
+			authoAttr.setRollnamn(rollnamn);
+			authoAttr.setTelefonnummer(telefonnummer);
+			authoAttr.setYrkeskod(Yrkesgrupp);
 
-			ApseAuthenticationAttributes authnAttr = new ApseAuthenticationAttributes(hsaID, organisationsnummer);
+			ApseAuthenticationAttributes authnAttr = new ApseAuthenticationAttributes();
+			authnAttr.setDirectoryID(hsaID);
+			authnAttr.setOrganisationID(organisationsnummer);
 
-			ApseInfoAttributes infoAttr = new ApseInfoAttributes(requestId, systemnamn, systemversion, systemIp);
+			ApseInfoAttributes infoAttr = new ApseInfoAttributes();
+			infoAttr.setRequestID(requestId);
+			infoAttr.setSystemIP(systemIp);
+			infoAttr.setSystemNamn(systemnamn);
+			infoAttr.setSystemVersion(systemversion);
 
 			launcher.setIncomingAuthorizationAttributes(authoAttr);
 			launcher.setIncomingAuthenticationAttributes(authnAttr);

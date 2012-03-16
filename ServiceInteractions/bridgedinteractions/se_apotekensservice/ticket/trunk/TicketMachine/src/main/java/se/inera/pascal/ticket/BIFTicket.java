@@ -8,14 +8,15 @@ import org.apache.axis.encoding.Base64;
 
 import se.inera.pascal.ticket.core.ApseAuthorizationAttributes;
 
-public class BIFTicket implements ServiceLifecycle{
-	
+public class BIFTicket implements ServiceLifecycle {
+
 	private GenerateTicket gt;
 	private String requestIP = "";
-	
-	public BIFTicket(){
+
+	public BIFTicket() {
 		gt = new GenerateTicket();
 	}
+
 	@Override
 	public void destroy() {
 	}
@@ -26,48 +27,78 @@ public class BIFTicket implements ServiceLifecycle{
 		requestIP = (String) ctx.getMessageContext().getProperty("remoteaddr");
 	}
 
-	public WSReturn getTicket(String b64BIFTicket,
-			String rollnamn,
-			String katalogId,
-			String katalog,
-			String forskrivarkod, 
-			String legitimationskod, 
-			String yrkeskod, 
-			String befattningskod, 
-			String fornamn,
-			String efternamn,
-			String arbetsplatskod,
-			String arbetsplats,
-			String postadress,
-			String postnummer,
-			String postort,
-			String telefonnummer)
-{
+	public WSReturn getTicket(String b64BIFTicket, String rollnamn, String katalogId, String katalog,
+			String forskrivarkod, String legitimationskod, String yrkeskod, String befattningskod, String fornamn,
+			String efternamn, String arbetsplatskod, String arbetsplats, String postadress, String postnummer,
+			String postort, String telefonnummer) {
 		WSReturn retVal = null;
 		gt.setIP(requestIP);
-		if ( b64BIFTicket == null ){ b64BIFTicket="";}
+		if (b64BIFTicket == null) {
+			b64BIFTicket = "";
+		}
 		String bifTicket = new String(Base64.decode(b64BIFTicket));
-		
-		if ( rollnamn == null ){ rollnamn="";}
-		if ( katalogId == null ){ katalogId="";}
-		if ( katalog == null ){ katalog="";}
-		if ( forskrivarkod == null ){ forskrivarkod="";}
-		if ( legitimationskod == null ){ legitimationskod="";}
-		if ( befattningskod == null ){ befattningskod="";}
-		if ( fornamn == null ){ fornamn="";}
-		if ( efternamn == null ){ efternamn="";}
-		if ( arbetsplatskod == null ){ arbetsplatskod="";}
-		if ( arbetsplats == null ){ arbetsplats="";}
-		if ( postadress == null ){ postadress="";}
-		if ( postort == null ){ postort="";}
-		if ( postnummer == null ){ postnummer="";}
-		if ( telefonnummer == null ){ telefonnummer="";}
-		ApseAuthorizationAttributes authoAttr = 
-			new ApseAuthorizationAttributes(rollnamn, katalogId, katalog, forskrivarkod, legitimationskod,
-											yrkeskod, befattningskod, fornamn, efternamn, arbetsplatskod, 
-											arbetsplats, postadress, postnummer, postort, telefonnummer);
+
+		if (rollnamn == null) {
+			rollnamn = "";
+		}
+		if (katalogId == null) {
+			katalogId = "";
+		}
+		if (katalog == null) {
+			katalog = "";
+		}
+		if (forskrivarkod == null) {
+			forskrivarkod = "";
+		}
+		if (legitimationskod == null) {
+			legitimationskod = "";
+		}
+		if (befattningskod == null) {
+			befattningskod = "";
+		}
+		if (fornamn == null) {
+			fornamn = "";
+		}
+		if (efternamn == null) {
+			efternamn = "";
+		}
+		if (arbetsplatskod == null) {
+			arbetsplatskod = "";
+		}
+		if (arbetsplats == null) {
+			arbetsplats = "";
+		}
+		if (postadress == null) {
+			postadress = "";
+		}
+		if (postort == null) {
+			postort = "";
+		}
+		if (postnummer == null) {
+			postnummer = "";
+		}
+		if (telefonnummer == null) {
+			telefonnummer = "";
+		}
+		ApseAuthorizationAttributes authoAttr = new ApseAuthorizationAttributes();
+		authoAttr.setArbetsplats(null);
+		authoAttr.setArbetsplatskod(arbetsplatskod);
+		authoAttr.setBefattningskod(befattningskod);
+		authoAttr.setEfternamn(efternamn);
+		authoAttr.setFornamn(fornamn);
+		authoAttr.setForskrivarkod(forskrivarkod);
+		authoAttr.setKatalog(katalog);
+		authoAttr.setKatalogId(katalogId);
+		authoAttr.setLegitimationskod(legitimationskod);
+		authoAttr.setPostadress(postadress);
+		authoAttr.setPostnummer(postnummer);
+		authoAttr.setPostort(postort);
+		authoAttr.setRollnamn(rollnamn);
+		authoAttr.setTelefonnummer(telefonnummer);
+		authoAttr.setYrkeskod(yrkeskod);
+
 		gt.setIncomingAuthorizationAttributes(authoAttr);
-		retVal =  gt.getTicket(bifTicket, true);
+		retVal = gt.getTicket(bifTicket, true);
 		return retVal;
 	}
 }

@@ -6,10 +6,6 @@ public class ApseAuthenticationAttributes {
 
 	public ApseAuthenticationAttributes(){
 	}
-	public ApseAuthenticationAttributes(String directoryID,String organisationID){
-		this.directoryID = directoryID;
-		this.organisationID = organisationID;
-	}
 
 	public void setDirectoryID(String directoryID){
 		this.directoryID = directoryID;
