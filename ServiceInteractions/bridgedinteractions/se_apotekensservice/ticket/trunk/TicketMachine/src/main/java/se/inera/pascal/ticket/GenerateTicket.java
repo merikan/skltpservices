@@ -14,15 +14,15 @@ import se.inera.pascal.ticket.core.impl.SAML2AssertionTicketGeneratorLauncher;
 
 //utöka implementationen av ServiceLifecycle för att på ett enkelt sätt
 //logga inkommande/klientens IP-nummer
-public class GenerateTicket implements ServiceLifecycle{
-	
+public class GenerateTicket implements ServiceLifecycle {
+
 	private static Logger logger = LoggerFactory.getLogger(GenerateTicket.class);
-	
+
 	private SAML2AssertionTicketGeneratorLauncher launcher = null;
 	private String launcherErrorString = "";
 	private String requestIP = "";
 
-	public GenerateTicket(){
+	public GenerateTicket() {
 		try {
 			launcher = new SAML2AssertionTicketGeneratorLauncher();
 		} catch (Exception e) {
@@ -31,96 +31,106 @@ public class GenerateTicket implements ServiceLifecycle{
 			logger.error(launcherErrorString);
 		}
 	}
+
 	@Override
 	public void destroy() {
 	}
+
 	@Override
 	public void init(Object obj) throws ServiceException {
 		ServletEndpointContext ctx = (ServletEndpointContext) obj;
 		requestIP = (String) ctx.getMessageContext().getProperty("remoteaddr");
 	}
-	//används bara för BIF/LkTj-ticket för att sätta klientens IP
-	protected void setIP(String ip){
+
+	// används bara för BIF/LkTj-ticket för att sätta klientens IP
+	protected void setIP(String ip) {
 		requestIP = ip;
-		//TODO: använda som infoAttribut?
+		// TODO: använda som infoAttribut?
 	}
-	//TODO: den skall tas bort som exponerad webservice före release 
-	//denna metod/webservice används enbart i utvecklings- och testsyfte,
-	public WSReturn getTicket(String rollnamn,
-							String katalogId,
-							String katalog,
-							String forskrivarkod, 
-							String legitimationskod, 
-							String yrkeskod, 
-							String befattningskod, 
-							String fornamn,
-							String efternamn,
-							String arbetsplatskod,
-							String arbetsplats,
-							String postadress,
-							String postnummer,
-							String postort,
-							String telefonnummer)
-	{
-		WSReturn retVal=null;
+
+	// TODO: den skall tas bort som exponerad webservice före release
+	// denna metod/webservice används enbart i utvecklings- och testsyfte,
+	public WSReturn getTicket(String rollnamn, String katalogId, String katalog, String forskrivarkod,
+			String legitimationskod, String yrkeskod, String befattningskod, String fornamn, String efternamn,
+			String arbetsplatskod, String arbetsplats, String postadress, String postnummer, String postort,
+			String telefonnummer) {
+		WSReturn retVal = null;
 		String logMess = "Incoming IP: " + requestIP;
 		logger.info(logMess);
-		
-		//fil används enbart i testsyfte
-		if( rollnamn.startsWith("file:") ){
+
+		// fil används enbart i testsyfte
+		if (rollnamn.startsWith("file:")) {
 			String file = rollnamn.substring(5);
 			analyzeXML(file, false, true);
-		}else{
-			ApseAuthorizationAttributes authoAttr = 
-				new ApseAuthorizationAttributes(rollnamn, katalogId, katalog, forskrivarkod, legitimationskod,
-												yrkeskod, befattningskod, fornamn, efternamn, arbetsplatskod, 
-												arbetsplats, postadress, postnummer, postort, telefonnummer);
+		} else {
+			ApseAuthorizationAttributes authoAttr = new ApseAuthorizationAttributes();
+			authoAttr.setArbetsplats(arbetsplats);
+			authoAttr.setArbetsplatskod(arbetsplatskod);
+			authoAttr.setBefattningskod(befattningskod);
+			authoAttr.setEfternamn(efternamn);
+			authoAttr.setFornamn(fornamn);
+			authoAttr.setForskrivarkod(forskrivarkod);
+			authoAttr.setKatalog(katalog);
+			authoAttr.setKatalogId(katalogId);
+			authoAttr.setLegitimationskod(legitimationskod);
+			authoAttr.setPostadress(postadress);
+			authoAttr.setPostnummer(postnummer);
+			authoAttr.setPostort(postort);
+			authoAttr.setRollnamn(rollnamn);
+			authoAttr.setTelefonnummer(telefonnummer);
+			authoAttr.setYrkeskod(yrkeskod);
+
 			setIncomingAuthorizationAttributes(authoAttr);
 		}
-		if ( launcher != null){
+		if (launcher != null) {
 			launcher.configureAttributes();
 		}
 		retVal = getReturnValue();
 		return retVal;
 	}
-	
-	//anropas av LkTjTicket/BIFTicket 
-	protected WSReturn getTicket(String incomingTicket, boolean isBIF){
+
+	// anropas av LkTjTicket/BIFTicket
+	protected WSReturn getTicket(String incomingTicket, boolean isBIF) {
 		String logMess = "Incoming IP: " + requestIP;
 		logger.info(logMess);
 		logger.info(incomingTicket);
 		analyzeXML(incomingTicket, isBIF);
-		if ( launcher != null){
+		if (launcher != null) {
 			launcher.configureAttributes();
 		}
 		return getReturnValue();
 	}
-	
-	//anropas av LkTjTicket/BIFTicket
-	//sätter authorization-attributens default-värden. Ändras eventuell av värdena i biljetten
-	protected void setIncomingAuthorizationAttributes(ApseAuthorizationAttributes attrs){
-		if ( launcher != null){
+
+	// anropas av LkTjTicket/BIFTicket
+	// sätter authorization-attributens default-värden. Ändras eventuell av
+	// värdena i biljetten
+	protected void setIncomingAuthorizationAttributes(ApseAuthorizationAttributes attrs) {
+		if (launcher != null) {
 			launcher.setIncomingAuthorizationAttributes(attrs);
 		}
 	}
-	protected void setIncomingAuthenticationAttributes(ApseAuthenticationAttributes attrs){
-		if ( launcher != null){
+
+	protected void setIncomingAuthenticationAttributes(ApseAuthenticationAttributes attrs) {
+		if (launcher != null) {
 			launcher.setIncomingAuthenticationAttributes(attrs);
 		}
 	}
-	protected void setIncomingInfoAttributes(ApseInfoAttributes attrs){
-		if ( launcher != null){
+
+	protected void setIncomingInfoAttributes(ApseInfoAttributes attrs) {
+		if (launcher != null) {
 			launcher.setIncomingInfoAttributes(attrs);
 		}
 	}
-	//analysera inkommande xml-sträng
-	private void analyzeXML(String xml, boolean isBIF){
-		analyzeXML(xml,isBIF,false);
+
+	// analysera inkommande xml-sträng
+	private void analyzeXML(String xml, boolean isBIF) {
+		analyzeXML(xml, isBIF, false);
 	}
-	private void analyzeXML(String xml, boolean isBIF,boolean isFile){
+
+	private void analyzeXML(String xml, boolean isBIF, boolean isFile) {
 		try {
-			if ( launcher != null){
-				launcher.analyzeXML(xml,isBIF,isFile);
+			if (launcher != null) {
+				launcher.analyzeXML(xml, isBIF, isFile);
 			}
 		} catch (Exception e) {
 			launcher = null;
@@ -128,17 +138,18 @@ public class GenerateTicket implements ServiceLifecycle{
 			logger.error(launcherErrorString);
 		}
 	}
-	//Hämtar datat från launcher-objektet och skapar retur-värdet
-	private WSReturn getReturnValue(){
+
+	// Hämtar datat från launcher-objektet och skapar retur-värdet
+	private WSReturn getReturnValue() {
 		String ticket;
 		String validTo;
-		if ( launcher != null){
+		if (launcher != null) {
 			ticket = launcher.getTicket(true);
 			validTo = launcher.getValidToString();
-		}else{
+		} else {
 			ticket = launcherErrorString;
 			validTo = "";
 		}
-		return new WSReturn(ticket,validTo);
+		return new WSReturn(ticket, validTo);
 	}
 }
