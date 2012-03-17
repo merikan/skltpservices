@@ -59,7 +59,7 @@
 		<dependency>
 			<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
 			<artifactId>ArgosHeaderTicketTransformer</artifactId>
-			<version>1.1</version>
+			<version>1.2</version>
 		</dependency>
 		
 		<dependency>
