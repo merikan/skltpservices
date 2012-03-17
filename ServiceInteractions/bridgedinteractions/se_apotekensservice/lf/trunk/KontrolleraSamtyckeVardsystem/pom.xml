@@ -13,12 +13,12 @@
 	<parent>
     <artifactId>lf</artifactId>
     <groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2</version>
   </parent>
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.lf</groupId>
 	<artifactId>KontrolleraSamtyckeVardsystem</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2</version>
 	<packaging>pom</packaging>
 	<name>KontrolleraSamtyckeVardsystem bridged service</name>
 
