@@ -10,7 +10,7 @@
 	<parent>
     	<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
 		<artifactId>Ticket</artifactId>
-		<version>1.2-SNAPSHOT</version>
+		<version>1.2</version>
   	</parent>
 
 	<properties>
