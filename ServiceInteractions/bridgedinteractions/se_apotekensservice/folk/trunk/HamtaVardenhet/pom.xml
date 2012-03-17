@@ -13,12 +13,12 @@
 	<parent>
     <artifactId>folk</artifactId>
     <groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2</version>
   </parent>
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.folk</groupId>
 	<artifactId>HamtaVardenhet</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2</version>
 	<packaging>pom</packaging>
 	<name>HamtaVardenhet bridged transformer service</name>
 
