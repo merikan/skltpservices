@@ -1,0 +1,4 @@
+TicketMachine och ArgosHeaderTicketTransformer är två komponenter
+som används av Apoken Service för att skapa SAML biljetter.
+I nuläget används dessa tjänster avv alla bryggare tjänster
+som ligger under se_apotekenservice.
