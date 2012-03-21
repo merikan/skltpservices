@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import se.fk.vardgivare.sjukvard.taemotfragaresponder.v1.TaEmotFragaResponseType;
 import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionresponder.v1.ReceiveMedicalCertificateQuestionResponseType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
 
 public class VardResponse2FkTransformer extends AbstractMessageAwareTransformer
 {
@@ -78,7 +79,17 @@ public class VardResponse2FkTransformer extends AbstractMessageAwareTransformer
 				TaEmotFragaResponseType outResponse = new TaEmotFragaResponseType();
 				
 				// Handle error if ResultCode == ERROR!
-	            	            	            	            
+				if (inResponse.getResult().getResultCode().equals(ResultCodeEnum.ERROR)) {
+					// Get Error text if any
+					String errorText ="";
+					if (inResponse.getResult().getErrorText() != null && inResponse.getResult().getErrorText().length() > 0) {
+						errorText = inResponse.getResult().getErrorText();
+					}
+					createSoapFault("Error: " + errorText, result);
+					logger.debug("Return SOAP Envelope: {}", result.toString());
+					return result.toString();					
+				}
+				
 				// Transform the JAXB object into a XML payload
 	            StringWriter writer = new StringWriter();
 	        	Marshaller marshaller = JAXBContext.newInstance(TaEmotFragaResponseType.class).createMarshaller();
@@ -105,7 +116,7 @@ public class VardResponse2FkTransformer extends AbstractMessageAwareTransformer
 	}
 			
 	private void createSoapFault(String errorText, StringBuffer result) {
-		result.append("<soap:Fault>");
+		result.append("<soap:Fault xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'>");
 		result.append("<faultcode>soap:Server</faultcode>");
 		result.append("<faultstring>VP009 Exception when calling the service producer: " + errorText + "</faultstring>");
 		result.append("</soap:Fault>");

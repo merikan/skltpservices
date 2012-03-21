@@ -44,11 +44,17 @@ public class RecMedCertQuestionImpl implements ReceiveMedicalCertificateQuestion
 			ReceiveMedicalCertificateQuestionType parameters) {
 		try {
 			ReceiveMedicalCertificateQuestionResponseType response = new ReceiveMedicalCertificateQuestionResponseType();
-			
-			// Ping response
+
 			ResultOfCall resCall = new ResultOfCall();
-			resCall.setResultCode(ResultCodeEnum.OK);
-			response.setResult(resCall);
+
+			// Check if to send an ERROR
+			if (parameters.getQuestion().getLakarutlatande().getPatient().getPersonId().getExtension().equalsIgnoreCase("19101010-1234")) {
+				resCall.setResultCode(ResultCodeEnum.ERROR);
+				response.setResult(resCall);				
+			} else {
+				resCall.setResultCode(ResultCodeEnum.OK);
+				response.setResult(resCall);				
+			}
 
 			return response;
 		} catch (RuntimeException e) {
