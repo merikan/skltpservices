@@ -45,10 +45,16 @@ public class RecMedCertAnswerImpl implements ReceiveMedicalCertificateAnswerResp
 		try {
 			ReceiveMedicalCertificateAnswerResponseType response = new ReceiveMedicalCertificateAnswerResponseType();
 			
-			// Ping response
 			ResultOfCall resCall = new ResultOfCall();
-			resCall.setResultCode(ResultCodeEnum.OK);
-			response.setResult(resCall);
+
+			// Check if to send an ERROR
+			if (parameters.getAnswer().getLakarutlatande().getPatient().getPersonId().getExtension().equalsIgnoreCase("19101010-1234")) {
+				resCall.setResultCode(ResultCodeEnum.ERROR);
+				response.setResult(resCall);				
+			} else {
+				resCall.setResultCode(ResultCodeEnum.OK);
+				response.setResult(resCall);				
+			}
 
 			return response;
 		} catch (RuntimeException e) {

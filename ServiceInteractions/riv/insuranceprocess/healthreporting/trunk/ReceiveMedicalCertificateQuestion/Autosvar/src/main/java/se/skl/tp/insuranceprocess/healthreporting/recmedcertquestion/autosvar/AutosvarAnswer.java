@@ -119,9 +119,9 @@ public class AutosvarAnswer extends Thread {
 		InnehallType svar = new InnehallType();
 		StringBuffer autoSvar = new StringBuffer();
 		autoSvar.append("Detta är en automatisk notifiering från vårdens nationella it-system.");
-		autoSvar.append("/n");
+		autoSvar.append(System.getProperty("line.separator"));
 		autoSvar.append("Just detta meddelande gick inte att leverera till avsedd mottagare på grund av ett fel och kommer därför inte att levereras.");
-		autoSvar.append("/n");
+		autoSvar.append(System.getProperty("line.separator"));
 		autoSvar.append("För att inte fördröja handläggningen, så ber vi er i detta fall vara vänlig att kommunicera med avsedd mottagare i vården enligt gällande manuella rutiner, dvs genom telefon eller brev.");
 		svar.setMeddelandeText(autoSvar.toString());
 		svar.setSigneringsTidpunkt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()));
