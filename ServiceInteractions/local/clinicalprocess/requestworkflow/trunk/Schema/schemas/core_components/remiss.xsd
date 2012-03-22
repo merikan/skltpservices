@@ -11,7 +11,7 @@
     <xs:complexType name="TelefonNummerTyp">
         <xs:sequence>
             <xs:element name="telekomadress" type="xs:string"/>
-            <xs:element name="datumfortelekomadress" type="gcda:ivlTs"/>
+            <!-- <xs:element name="datumfortelekomadress" type="gcda:ivlTs"/> -->
             <xs:element name="typavtelekomadress" type="gcda:ce"/>
         </xs:sequence>
     </xs:complexType>

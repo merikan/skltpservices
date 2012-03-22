@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--SLL eRemiss exemplelmeddelande "lättviktsformat" SendReferral - normalscenario, Gustav Alvfeldt-->
+<remiss xmlns:gcda="AlschulerAssociates::GreenCDA" xmlns:gcdan="AlschulerAssociates::GreenCDA::Narrative" xmlns="urn:riv:qwe" xsi:schemaLocation="urn:riv:qwe remiss_gustav.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<eremissid root="1.2.752.97.x.x.x.x" extension="abc123"/>
+	<versionsid root="1.2.752.97.x.x.x.x" extension="1"/>
+	<versionstidpunkt value="201203011636"/>
+	<!-- TODO code=? -->
+	<versionsorsak code="NR" displayName="Ändrad remiss" codeSystem="1.2.752.97.3.2.8.5"/>
+	<versionsorsaktext>Komplettering av remiss efter utförd MR-undersökning.</versionsorsaktext>
+	<remissdatum value="20120315"/>
+	<efterfragadtidforutforande>
+		<gcda:low value="20120415"/>
+		<gcda:high value="20120831"/>
+	</efterfragadtidforutforande>
+	<onskemalomremissmottagare>Specialistläkare inom ortopedi</onskemalomremissmottagare>
+	<kompletterandeadministrativinformation>Patienten är bortrest utomlands 2012-03-15 – 2012-04-14 och kan därför kallas tidigast 2012-04-15</kompletterandeadministrativinformation>
+	<eremisstyp code="4" displayName="allmänremiss" codeSystem="1.2.752.129.2.2.2.24"/>
+	<signatur>Jonas Dahl</signatur>
+	<signerad>true</signerad>
+	<signeringstid value="201204301233"/>
+
+	<!-- Patient -->
+	<patient>
+		<!--Personnummer, samordningsnummer eller reservnummer. OIDarna avgör vilken typ av identifikation det är-->
+		<personid root="1.2.752.97.3.1.2" extension="197907179191"/>
+		<efternamn>Testsson</efternamn>
+		<mellannamn>Anders</mellannamn>
+		<tilltalsnamn>Vårdtest</tilltalsnamn>
+		<fornamn>Vårdtest</fornamn>
+		<fodelsetidpunkt value="19790917"/>
+		<kon code="1" displayName="man" codeSystem="1.2.752.129.2.2.1.1"/>
+		<!-- TODO -->
+		<kontaktuppgift>
+			<telefonnummmer>
+				<telekomadress>+468123123</telekomadress>
+				<typavtelekomadress code="1" displayName="telefon" codeSystem="1.2.752.129.2.2.1.30"/>
+			</telefonnummmer>
+			<mobiltelefonnummer>
+				<telekomadress>+46706123123</telekomadress>
+				<typavtelekomadress code="3" displayName="mobiltelefon" codeSystem="1.2.752.129.2.2.1.30"/>
+			</mobiltelefonnummer>
+			<folkbokforingsadress>
+				<utdelningsadress1>Tolvisgatan 12</utdelningsadress1>
+				<postnummer>12121</postnummer>
+				<postort>Tolvaholm</postort>
+				<typavadress code="1" displayName="folkbokföringsadress" codeSystem="1.2.752.129.2.2.1.20"/>
+			</folkbokforingsadress>
+		</kontaktuppgift>
+		<sprakligkommunikation>
+			<kommentarTolkbehov>Behöver finsk tolk.</kommentarTolkbehov>
+		</sprakligkommunikation>
+		<uppmarksamhetsInformation>
+			<uppmarksamhetsText>Har hepatit C.</uppmarksamhetsText>
+			<kliniskInformation>
+				<kliniskinformationsid root="1.2.752.97.x.x.x.x" extension="123"/>
+				<tillstand code="KOD för allergi mot XXX" displayName="Allergi mot XXX" codeSystem="1.2.752.97.x.x.x.x"/>
+				<beskrivning>Patienten blir blå och låter som en orm när den förs i kontakt med XXX</beskrivning>
+			</kliniskInformation>
+		</uppmarksamhetsInformation>
+	</patient>
+	<remisstatus>
+		<eremissstatus code="SK" displayName="Skickad" codeSystem="1.2.752.97.3.2.8.3"/>
+	</remisstatus>
+	<involverarroller>
+		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
+		<remissrolltyp code="RT" displayName="Remittent" codeSystem="1.2.752.97.3.2.8.4"/>
+		<personalid root="1.2.752.97.3.1.1" extension="HSAid"/>
+		<personalnamn>Jonas Dahl</personalnamn>
+		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
+		<enhetnamn>Hässelby vårdcentral</enhetnamn>
+	</involverarroller>
+	<involverarroller>
+		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
+		<remissrolltyp code="RM" displayName="Remissmottagare" codeSystem="1.2.752.97.3.2.8.4"/>
+		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
+		<enhetnamn>Capio S:t Görans sjukhus, Ortopedmottagningen</enhetnamn>
+	</involverarroller>
+	<eremissmoment>
+		<eremissmomentid root="1.2.752.97.x.x.x.x" extension="123"/>
+		<eremissmomenttyp code="SE" displayName="Skicka ny version av e-remiss" codeSystem="1.2.752.97.3.2.8.1"/>
+		<momentstatus code="9" displayName="avklarad" codeSystem="1.2.752.129.2.2.2.27"/>
+		<momenttidpunkt value="201204301200"/>
+		<remissspecifikroll>
+			<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
+			<remissrolltyp code="RT" displayName="Remittent" codeSystem="1.2.752.97.3.2.8.4"/>
+			<personalid root="1.2.752.97.3.1.1" extension="HSAid"/>
+			<personalnamn>Jonas Dahl</personalnamn>
+			<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
+			<enhetnamn>Hässelby VC</enhetnamn>
+		</remissspecifikroll>
+		<!--Måste vara samma status värde i denna remissStatus som i remissStatus ovan!-->
+		<remissstatus>
+			<eremissstatus code="SK" displayName="Skickad" codeSystem="1.2.752.97.3.2.8.3"/>
+		</remissstatus>
+	</eremissmoment>
+	<fragestallningar>
+		<fragestallningsid root="1.2.752.97.x.x.x.x" extension="123"/>
+		<fragestallningstext>Meniskskada? Korsbandsskada?</fragestallningstext>
+		<kliniskinformation>
+			<kliniskinformationsid root="1.2.752.97.x.x.x.x" extension="123"/>
+			<tillstand code="NGN bra kod för ett tillstånd" displayName="Tillstånd XXX" codeSystem="1.2.752.97.x.x.x.x"/>
+			<beskrivning>Han springer runt i ett tomt hotell med en yxa och skriker, det är tillståndet det!</beskrivning>
+			<atgarder>
+				<atgardid root="1.2.752.97.x.x.x.x" extension="123"/>
+				<atgardtyp code="NGN bra kod för en åtgärd som fixar ovan givna problembild" displayName="Åtgärdskod XXX" codeSystem="1.2.752.97.x.x.x.x"/>
+				<atgardbeskrivning>33-årig blandmissbrukande man som ramlade omkring 1 februari i berusat tillstånd och på något sätt skadat höger knä. Ej sökt vård. Sedan dess har patienten haft intermittent svullnad av höger knä och låsningsfenomen. I status noteras måttlig hydrops, kraftig smärta vid meniskprovokationstest och misstänkt främre draglåda. Röntgenundersökning har inte visat något patologiskt. 
+
+Tillägg 2012-04-30:
+Har nu även genomgått MR av knäleden som visade ruptur av mediala menisken.  Kopia på utlåtande skickas med post till er. Jag kan också berätta att under den månad som gått sedan remissen ursprungligen skickades till er har patientens besvär snarast ökat.
+
+Tacksam för bedömning och ställningstagande till artroskopi.
+
+Hälsningar
+Jonas Dahl
+Distriktsläkare
+</atgardbeskrivning>
+			</atgarder>
+		</kliniskinformation>
+	</fragestallningar>
+</remiss>
