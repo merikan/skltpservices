@@ -87,19 +87,19 @@ public class SAML2AssertionTicketGeneratorLauncherTest {
 		assertNotNull(actual);
 		assertEquals("arbetsplats", actual.getArbetsplats());
 		assertEquals("arbetsplatskod", actual.getArbetsplatskod());
-		assertEquals("befattningskod", actual.getBefattningskod());
+		assertEquals("", actual.getBefattningskod());
 		assertEquals("efternamn", actual.getEfternamn());
 		assertEquals("fornamn", actual.getFornamn());
 		assertEquals("", actual.getForskrivarkod());
 		assertEquals("123", actual.getKatalog());
 		assertEquals("katalogId", actual.getKatalogId());
-		assertEquals("1234567", actual.getLegitimationskod());
+		assertEquals("", actual.getLegitimationskod());
 		assertEquals("postadress", actual.getPostadress());
 		assertEquals("12345", actual.getPostnummer());
 		assertEquals("postort", actual.getPostort());
-		assertEquals("rollnamn", actual.getRollnamn());
+		assertEquals("", actual.getRollnamn());
 		assertEquals("telefonnummer", actual.getTelefonnummer());
-		assertEquals("12", actual.getYrkeskod());
+		assertEquals("", actual.getYrkeskod());
 	}
 
 	@Test
