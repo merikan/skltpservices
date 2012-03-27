@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--SLL eRemiss exemplelmeddelande "lättviktsformat" SendReferral - normalscenario, Gustav Alvfeldt-->
 <remiss xmlns:gcda="AlschulerAssociates::GreenCDA" xmlns:gcdan="AlschulerAssociates::GreenCDA::Narrative" xmlns="urn:riv:qwe" xsi:schemaLocation="urn:riv:qwe remiss_gustav.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<!--Unikt remissID-->
 	<eremissid root="1.2.752.97.x.x.x.x" extension="abc123"/>
-	<!--Version av remiss, sätts alltid-->
 	<versionsid root="1.2.752.97.x.x.x.x" extension="1"/>
-	<!--Tidpunkt då versionen skapades-->
 	<versionstidpunkt value="201203011636"/>
-	<!--Orsak till att versionen skapades-->
 	<versionsorsak code="NR" displayName="Ny remiss" codeSystem="1.2.752.97.3.2.8.5"/>
-	<!--Tid då remittent anser att beslut om remiss togs. Inte samma sak som när remiss skickas-->
+	<versionsorsaktext>Ny remiss</versionsorsaktext>
 	<remissdatum value="20120315"/>
-	<!--Tidpunkt i form av intervall för när man vill få det man ber om i remissen utfört. Istället för att ange prioritet-->
 	<efterfragadtidforutforande>
 		<gcda:low value="20120415"/>
 		<gcda:high value="20120831"/>
 	</efterfragadtidforutforande>
-	<!--Önskemål om remissmottagare, enhet, person eller typ av personalkategori. Anges i klartext-->
 	<onskemalomremissmottagare>Specialistläkare inom ortopedi</onskemalomremissmottagare>
 	<kompletterandeadministrativinformation>Patienten är bortrest utomlands 2012-03-15 – 2012-04-14 och kan därför kallas tidigast 2012-04-15</kompletterandeadministrativinformation>
-	<!--Endast denna typ är giltig i denna version-->
 	<eremisstyp code="4" displayName="allmänremiss" codeSystem="1.2.752.129.2.2.2.24"/>
-	<!--Signerande läkare-->
 	<signatur>Jonas Dahl</signatur>
 	<signerad>true</signerad>
 	<signeringstid value="201203151233"/>
@@ -35,7 +27,6 @@
 		<fornamn>Vårdtest</fornamn>
 		<fodelsetidpunkt value="19790917"/>
 		<kon code="1" displayName="man" codeSystem="1.2.752.129.2.2.1.1"/>
-		<!-- TODO -->
 		<kontaktuppgift>
 			<telefonnummmer>
 				<telekomadress>+468123123</telekomadress>
@@ -51,6 +42,14 @@
 				<postort>Tolvaholm</postort>
 				<typavadress code="1" displayName="folkbokföringsadress" codeSystem="1.2.752.129.2.2.1.20"/>
 			</folkbokforingsadress>
+			<tillfalligadress>
+				<utdelningsadress1>Astrakangatan 14</utdelningsadress1>
+				<utdelningsadress2>Uppgång C</utdelningsadress2>
+				<utdelningsadress3>Lgh 0014</utdelningsadress3>
+				<postnummer>165 65</postnummer>
+				<postort>Hässelby</postort>
+				<typavadress code="1" displayName="tillfälligadress" codeSystem="1.2.752.129.2.2.1.20"/>
+			</tillfalligadress>
 		</kontaktuppgift>
 		<sprakligkommunikation>
 			<kommentarTolkbehov>Behöver finsk tolk.</kommentarTolkbehov>
@@ -59,8 +58,13 @@
 			<uppmarksamhetsText>Har hepatit C.</uppmarksamhetsText>
 			<kliniskInformation>
 				<kliniskinformationsid root="1.2.752.97.x.x.x.x" extension="123"/>
-				<tillstand code="KOD för allergi mot XXX" displayName="Allergi mot XXX" codeSystem="1.2.752.97.x.x.x.x"/>
-				<beskrivning>Patienten blir blå och låter som en orm när den förs i kontakt med XXX</beskrivning>
+				<tillstand code="S83.6" displayName="Allergi mot XXX" codeSystem="1.2.752.97.x.x.x.x"/>
+				<beskrivning>33-årig blandmissbrukande man som ramlade omkring 1 februari i berusat tillstånd och på något sätt skadat höger knä. Ej sökt vård. Sedan dess har patienten haft intermittent svullnad av höger knä och låsningsfenomen. I status noteras måttlig hydrops, kraftig smärta vid meniskprovokationstest och misstänkt främre draglåda. Röntgenundersökning har inte visat något patologiskt. Har ej genomgått MR. Tacksam för bedömning och ställningstagande till artroskopi.
+
+					Hälsningar
+					Jonas Dahl
+					Distriktsläkare
+				</beskrivning>
 			</kliniskInformation>
 		</uppmarksamhetsInformation>
 	</patient>
@@ -97,7 +101,7 @@
 		</remissspecifikroll>
 		<!--Måste vara samma status värde i denna remissStatus som i remissStatus ovan!-->
 		<remissstatus>
-			<eremissstatus code="SK" displayName="Skickad" codeSystem="1.2.752.97.3.2.8.3"/>
+			<eremissstatus code="SE" displayName="Skicka" codeSystem="1.2.752.97.3.2.8.3"/>
 		</remissstatus>
 	</eremissmoment>
 	<fragestallningar>
@@ -109,12 +113,8 @@
 			<beskrivning>Han springer runt i ett tomt hotell med en yxa och skriker, det är tillståndet det!</beskrivning>
 			<atgarder>
 				<atgardid root="1.2.752.97.x.x.x.x" extension="123"/>
-				<atgardtyp code="NGN bra kod för en åtgärd som fixar ovan givna problembild" displayName="Åtgärdskod XXX" codeSystem="1.2.752.97.x.x.x.x"/>
-				<atgardbeskrivning>33-årig blandmissbrukande man som ramlade omkring 1 februari i berusat tillstånd och på något sätt skadat höger knä. Ej sökt vård. Sedan dess har patienten haft intermittent svullnad av höger knä och låsningsfenomen. I status noteras måttlig hydrops, kraftig smärta vid meniskprovokationstest och misstänkt främre draglåda. Röntgenundersökning har inte visat något patologiskt. Har ej genomgått MR. Tacksam för bedömning och ställningstagande till artroskopi.
-
-Hälsningar
-Jonas Dahl
-Distriktsläkare</atgardbeskrivning>
+				<atgardtyp code="NGA11" displayName="Åtgärdskod XXX" codeSystem="1.2.752.97.x.x.x.x"/>
+				<atgardbeskrivning>Artroskopi höger knä</atgardbeskrivning>
 			</atgarder>
 		</kliniskinformation>
 	</fragestallningar>
