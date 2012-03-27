@@ -1,33 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--SLL eRemiss exemplelmeddelande "lättviktsformat" SendReferral - normalscenario, Gustav Alvfeldt-->
 <remiss xmlns:gcda="AlschulerAssociates::GreenCDA" xmlns:gcdan="AlschulerAssociates::GreenCDA::Narrative" xmlns="urn:riv:qwe" xsi:schemaLocation="urn:riv:qwe remiss_gustav.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<!--Unikt remissID-->
 	<eremissid root="1.2.752.97.x.x.x.x" extension="abc123"/>
-	<!--Version av remiss, sätts alltid-->
 	<versionsid root="1.2.752.97.x.x.x.x" extension="1"/>
-	<!--Tidpunkt då versionen skapades-->
 	<versionstidpunkt value="201203011636"/>
-	<!--Orsak till att versionen skapades-->
 	<versionsorsak code="NR" displayName="Ny remiss" codeSystem="1.2.752.97.3.2.8.5"/>
-	<!--Tid då remittent anser att beslut om remiss togs. Inte samma sak som när remiss skickas-->
 	<remissdatum value="20120315"/>
-	<!--Tidpunkt i form av intervall för när man vill få det man ber om i remissen utfört. Istället för att ange prioritet-->
 	<efterfragadtidforutforande>
 		<gcda:low value="20120415"/>
 		<gcda:high value="20120831"/>
 	</efterfragadtidforutforande>
-	<!--Önskemål om remissmottagare, enhet, person eller typ av personalkategori. Anges i klartext-->
 	<onskemalomremissmottagare>Specialistläkare inom ortopedi</onskemalomremissmottagare>
 	<kompletterandeadministrativinformation>Patienten är bortrest utomlands 2012-03-15 – 2012-04-14 och kan därför kallas tidigast 2012-04-15</kompletterandeadministrativinformation>
-	<!--Endast denna typ är giltig i denna version-->
 	<eremisstyp code="4" displayName="allmänremiss" codeSystem="1.2.752.129.2.2.2.24"/>
-	<!--Signerande läkare-->
 	<signatur>Jonas Dahl</signatur>
 	<signerad>true</signerad>
 	<signeringstid value="201203151233"/>
 	<!-- Patient -->
 	<patient>
-		<!--Personnummer, samordningsnummer eller reservnummer. OIDarna avgör vilken typ av identifikation det är-->
 		<personid root="1.2.752.97.3.1.2" extension="197907179191"/>
 		<efternamn>Testsson</efternamn>
 		<mellannamn>Anders</mellannamn>
@@ -35,7 +25,6 @@
 		<fornamn>Vårdtest</fornamn>
 		<fodelsetidpunkt value="19790917"/>
 		<kon code="1" displayName="man" codeSystem="1.2.752.129.2.2.1.1"/>
-		<!-- TODO -->
 		<kontaktuppgift>
 			<telefonnummmer>
 				<telekomadress>+468123123</telekomadress>
