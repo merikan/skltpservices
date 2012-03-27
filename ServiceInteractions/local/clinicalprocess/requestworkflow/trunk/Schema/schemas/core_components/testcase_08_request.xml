@@ -94,27 +94,27 @@
 		</remissstatus>
 	</eremissmoment>
 	<fragestallningar>
+		<atgarder>
+			<atgardid root="1.2.752.97.x.x.x.x" extension="123"/>
+			<atgardtyp code="NGA11" displayName="NGA11" codeSystem="1.2.752.97.x.x.x.x"/>
+			<atgardbeskrivning>Artroskopi höger knä</atgardbeskrivning>
+		</atgarder>
 		<fragestallningsid root="1.2.752.97.x.x.x.x" extension="123"/>
 		<fragestallningstext>Meniskskada? Korsbandsskada?</fragestallningstext>
 		<kliniskinformation>
 			<kliniskinformationsid root="1.2.752.97.x.x.x.x" extension="123"/>
-			<tillstand code="NGN bra kod för ett tillstånd" displayName="Tillstånd XXX" codeSystem="1.2.752.97.x.x.x.x"/>
-			<beskrivning>Han springer runt i ett tomt hotell med en yxa och skriker, det är tillståndet det!</beskrivning>
-			<atgarder>
-				<atgardid root="1.2.752.97.x.x.x.x" extension="123"/>
-				<atgardtyp code="NGN bra kod för en åtgärd som fixar ovan givna problembild" displayName="Åtgärdskod XXX" codeSystem="1.2.752.97.x.x.x.x"/>
-				<atgardbeskrivning>33-årig blandmissbrukande man som ramlade omkring 1 februari i berusat tillstånd och på något sätt skadat höger knä. Ej sökt vård. Sedan dess har patienten haft intermittent svullnad av höger knä och låsningsfenomen. I status noteras måttlig hydrops, kraftig smärta vid meniskprovokationstest och misstänkt främre draglåda. Röntgenundersökning har inte visat något patologiskt. 
+			<tillstand code="S83.6" displayName="S83.6" codeSystem="1.2.752.97.x.x.x.x"/>
+			<beskrivning>33-årig blandmissbrukande man som ramlade omkring 1 februari i berusat tillstånd och på något sätt skadat höger knä. Ej sökt vård. Sedan dess har patienten haft intermittent svullnad av höger knä och låsningsfenomen. I status noteras måttlig hydrops, kraftig smärta vid meniskprovokationstest och misstänkt främre draglåda. Röntgenundersökning har inte visat något patologiskt. 
 
-Tillägg 2012-04-30:
-Har nu även genomgått MR av knäleden som visade ruptur av mediala menisken.  Kopia på utlåtande skickas med post till er. Jag kan också berätta att under den månad som gått sedan remissen ursprungligen skickades till er har patientens besvär snarast ökat.
+				Tillägg 2012-04-30:
+				Har nu även genomgått MR av knäleden som visade ruptur av mediala menisken.  Kopia på utlåtande skickas med post till er. Jag kan också berätta att under den månad som gått sedan remissen ursprungligen skickades till er har patientens besvär snarast ökat.
 
-Tacksam för bedömning och ställningstagande till artroskopi.
+				Tacksam för bedömning och ställningstagande till artroskopi.
 
-Hälsningar
-Jonas Dahl
-Distriktsläkare
-</atgardbeskrivning>
-			</atgarder>
+				Hälsningar
+				Jonas Dahl
+				Distriktsläkare
+			</beskrivning>
 		</kliniskinformation>
 	</fragestallningar>
 </remiss>
