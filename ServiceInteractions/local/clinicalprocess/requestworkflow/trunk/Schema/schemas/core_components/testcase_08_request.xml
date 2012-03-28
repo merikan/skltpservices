@@ -5,7 +5,7 @@
 	<versionsid root="1.2.752.97.x.x.x.x" extension="1"/>
 	<versionstidpunkt value="201203011636"/>
 	<!-- TODO code=? -->
-	<versionsorsak code="NR" displayName="Ändrad remiss" codeSystem="1.2.752.97.3.2.8.5"/>
+	<versionsorsak code="ÄR" displayName="Ändrad remiss" codeSystem="1.2.752.97.3.2.8.5"/>
 	<versionsorsaktext>Komplettering av remiss efter utförd MR-undersökning.</versionsorsaktext>
 	<remissdatum value="20120315"/>
 	<efterfragadtidforutforande>
@@ -21,7 +21,6 @@
 
 	<!-- Patient -->
 	<patient>
-		<!--Personnummer, samordningsnummer eller reservnummer. OIDarna avgör vilken typ av identifikation det är-->
 		<personid root="1.2.752.97.3.1.2" extension="197907179191"/>
 		<efternamn>Testsson</efternamn>
 		<mellannamn>Anders</mellannamn>
@@ -29,7 +28,6 @@
 		<fornamn>Vårdtest</fornamn>
 		<fodelsetidpunkt value="19790917"/>
 		<kon code="1" displayName="man" codeSystem="1.2.752.129.2.2.1.1"/>
-		<!-- TODO -->
 		<kontaktuppgift>
 			<telefonnummmer>
 				<telekomadress>+468123123</telekomadress>
@@ -40,26 +38,33 @@
 				<typavtelekomadress code="3" displayName="mobiltelefon" codeSystem="1.2.752.129.2.2.1.30"/>
 			</mobiltelefonnummer>
 			<folkbokforingsadress>
-				<utdelningsadress1>Tolvisgatan 12</utdelningsadress1>
-				<postnummer>12121</postnummer>
-				<postort>Tolvaholm</postort>
+				<careof>Andersson</careof>
+				<utdelningsadress1>Storgatan 14</utdelningsadress1>
+				<utdelningsadress2>Uppgång B</utdelningsadress2>
+				<utdelningsadress3>Lgh 3377</utdelningsadress3>
+				<postnummer>88864</postnummer>
+				<postort>Umeå</postort>
 				<typavadress code="1" displayName="folkbokföringsadress" codeSystem="1.2.752.129.2.2.1.20"/>
 			</folkbokforingsadress>
+			<tillfalligadress>
+				<careof>Mikkonen</careof>
+				<utdelningsadress1>Astrakangatan 14</utdelningsadress1>
+				<utdelningsadress2>Uppgång C</utdelningsadress2>
+				<utdelningsadress3>Lgh 0014</utdelningsadress3>
+				<postnummer>16565</postnummer>
+				<postort>Hässelby</postort>
+				<typavadress code="1" displayName="tillfälligadress" codeSystem="1.2.752.129.2.2.1.20"/>
+			</tillfalligadress>
 		</kontaktuppgift>
 		<sprakligkommunikation>
 			<kommentarTolkbehov>Behöver finsk tolk.</kommentarTolkbehov>
 		</sprakligkommunikation>
 		<uppmarksamhetsInformation>
 			<uppmarksamhetsText>Har hepatit C.</uppmarksamhetsText>
-			<kliniskInformation>
-				<kliniskinformationsid root="1.2.752.97.x.x.x.x" extension="123"/>
-				<tillstand code="KOD för allergi mot XXX" displayName="Allergi mot XXX" codeSystem="1.2.752.97.x.x.x.x"/>
-				<beskrivning>Patienten blir blå och låter som en orm när den förs i kontakt med XXX</beskrivning>
-			</kliniskInformation>
 		</uppmarksamhetsInformation>
 	</patient>
 	<remisstatus>
-		<eremissstatus code="SK" displayName="Skickad" codeSystem="1.2.752.97.3.2.8.3"/>
+		<eremissstatus code="KB" displayName="Komplettering begärd" codeSystem="1.2.752.97.3.2.8.3"/>
 	</remisstatus>
 	<involverarroller>
 		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
@@ -77,7 +82,7 @@
 	</involverarroller>
 	<eremissmoment>
 		<eremissmomentid root="1.2.752.97.x.x.x.x" extension="123"/>
-		<eremissmomenttyp code="SE" displayName="Skicka ny version av e-remiss" codeSystem="1.2.752.97.3.2.8.1"/>
+		<eremissmomenttyp code="SN" displayName="Skicka ny version av e-remiss" codeSystem="1.2.752.97.3.2.8.1"/>
 		<momentstatus code="9" displayName="avklarad" codeSystem="1.2.752.129.2.2.2.27"/>
 		<momenttidpunkt value="201204301200"/>
 		<remissspecifikroll>
@@ -90,7 +95,7 @@
 		</remissspecifikroll>
 		<!--Måste vara samma status värde i denna remissStatus som i remissStatus ovan!-->
 		<remissstatus>
-			<eremissstatus code="SK" displayName="Skickad" codeSystem="1.2.752.97.3.2.8.3"/>
+			<eremissstatus code="KB" displayName="Komplettering begärd" codeSystem="1.2.752.97.3.2.8.3"/>
 		</remissstatus>
 	</eremissmoment>
 	<fragestallningar>

@@ -15,8 +15,10 @@
             <xs:element name="typavtelekomadress" type="gcda:ce"/>
         </xs:sequence>
     </xs:complexType>
+    <!-- @TODO refer to navetavisering -->
     <xs:complexType name="AdressTyp">
         <xs:sequence>
+            <xs:element name="careof" type="xs:string" minOccurs="0"/>
             <xs:element name="utdelningsadress1" type="xs:string"/>
             <xs:element name="utdelningsadress2" type="xs:string" minOccurs="0"/>
             <xs:element name="utdelningsadress3" type="xs:string" minOccurs="0"/>
