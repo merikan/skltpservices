@@ -32,7 +32,7 @@
 		<service name="GetSubjectOfCareSchedule-service-test">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="https://localhost:10000/testproducer/GetSubjectOfCareSchedule/1/rivtabp21"
+					address="http://localhost:10000/testproducer/GetSubjectOfCareSchedule/1/rivtabp21"
 					wsdlLocation="classpath:/schemas/interactions/GetSubjectOfCareScheduleInteraction/GetSubjectOfCareScheduleInteraction_1.1_RIVTABP21.wsdl"/>
 			</inbound>
 
