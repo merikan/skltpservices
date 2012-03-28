@@ -14,14 +14,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.skltpservices.crm.scheduling</groupId>
 	<artifactId>crm-scheduling-GetAllHealthcareFacilities-virtualisering</artifactId>
-	<version>1.2</version>
 	<name>GetAllHealthcareFacilities service virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>se.skl.skltpservices.crm.scheduling</groupId>
 		<artifactId>GetAllHealthcareFacilities</artifactId>
-		<version>1.2</version>
+		<version>1.2-SNAPSHOT</version>
 	</parent>
 
 	<build>
