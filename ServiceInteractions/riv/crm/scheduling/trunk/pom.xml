@@ -23,7 +23,7 @@
 
   <groupId>se.skl.skltpservices.crm.scheduling</groupId>
   <artifactId>crm-scheduling</artifactId>
-  <version>1.2</version>
+  <version>1.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>crm-scheduling</name>
 
@@ -48,6 +48,7 @@
     <module>GetSubjectOfCareSchedule</module>
     <module>MakeBooking</module>
     <module>UpdateBooking</module>
+    <module>Schemas</module>
   </modules>
   
   <scm>

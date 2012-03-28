@@ -13,12 +13,11 @@
 	<parent>
     <artifactId>crm-scheduling</artifactId>
     <groupId>se.skl.skltpservices.crm.scheduling</groupId>
-    <version>1.2</version>
+    <version>1.2-SNAPSHOT</version>
   </parent>
 
 	<groupId>se.skl.skltpservices.crm.scheduling</groupId>
 	<artifactId>UpdateBooking</artifactId>
-	<version>1.2</version>
 	<packaging>pom</packaging>
 	<name>UpdateBooking service</name>
 
