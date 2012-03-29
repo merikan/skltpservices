@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesource.org/schema/mule/core/2.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:spring="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.mulesource.org/schema/mule/core/2.2 http://www.mulesource.org/schema/mule/core/2.2/mule.xsd
+	">
+
+	<message-properties-transformer name="addContentTypeXmlUtf8">
+		<add-message-property key="Content-Type"
+			value="text/xml;charset=UTF-8" />
+	</message-properties-transformer>
+
+	<custom-transformer name="ArgosHeaderToSamlTicket"
+		class="se.skl.tp.ticket.saml.SamlTicketTransformer" />
+		
+	<custom-transformer name="IgnoreExceptionPayloads"
+		class="se.skl.tp.ticket.exception.IgnoreAnyEcxeptionPayloadsTransformer" />
+
+	<spring:beans>
+		<!--For junit test, import the config file for ticket transformer -->
+		<spring:import resource="classpath:TicketTransformer-spring-properties.xml" />
+
+		<!-- TODO: Add import of connector specific configuration files here as 
+			required -->
+		<spring:import resource="classpath:tp-virtuell-tjanst-config.xml" />
+		<spring:import resource="classpath:teststub-services/*-teststub-service.xml" />
+	</spring:beans>
+
+
+</mule>
