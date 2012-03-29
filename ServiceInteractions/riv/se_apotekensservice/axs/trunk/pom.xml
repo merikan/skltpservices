@@ -29,7 +29,7 @@
 	<!-- Modules to be created for each service -->
 	<modules>
 		<module>Schema</module>
-    <module>HamtaPatientInfo</module>
+   
   </modules>
 
 	<dependencies>
