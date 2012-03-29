@@ -13,7 +13,7 @@
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
 	<artifactId>or</artifactId>
-	<version>1.4-SNAPSHOT</version>
+	<version>1.4</version>
 	<packaging>pom</packaging>
 	<name>bridgedinteraction se_apotekensservice or</name>
 
@@ -102,8 +102,8 @@
 	</dependencies>
 
 	<scm>
-		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/se_apotekensservice/or/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/se_apotekensservice/or/trunk</developerConnection>
+		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/se_apotekensservice/or/tags/or-1.4</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/se_apotekensservice/or/tags/or-1.4</developerConnection>
 	</scm>
 
 	<build>
