@@ -13,7 +13,7 @@
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
 	<artifactId>axs</artifactId>
-	<version>1.5-SNAPSHOT</version>
+	<version>1.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>bridgedinteraction se_apotekensservice axs</name>
 
