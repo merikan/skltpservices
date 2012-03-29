@@ -14,7 +14,7 @@
 	<parent>
     	<artifactId>axs</artifactId>
     	<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
-    	<version>1.4-SNAPSHOT</version>
+    	<version>1.4</version>
   	</parent>
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.axs</groupId>
