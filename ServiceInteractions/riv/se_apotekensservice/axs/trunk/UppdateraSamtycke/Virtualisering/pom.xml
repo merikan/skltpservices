@@ -14,14 +14,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.skltpservices.se_apotekensservice.axs</groupId>
 	<artifactId>se_apotekensservice-axs-UppdateraSamtycke-virtualisering</artifactId>
-	<version>1.2</version>
+	<version>1.3-SNAPSHOT</version>
 	<name>UppdateraSamtycke service virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>se.skl.skltpservices.se_apotekensservice.axs</groupId>
 		<artifactId>UppdateraSamtycke</artifactId>
-		<version>1.2</version>
+		<version>1.3-SNAPSHOT</version>
 	</parent>
 
 	<build>
