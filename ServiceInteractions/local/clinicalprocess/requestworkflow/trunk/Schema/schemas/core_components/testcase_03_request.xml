@@ -46,65 +46,67 @@
 		</sprakligkommunikation>
 		<uppmarksamhetsInformation>
 			<uppmarksamhetsText>Har hepatit C.</uppmarksamhetsText>
-			<kliniskInformation>
-				<kliniskinformationsid root="1.2.752.97.x.x.x.x" extension="123"/>
-				<tillstand code="KOD för allergi mot XXX" displayName="Allergi mot XXX" codeSystem="1.2.752.97.x.x.x.x"/>
-				<beskrivning>Patienten blir blå och låter som en orm när den förs i kontakt med XXX</beskrivning>
-			</kliniskInformation>
 		</uppmarksamhetsInformation>
 	</patient>
 	<remisstatus>
-		<eremissstatus code="SK" displayName="Skickad" codeSystem="1.2.752.97.3.2.8.3"/>
+		<eremissstatus code="SV" displayName="Besvarad" codeSystem="1.2.752.97.3.2.8.3"/>
 	</remisstatus>
 	<involverarroller>
 		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
 		<remissrolltyp code="RT" displayName="Remittent" codeSystem="1.2.752.97.3.2.8.4"/>
 		<personalid root="1.2.752.97.3.1.1" extension="HSAid"/>
-		<personalnamn>Jonas Dahl</personalnamn>
+		<personalnamn>Elin Ek</personalnamn>
 		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
-		<enhetnamn>Hässelby vårdcentral</enhetnamn>
+		<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
+		<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
 	</involverarroller>
 	<involverarroller>
 		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
-		<remissrolltyp code="RM" displayName="Remissmottagare" codeSystem="1.2.752.97.3.2.8.4"/>
+		<remissrolltyp code="RE" displayName="Remissbesvarare" codeSystem="1.2.752.97.3.2.8.4"/>
 		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
-		<enhetnamn>Capio S:t Görans sjukhus, Ortopedmottagningen</enhetnamn>
+		<personalnamn>Lennart Ljung</personalnamn>
+		<enhetnamn>Råcksta-Vällingby Närvårdsmottagning</enhetnamn>
+		<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
+	</involverarroller>
+	<involverarroller>
+		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
+		<remissrolltyp code="SM" displayName="Svarsmottagare" codeSystem="1.2.752.97.3.2.8.4"/>
+		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
+		<personalnamn>Elin Ek</personalnamn>
+		<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
+		<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
 	</involverarroller>
 	<eremissmoment>
 		<eremissmomentid root="1.2.752.97.x.x.x.x" extension="123"/>
-		<eremissmomenttyp code="SE" displayName="Skicka e-remiss" codeSystem="1.2.752.97.3.2.8.1"/>
+		<eremissmomenttyp code="SS" displayName="Skicka svar på remissfråga" codeSystem="1.2.752.97.3.2.8.1"/>
 		<momentstatus code="9" displayName="avklarad" codeSystem="1.2.752.129.2.2.2.27"/>
-		<momenttidpunkt value="201203151636"/>
+		<momenttidpunkt value="201203141636"/>
 		<remissspecifikroll>
 			<!--Hur sa vi här? Skulle man kunna ange ngn annan än remittenten som avsändande av remissen, typ en sekreterare?)-->
 			<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
 			<remissrolltyp code="RT" displayName="Remittent" codeSystem="1.2.752.97.3.2.8.4"/>
 			<personalid root="1.2.752.97.3.1.1" extension="HSAid"/>
-			<personalnamn>Jonas Dahl</personalnamn>
+			<personalnamn>Elin Ek</personalnamn>
 			<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
-			<enhetnamn>Hässelby VC</enhetnamn>
+			<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
+			<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
 		</remissspecifikroll>
 		<!--Måste vara samma status värde i denna remissStatus som i remissStatus ovan!-->
 		<remissstatus>
-			<eremissstatus code="SK" displayName="Skickad" codeSystem="1.2.752.97.3.2.8.3"/>
+			<eremissstatus code="SV" displayName="Besvarad" codeSystem="1.2.752.97.3.2.8.3"/>
 		</remissstatus>
 	</eremissmoment>
 	<fragestallningar>
 		<fragestallningsid root="1.2.752.97.x.x.x.x" extension="123"/>
-		<fragestallningstext>Meniskskada? Korsbandsskada?</fragestallningstext>
+		<fragestallningstext>Diabetes?</fragestallningstext>
 		<kliniskinformation>
 			<kliniskinformationsid root="1.2.752.97.x.x.x.x" extension="123"/>
-			<tillstand code="NGN bra kod för ett tillstånd" displayName="Tillstånd XXX" codeSystem="1.2.752.97.x.x.x.x"/>
-			<beskrivning>Han springer runt i ett tomt hotell med en yxa och skriker, det är tillståndet det!</beskrivning>
-			<atgarder>
-				<atgardid root="1.2.752.97.x.x.x.x" extension="123"/>
-				<atgardtyp code="NGN bra kod för en åtgärd som fixar ovan givna problembild" displayName="Åtgärdskod XXX" codeSystem="1.2.752.97.x.x.x.x"/>
-				<atgardbeskrivning>33-årig blandmissbrukande man som ramlade omkring 1 februari i berusat tillstånd och på något sätt skadat höger knä. Ej sökt vård. Sedan dess har patienten haft intermittent svullnad av höger knä och låsningsfenomen. I status noteras måttlig hydrops, kraftig smärta vid meniskprovokationstest och misstänkt främre draglåda. Röntgenundersökning har inte visat något patologiskt. Har ej genomgått MR. Tacksam för bedömning och ställningstagande till artroskopi.
+			<beskrivning>33-årig blandmissbrukande man som ramlade omkring 1 februari i berusat tillstånd och på något sätt skadat höger knä. Ej sökt vård. Sedan dess har patienten haft intermittent svullnad av höger knä och låsningsfenomen. I status noteras måttlig hydrops, kraftig smärta vid meniskprovokationstest och misstänkt främre draglåda. Röntgenundersökning har inte visat något patologiskt. Har ej genomgått MR. Tacksam för bedömning och ställningstagande till artroskopi.
 
-Hälsningar
-Jonas Dahl
-Distriktsläkare</atgardbeskrivning>
-			</atgarder>
+				Hälsningar
+				Jonas Dahl
+				Distriktsläkare
+			</beskrivning>
 		</kliniskinformation>
 	</fragestallningar>
 </remiss>
