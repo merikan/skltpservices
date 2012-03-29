@@ -31,6 +31,7 @@
 				<typavadress code="1" displayName="folkbokföringsadress" codeSystem="1.2.752.129.2.2.1.20"/>
 			</folkbokforingsadress>
 			<tillfalligadress>
+				<careof>Mikkonen</careof>
 				<utdelningsadress1>Astrakangatan 14</utdelningsadress1>
 				<postnummer>16565</postnummer>
 				<postort>Hässelby</postort>
@@ -54,6 +55,7 @@
 		<personalnamn>Elin Ek</personalnamn>
 		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
+		<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
 	</involverarroller>
 	<involverarroller>
 		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
@@ -64,7 +66,7 @@
 	<eremissmoment>
 		<eremissmomentid root="1.2.752.97.x.x.x.x" extension="123"/>
 		<eremissmomenttyp code="SE" displayName="Skicka e-remiss" codeSystem="1.2.752.97.3.2.8.1"/>
-		<momentstatus code="9" displayName="avklarad" codeSystem="1.2.752.129.2.2.2.27"/>
+		<momentstatus code="9" displayName="Avklarad" codeSystem="1.2.752.129.2.2.2.27"/>
 		<momenttidpunkt value="201203121636"/>
 		<remissspecifikroll>
 			<!--Hur sa vi här? Skulle man kunna ange ngn annan än remittenten som avsändande av remissen, typ en sekreterare?)-->
@@ -73,11 +75,12 @@
 			<personalid root="1.2.752.97.3.1.1" extension="HSAid"/>
 			<personalnamn>Elin Ek</personalnamn>
 			<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
-			<enhetnamn>Hässelby VC</enhetnamn>
+			<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
+			<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
 		</remissspecifikroll>
 		<!--Måste vara samma status värde i denna remissStatus som i remissStatus ovan!-->
 		<remissstatus>
-			<eremissstatus code="SE" displayName="Skicka" codeSystem="1.2.752.97.3.2.8.1"/>
+			<eremissstatus code="SK" displayName="Skickad" codeSystem="1.2.752.97.3.2.8.3"/>
 		</remissstatus>
 	</eremissmoment>
 	<fragestallningar>
@@ -85,7 +88,6 @@
 		<fragestallningstext>Diabetes?</fragestallningstext>
 		<kliniskinformation>
 			<kliniskinformationsid root="1.2.752.97.x.x.x.x" extension="123"/>
-			<tillstand code="NGN bra kod för ett tillstånd" displayName="Tillstånd XXX" codeSystem="1.2.752.97.x.x.x.x"/>
 			<beskrivning>33-årig blandmissbrukande man som inkom 11/3 pga centrala bröstsmärtor. Patienten har vårdats inneliggande under ett dygn och hjärtinfarkt har uteslutits. Smärtorna bedöms som muskuloskelettala. Under vårdtiden har förhöjda blodsockervärden uppmätts vid flera tillfällen som högst 10,8. Patienten har ingen känd diabetes. Tacksam för uppföljning av patientens förhöjda blodsockervärden.
 
 				Vänliga hälsningar
