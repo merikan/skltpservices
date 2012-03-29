@@ -19,10 +19,10 @@
                http://www.mulesource.org/schema/mule/cxf/2.2  http://www.mulesource.org/schema/mule/cxf/2.2/mule-cxf.xsd">
 
 	<!-- Name of this file is mandatory and may not be changed. -->
-<model name="ApotekenService-HamtaVardenhet-model">
+<model name="Bridged-ApotekenService-HamtaVardenhet-model">
 
 		<service
-			name="ApotekenService-HamtaVardenhet-service">
+			name="Bridged-ApotekenService-HamtaVardenhet-service">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/HamtaVardenhetResponder/V1"
@@ -41,7 +41,7 @@
 		</service>
 		
 		<service
-			name="ApotekenService-HamtaVardenhet-service-ext0">
+			name="Bridged-ApotekenService-HamtaVardenhet-service-ext0">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext0/HamtaVardenhetResponder/V1"
@@ -60,7 +60,7 @@
 		</service>
 		
 		<service
-			name="ApotekenService-HamtaVardenhet-service-ext8">
+			name="Bridged-ApotekenService-HamtaVardenhet-service-ext8">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext8/HamtaVardenhetResponder/V1"
@@ -79,7 +79,7 @@
 		</service>
 		
 		<service
-			name="ApotekenService-HamtaVardenhet-service-ext11">
+			name="Bridged-ApotekenService-HamtaVardenhet-service-ext11">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext11/HamtaVardenhetResponder/V1"

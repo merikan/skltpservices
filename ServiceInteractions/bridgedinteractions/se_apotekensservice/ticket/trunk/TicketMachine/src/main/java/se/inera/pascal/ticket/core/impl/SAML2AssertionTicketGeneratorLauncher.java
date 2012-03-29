@@ -225,6 +225,10 @@ public class SAML2AssertionTicketGeneratorLauncher extends SAML2AssertionTicketG
 		return this.apseAuthorization;
 	}
 
+	ApseAuthenticationAttributes getApseAuthenticationAttributes() {
+		return this.apseAuthentication;
+	}
+
 	// sätt default-värden, om de inte innehåller något.
 	public void setIncomingAuthorizationAttributes(ApseAuthorizationAttributes attribs) {
 		if (StringUtils.isNotEmpty(attribs.getArbetsplats())) {

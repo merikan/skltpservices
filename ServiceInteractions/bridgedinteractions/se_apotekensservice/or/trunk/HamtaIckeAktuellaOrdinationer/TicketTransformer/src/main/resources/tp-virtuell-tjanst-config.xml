@@ -19,10 +19,10 @@
                http://www.mulesource.org/schema/mule/cxf/2.2  http://www.mulesource.org/schema/mule/cxf/2.2/mule-cxf.xsd">
 
 	<!-- Name of this file is mandatory and may not be changed. -->
-<model name="HamtaIckeAktuellaOrdinationer-TicketTransformerService-model">
+<model name="Bridged-ApotekenService-HamtaIckeAktuellaOrdinationer-TicketTransformerService-model">
 
 		<service
-			name="ApotekenService-HamtaIckeAktuellaOrdinationer-service">
+			name="Bridged-ApotekenService-HamtaIckeAktuellaOrdinationer-service">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/HamtaIckeAktuellaOrdinationerResponder/V1"
@@ -41,7 +41,7 @@
 		</service>
 		
 		<service
-			name="ApotekenService-HamtaIckeAktuellaOrdinationer-service-ext0">
+			name="Bridged-ApotekenService-HamtaIckeAktuellaOrdinationer-service-ext0">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext0/HamtaIckeAktuellaOrdinationerResponder/V1"
@@ -60,7 +60,7 @@
 		</service>
 		
 		<service
-			name="ApotekenService-HamtaIckeAktuellaOrdinationer-service-ext8">
+			name="Bridged-ApotekenService-HamtaIckeAktuellaOrdinationer-service-ext8">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext8/HamtaIckeAktuellaOrdinationerResponder/V1"
@@ -79,7 +79,7 @@
 		</service>
 		
 		<service
-			name="ApotekenService-HamtaIckeAktuellaOrdinationer-service-ext11">
+			name="Bridged-ApotekenService-HamtaIckeAktuellaOrdinationer-service-ext11">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext11/HamtaIckeAktuellaOrdinationerResponder/V1"
