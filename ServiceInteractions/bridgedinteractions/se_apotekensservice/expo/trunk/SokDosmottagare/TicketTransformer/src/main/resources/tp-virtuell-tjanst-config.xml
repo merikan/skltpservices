@@ -19,10 +19,10 @@
                http://www.mulesource.org/schema/mule/cxf/2.2  http://www.mulesource.org/schema/mule/cxf/2.2/mule-cxf.xsd">
 
 	<!-- Name of this file is mandatory and may not be changed. -->
-<model name="ApotekenService-SokDosmottagare-model">
+<model name="Bridged-ApotekenService-SokDosmottagare-model">
 
 		<service
-			name="ApotekenService-SokDosmottagare-service">
+			name="Bridged-ApotekenService-SokDosmottagare-service">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/SokDosmottagareResponder/V1"
@@ -41,7 +41,7 @@
 		</service>
 		
 		<service
-			name="ApotekenService-SokDosmottagare-service-ext0">
+			name="Bridged-ApotekenService-SokDosmottagare-service-ext0">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext0/SokDosmottagareResponder/V1"
@@ -60,7 +60,7 @@
 		</service>
 		
 		<service
-			name="ApotekenService-SokDosmottagare-service-ext8">
+			name="Bridged-ApotekenService-SokDosmottagare-service-ext8">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext8/SokDosmottagareResponder/V1"
@@ -79,7 +79,7 @@
 		</service>
 		
 		<service
-			name="ApotekenService-SokDosmottagare-service-ext11">
+			name="Bridged-ApotekenService-SokDosmottagare-service-ext11">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext11/SokDosmottagareResponder/V1"

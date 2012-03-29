@@ -19,10 +19,10 @@
                http://www.mulesource.org/schema/mule/cxf/2.2  http://www.mulesource.org/schema/mule/cxf/2.2/mule-cxf.xsd">
 
 	<!-- Name of this file is mandatory and may not be changed. -->
-<model name="KorrigeraOrdinationVard-model">
+<model name="Bridged-ApotekenService-KorrigeraOrdinationVard-model">
 
 		<service
-			name="ApotekenService-KorrigeraOrdinationVard-service">
+			name="Bridged-ApotekenService-KorrigeraOrdinationVard-service">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/KorrigeraOrdinationVardResponder/V1"
@@ -41,7 +41,7 @@
 		</service>
 		
 		<service
-			name="ApotekenService-KorrigeraOrdinationVard-service-ext0">
+			name="Bridged-ApotekenService-KorrigeraOrdinationVard-service-ext0">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext0/KorrigeraOrdinationVardResponder/V1"
@@ -60,7 +60,7 @@
 		</service>
 		
 		<service
-			name="ApotekenService-KorrigeraOrdinationVard-service-ext8">
+			name="Bridged-ApotekenService-KorrigeraOrdinationVard-service-ext8">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext8/KorrigeraOrdinationVardResponder/V1"
@@ -79,7 +79,7 @@
 		</service>
 		
 		<service
-			name="ApotekenService-KorrigeraOrdinationVard-service-ext11">
+			name="Bridged-ApotekenService-KorrigeraOrdinationVard-service-ext11">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="http://${tb.host}:${tb.port}/${tb.baseUri}/ext11/KorrigeraOrdinationVardResponder/V1"
