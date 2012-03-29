@@ -13,12 +13,12 @@
 	<parent>
     <artifactId>se_apotekensservice-axs</artifactId>
     <groupId>se.skl.skltpservices.se_apotekensservice.axs</groupId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2</version>
   </parent>
 
 	<groupId>se.skl.skltpservices.se_apotekensservice.axs</groupId>
 	<artifactId>HamtaPatientInfo</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2</version>
 	<packaging>pom</packaging>
 	<name>HamtaPatientInfo service</name>
 
