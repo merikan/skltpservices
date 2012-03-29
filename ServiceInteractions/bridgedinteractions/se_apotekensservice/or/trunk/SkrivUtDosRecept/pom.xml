@@ -13,12 +13,12 @@
 	<parent>
     	<artifactId>or</artifactId>
     	<groupId>se.skl.bridgedinteractions.se_apotekensservice</groupId>
-    	<version>1.4</version>
+    	<version>1.5-SNAPSHOT</version>
   	</parent>
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.or</groupId>
 	<artifactId>SkrivUtDosRecept</artifactId>
-	<version>1.4</version>
+	<version>1.5-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>SkrivUtDosRecept  bridged transformer service</name>
 

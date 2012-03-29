@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>se.skl.bridgedinteractions.se_apotekensservice.or</groupId>
 		<artifactId>SkapaOrdinationVard</artifactId>
-		<version>1.4</version>
+		<version>1.5-SNAPSHOT</version>
 	</parent>
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.or</groupId>
 	<artifactId>SkapaOrdinationVard-TicketTransformer</artifactId>
-	<version>1.4</version>
+	<version>1.5-SNAPSHOT</version>
 	<name>SkapaOrdinationVard TicketTransformer</name>
 	<url>http://maven.apache.org</url>
 
