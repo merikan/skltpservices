@@ -20,7 +20,7 @@
 	<parent>
 		<groupId>se.skl.skltpservices.se_apotekensservice.axs</groupId>
 		<artifactId>HamtaExpeditionsId</artifactId>
-		<version>1.2</version>
+		<version>1.3-SNAPSHOT</version>
 	</parent>
 
 	<build>
