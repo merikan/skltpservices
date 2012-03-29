@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>se.skl.bridgedinteractions.se_apotekensservice.or</groupId>
 		<artifactId>HamtaIckeAktuellaOrdinationer</artifactId>
-		<version>1.4-SNAPSHOT</version>
+		<version>1.4</version>
 	</parent>
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.or</groupId>
 	<artifactId>HamtaIckeAktuellaOrdinationer-TicketTransformer</artifactId>
-	<version>1.4-SNAPSHOT</version>
+	<version>1.4</version>
 	<name>HamtaIckeAktuellaOrdinationer-TicketTransformer</name>
 	<url>http://maven.apache.org</url>
 
