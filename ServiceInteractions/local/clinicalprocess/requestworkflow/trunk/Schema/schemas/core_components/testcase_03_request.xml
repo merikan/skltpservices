@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--SLL eRemiss exemplelmeddelande "lättviktsformat" SendReferral - normalscenario, Gustav Alvfeldt-->
-<remiss xmlns:gcda="AlschulerAssociates::GreenCDA" xmlns:gcdan="AlschulerAssociates::GreenCDA::Narrative" xmlns="urn:riv:qwe" xsi:schemaLocation="urn:riv:qwe remiss.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<remiss xmlns:gcda="AlschulerAssociates::GreenCDA" xmlns:gcdan="AlschulerAssociates::GreenCDA::Narrative" xmlns="urn:riv:clinicalprocess:requestworkflow:request"
+	xsi:schemaLocation="urn:riv:clinicalprocess:requestworkflow:request remiss.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<eremissid root="1.2.752.97.x.x.x.x" extension="abc123"/>
 	<versionsid root="1.2.752.97.x.x.x.x" extension="1"/>
 	<versionstidpunkt value="201203011636"/>
@@ -58,7 +59,7 @@
 		<personalnamn>Elin Ek</personalnamn>
 		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
-		<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
+		<typavhalsoochsjukvardspersonal code="LK" displayName="Läkare" />
 	</involverarroller>
 	<involverarroller>
 		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
@@ -66,7 +67,7 @@
 		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<personalnamn>Lennart Ljung</personalnamn>
 		<enhetnamn>Råcksta-Vällingby Närvårdsmottagning</enhetnamn>
-		<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
+		<typavhalsoochsjukvardspersonal code="LK" displayName="Läkare" />
 	</involverarroller>
 	<involverarroller>
 		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
@@ -74,7 +75,7 @@
 		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<personalnamn>Elin Ek</personalnamn>
 		<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
-		<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
+		<typavhalsoochsjukvardspersonal code="LK" diplayName="Läkare" />
 	</involverarroller>
 	<eremissmoment>
 		<eremissmomentid root="1.2.752.97.x.x.x.x" extension="123"/>
@@ -89,7 +90,7 @@
 			<personalnamn>Elin Ek</personalnamn>
 			<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 			<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
-			<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
+			<typavhalsoochsjukvardspersonal code="LK" diplayName="Läkare" />
 		</remissspecifikroll>
 		<!--Måste vara samma status värde i denna remissStatus som i remissStatus ovan!-->
 		<remissstatus>
