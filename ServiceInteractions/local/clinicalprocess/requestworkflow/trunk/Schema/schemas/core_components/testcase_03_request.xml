@@ -75,7 +75,7 @@
 		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<personalnamn>Elin Ek</personalnamn>
 		<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
-		<typavhalsoochsjukvardspersonal code="LK" diplayName="Läkare" />
+		<typavhalsoochsjukvardspersonal code="LK" displayName="Läkare" codeSystem=""/>
 	</involverarroller>
 	<eremissmoment>
 		<eremissmomentid root="1.2.752.97.x.x.x.x" extension="123"/>
@@ -90,7 +90,7 @@
 			<personalnamn>Elin Ek</personalnamn>
 			<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 			<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
-			<typavhalsoochsjukvardspersonal code="LK" diplayName="Läkare" />
+			<typavhalsoochsjukvardspersonal code="LK" displayName="Läkare" />
 		</remissspecifikroll>
 		<!--Måste vara samma status värde i denna remissStatus som i remissStatus ovan!-->
 		<remissstatus>
