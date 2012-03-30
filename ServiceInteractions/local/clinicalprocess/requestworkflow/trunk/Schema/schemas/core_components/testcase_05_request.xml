@@ -83,16 +83,15 @@
 		<personalnamn>Jonas Dahl</personalnamn>
 		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<enhetnamn>Hässelby vårdcentral</enhetnamn>
-		<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
+		<typavhalsoochsjukvardspersonal code="LK" diplayName="Läkare" />
 	</involverarroller>
 	<involverarroller>
 		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
 		<remissrolltyp code="RB" displayName="Remissbesvarare" codeSystem="1.2.752.97.3.2.8.4"/>
 		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<personalnamn>Gustav Olebratt</personalnamn>
-		<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
 		<enhetnamn>Capio S:t Görans sjukhus, Ortopedmottagningen</enhetnamn>
-		<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
+		<typavhalsoochsjukvardspersonal code="LK" diplayName="Läkare" />
 	</involverarroller>
 	<eremissmoment>
 		<eremissmomentid root="1.2.752.97.x.x.x.x" extension="123"/>
