@@ -82,7 +82,7 @@
 		<personalnamn>Jonas Dahl</personalnamn>
 		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<enhetnamn>Hässelby vårdcentral</enhetnamn>
-		<typavhalsoochsjukvardspersonal code="LK" diplayName="Läkare" />
+		<typavhalsoochsjukvardspersonal code="LK" displayName="Läkare" />
 	</involverarroller>
 	<involverarroller>
 		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
