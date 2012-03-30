@@ -37,12 +37,17 @@
 				<typavtelekomadress code="3" displayName="mobiltelefon" codeSystem="1.2.752.129.2.2.1.30"/>
 			</mobiltelefonnummer>
 			<folkbokforingsadress>
-				<utdelningsadress1>Tolvisgatan 12</utdelningsadress1>
-				<postnummer>12121</postnummer>
-				<postort>Tolvaholm</postort>
+				<careof>Andersson</careof>
+				<utdelningsadress1>Storgatan 14</utdelningsadress1>
+				<utdelningsadress2>Uppgång B</utdelningsadress2>
+				<utdelningsadress3>Lgh 3377</utdelningsadress3>
+				<postnummer>88864</postnummer>
+				<postort>Umeå</postort>
 				<typavadress code="1" displayName="folkbokföringsadress" codeSystem="1.2.752.129.2.2.1.20"/>
 			</folkbokforingsadress>
+			<!-- @TODO code för tillfälligadress finns inte än -->
 			<tillfalligadress>
+				<careof>Mikkonen</careof>
 				<utdelningsadress1>Astrakangatan 14</utdelningsadress1>
 				<utdelningsadress2>Uppgång C</utdelningsadress2>
 				<utdelningsadress3>Lgh 0014</utdelningsadress3>
@@ -78,6 +83,7 @@
 		<personalnamn>Jonas Dahl</personalnamn>
 		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<enhetnamn>Hässelby vårdcentral</enhetnamn>
+		<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
 	</involverarroller>
 	<involverarroller>
 		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
@@ -86,12 +92,13 @@
 		<personalnamn>Gustav Olebratt</personalnamn>
 		<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
 		<enhetnamn>Capio S:t Görans sjukhus, Ortopedmottagningen</enhetnamn>
+		<typavhalsoochsjukvardspersonal>Läkare</typavhalsoochsjukvardspersonal>
 	</involverarroller>
 	<eremissmoment>
 		<eremissmomentid root="1.2.752.97.x.x.x.x" extension="123"/>
-		<eremissmomenttyp code="SE" displayName="Skicka e-remiss" codeSystem="1.2.752.97.3.2.8.1"/>
-		<momentstatus code="9" displayName="avklarad" codeSystem="1.2.752.129.2.2.2.27"/>
-		<momenttidpunkt value="201203151636"/>
+		<eremissmomenttyp code="SS" displayName="Skicka svar på remissfråga" codeSystem="1.2.752.97.3.2.8.1"/>
+		<momentstatus code="9" displayName="Avklarad" codeSystem="1.2.752.129.2.2.2.27"/>
+		<momenttidpunkt value="201204181111"/>
 		<remissspecifikroll>
 			<!--Hur sa vi här? Skulle man kunna ange ngn annan än remittenten som avsändande av remissen, typ en sekreterare?)-->
 			<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
@@ -103,7 +110,7 @@
 		</remissspecifikroll>
 		<!--Måste vara samma status värde i denna remissStatus som i remissStatus ovan!-->
 		<remissstatus>
-			<eremissstatus code="SE" displayName="Skicka" codeSystem="1.2.752.97.3.2.8.3"/>
+			<eremissstatus code="SV" displayName="Besvarad" codeSystem="1.2.752.97.3.2.8.3"/>
 		</remissstatus>
 	</eremissmoment>
 	<fragestallningar>
@@ -111,8 +118,13 @@
 		<fragestallningstext>Meniskskada? Korsbandsskada?</fragestallningstext>
 		<kliniskinformation>
 			<kliniskinformationsid root="1.2.752.97.x.x.x.x" extension="123"/>
-			<tillstand code="NGN bra kod för ett tillstånd" displayName="Tillstånd XXX" codeSystem="1.2.752.97.x.x.x.x"/>
-			<beskrivning>Han springer runt i ett tomt hotell med en yxa och skriker, det är tillståndet det!</beskrivning>
+			<tillstand code="S83.6" displayName="Allergi mot XXX" codeSystem="1.2.752.97.x.x.x.x"/>
+			<beskrivning>33-årig blandmissbrukande man som ramlade omkring 1 februari i berusat tillstånd och på något sätt skadat höger knä. Ej sökt vård. Sedan dess har patienten haft intermittent svullnad av höger knä och låsningsfenomen. I status noteras måttlig hydrops, kraftig smärta vid meniskprovokationstest och misstänkt främre draglåda. Röntgenundersökning har inte visat något patologiskt. Har ej genomgått MR. Tacksam för bedömning och ställningstagande till artroskopi.
+
+				Hälsningar
+				Jonas Dahl
+				Distriktsläkare
+			</beskrivning>
 			<atgarder>
 				<atgardid root="1.2.752.97.x.x.x.x" extension="123"/>
 				<atgardtyp code="NGA11" displayName="Åtgärdskod XXX" codeSystem="1.2.752.97.x.x.x.x"/>
