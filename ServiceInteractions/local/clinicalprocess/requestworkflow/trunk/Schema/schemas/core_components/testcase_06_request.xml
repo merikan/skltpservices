@@ -60,11 +60,6 @@
 		</sprakligkommunikation>
 		<uppmarksamhetsInformation>
 			<uppmarksamhetsText>Har hepatit C.</uppmarksamhetsText>
-			<kliniskInformation>
-				<kliniskinformationsid root="1.2.752.97.x.x.x.x" extension="123"/>
-				<tillstand code="KOD för allergi mot XXX" displayName="Allergi mot XXX" codeSystem="1.2.752.97.x.x.x.x"/>
-				<beskrivning>Patienten blir blå och låter som en orm när den förs i kontakt med XXX</beskrivning>
-			</kliniskInformation>
 		</uppmarksamhetsInformation>
 	</patient>
 	<remisstatus>
@@ -108,16 +103,17 @@
 		<fragestallningstext>Meniskskada? Korsbandsskada?</fragestallningstext>
 		<kliniskinformation>
 			<kliniskinformationsid root="1.2.752.97.x.x.x.x" extension="123"/>
-			<tillstand code="NGN bra kod för ett tillstånd" displayName="Tillstånd XXX" codeSystem="1.2.752.97.x.x.x.x"/>
-			<beskrivning>Han springer runt i ett tomt hotell med en yxa och skriker, det är tillståndet det!</beskrivning>
+			<tillstand code="S83.6" displayName="Allergi mot XXX" codeSystem="1.2.752.97.x.x.x.x"/>
+			<beskrivning>33-årig blandmissbrukande man som ramlade omkring 1 februari i berusat tillstånd och på något sätt skadat höger knä. Ej sökt vård. Sedan dess har patienten haft intermittent svullnad av höger knä och låsningsfenomen. I status noteras måttlig hydrops, kraftig smärta vid meniskprovokationstest och misstänkt främre draglåda. Röntgenundersökning har inte visat något patologiskt. Har ej genomgått MR. Tacksam för bedömning och ställningstagande till artroskopi.
+
+				Hälsningar
+				Jonas Dahl
+				Distriktsläkare
+			</beskrivning>
 			<atgarder>
 				<atgardid root="1.2.752.97.x.x.x.x" extension="123"/>
-				<atgardtyp code="NGN bra kod för en åtgärd som fixar ovan givna problembild" displayName="Åtgärdskod XXX" codeSystem="1.2.752.97.x.x.x.x"/>
-				<atgardbeskrivning>33-årig blandmissbrukande man som ramlade omkring 1 februari i berusat tillstånd och på något sätt skadat höger knä. Ej sökt vård. Sedan dess har patienten haft intermittent svullnad av höger knä och låsningsfenomen. I status noteras måttlig hydrops, kraftig smärta vid meniskprovokationstest och misstänkt främre draglåda. Röntgenundersökning har inte visat något patologiskt. Har ej genomgått MR. Tacksam för bedömning och ställningstagande till artroskopi.
-
-Hälsningar
-Jonas Dahl
-Distriktsläkare</atgardbeskrivning>
+				<atgardtyp code="NGA11" displayName="Åtgärdskod XXX" codeSystem="1.2.752.97.x.x.x.x"/>
+				<atgardbeskrivning>Artroskopi höger knä</atgardbeskrivning>
 			</atgarder>
 		</kliniskinformation>
 	</fragestallningar>
