@@ -55,7 +55,6 @@
 	<involverarroller>
 		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
 		<remissrolltyp code="RT" displayName="Remittent" codeSystem="1.2.752.97.3.2.8.4"/>
-		<personalid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<personalnamn>Elin Ek</personalnamn>
 		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
@@ -64,16 +63,16 @@
 	<involverarroller>
 		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
 		<remissrolltyp code="RE" displayName="Remissbesvarare" codeSystem="1.2.752.97.3.2.8.4"/>
-		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<personalnamn>Lennart Ljung</personalnamn>
+		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<enhetnamn>Råcksta-Vällingby Närvårdsmottagning</enhetnamn>
 		<typavhalsoochsjukvardspersonal code="LK" displayName="Läkare" />
 	</involverarroller>
 	<involverarroller>
 		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
 		<remissrolltyp code="SM" displayName="Svarsmottagare" codeSystem="1.2.752.97.3.2.8.4"/>
-		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<personalnamn>Elin Ek</personalnamn>
+		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
 		<typavhalsoochsjukvardspersonal code="LK" displayName="Läkare" codeSystem=""/>
 	</involverarroller>
@@ -86,7 +85,6 @@
 			<!--Hur sa vi här? Skulle man kunna ange ngn annan än remittenten som avsändande av remissen, typ en sekreterare?)-->
 			<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
 			<remissrolltyp code="RT" displayName="Remittent" codeSystem="1.2.752.97.3.2.8.4"/>
-			<personalid root="1.2.752.97.3.1.1" extension="HSAid"/>
 			<personalnamn>Elin Ek</personalnamn>
 			<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 			<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>

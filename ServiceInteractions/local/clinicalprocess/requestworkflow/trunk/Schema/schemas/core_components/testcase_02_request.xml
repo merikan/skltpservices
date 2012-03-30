@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--SLL eRemiss exemplelmeddelande "lättviktsformat" SendReferral - normalscenario, Gustav Alvfeldt-->
-<remiss xmlns:gcda="AlschulerAssociates::GreenCDA" xmlns:gcdan="AlschulerAssociates::GreenCDA::Narrative" xmlns="urn:riv:qwe" xsi:schemaLocation="urn:riv:qwe remiss.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<remiss xmlns:gcda="AlschulerAssociates::GreenCDA" xmlns:gcdan="AlschulerAssociates::GreenCDA::Narrative" xmlns="urn:riv:clinicalprocess:requestworkflow:request"
+xsi:schemaLocation="urn:riv:clinicalprocess:requestworkflow:request remiss.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<eremissid root="1.2.752.97.x.x.x.x" extension="abc123"/>
 	<versionsid root="1.2.752.97.x.x.x.x" extension="1"/>
 	<versionstidpunkt value="201203011636"/>
@@ -66,9 +67,9 @@
 		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
 		<!-- @TODO Remissförmedlare saknas i kodverket -->
 		<remissrolltyp code="RM" displayName="Remissförmedlare" codeSystem="1.2.752.97.3.2.8.4"/>
+		<personalnamn>Jonas Dahl</personalnamn>
 		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<enhetnamn>Hässelby vårdcentral</enhetnamn>
-		<personalnamn>Jonas Dahl</personalnamn>
 		<typavhalsoochsjukvardspersonal code="LK" displayName="Läkare" />
 	</involverarroller>
 	<eremissmoment>

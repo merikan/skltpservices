@@ -176,11 +176,11 @@
 
 	<xs:complexType name="SvarsMeddelandeTyp">
 		<xs:sequence>
-			<xs:element name="" />
-			<xs:element name="" />
-			<xs:element name="" />
-			<xs:element name="" />
-			<xs:element name="" />
+			<xs:element name="X" />
+			<xs:element name="X" />
+			<xs:element name="X" />
+			<xs:element name="X" />
+			<xs:element name="X" />
 		</xs:sequence>
 	</xs:complexType>
      
