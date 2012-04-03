@@ -54,7 +54,7 @@ xsi:schemaLocation="urn:riv:clinicalprocess:requestworkflow:request remiss.xsd" 
 		<remissrolltyp code="RT" displayName="Remittent" codeSystem="1.2.752.97.3.2.8.4"/>
 		<personalid root="1.2.752.97.3.1.1" extension="HSAid"/>
 		<personalnamn>Elin Ek</personalnamn>
-		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
+		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/> <!-- Måste finnas i TK -->
 		<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
 		<typavhalsoochsjukvardspersonal code="LK" displayName="Läkare" />
 	</involverarroller>
@@ -76,6 +76,8 @@ xsi:schemaLocation="urn:riv:clinicalprocess:requestworkflow:request remiss.xsd" 
 			<personalid root="1.2.752.97.3.1.1" extension="HSAid"/>
 			<personalnamn>Elin Ek</personalnamn>
 			<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
+			<vardgivarid root="1.2.752.97.3.1.1" extension="HSAid"/>
+			<lansid root="1.2.752.97.3.1.1" extension="HSAid"/>
 			<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
 			<typavhalsoochsjukvardspersonal code="LK" displayName="Läkare" />
 		</remissspecifikroll>

@@ -33,6 +33,7 @@
   		<groupId>se.skl.tp</groupId>
 	    <artifactId>clinicalprocess-requestworkflow</artifactId>
   		<version>1.0-SNAPSHOT</version>
+		<relativePath>../</relativePath>
    </parent>
 
 	<modules>
