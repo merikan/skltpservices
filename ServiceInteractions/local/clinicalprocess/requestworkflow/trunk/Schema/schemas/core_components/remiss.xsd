@@ -91,7 +91,9 @@
 			<xs:element name="remissrolltyp" type="gcda:ce"/>
 			<xs:element name="personalid" type="gcda:ii" minOccurs="0" />
 			<xs:element name="personalnamn" type="xs:string" minOccurs="0" />
-			<xs:element name="enhetid" type="gcda:ii" minOccurs="0" />
+			<xs:element name="enhetid" type="gcda:ii" minOccurs="1" />
+			<xs:element name="vardgivarid" type="gcda:ii" minOccurs="1"/>
+			<xs:element name="lansid" type="gcda:ii" minOccurs="1"/>
 			<xs:element name="enhetnamn" type="xs:string" minOccurs="0" />
 			<xs:element name="typavhalsoochsjukvardspersonal" type="gcda:ce" minOccurs="0" />
 		</xs:sequence>
