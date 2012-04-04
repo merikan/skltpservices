@@ -22,6 +22,10 @@ package se.skl.tp.clinicalprocess.requestworkflow.processrequest.mockservice;
 
 import javax.jws.WebService;
 import lombok.extern.slf4j.Slf4j;
+import se.riv.clinicalprocess.requestworkflow.processrequest.v1.ProcessRequestResponderInterface;
+import se.riv.clinicalprocess.requestworkflow.processrequest.v1.ProcessRequestResponseType;
+import se.riv.clinicalprocess.requestworkflow.processrequest.v1.ProcessRequestType;
+import se.riv.clinicalprocess.requestworkflow.v1.ResultCodeEnum;
 
 /**
  * Validation class that will certify a webservice call made for a question regarding a medical certificate.. We will check mandatory/optional fields and all other declared rules.
@@ -38,30 +42,24 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MockServiceImpl implements ProcessRequestResponderInterface {
 
-	public ReceiveMedicalCertificateQuestionResponseType receiveMedicalCertificateQuestion(
-			AttributedURIType logicalAddress,
-			ReceiveMedicalCertificateQuestionType parameters) {
-		
-		// Create a response and set result of validation            
-		ReceiveMedicalCertificateQuestionResponseType outResponse = new ReceiveMedicalCertificateQuestionResponseType();
-		ResultOfCall outResCall = new ResultOfCall();
-		outResponse.setResult(outResCall);
+    @Override
+    public ProcessRequestResponseType processRequest(String string, ProcessRequestType parameters) {
+		ProcessRequestResponseType outResponse = new ProcessRequestResponseType();
+		outResponse.setResultCode(ResultCodeEnum.OK);
+        outResponse.setComment("MockServiceImpl");
 
 		try {
 			// Send a new Answer before answering to this request
-			MockServiceAnswer autoanswer = new MockServiceAnswer(parameters.getQuestion());
+			MockServiceAnswer autoanswer = new MockServiceAnswer(parameters.getRequest());
 			autoanswer.start();
 					
-			// Return OK!            
-			outResCall.setResultCode(ResultCodeEnum.OK);
-			outResponse.setResult(outResCall);
-			
 			return outResponse;
 		} catch (Exception e) {
-			outResCall.setErrorText(e.getMessage());
-			outResCall.setResultCode(ResultCodeEnum.ERROR);
+			outResponse.setComment(e.getMessage());
+			outResponse.setResultCode(ResultCodeEnum.ERROR);
 			log.error("Autosvar exception: " + e.getMessage());
 			return outResponse;
 		}
-	}
+
+    }
 }
