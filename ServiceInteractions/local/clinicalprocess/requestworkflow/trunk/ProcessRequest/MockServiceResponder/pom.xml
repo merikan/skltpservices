@@ -22,80 +22,81 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>se.skl.tp</groupId>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>se.skl.tp</groupId>
     <artifactId>clinicalprocess-requestworkflow-processrequest-MockServiceResponder</artifactId>
-	<version>1.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <name>clinicalprocess-requestworkflow-processrequest-MockServiceResponder</name>
-	<url>http://maven.apache.org</url>
+    <url>http://maven.apache.org</url>
 
-	<parent>
-  		<groupId>se.skl.tp</groupId>
-		<artifactId>clinicalprocess-requestworkflow-processrequest-service</artifactId>
-  		<version>1.0-SNAPSHOT</version>
-		<relativePath>../</relativePath>
-   </parent>
+    <parent>
+        <groupId>se.skl.tp</groupId>
+        <artifactId>clinicalprocess-requestworkflow-processrequest-service</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../</relativePath>
+    </parent>
 
-	<properties>
-		<schema.path>${basedir}/src/main/resources/schemas/business</schema.path>
-		<mule.version>2.2.8</mule.version>
- 	</properties>
+    <properties>
+        <schema.path>${basedir}/src/main/resources/schemas/business</schema.path>
+        <mule.version>2.2.8</mule.version>
+    </properties>
  
-	<dependencies>
+    <dependencies>
 		<!-- schema dependency -->
-	    <dependency>
-	        <groupId>se.skl.tp</groupId>
-			<artifactId>clinicalprocess-requestworkflow-schemas</artifactId>
-	        <version>1.0-SNAPSHOT</version>
-	    </dependency>
+        <dependency>
+            <groupId>se.riv</groupId>
+            <artifactId>clinicalprocess-requestworkflow-schemas</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
 	    
-
         <!-- Mule dependencies, these cannot be found in any repository, they have to be built by hand and imported into a local repository -->
-		<dependency>
-			<groupId>org.mule</groupId>
-			<artifactId>mule-core</artifactId>
-           <version>${mule.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-module-spring-config</artifactId>
+        <dependency>
+            <groupId>org.mule</groupId>
+            <artifactId>mule-core</artifactId>
             <version>${mule.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-module-scripting</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-module-spring-config</artifactId>
             <version>${mule.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-module-xml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-module-scripting</artifactId>
             <version>${mule.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-module-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-module-xml</artifactId>
             <version>${mule.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.tests</groupId>
-			<artifactId>mule-tests-functional</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-module-client</artifactId>
+            <version>2.2.8</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.tests</groupId>
+            <artifactId>mule-tests-functional</artifactId>
             <version>${mule.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.transports</groupId>
-			<artifactId>mule-transport-vm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.transports</groupId>
+            <artifactId>mule-transport-vm</artifactId>
             <version>${mule.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.transports</groupId>
-			<artifactId>mule-transport-http</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.transports</groupId>
+            <artifactId>mule-transport-http</artifactId>
             <version>${mule.version}</version>
-		</dependency>		
-		<dependency>
-			<groupId>org.mule.transports</groupId>
-			<artifactId>mule-transport-cxf</artifactId>
-           <version>${mule.version}</version>
-		</dependency>
+        </dependency>		
+        <dependency>
+            <groupId>org.mule.transports</groupId>
+            <artifactId>mule-transport-cxf</artifactId>
+            <version>${mule.version}</version>
+        </dependency>
 
 	    <!-- cxf dependencies -->
         <dependency>
@@ -109,41 +110,41 @@
             <version>${cxf.version}</version>
         </dependency>
         <dependency>
-             <groupId>org.apache.cxf</groupId>
-             <artifactId>cxf-rt-transports-http-jetty</artifactId>
-             <version>${cxf.version}</version>
-       </dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http-jetty</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.5.6</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.5.6</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
-			<exclusions>
-				<exclusion>
-					<groupId>com.sun.jdmk</groupId>
-					<artifactId>jmxtools</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jmx</groupId>
-					<artifactId>jmxri</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.jms</groupId>
-					<artifactId>jms</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.5.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.5.6</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.15</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.jdmk</groupId>
+                    <artifactId>jmxtools</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jmx</groupId>
+                    <artifactId>jmxri</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.jms</groupId>
+                    <artifactId>jms</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
        
         <!--  för att undvika att 2.0.8 laddas in -->
         <dependency>
@@ -156,6 +157,12 @@
             <artifactId>spring-web</artifactId>
             <version>2.5.6</version>
         </dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>0.10.8</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
 
 </project>

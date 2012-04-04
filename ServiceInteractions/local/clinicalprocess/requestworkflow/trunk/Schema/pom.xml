@@ -23,7 +23,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>se.skl.tp</groupId>
+    <groupId>se.riv</groupId>
     <artifactId>clinicalprocess-requestworkflow-schemas</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>clinicalprocess-requestworkflow-schemas</name>
@@ -185,7 +185,7 @@
                                         <extraarg>-p</extraarg>
                                         Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
                                         <extraarg>
-                                            urn:riv:clinicalprocess:requestworkflow:ProcessRequestReceivedConfirmation:1:rivtabp21=se.riv.clinicalprocess.requestworkflow.processrequestrecaivedconfirmation.v1
+                                            urn:riv:clinicalprocess:requestworkflow:ProcessRequestReceivedConfirmation:1:rivtabp21=se.riv.clinicalprocess.requestworkflow.processrequestreceivedconfirmation.v1
                                         </extraarg>
                                         <extraarg>-p</extraarg>
                                         <extraarg>
