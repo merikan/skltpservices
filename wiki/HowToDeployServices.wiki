@@ -26,7 +26,9 @@ In case the service platform does not start because of the new services deployed
   * Remove the newly deployed service
   * Restart server
 
-==Errors==
+==Errors that may occur in logs when deploying==
+
+Here we try to add errors that may occur during deploy and what to do to solve them.
 
 ===Service with the same listener already defined===
 
