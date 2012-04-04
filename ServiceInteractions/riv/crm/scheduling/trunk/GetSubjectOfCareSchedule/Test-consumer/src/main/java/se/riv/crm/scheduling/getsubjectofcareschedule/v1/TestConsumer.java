@@ -20,9 +20,19 @@
  */
 package se.riv.crm.scheduling.getsubjectofcareschedule.v1;
 
+import java.io.FileInputStream;
 import java.net.URL;
+import java.security.KeyStore;
 
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.TrustManagerFactory;
 import javax.xml.ws.BindingProvider;
+
+import org.apache.cxf.configuration.jsse.TLSClientParameters;
+import org.apache.cxf.endpoint.Client;
+import org.apache.cxf.frontend.ClientProxy;
+import org.apache.cxf.transport.http.HTTPConduit;
+import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 
 import se.riv.crm.scheduling.getsubjectofcareschedule.v1.rivtabp21.GetSubjectOfCareScheduleResponderInterface;
 import se.riv.crm.scheduling.getsubjectofcareschedule.v1.rivtabp21.GetSubjectOfCareScheduleResponderService;
@@ -31,11 +41,13 @@ import se.riv.crm.scheduling.getsubjectofcarescheduleresponder.v1.GetSubjectOfCa
 
 public final class TestConsumer {
 
+	private static final String LOGICAL_ADDRESS = "Test";
+
 	private static final String LOGISK_ADDRESS = "/GetSubjectOfCareSchedule/1/rivtabp21";
 
-	private static String host = "192.168.25.40:20000/vp";
+	// private static String host = "192.168.25.40:20000/vp";
 
-	// private static String host = "test1.esb.ntjp.se/vp";
+	private static String host = "test1.esb.ntjp.se/vp";
 
 	public static void main(String[] args) {
 
@@ -43,64 +55,84 @@ public final class TestConsumer {
 			host = args[0];
 		}
 
-		// Setup ssl info for the initial ?wsdl lookup...
-		System.setProperty("javax.net.ssl.keyStore", "../../certs/consumer.jks");
-		System.setProperty("javax.net.ssl.keyStorePassword", "password");
-
-		// pkcs12, jks
-		System.setProperty("javax.net.ssl.keyStoreType", "jks");
-		System.setProperty("javax.net.ssl.trustStore", "../../certs/truststore.jks");
-		System.setProperty("javax.net.ssl.trustStorePassword", "password");
-		System.setProperty("javax.net.ssl.trustStoreType", "jks");
-
 		String endpointAddress = "https://" + host + LOGISK_ADDRESS;
 		System.out.println("Consumer connecting to " + endpointAddress);
-		String p = callService(endpointAddress, "Ping");
+		String p = callService2(endpointAddress, "Test");
 		System.out.println("Returned: " + p);
 	}
 
-	public static String callService(String endpointAddress, String logicalAddresss) {
-
-		GetSubjectOfCareScheduleType request = new GetSubjectOfCareScheduleType();
-		request.setHealthcareFacility("HSA-VKK123");
-		request.setSubjectOfCare("19751026-6849");
+	public static String callService2(String serviceAddress, String logicalAddresss) {
 
 		try {
-			GetSubjectOfCareScheduleResponseType response = getService(endpointAddress).getSubjectOfCareSchedule(
-					"Test", null, request);
-			return ("GetSubjectOfCareScheduleResponseType response=" + response.getTimeslotDetail());
-		} catch (Exception ex) {
-			System.out.println("Exception=" + ex.getMessage());
-			return null;
-		}
-	}
-
-	// public static URL createEndpointUrlFromServiceAddress(String
-	// serviceAddress) {
-	// try {
-	// return new URL(serviceAddress + "?wsdl");
-	// } catch (MalformedURLException e) {
-	// throw new RuntimeException("Malformed URL Exception: " + e.getMessage());
-	// }
-	// }
-
-	private static GetSubjectOfCareScheduleResponderInterface getService(String endpointAddress) {
-
-		try {
-			final ClassLoader loader = Thread.currentThread().getContextClassLoader();
-			final URL wsdl = loader
+			// Get URL to wsdl file
+			ClassLoader loader = Thread.currentThread().getContextClassLoader();
+			URL wsdlUrl = loader
 					.getResource("schemas/interactions/GetSubjectOfCareScheduleInteraction/GetSubjectOfCareScheduleInteraction_1.1_RIVTABP21.wsdl");
 
-			GetSubjectOfCareScheduleResponderService service = new GetSubjectOfCareScheduleResponderService(wsdl);
+			GetSubjectOfCareScheduleResponderService service = new GetSubjectOfCareScheduleResponderService(wsdlUrl);
 			GetSubjectOfCareScheduleResponderInterface serviceInterface = service
 					.getGetSubjectOfCareScheduleResponderPort();
 
-			((BindingProvider) serviceInterface).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-					endpointAddress);
+			// Set web service server url
+			BindingProvider provider = (BindingProvider) serviceInterface;
+			provider.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceAddress);
 
-			return serviceInterface;
-		} catch (final Exception e) {
-			throw new RuntimeException(e);
+			GetSubjectOfCareScheduleType request = new GetSubjectOfCareScheduleType();
+			request.setHealthcareFacility("HSA-VKK123");
+			request.setSubjectOfCare("19751026-6849");
+
+			Client client = ClientProxy.getClient(serviceInterface);
+			HTTPConduit http = (HTTPConduit) client.getConduit();
+
+			HTTPClientPolicy httpClientPolicy = new HTTPClientPolicy();
+			httpClientPolicy.setConnectionTimeout(36000);
+			httpClientPolicy.setAllowChunking(false);
+			httpClientPolicy.setReceiveTimeout(32000);
+			http.setClient(httpClientPolicy);
+
+			TLSClientParameters tlsCP = setUpTlsClientParams();
+			http.setTlsClientParameters(tlsCP);
+
+			GetSubjectOfCareScheduleResponseType response = serviceInterface.getSubjectOfCareSchedule(LOGICAL_ADDRESS,
+					null, request);
+
+			return ("GetSubjectOfCareSchedule response=" + response.getTimeslotDetail());
+
+		} catch (Throwable ex) {
+			System.out.println("Exception={}" + ex.getMessage());
+			throw new RuntimeException(ex); // TODO: Define other exception
 		}
 	}
+
+	private static TLSClientParameters setUpTlsClientParams() throws Exception {
+
+		KeyStore trustStore = KeyStore.getInstance("JKS");
+		String trustStoreLoc = "../../certs/truststore_test.jks";
+		String trustPassword = "password";
+		trustStore.load(new FileInputStream(trustStoreLoc), trustPassword.toCharArray());
+
+		String keyPassword = "password";
+		KeyStore keyStore = KeyStore.getInstance("PKCS12");
+		String keyStoreLoc = "../../certs/consumer.p12";
+		keyStore.load(new FileInputStream(keyStoreLoc), keyPassword.toCharArray());
+
+		TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+		tmf.init(trustStore);
+
+		KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+		kmf.init(keyStore, keyPassword.toCharArray());
+
+		TLSClientParameters tlsCP = new TLSClientParameters();
+		tlsCP.setTrustManagers(tmf.getTrustManagers());
+		tlsCP.setKeyManagers(kmf.getKeyManagers());
+
+		// The following is not recommended and would not be done in a
+		// prodcution environment,
+		// this is just for illustrative purpose
+		tlsCP.setDisableCNCheck(true);
+
+		return tlsCP;
+
+	}
+
 }
