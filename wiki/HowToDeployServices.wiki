@@ -27,7 +27,9 @@ In case the service platform does not start because of the new services deployed
 
 ===Service with the same listener already defined===
 
-If a service exist with the same listener already defined you get the following exception.
+This could be the case when we deploy a new version of an older service.
+
+If a service exist with the same listener already defined you get the following exception. Solution is to remove one of the services with the registered listener or change one of the listeners.
 
 {{{
 vice{Get-HamtaPatientInfo-service-urn:riv:se.apotekensservice:axs:HamtaPatientInfo:1:rivtabp20}
