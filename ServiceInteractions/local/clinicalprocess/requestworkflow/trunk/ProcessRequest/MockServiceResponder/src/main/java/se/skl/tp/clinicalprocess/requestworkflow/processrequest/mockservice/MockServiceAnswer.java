@@ -1,39 +1,31 @@
-package se.skl.tp.insuranceprocess.healthreporting.recmedcertquestion.autosvar;
-
-import iso.v21090.dt.v1.II;
+package se.skl.tp.clinicalprocess.requestworkflow.processrequest.mockservice;
 
 import java.util.GregorianCalendar;
 
 import javax.xml.datatype.DatatypeFactory;
 
 import org.mule.module.client.MuleClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.w3.wsaddressing10.AttributedURIType;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.cxf.ws.addressing.AttributedURIType;
+import se.riv.clinicalprocess.requestworkflow.processrequest.v1.ProcessRequestResponseType;
+import se.riv.clinicalprocess.requestworkflow.processrequest.v1.ProcessRequestType;
 
-import se.skl.riv.insuranceprocess.healthreporting.qa.v1.InnehallType;
-import se.skl.riv.insuranceprocess.healthreporting.qa.v1.LakarutlatandeEnkelType;
-import se.skl.riv.insuranceprocess.healthreporting.qa.v1.VardAdresseringsType;
-import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionresponder.v1.QuestionFromFkType;
-import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificateanswerresponder.v1.AnswerToFkType;
-import se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificateanswerresponder.v1.SendMedicalCertificateAnswerType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.EnhetType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
-
-public class AutosvarAnswer extends Thread {
-	private final Logger logger = LoggerFactory.getLogger(getClass());
-	QuestionFromFkType question;
+/**
+ * A mockup service for clinicalprocess:requestworkflow
+ * @author khaleddaham
+ */
+@Slf4j
+public class MockServiceAnswer extends Thread {
+	ProcessRequestType request;
 	
-	public AutosvarAnswer(QuestionFromFkType question) {
+	public MockServiceAnswer(ProcessRequestType request) {
 		super();
-		this.question = question;		
+		this.request = request;		
 	}
 
 	@Override
 	public void run() {
-		logger.debug("Sending autoanswer to question.");
+		log.debug("Sending autoanswer to question.");
 				
 		MuleClient client;
 		try {
@@ -41,20 +33,20 @@ public class AutosvarAnswer extends Thread {
 			
 			AttributedURIType logicalAddressHeader = new AttributedURIType();
 			logicalAddressHeader.setValue("2021005521");
-	
-			SendMedicalCertificateAnswerType request = new SendMedicalCertificateAnswerType();
+            ProcessRequestResponseType response = new ProcessRequestResponseType();
 
-			// Set an answer 
+            /*
+            ProcessRequestAnswerType answer = new ProcessRequestAnswerType();
 			request.setAnswer(getAnswer(question));
-			
 			// Create payload to webservice
+            */
 			Object[] payloadOut = new Object[] {logicalAddressHeader, request};
 
 			client.send("autosvarEndpoint", payloadOut, null);
-			logger.info("Autoanswer sent for careUnit with id: " + request.getAnswer().getAdressVard().getHosPersonal().getEnhet().getEnhetsId().getExtension());
+			log.info("Autoanswer sent for careUnit with id: " + request.getAnswer().getAdressVard().getHosPersonal().getEnhet().getEnhetsId().getExtension());
 			
 		} catch (Exception e) {
-			logger.error("Autoanswer exception: " + e.getMessage());
+			log.error("Autoanswer exception: " + e.getMessage());
 		}		
 	}
 	

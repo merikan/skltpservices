@@ -18,19 +18,10 @@
 
  *   Boston, MA 02111-1307  USA
  */
-package se.skl.tp.insuranceprocess.healthreporting.recmedcertquestion.autosvar;
+package se.skl.tp.clinicalprocess.requestworkflow.processrequest.mockservice;
 
 import javax.jws.WebService;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.w3.wsaddressing10.AttributedURIType;
-
-import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestion.v1.rivtabp20.ReceiveMedicalCertificateQuestionResponderInterface;
-import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionresponder.v1.ReceiveMedicalCertificateQuestionResponseType;
-import se.skl.riv.insuranceprocess.healthreporting.receivemedicalcertificatequestionresponder.v1.ReceiveMedicalCertificateQuestionType;
-import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
-import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Validation class that will certify a webservice call made for a question regarding a medical certificate.. We will check mandatory/optional fields and all other declared rules.
@@ -44,8 +35,8 @@ import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
 		portName = "ReceiveMedicalCertificateQuestionResponderPort", 
 		targetNamespace = "urn:riv:insuranceprocess:healthreporting:ReceiveMedicalCertificateQuestion:1:rivtabp20",
 		wsdlLocation = "schemas/vard/interactions/ReceiveMedicalCertificateQuestionInteraction/ReceiveMedicalCertificateQuestionInteraction_1.0_rivtabp20.wsdl")
-public class AutosvarImpl implements ReceiveMedicalCertificateQuestionResponderInterface {
-	private final Logger logger = LoggerFactory.getLogger(getClass());
+@Slf4j
+public class MockServiceImpl implements ProcessRequestResponderInterface {
 
 	public ReceiveMedicalCertificateQuestionResponseType receiveMedicalCertificateQuestion(
 			AttributedURIType logicalAddress,
@@ -58,7 +49,7 @@ public class AutosvarImpl implements ReceiveMedicalCertificateQuestionResponderI
 
 		try {
 			// Send a new Answer before answering to this request
-			AutosvarAnswer autoanswer = new AutosvarAnswer(parameters.getQuestion());
+			MockServiceAnswer autoanswer = new MockServiceAnswer(parameters.getQuestion());
 			autoanswer.start();
 					
 			// Return OK!            
@@ -69,7 +60,7 @@ public class AutosvarImpl implements ReceiveMedicalCertificateQuestionResponderI
 		} catch (Exception e) {
 			outResCall.setErrorText(e.getMessage());
 			outResCall.setResultCode(ResultCodeEnum.ERROR);
-			logger.error("Autosvar exception: " + e.getMessage());
+			log.error("Autosvar exception: " + e.getMessage());
 			return outResponse;
 		}
 	}
