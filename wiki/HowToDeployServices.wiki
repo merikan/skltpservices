@@ -22,3 +22,42 @@ In case the service platform does not start because of the new services deployed
   * Capture the errorlog to use when reporting the error
   * Remove the newly deployed service
   * Restart server
+
+==Errors==
+
+===Service with the same listener already defined===
+
+If a service exist with the same listener already defined you get the following exception.
+
+{{{
+vice{Get-HamtaPatientInfo-service-urn:riv:se.apotekensservice:axs:HamtaPatientInfo:1:rivtabp20}
+INFO  2012-04-04 12:48:18,263 [WrapperListener_start_runner] org.mule.transport.cxf.CxfConnector: Registering listener: Get-HamtaPatientInfo-service-urn:riv:se.apotekensservice:axs:HamtaPatientInfo:1:rivtabp20 on endpointUri: https://192.168.25.82:20000/vp/HamtaPatientInfo/1/rivtabp20
+ERROR 2012-04-04 12:48:18,267 [WrapperListener_start_runner] org.mule.MuleServer: 
+********************************************************************************
+Message               : There is already a listener registered on this connector on endpointUri: https://192.168.25.82:20000/vp/HamtaPatientInfo/1/rivtabp20. Connector that caused exception is: CxfConnector{this=6a4d37e5, started=true, initialised=true, name='connector.cxf.0', disposed=false, numberOfConcurrentTransactedReceivers=4, createMultipleTransactedReceivers=true, connected=true, supportedProtocols=[cxf, cxf:http, cxf:https, cxf:jms, cxf:vm], serviceOverrides=null}
+Type                  : org.mule.api.transport.ConnectorException
+Code                  : MULE_ERROR-68035
+JavaDoc               : http://www.mulesource.org/docs/site/current2/apidocs/org/mule/api/transport/ConnectorException.html
+********************************************************************************
+Exception stack is:
+1. There is already a listener registered on this connector on endpointUri: https://192.168.25.82:20000/vp/HamtaPatientInfo/1/rivtabp20. Connector that caused exception is: CxfConnector{this=6a4d37e5, started=true, initialised=true, name='connector.cxf.0', disposed=false, numberOfConcurrentTransactedReceivers=4, createMultipleTransactedReceivers=true, connected=true, supportedProtocols=[cxf, cxf:http, cxf:https, cxf:jms, cxf:vm], serviceOverrides=null} (org.mule.api.transport.ConnectorException)
+  org.mule.transport.AbstractConnector:1246 (http://www.mulesource.org/docs/site/current2/apidocs/org/mule/api/transport/ConnectorException.html)
+********************************************************************************
+Root Exception stack trace:
+org.mule.api.transport.ConnectorException: There is already a listener registered on this connector on endpointUri: https://192.168.25.82:20000/vp/HamtaPatientInfo/1/rivtabp20. Connector that caused exception is: CxfConnector{this=6a4d37e5, started=true, initialised=true, name='connector.cxf.0', disposed=false, numberOfConcurrentTransactedReceivers=4, createMultipleTransactedReceivers=true, connected=true, supportedProtocols=[cxf, cxf:http, cxf:https, cxf:jms, cxf:vm], serviceOverrides=null}
+	at org.mule.transport.AbstractConnector.registerListener(AbstractConnector.java:1246)
+	at org.mule.service.AbstractService.registerListeners(AbstractService.java:595)
+	at org.mule.service.AbstractService.start(AbstractService.java:316)
+	at org.mule.service.AbstractService.start(AbstractService.java:293)
+	at sun.reflect.GeneratedMethodAccessor37.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.mule.lifecycle.DefaultLifecyclePhase.applyLifecycle(DefaultLifecyclePhase.java:272)
+	at org.mule.lifecycle.DefaultLifecyclePhase.applyLifecycle(DefaultLifecyclePhase.java:128)
+	at org.mule.lifecycle.GenericLifecycleManager.firePhase(GenericLifecycleManager.java:84)
+	at org.mule.DefaultMuleContext.start(DefaultMuleContext.java:186)
+	at org.mule.MuleServer.run(MuleServer.java:267)
+	at org.mule.MuleServer.start(MuleServer.java:252)
+	at org.mule.module.boot.MuleServerWrapper.start(MuleServerWrapper.java:48)
+	at org.tanukisoftware.wrapper.WrapperManager$12.run(WrapperManager.java:3925)
+}}}
