@@ -1,10 +1,12 @@
 package se.inera.pascal.ticket.core;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 public class ApseInfoAttributes {
-	private String requestID = "";
-	private String systemNamn = "";
-	private String systemVersion = "";
-	private String systemIP = "";
+	private String requestID;
+	private String systemNamn;
+	private String systemVersion;
+	private String systemIP;
 
 	public ApseInfoAttributes() {
 	}
@@ -39,5 +41,10 @@ public class ApseInfoAttributes {
 
 	public String getSystemIP() {
 		return systemIP;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }
