@@ -1,21 +1,23 @@
 package se.inera.pascal.ticket.core;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 public class ApseAuthorizationAttributes {
-	private String rollnamn = "";
-	private String katalogId = "";
-	private String katalog = "";
-	private String forskrivarkod = "";
-	private String legitimationskod = "";
-	private String yrkeskod = "";
-	private String befattningskod = "";
-	private String fornamn = "";
-	private String efternamn = "";
-	private String arbetsplatskod = "";
-	private String arbetsplats = "";
-	private String postadress = "";
-	private String postnummer = "";
-	private String postort = "";
-	private String telefonnummer = "";
+	private String rollnamn;
+	private String katalogId;
+	private String katalog;
+	private String forskrivarkod;
+	private String legitimationskod;
+	private String yrkeskod;
+	private String befattningskod;
+	private String fornamn;
+	private String efternamn;
+	private String arbetsplatskod;
+	private String arbetsplats;
+	private String postadress;
+	private String postnummer;
+	private String postort;
+	private String telefonnummer;
 
 	public ApseAuthorizationAttributes() {
 	}
@@ -138,5 +140,10 @@ public class ApseAuthorizationAttributes {
 
 	public String getTelefonnummer() {
 		return telefonnummer;
+	}
+	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }
