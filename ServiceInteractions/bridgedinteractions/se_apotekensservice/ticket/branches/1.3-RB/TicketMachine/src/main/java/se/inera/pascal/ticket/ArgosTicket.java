@@ -12,17 +12,28 @@ public class ArgosTicket {
 
 	private static Logger logger = LoggerFactory.getLogger(ArgosTicket.class);
 
+	private static ArgosTicket instance;
 	private SAML2AssertionTicketGeneratorLauncher launcher = null;
 	private String launcherErrorString = "";
 
-	public ArgosTicket() {
+	private ArgosTicket() {
+		logger.info("Launching  ArgosTicket....");
 		try {
 			launcher = new SAML2AssertionTicketGeneratorLauncher();
+			logger.info("ArgosTicket launched....");
 		} catch (Exception e) {
 			launcher = null;
 			launcherErrorString = e.getMessage();
 			logger.error(launcherErrorString);
+			throw new RuntimeException("Error launching ArgosTicket machine", e);
 		}
+	}
+
+	public static ArgosTicket getInstance() {
+		if (instance == null) {
+			instance = new ArgosTicket();
+		}
+		return instance;
 	}
 
 	public String getTicket(String forskrivarkod, String legitimationskod, String fornamn, String efternamn,
@@ -30,9 +41,9 @@ public class ArgosTicket {
 			String postadress, String postnummer, String telefonnummer, String requestId, String rollnamn,
 			String hsaID, String katalog, String organisationsnummer, String systemnamn, String systemversion,
 			String systemIp) {
-		String retval = "";
+
 		if (launcher != null) {
-			ApseAuthorizationAttributes authoAttr = new ApseAuthorizationAttributes();
+			final ApseAuthorizationAttributes authoAttr = new ApseAuthorizationAttributes();
 			authoAttr.setArbetsplats(arbetsplatsnamn);
 			authoAttr.setArbetsplatskod(arbetsplatskod);
 			authoAttr.setBefattningskod(befattningskod);
@@ -49,26 +60,19 @@ public class ArgosTicket {
 			authoAttr.setTelefonnummer(telefonnummer);
 			authoAttr.setYrkeskod(Yrkesgrupp);
 
-			ApseAuthenticationAttributes authnAttr = new ApseAuthenticationAttributes();
+			final ApseAuthenticationAttributes authnAttr = new ApseAuthenticationAttributes();
 			authnAttr.setDirectoryID(hsaID);
 			authnAttr.setOrganisationID(organisationsnummer);
 
-			ApseInfoAttributes infoAttr = new ApseInfoAttributes();
+			final ApseInfoAttributes infoAttr = new ApseInfoAttributes();
 			infoAttr.setRequestID(requestId);
 			infoAttr.setSystemIP(systemIp);
 			infoAttr.setSystemNamn(systemnamn);
 			infoAttr.setSystemVersion(systemversion);
 
-			launcher.setIncomingAuthorizationAttributes(authoAttr);
-			launcher.setIncomingAuthenticationAttributes(authnAttr);
-			launcher.setIncomingInfoAttributes(infoAttr);
-
-			launcher.configureAttributes();
-
-			retval = launcher.getTicket(true);
+			return launcher.getTicket(true, authoAttr, authnAttr, infoAttr);
 		} else {
-			retval = launcherErrorString;
+			return launcherErrorString;
 		}
-		return retval;
 	}
 }
