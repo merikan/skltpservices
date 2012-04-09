@@ -8,9 +8,6 @@
         <property name="locations">
             <list>
                 <value>classpath:/application.properties</value>
-                <value>classpath:/apse_authorization.properties</value>
-                <value>classpath:/apse_authentication.properties</value>
-                <value>classpath:/apse_info.properties</value>
             </list>
         </property>
     </bean>

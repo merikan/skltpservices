@@ -37,23 +37,6 @@ public class TicketMachine {
 	private static final String WSSE_STARTTAG = "<wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">";
 	private static final String WSSE_ENDTAG = "</wsse:Security>";
 	private static Logger log = LoggerFactory.getLogger(TicketMachine.class);
-	private static ArgosTicket argosSamlTicketMachine;
-
-	/**
-	 * For testing the ticketmachine with e.g a mock
-	 * 
-	 * @param argosTicketMachine
-	 */
-	void setArgosTicketMachine(ArgosTicket argosTicketMachine) {
-		argosSamlTicketMachine = argosTicketMachine;
-	}
-
-	private ArgosTicket getArgosTicketMachine() {
-		if (argosSamlTicketMachine == null) {
-			argosSamlTicketMachine = new ArgosTicket();
-		}
-		return argosSamlTicketMachine;
-	}
 
 	/**
 	 * Get a SAML ticket based on ArgosHeader information.
@@ -63,12 +46,15 @@ public class TicketMachine {
 	 * @return A String representation of the SAML ticket in ws security format.
 	 * @throws TicketMachineException
 	 */
-	public String produceSamlTicket(ArgosHeader argosHeader) throws TicketMachineException {
+	public String produceSamlTicket(final ArgosHeader argosHeader) throws TicketMachineException {
 
-		log.info("Entering produce saml ticket");
-		log.debug("Argos header " + argosHeader);
+		log.info("Entering produce saml ticket....");
+
+		if (log.isDebugEnabled()) {
+			log.debug("Argos header " + argosHeader);
+		}
 		try {
-			String samlTicket = getArgosTicketMachine().getTicket(argosHeader.getForskrivarkod(),
+			final String samlTicket = ArgosTicket.getInstance().getTicket(argosHeader.getForskrivarkod(),
 					argosHeader.getLegitimationskod(), argosHeader.getFornamn(), argosHeader.getEfternamn(),
 					argosHeader.getYrkesgrupp(), argosHeader.getBefattningskod(), argosHeader.getArbetsplatskod(),
 					argosHeader.getArbetsplatsnamn(), argosHeader.getPostort(), argosHeader.getPostadress(),
@@ -81,7 +67,7 @@ public class TicketMachine {
 		} catch (Exception e) {
 			throw new TicketMachineException("Exception generating saml ticket from ticket machine", e);
 		} finally {
-			log.info("Exiting produce saml ticket");
+			log.info("Exiting produce saml ticket....");
 		}
 
 	}
@@ -93,7 +79,7 @@ public class TicketMachine {
 	 *            The ticket to apply ws security to
 	 * @return The samlTicket including ws security information
 	 */
-	String applyWsSecurityToSamlTicket(String samlTicket) {
+	String applyWsSecurityToSamlTicket(final String samlTicket) {
 		if (StringUtils.isEmpty(samlTicket)) {
 			return WSSE_STARTTAG + WSSE_ENDTAG;
 		}

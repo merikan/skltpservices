@@ -17,39 +17,8 @@
        <bean id="keyInfoManager" factory-bean="secConfig" factory-method="getKeyInfoGeneratorManager" />
        <bean id="keyInfoGeneratorManager" factory-bean="keyInfoManager" factory-method="getDefaultManager" />
        
-       <bean id="apse_authentication" class="se.inera.pascal.ticket.core.ApseAuthenticationAttributes">
-       		<property name="directoryID" value="${directoryID} "/>
-       		<property name="organisationID" value="${organisationID}" />
-       </bean>
-       <bean id="apse_authorization" class="se.inera.pascal.ticket.core.ApseAuthorizationAttributes">
-			<property name="rollnamn" value="${rollnamn}"/>
-			<property name="katalogId" value="${katalogId}"/>
-			<property name="katalog" value="${katalog}"/>
-			<property name="forskrivarkod" value="${forskrivarkod}"/>
-			<property name="legitimationskod" value="${legitimationskod}"/>
-			<property name="yrkeskod" value="${yrkeskod}"/>
-			<property name="befattningskod" value="${befattningskod}"/>
-			<property name="fornamn" value="${fornamn}"/>
-			<property name="efternamn" value="${efternamn}"/>
-			<property name="arbetsplatskod" value="${arbetsplatskod}"/>
-			<property name="arbetsplats" value="${arbetsplats}"/>
-			<property name="postadress" value="${postadress}"/>
-			<property name="postnummer" value="${postnummer}"/>
-			<property name="postort" value="${postort}"/>
-			<property name="telefonnummer" value="${telefonnummer}"/>
-       </bean>
-       <bean id="apse_info" class="se.inera.pascal.ticket.core.ApseInfoAttributes">
-			<property name="systemNamn" value="${systemNamn}" />
-			<property name="systemVersion" value="${systemVersion}" />
-			<property name="systemIP" value="${systemIP}" />
-			<property name="requestID" value="${requestID}" />
-       </bean>
-
        <bean id="defaultValues" class="se.inera.pascal.ticket.core.DefaultValues">
        		<property name="ticketValidity" value="${ticketValidity}"/>
-       		<property name="apseAuthenticationAttributes" ref="apse_authentication"/>
-       		<property name="apseAuthorizationAttributes" ref="apse_authorization"/>
-       		<property name="apseInfoAttributes" ref="apse_info"/>
        		<property name="certificateSubjectName" value="${certificateSubjectName}"/>
        		<property name="certificateSubject" value="${certificateSubject}"/>
        		<property name="certificateSerial" value="${certificateSerial}"/>
