@@ -13,12 +13,12 @@
 	<parent>
     <artifactId>itintegration-registry</artifactId>
     <groupId>se.skl.tp</groupId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
   </parent>
 
 	<groupId>se.skl.skltpservices.itintegration.registry</groupId>
 	<artifactId>GetSupportedServiceContracts</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>GetSupportedServiceContracts service</name>
 
