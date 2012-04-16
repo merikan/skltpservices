@@ -23,7 +23,7 @@
 
   <groupId>se.skl.tp</groupId>
   <artifactId>itintegration-registry</artifactId>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>itintegration-registry</name>
 
@@ -42,8 +42,8 @@
   </modules>
   
  	<scm>
-		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/itintegration/registry/tags/itintegration-registry-1.0</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/itintegration/registry/tags/itintegration-registry-1.0</developerConnection>
+		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/itintegration/registry/trunk</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/itintegration/registry/trunk</developerConnection>
 	</scm>
 	
 	<build>
