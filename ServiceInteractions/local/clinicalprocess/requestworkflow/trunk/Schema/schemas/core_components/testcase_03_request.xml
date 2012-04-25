@@ -64,7 +64,7 @@
     </involverarroller>
     <involverarroller>
         <rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
-        <remissrolltyp code="RE" displayName="Remissbesvarare" codeSystem="1.2.752.97.3.2.8.4"/>
+        <remissrolltyp code="RA" displayName="Remissbesvarare" codeSystem="1.2.752.97.3.2.8.4"/>
         <personalnamn>Lennart Ljung</personalnamn>
         <enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
         <vardgivarid root="1.2.752.97.3.1.1" extension="HSAid"/>
@@ -80,7 +80,7 @@
         <vardgivarid root="1.2.752.97.3.1.1" extension="HSAid"/>
         <lansid root="1.2.752.97.3.1.1" extension="HSAid"/>
         <enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
-        <typavhalsoochsjukvardspersonal code="LK" displayName="Läkare" codeSystem=""/>
+        <typavhalsoochsjukvardspersonal code="LK" displayName="Läkare" codeSystem="1.2.752.97.3.2.8.8"/>
     </involverarroller>
     <eremissmoment>
         <eremissmomentid root="1.2.752.97.x.x.x.x" extension="123"/>

@@ -6,7 +6,7 @@
     <versionsid root="1.2.752.97.x.x.x.x" extension="1"/>
     <versionstidpunkt value="201203011636"/>
 	<!-- TODO code=? -->
-    <versionsorsak code="ÄR" displayName="Ändrad remiss" codeSystem="1.2.752.97.3.2.8.5"/>
+    <versionsorsak code="AR" displayName="Ändrad remiss" codeSystem="1.2.752.97.3.2.8.5"/>
     <versionsorsaktext>Komplettering av remiss efter utförd MR-undersökning.</versionsorsaktext>
     <remissdatum value="20120315"/>
     <efterfragadtidforutforande>
