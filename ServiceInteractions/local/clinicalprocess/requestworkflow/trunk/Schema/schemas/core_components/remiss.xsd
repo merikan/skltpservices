@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn:riv:clinicalprocess:requestworkflow:request" xmlns="urn:riv:clinicalprocess:requestworkflow:request" xmlns:gcda="AlschulerAssociates::GreenCDA" attributeFormDefault="unqualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified" 
+	targetNamespace="urn:riv:clinicalprocess:requestworkflow:request" 
+	xmlns="urn:riv:clinicalprocess:requestworkflow:request" 
+	xmlns:gcda="AlschulerAssociates::GreenCDA" 
+	xmlns:codes="urn:riv:clinicalprocess:requestworkflow:codes"
+	attributeFormDefault="unqualified">
+
 	<xs:import schemaLocation='green_ccd.xsd' namespace='AlschulerAssociates::GreenCDA' />
+	<xs:import schemaLocation='codes.xsd' namespace='urn:riv:clinicalprocess:requestworkflow:codes' />
+
 	<xs:element name="remiss" type="ERemissTyp"/>
+
 	<xs:complexType name="DatumIntervall">
 		<xs:sequence>
 			<xs:element name="startdatum" type="xs:string" minOccurs="0" />
@@ -11,7 +21,7 @@
 	<xs:complexType name="TelefonNummerTyp">
 		<xs:sequence>
 			<xs:element name="telekomadress" type="xs:string"/>
-			<xs:element name="typavtelekomadress" type="gcda:cd"/>
+			<xs:element name="typavtelekomadress" type="codes:kv_telekomtyp"/>
 		</xs:sequence>
 	</xs:complexType>
     <!-- @TODO refer to navetavisering -->
@@ -23,7 +33,7 @@
 			<xs:element name="utdelningsadress3" type="xs:string" minOccurs="0"/>
 			<xs:element name="postnummer" type="xs:string"/>
 			<xs:element name="postort" type="xs:string"/>
-			<xs:element name="typavadress" type="gcda:cd"/>            
+			<xs:element name="typavadress" type="codes:kv_adresstyp"/>            
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="KontaktuppgiftTyp">
@@ -81,35 +91,35 @@
     
 	<xs:complexType name="ERemissStatusTyp">
 		<xs:sequence>
-			<xs:element name="eremissstatus" type="gcda:cd"/>
+			<xs:element name="eremissstatus" type="codes:kv_eRemissStatus"/>
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="RemissSpecifikRollTyp">
 		<xs:sequence>
 			<xs:element name="rollinstansid" type="gcda:ii"/>
-			<xs:element name="remissrolltyp" type="gcda:cd"/>
+			<xs:element name="remissrolltyp" type="codes:kv_remissrolltyp"/>
 			<xs:element name="personalid" type="gcda:ii" minOccurs="0" />
 			<xs:element name="personalnamn" type="xs:string" minOccurs="0" />
 			<xs:element name="enhetid" type="gcda:ii" minOccurs="1" />
 			<xs:element name="vardgivarid" type="gcda:ii" minOccurs="1"/>
 			<xs:element name="lansid" type="gcda:ii" minOccurs="1"/>
 			<xs:element name="enhetnamn" type="xs:string" minOccurs="0" />
-			<xs:element name="typavhalsoochsjukvardspersonal" type="gcda:cd" minOccurs="0" />
+			<xs:element name="typavhalsoochsjukvardspersonal" type="codes:kv_yrkeskoder" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="ERemissMomentTyp">
 		<xs:sequence>
 			<xs:element name="eremissmomentid" type="gcda:ii"/>
-			<xs:element name="eremissmomenttyp" type="gcda:cd"/>
-			<xs:element name="momentstatus" type="gcda:cd"/>
+			<xs:element name="eremissmomenttyp" type="codes:kv_e_remissmomenttyp"/>
+			<xs:element name="momentstatus" type="codes:kv_aktmomentstatus"/>
 			<xs:element name="momenttidpunkt" type="gcda:ts"/>
 			<xs:element name="remissspecifikroll" type="RemissSpecifikRollTyp"/>
 			<xs:element name="remissstatus" type="ERemissStatusTyp" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
-    
+      
 	<xs:complexType name="AtgardTyp">
 		<xs:sequence>
 			<xs:element name="atgardid" type="gcda:ii"/>
@@ -143,7 +153,7 @@
 			<xs:element name="tilltalsnamn" type="xs:string" minOccurs="0" />
 			<xs:element name="fornamn"  type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="fodelsetidpunkt" type="gcda:ts" minOccurs="0" />
-			<xs:element name="kon" type="gcda:cd" minOccurs="0" />
+			<xs:element name="kon" type="codes:kv_kon" minOccurs="0" />
 			<xs:element name="kontaktuppgift" type="KontaktuppgiftTyp" minOccurs="0" />
 			<xs:element name="slaktskap" type="SlaktskapTyp" minOccurs="0" />
 			<xs:element name="foretradare" type="ForetradareTyp" minOccurs="0" />
@@ -157,13 +167,13 @@
 			<xs:element name="eremissid" type="gcda:ii"/>
 			<xs:element name="versionsid" type="gcda:ii"/>
 			<xs:element name="versionstidpunkt" type="gcda:ts" minOccurs="0" />
-			<xs:element name="versionsorsak" type="gcda:cd" minOccurs="0" />
+			<xs:element name="versionsorsak" type="codes:kv_e_remiss_versionsorsak" minOccurs="0" />
 			<xs:element name="versionsorsaktext" type="xs:string" minOccurs="0" />
 			<xs:element name="remissdatum" type="gcda:ts" minOccurs="0" />
 			<xs:element name="efterfragadtidforutforande" type="gcda:ivlTs" minOccurs="0" />
 			<xs:element name="onskemalomremissmottagare" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="kompletterandeadministrativinformation" type="xs:string" minOccurs="0" />
-			<xs:element name="eremisstyp" type="gcda:cd" minOccurs="0" />
+			<xs:element name="eremisstyp" type="codes:kv_framstallantyp_NeR" minOccurs="0" />
 			<xs:element name="signatur" type="xs:string" minOccurs="0" />
 			<xs:element name="signerad" type="xs:boolean"/>
 			<xs:element name="signeringstid" type="gcda:ts" minOccurs="0" />
