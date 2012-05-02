@@ -6,7 +6,7 @@
 	<artifactId>ei-pull-virtualisering</artifactId>
 	<packaging>jar</packaging>
 
-	<name>ei-pull integrationtests</name>
+	<name>ei-pull virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
