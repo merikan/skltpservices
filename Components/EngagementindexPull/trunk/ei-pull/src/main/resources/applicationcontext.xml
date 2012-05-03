@@ -9,11 +9,12 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
         http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
         http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
-        
+
 	<beans:import resource="classpath:META-INF/cxf/cxf.xml" />
 	<beans:import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
-  
-	<jaxws:client id="getUpdatesClient"
+    <beans:import resource="classpath:META-INF/cxf/cxf-extension-http.xml" />
+
+    <jaxws:client id="getUpdatesClient"
 		serviceClass="se.riv.itintegration.engagementindex.getupdates.v1.rivtabp21.GetUpdatesResponderInterface"
 		address="http://localhost:10001/testproducer/GetUpdatesResponder/V1" />
 		
