@@ -36,12 +36,15 @@
 
 			<inbound>
 				<quartz:inbound-endpoint jobName="getUpdatesJob"
-					repeatInterval="1000">
+					repeatInterval="10000">
 					<quartz:event-generator-job />
 				</quartz:inbound-endpoint>
 			</inbound>
-
-			<component class="se.skl.components.pull.EngagementIndexPull" />
+			
+			
+			<component>
+				<singleton-object class="se.skl.components.pull.EngagementIndexPull" />
+			</component>
 
 <!-- 			<outbound> -->
 <!-- 				<pass-through-router> -->
