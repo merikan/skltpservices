@@ -14,6 +14,10 @@
 	<beans:import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
     <beans:import resource="classpath:META-INF/cxf/cxf-extension-http.xml" />
 
+    <jaxws:client id="getAddressesClient"
+                  serviceClass="se.riv.itintegration.registry.getlogicaladdresseesbyservicecontract.v1.rivtabp21.GetLogicalAddresseesByServiceContractResponderInterface"
+                  address="http://localhost:10001/testproducer/GetLogicalAddresseesByServiceContractResponder/V1" />
+
     <jaxws:client id="getUpdatesClient"
 		serviceClass="se.riv.itintegration.engagementindex.getupdates.v1.rivtabp21.GetUpdatesResponderInterface"
 		address="http://localhost:10001/testproducer/GetUpdatesResponder/V1" />
