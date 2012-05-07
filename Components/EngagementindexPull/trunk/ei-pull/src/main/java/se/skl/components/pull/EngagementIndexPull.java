@@ -52,12 +52,12 @@ public class EngagementIndexPull {
         for (String address : addressesToContact) {
             List<String> serviceDomainList = getServiceDomainList();
             for (String serviceDomain : serviceDomainList) {
-                boolean hasMore;
+                boolean isComplete;
                 do {
                     GetUpdatesResponseType updates = pull(serviceDomain, address);
-                    hasMore = checkHasMoreData(serviceDomain, address);
+                    isComplete = updates.isResponseIsComplete();
                     push(address, updates);
-                } while (hasMore);
+                } while (!isComplete);
             }
         }
 	}
@@ -78,10 +78,6 @@ public class EngagementIndexPull {
             serviceDomainList.add(StringUtils.trim(serviceDomain));
         }
         return serviceDomainList;
-    }
-
-    private boolean checkHasMoreData(String serviceDomain, String logicalAddress) {
-        return false;
     }
 
 	private void push(String logicalAddress, GetUpdatesResponseType updates) {
