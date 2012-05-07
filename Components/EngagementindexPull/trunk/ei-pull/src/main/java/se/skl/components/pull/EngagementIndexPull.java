@@ -118,8 +118,7 @@ public class EngagementIndexPull {
 	}
 
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("applicationcontext.xml");
-		BeanFactory factory = context;
+		BeanFactory factory = new ClassPathXmlApplicationContext("applicationcontext.xml");
 		EngagementIndexPull engagementIndexPull = (EngagementIndexPull) factory.getBean("engagementIndexPull");
 		engagementIndexPull.doFetchUpdates();
 	}
