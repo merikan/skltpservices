@@ -1,13 +1,22 @@
 title Engagemangsindex - Pullfunktion NTjP utan RTP
 
-EI_Pull->NTjP: GetLogicalAddressesByServiceContract
-NTjP->TjŠnsteadresseringskatalog: GetLogicalAddressesByServiceContract
+note over EI_Pull, NTjP
+Kolla om N EI svarar
+end note
+
+EI_Pull->NTjP: PingForConfiguration
+NTjP->N EI: PingForConfiguration
+N EI->NTjP: Ping response
+NTjP->EI_Pull: Ping response
 
 note over EI_Pull, NTjP
 HŠmta logiska adresser som konsument fŒr gšra getUpdates pŒ:
 Konsument HSA ID: HSASERVICES-100M
 TjŠnstekontrakt: urn:riv:itintegration:engagementindex:GetUpdates:1:rivtabp21
 end note
+
+EI_Pull->NTjP: GetLogicalAddressesByServiceContract
+NTjP->TjŠnsteadresseringskatalog: GetLogicalAddressesByServiceContract
 
 TjŠnsteadresseringskatalog->NTjP: Lista av logiska adresser
 NTjP->EI_Pull: Lista av logiska adresser
