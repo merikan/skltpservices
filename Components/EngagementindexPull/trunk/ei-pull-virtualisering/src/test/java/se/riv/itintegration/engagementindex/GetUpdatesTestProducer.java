@@ -23,13 +23,10 @@ public class GetUpdatesTestProducer implements GetUpdatesResponderInterface {
 
 	@Override
 	public GetUpdatesResponseType getUpdates(String arg0, GetUpdatesType request) {
-
 		String serviceDomain = request.getServiceDomain();
-
 		GetUpdatesResponseType response = new GetUpdatesResponseType();
 		response.setResponseIsComplete(true);
-		response.getRegisteredResidentEngagement().add(
-				createRegisteredResidentEngagementType(serviceDomain, "197303160555"));
+		response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "197303160555"));
 		return response;
 	}
 
