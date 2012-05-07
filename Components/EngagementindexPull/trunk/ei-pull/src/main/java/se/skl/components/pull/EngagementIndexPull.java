@@ -49,12 +49,13 @@ public class EngagementIndexPull {
     }
 
 	private void doPull(List<String> addressesToContact) {
+        final String sinceTimeStamp = getFormattedPastTime();
         for (String address : addressesToContact) {
             List<String> serviceDomainList = getServiceDomainList();
             for (String serviceDomain : serviceDomainList) {
                 boolean isComplete;
                 do {
-                    GetUpdatesResponseType updates = pull(serviceDomain, address);
+                    GetUpdatesResponseType updates = pull(serviceDomain, address, sinceTimeStamp);
                     isComplete = updates.isResponseIsComplete();
                     push(address, updates);
                 } while (!isComplete);
@@ -62,10 +63,10 @@ public class EngagementIndexPull {
         }
 	}
 
-	private GetUpdatesResponseType pull(String serviceDomain, String logicalAddress) {
+	private GetUpdatesResponseType pull(String serviceDomain, String logicalAddress, String sinceTimeStamp) {
 		GetUpdatesType updateRequest = new GetUpdatesType();
 		updateRequest.setServiceDomain(serviceDomain);
-		updateRequest.setTimeStamp(getFormattedPastTime());
+		updateRequest.setTimeStamp(sinceTimeStamp);
 		GetUpdatesResponseType response = getUpdatesClient.getUpdates(logicalAddress, updateRequest);
 		return response;
 	}
