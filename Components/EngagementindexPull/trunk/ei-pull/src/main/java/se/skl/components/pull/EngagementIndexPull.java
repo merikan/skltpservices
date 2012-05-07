@@ -1,10 +1,10 @@
 package se.skl.components.pull;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -37,35 +37,52 @@ public class EngagementIndexPull {
 	private UpdateResponderInterface updateClient;
 
     public void doFetchUpdates() {
-        String logicalAddress = "Kalle";
         GetLogicalAddresseesByServiceContractType parameters = new GetLogicalAddresseesByServiceContractType();
         ServiceContractNamespaceType serviceContractNameSpace = new ServiceContractNamespaceType();
-        serviceContractNameSpace.setServiceContractNamespace("SOME URI");
-        parameters.setServiceConsumerHsaId("Some consumer HSA ID");
+        serviceContractNameSpace.setServiceContractNamespace(PropertyResolver.get("ei.push.service.contract.namespace"));
         parameters.setServiceContractNameSpace(serviceContractNameSpace);
+        parameters.setServiceConsumerHsaId(PropertyResolver.get("ei.push.service.consumer.hsaid"));
+        String logicalAddress = PropertyResolver.get("ei.push.address");
         GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(logicalAddress, parameters);
         List<String> addressesToContact = addressResponse.getLogicalAddress();
-        // List<String> addressesToContact = new ArrayList<String>();
-        // addressesToContact.add("Kalle");
         doPull(addressesToContact);
     }
 
 	private void doPull(List<String> addressesToContact) {
         for (String address : addressesToContact) {
-            GetUpdatesResponseType updates = pull(address);
-            push(address, updates);
+            List<String> serviceDomainList = getServiceDomainList();
+            for (String serviceDomain : serviceDomainList) {
+                boolean hasMore;
+                do {
+                    GetUpdatesResponseType updates = pull(serviceDomain, address);
+                    hasMore = checkHasMoreData(serviceDomain, address);
+                    push(address, updates);
+                } while (hasMore);
+            }
         }
 	}
 
-	private GetUpdatesResponseType pull(String logicalAddress) {
-
+	private GetUpdatesResponseType pull(String serviceDomain, String logicalAddress) {
 		GetUpdatesType updateRequest = new GetUpdatesType();
-		updateRequest.setServiceDomain("riv:crm:scheduling");
-		updateRequest.setTimeStamp(getTimestamp());
-
+		updateRequest.setServiceDomain(serviceDomain);
+		updateRequest.setTimeStamp(getFormattedPastTime());
 		GetUpdatesResponseType response = getUpdatesClient.getUpdates(logicalAddress, updateRequest);
 		return response;
 	}
+
+    private List<String> getServiceDomainList() {
+        List<String> serviceDomainList = new LinkedList<String>();
+        String commaSeparatedDomains = PropertyResolver.get("ei.push.service.domain.list");
+        String[] stringDomainList = commaSeparatedDomains.split(",");
+        for (String serviceDomain : stringDomainList) {
+            serviceDomainList.add(StringUtils.trim(serviceDomain));
+        }
+        return serviceDomainList;
+    }
+
+    private boolean checkHasMoreData(String serviceDomain, String logicalAddress) {
+        return false;
+    }
 
 	private void push(String logicalAddress, GetUpdatesResponseType updates) {
 		UpdateType requestForUpdate = createRequestForUpdate(updates);
@@ -89,8 +106,15 @@ public class EngagementIndexPull {
 		return requestForUpdate;
 	}
 
-	String getTimestamp() {
-		return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+	private String getFormattedPastTime() {
+        int timeOffset = -NumberUtils.toInt(PropertyResolver.get("ei.push.time.offset"));
+        Date currentDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.setTime(currentDate);
+        calendar.set(Calendar.SECOND, timeOffset);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		return simpleDateFormat.format(calendar.getTime());
 	}
 
 	public static void main(String[] args) {
