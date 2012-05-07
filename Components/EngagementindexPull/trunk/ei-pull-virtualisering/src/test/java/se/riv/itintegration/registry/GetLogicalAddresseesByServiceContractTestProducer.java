@@ -23,12 +23,12 @@ public class GetLogicalAddresseesByServiceContractTestProducer implements GetLog
         ServiceContractNamespaceType serviceContractNamespaceType = parameters.getServiceContractNameSpace();
 		GetLogicalAddresseesByServiceContractResponseType response = new GetLogicalAddresseesByServiceContractResponseType();
         ArrayList<String> logicalAddresses = new ArrayList<String>();
-        if (StringUtils.equals(logicalAddress, "Kalle")) {
+        if (StringUtils.equals(serviceConsumerHsaId, "Kalel")) {
             logicalAddresses.add("Lion");
             logicalAddresses.add("Cliff Valley");
             logicalAddresses.add("Aoaoao");
         }
-        // Not nice pattern but JAX only generates a getter.
+        // Not a nice pattern but JAX only generates a getter.
         response.getLogicalAddress().addAll(logicalAddresses);
 		return response;
 	}
