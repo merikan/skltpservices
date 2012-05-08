@@ -69,7 +69,7 @@ public class EngagementIndexPull {
             final String updatesSinceTimeStamp = getFormattedOffsetTime();
             for (String address : addressesToContact) {
                 for (String serviceDomain : getServiceDomainList()) {
-                    boolean isComplete = false;
+                    boolean isComplete;
                     List<String> registeredResidentLastFetched = new LinkedList<String>();
                     do {
                         GetUpdatesResponseType updates = pull(serviceDomain, address, updatesSinceTimeStamp, registeredResidentLastFetched);
@@ -133,6 +133,10 @@ public class EngagementIndexPull {
                     break;
                 case ERROR:
                     log.fatal("Result containing " + updates.getRegisteredResidentEngagement().size() + " posts was pushed to "+ logicalAddress + ", however an error response code was in the reply!\nResult code: " + resultCode.name() + ".\nUpdate response comment:" + updateResponse.getComment());
+                    break;
+                default:
+                    String responseCode = (resultCode != null ? resultCode.name() : "null");
+                    log.warn("Received unexpected result code '" + responseCode + "' after updating " + updates.getRegisteredResidentEngagement().size() + " posts to "+ logicalAddress + ". Update response comment:" + updateResponse.getComment());
                     break;
             }
         } catch (Exception e) {
