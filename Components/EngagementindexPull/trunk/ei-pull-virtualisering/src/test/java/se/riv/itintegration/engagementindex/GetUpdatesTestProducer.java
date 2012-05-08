@@ -1,16 +1,16 @@
 package se.riv.itintegration.engagementindex;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
-
-import javax.jws.WebService;
-
+import org.mule.util.StringUtils;
 import riv.itintegration.engagementindex._1.EngagementType;
 import riv.itintegration.engagementindex._1.RegisteredResidentEngagementType;
 import se.riv.itintegration.engagementindex.getupdates.v1.rivtabp21.GetUpdatesResponderInterface;
 import se.riv.itintegration.engagementindex.getupdatesresponder.v1.GetUpdatesResponseType;
 import se.riv.itintegration.engagementindex.getupdatesresponder.v1.GetUpdatesType;
+
+import javax.jws.WebService;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 
 @WebService(serviceName = "GetUpdatesResponderService",
         endpointInterface = "se.riv.itintegration.engagementindex.getupdates.v1.rivtabp21.GetUpdatesResponderInterface",
@@ -26,12 +26,26 @@ public class GetUpdatesTestProducer implements GetUpdatesResponderInterface {
 		String serviceDomain = request.getServiceDomain();
 		GetUpdatesResponseType response = new GetUpdatesResponseType();
 		response.setResponseIsComplete(true);
-		response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "197303160555"));
+        if (StringUtils.equals(serviceDomain, "riv:crm:scheduling")) {
+            // Simulate a partial request
+            if (request.getRegisteredResidentLastFetched().isEmpty()) {
+                response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "197303160555"));
+                response.setResponseIsComplete(false);
+            } else {
+                response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "197707070707"));
+                response.setResponseIsComplete(true);
+            }
+        } else if (StringUtils.equals(serviceDomain, "riv:crm:tbook")) {
+            response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "197303160555"));
+        } else if (StringUtils.equals(serviceDomain, "riv:crm:appointment")) {
+
+        } else {
+            return null;
+        }
 		return response;
 	}
 
-	private RegisteredResidentEngagementType createRegisteredResidentEngagementType(String serviceDomain,
-			String registeredResidentIdentification) {
+	private RegisteredResidentEngagementType createRegisteredResidentEngagementType(String serviceDomain, String registeredResidentIdentification) {
 		RegisteredResidentEngagementType response = new RegisteredResidentEngagementType();
 		response.setRegisteredResidentIdentification(registeredResidentIdentification);
 		response.getEngagement().add(createEngagement(serviceDomain, registeredResidentIdentification));
