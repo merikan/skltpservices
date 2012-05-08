@@ -11,10 +11,12 @@ import org.springframework.stereotype.Component;
 import riv.itintegration.engagementindex._1.EngagementTransactionType;
 import riv.itintegration.engagementindex._1.EngagementType;
 import riv.itintegration.engagementindex._1.RegisteredResidentEngagementType;
+import riv.itintegration.engagementindex._1.ResultCodeEnum;
 import se.riv.itintegration.engagementindex.getupdates.v1.rivtabp21.GetUpdatesResponderInterface;
 import se.riv.itintegration.engagementindex.getupdatesresponder.v1.GetUpdatesResponseType;
 import se.riv.itintegration.engagementindex.getupdatesresponder.v1.GetUpdatesType;
 import se.riv.itintegration.engagementindex.update.v1.rivtabp21.UpdateResponderInterface;
+import se.riv.itintegration.engagementindex.updateresponder.v1.UpdateResponseType;
 import se.riv.itintegration.engagementindex.updateresponder.v1.UpdateType;
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontract.v1.rivtabp21.GetLogicalAddresseesByServiceContractResponderInterface;
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractresponder.v1.GetLogicalAddresseesByServiceContractResponseType;
@@ -116,7 +118,18 @@ public class EngagementIndexPull {
     private void push(String logicalAddress, GetUpdatesResponseType updates) {
         UpdateType requestForUpdate = createRequestForUpdate(updates);
         try {
-            updateClient.update(logicalAddress, requestForUpdate);
+            UpdateResponseType updateResponse = updateClient.update(logicalAddress, requestForUpdate);
+            ResultCodeEnum resultCode = updateResponse.getResultCode();
+            switch (resultCode) {
+                case OK:
+                    return;
+                case INFO:
+                    // What is supposed to happen here?
+                    break;
+                case ERROR:
+                    log.fatal("Result containing " + updates.getRegisteredResidentEngagement().size() + " posts was pushed to "+ logicalAddress + ", however an error response code was in the reply!\nResult code: " + resultCode.name() + ".\nUpdate response comment:" + updateResponse.getComment());
+                    break;
+            }
         } catch (Exception e) {
             log.fatal("Error while trying to update index! " + updates.getRegisteredResidentEngagement().size() + " posts were unable to be pushed to:"  + logicalAddress + ". Reason:\n", e);
         }

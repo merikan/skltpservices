@@ -1,10 +1,11 @@
 package se.riv.itintegration.engagementindex;
 
-import javax.jws.WebService;
-
+import riv.itintegration.engagementindex._1.ResultCodeEnum;
 import se.riv.itintegration.engagementindex.update.v1.rivtabp21.UpdateResponderInterface;
 import se.riv.itintegration.engagementindex.updateresponder.v1.UpdateResponseType;
 import se.riv.itintegration.engagementindex.updateresponder.v1.UpdateType;
+
+import javax.jws.WebService;
 
 @WebService(serviceName = "UpdateResponderService", 
 			endpointInterface = "se.riv.itintegration.engagementindex.update.v1.rivtabp21.UpdateResponderInterface",
@@ -17,6 +18,7 @@ public class UpdateTestProducer implements UpdateResponderInterface {
 	public UpdateResponseType update(String arg0, UpdateType arg1) {
 		
 		UpdateResponseType response = new UpdateResponseType();
+        response.setResultCode(ResultCodeEnum.OK);
 		
 		return response;
 	}
