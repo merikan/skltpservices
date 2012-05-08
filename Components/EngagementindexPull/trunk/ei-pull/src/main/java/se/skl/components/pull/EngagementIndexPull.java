@@ -47,31 +47,36 @@ public class EngagementIndexPull {
         parameters.setServiceContractNameSpace(serviceContractNameSpace);
         parameters.setServiceConsumerHsaId(PropertyResolver.get("ei.push.service.consumer.hsaid"));
         String logicalAddress = PropertyResolver.get("ei.push.address");
+        List<String> addressesToContact = null;
         try {
             GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(logicalAddress, parameters);
-            List<String> addressesToContact = addressResponse.getLogicalAddress();
-            doPull(addressesToContact);
+            addressesToContact = addressResponse.getLogicalAddress();
         } catch (Exception e) {
             log.fatal("Could not contact " + PropertyResolver.get("ei.push.address.client") + " in order to acquire addresses which should be contacted for pulling data. Reason:\n", e);
         }
+        doPull(addressesToContact);
     }
 
 	private void doPull(List<String> addressesToContact) {
-        final String sinceTimeStamp = getFormattedPastTime();
-        for (String address : addressesToContact) {
-            List<String> serviceDomainList = getServiceDomainList();
-            for (String serviceDomain : serviceDomainList) {
-                boolean isComplete;
-                do {
-                    GetUpdatesResponseType updates = pull(serviceDomain, address, sinceTimeStamp);
-                    if (updates != null) {
-                        isComplete = updates.isResponseIsComplete();
-                        push(address, updates);
-                    } else {
-                        isComplete = true;
-                    }
-                } while (!isComplete);
+        if (addressesToContact != null && addressesToContact.isEmpty()) {
+            final String sinceTimeStamp = getFormattedPastTime();
+            for (String address : addressesToContact) {
+                List<String> serviceDomainList = getServiceDomainList();
+                for (String serviceDomain : serviceDomainList) {
+                    boolean isComplete;
+                    do {
+                        GetUpdatesResponseType updates = pull(serviceDomain, address, sinceTimeStamp);
+                        if (updates != null) {
+                            isComplete = updates.isResponseIsComplete();
+                            push(address, updates);
+                        } else {
+                            isComplete = true;
+                        }
+                    } while (!isComplete);
+                }
             }
+        } else {
+            log.error("The address list is either null or empty. No fetching of updates could be done at this time.");
         }
 	}
 
