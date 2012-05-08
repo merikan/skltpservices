@@ -77,7 +77,7 @@ public class EngagementIndexPull {
                             push(address, updates);
                             isComplete = updates.isResponseIsComplete();
                         } else {
-                            log.error("Received null when pulling data since " + updatesSinceTimeStamp + ", from address: " + address + "\nusing service domain: " + serviceDomain + ". Previously fetched " + registeredResidentLastFetched.size() + " posts from this domain.");
+                            log.error("Received null when pulling data since: " + updatesSinceTimeStamp + ", from address: " + address + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + registeredResidentLastFetched.size() + " partial results from this address.");
                             isComplete = true;
                         }
                         // If the result is not complete the next request should contain what information which was previously fetched.
