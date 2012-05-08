@@ -26,7 +26,7 @@ public class GetUpdatesTestProducer implements GetUpdatesResponderInterface {
 		String serviceDomain = request.getServiceDomain();
 		GetUpdatesResponseType response = new GetUpdatesResponseType();
 		response.setResponseIsComplete(true);
-        if (StringUtils.equals(serviceDomain, "riv:crm:scheduling")) {
+        if (StringUtils.equals(serviceDomain, "")) {
             // Simulate a partial request
             if (request.getRegisteredResidentLastFetched().isEmpty()) {
                 response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "197303160555"));
@@ -35,9 +35,9 @@ public class GetUpdatesTestProducer implements GetUpdatesResponderInterface {
                 response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "197707070707"));
                 response.setResponseIsComplete(true);
             }
-        } else if (StringUtils.equals(serviceDomain, "riv:crm:tbook")) {
+        } else if (StringUtils.equals(serviceDomain, "riv:itintegration:engagementindex")) {
             response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "197303160555"));
-        } else if (StringUtils.equals(serviceDomain, "riv:crm:appointment")) {
+        } else if (StringUtils.equals(serviceDomain, "riv:crm:scheduling")) {
 
         } else {
             return null;
