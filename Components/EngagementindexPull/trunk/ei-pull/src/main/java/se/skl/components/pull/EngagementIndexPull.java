@@ -71,6 +71,7 @@ public class EngagementIndexPull {
                         } else {
                             isComplete = true;
                         }
+                    // Continue while there is more data to fetch
                     } while (!isComplete);
                 }
             }
