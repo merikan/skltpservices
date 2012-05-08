@@ -1,6 +1,5 @@
 package se.skl.components.pull;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,16 +22,12 @@ import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractrespon
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractresponder.v1.GetLogicalAddresseesByServiceContractType;
 import se.riv.itintegration.registry.v1.ServiceContractNamespaceType;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Authors: Hans Thunberg, Henrik Rostam
- **/
-
+ */
 @Component
 public class EngagementIndexPull {
 
@@ -66,30 +61,12 @@ public class EngagementIndexPull {
 
 	private void pushAndPull(List<String> addressesToContact) {
         if (addressesToContact != null && !addressesToContact.isEmpty()) {
-            final String updatesSinceTimeStamp = getFormattedOffsetTime();
+            String commaSeparatedDomains = PropertyResolver.get("ei.push.service.domain.list");
+            int offsetFromNowInSeconds = -NumberUtils.toInt(PropertyResolver.get("ei.push.time.offset"));
+            final String updatesSinceTimeStamp = EngagementIndexHelper.getFormattedOffsetTime(offsetFromNowInSeconds, "yyyyMMddHHmmss");
             for (String address : addressesToContact) {
-                for (String serviceDomain : getServiceDomainList()) {
-                    boolean isComplete;
-                    List<String> registeredResidentLastFetched = new LinkedList<String>();
-                    do {
-                        GetUpdatesResponseType updates = pull(serviceDomain, address, updatesSinceTimeStamp, registeredResidentLastFetched);
-                        if (updates != null) {
-                            push(address, updates);
-                            isComplete = updates.isResponseIsComplete();
-                        } else {
-                            log.error("Received null when pulling data since: " + updatesSinceTimeStamp + ", from address: " + address + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + registeredResidentLastFetched.size() + " partial results from this address.");
-                            isComplete = true;
-                        }
-                        // If the result is not complete the next request should contain what information which was previously fetched.
-                        if (isComplete) {
-                            registeredResidentLastFetched.clear();
-                        } else {
-                            for (RegisteredResidentEngagementType tmpEngagementType : updates.getRegisteredResidentEngagement()) {
-                                registeredResidentLastFetched.add(tmpEngagementType.getRegisteredResidentIdentification());
-                            }
-                        }
-                    // Continue while there is more data to fetch
-                    } while (!isComplete);
+                for (String serviceDomain : EngagementIndexHelper.getServiceDomainList(commaSeparatedDomains)) {
+                    doPushAndPull(serviceDomain, address, updatesSinceTimeStamp);
                 }
             }
         } else {
@@ -97,15 +74,31 @@ public class EngagementIndexPull {
         }
 	}
 
-    private List<String> getServiceDomainList() {
-        List<String> serviceDomainList = new LinkedList<String>();
-        String commaSeparatedDomains = PropertyResolver.get("ei.push.service.domain.list");
-        String[] stringDomainList = commaSeparatedDomains.split(",");
-        for (String serviceDomain : stringDomainList) {
-            serviceDomainList.add(StringUtils.trim(serviceDomain));
+    private void doPushAndPull(String serviceDomain, String logicalAddress, String updatesSinceTimeStamp) {
+        List<String> registeredResidentLastFetched = new LinkedList<String>();
+        boolean isNotDone = true;
+        // Continue while there is more data to fetch
+        while (isNotDone) {
+            GetUpdatesResponseType updates = pull(serviceDomain, logicalAddress, updatesSinceTimeStamp, registeredResidentLastFetched);
+            if (updates != null) {
+                push(logicalAddress, updates);
+                if (updates.isResponseIsComplete()) {
+                    // No more results to be fetched
+                    isNotDone = false;
+                } else {
+                    // There are more results to fetch, build list of what we fetched since the producer is stateless.
+                    for (RegisteredResidentEngagementType tmpEngagementType : updates.getRegisteredResidentEngagement()) {
+                        registeredResidentLastFetched.add(tmpEngagementType.getRegisteredResidentIdentification());
+                    }
+                }
+            } else {
+                isNotDone = false;
+                log.error("Received null when pulling data since: " + updatesSinceTimeStamp + ", from address: " + logicalAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + registeredResidentLastFetched.size() + " partial results from this address.");
+            }
         }
-        return serviceDomainList;
     }
+
+
 
 	private GetUpdatesResponseType pull(String serviceDomain, String logicalAddress, String sinceTimeStamp, List<String> registeredResidentLastFetched) {
 		GetUpdatesType updateRequest = new GetUpdatesType();
@@ -149,18 +142,12 @@ public class EngagementIndexPull {
 
 	private UpdateType createRequestForUpdate(GetUpdatesResponseType updateResponse) {
 		UpdateType requestForUpdate = new UpdateType();
-        List<RegisteredResidentEngagementType> registeredResidentEngagement = updateResponse.getRegisteredResidentEngagement();
-        if (registeredResidentEngagement != null && !registeredResidentEngagement.isEmpty()) {
-            for (RegisteredResidentEngagementType registeredResidentEngagementType : registeredResidentEngagement) {
-                List<EngagementType> engagement = registeredResidentEngagementType.getEngagement();
-                if (engagement != null && !engagement.isEmpty()) {
-                    for (EngagementType engagementType : engagement) {
-                        EngagementTransactionType engagementTransaction = new EngagementTransactionType();
-                        // Var hittar man informtion om vad som skall tas bort?
-                        // engagementTransaction.setDeleteFlag(value);
-                        engagementTransaction.setEngagement(engagementType);
-                        requestForUpdate.getEngagementTransaction().add(engagementTransaction);
-                    }
+        List<RegisteredResidentEngagementType> registeredEngagementTypes = updateResponse.getRegisteredResidentEngagement();
+        if (registeredEngagementTypes != null && !registeredEngagementTypes.isEmpty()) {
+            for (RegisteredResidentEngagementType registeredResidentEngagementType : registeredEngagementTypes) {
+                List<EngagementType> engagementTypes = registeredResidentEngagementType.getEngagement();
+                if (engagementTypes != null && !engagementTypes.isEmpty()) {
+                    addTransactionsToUpdateRequest(engagementTypes, requestForUpdate);
                 } else {
                     // Engagement list was either null or empty
                     log.debug("Engagement list was either null or empty, no data added to the engagement transaction.");
@@ -173,16 +160,17 @@ public class EngagementIndexPull {
 		return requestForUpdate;
 	}
 
-	private String getFormattedOffsetTime() {
-        int timeOffset = -NumberUtils.toInt(PropertyResolver.get("ei.push.time.offset"));
-        Date currentDate = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.clear();
-        calendar.setTime(currentDate);
-        calendar.set(Calendar.SECOND, timeOffset);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-		return simpleDateFormat.format(calendar.getTime());
-	}
+    private void addTransactionsToUpdateRequest(List<EngagementType> engagementTypes, UpdateType requestForUpdate) {
+        for (EngagementType engagementType : engagementTypes) {
+            EngagementTransactionType engagementTransaction = new EngagementTransactionType();
+            // Var hittar man informtion om vad som skall tas bort?
+            // engagementTransaction.setDeleteFlag(value);
+            engagementTransaction.setEngagement(engagementType);
+            requestForUpdate.getEngagementTransaction().add(engagementTransaction);
+        }
+    }
+
+
 
 	public static void main(String[] args) {
 		BeanFactory factory = new ClassPathXmlApplicationContext("applicationcontext.xml");
