@@ -75,7 +75,7 @@ public class EngagementIndexPull {
                 }
             }
         } else {
-            log.error("The address list is either null or empty. No fetching of updates could be done at this time.");
+            log.error("The address list used to fetch updates is either null or empty. No fetching of updates could be done at this time.");
         }
 	}
 
@@ -112,15 +112,27 @@ public class EngagementIndexPull {
 
 	private UpdateType createRequestForUpdate(GetUpdatesResponseType updateResponse) {
 		UpdateType requestForUpdate = new UpdateType();
-		for (RegisteredResidentEngagementType registeredResidentEngagementType : updateResponse.getRegisteredResidentEngagement()) {
-			for (EngagementType engagementType : registeredResidentEngagementType.getEngagement()) {
-				EngagementTransactionType engagementTransaction = new EngagementTransactionType();
-				// Var hittar man informtion om vad som skall tas bort?
-				// engagementTransaction.setDeleteFlag(value);
-				engagementTransaction.setEngagement(engagementType);
-				requestForUpdate.getEngagementTransaction().add(engagementTransaction);
-			}
-		}
+        List<RegisteredResidentEngagementType> registeredResidentEngagement = updateResponse.getRegisteredResidentEngagement();
+        if (registeredResidentEngagement != null && !registeredResidentEngagement.isEmpty()) {
+            for (RegisteredResidentEngagementType registeredResidentEngagementType : registeredResidentEngagement) {
+                List<EngagementType> engagement = registeredResidentEngagementType.getEngagement();
+                if (engagement != null && !engagement.isEmpty()) {
+                    for (EngagementType engagementType : engagement) {
+                        EngagementTransactionType engagementTransaction = new EngagementTransactionType();
+                        // Var hittar man informtion om vad som skall tas bort?
+                        // engagementTransaction.setDeleteFlag(value);
+                        engagementTransaction.setEngagement(engagementType);
+                        requestForUpdate.getEngagementTransaction().add(engagementTransaction);
+                    }
+                } else {
+                    // Engagement list was either null or empty
+                    log.info("Engagement list was either null or empty, no data added to the engagement transaction.");
+                }
+            }
+        } else {
+            // RegisteredResidentEngagement list was either null or empty.
+            log.info("Registered resident engagement list was either null or empty, no data added to the engagement transaction.");
+        }
 		return requestForUpdate;
 	}
 
