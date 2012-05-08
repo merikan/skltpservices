@@ -27,6 +27,10 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Authors: Hans Thunberg, Henrik Rostam
+ **/
+
 @Component
 public class EngagementIndexPull {
 
