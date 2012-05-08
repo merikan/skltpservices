@@ -69,12 +69,17 @@ public class EngagementIndexPull {
             final String updatesSinceTimeStamp = getFormattedOffsetTime();
             for (String address : addressesToContact) {
                 for (String serviceDomain : getServiceDomainList()) {
-                    boolean isComplete;
+                    boolean isComplete = false;
                     List<String> registeredResidentLastFetched = new LinkedList<String>();
                     do {
                         GetUpdatesResponseType updates = pull(serviceDomain, address, updatesSinceTimeStamp, registeredResidentLastFetched);
-                        push(address, updates);
-                        isComplete = (updates == null || updates.isResponseIsComplete());
+                        if (updates != null) {
+                            push(address, updates);
+                            isComplete = updates.isResponseIsComplete();
+                        } else {
+                            log.error("Received null when pulling data since " + updatesSinceTimeStamp + ", from address: " + address + "\nusing service domain: " + serviceDomain + ". Previously fetched " + registeredResidentLastFetched.size() + " posts from this domain.");
+                            isComplete = true;
+                        }
                         // If the result is not complete the next request should contain what information which was previously fetched.
                         if (isComplete) {
                             registeredResidentLastFetched.clear();
