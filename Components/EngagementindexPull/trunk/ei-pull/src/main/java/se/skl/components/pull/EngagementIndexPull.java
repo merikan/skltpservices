@@ -72,11 +72,7 @@ public class EngagementIndexPull {
                     do {
                         GetUpdatesResponseType updates = pull(serviceDomain, address, updatesSinceTimeStamp, registeredResidentLastFetched);
                         push(address, updates);
-                        if (updates != null) {
-                            isComplete = updates.isResponseIsComplete();
-                        } else {
-                            isComplete = true;
-                        }
+                        isComplete = (updates == null || updates.isResponseIsComplete());
                         // If the result is not complete the next request should contain what information which was previously fetched.
                         if (isComplete) {
                             registeredResidentLastFetched.clear();
