@@ -3,11 +3,13 @@ package se.skl.components.pull;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +38,8 @@ public class EngagementIndexPull {
 	@Autowired
 	private UpdateResponderInterface updateClient;
 
+    private final static Log log = LogFactory.getLog(EngagementIndexPull.class);
+
     public void doFetchUpdates() {
         GetLogicalAddresseesByServiceContractType parameters = new GetLogicalAddresseesByServiceContractType();
         ServiceContractNamespaceType serviceContractNameSpace = new ServiceContractNamespaceType();
@@ -43,9 +47,13 @@ public class EngagementIndexPull {
         parameters.setServiceContractNameSpace(serviceContractNameSpace);
         parameters.setServiceConsumerHsaId(PropertyResolver.get("ei.push.service.consumer.hsaid"));
         String logicalAddress = PropertyResolver.get("ei.push.address");
-        GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(logicalAddress, parameters);
-        List<String> addressesToContact = addressResponse.getLogicalAddress();
-        doPull(addressesToContact);
+        try {
+            GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(logicalAddress, parameters);
+            List<String> addressesToContact = addressResponse.getLogicalAddress();
+            doPull(addressesToContact);
+        } catch (Exception e) {
+            log.fatal("Could not contact " + PropertyResolver.get("ei.push.address.client") + " in order to acquire addresses which should be contacted for pulling data. Reason:\n", e);
+        }
     }
 
 	private void doPull(List<String> addressesToContact) {
@@ -56,8 +64,12 @@ public class EngagementIndexPull {
                 boolean isComplete;
                 do {
                     GetUpdatesResponseType updates = pull(serviceDomain, address, sinceTimeStamp);
-                    isComplete = updates.isResponseIsComplete();
-                    push(address, updates);
+                    if (updates != null) {
+                        isComplete = updates.isResponseIsComplete();
+                        push(address, updates);
+                    } else {
+                        isComplete = true;
+                    }
                 } while (!isComplete);
             }
         }
@@ -67,8 +79,12 @@ public class EngagementIndexPull {
 		GetUpdatesType updateRequest = new GetUpdatesType();
 		updateRequest.setServiceDomain(serviceDomain);
 		updateRequest.setTimeStamp(sinceTimeStamp);
-		GetUpdatesResponseType response = getUpdatesClient.getUpdates(logicalAddress, updateRequest);
-		return response;
+        try {
+		    return getUpdatesClient.getUpdates(logicalAddress, updateRequest);
+        } catch (Exception e) {
+            log.fatal("Could not aquire updates from " + logicalAddress + ", using service domain: " + updateRequest.getServiceDomain() + ". Reason:\n", e);
+        }
+        return null;
 	}
 
     private List<String> getServiceDomainList() {
@@ -83,7 +99,11 @@ public class EngagementIndexPull {
 
 	private void push(String logicalAddress, GetUpdatesResponseType updates) {
 		UpdateType requestForUpdate = createRequestForUpdate(updates);
-		updateClient.update(logicalAddress, requestForUpdate);
+        try {
+            updateClient.update(logicalAddress, requestForUpdate);
+        } catch (Exception e) {
+            log.fatal("Error while trying to update index! " + updates.getAny().size() + " posts were unable to be pushed to:"  + logicalAddress + ". Reason:\n", e);
+        }
 	}
 
 	private UpdateType createRequestForUpdate(GetUpdatesResponseType updateResponse) {

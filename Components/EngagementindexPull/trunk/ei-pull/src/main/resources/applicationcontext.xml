@@ -22,15 +22,15 @@
 
     <jaxws:client id="getAddressesClient"
                   serviceClass="se.riv.itintegration.registry.getlogicaladdresseesbyservicecontract.v1.rivtabp21.GetLogicalAddresseesByServiceContractResponderInterface"
-                  address="http://localhost:10001/testproducer/GetLogicalAddresseesByServiceContractResponder/V1"/>
+                  address="${ei.push.address.client}"/>
 
     <jaxws:client id="getUpdatesClient"
 		          serviceClass="se.riv.itintegration.engagementindex.getupdates.v1.rivtabp21.GetUpdatesResponderInterface"
-		          address="http://localhost:10001/testproducer/GetUpdatesResponder/V1"/>
+		          address="${ei.push.updates.client}"/>
 		
 	<jaxws:client id="updateClient"
 		          serviceClass="se.riv.itintegration.engagementindex.update.v1.rivtabp21.UpdateResponderInterface"
-		          address="http://localhost:10001/testproducer/UpdateResponder/V1"/>
+		          address="${ei.push.update.client}"/>
 
 	<context:component-scan base-package="se.skl.components.pull"/>
 
