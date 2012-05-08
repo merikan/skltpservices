@@ -58,7 +58,7 @@ public class EngagementIndexPull {
     }
 
 	private void pushAndPull(List<String> addressesToContact) {
-        if (addressesToContact != null && addressesToContact.isEmpty()) {
+        if (addressesToContact != null && !addressesToContact.isEmpty()) {
             final String updatesSinceTimeStamp = getFormattedOffsetTime();
             for (String address : addressesToContact) {
                 for (String serviceDomain : getServiceDomainList()) {
