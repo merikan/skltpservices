@@ -102,16 +102,14 @@ public class EngagementIndexPull {
         try {
             updateClient.update(logicalAddress, requestForUpdate);
         } catch (Exception e) {
-            log.fatal("Error while trying to update index! " + updates.getAny().size() + " posts were unable to be pushed to:"  + logicalAddress + ". Reason:\n", e);
+            log.fatal("Error while trying to update index! " + updates.getRegisteredResidentEngagement().size() + " posts were unable to be pushed to:"  + logicalAddress + ". Reason:\n", e);
         }
 	}
 
 	private UpdateType createRequestForUpdate(GetUpdatesResponseType updateResponse) {
 		UpdateType requestForUpdate = new UpdateType();
-		List<RegisteredResidentEngagementType> updates = updateResponse.getRegisteredResidentEngagement();
-		for (RegisteredResidentEngagementType registeredResidentEngagementType : updates) {
-			List<EngagementType> engagements = registeredResidentEngagementType.getEngagement();
-			for (EngagementType engagementType : engagements) {
+		for (RegisteredResidentEngagementType registeredResidentEngagementType : updateResponse.getRegisteredResidentEngagement()) {
+			for (EngagementType engagementType : registeredResidentEngagementType.getEngagement()) {
 				EngagementTransactionType engagementTransaction = new EngagementTransactionType();
 				// Var hittar man informtion om vad som skall tas bort?
 				// engagementTransaction.setDeleteFlag(value);
