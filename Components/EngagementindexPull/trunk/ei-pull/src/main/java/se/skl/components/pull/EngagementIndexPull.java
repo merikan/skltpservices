@@ -54,18 +54,17 @@ public class EngagementIndexPull {
         } catch (Exception e) {
             log.fatal("Could not contact " + PropertyResolver.get("ei.push.address.client") + " in order to acquire addresses which should be contacted for pulling data. Reason:\n", e);
         }
-        doPull(addressesToContact);
+        pushAndPull(addressesToContact);
     }
 
-	private void doPull(List<String> addressesToContact) {
+	private void pushAndPull(List<String> addressesToContact) {
         if (addressesToContact != null && addressesToContact.isEmpty()) {
-            final String sinceTimeStamp = getFormattedPastTime();
+            final String updatesSinceTimeStamp = getFormattedOffsetTime();
             for (String address : addressesToContact) {
-                List<String> serviceDomainList = getServiceDomainList();
-                for (String serviceDomain : serviceDomainList) {
+                for (String serviceDomain : getServiceDomainList()) {
                     boolean isComplete;
                     do {
-                        GetUpdatesResponseType updates = pull(serviceDomain, address, sinceTimeStamp);
+                        GetUpdatesResponseType updates = pull(serviceDomain, address, updatesSinceTimeStamp);
                         if (updates != null) {
                             isComplete = updates.isResponseIsComplete();
                             push(address, updates);
@@ -80,6 +79,16 @@ public class EngagementIndexPull {
         }
 	}
 
+    private List<String> getServiceDomainList() {
+        List<String> serviceDomainList = new LinkedList<String>();
+        String commaSeparatedDomains = PropertyResolver.get("ei.push.service.domain.list");
+        String[] stringDomainList = commaSeparatedDomains.split(",");
+        for (String serviceDomain : stringDomainList) {
+            serviceDomainList.add(StringUtils.trim(serviceDomain));
+        }
+        return serviceDomainList;
+    }
+
 	private GetUpdatesResponseType pull(String serviceDomain, String logicalAddress, String sinceTimeStamp) {
 		GetUpdatesType updateRequest = new GetUpdatesType();
 		updateRequest.setServiceDomain(serviceDomain);
@@ -92,24 +101,14 @@ public class EngagementIndexPull {
         return null;
 	}
 
-    private List<String> getServiceDomainList() {
-        List<String> serviceDomainList = new LinkedList<String>();
-        String commaSeparatedDomains = PropertyResolver.get("ei.push.service.domain.list");
-        String[] stringDomainList = commaSeparatedDomains.split(",");
-        for (String serviceDomain : stringDomainList) {
-            serviceDomainList.add(StringUtils.trim(serviceDomain));
-        }
-        return serviceDomainList;
-    }
-
-	private void push(String logicalAddress, GetUpdatesResponseType updates) {
-		UpdateType requestForUpdate = createRequestForUpdate(updates);
+    private void push(String logicalAddress, GetUpdatesResponseType updates) {
+        UpdateType requestForUpdate = createRequestForUpdate(updates);
         try {
             updateClient.update(logicalAddress, requestForUpdate);
         } catch (Exception e) {
             log.fatal("Error while trying to update index! " + updates.getRegisteredResidentEngagement().size() + " posts were unable to be pushed to:"  + logicalAddress + ". Reason:\n", e);
         }
-	}
+    }
 
 	private UpdateType createRequestForUpdate(GetUpdatesResponseType updateResponse) {
 		UpdateType requestForUpdate = new UpdateType();
@@ -122,11 +121,10 @@ public class EngagementIndexPull {
 				requestForUpdate.getEngagementTransaction().add(engagementTransaction);
 			}
 		}
-
 		return requestForUpdate;
 	}
 
-	private String getFormattedPastTime() {
+	private String getFormattedOffsetTime() {
         int timeOffset = -NumberUtils.toInt(PropertyResolver.get("ei.push.time.offset"));
         Date currentDate = new Date();
         Calendar calendar = Calendar.getInstance();
