@@ -26,7 +26,7 @@ public class GetUpdatesTestProducer implements GetUpdatesResponderInterface {
 		String serviceDomain = request.getServiceDomain();
 		GetUpdatesResponseType response = new GetUpdatesResponseType();
 		response.setResponseIsComplete(true);
-        if (StringUtils.equals(serviceDomain, "")) {
+        if (StringUtils.equals(serviceDomain, "riv:crm:scheduling")) {
             // Simulate a partial request
             if (request.getRegisteredResidentLastFetched().isEmpty()) {
                 response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "197303160555"));
