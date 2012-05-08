@@ -68,13 +68,22 @@ public class EngagementIndexPull {
             for (String address : addressesToContact) {
                 for (String serviceDomain : getServiceDomainList()) {
                     boolean isComplete;
+                    List<String> registeredResidentLastFetched = new LinkedList<String>();
                     do {
-                        GetUpdatesResponseType updates = pull(serviceDomain, address, updatesSinceTimeStamp);
+                        GetUpdatesResponseType updates = pull(serviceDomain, address, updatesSinceTimeStamp, registeredResidentLastFetched);
+                        push(address, updates);
                         if (updates != null) {
                             isComplete = updates.isResponseIsComplete();
-                            push(address, updates);
                         } else {
                             isComplete = true;
+                        }
+                        // If the result is not complete the next request should contain what information which was previously fetched.
+                        if (isComplete) {
+                            registeredResidentLastFetched.clear();
+                        } else {
+                            for (RegisteredResidentEngagementType tmpEngagementType : updates.getRegisteredResidentEngagement()) {
+                                registeredResidentLastFetched.add(tmpEngagementType.getRegisteredResidentIdentification());
+                            }
                         }
                     // Continue while there is more data to fetch
                     } while (!isComplete);
@@ -95,10 +104,11 @@ public class EngagementIndexPull {
         return serviceDomainList;
     }
 
-	private GetUpdatesResponseType pull(String serviceDomain, String logicalAddress, String sinceTimeStamp) {
+	private GetUpdatesResponseType pull(String serviceDomain, String logicalAddress, String sinceTimeStamp, List<String> registeredResidentLastFetched) {
 		GetUpdatesType updateRequest = new GetUpdatesType();
 		updateRequest.setServiceDomain(serviceDomain);
 		updateRequest.setTimeStamp(sinceTimeStamp);
+        updateRequest.getRegisteredResidentLastFetched().addAll(registeredResidentLastFetched);
         try {
 		    return getUpdatesClient.getUpdates(logicalAddress, updateRequest);
         } catch (Exception e) {
@@ -132,12 +142,12 @@ public class EngagementIndexPull {
                     }
                 } else {
                     // Engagement list was either null or empty
-                    log.info("Engagement list was either null or empty, no data added to the engagement transaction.");
+                    log.debug("Engagement list was either null or empty, no data added to the engagement transaction.");
                 }
             }
         } else {
             // RegisteredResidentEngagement list was either null or empty.
-            log.info("Registered resident engagement list was either null or empty, no data added to the engagement transaction.");
+            log.debug("Registered resident engagement list was either null or empty, no data added to the engagement transaction.");
         }
 		return requestForUpdate;
 	}
