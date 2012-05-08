@@ -23,7 +23,7 @@ public class PropertyResolver extends PropertyPlaceholderConfigurer {
         super.processProperties(beanFactory, properties);
         for (Object key : properties.keySet()) {
             String stringKey = key.toString();
-            String stringValue = parseStringValue(properties.getProperty(stringKey), properties, new HashSet());
+            String stringValue = super.parseStringValue(properties.getProperty(stringKey), properties, new HashSet());
             propertyStore.put(stringKey, stringValue);
         }
     }
