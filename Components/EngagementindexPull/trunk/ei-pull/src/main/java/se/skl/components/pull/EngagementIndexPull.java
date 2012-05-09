@@ -54,7 +54,7 @@ public class EngagementIndexPull {
             GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(logicalAddress, parameters);
             addressesToContact = addressResponse.getLogicalAddress();
         } catch (Exception e) {
-            log.fatal("Could not contact " + PropertyResolver.get("ei.push.address.client") + " in order to acquire addresses which should be contacted for pulling data. Reason:\n", e);
+            log.fatal("Could not acquire addresses from " + logicalAddress + " which should be contacted for pulling data. Reason:\n", e);
         }
         pushAndPull(addressesToContact);
     }
@@ -121,16 +121,16 @@ public class EngagementIndexPull {
             if (resultCode != null) { // Switch cases doesn't support null
                 switch (resultCode) {
                     case OK:
-                        return;
+                    return;
                     case INFO:
                         // What is supposed to happen here?
-                        break;
+                    break;
                     case ERROR:
                         log.fatal("Result containing " + updates.getRegisteredResidentEngagement().size() + " posts was pushed to "+ logicalAddress + ", however an error response code was in the reply!\nResult code: " + resultCode.name() + ".\nUpdate response comment:" + updateResponse.getComment());
-                        break;
+                    break;
                     default:
                         log.warn("Received unexpected result code '" + resultCode.name() + "' after updating " + updates.getRegisteredResidentEngagement().size() + " posts to "+ logicalAddress + ". Update response comment:" + updateResponse.getComment());
-                        break;
+                    break;
                 }
             } else {
                 log.warn("Received no response (resultCode was null) after updating " + updates.getRegisteredResidentEngagement().size() + " posts to "+ logicalAddress + ". Update response comment:" + updateResponse.getComment());
