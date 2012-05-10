@@ -27,7 +27,7 @@ public class GetUpdatesTestProducer implements GetUpdatesResponderInterface {
 		GetUpdatesResponseType response = new GetUpdatesResponseType();
 		response.setResponseIsComplete(true);
         if (StringUtils.equals(serviceDomain, "riv:crm:scheduling")) {
-            // Simulate a partial request
+            // Simulate a partial request - if the previous result set is never sent from the consumer, then this would probably be an infinite loop
             if (request.getRegisteredResidentLastFetched().isEmpty()) {
                 response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "197303160555"));
                 response.setResponseIsComplete(false);
