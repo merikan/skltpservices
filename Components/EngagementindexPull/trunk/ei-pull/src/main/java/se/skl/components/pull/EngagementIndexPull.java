@@ -22,6 +22,7 @@ import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractrespon
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractresponder.v1.GetLogicalAddresseesByServiceContractType;
 import se.riv.itintegration.registry.v1.ServiceContractNamespaceType;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -63,9 +64,10 @@ public class EngagementIndexPull {
         if (addressesToContact != null && !addressesToContact.isEmpty()) {
             String commaSeparatedDomains = PropertyResolver.get("ei.push.service.domain.list");
             int offsetFromNowInSeconds = -NumberUtils.toInt(PropertyResolver.get("ei.push.time.offset"));
-            final String updatesSinceTimeStamp = EngagementIndexHelper.getFormattedOffsetTime(offsetFromNowInSeconds, "yyyyMMddHHmmss");
+            Date dateNow = new Date();
+            final String updatesSinceTimeStamp = EngagementIndexHelper.getFormattedOffsetTime(dateNow, offsetFromNowInSeconds, "yyyyMMddHHmmss");
             for (String address : addressesToContact) {
-                for (String serviceDomain : EngagementIndexHelper.getServiceDomainList(commaSeparatedDomains)) {
+                for (String serviceDomain : EngagementIndexHelper.stringToList(commaSeparatedDomains)) {
                     doPushAndPull(serviceDomain, address, updatesSinceTimeStamp);
                 }
             }
