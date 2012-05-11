@@ -126,7 +126,7 @@ public class EngagementIndexPull {
                     case OK:
                     return;
                     case INFO:
-                        // What is supposed to happen here?
+                        log.warn("Received unexpected result with code " + resultCode.name() + ". Response comment: " + updateResponse.getComment() + "." + updates.getRegisteredResidentEngagement().size() + " posts was however, successfully pushed to " + logicalAddress + ".");
                     break;
                     case ERROR:
                         log.fatal("Result containing " + updates.getRegisteredResidentEngagement().size() + " posts was pushed to "+ logicalAddress + ", however an error response code was in the reply!\nResult code: " + resultCode.name() + ".\nUpdate response comment:" + updateResponse.getComment());
