@@ -1,9 +1,11 @@
 package se.skl.components.pull;
 
-import org.junit.After;
+import org.apache.commons.lang.math.NumberUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -14,28 +16,39 @@ import se.riv.itintegration.engagementindex.getupdates.v1.rivtabp21.GetUpdatesRe
 import se.riv.itintegration.engagementindex.getupdatesresponder.v1.GetUpdatesResponseType;
 import se.riv.itintegration.engagementindex.getupdatesresponder.v1.GetUpdatesType;
 import se.riv.itintegration.engagementindex.update.v1.rivtabp21.UpdateResponderInterface;
+import se.riv.itintegration.engagementindex.updateresponder.v1.UpdateType;
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontract.v1.rivtabp21.GetLogicalAddresseesByServiceContractResponderInterface;
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractresponder.v1.GetLogicalAddresseesByServiceContractResponseType;
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractresponder.v1.GetLogicalAddresseesByServiceContractType;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import static junit.framework.Assert.assertEquals;
 import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
+import static org.mockito.internal.verification.VerificationModeFactory.atLeastOnce;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.powermock.api.mockito.PowerMockito.when;
+import static org.powermock.api.mockito.PowerMockito.*;
 
 /**
  * Author: Henrik Rostam
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(PropertyResolver.class)
+@PrepareForTest({ PropertyResolver.class, DateHelper.class })
 public class EngagementIndexPullTest {
+
+    private final String namespacePropertyKey = "ei.push.service.contract.namespace";
+    private final String consumerHsaIdPropertyKey = "ei.push.service.consumer.hsaid";
+    private final String addressServicePropertyKey = "ei.address.service";
+    private final String engagementIndexPropertyKey = "ei.push.service.domain.list";
+    private final String timeOffsetPropertyKey = "ei.push.time.offset";
+    private final String dateFormat = "yyyyMMddHHmmss";
 
     @Mock
     private GetLogicalAddresseesByServiceContractResponderInterface getAddressesClient;
@@ -50,10 +63,10 @@ public class EngagementIndexPullTest {
     private EngagementIndexPull engagementIndexPull = new EngagementIndexPull();
 
     @Before
-    public void initTests() {
+    public void initTests() throws ParseException {
         mockStatic(PropertyResolver.class);
+        mockStatic(DateHelper.class);
 
-        final String dateFormat = "yyyyMMddHHmmss";
         final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
         final String serviceDomain = "mockito:test:namespace";
         final String consumerHsaId = "Mock170Test1D";
@@ -65,7 +78,7 @@ public class EngagementIndexPullTest {
         final String timeOffset = "-123";
         final String engagementBookingId = "bookingId";
         final String engagementCategorization = "Booking";
-        final Date dateNow = new Date();
+        final Date testDate = simpleDateFormat.parse("20120505150000");
         final String engagementOwner = "HSA-id";
         final String engagementLogicalAddress = "Landstingets hsaid:Vårdgivarens HSA-id:Enhetens hsaid";
         final String engagementSourceSystem = "Systemets HSA-ID";
@@ -75,24 +88,25 @@ public class EngagementIndexPullTest {
         testAddresses.add(serviceDomain2);
         testAddresses.add(serviceDomain3);
 
-        when(PropertyResolver.get(eq("ei.push.service.contract.namespace"))).thenReturn(serviceDomain);
-        when(PropertyResolver.get(eq("ei.push.service.consumer.hsaid"))).thenReturn(consumerHsaId);
-        when(PropertyResolver.get(eq("ei.push.address"))).thenReturn(pushAddress);
-        when(PropertyResolver.get(eq("ei.push.service.domain.list"))).thenReturn(serviceDomainList);
-        when(PropertyResolver.get(eq("ei.push.time.offset"))).thenReturn(timeOffset);
+        when(PropertyResolver.get(eq(namespacePropertyKey))).thenReturn(serviceDomain);
+        when(PropertyResolver.get(eq(consumerHsaIdPropertyKey))).thenReturn(consumerHsaId);
+        when(PropertyResolver.get(eq(addressServicePropertyKey))).thenReturn(pushAddress);
+        when(PropertyResolver.get(eq(engagementIndexPropertyKey))).thenReturn(serviceDomainList);
+        when(PropertyResolver.get(eq(timeOffsetPropertyKey))).thenReturn(timeOffset);
+        when(DateHelper.now()).thenReturn(testDate);
 
         EngagementType engagement = new EngagementType();
         engagement.setBusinessObjectInstanceIdentifier(engagementBookingId);
         engagement.setCategorization(engagementCategorization);
         engagement.setClinicalProcessInterestId(UUID.randomUUID().toString());
-        engagement.setCreationTime(simpleDateFormat.format(dateNow));
+        engagement.setCreationTime(simpleDateFormat.format(testDate));
         engagement.setLogicalAddress(engagementLogicalAddress);
-        engagement.setMostRecentContent(simpleDateFormat.format(dateNow));
+        engagement.setMostRecentContent(simpleDateFormat.format(testDate));
         engagement.setOwner(engagementOwner);
         engagement.setRegisteredResidentIdentification(patientSsn);
         engagement.setServiceDomain(serviceDomain);
         engagement.setSourceSystem(engagementSourceSystem);
-        engagement.setUpdateTime(simpleDateFormat.format(dateNow));
+        engagement.setUpdateTime(simpleDateFormat.format(testDate));
 
         RegisteredResidentEngagementType registeredResidentEngagementType = new RegisteredResidentEngagementType();
         registeredResidentEngagementType.setRegisteredResidentIdentification(patientSsn);
@@ -111,13 +125,70 @@ public class EngagementIndexPullTest {
 
     @Test
     public void testOneAddressFetchCall() {
+        // Test
         engagementIndexPull.doFetchUpdates();
+        // Verify
         verify(getAddressesClient, times(1)).getLogicalAddresseesByServiceContract(anyString(), any(GetLogicalAddresseesByServiceContractType.class));
     }
 
-    @After
-    public void postTests() {
+    @Test
+    public void testAddressCorrectAddressCall() {
+        // Setup
+        ArgumentCaptor<String> addressServiceLogicalAddressCaptor = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<GetLogicalAddresseesByServiceContractType> getLogicalAddresseesByServiceContractTypeArgumentCaptor = ArgumentCaptor.forClass(GetLogicalAddresseesByServiceContractType.class);
+        // Test
+        engagementIndexPull.doFetchUpdates();
+        // Verify
+        verifyStatic(times(1));
+        PropertyResolver.get(eq(addressServicePropertyKey));
+        verifyStatic(times(1));
+        PropertyResolver.get(eq(namespacePropertyKey));
+        verify(getAddressesClient, times(1)).getLogicalAddresseesByServiceContract(addressServiceLogicalAddressCaptor.capture(), getLogicalAddresseesByServiceContractTypeArgumentCaptor.capture());
+        assertEquals("The contacted address did not match the expected one!", PropertyResolver.get(addressServicePropertyKey), addressServiceLogicalAddressCaptor.getValue());
+        String contactedNameSpace = getLogicalAddresseesByServiceContractTypeArgumentCaptor.getValue().getServiceContractNameSpace().getServiceContractNamespace();
+        assertEquals("The contacted namespace did not match the expected one!", PropertyResolver.get(namespacePropertyKey), contactedNameSpace);
+    }
 
+    @Test
+    public void testPushThenPull() {
+        // Setup
+        InOrder inOrder = inOrder(getUpdatesClient, updateClient);
+        // Test
+        engagementIndexPull.doFetchUpdates();
+        // Verify
+        inOrder.verify(getUpdatesClient).getUpdates(anyString(), any(GetUpdatesType.class));
+        inOrder.verify(updateClient).update(anyString(), any(UpdateType.class));
+    }
+
+    @Test
+    public void testAddressServiceCall() {
+        // Setup
+        ArgumentCaptor<String> engagementIndexLogicalAddressCaptor = ArgumentCaptor.forClass(String.class);
+        // Test
+        engagementIndexPull.doFetchUpdates();
+        // Verify
+        verifyStatic(times(1));
+        PropertyResolver.get(eq(consumerHsaIdPropertyKey));
+        verify(updateClient, times(1)).update(engagementIndexLogicalAddressCaptor.capture(), any(UpdateType.class));
+        assertEquals("The contacted address did not match the expected one!", PropertyResolver.get(engagementIndexPropertyKey), engagementIndexLogicalAddressCaptor.getValue());
+    }
+
+    @Test
+    public void testTimeOffset() throws ParseException {
+        // Setup
+        Date testDate = DateHelper.now();
+        int timeOffset = -NumberUtils.toInt(PropertyResolver.get(timeOffsetPropertyKey));
+        String expectedDate = EngagementIndexHelper.getFormattedOffsetTime(testDate, timeOffset, dateFormat);
+        ArgumentCaptor<GetUpdatesType> getUpdatesTypeArgumentCaptor = ArgumentCaptor.forClass(GetUpdatesType.class);
+        // Test
+        engagementIndexPull.doFetchUpdates();
+        // Verify
+        // 2 method calls - one for the actual call and one is used in this test
+        verifyStatic(times(2));
+        PropertyResolver.get(eq(timeOffsetPropertyKey));
+        verify(getUpdatesClient, atLeastOnce()).getUpdates(anyString(), getUpdatesTypeArgumentCaptor.capture());
+        String actualDate = getUpdatesTypeArgumentCaptor.getValue().getTimeStamp();
+        assertEquals("The time used in the getUpdates call differ from the expected one!", expectedDate, actualDate);
     }
 
 }
