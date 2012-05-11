@@ -4,10 +4,8 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InOrder;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.*;
+import org.mule.util.StringUtils;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import riv.itintegration.engagementindex._1.EngagementType;
@@ -29,6 +27,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
@@ -44,6 +43,7 @@ import static org.powermock.api.mockito.PowerMockito.*;
 public class EngagementIndexPullTest {
 
     private final String namespacePropertyKey = "ei.push.service.contract.namespace";
+    private final String updateDestinationProperty = "ei.push.update.destination";
     private final String consumerHsaIdPropertyKey = "ei.push.service.consumer.hsaid";
     private final String addressServicePropertyKey = "ei.address.service";
     private final String engagementIndexPropertyKey = "ei.push.service.domain.list";
@@ -187,8 +187,88 @@ public class EngagementIndexPullTest {
         verifyStatic(times(2));
         PropertyResolver.get(eq(timeOffsetPropertyKey));
         verify(getUpdatesClient, atLeastOnce()).getUpdates(anyString(), getUpdatesTypeArgumentCaptor.capture());
-        String actualDate = getUpdatesTypeArgumentCaptor.getValue().getTimeStamp();
-        assertEquals("The time used in the getUpdates call differ from the expected one!", expectedDate, actualDate);
+        int i = 1;
+        for (GetUpdatesType actualUpdateType : getUpdatesTypeArgumentCaptor.getAllValues()) {
+            String actualDate = actualUpdateType.getTimeStamp();
+            assertEquals("The time used in number " + i + " of the getUpdates call differ from the expected one!", expectedDate, actualDate);
+            i++;
+        }
+    }
+
+    @Test
+    public void testUpdateAmountOfCalls() {
+        // Setup
+        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(engagementIndexPropertyKey), ",") + 1;
+        int amountOfAddresses = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress().size();
+        int expectedAmountOfMethodCalls = amountOfServiceDomains * amountOfAddresses;
+        // Test
+        engagementIndexPull.doFetchUpdates();
+        // Verify
+        verify(updateClient, times(expectedAmountOfMethodCalls)).update(anyString(), any(UpdateType.class));
+    }
+
+    @Test
+    public void testCheckForUpdatesAddresses() {
+        // Setup
+        List<String> expectedAddresses = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress();
+        ArgumentCaptor<String> logicalAddressArgumentCaptor = ArgumentCaptor.forClass(String.class);
+        // Test
+        engagementIndexPull.doFetchUpdates();
+        // Verify
+        verify(getUpdatesClient, atLeastOnce()).getUpdates(logicalAddressArgumentCaptor.capture(), any(GetUpdatesType.class));
+        List<String> actualAddresses = logicalAddressArgumentCaptor.getAllValues();
+        // Verify that all called addresses were expected.
+        for (String actualAddress : actualAddresses) {
+            assertTrue("The actual called address " + actualAddress + " was not expected!", expectedAddresses.contains(actualAddress));
+        }
+        // Verify that all expected addresses were actually called.
+        for (String expectedAddress : expectedAddresses) {
+            assertTrue("The expected called address " + expectedAddress + " was not called!", actualAddresses.contains(expectedAddress));
+        }
+    }
+
+    @Test
+    public void testCheckForUpdatesAddressesAndServiceDomain() {
+        // Setup
+        List<String> expectedServiceDomains = EngagementIndexHelper.stringToList(PropertyResolver.get(engagementIndexPropertyKey));
+        List<String> expectedAddresses = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress();
+        ArgumentCaptor<String> logicalAddressArgumentCaptor = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<GetUpdatesType> getUpdatesTypeArgumentCaptor = ArgumentCaptor.forClass(GetUpdatesType.class);
+        // Test
+        engagementIndexPull.doFetchUpdates();
+        // Verify
+        verify(getUpdatesClient, atLeastOnce()).getUpdates(logicalAddressArgumentCaptor.capture(), getUpdatesTypeArgumentCaptor.capture());
+        List<String> actualAddresses = logicalAddressArgumentCaptor.getAllValues();
+        List<GetUpdatesType> getUpdatesTypes = getUpdatesTypeArgumentCaptor.getAllValues();
+        // Verify that all called addresses were expected.
+        // There is a glitch here, because the combination of actual addresses and service domains is not verified, however it seems that Mockito does not support verification of parameter combinations.
+        // To accomplish this test, the combinations need to be hard coded.
+        for (GetUpdatesType getUpdatesType : getUpdatesTypes) {
+            String actualServiceDomain = getUpdatesType.getServiceDomain();
+            for (String actualAddress : actualAddresses) {
+                assertTrue("The actual called address " + actualAddress + " using service domain " + actualServiceDomain + " was not expected!", expectedAddresses.contains(actualAddress));
+                assertTrue("The actual called address " + actualAddress + " using service domain " + actualServiceDomain + " was not expected!", expectedServiceDomains.contains(actualServiceDomain));
+            }
+        }
+        // Verify that all expected addresses were actually called.
+        for (String expectedServiceDomain : expectedServiceDomains) {
+            for (String expectedAddress : expectedAddresses) {
+                assertTrue("The expected called address " + expectedAddress + " using service domain " + expectedServiceDomain + " was not called!", actualAddresses.contains(expectedAddress));
+                assertTrue("The expected called address " + expectedAddress + " using service domain " + expectedServiceDomain + " was not called!", actualAddresses.contains(expectedServiceDomain));
+            }
+        }
+    }
+
+    @Test
+    public void testCorrectEngagementIndexAddress() {
+        // Setup
+        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(engagementIndexPropertyKey), ",") + 1;
+        int amountOfAddresses = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress().size();
+        int expectedAmountOfMethodCalls = amountOfServiceDomains * amountOfAddresses;
+        // Test
+        engagementIndexPull.doFetchUpdates();
+        // Verify
+        verify(updateClient, Mockito.times(expectedAmountOfMethodCalls)).update(eq(PropertyResolver.get("updateDestinationProperty")), any(UpdateType.class));
     }
 
 }
