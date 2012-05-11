@@ -49,7 +49,7 @@ public class EngagementIndexPull {
         serviceContractNameSpace.setServiceContractNamespace(PropertyResolver.get("ei.push.service.contract.namespace"));
         parameters.setServiceContractNameSpace(serviceContractNameSpace);
         parameters.setServiceConsumerHsaId(PropertyResolver.get("ei.push.service.consumer.hsaid"));
-        String logicalAddress = PropertyResolver.get("ei.push.address");
+        String logicalAddress = PropertyResolver.get("ei.address.service");
         List<String> addressesToContact = null;
         try {
             GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(logicalAddress, parameters);
@@ -64,7 +64,7 @@ public class EngagementIndexPull {
         if (addressesToContact != null && !addressesToContact.isEmpty()) {
             String commaSeparatedDomains = PropertyResolver.get("ei.push.service.domain.list");
             int offsetFromNowInSeconds = -NumberUtils.toInt(PropertyResolver.get("ei.push.time.offset"));
-            Date dateNow = new Date();
+            Date dateNow = DateHelper.now();
             final String updatesSinceTimeStamp = EngagementIndexHelper.getFormattedOffsetTime(dateNow, offsetFromNowInSeconds, "yyyyMMddHHmmss");
             for (String address : addressesToContact) {
                 for (String serviceDomain : EngagementIndexHelper.stringToList(commaSeparatedDomains)) {
