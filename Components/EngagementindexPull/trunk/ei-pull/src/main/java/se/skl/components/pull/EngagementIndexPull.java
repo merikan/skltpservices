@@ -50,6 +50,7 @@ public class EngagementIndexPull {
         parameters.setServiceContractNameSpace(serviceContractNameSpace);
         parameters.setServiceConsumerHsaId(PropertyResolver.get("ei.push.service.consumer.hsaid"));
         String logicalAddress = PropertyResolver.get("ei.address.service");
+        String pushLogicalAddress = PropertyResolver.get("ei.push.update.destination");
         List<String> addressesToContact = null;
         try {
             GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(logicalAddress, parameters);
@@ -57,10 +58,10 @@ public class EngagementIndexPull {
         } catch (Exception e) {
             log.fatal("Could not acquire addresses from " + logicalAddress + " which should be contacted for pulling data. Reason:\n", e);
         }
-        pushAndPull(addressesToContact);
+        pushAndPull(addressesToContact, pushLogicalAddress);
     }
 
-	private void pushAndPull(List<String> addressesToContact) {
+	private void pushAndPull(List<String> addressesToContact, String pushLogicalAddress) {
         if (addressesToContact != null && !addressesToContact.isEmpty()) {
             String commaSeparatedDomains = PropertyResolver.get("ei.push.service.domain.list");
             int offsetFromNowInSeconds = -NumberUtils.toInt(PropertyResolver.get("ei.push.time.offset"));
@@ -68,7 +69,7 @@ public class EngagementIndexPull {
             final String updatesSinceTimeStamp = EngagementIndexHelper.getFormattedOffsetTime(dateNow, offsetFromNowInSeconds, "yyyyMMddHHmmss");
             for (String address : addressesToContact) {
                 for (String serviceDomain : EngagementIndexHelper.stringToList(commaSeparatedDomains)) {
-                    doPushAndPull(serviceDomain, address, updatesSinceTimeStamp);
+                    doPushAndPull(serviceDomain, address, pushLogicalAddress, updatesSinceTimeStamp);
                 }
             }
         } else {
@@ -76,14 +77,14 @@ public class EngagementIndexPull {
         }
 	}
 
-    private void doPushAndPull(String serviceDomain, String logicalAddress, String updatesSinceTimeStamp) {
+    private void doPushAndPull(String serviceDomain, String getUpdatesLogicalAddress, String pushLogicalAddress, String updatesSinceTimeStamp) {
         List<String> registeredResidentLastFetched = new LinkedList<String>();
         boolean isNotDone = true;
         // Continue while there is more data to fetch
         while (isNotDone) {
-            GetUpdatesResponseType updates = pull(serviceDomain, logicalAddress, updatesSinceTimeStamp, registeredResidentLastFetched);
+            GetUpdatesResponseType updates = pull(serviceDomain, getUpdatesLogicalAddress, updatesSinceTimeStamp, registeredResidentLastFetched);
             if (updates != null) {
-                push(logicalAddress, updates);
+                push(pushLogicalAddress, updates);
                 if (updates.isResponseIsComplete()) {
                     // No more results to be fetched
                     isNotDone = false;
@@ -95,7 +96,7 @@ public class EngagementIndexPull {
                 }
             } else {
                 isNotDone = false;
-                log.error("Received null when pulling data since: " + updatesSinceTimeStamp + ", from address: " + logicalAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + registeredResidentLastFetched.size() + " partial results from this address.");
+                log.error("Received null when pulling data since: " + updatesSinceTimeStamp + ", from address: " + getUpdatesLogicalAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + registeredResidentLastFetched.size() + " partial results from this address.");
             }
         }
     }
