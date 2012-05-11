@@ -8,6 +8,7 @@ import org.mockito.*;
 import org.mule.util.StringUtils;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import riv.itintegration.engagementindex._1.EngagementTransactionType;
 import riv.itintegration.engagementindex._1.EngagementType;
 import riv.itintegration.engagementindex._1.RegisteredResidentEngagementType;
 import se.riv.itintegration.engagementindex.getupdates.v1.rivtabp21.GetUpdatesResponderInterface;
@@ -21,10 +22,7 @@ import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractrespon
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
@@ -269,6 +267,53 @@ public class EngagementIndexPullTest {
         engagementIndexPull.doFetchUpdates();
         // Verify
         verify(updateClient, Mockito.times(expectedAmountOfMethodCalls)).update(eq(PropertyResolver.get("updateDestinationProperty")), any(UpdateType.class));
+    }
+
+    @Test
+    public void testPushInformationIntegrity() {
+        // Setup
+        GetUpdatesResponseType expectedUpdate = getUpdatesClient.getUpdates(null, null);
+        ArgumentCaptor<UpdateType> actualUpdatesArgumantCaptor = ArgumentCaptor.forClass(UpdateType.class);
+        List<EngagementType> givenEngagementTypesFromUpdateService = new ArrayList<EngagementType>();
+        List<RegisteredResidentEngagementType> expectedResidentEngagementTypes = expectedUpdate.getRegisteredResidentEngagement();
+        for (RegisteredResidentEngagementType expectedResidentEngagementType : expectedResidentEngagementTypes) {
+            givenEngagementTypesFromUpdateService.addAll(expectedResidentEngagementType.getEngagement());
+        }
+        List<EngagementType> pushedEngagementTypesToEngagementIndex = new ArrayList<EngagementType>();
+        // Test
+        engagementIndexPull.doFetchUpdates();
+        // Get captured values
+        updateClient.update(anyString(), actualUpdatesArgumantCaptor.capture());
+        List<UpdateType> actualUpdates = actualUpdatesArgumantCaptor.getAllValues();
+        // Collect the values in the pushed list
+        for (UpdateType actualUpdateType : actualUpdates) {
+            List<EngagementTransactionType> actualTransactionTypes = actualUpdateType.getEngagementTransaction();
+            for (EngagementTransactionType actualTransactionType : actualTransactionTypes) {
+                EngagementType actualSentData = actualTransactionType.getEngagement();
+                pushedEngagementTypesToEngagementIndex.add(actualSentData);
+            }
+        }
+        // Verify content
+        for (EngagementType expectedEngagement : givenEngagementTypesFromUpdateService) {
+            for (EngagementType actualEngagement : pushedEngagementTypesToEngagementIndex) {
+                assertEquals("The value of registeredResidentInformation given by the producer mismatched with the value sent to the engagement index!", expectedEngagement.getRegisteredResidentIdentification(), actualEngagement.getRegisteredResidentIdentification());
+                assertEquals("The value of serviceDomain given by the producer mismatched with the value sent to the engagement index!", expectedEngagement.getServiceDomain(), actualEngagement.getServiceDomain());
+                assertEquals("The value of categorization given by the producer mismatched with the value sent to the engagement index!", expectedEngagement.getCategorization(), actualEngagement.getCategorization());
+                assertEquals("The value of logicalAddress given by the producer mismatched with the value sent to the engagement index!", expectedEngagement.getLogicalAddress(), actualEngagement.getLogicalAddress());
+                assertEquals("The value of businessObjectInstanceIdentified given by the producer mismatched with the value sent to the engagement index!", expectedEngagement.getBusinessObjectInstanceIdentifier(), actualEngagement.getBusinessObjectInstanceIdentifier());
+                assertEquals("The value of clinicalProcessInterestId given by the producer mismatched with the value sent to the engagement index!", expectedEngagement.getClinicalProcessInterestId(), actualEngagement.getClinicalProcessInterestId());
+                assertEquals("The value of mostRecentContent given by the producer mismatched with the value sent to the engagement index!", expectedEngagement.getMostRecentContent(), actualEngagement.getMostRecentContent());
+                assertEquals("The value of sourceSystem given by the producer mismatched with the value sent to the engagement index!", expectedEngagement.getSourceSystem(), actualEngagement.getSourceSystem());
+                assertEquals("The value of creationTime given by the producer mismatched with the value sent to the engagement index!", expectedEngagement.getCreationTime(), actualEngagement.getCreationTime());
+                assertEquals("The value of updateTime given by the producer mismatched with the value sent to the engagement index!", expectedEngagement.getUpdateTime(), actualEngagement.getUpdateTime());
+                assertEquals("The value of owner given by the producer mismatched with the value sent to the engagement index!", expectedEngagement.getOwner(), actualEngagement.getOwner());
+                for (Object expectedEngagementAny : expectedEngagement.getAny()) {
+                    for (Object actualEngagementAny : actualEngagement.getAny()) {
+                        assertEquals("The extra parameters of the engagement type mismatched with the value sent to the engagement index!", expectedEngagementAny, actualEngagementAny);
+                    }
+                }
+            }
+        }
     }
 
 }
