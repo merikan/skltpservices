@@ -63,11 +63,12 @@ public class EngagementIndexPull {
 	private void pushAndPull(List<String> addressesToContact, String pushLogicalAddress) {
         if (addressesToContact != null && !addressesToContact.isEmpty()) {
             String commaSeparatedDomains = PropertyResolver.get("ei.push.service.domain.list");
+            List<String> serviceDomainList = EngagementIndexHelper.stringToList(commaSeparatedDomains);
             int offsetFromNowInSeconds = -NumberUtils.toInt(PropertyResolver.get("ei.push.time.offset"));
             Date dateNow = DateHelper.now();
             final String updatesSinceTimeStamp = EngagementIndexHelper.getFormattedOffsetTime(dateNow, offsetFromNowInSeconds, "yyyyMMddHHmmss");
             for (String address : addressesToContact) {
-                for (String serviceDomain : EngagementIndexHelper.stringToList(commaSeparatedDomains)) {
+                for (String serviceDomain : serviceDomainList) {
                     doPushAndPull(serviceDomain, address, pushLogicalAddress, updatesSinceTimeStamp);
                 }
             }
