@@ -65,11 +65,11 @@ public class EngagementIndexHelperTest extends AbstractTestCase {
         String dateFormat = "yyyyMMddHHmmss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
         Date insertedDate = simpleDateFormat.parse(insertedDateString);
-        int dateOffset = -356521;
+        String dateOffset = "356521";
         // Test
         String actualReturnedString = EngagementIndexHelper.getFormattedOffsetTime(insertedDate, dateOffset, dateFormat);
         // Verify
-        assertEquals("Returning list is not null!", shouldReturnString, actualReturnedString);
+        assertEquals("Returning timestamp does not match the expected one!", shouldReturnString, actualReturnedString);
     }
 
     @Test
@@ -80,11 +80,11 @@ public class EngagementIndexHelperTest extends AbstractTestCase {
         String dateFormat = "yyyyMMddHHmmss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
         Date insertedDate = simpleDateFormat.parse(insertedDateString);
-        int dateOffset = 0;
+        String dateOffset = "0";
         // Test
         String actualReturnedString = EngagementIndexHelper.getFormattedOffsetTime(insertedDate, dateOffset, dateFormat);
         // Verify
-        assertEquals("Returning list is not null!", shouldReturnString, actualReturnedString);
+        assertEquals("Returning timestamp does not match the expected one!", shouldReturnString, actualReturnedString);
     }
 
     @Test
@@ -95,11 +95,11 @@ public class EngagementIndexHelperTest extends AbstractTestCase {
         String dateFormat = "yyyyMMddHHmmss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
         Date insertedDate = simpleDateFormat.parse(insertedDateString);
-        int dateOffset = 356521;
+        String dateOffset = "-356521";
         // Test
         String actualReturnedString = EngagementIndexHelper.getFormattedOffsetTime(insertedDate, dateOffset, dateFormat);
         // Verify
-        assertEquals("Returning list is not null!", shouldReturnString, actualReturnedString);
+        assertEquals("Returning timestamp does not match the expected one!", shouldReturnString, actualReturnedString);
     }
 
 }
