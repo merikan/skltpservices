@@ -1,6 +1,5 @@
 package se.skl.components.pull;
 
-import org.apache.commons.lang.math.NumberUtils;
 import org.apache.log4j.Appender;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -53,6 +52,7 @@ public class EngagementIndexPullTest {
     private final String addressServicePropertyKey = "ei.address.service";
     private final String serviceDomainsPropertyKey = "ei.push.service.domain.list";
     private final String timeOffsetPropertyKey = "ei.push.time.offset";
+    private final String timestampFormatPropertyKey = "ei.pull.timestampformat";
     private final String dateFormat = "yyyyMMddHHmmss";
 
     @Mock
@@ -110,6 +110,7 @@ public class EngagementIndexPullTest {
         when(PropertyResolver.get(eq(addressServicePropertyKey))).thenReturn(addressService);
         when(PropertyResolver.get(eq(serviceDomainsPropertyKey))).thenReturn(serviceDomainList);
         when(PropertyResolver.get(eq(timeOffsetPropertyKey))).thenReturn(timeOffset);
+        when(PropertyResolver.get(eq(timestampFormatPropertyKey))).thenReturn(dateFormat);
         when(DateHelper.now()).thenReturn(testDate);
         LogManager.getRootLogger().addAppender(appender);
 
@@ -195,7 +196,7 @@ public class EngagementIndexPullTest {
     public void testTimeOffset() throws ParseException {
         // Setup
         Date testDate = DateHelper.now();
-        int timeOffset = -NumberUtils.toInt(PropertyResolver.get(timeOffsetPropertyKey));
+        String timeOffset = PropertyResolver.get(timeOffsetPropertyKey);
         String expectedDate = EngagementIndexHelper.getFormattedOffsetTime(testDate, timeOffset, dateFormat);
         ArgumentCaptor<GetUpdatesType> getUpdatesTypeArgumentCaptor = ArgumentCaptor.forClass(GetUpdatesType.class);
         // Test

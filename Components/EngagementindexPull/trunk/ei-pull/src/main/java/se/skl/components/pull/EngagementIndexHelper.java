@@ -1,6 +1,7 @@
 package se.skl.components.pull;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,7 +26,8 @@ public class EngagementIndexHelper {
         return serviceDomainList;
     }
 
-    protected final static String getFormattedOffsetTime(Date startingDate, int offsetFromNowInSeconds, String dateFormat) {
+    protected final static String getFormattedOffsetTime(Date startingDate, String timeOffset, String dateFormat) {
+        int offsetFromNowInSeconds = -NumberUtils.toInt(timeOffset);
         Calendar calendar = Calendar.getInstance();
         calendar.clear();
         calendar.setTime(startingDate);

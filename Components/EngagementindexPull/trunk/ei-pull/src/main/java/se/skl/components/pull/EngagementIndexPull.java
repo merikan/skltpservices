@@ -1,6 +1,5 @@
 package se.skl.components.pull;
 
-import org.apache.commons.lang.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +49,12 @@ public class EngagementIndexPull {
         parameters.setServiceConsumerHsaId(PropertyResolver.get("ei.push.service.consumer.hsaid"));
         String logicalAddress = PropertyResolver.get("ei.address.service");
         String pushLogicalAddress = PropertyResolver.get("ei.push.update.destination");
+        String commaSeparatedDomains = PropertyResolver.get("ei.push.service.domain.list");
+        String timeOffset = PropertyResolver.get("ei.push.time.offset");
+        Date dateNow = DateHelper.now();
+        String timestampFormat = PropertyResolver.get("ei.pull.timestampformat");
+        final String updatesSinceTimeStamp = EngagementIndexHelper.getFormattedOffsetTime(dateNow, timeOffset, timestampFormat);
+        List<String> serviceDomainList = EngagementIndexHelper.stringToList(commaSeparatedDomains);
         List<String> addressesToContact = null;
         try {
             GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(logicalAddress, parameters);
@@ -57,16 +62,11 @@ public class EngagementIndexPull {
         } catch (Exception e) {
             log.fatal("Could not acquire addresses from " + logicalAddress + " which should be contacted for pulling data. Reason:\n", e);
         }
-        pushAndPull(addressesToContact, pushLogicalAddress);
+        pushAndPull(addressesToContact, pushLogicalAddress, updatesSinceTimeStamp, serviceDomainList);
     }
 
-	private void pushAndPull(List<String> addressesToContact, String pushLogicalAddress) {
+	private void pushAndPull(List<String> addressesToContact, String pushLogicalAddress, String updatesSinceTimeStamp, List<String> serviceDomainList) {
         if (addressesToContact != null && !addressesToContact.isEmpty()) {
-            String commaSeparatedDomains = PropertyResolver.get("ei.push.service.domain.list");
-            List<String> serviceDomainList = EngagementIndexHelper.stringToList(commaSeparatedDomains);
-            int offsetFromNowInSeconds = -NumberUtils.toInt(PropertyResolver.get("ei.push.time.offset"));
-            Date dateNow = DateHelper.now();
-            final String updatesSinceTimeStamp = EngagementIndexHelper.getFormattedOffsetTime(dateNow, offsetFromNowInSeconds, "yyyyMMddHHmmss");
             for (String address : addressesToContact) {
                 for (String serviceDomain : serviceDomainList) {
                     doPushAndPull(serviceDomain, address, pushLogicalAddress, updatesSinceTimeStamp);
