@@ -29,7 +29,7 @@ tjänstedomän: urn:riv:crm:scheduling
 vid eller efter tid: 20111010T100000
 end note
 
-loop för varje uppdateringssak
+loop för varje deluppdatering (optionellt)
 
 NTjP->Producent: GetUpdates
 Producent->NTjP: Lista med uppdateringar
