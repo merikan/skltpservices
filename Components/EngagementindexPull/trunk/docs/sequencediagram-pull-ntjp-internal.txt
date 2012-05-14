@@ -4,9 +4,8 @@ note over EI_Pull, PropertyResolver
 Hämta address till Tjänstekatalogen
 end note
 
-EI_Pull->PropertyResolver: get("ei.address.service")
+EI_Pull->PropertyResolver: get("ei.push.service.consumer.hsaid")
 PropertyResolver->EI_Pull: addressForServiceCatalog
-
 
 note over EI_Pull, PropertyResolver
 Hämta URI till Tjänstekatalogen
@@ -14,6 +13,27 @@ end note
 
 EI_Pull->PropertyResolver: get("ei.push.service.contract.namespace")
 PropertyResolver->EI_Pull: URIForServiceCatalog
+
+note over EI_Pull, PropertyResolver
+Hämta HSA-ID som tjänsten tillhör
+end note
+
+EI_Pull->PropertyResolver: get("ei.address.service")
+PropertyResolver->EI_Pull: yourServiceHSAId
+
+note over EI_Pull, PropertyResolver
+Hämta tidsoffset i sekunder
+end note
+
+EI_Pull->PropertyResolver: get("ei.pull.timestampformat")
+PropertyResolver->EI_Pull: timestampFormat
+
+note over EI_Pull, EngagementIndexHelper
+Hämta omräknad, formaterad sträng
+end note
+
+EI_Pull->EngagementIndexHelper: getFormattedOffsetTime(dateNow, timeOffset, "yyyyMMddHHmmss")
+PropertyResolver->EI_Pull: timeOffsetInSecondsAsString
 
 note over EI_Pull, PropertyResolver
 Hämta address till Engagemangsindex
