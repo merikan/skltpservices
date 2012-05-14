@@ -413,6 +413,15 @@ public class EngagementIndexPullTest {
         }
     }
 
+    @Test
+    public void testTimeStampLookup() {
+        // Test
+        engagementIndexPull.doFetchUpdates();
+        // Verify
+        verifyStatic();
+        PropertyResolver.get(eq(timeOffsetPropertyKey));
+    }
+
     @After
     public void fell() {
         LogManager.getRootLogger().removeAppender(appender);
