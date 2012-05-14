@@ -51,7 +51,7 @@ public class EngagementIndexPullTest {
     private final String updateDestinationProperty = "ei.push.update.destination";
     private final String consumerHsaIdPropertyKey = "ei.push.service.consumer.hsaid";
     private final String addressServicePropertyKey = "ei.address.service";
-    private final String engagementIndexPropertyKey = "ei.push.service.domain.list";
+    private final String serviceDomainsPropertyKey = "ei.push.service.domain.list";
     private final String timeOffsetPropertyKey = "ei.push.time.offset";
     private final String dateFormat = "yyyyMMddHHmmss";
 
@@ -108,7 +108,7 @@ public class EngagementIndexPullTest {
         when(PropertyResolver.get(eq(consumerHsaIdPropertyKey))).thenReturn(consumerHsaId);
         when(PropertyResolver.get(eq(updateDestinationProperty))).thenReturn(pushAddress);
         when(PropertyResolver.get(eq(addressServicePropertyKey))).thenReturn(addressService);
-        when(PropertyResolver.get(eq(engagementIndexPropertyKey))).thenReturn(serviceDomainList);
+        when(PropertyResolver.get(eq(serviceDomainsPropertyKey))).thenReturn(serviceDomainList);
         when(PropertyResolver.get(eq(timeOffsetPropertyKey))).thenReturn(timeOffset);
         when(DateHelper.now()).thenReturn(testDate);
         LogManager.getRootLogger().addAppender(appender);
@@ -181,7 +181,7 @@ public class EngagementIndexPullTest {
     @Test
     public void testFetchAmountOfCalls() {
         // Setup
-        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(engagementIndexPropertyKey), ",") + 1;
+        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(serviceDomainsPropertyKey), ",") + 1;
         int amountOfAddresses = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress().size();
         int expectedAmountOfPushCalls = amountOfServiceDomains * amountOfAddresses;
         ArgumentCaptor<String> producerAddressCaptor = ArgumentCaptor.forClass(String.class);
@@ -216,7 +216,7 @@ public class EngagementIndexPullTest {
     @Test
     public void testUpdateAmountOfCalls() {
         // Setup
-        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(engagementIndexPropertyKey), ",") + 1;
+        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(serviceDomainsPropertyKey), ",") + 1;
         int amountOfAddresses = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress().size();
         int expectedAmountOfMethodCalls = amountOfServiceDomains * amountOfAddresses;
         // Test
@@ -251,7 +251,7 @@ public class EngagementIndexPullTest {
     @Test
     public void testCheckForUpdatesAddressesAndServiceDomain() {
         // Setup
-        List<String> expectedServiceDomains = EngagementIndexHelper.stringToList(PropertyResolver.get(engagementIndexPropertyKey));
+        List<String> expectedServiceDomains = EngagementIndexHelper.stringToList(PropertyResolver.get(serviceDomainsPropertyKey));
         List<String> expectedAddresses = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress();
         ArgumentCaptor<String> logicalAddressArgumentCaptor = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<GetUpdatesType> getUpdatesTypeArgumentCaptor = ArgumentCaptor.forClass(GetUpdatesType.class);
@@ -282,7 +282,7 @@ public class EngagementIndexPullTest {
     @Test
     public void testCorrectEngagementIndexAddress() {
         // Setup
-        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(engagementIndexPropertyKey), ",") + 1;
+        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(serviceDomainsPropertyKey), ",") + 1;
         int amountOfAddresses = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress().size();
         int expectedAmountOfMethodCalls = amountOfServiceDomains * amountOfAddresses;
         // Test
@@ -363,7 +363,7 @@ public class EngagementIndexPullTest {
         // Setup
         ArgumentCaptor<LoggingEvent> loggingEventArgumentCaptor = ArgumentCaptor.forClass(LoggingEvent.class);
         List<String> testAddressesForFetchingData = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress();
-        List<String> testServiceContractsForFetchingData = EngagementIndexHelper.stringToList(PropertyResolver.get(engagementIndexPropertyKey));
+        List<String> testServiceDomainsForFetchingData = EngagementIndexHelper.stringToList(PropertyResolver.get(serviceDomainsPropertyKey));
         // Generate error after update.
         when(getUpdatesClient.getUpdates(anyString(), any(GetUpdatesType.class))).thenThrow(new IllegalArgumentException("Mock generated exception."));
         // Test
@@ -381,7 +381,7 @@ public class EngagementIndexPullTest {
             assertTrue("The logical address of the producer was not in the log message when pulling data did not go as anticipated.", containsLogicalAddress);
 
             boolean containsServiceContract = false;
-            for (String serviceContractWhichShouldBeLogged : testServiceContractsForFetchingData) {
+            for (String serviceContractWhichShouldBeLogged : testServiceDomainsForFetchingData) {
                 // One of these addresses should be in the log message
                 containsServiceContract = containsServiceContract || StringUtils.contains(renderedMessage, serviceContractWhichShouldBeLogged);
             }
@@ -392,7 +392,7 @@ public class EngagementIndexPullTest {
     @Test
     public void testLoggingOfPushUpdatesError() {
         // Setup
-        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(engagementIndexPropertyKey), ",") + 1;
+        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(serviceDomainsPropertyKey), ",") + 1;
         int amountOfAddresses = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress().size();
         int expectedAmountOfPushCalls = amountOfServiceDomains * amountOfAddresses;
         ArgumentCaptor<LoggingEvent> loggingEventArgumentCaptor = ArgumentCaptor.forClass(LoggingEvent.class);
