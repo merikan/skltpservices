@@ -1,46 +1,40 @@
 title Engagemangsindex - Pullfunktion NTjP utan RTP
 
-note over EI_Pull, PropertyResolver
-Hämta address till Tjänstekatalogen
-end note
-
 EI_Pull->PropertyResolver: get("ei.push.service.consumer.hsaid")
-PropertyResolver->EI_Pull: addressForServiceCatalog
-
-note over EI_Pull, PropertyResolver
-Hämta URI till Tjänstekatalogen
-end note
+PropertyResolver->EI_Pull: Address till tjänstekatalogen
 
 EI_Pull->PropertyResolver: get("ei.push.service.contract.namespace")
-PropertyResolver->EI_Pull: URIForServiceCatalog
-
-note over EI_Pull, PropertyResolver
-Hämta HSA-ID som tjänsten tillhör
-end note
+PropertyResolver->EI_Pull: URI till Tjänstekatalogen
 
 EI_Pull->PropertyResolver: get("ei.address.service")
-PropertyResolver->EI_Pull: yourServiceHSAId
+PropertyResolver->EI_Pull: HSA-ID som tjänsten tillhör
 
-note over EI_Pull, PropertyResolver
-Hämta tidsoffset i sekunder
-end note
+EI_Pull->PropertyResolver: get("ei.push.time.offset")
+PropertyResolver->EI_Pull: Tidsoffset i sekunder
 
 EI_Pull->PropertyResolver: get("ei.pull.timestampformat")
-PropertyResolver->EI_Pull: timestampFormat
-
-note over EI_Pull, EngagementIndexHelper
-Hämta omräknad, formaterad sträng
-end note
-
-EI_Pull->EngagementIndexHelper: getFormattedOffsetTime(dateNow, timeOffset, "yyyyMMddHHmmss")
-PropertyResolver->EI_Pull: timeOffsetInSecondsAsString
-
-note over EI_Pull, PropertyResolver
-Hämta address till Engagemangsindex
-end note
+PropertyResolver->EI_Pull: Format för tidsstämpel
 
 EI_Pull->PropertyResolver: get("ei.push.update.destination")
-PropertyResolver->EI_Pull: addressForEngagementIndex
+PropertyResolver->EI_Pull: Address till Engagemangsindex
+
+note over EI_Pull, PropertyResolver
+Kommaseparerade service domäner läses in från propertyfil
+riv:crm:scheduling, riv:itintegration:engagementindex, riv:careprocess:request
+end note
+
+EI_Pull->PropertyResolver: get("ei.push.service.domain.list")
+PropertyResolver->EI_Pull: commaSeparatedStringList
+
+note over EI_Pull,EngagementIndexHelper:
+Kommaseparerad sträng görs om till lista
+end note
+
+EI_Pull->EngagementIndexHelper: stringToList(commaSeparatedStringList)
+EngagementIndexHelper->EI_Pull: Lista av service domäner
+
+EI_Pull->EngagementIndexHelper: getFormattedOffsetTime(dateNow, timeOffset, "yyyyMMddHHmmss")
+PropertyResolver->EI_Pull: Omräknad, formaterad tidsstämpel
 
 note over EI_Pull, NTjP
 Hämta logiska adresser som konsument får göra getUpdates på:
@@ -59,17 +53,6 @@ SE2321000016-1K2W
 HSA-456
 HSA-789
 end note
-
-EI_Pull->PropertyResolver: get("ei.push.service.domain.list")
-PropertyResolver->EI_Pull: commaSeparatedStringList
-
-note over EI_Pull, PropertyResolver
-Lista med service domäner läses in från propertyfil
-riv:crm:scheduling, riv:itintegration:engagementindex, riv:careprocess:request
-end note
-
-EI_Pull->EngagementIndexHelper: stringToList(commaSeparatedStringList)
-EngagementIndexHelper->EI_Pull: Lista av service domäner
 
 note over EI_Pull, EngagementIndexHelper
 Den kommaseparerade strängen görs om till en lista.
