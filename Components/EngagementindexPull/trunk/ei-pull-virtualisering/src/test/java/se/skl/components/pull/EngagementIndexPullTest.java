@@ -1,11 +1,17 @@
 package se.skl.components.pull;
 
 import org.apache.commons.lang.math.NumberUtils;
+import org.apache.log4j.Appender;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.spi.LoggingEvent;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mule.util.StringUtils;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import riv.itintegration.engagementindex._1.EngagementTransactionType;
@@ -26,17 +32,20 @@ import java.util.*;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.*;
 import static org.mockito.internal.verification.VerificationModeFactory.atLeastOnce;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
-import static org.powermock.api.mockito.PowerMockito.*;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 
 /**
  * Author: Henrik Rostam
  */
 @RunWith(PowerMockRunner.class)
+@PowerMockIgnore("org.apache.commons.logging.*")
 @PrepareForTest({ PropertyResolver.class, DateHelper.class })
 public class EngagementIndexPullTest {
 
@@ -57,6 +66,9 @@ public class EngagementIndexPullTest {
     @Mock
     private UpdateResponderInterface updateClient;
 
+    @Mock
+    private Appender appender;
+
     @InjectMocks
     private EngagementIndexPull engagementIndexPull = new EngagementIndexPull();
 
@@ -66,6 +78,7 @@ public class EngagementIndexPullTest {
         mockStatic(DateHelper.class);
 
         final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+        final String addressService = "Mockito-address-service";
         final String serviceDomain = "mockito:test:namespace";
         final String consumerHsaId = "Mock170Test1D";
         final String pushAddress = "Mock170T35t4ddr3ss";
@@ -73,6 +86,11 @@ public class EngagementIndexPullTest {
         final String serviceDomain2 = "Testing";
         final String serviceDomain3 = "Rocks";
         final String serviceDomainList = serviceDomain1 + ", " + serviceDomain2 + ", " + serviceDomain3;
+        final String testAddress1 = "Mockito producer 1";
+        final String testAddress2 = "Mockito producer 2";
+        final String testAddress3 = "Mockito producer 3";
+        final String testAddress4 = "Mockito producer 4";
+        final String testAddress5 = "Mockito producer 5";
         final String timeOffset = "-123";
         final String engagementBookingId = "bookingId";
         final String engagementCategorization = "Booking";
@@ -82,16 +100,20 @@ public class EngagementIndexPullTest {
         final String engagementSourceSystem = "Systemets HSA-ID";
         final String patientSsn = "012345678901";
         final List<String> testAddresses = new LinkedList<String>();
-        testAddresses.add(serviceDomain1);
-        testAddresses.add(serviceDomain2);
-        testAddresses.add(serviceDomain3);
+        testAddresses.add(testAddress1);
+        testAddresses.add(testAddress2);
+        testAddresses.add(testAddress3);
+        testAddresses.add(testAddress4);
+        testAddresses.add(testAddress5);
 
         when(PropertyResolver.get(eq(namespacePropertyKey))).thenReturn(serviceDomain);
         when(PropertyResolver.get(eq(consumerHsaIdPropertyKey))).thenReturn(consumerHsaId);
-        when(PropertyResolver.get(eq(addressServicePropertyKey))).thenReturn(pushAddress);
+        when(PropertyResolver.get(eq(updateDestinationProperty))).thenReturn(pushAddress);
+        when(PropertyResolver.get(eq(addressServicePropertyKey))).thenReturn(addressService);
         when(PropertyResolver.get(eq(engagementIndexPropertyKey))).thenReturn(serviceDomainList);
         when(PropertyResolver.get(eq(timeOffsetPropertyKey))).thenReturn(timeOffset);
         when(DateHelper.now()).thenReturn(testDate);
+        LogManager.getRootLogger().addAppender(appender);
 
         EngagementType engagement = new EngagementType();
         engagement.setBusinessObjectInstanceIdentifier(engagementBookingId);
@@ -159,16 +181,16 @@ public class EngagementIndexPullTest {
     }
 
     @Test
-    public void testAddressServiceCall() {
+    public void testFetchAmountOfCalls() {
         // Setup
-        ArgumentCaptor<String> engagementIndexLogicalAddressCaptor = ArgumentCaptor.forClass(String.class);
+        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(engagementIndexPropertyKey), ",") + 1;
+        int amountOfAddresses = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress().size();
+        int expectedAmountOfPushCalls = amountOfServiceDomains * amountOfAddresses;
+        ArgumentCaptor<String> producerAddressCaptor = ArgumentCaptor.forClass(String.class);
         // Test
         engagementIndexPull.doFetchUpdates();
         // Verify
-        verifyStatic(times(1));
-        PropertyResolver.get(eq(consumerHsaIdPropertyKey));
-        verify(updateClient, times(1)).update(engagementIndexLogicalAddressCaptor.capture(), any(UpdateType.class));
-        assertEquals("The contacted address did not match the expected one!", PropertyResolver.get(engagementIndexPropertyKey), engagementIndexLogicalAddressCaptor.getValue());
+        verify(getUpdatesClient, times(expectedAmountOfPushCalls)).getUpdates(producerAddressCaptor.capture(), any(GetUpdatesType.class));
     }
 
     @Test
@@ -202,6 +224,9 @@ public class EngagementIndexPullTest {
         // Test
         engagementIndexPull.doFetchUpdates();
         // Verify
+        // Should fetch the update address just once.
+        verifyStatic(times(1));
+        PropertyResolver.get(eq(consumerHsaIdPropertyKey));
         verify(updateClient, times(expectedAmountOfMethodCalls)).update(anyString(), any(UpdateType.class));
     }
 
@@ -252,7 +277,6 @@ public class EngagementIndexPullTest {
         for (String expectedServiceDomain : expectedServiceDomains) {
             for (String expectedAddress : expectedAddresses) {
                 assertTrue("The expected called address " + expectedAddress + " using service domain " + expectedServiceDomain + " was not called!", actualAddresses.contains(expectedAddress));
-                assertTrue("The expected called address " + expectedAddress + " using service domain " + expectedServiceDomain + " was not called!", actualAddresses.contains(expectedServiceDomain));
             }
         }
     }
@@ -266,7 +290,8 @@ public class EngagementIndexPullTest {
         // Test
         engagementIndexPull.doFetchUpdates();
         // Verify
-        verify(updateClient, Mockito.times(expectedAmountOfMethodCalls)).update(eq(PropertyResolver.get("updateDestinationProperty")), any(UpdateType.class));
+        String destinationAddress = PropertyResolver.get(updateDestinationProperty);
+        verify(updateClient, Mockito.times(expectedAmountOfMethodCalls)).update(eq(destinationAddress), any(UpdateType.class));
     }
 
     @Test
@@ -314,6 +339,84 @@ public class EngagementIndexPullTest {
                 }
             }
         }
+    }
+
+    @Test
+    public void testLoggingOfAddressService() {
+        // Setup
+        ArgumentCaptor<LoggingEvent> loggingEventArgumentCaptor = ArgumentCaptor.forClass(LoggingEvent.class);
+        String logicalAddressWhichShouldBeLogged = PropertyResolver.get(addressServicePropertyKey);
+        // Generate error
+        when(getAddressesClient.getLogicalAddresseesByServiceContract(anyString(), any(GetLogicalAddresseesByServiceContractType.class))).thenThrow(new IllegalArgumentException("Mock-generated exception."));
+        // Test
+        engagementIndexPull.doFetchUpdates();
+        // Verify
+        verify(appender, times(2)).doAppend(loggingEventArgumentCaptor.capture());
+        // Get the first logging message
+        LoggingEvent loggingEvent = loggingEventArgumentCaptor.getAllValues().get(0);
+        // Check level of log message
+        assertEquals("Logging level for exception should be fatal!", Level.FATAL, loggingEvent.getLevel());
+        // Check that the message contains the logical address
+        assertTrue("The logical address of the address service was not in the log message", StringUtils.contains(loggingEvent.getRenderedMessage(), logicalAddressWhichShouldBeLogged));
+    }
+
+    @Test
+    public void testLoggingOfFetchUpdatesError() {
+        // Setup
+        ArgumentCaptor<LoggingEvent> loggingEventArgumentCaptor = ArgumentCaptor.forClass(LoggingEvent.class);
+        List<String> testAddressesForFetchingData = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress();
+        List<String> testServiceContractsForFetchingData = EngagementIndexHelper.stringToList(PropertyResolver.get(engagementIndexPropertyKey));
+        // Generate error after update.
+        when(getUpdatesClient.getUpdates(anyString(), any(GetUpdatesType.class))).thenThrow(new IllegalArgumentException("Mock generated exception."));
+        // Test
+        engagementIndexPull.doFetchUpdates();
+        // Verify
+        verify(appender, atLeastOnce()).doAppend(loggingEventArgumentCaptor.capture());
+        List<LoggingEvent> loggingEvents = loggingEventArgumentCaptor.getAllValues();
+        for (LoggingEvent loggingEvent : loggingEvents) {
+            String renderedMessage = loggingEvent.getRenderedMessage();
+            boolean containsLogicalAddress = false;
+            for (String logicalAddressWhichShouldBeLogged : testAddressesForFetchingData) {
+                // One of these addresses should be in the log message
+                containsLogicalAddress = containsLogicalAddress || StringUtils.contains(renderedMessage, logicalAddressWhichShouldBeLogged);
+            }
+            assertTrue("The logical address of the producer was not in the log message when pulling data did not go as anticipated.", containsLogicalAddress);
+
+            boolean containsServiceContract = false;
+            for (String serviceContractWhichShouldBeLogged : testServiceContractsForFetchingData) {
+                // One of these addresses should be in the log message
+                containsServiceContract = containsServiceContract || StringUtils.contains(renderedMessage, serviceContractWhichShouldBeLogged);
+            }
+            assertTrue("The service domain used to contact the producer was not in the log message when pulling data did not go as anticipated.", containsLogicalAddress);
+        }
+    }
+
+    @Test
+    public void testLoggingOfPushUpdatesError() {
+        // Setup
+        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(engagementIndexPropertyKey), ",") + 1;
+        int amountOfAddresses = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress().size();
+        int expectedAmountOfPushCalls = amountOfServiceDomains * amountOfAddresses;
+        ArgumentCaptor<LoggingEvent> loggingEventArgumentCaptor = ArgumentCaptor.forClass(LoggingEvent.class);
+        String logicalAddressWhichShouldBeLogged = PropertyResolver.get(updateDestinationProperty);
+        // Generate error after update.
+        when(updateClient.update(anyString(), any(UpdateType.class))).thenThrow(new IllegalArgumentException("Mock generated exception."));
+        // Test
+        engagementIndexPull.doFetchUpdates();
+        // Verify
+        verify(appender, times(expectedAmountOfPushCalls)).doAppend(loggingEventArgumentCaptor.capture());
+        List<LoggingEvent> loggingEvents = loggingEventArgumentCaptor.getAllValues();
+        for (LoggingEvent loggingEvent : loggingEvents) {
+            // Check level of log message
+            assertEquals("Logging level for this exception should be fatal!", Level.FATAL, loggingEvent.getLevel());
+            // Check that the message contains the logical address
+            assertTrue("The logical address of the engagement index was not in the log message when pushing data did not go as anticipated.", StringUtils.contains(loggingEvent.getRenderedMessage(), logicalAddressWhichShouldBeLogged));
+        }
+    }
+
+    @After
+    public void fell() {
+        LogManager.getRootLogger().removeAppender(appender);
     }
 
 }
