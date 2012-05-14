@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mule.util.StringUtils;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import riv.itintegration.engagementindex._1.EngagementTransactionType;
@@ -45,7 +44,6 @@ import static org.powermock.api.mockito.PowerMockito.verifyStatic;
  * Author: Henrik Rostam
  */
 @RunWith(PowerMockRunner.class)
-@PowerMockIgnore("org.apache.commons.logging.*")
 @PrepareForTest({ PropertyResolver.class, DateHelper.class })
 public class EngagementIndexPullTest {
 
