@@ -1,8 +1,7 @@
 package se.skl.components.pull;
 
 import org.apache.commons.lang.math.NumberUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -41,7 +40,7 @@ public class EngagementIndexPull {
 	@Autowired
 	private UpdateResponderInterface updateClient;
 
-    private final static Log log = LogFactory.getLog(EngagementIndexPull.class);
+    private final static Logger log = Logger.getLogger(EngagementIndexPull.class);
 
     public void doFetchUpdates() {
         GetLogicalAddresseesByServiceContractType parameters = new GetLogicalAddresseesByServiceContractType();
