@@ -1,46 +1,39 @@
 title Engagemangsindex - Pullfunktion NTjP utan RTP
 
 note over EI_Pull, NTjP
-Kolla om N EI svarar
-end note
-
-EI_Pull->NTjP: PingForConfiguration
-NTjP->N EI: PingForConfiguration
-N EI->NTjP: Ping response
-NTjP->EI_Pull: Ping response
-
-note over EI_Pull, NTjP
-Hämta logiska adresser som konsument får göra getUpdates på:
+H‰mta logiska adresser som konsument fÂr gˆra getUpdates pÂ:
 Konsument HSA ID: HSASERVICES-100M
-Tjänstekontrakt: urn:riv:itintegration:engagementindex:GetUpdates:1:rivtabp21
+Tj‰nstekontrakt: urn:riv:itintegration:engagementindex:GetUpdates:1:rivtabp21
 end note
 
 EI_Pull->NTjP: GetLogicalAddressesByServiceContract
-NTjP->Tjänsteadresseringskatalog: GetLogicalAddressesByServiceContract
+NTjP->Tj‰nsteadresseringskatalog: GetLogicalAddressesByServiceContract
 
-Tjänsteadresseringskatalog->NTjP: Lista av logiska adresser
+Tj‰nsteadresseringskatalog->NTjP: Lista av logiska adresser
 NTjP->EI_Pull: Lista av logiska adresser
 
 note over EI_Pull, NTjP
-Lista med logiska adresser som konsumenten får göra getUpdates på:
+Lista med logiska adresser som konsumenten fÂr gˆra getUpdates pÂ:
 SE2321000016-1K2W
 HSA-456
 HSA-789
 end note
 
-loop för varje logisk adress och tjänstedomän
+loop fˆr varje logisk adress och tj‰nstedom‰n
 EI_Pull->NTjP: GetUpdates
 
-note over EI_Pull, Tjänsteadresseringskatalog
-Hämta för:
+note over EI_Pull, Tj‰nsteadresseringskatalog
+H‰mta fˆr:
 logicalAddress: SE2321000016-1K2W
-tjänstedomän: urn:riv:crm:scheduling
+tj‰nstedom‰n: urn:riv:crm:scheduling
 vid eller efter tid: 20111010T100000
 end note
 
+loop fˆr varje uppdateringssak
+
 NTjP->Producent: GetUpdates
 Producent->NTjP: Lista med uppdateringar
-NTjP->EI_Pull: List med uppdateringar
+NTjP->EI_Pull: Lista med uppdateringar
 
 EI_Pull->NTjP: Update
 NTjP->N EI: Update
@@ -48,8 +41,9 @@ N EI->NTjP: Resultat (status + text)
 NTjP->EI_Pull:  Resultat (status + text)
 
 note right of EI_Pull
-Vid fel, logga felet och gå vidare
-med nästa logiska adress
+Vid fel, logga felet och gÂ vidare
+med n‰sta logiska adress
 end note
 
+end
 end
