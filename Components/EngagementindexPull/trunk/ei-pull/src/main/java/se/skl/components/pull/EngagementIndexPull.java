@@ -20,7 +20,6 @@ import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractrespon
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractresponder.v1.GetLogicalAddresseesByServiceContractType;
 import se.riv.itintegration.registry.v1.ServiceContractNamespaceType;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,34 +41,31 @@ public class EngagementIndexPull {
     private final static Logger log = Logger.getLogger(EngagementIndexPull.class);
 
     public void doFetchUpdates() {
-        GetLogicalAddresseesByServiceContractType parameters = new GetLogicalAddresseesByServiceContractType();
-        ServiceContractNamespaceType serviceContractNameSpace = new ServiceContractNamespaceType();
-        serviceContractNameSpace.setServiceContractNamespace(PropertyResolver.get("ei.push.service.contract.namespace"));
-        parameters.setServiceContractNameSpace(serviceContractNameSpace);
-        parameters.setServiceConsumerHsaId(PropertyResolver.get("ei.push.service.consumer.hsaid"));
-        String logicalAddress = PropertyResolver.get("ei.address.service");
-        String pushLogicalAddress = PropertyResolver.get("ei.push.update.destination");
-        String commaSeparatedDomains = PropertyResolver.get("ei.push.service.domain.list");
-        String timeOffset = PropertyResolver.get("ei.push.time.offset");
-        Date dateNow = DateHelper.now();
-        String timestampFormat = PropertyResolver.get("ei.pull.timestampformat");
-        final String updatesSinceTimeStamp = EngagementIndexHelper.getFormattedOffsetTime(dateNow, timeOffset, timestampFormat);
-        List<String> serviceDomainList = EngagementIndexHelper.stringToList(commaSeparatedDomains);
+        final String pushServiceContractNamespace = PropertyResolver.get("ei.push.service.contract.namespace");
+        final String belongsToHsaId = PropertyResolver.get("ei.push.service.consumer.hsaid");
+        final String addressServiceAddress = PropertyResolver.get("ei.address.service");
+        final String pushLogicalAddress = PropertyResolver.get("ei.push.update.destination");
+        final String commaSeparatedDomains = PropertyResolver.get("ei.push.service.domain.list");
+        final String timeOffset = PropertyResolver.get("ei.push.time.offset");
+        final String timestampFormat = PropertyResolver.get("ei.pull.timestampformat");
+        final String updatesSinceTimeStamp = EngagementIndexHelper.getFormattedOffsetTime(DateHelper.now(), timeOffset, timestampFormat);
+        final List<String> serviceDomainList = EngagementIndexHelper.stringToList(commaSeparatedDomains);
+        final GetLogicalAddresseesByServiceContractType parameters = generateAddressParameters(pushServiceContractNamespace, belongsToHsaId);
         List<String> addressesToContact = null;
         try {
-            GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(logicalAddress, parameters);
+            GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(addressServiceAddress, parameters);
             addressesToContact = addressResponse.getLogicalAddress();
         } catch (Exception e) {
-            log.fatal("Could not acquire addresses from " + logicalAddress + " which should be contacted for pulling data. Reason:\n", e);
+            log.fatal("Could not acquire addresses from " + addressServiceAddress + " which should be contacted for pulling data. Reason:\n", e);
         }
         pushAndPull(addressesToContact, pushLogicalAddress, updatesSinceTimeStamp, serviceDomainList);
     }
 
 	private void pushAndPull(List<String> addressesToContact, String pushLogicalAddress, String updatesSinceTimeStamp, List<String> serviceDomainList) {
         if (addressesToContact != null && !addressesToContact.isEmpty()) {
-            for (String address : addressesToContact) {
+            for (String pullAddress : addressesToContact) {
                 for (String serviceDomain : serviceDomainList) {
-                    doPushAndPull(serviceDomain, address, pushLogicalAddress, updatesSinceTimeStamp);
+                    doPushAndPull(serviceDomain, pullAddress, pushLogicalAddress, updatesSinceTimeStamp);
                 }
             }
         } else {
@@ -77,41 +73,40 @@ public class EngagementIndexPull {
         }
 	}
 
-    private void doPushAndPull(String serviceDomain, String getUpdatesLogicalAddress, String pushLogicalAddress, String updatesSinceTimeStamp) {
+    private void doPushAndPull(String serviceDomain, String pullAddress, String pushLogicalAddress, String updatesSinceTimeStamp) {
         List<String> registeredResidentLastFetched = new LinkedList<String>();
-        boolean isNotDone = true;
+        boolean done = false;
         // Continue while there is more data to fetch
-        while (isNotDone) {
-            GetUpdatesResponseType updates = pull(serviceDomain, getUpdatesLogicalAddress, updatesSinceTimeStamp, registeredResidentLastFetched);
+        while (!done) {
+            GetUpdatesResponseType updates = pull(serviceDomain, updatesSinceTimeStamp, registeredResidentLastFetched, pullAddress);
             if (updates != null) {
                 push(pushLogicalAddress, updates);
                 if (updates.isResponseIsComplete()) {
-                    // No more results to be fetched
-                    isNotDone = false;
+                    done = true;
                 } else {
-                    // There are more results to fetch, build list of what we fetched since the producer is stateless.
+                    // There are more results to fetch, build list of what we fetched so far, since the producer is stateless.
                     for (RegisteredResidentEngagementType tmpEngagementType : updates.getRegisteredResidentEngagement()) {
                         registeredResidentLastFetched.add(tmpEngagementType.getRegisteredResidentIdentification());
                     }
                 }
             } else {
-                isNotDone = false;
-                log.error("Received null when pulling data since: " + updatesSinceTimeStamp + ", from address: " + getUpdatesLogicalAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + registeredResidentLastFetched.size() + " partial results from this address.");
+                done = true;
+                log.error("Received null when pulling data since: " + updatesSinceTimeStamp + ", from address: " + pullAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + registeredResidentLastFetched.size() + " partial results from this address.");
             }
         }
     }
 
 
 
-	private GetUpdatesResponseType pull(String serviceDomain, String logicalAddress, String sinceTimeStamp, List<String> registeredResidentLastFetched) {
+	private GetUpdatesResponseType pull(String serviceDomain, String updatesSinceTimeStamp, List<String> registeredResidentLastFetched, String pullAddress) {
 		GetUpdatesType updateRequest = new GetUpdatesType();
 		updateRequest.setServiceDomain(serviceDomain);
-		updateRequest.setTimeStamp(sinceTimeStamp);
+		updateRequest.setTimeStamp(updatesSinceTimeStamp);
         updateRequest.getRegisteredResidentLastFetched().addAll(registeredResidentLastFetched);
         try {
-		    return getUpdatesClient.getUpdates(logicalAddress, updateRequest);
+		    return getUpdatesClient.getUpdates(pullAddress, updateRequest);
         } catch (Exception e) {
-            log.fatal("Could not aquire updates from " + logicalAddress + ", using service domain: " + updateRequest.getServiceDomain() + ". Reason:\n", e);
+            log.fatal("Could not aquire updates from " + pullAddress + ", using service domain: " + updateRequest.getServiceDomain() + ". Reason:\n", e);
         }
         return null;
 	}
@@ -171,6 +166,15 @@ public class EngagementIndexPull {
             engagementTransaction.setEngagement(engagementType);
             requestForUpdate.getEngagementTransaction().add(engagementTransaction);
         }
+    }
+
+    private GetLogicalAddresseesByServiceContractType generateAddressParameters(String pushServiceContractNamespace, String belongsToHsaId) {
+        GetLogicalAddresseesByServiceContractType parameters = new GetLogicalAddresseesByServiceContractType();
+        ServiceContractNamespaceType serviceContractNameSpace = new ServiceContractNamespaceType();
+        serviceContractNameSpace.setServiceContractNamespace(pushServiceContractNamespace);
+        parameters.setServiceContractNameSpace(serviceContractNameSpace);
+        parameters.setServiceConsumerHsaId(belongsToHsaId);
+        return parameters;
     }
 
 
