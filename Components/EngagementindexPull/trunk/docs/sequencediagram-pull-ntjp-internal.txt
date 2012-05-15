@@ -1,41 +1,7 @@
 title Engagemangsindex - Pullfunktion NTjP utan RTP
 
-EI_Pull->PropertyResolver: get("ei.pull.belongsto.hsaid")
-PropertyResolver->EI_Pull: HSA-ID som tjänsten tillhör
-
-EI_Pull->PropertyResolver: get("ei.push.address.servicedomain")
-PropertyResolver->EI_Pull: URI till Tjänstekatalogen
-
-EI_Pull->PropertyResolver: get("ei.address.service.address.logical")
-PropertyResolver->EI_Pull: Address till Tjänstekatalogen
-
-EI_Pull->PropertyResolver: get("ei.pull.time.offset")
-PropertyResolver->EI_Pull: Tidsoffset i sekunder
-
-EI_Pull->PropertyResolver: get("ei.pull.time.format")
-PropertyResolver->EI_Pull: Format för tidsstämpel
-
-EI_Pull->PropertyResolver: get("ei.push.address.logical")
-PropertyResolver->EI_Pull: Address till Engagemangsindex
-
-note over EI_Pull, PropertyResolver
-Kommaseparerade service domäner läses in från propertyfil
-riv:crm:scheduling, riv:itintegration:engagementindex, riv:careprocess:request
-end note
-
-EI_Pull->PropertyResolver: get("ei.pull.address.servicedomains")
-PropertyResolver->EI_Pull: Kommaseparerade tjänstedomäner
-
-note over EI_Pull, EngagementIndexHelper
-Kommaseparerad sträng görs om till lista.
-{ (riv:crm:scheduling), (riv:itintegration:engagementindex), (riv:careprocess:request) }
-end note
-
-EI_Pull->EngagementIndexHelper: stringToList(commaSeparatedStringList)
-EngagementIndexHelper->EI_Pull: Lista av tjänstedomäner
-
-EI_Pull->EngagementIndexHelper: getFormattedOffsetTime(dateNow, timeOffset, "yyyyMMddHHmmss")
-EngagementIndexHelper->EI_Pull: Omräknad, formaterad tidsstämpel
+EI_Pull->PropertyResolver: get
+PropertyResolver->EI_Pull: Egenskaper från propertyfil
 
 note over EI_Pull, NTjP
 Hämta logiska adresser som konsument får göra getUpdates på:
@@ -56,8 +22,16 @@ HSA-789
 end note
 
 loop för varje logisk adress
-loop för varje service domäns
+loop för varje service domän
 loop för varje deluppdatering (optionellt)
+
+
+note right of EI_Pull
+Om föregående hämtning på
+samma address inte var fullständig,
+skicka med id på den senaste hämtade posten
+för att få  ytterligare uppdateringar.
+end note
 
 EI_Pull->NTjP: GetUpdates
 NTjP->Producent: GetUpdates
@@ -80,6 +54,11 @@ NTjP->EI_Pull:  Resultat (status + text)
 note right of EI_Pull
 Vid fel, logga felet och gå vidare
 med nästa logiska adress
+end note
+
+note right of EI_Pull
+Om datan är fullständig,
+gå vidare med nästa logiska adress
 end note
 
 end
