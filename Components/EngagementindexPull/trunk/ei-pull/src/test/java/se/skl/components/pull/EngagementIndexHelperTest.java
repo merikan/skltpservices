@@ -1,33 +1,19 @@
 package se.skl.components.pull;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
+
 import org.junit.Test;
-import org.soitoolkit.commons.mule.test.AbstractTestCase;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class EngagementIndexHelperTest extends AbstractTestCase {
+import static junit.framework.Assert.assertEquals;
 
-    @BeforeClass
-    public void beforeClass() {
-        setDisposeManagerPerSuite(true);
-        setTestTimeoutSecs(240);
-    }
-
-    @Before
-    public void doSetUp() throws Exception {
-        super.doSetUp();
-        setDisposeManagerPerSuite(true);
-    }
-
-    @Override
-    protected String getConfigResources() {
-        return "teststubs-and-services-config.xml";
-    }
+@RunWith(MockitoJUnitRunner.class)
+public class EngagementIndexHelperTest {
 
     @Test
     public void testStringToListThree() {
