@@ -20,6 +20,7 @@ import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractrespon
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractresponder.v1.GetLogicalAddresseesByServiceContractType;
 import se.riv.itintegration.registry.v1.ServiceContractNamespaceType;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class EngagementIndexPull {
         final String updatesSinceTimeStamp = EngagementIndexHelper.getFormattedOffsetTime(DateHelper.now(), timeOffset, timestampFormat);
         final List<String> serviceDomainList = EngagementIndexHelper.stringToList(commaSeparatedDomains);
         final GetLogicalAddresseesByServiceContractType parameters = generateAddressParameters(pushServiceContractNamespace, belongsToHsaId);
-        List<String> addressesToContact = null;
+        List<String> addressesToContact = new ArrayList<String>();
         try {
             GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(addressServiceAddress, parameters);
             addressesToContact = addressResponse.getLogicalAddress();
@@ -62,7 +63,7 @@ public class EngagementIndexPull {
     }
 
 	private void pushAndPull(List<String> addressesToContact, String pushLogicalAddress, String updatesSinceTimeStamp, List<String> serviceDomainList) {
-        if (addressesToContact != null && !addressesToContact.isEmpty()) {
+        if (!addressesToContact.isEmpty()) {
             for (String pullAddress : addressesToContact) {
                 for (String serviceDomain : serviceDomainList) {
                     doPushAndPull(serviceDomain, pullAddress, pushLogicalAddress, updatesSinceTimeStamp);
@@ -75,25 +76,28 @@ public class EngagementIndexPull {
 
     private void doPushAndPull(String serviceDomain, String pullAddress, String pushLogicalAddress, String updatesSinceTimeStamp) {
         List<String> registeredResidentLastFetched = new LinkedList<String>();
-        boolean done = false;
         // Continue while there is more data to fetch
-        while (!done) {
+        boolean done;
+        do {
             GetUpdatesResponseType updates = pull(serviceDomain, updatesSinceTimeStamp, registeredResidentLastFetched, pullAddress);
+            done = pushCycleIsComplete(updates);
             if (updates != null) {
                 push(pushLogicalAddress, updates);
-                if (updates.isResponseIsComplete()) {
-                    done = true;
-                } else {
+                if (!done) {
                     // There are more results to fetch, build list of what we fetched so far, since the producer is stateless.
+                    // TODO: When the wsdl-schema is updated, change this to just include the resident information of the last object
                     for (RegisteredResidentEngagementType tmpEngagementType : updates.getRegisteredResidentEngagement()) {
                         registeredResidentLastFetched.add(tmpEngagementType.getRegisteredResidentIdentification());
                     }
                 }
             } else {
-                done = true;
                 log.error("Received null when pulling data since: " + updatesSinceTimeStamp + ", from address: " + pullAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + registeredResidentLastFetched.size() + " partial results from this address.");
             }
-        }
+        } while (!done);
+    }
+
+    private boolean pushCycleIsComplete(GetUpdatesResponseType updates) {
+        return (updates == null) || (updates.isResponseIsComplete());
     }
 
 
@@ -141,10 +145,10 @@ public class EngagementIndexPull {
 	private UpdateType createRequestForUpdate(GetUpdatesResponseType updateResponse) {
 		UpdateType requestForUpdate = new UpdateType();
         List<RegisteredResidentEngagementType> registeredEngagementTypes = updateResponse.getRegisteredResidentEngagement();
-        if (registeredEngagementTypes != null && !registeredEngagementTypes.isEmpty()) {
+        if (!registeredEngagementTypes.isEmpty()) {
             for (RegisteredResidentEngagementType registeredResidentEngagementType : registeredEngagementTypes) {
                 List<EngagementType> engagementTypes = registeredResidentEngagementType.getEngagement();
-                if (engagementTypes != null && !engagementTypes.isEmpty()) {
+                if (!engagementTypes.isEmpty()) {
                     addTransactionsToUpdateRequest(engagementTypes, requestForUpdate);
                 } else {
                     // Engagement list was either null or empty
