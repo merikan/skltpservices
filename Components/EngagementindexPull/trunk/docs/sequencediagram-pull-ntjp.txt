@@ -1,37 +1,45 @@
 title Engagemangsindex - Pullfunktion NTjP utan RTP
 
 note over EI_Pull, NTjP
-Hämta logiska adresser som konsument får göra getUpdates på:
+Hï¿½mta logiska adresser som konsument fï¿½r gï¿½ra getUpdates pï¿½:
 Konsument HSA ID: HSASERVICES-100M
-Tjänstekontrakt: urn:riv:itintegration:engagementindex:GetUpdates:1:rivtabp21
+Tjï¿½nstekontrakt: urn:riv:itintegration:engagementindex:GetUpdates:1:rivtabp21
 end note
 
 EI_Pull->NTjP: GetLogicalAddressesByServiceContract
-NTjP->Tjänsteadresseringskatalog: GetLogicalAddressesByServiceContract
-
-Tjänsteadresseringskatalog->NTjP: Lista av logiska adresser
+NTjP->Tjï¿½nsteadresseringskatalog: GetLogicalAddressesByServiceContract
+Tjï¿½nsteadresseringskatalog->NTjP: Lista av logiska adresser
 NTjP->EI_Pull: Lista av logiska adresser
 
 note over EI_Pull, NTjP
-Lista med logiska adresser som konsumenten får göra getUpdates på:
+Lista med logiska adresser som konsumenten fï¿½r gï¿½ra getUpdates pï¿½:
 SE2321000016-1K2W
 HSA-456
 HSA-789
 end note
 
-loop för varje logisk adress och tjänstedomän
-EI_Pull->NTjP: GetUpdates
+loop fï¿½r varje logisk adress
+loop fï¿½r varje service domï¿½n
+loop fï¿½r varje deluppdatering (optionellt)
 
-note over EI_Pull, Tjänsteadresseringskatalog
-Hämta för:
+
+note right of EI_Pull
+Om fï¿½regï¿½ende hï¿½mtning pï¿½
+samma address inte var fullstï¿½ndig,
+skicka med id pï¿½ den senaste hï¿½mtade posten
+fï¿½r att fï¿½  ytterligare uppdateringar.
+end note
+
+EI_Pull->NTjP: GetUpdates
+NTjP->Producent: GetUpdates
+
+note over EI_Pull, Tjï¿½nsteadresseringskatalog
+Hï¿½mta fï¿½r:
 logicalAddress: SE2321000016-1K2W
-tjänstedomän: urn:riv:crm:scheduling
+tjï¿½nstedomï¿½n: urn:riv:crm:scheduling
 vid eller efter tid: 20111010T100000
 end note
 
-loop för varje deluppdatering (optionellt)
-
-NTjP->Producent: GetUpdates
 Producent->NTjP: Lista med uppdateringar
 NTjP->EI_Pull: Lista med uppdateringar
 
@@ -41,9 +49,15 @@ N EI->NTjP: Resultat (status + text)
 NTjP->EI_Pull:  Resultat (status + text)
 
 note right of EI_Pull
-Vid fel, logga felet och gå vidare
-med nästa logiska adress
+Vid fel, logga felet och gï¿½ vidare
+med nï¿½sta logiska adress
 end note
 
+note right of EI_Pull
+Om datan ï¿½r fullstï¿½ndig,
+gï¿½ vidare med nï¿½sta logiska adress
+end note
+
+end
 end
 end
