@@ -131,12 +131,40 @@
             <artifactId>powermock-module-junit4</artifactId>
             <version>1.4.7</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>powermock-core</artifactId>
+                    <groupId>org.powermock</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>powermock-reflect</artifactId>
+                    <groupId>org.powermock</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>junit</artifactId>
+                    <groupId>junit</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-mockito</artifactId>
             <version>1.4.10</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>powermock-core</artifactId>
+                    <groupId>org.powermock</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>powermock-reflect</artifactId>
+                    <groupId>org.powermock</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>mockito-all</artifactId>
+                    <groupId>org.mockito</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
