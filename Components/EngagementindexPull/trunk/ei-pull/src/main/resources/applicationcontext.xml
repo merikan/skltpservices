@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jaxws="http://cxf.apache.org/jaxws"
-    xmlns:cxf="http://cxf.apache.org/core"
-	xsi:schemaLocation="
-        http://www.springframework.org/schema/beans
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:jaxws="http://cxf.apache.org/jaxws"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-2.5.xsd
         http://cxf.apache.org/jaxws
-        http://cxf.apache.org/schemas/jaxws.xsd
-        http://cxf.apache.org/core
-        http://cxf.apache.org/schemas/core.xsd">
+        http://cxf.apache.org/schemas/jaxws.xsd">
 
 	<beans:import resource="classpath:META-INF/cxf/cxf.xml"/>
 	<beans:import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
@@ -22,15 +18,15 @@
 
     <jaxws:client id="getAddressesClient"
                   serviceClass="se.riv.itintegration.registry.getlogicaladdresseesbyservicecontract.v1.rivtabp21.GetLogicalAddresseesByServiceContractResponderInterface"
-                  address="${ei.push.address.client}"/>
+                  address="${ei.address.service.address.uri}"/>
 
     <jaxws:client id="getUpdatesClient"
 		          serviceClass="se.riv.itintegration.engagementindex.getupdates.v1.rivtabp21.GetUpdatesResponderInterface"
-		          address="${ei.push.updates.client}"/>
+		          address="${ei.pull.address.uri}"/>
 		
 	<jaxws:client id="updateClient"
 		          serviceClass="se.riv.itintegration.engagementindex.update.v1.rivtabp21.UpdateResponderInterface"
-		          address="${ei.push.update.client}"/>
+		          address="${ei.push.address.uri}"/>
 
 	<context:component-scan base-package="se.skl.components.pull"/>
 

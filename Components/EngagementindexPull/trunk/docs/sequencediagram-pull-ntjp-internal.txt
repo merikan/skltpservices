@@ -1,21 +1,21 @@
 title Engagemangsindex - Pullfunktion NTjP utan RTP
 
-EI_Pull->PropertyResolver: get("ei.push.service.consumer.hsaid")
+EI_Pull->PropertyResolver: get("ei.pull.belongsto.hsaid")
 PropertyResolver->EI_Pull: Address till tjänstekatalogen
 
-EI_Pull->PropertyResolver: get("ei.push.service.contract.namespace")
+EI_Pull->PropertyResolver: get("ei.push.address.servicedomain")
 PropertyResolver->EI_Pull: URI till Tjänstekatalogen
 
-EI_Pull->PropertyResolver: get("ei.address.service")
+EI_Pull->PropertyResolver: get("ei.address.service.address.logical")
 PropertyResolver->EI_Pull: HSA-ID som tjänsten tillhör
 
-EI_Pull->PropertyResolver: get("ei.push.time.offset")
+EI_Pull->PropertyResolver: get("ei.pull.time.offset")
 PropertyResolver->EI_Pull: Tidsoffset i sekunder
 
-EI_Pull->PropertyResolver: get("ei.pull.timestampformat")
+EI_Pull->PropertyResolver: get("ei.pull.time.format")
 PropertyResolver->EI_Pull: Format för tidsstämpel
 
-EI_Pull->PropertyResolver: get("ei.push.update.destination")
+EI_Pull->PropertyResolver: get("ei.push.address.logical")
 PropertyResolver->EI_Pull: Address till Engagemangsindex
 
 note over EI_Pull, PropertyResolver
@@ -23,7 +23,7 @@ Kommaseparerade service domäner läses in från propertyfil
 riv:crm:scheduling, riv:itintegration:engagementindex, riv:careprocess:request
 end note
 
-EI_Pull->PropertyResolver: get("ei.push.service.domain.list")
+EI_Pull->PropertyResolver: get("ei.pull.address.servicedomains")
 PropertyResolver->EI_Pull: commaSeparatedStringList
 
 note over EI_Pull,EngagementIndexHelper:
