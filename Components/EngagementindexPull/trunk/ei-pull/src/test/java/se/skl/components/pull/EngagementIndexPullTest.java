@@ -46,13 +46,13 @@ import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 @PrepareForTest({ PropertyResolver.class, DateHelper.class })
 public class EngagementIndexPullTest {
 
-    private final String namespacePropertyKey = "ei.push.service.contract.namespace";
-    private final String updateDestinationProperty = "ei.push.update.destination";
-    private final String consumerHsaIdPropertyKey = "ei.push.service.consumer.hsaid";
-    private final String addressServicePropertyKey = "ei.address.service";
-    private final String serviceDomainsPropertyKey = "ei.push.service.domain.list";
-    private final String timeOffsetPropertyKey = "ei.push.time.offset";
-    private final String timestampFormatPropertyKey = "ei.pull.timestampformat";
+    private final String namespacePropertyKey = "ei.push.address.servicedomain";
+    private final String updateDestinationProperty = "ei.push.address.logical";
+    private final String consumerHsaIdPropertyKey = "ei.pull.belongsto.hsaid";
+    private final String addressServicePropertyKey = "ei.address.service.address.logical";
+    private final String serviceDomainsPropertyKey = "ei.pull.address.servicedomains";
+    private final String timeOffsetPropertyKey = "ei.pull.time.offset";
+    private final String timestampFormatPropertyKey = "ei.pull.time.format";
     private final String dateFormat = "yyyyMMddHHmmss";
 
     @Mock

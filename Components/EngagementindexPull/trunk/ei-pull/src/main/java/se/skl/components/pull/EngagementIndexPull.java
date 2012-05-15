@@ -41,13 +41,13 @@ public class EngagementIndexPull {
     private final static Logger log = Logger.getLogger(EngagementIndexPull.class);
 
     public void doFetchUpdates() {
-        final String pushServiceContractNamespace = PropertyResolver.get("ei.push.service.contract.namespace");
-        final String belongsToHsaId = PropertyResolver.get("ei.push.service.consumer.hsaid");
-        final String addressServiceAddress = PropertyResolver.get("ei.address.service");
-        final String pushLogicalAddress = PropertyResolver.get("ei.push.update.destination");
-        final String commaSeparatedDomains = PropertyResolver.get("ei.push.service.domain.list");
-        final String timeOffset = PropertyResolver.get("ei.push.time.offset");
-        final String timestampFormat = PropertyResolver.get("ei.pull.timestampformat");
+        final String pushServiceContractNamespace = PropertyResolver.get("ei.push.address.servicedomain");
+        final String belongsToHsaId = PropertyResolver.get("ei.pull.belongsto.hsaid");
+        final String addressServiceAddress = PropertyResolver.get("ei.address.service.address.logical");
+        final String pushLogicalAddress = PropertyResolver.get("ei.push.address.logical");
+        final String commaSeparatedDomains = PropertyResolver.get("ei.pull.address.servicedomains");
+        final String timeOffset = PropertyResolver.get("ei.pull.time.offset");
+        final String timestampFormat = PropertyResolver.get("ei.pull.time.format");
         final String updatesSinceTimeStamp = EngagementIndexHelper.getFormattedOffsetTime(DateHelper.now(), timeOffset, timestampFormat);
         final List<String> serviceDomainList = EngagementIndexHelper.stringToList(commaSeparatedDomains);
         final GetLogicalAddresseesByServiceContractType parameters = generateAddressParameters(pushServiceContractNamespace, belongsToHsaId);
