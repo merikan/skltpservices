@@ -1,13 +1,13 @@
 title Engagemangsindex - Pullfunktion NTjP utan RTP
 
 EI_Pull->PropertyResolver: get("ei.pull.belongsto.hsaid")
-PropertyResolver->EI_Pull: Address till tjänstekatalogen
+PropertyResolver->EI_Pull: HSA-ID som tjänsten tillhör
 
 EI_Pull->PropertyResolver: get("ei.push.address.servicedomain")
 PropertyResolver->EI_Pull: URI till Tjänstekatalogen
 
 EI_Pull->PropertyResolver: get("ei.address.service.address.logical")
-PropertyResolver->EI_Pull: HSA-ID som tjänsten tillhör
+PropertyResolver->EI_Pull: Address till Tjänstekatalogen
 
 EI_Pull->PropertyResolver: get("ei.pull.time.offset")
 PropertyResolver->EI_Pull: Tidsoffset i sekunder
@@ -24,17 +24,18 @@ riv:crm:scheduling, riv:itintegration:engagementindex, riv:careprocess:request
 end note
 
 EI_Pull->PropertyResolver: get("ei.pull.address.servicedomains")
-PropertyResolver->EI_Pull: commaSeparatedStringList
+PropertyResolver->EI_Pull: Kommaseparerade tjänstedomäner
 
-note over EI_Pull,EngagementIndexHelper:
-Kommaseparerad sträng görs om till lista
+note over EI_Pull, EngagementIndexHelper
+Kommaseparerad sträng görs om till lista.
+{ (riv:crm:scheduling), (riv:itintegration:engagementindex), (riv:careprocess:request) }
 end note
 
 EI_Pull->EngagementIndexHelper: stringToList(commaSeparatedStringList)
-EngagementIndexHelper->EI_Pull: Lista av service domäner
+EngagementIndexHelper->EI_Pull: Lista av tjänstedomäner
 
 EI_Pull->EngagementIndexHelper: getFormattedOffsetTime(dateNow, timeOffset, "yyyyMMddHHmmss")
-PropertyResolver->EI_Pull: Omräknad, formaterad tidsstämpel
+EngagementIndexHelper->EI_Pull: Omräknad, formaterad tidsstämpel
 
 note over EI_Pull, NTjP
 Hämta logiska adresser som konsument får göra getUpdates på:
@@ -52,11 +53,6 @@ Lista med logiska adresser som konsumenten får göra getUpdates på:
 SE2321000016-1K2W
 HSA-456
 HSA-789
-end note
-
-note over EI_Pull, EngagementIndexHelper
-Den kommaseparerade strängen görs om till en lista.
-{ (riv:crm:scheduling), (riv:itintegration:engagementindex), (riv:careprocess:request) }
 end note
 
 loop för varje logisk adress
