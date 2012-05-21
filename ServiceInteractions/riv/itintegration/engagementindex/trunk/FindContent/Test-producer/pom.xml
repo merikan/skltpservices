@@ -27,9 +27,9 @@
 	<dependencies>
 		<!-- Schemas -->
 		<dependency>
-			<groupId>se.skl.skltpservices.itintegration.engagementindex</groupId>
-			<artifactId>engagementindex-schemas</artifactId>
-			<version>${project.version}</version>
+			<groupId>se.rivta.tools</groupId>
+			<artifactId>itintegration-engagementindex-schemas</artifactId>
+			<version>1</version>
 		</dependency>
 
 		<!-- CXF -->
