@@ -1,35 +1,26 @@
 package se.skl.components.pull;
 
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
-
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * Author: Henrik Rostam
  **/
 
-public class PropertyResolver extends PropertyPlaceholderConfigurer {
+public class PropertyResolver {
 
-    private static Map<String, String> propertyStore = new HashMap<String, String>();
+    private static Map<String, Object> properties = new HashMap<String, Object>();
 
-    @Override
-    protected void processProperties(ConfigurableListableBeanFactory beanFactory, Properties properties) throws BeansException {
-        // Instantiate and populate the properties
-        super.processProperties(beanFactory, properties);
-        for (Object key : properties.keySet()) {
-            String stringKey = key.toString();
-            String stringValue = super.parseStringValue(properties.getProperty(stringKey), properties, new HashSet());
-            propertyStore.put(stringKey, stringValue);
-        }
+    private PropertyResolver() {
+
+    }
+
+    public void setProperties(Map<String, Object> properties) {
+        PropertyResolver.properties = properties;
     }
 
     public static String get(String name) {
-        return propertyStore.get(name);
+        return String.valueOf(properties.get(name));
     }
 }
 
