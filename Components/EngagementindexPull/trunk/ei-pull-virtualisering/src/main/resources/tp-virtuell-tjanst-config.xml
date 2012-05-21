@@ -11,15 +11,14 @@
 	MA 02111-1307 USA -->
 <mule xmlns="http://www.mulesource.org/schema/mule/core/2.2"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:spring="http://www.springframework.org/schema/beans"
-	xmlns:cxf="http://www.mulesource.org/schema/mule/cxf/2.2" xmlns:https="http://www.mulesource.org/schema/mule/https/2.2"
+    xmlns:https="http://www.mulesource.org/schema/mule/https/2.2"
 	xmlns:quartz="http://www.mulesource.org/schema/mule/quartz/2.2"
 	xmlns:vm="http://www.mulesource.org/schema/mule/vm/2.2" xmlns:jaxws="http://cxf.apache.org/jaxws"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="
-               http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
                http://www.mulesource.org/schema/mule/core/2.2 http://www.mulesource.org/schema/mule/core/2.2/mule.xsd
                http://www.mulesource.org/schema/mule/https/2.2 http://www.mulesource.org/schema/mule/https/2.2/mule-https.xsd
-               http://www.mulesource.org/schema/mule/cxf/2.2  http://www.mulesource.org/schema/mule/cxf/2.2/mule-cxf.xsd
+
                http://www.mulesource.org/schema/mule/quartz/2.2 http://www.mulesource.org/schema/mule/quartz/2.2/mule-quartz.xsd
                http://www.mulesource.org/schema/mule/vm/2.2 http://www.mulesource.org/schema/mule/vm/2.2/mule-vm.xsd
                http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
@@ -32,15 +31,15 @@
 
 		<jaxws:client id="getAddressesClient"
 			serviceClass="se.riv.itintegration.registry.getlogicaladdresseesbyservicecontract.v1.rivtabp21.GetLogicalAddresseesByServiceContractResponderInterface"
-			address="${ei.push.address.client}" />
+			address="${ei.address.service.address.uri}" />
 
 		<jaxws:client id="getUpdatesClient"
 			serviceClass="se.riv.itintegration.engagementindex.getupdates.v1.rivtabp21.GetUpdatesResponderInterface"
-			address="${ei.push.updates.client}" />
+			address="${ei.pull.address.uri}" />
 
 		<jaxws:client id="updateClient"
 			serviceClass="se.riv.itintegration.engagementindex.update.v1.rivtabp21.UpdateResponderInterface"
-			address="${ei.push.update.client}" />
+			address="${ei.push.address.uri}" />
 
 		<context:component-scan base-package="se.skl.components.pull" />
 
