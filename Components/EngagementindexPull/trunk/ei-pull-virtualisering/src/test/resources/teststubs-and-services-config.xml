@@ -12,8 +12,6 @@
 		<spring:property name="locations">
 			<spring:list>
 				<spring:value>classpath:vp-config.properties</spring:value>
-                <spring:value>classpath:default.properties</spring:value>
-                <spring:value>file:/Users/zherkezhi/Work/Config/vp/config/ei-pull.properties</spring:value>
 			</spring:list>
 		</spring:property>
 	</spring:bean>
