@@ -21,15 +21,13 @@
                 <entry key="ei.push.address.servicedomain" value="${ei.push.address.servicedomain}" />
                 <entry key="ei.pull.belongsto.hsaid" value="${ei.pull.belongsto.hsaid}" />
                 <entry key="ei.address.service.address.logical" value="${ei.address.service.address.logical}" />
-                <entry key="ei.address.service.address.logical" value="${ei.address.service.address.logical}" />
                 <entry key="ei.push.address.logical" value="${ei.push.address.logical}" />
                 <entry key="ei.pull.address.servicedomains" value="${ei.pull.address.servicedomains}" />
                 <entry key="ei.pull.time.offset" value="${ei.pull.time.offset}" />
                 <entry key="ei.pull.time.format" value="${ei.pull.time.format}" />
-     
-                
-               <entry key="trustStoreType" value="jks" />
-                <entry key="trustStoreFile" value="truststore.jks" />
+
+                <entry key="trustStoreType" value="jks" />
+                <entry key="trustStoreFile" value="${MULE_HOME}/certs/truststore.jks" />
                 <entry key="trustStorePassword" value="password" />
                 <entry key="keyStoreType" value="pkcs12" />
                 <entry key="keyStoreFile" value="keystore.p12" />
