@@ -72,7 +72,7 @@
 
 
 			<component>
-				<spring-object bean="engagementIndexPull"></spring-object>
+				<spring-object bean="engagementIndexPull"/>
 			</component>
 
 		</service>

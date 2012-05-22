@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Authors: Hans Thunberg, Henrik Rostam
  */
-@Component
+@Component("engagementIndexPull")
 public class EngagementIndexPull {
 
     @Autowired
