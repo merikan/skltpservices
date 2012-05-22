@@ -36,15 +36,17 @@ public class EngagementIndexPull {
 	@Autowired
 	private UpdateResponderInterface updateClient;
 
+    @Autowired
+    private HttpHelper httpHelper;
+
     private final static Logger log = Logger.getLogger(EngagementIndexPull.class);
 
     public void doFetchUpdates() {
-    	
-    	HttpHelper httpHelper = new HttpHelper();
+
     	httpHelper.configHttpConduit(getAddressesClient);
     	httpHelper.configHttpConduit(updateClient);
     	httpHelper.configHttpConduit(getUpdatesClient);
-    	
+
         final String pushServiceContractNamespace = PropertyResolver.get("ei.push.address.servicedomain");
         final String belongsToHsaId = PropertyResolver.get("ei.pull.belongsto.hsaid");
         final String addressServiceAddress = PropertyResolver.get("ei.address.service.address.logical");

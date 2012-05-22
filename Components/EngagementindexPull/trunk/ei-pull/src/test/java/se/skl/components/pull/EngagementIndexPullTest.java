@@ -67,6 +67,9 @@ public class EngagementIndexPullTest {
     @Mock
     private Appender appender;
 
+    @Mock
+    private HttpHelper httpHelper;
+
     @InjectMocks
     private EngagementIndexPull engagementIndexPull = new EngagementIndexPull();
 
