@@ -23,16 +23,7 @@
 	<packaging>pom</packaging>
 	<name>FindContent service</name>
 
-	<properties>
-		<osorCertDirectory>http://skltpservices.googlecode.com/svn/ServiceInteractions/certs/</osorCertDirectory>
-		<osorSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/itintegration/engagementindex/trunk/schemas/interactions/FindContentInteraction</osorSchemaDirectoryUrl>
-		<osorCoreSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/itintegration/engagementindex/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
-	</properties>
-
-	<!-- Modules to be created for each service -->
-
 	<modules>
-		<module>Virtualisering</module>
 		<module>Test-producer</module>
 	</modules>
 </project>

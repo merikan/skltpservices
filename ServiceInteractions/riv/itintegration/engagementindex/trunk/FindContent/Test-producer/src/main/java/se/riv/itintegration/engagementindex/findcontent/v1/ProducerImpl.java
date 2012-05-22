@@ -47,7 +47,6 @@ public class ProducerImpl implements FindContentResponderInterface {
 		engagementType.setBusinessObjectInstanceIdentifier(findContent.getBusinessObjectInstanceIdentifier());
 		engagementType.setCategorization(findContent.getCategorization());
 		engagementType.setCreationTime(new Date().toString());
-		engagementType.setHealthIssueThreadId(findContent.getHealthIssueThreadId());
 		engagementType.setLogicalAddress(findContent.getLogicalAddress());
 		engagementType.setMostRecentContent(findContent.getMostRecentContent());
 		engagementType.setOwner(findContent.getOwner());
