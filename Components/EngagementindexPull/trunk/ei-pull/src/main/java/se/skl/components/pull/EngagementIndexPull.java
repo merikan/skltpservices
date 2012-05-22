@@ -1,9 +1,7 @@
 package se.skl.components.pull;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import riv.itintegration.engagementindex._1.EngagementTransactionType;
 import riv.itintegration.engagementindex._1.EngagementType;
@@ -21,7 +19,6 @@ import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractrespon
 import se.riv.itintegration.registry.v1.ServiceContractNamespaceType;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -75,23 +72,25 @@ public class EngagementIndexPull {
 	}
 
     private void doPushAndPull(String serviceDomain, String pullAddress, String pushLogicalAddress, String updatesSinceTimeStamp) {
-        List<String> registeredResidentLastFetched = new LinkedList<String>();
+        String lastFetchedRegisteredResidentIdentification = "";
+        int amountOfFetchedResults = 0;
         // Continue while there is more data to fetch
         boolean done;
         do {
-            GetUpdatesResponseType updates = pull(serviceDomain, updatesSinceTimeStamp, registeredResidentLastFetched, pullAddress);
+            GetUpdatesResponseType updates = pull(serviceDomain, updatesSinceTimeStamp, lastFetchedRegisteredResidentIdentification, pullAddress);
             done = pushCycleIsComplete(updates);
             if (updates != null) {
                 push(pushLogicalAddress, updates);
                 if (!done) {
                     // There are more results to fetch, build list of what we fetched so far, since the producer is stateless.
-                    // TODO: When the wsdl-schema is updated, change this to just include the resident information of the last object
-                    for (RegisteredResidentEngagementType tmpEngagementType : updates.getRegisteredResidentEngagement()) {
-                        registeredResidentLastFetched.add(tmpEngagementType.getRegisteredResidentIdentification());
-                    }
+                    List<RegisteredResidentEngagementType> registeredResidentEngagements = updates.getRegisteredResidentEngagement();
+                    int listSize = registeredResidentEngagements.size();
+                    int indexOfLastElement = listSize - 1;
+                    lastFetchedRegisteredResidentIdentification = registeredResidentEngagements.get(indexOfLastElement).getRegisteredResidentIdentification();
+                    amountOfFetchedResults += listSize;
                 }
             } else {
-                log.error("Received null when pulling data since: " + updatesSinceTimeStamp + ", from address: " + pullAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + registeredResidentLastFetched.size() + " partial results from this address.");
+                log.error("Received null when pulling data since: " + updatesSinceTimeStamp + ", from address: " + pullAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + amountOfFetchedResults + " partial results from this address.");
             }
         } while (!done);
     }
@@ -102,11 +101,11 @@ public class EngagementIndexPull {
 
 
 
-	private GetUpdatesResponseType pull(String serviceDomain, String updatesSinceTimeStamp, List<String> registeredResidentLastFetched, String pullAddress) {
+	private GetUpdatesResponseType pull(String serviceDomain, String updatesSinceTimeStamp, String lastFetchedRegisteredResidentIdentification, String pullAddress) {
 		GetUpdatesType updateRequest = new GetUpdatesType();
 		updateRequest.setServiceDomain(serviceDomain);
 		updateRequest.setTimeStamp(updatesSinceTimeStamp);
-        updateRequest.getRegisteredResidentLastFetched().addAll(registeredResidentLastFetched);
+        updateRequest.setRegisteredResidentLastFetched(lastFetchedRegisteredResidentIdentification);
         try {
 		    return getUpdatesClient.getUpdates(pullAddress, updateRequest);
         } catch (Exception e) {
@@ -180,13 +179,5 @@ public class EngagementIndexPull {
         parameters.setServiceConsumerHsaId(belongsToHsaId);
         return parameters;
     }
-
-
-
-	public static void main(String[] args) {
-		BeanFactory factory = new ClassPathXmlApplicationContext("applicationcontext.xml");
-		EngagementIndexPull engagementIndexPull = (EngagementIndexPull) factory.getBean("engagementIndexPull");
-		engagementIndexPull.doFetchUpdates();
-	}
 
 }
