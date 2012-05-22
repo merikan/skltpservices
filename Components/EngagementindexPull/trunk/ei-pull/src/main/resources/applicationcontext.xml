@@ -30,13 +30,4 @@
 
 	<context:component-scan base-package="se.skl.components.pull"/>
 
-    <beans:bean id="propertyConfigurer" class="se.skl.components.pull.PropertyResolver">
-        <beans:property name="locations">
-            <beans:list>
-                <beans:value>classpath:default.properties</beans:value>
-                <beans:value>file:${app.home}/vp/config/ei-pull.properties</beans:value>
-            </beans:list>
-        </beans:property>
-    </beans:bean>
-
 </beans:beans>
