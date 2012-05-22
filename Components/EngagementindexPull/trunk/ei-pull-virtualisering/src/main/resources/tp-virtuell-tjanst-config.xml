@@ -60,23 +60,16 @@
 	</spring:beans>
 
 	<model name="EngagementIndex-GetUpdates-trigger-model">
-
 		<service name="EngagementIndex-GetUpdates-trigger-service">
-
 			<inbound>
-				<quartz:inbound-endpoint jobName="getUpdatesJob"
-					repeatInterval="10000">
+				<quartz:inbound-endpoint jobName="getUpdatesJob" repeatInterval="10000">
 					<quartz:event-generator-job />
 				</quartz:inbound-endpoint>
 			</inbound>
-
-
 			<component>
 				<spring-object bean="engagementIndexPull"/>
 			</component>
-
 		</service>
-		
 	</model>
 
 </mule>
