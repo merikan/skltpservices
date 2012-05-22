@@ -26,12 +26,12 @@
                 <entry key="ei.pull.time.offset" value="${ei.pull.time.offset}" />
                 <entry key="ei.pull.time.format" value="${ei.pull.time.format}" />
 
-                <entry key="trustStoreType" value="jks" />
-                <entry key="trustStoreFile" value="${MULE_HOME}/certs/truststore.jks" />
-                <entry key="trustStorePassword" value="password" />
-                <entry key="keyStoreType" value="pkcs12" />
-                <entry key="keyStoreFile" value="keystore.p12" />
-                <entry key="keyStorePassword" value="password" />
+                <entry key="trustStoreType" value="${ei.https.trustStoreType}" />
+                <entry key="trustStoreFile" value="${ei.https.trustStoreFile}" />
+                <entry key="trustStorePassword" value="${ei.https.trustStorePassword}" />
+                <entry key="keyStoreType" value="${ei.https.keyStoreType}" />
+                <entry key="keyStoreFile" value="${ei.https.keyStoreFile}" />
+                <entry key="keyStorePassword" value="${ei.https.keyStorePassword}" />
             </map>
         </property>
     </bean>
