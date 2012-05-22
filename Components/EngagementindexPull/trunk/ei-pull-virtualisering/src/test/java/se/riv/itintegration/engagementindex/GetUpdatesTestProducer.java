@@ -2,10 +2,10 @@ package se.riv.itintegration.engagementindex;
 
 import org.mule.util.StringUtils;
 import riv.itintegration.engagementindex._1.EngagementType;
-import riv.itintegration.engagementindex._1.RegisteredResidentEngagementType;
 import se.riv.itintegration.engagementindex.getupdates.v1.rivtabp21.GetUpdatesResponderInterface;
 import se.riv.itintegration.engagementindex.getupdatesresponder.v1.GetUpdatesResponseType;
 import se.riv.itintegration.engagementindex.getupdatesresponder.v1.GetUpdatesType;
+import se.riv.itintegration.engagementindex.getupdatesresponder.v1.RegisteredResidentEngagementType;
 
 import javax.jws.WebService;
 import java.text.SimpleDateFormat;
