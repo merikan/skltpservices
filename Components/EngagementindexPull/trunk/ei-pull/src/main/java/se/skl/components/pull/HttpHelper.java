@@ -23,18 +23,19 @@ public class HttpHelper {
 
 	private final static Logger log = Logger.getLogger(HttpHelper.class);
 
-	private final String trustStoreType = PropertyResolver.get("trustStoreType");
-	private final String trustStoreFile = PropertyResolver.get("trustStoreFile");
-	private final String trustStorePassword = PropertyResolver.get("trustStorePassword");
-	private final String keyStoreType = PropertyResolver.get("keyStoreType");
-	private final String keyStoreFile = PropertyResolver.get("keyStoreFile");
-	private final String keyStorePassword = PropertyResolver.get("keyStorePassword");
-
 	void configHttpConduit(Object service) {
 		final Client clientProxy = ClientProxy.getClient(service);
 		final HTTPConduit conduit = (HTTPConduit) clientProxy.getConduit();
 
 		if (isHTTPS(conduit)) {
+
+            final String trustStoreType = PropertyResolver.get("trustStoreType");
+            final String trustStoreFile = PropertyResolver.get("trustStoreFile");
+            final String trustStorePassword = PropertyResolver.get("trustStorePassword");
+            final String keyStoreType = PropertyResolver.get("keyStoreType");
+            final String keyStoreFile = PropertyResolver.get("keyStoreFile");
+            final String keyStorePassword = PropertyResolver.get("keyStorePassword");
+
 			try {
 				final KeyStore trustStore = KeyStore.getInstance(trustStoreType);
 				trustStore.load(new FileInputStream(trustStoreFile), trustStorePassword.toCharArray());
