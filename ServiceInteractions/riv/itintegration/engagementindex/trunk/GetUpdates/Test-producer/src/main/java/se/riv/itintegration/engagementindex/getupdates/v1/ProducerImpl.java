@@ -100,7 +100,7 @@ public class ProducerImpl implements GetUpdatesResponderInterface {
         return StringUtils.repeat("0", amountOfZeroes) + lastFourAsString;
     }
 
-    private RegisteredResidentEngagementType createRegisteredResidentEngagementType(String registeredResidentIdentification, String serviceDomain) {
+    private RegisteredResidentEngagementType createRegisteredResidentEngagementType(String serviceDomain, String registeredResidentIdentification) {
         RegisteredResidentEngagementType engagementType = new RegisteredResidentEngagementType();
         engagementType.getEngagement().add(createEngagementType(registeredResidentIdentification, serviceDomain));
         engagementType.setRegisteredResidentIdentification(registeredResidentIdentification);
