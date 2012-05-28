@@ -131,7 +131,8 @@ public class EngagementIndexPull {
             if (resultCode != null) { // Switch cases doesn't support null
                 switch (resultCode) {
                     case OK:
-                    return;
+                        log.info("Received " + resultCode.name() + " when updating to " + logicalAddress + ". Result comment: " + updateResponse.getComment() + ".");
+                    break;
                     case INFO:
                         log.warn("Received unexpected result with code " + resultCode.name() + ". Response comment: " + updateResponse.getComment() + "." + updates.getRegisteredResidentEngagement().size() + " posts was however, successfully pushed to " + logicalAddress + ".");
                     break;
