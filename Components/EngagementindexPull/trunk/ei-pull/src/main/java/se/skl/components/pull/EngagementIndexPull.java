@@ -42,7 +42,7 @@ public class EngagementIndexPull {
     private final static Logger log = Logger.getLogger(EngagementIndexPull.class);
 
     public void doFetchUpdates() {
-
+        log.info("Pull/Push-sequence started.");
     	httpHelper.configHttpConduit(getAddressesClient);
     	httpHelper.configHttpConduit(updateClient);
     	httpHelper.configHttpConduit(getUpdatesClient);
@@ -65,6 +65,7 @@ public class EngagementIndexPull {
             log.fatal("Could not acquire addresses from " + addressServiceAddress + " which should be contacted for pulling data. Reason:\n", e);
         }
         pushAndPull(addressesToContact, pushLogicalAddress, updatesSinceTimeStamp, serviceDomainList);
+        log.info("Pull/Push-sequence ended.");
     }
 
 	private void pushAndPull(List<String> addressesToContact, String pushLogicalAddress, String updatesSinceTimeStamp, List<String> serviceDomainList) {
