@@ -87,6 +87,8 @@ public class ProducerImpl implements GetUpdatesResponderInterface {
         do {
             int secondsToAdd = Math.abs(random.nextInt());
             calendar.add(Calendar.SECOND, secondsToAdd);
+            int additionalYearsToAdd = Math.abs(random.nextInt(60));
+            calendar.add(Calendar.YEAR, additionalYearsToAdd);
             randomBirthDate = calendar.getTime();
         } while (!randomBirthDate.before(currentDate)); // A date of birth which is in the future is not reasonable!
         String lastFour = generateLastFourInSsn(random);
