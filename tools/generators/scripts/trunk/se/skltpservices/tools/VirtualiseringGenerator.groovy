@@ -9,6 +9,9 @@ org.apache.commons.io.FileUtils
 @Grab(group='commons-io', module='commons-io', version='1.3.2')
 import org.apache.commons.io.FileUtils
 
+@Grab(group='dom4j', module='dom4j', version='1.6.1')
+import org.dom4j.io.SAXReader
+
 /**
  * This script should help us to generate many services at one time. 
  *
@@ -24,10 +27,6 @@ import org.apache.commons.io.FileUtils
  * A first version is created to solve that we would like to generate several service interactions without to much manual work.
  *
  * TODO:
- * Make the script more smart by
- * - Today its hardcoded to rivtabp20
- * - Today it only works for version 1 of TP services
- * - Fix that it reads namepace from WSDL not as today with hardcoded values (URN:RIV is hardcoded)
  * 
  */
 
@@ -45,23 +44,39 @@ def getAllDirectoriesMatching(direcory, pattern){
 	return dirsFound
 }
 
-def buildVirtualServices(serviceInteractionDirectories, targetDir, domain){
+def getAllUniqueRivNameSpaces(wsdlFile){
+	def rivNameSpace = 'No namespace found'
+
+	new SAXReader().read(wsdlFile).getRootElement().declaredNamespaces().grep(~/.*urn:riv.*/).each{ namespace ->
+		if(namespace.text.contains('rivtabp')){
+			rivNameSpace = namespace.text
+		}
+	}
+	println rivNameSpace
+	return rivNameSpace
+}
+
+def buildVirtualServices(serviceInteractionDirectories, targetDir){
 
 	serviceInteractionDirectories.each { serviceInteractionDirectory ->
 
 		def artifactId = serviceInteractionDirectory.name - 'Interaction'
 		def schemasFiles = getAllFilesMatching(serviceInteractionDirectory, /.*\.wsdl/)
+		
+		def serviceNameSpace = getAllUniqueRivNameSpaces(schemasFiles[0])
+		def serviceNameSpaceArray = serviceNameSpace.split("\\:")
+		
+		def namespacePrefix = serviceNameSpaceArray[0] + ":" + serviceNameSpaceArray[1]
+		def maindomain = serviceNameSpaceArray[2]
+		def subdomain =  serviceNameSpaceArray[3] 
+		def serviceName = serviceNameSpaceArray[4]
+		def serviceVersion = serviceNameSpaceArray[5]
+		def rivtaVersion = serviceNameSpaceArray[6]
+		
 		def wsdlFileName = schemasFiles[0].name
-		def rivtaVersion = 'rivtabp20'
-		def serviceVersion = '1'
-		def version = '1.0-SNAPSHOT'
+	
+		def version = '1.0'
 		
-		
-		def namespacePrefix = 'urn:riv'
-		
-		def domainArray = domain.split("\\.")
-		def maindomain = domainArray[0]
-		def subdomain =  domainArray[1] 
 		
 		def mvnCommand = """mvn archetype:generate 
 		-DinteractiveMode=false 
@@ -78,12 +93,12 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir, domain){
 		-DserviceInteraction=${artifactId}Interaction  
 		-DserviceRelativePath=${artifactId}/${serviceVersion}/${rivtaVersion} 
 		-DserviceWsdlFile=${wsdlFileName} 
-		-DserviceNamespace=${namespacePrefix}:${maindomain}:${subdomain}:${artifactId}:${serviceVersion}:${rivtaVersion}  
+		-DserviceNamespace=${serviceNameSpace}  
 		"""
 		
 		def process = mvnCommand.execute()
 		process.waitFor()
-
+		
 		// Obtain status and output
 		println "RETURN CODE: ${ process.exitValue()}"
 		println "STDOUT: ${process.in.text}"
@@ -121,17 +136,17 @@ def copyCoreSchemas(serviceInteractionDirectories, coreSchemaDirectory, targetDi
 	}
 }
 
-if( args.size() < 2){
-	println "This tool generates service virtualising components based on service interactions found in sourceDir. They are generated in the targetDir."
+if( args.size() < 1){
+	println "This tool generates service virtualising components based on service interactions found in sourceDir. They are generated in the dir where script is executed."
 	println "Point sourceDir to the schemas dir containing:"
 	println "core_components"
 	println "interactions"
 	println ""
-	println "Required parameters: source directory [sourceDir], target directory [targetDir],domain [domain] \n"
+	println "To be able to run this tool you need to have the service-archetype installed, found under tools/generators/archetypes."
+	println ""
+	println "Required parameters: source directory [sourceDir] \n"
 	println "PARAMETERS DESCRIPTION:"
 	println "[sourceDir] is the base direcory where this script will start working to look for servivce interactions, e.g /repository/rivta/ServiceInteractions/riv/crm/scheduling/trunk "
-	println "[targetDir] is the direcory where new interactions will be generated, e.g /repository/skltpservices/ServiceInteractions/riv/crm/scheduling/trunk "
-	println "[domain] is the name of the domain to process, e.g crm.scheduling"
 	println ""
 	println "OUTPUT:"
 	println "New maven folders containing service interactions"
@@ -139,12 +154,17 @@ if( args.size() < 2){
 }
 
 def sourceDir = new File(args[0])
-def targetDir = new File(args[1])
-def domain = args[2]
+def targetDir = "."
+
+new File("${targetDir}/pom.xml") << new File("pomtemplate.xml").asWritable()
 
 def serviceInteractionDirectories = getAllDirectoriesMatching(sourceDir,/.*Interaction$/)
 def coreSchemaDirectory = getAllDirectoriesMatching(sourceDir,/core_components/)[0]
 
-buildVirtualServices(serviceInteractionDirectories, targetDir, domain)
+buildVirtualServices(serviceInteractionDirectories, targetDir)
 copyServiceSchemas(serviceInteractionDirectories, targetDir)
 copyCoreSchemas(serviceInteractionDirectories, coreSchemaDirectory, targetDir)
+
+println ""
+println ""
+println "NOTE! Remember to update root pom with domain and subdomain"
