@@ -20,10 +20,15 @@
  */
 package se.riv.itintegration.engagementindex.getupdates.v1;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 import javax.jws.WebService;
 
+import org.apache.commons.lang.StringUtils;
 import riv.itintegration.engagementindex._1.EngagementType;
 import se.riv.itintegration.engagementindex.getupdates.v1.rivtabp21.GetUpdatesResponderInterface;
 import se.riv.itintegration.engagementindex.getupdatesresponder.v1.GetUpdatesResponseType;
@@ -33,41 +38,88 @@ import se.riv.itintegration.engagementindex.getupdatesresponder.v1.RegisteredRes
 @WebService(serviceName = "GetUpdatesResponderService", endpointInterface = "se.riv.itintegration.engagementindex.getupdates.v1.rivtabp21.GetUpdatesResponderInterface", portName = "GetUpdatesResponderPort", targetNamespace = "urn:riv:itintegration:engagementindex:GetUpdates:1:rivtabp21", wsdlLocation = "schemas/interactions/GetUpdatesInteraction/GetUpdatesInteraction_1.0_RIVTABP21.wsdl")
 public class ProducerImpl implements GetUpdatesResponderInterface {
 
-	@Override
-	public GetUpdatesResponseType getUpdates(String arg0, GetUpdatesType arg1) {
-		GetUpdatesResponseType getUpdatesResponseType = new GetUpdatesResponseType();
-		getUpdatesResponseType.setResponseIsComplete(true);
-		
-		String serviceDomain = arg1.getServiceDomain();
-		
-		getUpdatesResponseType.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "196911202163"));
-		return getUpdatesResponseType;
-	}
+    @Override
+    public GetUpdatesResponseType getUpdates(String arg0, GetUpdatesType request) {
+        GetUpdatesResponseType response = new GetUpdatesResponseType();
+        response.setResponseIsComplete(true);
 
-	private RegisteredResidentEngagementType createRegisteredResidentEngagementType(String registeredResidentIdentification, String serviceDomain) {
-		RegisteredResidentEngagementType engagementType = new RegisteredResidentEngagementType();
-		engagementType.getEngagement().add(createEngagementType(registeredResidentIdentification, serviceDomain));
-		engagementType.setRegisteredResidentIdentification(registeredResidentIdentification);
-		return engagementType;
-	}
+        String serviceDomain = request.getServiceDomain();
+        if (StringUtils.equals(serviceDomain, "riv:crm:scheduling")) {
+            // Simulate a partial request - if the previous result set is never sent from the consumer, then this would probably become an infinite loop
+            if (request.getRegisteredResidentLastFetched().isEmpty()) {
+                response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "197303160555"));
+                response.setResponseIsComplete(false);
+            } else {
+                response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "197707070707"));
+                response.setResponseIsComplete(true);
+            }
+        } else if (StringUtils.equals(serviceDomain, "riv:itintegration:engagementindex")) {
+            long firstSocialSecurityNumber = new Long("190102030405");
+            long amountOfPersons = 100;
+            for (long i = 0; i < amountOfPersons; i++) {
+                String tmpSsn = String.valueOf(firstSocialSecurityNumber + i);
+                response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, tmpSsn));
+            }
+        } else if (StringUtils.equals(serviceDomain, "riv:careprocess:request")) {
+            int amountOfRandomPersons = 15;
+            Random random = new Random(System.currentTimeMillis());
+            for (int i = 0; i < amountOfRandomPersons; i++) {
+                response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, generateRandomSsn(random)));
+            }
+        } else {
+            response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "FAILEDFAILEDFAILEDFAILEDFAILEDFAILED"));
+        }
+        return response;
+    }
 
-	private EngagementType createEngagementType(String registeredResidentIdentification, String serviceDomain) {
+    private String generateRandomSsn(Random random) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        Date startDate;
+        try {
+            startDate = simpleDateFormat.parse("19000101");
+        } catch (ParseException e) {
+            startDate =  new Date(0L);
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate);
+        Date currentDate = new Date();
+        Date randomBirthDate;
+        do {
+            int secondsToAdd = Math.abs(random.nextInt());
+            calendar.add(Calendar.SECOND, secondsToAdd);
+            randomBirthDate = calendar.getTime();
+        } while (!randomBirthDate.before(currentDate)); // A date of birth which is in the future is not reasonable!
+        String lastFour = generateLastFourInSsn(random);
+        return simpleDateFormat.format(randomBirthDate) + lastFour;
+    }
 
-		EngagementType engagementType = new EngagementType();
-		engagementType.setBusinessObjectInstanceIdentifier("");
-		engagementType.setCategorization("");
-		engagementType.setCreationTime("");
-		engagementType.setLogicalAddress("");
-		engagementType.setMostRecentContent("");
-		engagementType.setOwner("");
-		engagementType.setRegisteredResidentIdentification(registeredResidentIdentification);
-		engagementType.setServiceDomain(serviceDomain);
-		engagementType.setSourceSystem("");
-		engagementType.setUpdateTime(new Date().toString());
+    private String generateLastFourInSsn(Random random) {
+        int lastFourNumber = random.nextInt(10000);
+        String lastFourAsString = String.valueOf(lastFourNumber);
+        int amountOfZeroes = 4 - lastFourAsString.length();
+        return StringUtils.repeat("0", amountOfZeroes) + lastFourAsString;
+    }
 
-		return engagementType;
-	}
+    private RegisteredResidentEngagementType createRegisteredResidentEngagementType(String registeredResidentIdentification, String serviceDomain) {
+        RegisteredResidentEngagementType engagementType = new RegisteredResidentEngagementType();
+        engagementType.getEngagement().add(createEngagementType(registeredResidentIdentification, serviceDomain));
+        engagementType.setRegisteredResidentIdentification(registeredResidentIdentification);
+        return engagementType;
+    }
 
-	
+    private EngagementType createEngagementType(String registeredResidentIdentification, String serviceDomain) {
+        EngagementType engagementType = new EngagementType();
+        engagementType.setBusinessObjectInstanceIdentifier("");
+        engagementType.setCategorization("");
+        engagementType.setCreationTime("");
+        engagementType.setLogicalAddress("");
+        engagementType.setMostRecentContent("");
+        engagementType.setOwner("");
+        engagementType.setRegisteredResidentIdentification(registeredResidentIdentification);
+        engagementType.setServiceDomain(serviceDomain);
+        engagementType.setSourceSystem("");
+        engagementType.setUpdateTime(new Date().toString());
+        return engagementType;
+    }
 
 }
