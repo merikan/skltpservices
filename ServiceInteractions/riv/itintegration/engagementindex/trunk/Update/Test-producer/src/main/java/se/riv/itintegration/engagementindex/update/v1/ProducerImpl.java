@@ -22,19 +22,35 @@ package se.riv.itintegration.engagementindex.update.v1;
 
 import javax.jws.WebService;
 
+import riv.itintegration.engagementindex._1.EngagementTransactionType;
+import riv.itintegration.engagementindex._1.EngagementType;
 import riv.itintegration.engagementindex._1.ResultCodeEnum;
 import se.riv.itintegration.engagementindex.update.v1.rivtabp21.UpdateResponderInterface;
 import se.riv.itintegration.engagementindex.updateresponder.v1.UpdateResponseType;
 import se.riv.itintegration.engagementindex.updateresponder.v1.UpdateType;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 @WebService(serviceName = "UpdateResponderService", endpointInterface = "se.riv.itintegration.engagementindex.update.v1.rivtabp21.UpdateResponderInterface", portName = "UpdateResponderPort", targetNamespace = "urn:riv:itintegration:engagementindex:Update:1:rivtabp21", wsdlLocation = "schemas/interactions/UpdateInteraction/UpdateInteraction_1.0_RIVTABP21.wsdl")
 public class ProducerImpl implements UpdateResponderInterface {
 
 	@Override
-	public UpdateResponseType update(String arg0, UpdateType arg1) {
-		UpdateResponseType responseType = new UpdateResponseType();
+	public UpdateResponseType update(String arg0, UpdateType updateData) {
+        int amountOfUpdates = updateData.getEngagementTransaction().size();
+        HashSet<String> receivedSsns = new HashSet<String>(amountOfUpdates * 2);
+        for (EngagementTransactionType engagementTransactionType : updateData.getEngagementTransaction()) {
+            EngagementType engagementType = engagementTransactionType.getEngagement();
+            receivedSsns.add(engagementType.getRegisteredResidentIdentification());
+        }
+        String allSocialSecurityNumbers = "";
+        for (String socialSecurityNumber : receivedSsns) {
+            allSocialSecurityNumbers = allSocialSecurityNumbers + ", " + socialSecurityNumber;
+        }
+        allSocialSecurityNumbers = allSocialSecurityNumbers.replaceFirst(", ", "");
 
-		responseType.setComment("A comment");
+		UpdateResponseType responseType = new UpdateResponseType();
+		responseType.setComment(allSocialSecurityNumbers);
 		responseType.setResultCode(ResultCodeEnum.OK);
 		return responseType;
 	}
