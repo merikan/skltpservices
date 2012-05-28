@@ -16,37 +16,37 @@
  KIND, either express or implied. See the License for the
  specific language governing permissions and limitations
  under the License.
- -->
+ -->		
 <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:tns='urn:riv:itintegration:engagementindex:GetUpdatesResponder:1' xmlns:core='urn:riv:itintegration:engagementindex:1' targetNamespace='urn:riv:itintegration:engagementindex:GetUpdatesResponder:1' elementFormDefault='qualified' attributeFormDefault='unqualified' version='1.0'>
-    <xs:import schemaLocation='../../core_components/itintegration_engagementindex_1.0.xsd' namespace='urn:riv:itintegration:engagementindex:1' />
-
-    <xs:element name='GetUpdates' type='tns:GetUpdatesType' />
-
-    <xs:element name='GetUpdatesResponse' type='tns:GetUpdatesResponseType' />
-
-    <xs:complexType name="RegisteredResidentEngagementType">
-        <xs:sequence>
-            <xs:element name='registeredResidentIdentification' type='core:RegisteredResidentIdentificationType' />
-            <xs:element name='engagement' type='core:EngagementType' minOccurs='0' maxOccurs='unbounded'/>
-            <xs:any namespace='##other' processContents='lax' minOccurs='0' maxOccurs='unbounded' />
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name='GetUpdatesType'>
-        <xs:sequence>
-            <xs:element name='serviceDomain' type='xs:anyURI' />
-            <xs:element name='timeStamp' type='core:TS' />
-            <xs:element name='registeredResidentLastFetched' type='core:RegisteredResidentIdentificationType' minOccurs='0' maxOccurs='1'/>
-            <xs:any namespace='##other' processContents='lax' minOccurs='0' maxOccurs='1' />
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name='GetUpdatesResponseType'>
-        <xs:sequence>
-            <xs:element name='responseIsComplete' type='xs:boolean' />
-            <xs:element name='registeredResidentEngagement' type='tns:RegisteredResidentEngagementType' minOccurs='0' maxOccurs='unbounded' />
-            <xs:any namespace='##other' processContents='lax' minOccurs='0' maxOccurs='unbounded' />
-        </xs:sequence>
-    </xs:complexType>
-
+  <xs:import schemaLocation='../../core_components/itintegration_engagementindex_1.0.xsd' namespace='urn:riv:itintegration:engagementindex:1' />
+  
+  <xs:element name='GetUpdates' type='tns:GetUpdatesType' />
+  
+  <xs:element name='GetUpdatesResponse' type='tns:GetUpdatesResponseType' />
+  
+  <xs:complexType name="RegisteredResidentEngagementType">
+	  <xs:sequence>
+	  	<xs:element name='registeredResidentIdentification' type='core:RegisteredResidentIdentificationType' />
+        <xs:element name='engagement' type='core:EngagementType' minOccurs='0' maxOccurs='unbounded'/>
+        <xs:any namespace='##other' processContents='lax' minOccurs='0' maxOccurs='unbounded' />
+      </xs:sequence>
+	</xs:complexType>
+  
+  <xs:complexType name='GetUpdatesType'>
+    <xs:sequence>
+      <xs:element name='serviceDomain' type='xs:anyURI' />
+      <xs:element name='timeStamp' type='core:TS' />
+      <xs:element name='registeredResidentLastFetched' type='core:RegisteredResidentIdentificationType' minOccurs='0' maxOccurs='1'/>
+      <xs:any namespace='##other' processContents='lax' minOccurs='0' maxOccurs='1' />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name='GetUpdatesResponseType'>
+  	<xs:sequence>
+  	  <xs:element name='responseIsComplete' type='xs:boolean' />
+      <xs:element name='registeredResidentEngagement' type='tns:RegisteredResidentEngagementType' minOccurs='0' maxOccurs='unbounded' />
+      <xs:any namespace='##other' processContents='lax' minOccurs='0' maxOccurs='unbounded' />
+    </xs:sequence>
+  </xs:complexType>
+  
 </xs:schema>
