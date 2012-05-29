@@ -20,8 +20,6 @@
  */
 package se.riv.itintegration.engagementindex.update.v1;
 
-import javax.jws.WebService;
-
 import riv.itintegration.engagementindex._1.EngagementTransactionType;
 import riv.itintegration.engagementindex._1.EngagementType;
 import riv.itintegration.engagementindex._1.ResultCodeEnum;
@@ -29,8 +27,9 @@ import se.riv.itintegration.engagementindex.update.v1.rivtabp21.UpdateResponderI
 import se.riv.itintegration.engagementindex.updateresponder.v1.UpdateResponseType;
 import se.riv.itintegration.engagementindex.updateresponder.v1.UpdateType;
 
-import java.util.HashMap;
+import javax.jws.WebService;
 import java.util.HashSet;
+import java.util.Random;
 
 @WebService(serviceName = "UpdateResponderService", endpointInterface = "se.riv.itintegration.engagementindex.update.v1.rivtabp21.UpdateResponderInterface", portName = "UpdateResponderPort", targetNamespace = "urn:riv:itintegration:engagementindex:Update:1:rivtabp21", wsdlLocation = "schemas/interactions/UpdateInteraction/UpdateInteraction_1.0_RIVTABP21.wsdl")
 public class ProducerImpl implements UpdateResponderInterface {
@@ -51,7 +50,15 @@ public class ProducerImpl implements UpdateResponderInterface {
 
 		UpdateResponseType responseType = new UpdateResponseType();
 		responseType.setComment(allSocialSecurityNumbers);
-		responseType.setResultCode(ResultCodeEnum.OK);
+        Random random = new Random(System.currentTimeMillis());
+        int randomNumber = random.nextInt(100) + 1;
+        if (randomNumber < 90) {
+		    responseType.setResultCode(ResultCodeEnum.OK);
+        } else if (randomNumber < 95) {
+            responseType.setResultCode(ResultCodeEnum.INFO);
+        } else {
+            responseType.setResultCode(ResultCodeEnum.ERROR);
+        }
 		return responseType;
 	}
 
