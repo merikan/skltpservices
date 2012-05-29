@@ -1,7 +1,7 @@
 title Engagemangsindex - Pullfunktion NTjP utan RTP
 
-EI_Pull->PropertyResolver: get
-PropertyResolver->EI_Pull: Egenskaper från propertyfil
+EI_Pull->Extern konfigurationsfil: read
+Extern konfigurationsfil->EI_Pull: Egenskaper från propertyfil
 
 note over EI_Pull, NTjP
 Hämta logiska adresser som konsument får göra getUpdates på:
