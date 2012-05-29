@@ -61,14 +61,13 @@ public class ProducerImpl implements GetUpdatesResponderInterface {
                 response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, tmpSsn));
             }
         } else if (StringUtils.equals(serviceDomain, "riv:careprocess:request")) {
-            int amountOfRandomPersons = 15;
             Random random = new Random(System.currentTimeMillis());
-            for (int i = 0; i < amountOfRandomPersons; i++) {
+            for (int amountOfRandomPersons = 300; amountOfRandomPersons > 0; amountOfRandomPersons--) {
                 String registeredResidentIdentification = generateRandomSsn(random);
                 response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, registeredResidentIdentification));
             }
         } else {
-            response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "FAILEDFAILEDFAILEDFAILEDFAILEDFAILED"));
+            // Simulate returning empty list
         }
         return response;
     }
