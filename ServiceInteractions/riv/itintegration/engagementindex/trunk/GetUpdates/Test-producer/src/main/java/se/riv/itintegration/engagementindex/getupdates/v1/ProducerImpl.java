@@ -64,7 +64,8 @@ public class ProducerImpl implements GetUpdatesResponderInterface {
             int amountOfRandomPersons = 15;
             Random random = new Random(System.currentTimeMillis());
             for (int i = 0; i < amountOfRandomPersons; i++) {
-                response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, generateRandomSsn(random)));
+                String registeredResidentIdentification = generateRandomSsn(random);
+                response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, registeredResidentIdentification));
             }
         } else {
             response.getRegisteredResidentEngagement().add(createRegisteredResidentEngagementType(serviceDomain, "FAILEDFAILEDFAILEDFAILEDFAILEDFAILED"));
@@ -81,10 +82,10 @@ public class ProducerImpl implements GetUpdatesResponderInterface {
             startDate =  new Date(0L);
         }
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(startDate);
         Date currentDate = new Date();
         Date randomBirthDate;
         do {
+            calendar.setTime(startDate);
             int secondsToAdd = Math.abs(random.nextInt());
             calendar.add(Calendar.SECOND, secondsToAdd);
             int additionalYearsToAdd = Math.abs(random.nextInt(60));
