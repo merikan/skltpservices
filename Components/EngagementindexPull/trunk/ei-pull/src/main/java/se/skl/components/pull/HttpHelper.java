@@ -57,23 +57,23 @@ public class HttpHelper {
 				conduit.setTlsClientParameters(tlsCP);
 
 			} catch (KeyStoreException e) {
-				log.warn("Fatal error occured when setting secuurity settings, make sure they are correct configured in app.properties file!");
-				throw new RuntimeException("Fatal exception occured!", e);
+				log.warn("Fatal error occurred when setting security settings, make sure they are correct configured in app.properties file!");
+				throw new RuntimeException("Fatal exception occurred!", e);
 			} catch (NoSuchAlgorithmException e) {
-				log.warn("Fatal error occured when setting secuurity settings, make sure they are correct configured in app.properties file!");
-				throw new RuntimeException("Fatal exception occured!", e);
+				log.warn("Fatal error occurred when setting security settings, make sure they are correct configured in app.properties file!");
+				throw new RuntimeException("Fatal exception occurred!", e);
 			} catch (CertificateException e) {
-				log.warn("Fatal error occured when setting secuurity settings, make sure they are correct configured in app.properties file!");
-				throw new RuntimeException("Fatal exception occured!", e);
+				log.warn("Fatal error occurred when setting security settings, make sure they are correct configured in app.properties file!");
+				throw new RuntimeException("Fatal exception occurred!", e);
 			} catch (FileNotFoundException e) {
-				log.warn("Fatal error occured when setting secuurity settings, make sure they are correct configured in app.properties file!");
-				throw new RuntimeException("Fatal exception occured!", e);
+				log.warn("Fatal error occurred when setting security settings, make sure they are correct configured in app.properties file!");
+				throw new RuntimeException("Fatal exception occurred!", e);
 			} catch (IOException e) {
-				log.warn("Fatal error occured when setting secuurity settings, make sure they are correct configured in app.properties file!");
-				throw new RuntimeException("Fatal exception occured!", e);
+				log.warn("Fatal error occurred when setting security settings, make sure they are correct configured in app.properties file!");
+				throw new RuntimeException("Fatal exception occurred!", e);
 			} catch (UnrecoverableKeyException e) {
-				log.warn("Fatal error occured when setting secuurity settings, make sure they are correct configured in app.properties file!");
-				throw new RuntimeException("Fatal exception occured!", e);
+				log.warn("Fatal error occurred when setting security settings, make sure they are correct configured in app.properties file!");
+				throw new RuntimeException("Fatal exception occurred!", e);
 			}
 
 		}
