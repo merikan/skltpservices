@@ -104,12 +104,12 @@ public class ProducerImpl implements GetUpdatesResponderInterface {
 
     private RegisteredResidentEngagementType createRegisteredResidentEngagementType(String serviceDomain, String registeredResidentIdentification) {
         RegisteredResidentEngagementType engagementType = new RegisteredResidentEngagementType();
-        engagementType.getEngagement().add(createEngagementType(registeredResidentIdentification, serviceDomain));
+        engagementType.getEngagement().add(createEngagementType(serviceDomain, registeredResidentIdentification));
         engagementType.setRegisteredResidentIdentification(registeredResidentIdentification);
         return engagementType;
     }
 
-    private EngagementType createEngagementType(String registeredResidentIdentification, String serviceDomain) {
+    private EngagementType createEngagementType(String serviceDomain, String registeredResidentIdentification) {
         EngagementType engagementType = new EngagementType();
         engagementType.setBusinessObjectInstanceIdentifier("");
         engagementType.setCategorization("");
