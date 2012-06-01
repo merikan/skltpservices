@@ -89,6 +89,7 @@ public class EngagementIndexPull {
             GetUpdatesResponseType updates = pull(serviceDomain, updatesSinceTimeStamp, lastFetchedRegisteredResidentIdentification, pullAddress);
             done = pushCycleIsComplete(updates);
             if (updates != null) {
+                log.info("Received " + updates.getRegisteredResidentEngagement().size() + " updates from: " + pullAddress + " using service domain: " + serviceDomain + ".");
                 push(pushLogicalAddress, updates);
                 if (!done) {
                     // There are more results to fetch, build list of what we fetched so far, since the producer is stateless.
