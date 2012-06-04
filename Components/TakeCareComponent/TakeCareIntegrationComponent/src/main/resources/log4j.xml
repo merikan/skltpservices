@@ -62,13 +62,13 @@
 	</logger>
 	
 	<logger name="se.skl.takecare.takecareintegrationcomponent">
-		<level value="INFO" />
+		<level value="DEBUG" />
 	</logger>
 
 
 	<!-- Message logging -->
 	<logger name="org.soitoolkit.commons.mule.messageLogger">
-		<level value="INFO" />
+		<level value="DEBUG" />
 	</logger>
 	
 	<root>
