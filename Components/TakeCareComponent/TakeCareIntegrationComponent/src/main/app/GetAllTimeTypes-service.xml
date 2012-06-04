@@ -35,29 +35,26 @@
  
 
 	<flow name="GetAllTimeTypes-service">
-
+	
 		<http:inbound-endpoint
 			address="${GETALLTIMETYPES_INBOUND_URL}"
 			exchange-pattern="request-response"
 			transformer-refs="objToStr logReqIn"
 			responseTransformer-refs="createSoapFaultIfException logRespOut">
 			<cxf:proxy-service 
-				service="sampleService"
-				wsdlLocation="classpath:/schemas/org/soitoolkit/refapps/sd/sample/sampleService.wsdl" 
-				namespace="urn:org.soitoolkit.refapps.sd.sample.wsdl:v1">
+				service="GetAllTimeTypesResponderService"
+				wsdlLocation="classpath:/schemas/interactions/GetAllTimeTypesInteraction/GetAllTimeTypesInteraction_1.1_RIVTABP21.wsdl" 
+				namespace="urn:riv:crm:scheduling:GetAllTimeTypes:1:rivtabp21" payload="envelope">
 			</cxf:proxy-service>
 		</http:inbound-endpoint>
  
-
-
         <custom-transformer doc:name="transform-request" class="se.skl.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesRequestTransformer"/>
+        
         <response>
             <custom-transformer doc:name="transform-response" class="se.skl.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesResponseTransformer"/>
         </response>
  
-
-
-        <cxf:proxy-client />
+        <cxf:proxy-client payload="envelope"/>
         
 		<http:outbound-endpoint 
 			address="${GETALLTIMETYPES_OUTBOUND_URL}" 

@@ -14,25 +14,26 @@ public class GetAllTimeTypesRequestTransformer extends AbstractMessageTransforme
 
 	private static final JaxbUtil jaxbUtil = new JaxbUtil(Sample.class);
 
-    /**
-     * Message aware transformer that ...
-     */
-    @Override
-    public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
+	/**
+	 * Message aware transformer that ...
+	 */
+	@Override
+	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
 
-        // Perform any message aware processing here, otherwise delegate as much as possible to pojoTransform() for easier unit testing
+		// Perform any message aware processing here, otherwise delegate as much
+		// as possible to pojoTransform() for easier unit testing
 
-        return pojoTransform(message.getPayload(), outputEncoding);
-    }
+		return pojoTransform(message.getPayload(), outputEncoding);
+	}
 
 	/**
-     * Simple pojo transformer method that can be tested with plain unit testing...
+	 * Simple pojo transformer method that can be tested with plain unit
+	 * testing...
 	 */
 	protected Object pojoTransform(Object src, String encoding) throws TransformerException {
 
-
 		log.debug("Transforming payload: {}", src);
-		
+
 		return src;
 
 	}
