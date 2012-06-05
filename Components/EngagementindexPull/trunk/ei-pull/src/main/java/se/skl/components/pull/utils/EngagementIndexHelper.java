@@ -1,4 +1,4 @@
-package se.skl.components.pull;
+package se.skl.components.pull.utils;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class EngagementIndexHelper {
 
-    protected final static List<String> stringToList(String commaSeparatedDomains) {
+    public final static List<String> stringToList(String commaSeparatedDomains) {
         if (StringUtils.isBlank(commaSeparatedDomains)) {
             return null;
         }
@@ -26,7 +26,7 @@ public class EngagementIndexHelper {
         return serviceDomainList;
     }
 
-    protected final static String getFormattedOffsetTime(Date startingDate, String timeOffset, String dateFormat) {
+    public final static String getFormattedOffsetTime(Date startingDate, String timeOffset, String dateFormat) {
         int offsetFromNowInSeconds = -NumberUtils.toInt(timeOffset);
         Calendar calendar = Calendar.getInstance();
         calendar.clear();

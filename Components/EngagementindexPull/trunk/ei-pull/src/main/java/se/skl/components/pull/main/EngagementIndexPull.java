@@ -1,4 +1,4 @@
-package se.skl.components.pull;
+package se.skl.components.pull.main;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,10 @@ import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontract.v1.ri
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractresponder.v1.GetLogicalAddresseesByServiceContractResponseType;
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractresponder.v1.GetLogicalAddresseesByServiceContractType;
 import se.riv.itintegration.registry.v1.ServiceContractNamespaceType;
+import se.skl.components.pull.utils.DateHelper;
+import se.skl.components.pull.utils.EngagementIndexHelper;
+import se.skl.components.pull.utils.HttpHelper;
+import se.skl.components.pull.utils.PropertyResolver;
 
 import java.util.ArrayList;
 import java.util.List;
