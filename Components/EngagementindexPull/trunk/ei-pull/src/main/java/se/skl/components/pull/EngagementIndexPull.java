@@ -129,23 +129,16 @@ public class EngagementIndexPull {
         try {
             UpdateResponseType updateResponse = updateClient.update(logicalAddress, requestForUpdate);
             ResultCodeEnum resultCode = updateResponse.getResultCode();
-            if (resultCode != null) { // Switch cases doesn't support null
-                switch (resultCode) {
-                    case OK:
-                        log.info("Received " + resultCode.name() + " when updating to " + logicalAddress + ". Result comment: " + updateResponse.getComment() + ".");
-                    break;
-                    case INFO:
-                        log.warn("Received unexpected result with code " + resultCode.name() + ". Response comment: " + updateResponse.getComment() + "." + updates.getRegisteredResidentEngagement().size() + " posts was however, successfully pushed to " + logicalAddress + ".");
-                    break;
-                    case ERROR:
-                        log.fatal("Result containing " + updates.getRegisteredResidentEngagement().size() + " posts was pushed to "+ logicalAddress + ", however an error response code was in the reply!\nResult code: " + resultCode.name() + ".\nUpdate response comment: " + updateResponse.getComment());
-                    break;
-                    default:
-                        log.warn("Received unexpected result code '" + resultCode.name() + "' after updating " + updates.getRegisteredResidentEngagement().size() + " posts to "+ logicalAddress + ". Update response comment: " + updateResponse.getComment());
-                    break;
-                }
-            } else {
-                log.warn("Received no response (resultCode was null) after updating " + updates.getRegisteredResidentEngagement().size() + " posts to "+ logicalAddress + ". Update response comment: " + updateResponse.getComment());
+            switch (resultCode) {
+                case OK:
+                    log.info("Received " + resultCode.name() + " when updating to " + logicalAddress + ".");
+                break;
+                case INFO:
+                    log.warn("Received unexpected result with code " + resultCode.name() + ". Response comment: " + updateResponse.getComment() + "." + updates.getRegisteredResidentEngagement().size() + " posts was however, successfully pushed to " + logicalAddress + ".");
+                break;
+                case ERROR:
+                    log.fatal("Result containing " + updates.getRegisteredResidentEngagement().size() + " posts was pushed to "+ logicalAddress + ", however an error response code was in the reply!\nResult code: " + resultCode.name() + ".\nUpdate response comment: " + updateResponse.getComment());
+                break;
             }
         } catch (Exception e) {
             log.fatal("Error while trying to update index! " + updates.getRegisteredResidentEngagement().size() + " posts were unable to be pushed to: "  + logicalAddress + ". Reason:\n", e);
