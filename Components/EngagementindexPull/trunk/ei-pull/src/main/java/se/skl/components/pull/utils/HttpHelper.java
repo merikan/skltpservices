@@ -1,4 +1,4 @@
-package se.skl.components.pull;
+package se.skl.components.pull.utils;
 
 import org.apache.cxf.configuration.jsse.TLSClientParameters;
 import org.apache.cxf.endpoint.Client;
@@ -23,7 +23,7 @@ public class HttpHelper {
 
 	private final static Logger log = Logger.getLogger(HttpHelper.class);
 
-	void configHttpConduit(Object service) {
+	public void configHttpConduit(Object service) {
 		final Client clientProxy = ClientProxy.getClient(service);
 		final HTTPConduit conduit = (HTTPConduit) clientProxy.getConduit();
 

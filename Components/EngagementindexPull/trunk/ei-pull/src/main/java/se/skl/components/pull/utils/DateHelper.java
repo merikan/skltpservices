@@ -1,4 +1,4 @@
-package se.skl.components.pull;
+package se.skl.components.pull.utils;
 
 import java.util.Date;
 
