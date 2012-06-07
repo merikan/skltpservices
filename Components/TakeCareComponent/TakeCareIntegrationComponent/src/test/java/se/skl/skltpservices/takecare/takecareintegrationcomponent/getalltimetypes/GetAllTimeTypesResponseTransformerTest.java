@@ -1,4 +1,4 @@
-package se.skl.takecare.takecareintegrationcomponent.getalltimetypes;
+package se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes;
 
 import static org.junit.Assert.assertEquals;
 import static org.soitoolkit.commons.mule.smooks.SmooksUtil.runSmooksTransformer;
@@ -8,6 +8,8 @@ import java.io.IOException;
 import org.junit.Test;
 import org.mule.api.transformer.TransformerException;
 import org.soitoolkit.commons.mule.util.MiscUtil;
+
+import se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesResponseTransformer;
 
 public class GetAllTimeTypesResponseTransformerTest {
 

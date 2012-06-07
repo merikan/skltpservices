@@ -1,10 +1,12 @@
-package se.skl.takecare.takecareintegrationcomponent.getalltimetypes;
+package se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes;
 
 import static org.junit.Assert.assertEquals;
 
 
 import org.junit.Test;
 import org.soitoolkit.commons.mule.util.MiscUtil;
+
+import se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesRequestTransformer;
 
 public class GetAllTimeTypesRequestTransformerTest {
 
