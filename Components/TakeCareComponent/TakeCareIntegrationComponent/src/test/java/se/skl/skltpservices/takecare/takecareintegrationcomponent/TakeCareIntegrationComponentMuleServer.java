@@ -1,4 +1,4 @@
-package se.skl.takecare.takecareintegrationcomponent;
+package se.skl.skltpservices.takecare.takecareintegrationcomponent;
 
  
 import org.soitoolkit.commons.mule.test.StandaloneMuleServer;
