@@ -43,9 +43,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>se.rivta.tools</groupId>
-			<artifactId>ehr-scheduling-schemas</artifactId>
-			<version>1</version>
+			<groupId>se.riv.crm.scheduling</groupId>
+			<artifactId>crm-scheduling-schemas</artifactId>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.soitoolkit.commons.components</groupId>
@@ -69,6 +69,12 @@
 			<groupId>org.soitoolkit.refapps.sd</groupId>
 			<artifactId>soitoolkit-refapps-sample-schemas</artifactId>
 			<version>${soitoolkit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>xmlunit</groupId>
+			<artifactId>xmlunit</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
