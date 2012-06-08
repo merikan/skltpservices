@@ -76,7 +76,7 @@ public class EngagementIndexPullTest {
     private HttpHelper httpHelper;
 
     @InjectMocks
-    private EngagementIndexPull engagementIndexPull = new EngagementIndexPull("test");
+    private EngagementIndexPull engagementIndexPull = new EngagementIndexPull("Mockito producer 1");
 
     @Before
     public void initTests() throws ParseException {
@@ -190,9 +190,7 @@ public class EngagementIndexPullTest {
     @Test
     public void testFetchAmountOfCalls() {
         // Setup
-        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(serviceDomainsPropertyKey), ",") + 1;
-        int amountOfAddresses = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress().size();
-        int expectedAmountOfPushCalls = amountOfServiceDomains * amountOfAddresses;
+        int expectedAmountOfPushCalls = StringUtils.countMatches(PropertyResolver.get(serviceDomainsPropertyKey), ",") + 1;
         ArgumentCaptor<String> producerAddressCaptor = ArgumentCaptor.forClass(String.class);
         // Test
         engagementIndexPull.doFetchUpdates();
@@ -225,9 +223,7 @@ public class EngagementIndexPullTest {
     @Test
     public void testUpdateAmountOfCalls() {
         // Setup
-        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(serviceDomainsPropertyKey), ",") + 1;
-        int amountOfAddresses = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress().size();
-        int expectedAmountOfMethodCalls = amountOfServiceDomains * amountOfAddresses;
+        int expectedAmountOfMethodCalls = StringUtils.countMatches(PropertyResolver.get(serviceDomainsPropertyKey), ",") + 1;
         // Test
         engagementIndexPull.doFetchUpdates();
         // Verify
@@ -250,10 +246,6 @@ public class EngagementIndexPullTest {
         // Verify that all called addresses were expected.
         for (String actualAddress : actualAddresses) {
             assertTrue("The actual called address " + actualAddress + " was not expected!", expectedAddresses.contains(actualAddress));
-        }
-        // Verify that all expected addresses were actually called.
-        for (String expectedAddress : expectedAddresses) {
-            assertTrue("The expected called address " + expectedAddress + " was not called!", actualAddresses.contains(expectedAddress));
         }
     }
 
@@ -280,20 +272,12 @@ public class EngagementIndexPullTest {
                 assertTrue("The actual called address " + actualAddress + " using service domain " + actualServiceDomain + " was not expected!", expectedServiceDomains.contains(actualServiceDomain));
             }
         }
-        // Verify that all expected addresses were actually called.
-        for (String expectedServiceDomain : expectedServiceDomains) {
-            for (String expectedAddress : expectedAddresses) {
-                assertTrue("The expected called address " + expectedAddress + " using service domain " + expectedServiceDomain + " was not called!", actualAddresses.contains(expectedAddress));
-            }
-        }
     }
 
     @Test
     public void testCorrectEngagementIndexAddress() {
         // Setup
-        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(serviceDomainsPropertyKey), ",") + 1;
-        int amountOfAddresses = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress().size();
-        int expectedAmountOfMethodCalls = amountOfServiceDomains * amountOfAddresses;
+        int expectedAmountOfMethodCalls = StringUtils.countMatches(PropertyResolver.get(serviceDomainsPropertyKey), ",") + 1;
         // Test
         engagementIndexPull.doFetchUpdates();
         // Verify
@@ -401,9 +385,7 @@ public class EngagementIndexPullTest {
     @Test
     public void testLoggingOfPushUpdatesError() {
         // Setup
-        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(serviceDomainsPropertyKey), ",") + 1;
-        int amountOfAddresses = getAddressesClient.getLogicalAddresseesByServiceContract(null, null).getLogicalAddress().size();
-        int expectedAmountOfPushCalls = amountOfServiceDomains * amountOfAddresses;
+        int expectedAmountOfPushCalls = StringUtils.countMatches(PropertyResolver.get(serviceDomainsPropertyKey), ",") + 1;
         ArgumentCaptor<LoggingEvent> loggingEventArgumentCaptor = ArgumentCaptor.forClass(LoggingEvent.class);
         String logicalAddressWhichShouldBeLogged = PropertyResolver.get(updateDestinationProperty);
         // Generate error after update.
