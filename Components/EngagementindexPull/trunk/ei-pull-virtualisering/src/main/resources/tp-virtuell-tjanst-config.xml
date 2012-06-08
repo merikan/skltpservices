@@ -20,16 +20,41 @@
 	  	<spring:import resource="classpath:ei-pull-resources-config.xml"/>
 	</spring:beans>
 
+    <!-- Instantiate the pull modules.. -->
+
+    <spring:beans>
+        <spring:bean id="pull-1" class="se.skl.components.pull.main.EngagementIndexPull">
+            <spring:constructor-arg type="java.lang.String" value="Test"/>
+        </spring:bean>
+
+        <spring:bean id="pull-2" class="se.skl.components.pull.main.EngagementIndexPull">
+            <spring:constructor-arg type="java.lang.String" value="Test2"/>
+        </spring:bean>
+    </spring:beans>
+
+    <!-- Schedule these pull modules.. -->
+
 	<model name="EngagementIndex-GetUpdates-trigger-model">
-		<service name="EngagementIndex-GetUpdates-trigger-service">
+		<service name="EngagementIndex-schedule-pull-1">
 			<inbound>
-				<quartz:inbound-endpoint jobName="getUpdatesJob" repeatInterval="10000">
-					<quartz:event-generator-job />
-				</quartz:inbound-endpoint>
-			</inbound>
-			<component>
-				<spring-object bean="engagementIndexPull"/>
+                <quartz:inbound-endpoint jobName="endpoint-pull-1" repeatInterval="10000">
+                    <quartz:event-generator-job />
+                </quartz:inbound-endpoint>
+            </inbound>
+            <component>
+                <spring-object bean="pull-1"/>
 			</component>
+		</service>
+
+        <service name="EngagementIndex-schedule-pull-2">
+			<inbound>
+                <quartz:inbound-endpoint jobName="endpoint-pull-2" repeatInterval="10000">
+                    <quartz:event-generator-job />
+                </quartz:inbound-endpoint>
+            </inbound>
+            <component>
+                <spring-object bean="pull-2"/>
+            </component>
 		</service>
 	</model>
 

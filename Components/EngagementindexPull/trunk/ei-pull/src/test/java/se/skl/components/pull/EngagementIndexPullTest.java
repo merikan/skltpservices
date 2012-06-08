@@ -23,6 +23,11 @@ import se.riv.itintegration.engagementindex.updateresponder.v1.UpdateType;
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontract.v1.rivtabp21.GetLogicalAddresseesByServiceContractResponderInterface;
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractresponder.v1.GetLogicalAddresseesByServiceContractResponseType;
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractresponder.v1.GetLogicalAddresseesByServiceContractType;
+import se.skl.components.pull.main.EngagementIndexPull;
+import se.skl.components.pull.utils.DateHelper;
+import se.skl.components.pull.utils.EngagementIndexHelper;
+import se.skl.components.pull.utils.HttpHelper;
+import se.skl.components.pull.utils.PropertyResolver;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -71,7 +76,7 @@ public class EngagementIndexPullTest {
     private HttpHelper httpHelper;
 
     @InjectMocks
-    private EngagementIndexPull engagementIndexPull = new EngagementIndexPull();
+    private EngagementIndexPull engagementIndexPull = new EngagementIndexPull("test");
 
     @Before
     public void initTests() throws ParseException {

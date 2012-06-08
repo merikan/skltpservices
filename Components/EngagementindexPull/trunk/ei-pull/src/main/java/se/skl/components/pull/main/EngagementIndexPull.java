@@ -2,7 +2,6 @@ package se.skl.components.pull.main;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import riv.itintegration.engagementindex._1.EngagementTransactionType;
 import riv.itintegration.engagementindex._1.EngagementType;
 import riv.itintegration.engagementindex._1.ResultCodeEnum;
@@ -28,7 +27,7 @@ import java.util.List;
 /**
  * Authors: Hans Thunberg, Henrik Rostam
  */
-@Component("engagementIndexPull")
+
 public class EngagementIndexPull {
 
     @Autowired
@@ -44,6 +43,16 @@ public class EngagementIndexPull {
     private HttpHelper httpHelper;
 
     private final static Logger log = Logger.getLogger(EngagementIndexPull.class);
+
+    private String pullLogicalAddress;
+
+    private EngagementIndexPull() {
+
+    }
+
+    public EngagementIndexPull(String pullLogicalAddress) {
+        this.pullLogicalAddress = pullLogicalAddress;
+    }
 
     public void doFetchUpdates() {
         log.info("Pull/Push-sequence started.");
@@ -61,39 +70,37 @@ public class EngagementIndexPull {
         final String updatesSinceTimeStamp = EngagementIndexHelper.getFormattedOffsetTime(DateHelper.now(), timeOffset, timestampFormat);
         final List<String> serviceDomainList = EngagementIndexHelper.stringToList(commaSeparatedDomains);
         final GetLogicalAddresseesByServiceContractType parameters = generateAddressParameters(pushServiceContractNamespace, belongsToHsaId);
-        List<String> addressesToContact = new ArrayList<String>();
+        List<String> possiblePullAddresses = new ArrayList<String>();
         try {
             GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(addressServiceAddress, parameters);
-            addressesToContact = addressResponse.getLogicalAddress();
+            possiblePullAddresses = addressResponse.getLogicalAddress();
         } catch (Exception e) {
             log.fatal("Could not acquire addresses from " + addressServiceAddress + " which should be contacted for pulling data. Reason:\n", e);
         }
-        pushAndPull(addressesToContact, pushLogicalAddress, updatesSinceTimeStamp, serviceDomainList);
+        pushAndPull(possiblePullAddresses, pullLogicalAddress, pushLogicalAddress, updatesSinceTimeStamp, serviceDomainList);
         log.info("Pull/Push-sequence ended.");
     }
 
-	private void pushAndPull(List<String> addressesToContact, String pushLogicalAddress, String updatesSinceTimeStamp, List<String> serviceDomainList) {
-        if (!addressesToContact.isEmpty()) {
-            for (String pullAddress : addressesToContact) {
-                for (String serviceDomain : serviceDomainList) {
-                    doPushAndPull(serviceDomain, pullAddress, pushLogicalAddress, updatesSinceTimeStamp);
-                }
+	private void pushAndPull(List<String> possiblePullAddresses, String pullLogicalAddress, String pushLogicalAddress, String updatesSinceTimeStamp, List<String> serviceDomainList) {
+        if (possiblePullAddresses.contains(pullLogicalAddress)) {
+            for (String serviceDomain : serviceDomainList) {
+                doPushAndPull(pullLogicalAddress, serviceDomain, updatesSinceTimeStamp, pushLogicalAddress);
             }
         } else {
-            log.error("The address list used to fetch updates is either null or empty. No fetching of updates could be done at this time.");
+            log.error("The address list of allowed logical addresses does not contain the requested logical address '" + pullLogicalAddress + "'. No fetching of updates could be done at this time.");
         }
 	}
 
-    private void doPushAndPull(String serviceDomain, String pullAddress, String pushLogicalAddress, String updatesSinceTimeStamp) {
+    private void doPushAndPull(String pullLogicalAddress, String serviceDomain, String updatesSinceTimeStamp, String pushLogicalAddress) {
         String lastFetchedRegisteredResidentIdentification = "";
         int amountOfFetchedResults = 0;
         // Continue while there is more data to fetch
         boolean done;
         do {
-            GetUpdatesResponseType updates = pull(serviceDomain, updatesSinceTimeStamp, lastFetchedRegisteredResidentIdentification, pullAddress);
+            GetUpdatesResponseType updates = pull(pullLogicalAddress, serviceDomain, updatesSinceTimeStamp, lastFetchedRegisteredResidentIdentification);
             done = pushCycleIsComplete(updates);
             if (updates != null) {
-                log.info("Received " + updates.getRegisteredResidentEngagement().size() + " updates from: " + pullAddress + " using service domain: " + serviceDomain + ".");
+                log.info("Received " + updates.getRegisteredResidentEngagement().size() + " updates from: " + pullLogicalAddress + " using service domain: " + serviceDomain + ".");
                 push(pushLogicalAddress, updates);
                 if (!done) {
                     // There are more results to fetch, build list of what we fetched so far, since the producer is stateless.
@@ -104,7 +111,7 @@ public class EngagementIndexPull {
                     amountOfFetchedResults += listSize;
                 }
             } else {
-                log.error("Received null when pulling data since: " + updatesSinceTimeStamp + ", from address: " + pullAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + amountOfFetchedResults + " partial results from this address.");
+                log.error("Received null when pulling data since: " + updatesSinceTimeStamp + ", from address: " + pullLogicalAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + amountOfFetchedResults + " partial results from this address.");
             }
         } while (!done);
     }
@@ -115,15 +122,15 @@ public class EngagementIndexPull {
 
 
 
-	private GetUpdatesResponseType pull(String serviceDomain, String updatesSinceTimeStamp, String lastFetchedRegisteredResidentIdentification, String pullAddress) {
+	private GetUpdatesResponseType pull(String pullLogicalAddress, String serviceDomain, String updatesSinceTimeStamp, String lastFetchedRegisteredResidentIdentification) {
 		GetUpdatesType updateRequest = new GetUpdatesType();
 		updateRequest.setServiceDomain(serviceDomain);
 		updateRequest.setTimeStamp(updatesSinceTimeStamp);
         updateRequest.setRegisteredResidentLastFetched(lastFetchedRegisteredResidentIdentification);
         try {
-		    return getUpdatesClient.getUpdates(pullAddress, updateRequest);
+		    return getUpdatesClient.getUpdates(pullLogicalAddress, updateRequest);
         } catch (Exception e) {
-            log.fatal("Could not aquire updates from " + pullAddress + ", using service domain: " + updateRequest.getServiceDomain() + ". Reason:\n", e);
+            log.fatal("Could not aquire updates from " + pullLogicalAddress + ", using service domain: " + updateRequest.getServiceDomain() + ". Reason:\n", e);
         }
         return null;
 	}
