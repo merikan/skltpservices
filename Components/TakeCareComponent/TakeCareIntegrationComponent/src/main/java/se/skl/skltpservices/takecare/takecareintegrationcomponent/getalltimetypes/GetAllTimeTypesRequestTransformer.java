@@ -39,7 +39,6 @@ public class GetAllTimeTypesRequestTransformer extends AbstractMessageTransforme
 	 */
 	protected Object pojoTransform(Object src, String encoding) throws TransformerException {
 
-		System.out.println("Kallekula" + src);
 		log.debug("Transforming request payload: {}", src);
 
 		// Perform any message aware processing here, otherwise delegate as much
