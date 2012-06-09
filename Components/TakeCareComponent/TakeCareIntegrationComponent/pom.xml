@@ -13,7 +13,7 @@
 		<version>0.5.0</version>
 	</parent>
 
-	<groupId>se.skl.takecare</groupId>
+	<groupId>se.skl.skltpservices.takecare</groupId>
 	<artifactId>TakeCareIntegrationComponent</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>mule</packaging>
@@ -43,9 +43,14 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>se.skl.skltpservices.takecare</groupId>
+			<artifactId>TakeCare-schemas</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>se.riv.crm.scheduling</groupId>
-			<artifactId>crm-scheduling-schemas</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<artifactId>CrmScheduling-Schemas</artifactId>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.soitoolkit.commons.components</groupId>

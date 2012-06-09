@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareIntegrationComponentMuleServer.getAddress;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesTestProducer.TEST_HEALTHCAREFACILITY_INVALID_ID;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesTestProducer.TEST_HEALTHCAREFACILITY_OK;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesTestProducer.TEST_ID_FAULT_TIMEOUT;
+import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetTimeTypesTestProducer.TEST_HEALTHCAREFACILITY_INVALID_ID;
+import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetTimeTypesTestProducer.TEST_HEALTHCAREFACILITY_OK;
+import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetTimeTypesTestProducer.TEST_ID_FAULT_TIMEOUT;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
@@ -18,7 +18,7 @@ import org.soitoolkit.commons.mule.test.ActiveMqJmsTestUtil;
 import org.soitoolkit.commons.mule.test.junit4.AbstractTestCase;
 import org.soitoolkit.refapps.sd.sample.wsdl.v1.Fault;
 
-import se.riv.crm.scheduling_1.GetAllTimeTypesResponseType;
+import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesResponseType;
 
 public class GetAllTimeTypesIntegrationTest extends AbstractTestCase {
 

@@ -8,12 +8,12 @@ import java.net.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.refapps.sd.sample.wsdl.v1.Fault;
-import org.w3c.addressing_1_0.AttributedURIType;
+import org.w3.wsaddressing10.AttributedURIType;
 
-import se.riv.crm.scheduling_1.GetAllTimeTypesResponderInterface;
-import se.riv.crm.scheduling_1.GetAllTimeTypesResponderService;
-import se.riv.crm.scheduling_1.GetAllTimeTypesResponseType;
-import se.riv.crm.scheduling_1.GetAllTimeTypesType;
+import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesResponderInterface;
+import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesResponderService;
+import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesResponseType;
+import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesType;
 
 public class GetAllTimeTypesTestConsumer {
 

@@ -19,7 +19,7 @@
 	<simple-service 
 		name="GetAllTimeTypes-teststub-service"
         address="${GETALLTIMETYPES_TESTSTUB_INBOUND_URL}" 
-        component-class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesTestProducer"
+        component-class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetTimeTypesTestProducer"
         type="jax-ws" />
 
  

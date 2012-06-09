@@ -32,10 +32,6 @@
 
 	<!-- TODO: Add service specific definitions here -->
 
-	<mule-xml:xslt-transformer name="getAllTimeTypesRequestTransformer" xsl-file="Request/MapRivToProfDocHisMessage_GetAllTimeTypes_req.xsl"/>
-	<mule-xml:xslt-transformer name="getTimeTypesResponseTransformer" xsl-file="Response/MapProfdocHISMessageGetTimeTypesToMVKInternalIF.xsl"/>
- 
-
 	<flow name="GetAllTimeTypes-service">
 	
 		<http:inbound-endpoint
@@ -46,17 +42,17 @@
 			<cxf:proxy-service 
 				service="GetAllTimeTypesResponderService"
 				wsdlLocation="classpath:/schemas/interactions/GetAllTimeTypesInteraction/GetAllTimeTypesInteraction_1.0_rivtabp20.wsdl" 
-				namespace="urn:riv:crm:scheduling:GetAllTimeTypes:1:rivtabp20" payload="envelope">
+				namespace="urn:riv:crm:scheduling:GetAllTimeTypes:1:rivtabp20">
 			</cxf:proxy-service>
 		</http:inbound-endpoint>
- 
-        <custom-transformer doc:name="transform-request" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesRequestTransformer"/>
-        
-        <response>
-            <custom-transformer doc:name="transform-response" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesResponseTransformer"/>
-        </response>
- 
-        <cxf:proxy-client payload="envelope"/>
+			
+		<custom-transformer name="transform-request" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesRequestTransformer"/>
+    
+    	<response>
+    		<custom-transformer name="transform-response" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesResponseTransformer"/>
+    	</response>
+    
+        <cxf:proxy-client/>
         
 		<http:outbound-endpoint 
 			address="${GETALLTIMETYPES_OUTBOUND_URL}" 
