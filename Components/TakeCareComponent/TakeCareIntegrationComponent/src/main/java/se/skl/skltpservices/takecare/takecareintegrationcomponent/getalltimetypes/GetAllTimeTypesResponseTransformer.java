@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
 import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesResponseType;
-import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesType;
 import se.riv.crm.scheduling.getalltimetypes.v1.ObjectFactory;
 import se.riv.crm.scheduling.v1.TimeTypeType;
 import se.skl.skltpservices.takecare.booking.GetTimeTypesResponse;
@@ -50,7 +49,7 @@ public class GetAllTimeTypesResponseTransformer extends AbstractMessageTransform
 		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
 		TimeTypes incoming_timeTypes = message.getTimeTypes();
 
-		JAXBElement<GetAllTimeTypesResponseType> outgoing_res = new ObjectFactory().createGetAllTimeTypesResponse(new GetAllTimeTypesResponseType());
+		JAXBElement<GetAllTimeTypesResponseType> outgoing_res = createGetAllTimeTypesResponse();
 		for (TimeType incoming_timeType : incoming_timeTypes.getTimeType()) {
 			TimeTypeType outgoing_timeType = new TimeTypeType();
 			outgoing_timeType.setTimeTypeId(String.valueOf(incoming_timeType.getTimeTypeId()));
@@ -66,6 +65,10 @@ public class GetAllTimeTypesResponseTransformer extends AbstractMessageTransform
 
 		return payloadOut;
 
+	}
+
+	private JAXBElement<GetAllTimeTypesResponseType> createGetAllTimeTypesResponse() {
+		return new ObjectFactory().createGetAllTimeTypesResponse(new GetAllTimeTypesResponseType());
 	}
 
 	private String createFault(String errorMessage) {
