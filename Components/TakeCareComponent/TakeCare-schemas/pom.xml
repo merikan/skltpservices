@@ -88,9 +88,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 									<extraargs>
 										<extraarg>-validate</extraarg>
 										<extraarg>-p</extraarg>
-										<extraarg>urn:ProfdocHISMessage:GetTimeTypes:Response=se.skl.skltpservices.takecare.booking.gettimetypesrequest</extraarg>
+										<extraarg>urn:ProfdocHISMessage:GetTimeTypes:Request=se.skl.skltpservices.takecare.booking.gettimetypesrequest</extraarg>
 										<extraarg>-p</extraarg>
-										<extraarg>urn:ProfdocHISMessage:GetTimeTypes:Request=se.skl.skltpservices.takecare.booking.gettimetypesresponse</extraarg>
+										<extraarg>urn:ProfdocHISMessage:GetTimeTypes:Response=se.skl.skltpservices.takecare.booking.gettimetypesresponse</extraarg>
 									</extraargs>
 								</wsdlOption>
 							</wsdlOptions>
