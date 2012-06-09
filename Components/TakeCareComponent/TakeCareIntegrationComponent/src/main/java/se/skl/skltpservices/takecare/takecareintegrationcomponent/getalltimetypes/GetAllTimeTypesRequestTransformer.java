@@ -75,7 +75,7 @@ public class GetAllTimeTypesRequestTransformer extends AbstractMessageTransforme
 	}
 
 	private BigInteger now() {
-		// TODO Auto-generated method stub
+		// TODO Hur skall tiden representeras för TakeCare, kolla specen!
 		return new BigInteger("20120607110000");
 	}
 }
