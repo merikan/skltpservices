@@ -8,8 +8,9 @@
 
 	<wsdl:types>
 		<xsd:schema>
-			<xsd:import schemaLocation="getTimeTypesResponse.xsd" namespace="urn:ProfdocHISMessage:GetTimeTypes:Response"/>
-			<xsd:import schemaLocation="getTimeTypesRequest.xsd" namespace="urn:ProfdocHISMessage:GetTimeTypes:Request"/>
+			<xsd:import schemaLocation="./gettimetypes/getTimeTypesResponse.xsd" namespace="urn:ProfdocHISMessage:GetTimeTypes:Response"/>
+			<xsd:import schemaLocation="./gettimetypes/getTimeTypesRequest.xsd" namespace="urn:ProfdocHISMessage:GetTimeTypes:Request"/>
+			<xsd:import schemaLocation="./error/error.xsd" namespace="urn:ProfdocHISMessage:Error"/>
 		</xsd:schema>
 	</wsdl:types>
 
