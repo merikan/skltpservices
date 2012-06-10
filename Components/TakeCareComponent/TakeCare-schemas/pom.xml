@@ -91,6 +91,8 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 										<extraarg>urn:ProfdocHISMessage:GetTimeTypes:Request=se.skl.skltpservices.takecare.booking.gettimetypesrequest</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>urn:ProfdocHISMessage:GetTimeTypes:Response=se.skl.skltpservices.takecare.booking.gettimetypesresponse</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:ProfdocHISMessage:Error=se.skl.skltpservices.takecare.booking.error</extraarg>
 									</extraargs>
 								</wsdlOption>
 							</wsdlOptions>
