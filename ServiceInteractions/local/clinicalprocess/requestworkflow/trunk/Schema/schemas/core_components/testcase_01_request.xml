@@ -1,106 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<remiss xmlns:gcda="AlschulerAssociates::GreenCDA" xmlns:gcdan="AlschulerAssociates::GreenCDA::Narrative" xmlns="urn:riv:clinicalprocess:requestworkflow:request"
-xsi:schemaLocation="urn:riv:clinicalprocess:requestworkflow:request remiss.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<eremissid root="1.2.752.97.x.x.x.x" extension="abc123"/>
-	<versionsid root="1.2.752.97.x.x.x.x" extension="1"/>
-	<versionstidpunkt value="201203011636"/>
-	<versionsorsak code="NR" displayName="Ny remiss" codeSystem="1.2.752.97.3.2.8.5"/>
-	<remissdatum value="20120312"/>
-	<onskemalomremissmottagare>Vederbörande husläkare</onskemalomremissmottagare>
-	<eremisstyp code="4" displayName="allmänremiss" codeSystem="1.2.752.129.2.2.2.24"/>
-	<signatur>Elin Ek</signatur>
-	<signerad>true</signerad>
-	<signeringstid value="201203121122"/>
+<request xmlns:gcda="AlschulerAssociates::GreenCDA" xmlns:gcdan="AlschulerAssociates::GreenCDA::Narrative" xmlns="urn:riv:clinicalprocess:requestworkflow:request"
+         xsi:schemaLocation="urn:riv:clinicalprocess:requestworkflow:request remiss.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+             
+    <requestId root="1.2.752.129.2.1.2.1" extension="abc123"/>
+    <typeOfRequest code="4" codeSystem="1.2.752.129.2.2.2.24"/>
+    <versionTimeStamp value="201203121636"/>
+    <versionNumber>1</versionNumber>
+    <reasonForVersion>
+        <typeOfReason code="NR" codeSystem="1.2.752.97.3.2.8.5"/>
+    </reasonForVersion>
 
-	<!-- Patient -->
-	<patient>
-		<personid root="1.2.752.97.3.1.2" extension="197907179191"/>
-		<efternamn>Testsson</efternamn>
-		<tilltalsnamn>Vårdtest</tilltalsnamn>
-		<fodelsetidpunkt value="19790917"/>
-		<kon code="1" displayName="man" codeSystem="1.2.752.129.2.2.1.1"/>
-		<!-- TODO -->
-		<kontaktuppgift>
-			<mobiltelefonnummer>
-				<telekomadress>+46706123123</telekomadress>
-				<typavtelekomadress code="3" displayName="mobiltelefon" codeSystem="1.2.752.129.2.2.1.30"/>
-			</mobiltelefonnummer>
-			<folkbokforingsadress>
-				<utdelningsadress1>Storgatan 14</utdelningsadress1>
-				<postnummer>88864</postnummer>
-				<postort>Umeå</postort>
-				<typavadress code="1" displayName="folkbokföringsadress" codeSystem="1.2.752.129.2.2.1.20"/>
-			</folkbokforingsadress>
-			<tillfalligadress>
-				<careof>Mikkonen</careof>
-				<utdelningsadress1>Astrakangatan 14</utdelningsadress1>
-				<postnummer>16565</postnummer>
-				<postort>Hässelby</postort>
-				<typavadress code="1" displayName="tillfalligadress" codeSystem="1.2.752.129.2.2.1.20"/>
-			</tillfalligadress>
-		</kontaktuppgift>
-		<sprakligkommunikation>
-			<kommentarTolkbehov>Behöver finsk tolk.</kommentarTolkbehov>
-		</sprakligkommunikation>
-		<uppmarksamhetsInformation>
-			<uppmarksamhetsText>Har hepatit C.</uppmarksamhetsText>
-		</uppmarksamhetsInformation>
-	</patient>
-	<remisstatus>
-		<eremissstatus code="SK" displayName="Skickad" codeSystem="1.2.752.97.3.2.8.3"/>
-	</remisstatus>
-	<involverarroller>
-		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
-		<remissrolltyp code="RT" displayName="Remittent" codeSystem="1.2.752.97.3.2.8.4"/>
-		<personalid root="1.2.752.97.3.1.1" extension="HSAid"/>
-		<personalnamn>Elin Ek</personalnamn>
-		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/> <!-- Måste finnas i TK -->
-		<vardgivarid root="1.2.752.97.3.1.1" extension="HSAid"/>
-		<lansid root="1.2.752.97.3.1.1" extension="HSAid"/>
-		<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
-		<typavhalsoochsjukvardspersonal code="LK" displayName="Läkare" />
-	</involverarroller>
-	<involverarroller>
-		<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
-		<remissrolltyp code="RM" displayName="Remissmottagare" codeSystem="1.2.752.97.3.2.8.4"/>
-		<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
-		<vardgivarid root="1.2.752.97.3.1.1" extension="HSAid"/>
-		<lansid root="1.2.752.97.3.1.1" extension="HSAid"/>
-		<enhetnamn>Hässelby vårdcentral</enhetnamn>
-	</involverarroller>
-	<eremissmoment>
-		<eremissmomentid root="1.2.752.97.x.x.x.x" extension="123"/>
-		<eremissmomenttyp code="SE" displayName="Skicka e-remiss" codeSystem="1.2.752.97.3.2.8.1"/>
-		<momentstatus code="9" displayName="Avklarad" codeSystem="1.2.752.129.2.2.2.27"/>
-		<momenttidpunkt value="201203121636"/>
-		<remissspecifikroll>
-			<!--Hur sa vi här? Skulle man kunna ange ngn annan än remittenten som avsändande av remissen, typ en sekreterare?)-->
-			<rollinstansid root="1.2.752.97.x.x.x.x" extension="123"/>
-			<remissrolltyp code="RT" displayName="Remittent" codeSystem="1.2.752.97.3.2.8.4"/>
-			<personalid root="1.2.752.97.3.1.1" extension="HSAid"/>
-			<personalnamn>Elin Ek</personalnamn>
-			<enhetid root="1.2.752.97.3.1.1" extension="HSAid"/>
-			<vardgivarid root="1.2.752.97.3.1.1" extension="HSAid"/>
-			<lansid root="1.2.752.97.3.1.1" extension="HSAid"/>
-			<enhetnamn>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</enhetnamn>
-			<typavhalsoochsjukvardspersonal code="LK" displayName="Läkare" />
-		</remissspecifikroll>
-		<!--Måste vara samma status värde i denna remissStatus som i remissStatus ovan!-->
-		<remissstatus>
-			<eremissstatus code="SK" displayName="Skickad" codeSystem="1.2.752.97.3.2.8.3"/>
-		</remissstatus>
-	</eremissmoment>
-	<fragestallningar>
-		<fragestallningsid root="1.2.752.97.x.x.x.x" extension="123"/>
-		<fragestallningstext>Diabetes?</fragestallningstext>
-		<kliniskinformation>
-			<kliniskinformationsid root="1.2.752.97.x.x.x.x" extension="123"/>
-			<beskrivning>33-årig blandmissbrukande man som inkom 11/3 pga centrala bröstsmärtor. Patienten har vårdats inneliggande under ett dygn och hjärtinfarkt har uteslutits. Smärtorna bedöms som muskuloskelettala. Under vårdtiden har förhöjda blodsockervärden uppmätts vid flera tillfällen som högst 10,8. Patienten har ingen känd diabetes. Tacksam för uppföljning av patientens förhöjda blodsockervärden.
+    <patient>
+        <personId root="1.2.752.97.3.1.2" extension="197907179191"/>
+        <address>
+            <careOf>Mikkonen</careOf>
+            <streetName1>Astrakangatan 14</streetName1>
+            <postalCode>16565</postalCode>
+            <postalCity>Hässelby</postalCity>
+        </address>
+        <telecom>
+            <typeOfTelecom code="MC" codeSystem="1.2.752.129.2.2.1.30"/>
+            <number>+46706123123</number>
+        </telecom>
+        <!-- Efternamn/mellannamn/tilltalsnamn/förnamn -->
+        <name>Testsson/Vårdtest//</name>
+        <gender code="1" codeSystem="1.2.752.129.2.2.1.1"/>
+        <dateOfBirth value="19790917"/>
+    </patient>
 
-				Vänliga hälsningar
-				Elin EK
-				AT-läkare
-			</beskrivning>
-		</kliniskinformation>
-	</fragestallningar>
-</remiss>
+    <author>
+        <!-- Maps to clinicalDocument/author/time -->                               
+        <dateOfRequest value="20120312"/>
+        <!-- No mapping for clinicalDocument/author/assignedAuthor -->                               
+        <staff>
+           <!-- Maps to clinicalDocument/author/assignedAuthor/id --> 
+            <id root="1.2.752.129.2.1.4.1" extension="HSAid Remittent"/>
+            <!-- Maps to clinicalDocument/author/assignedAuthor/assignedPerson/name -->                               
+            <name>Elin Ek</name>
+        </staff>
+        <!-- Maps to clinicalDocument/author/assignedAuthor/code -->                               
+        <typeOfStaff code="LK" codeSystem="1.2.752.97.3.2.8.8"/>
+        <staffOrganisation>
+            <!-- Maps to clinicalDocument/author/assignedAuthor/representedOrganization/id -->                                     
+            <careUnitId root="1.2.752.129.2.1.4.1" extension="HSA-id for RT organization"/>
+            <!-- Maps to clinicalDocument/author/assignedAuthor/representedOrganization/name -->                                     
+            <careUnitName>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</careUnitName>
+        </staffOrganisation>
+        
+        <legalAuthenticator>
+            <timeOfSigning value="201203121122"/>
+            <signature>
+                <id root="1.2.752.129.2.1.4.1" extension="HSA-id for signer" />
+                <name>Elin Ek</name>
+            </signature>
+        </legalAuthenticator>
+    </author>
+
+    <recipient>
+        <organisation>
+            <!-- Maps to clinicalDocument/informationRecipient/receivedOrganization/id -->                                     
+            <careUnitId root="1.2.752.129.2.1.4.1" extension="HSA-id for recipient organization"/>
+            <!-- Maps to clinicalDocument/informationRecipient/receivedOrganization/name -->                                     
+            <careUnitName>Hasselby vårdcentral</careUnitName>
+        </organisation>
+    </recipient>
+
+    <additionalInformation>
+        <desiredDateForPerformance start="20120501" end="20120601" />
+        <desiredRequestRecipient>Vederbörande husläkare</desiredRequestRecipient>                
+        <interpreterRequirement>Behöver finsk tolk.</interpreterRequirement>
+    </additionalInformation>
+
+    <awarenessInformation>
+        <text>Har hepatit C.</text>
+	<!-- <clinicalInformation /> -->
+    </awarenessInformation>
+
+    <questionFormulation>
+        <id root="1.2.752.129.2.1.2.1" extension="1"/>
+        <text>Diabetes?</text>
+        <!-- <desiredAction/> -->
+        <clinicalInformation>
+            <id root="1.2.752.129.2.1.2.1" extension="1"/>
+            <description>33-årig blandmissbrukande man som inkom 11/3 pga centrala bröstsmärtor. Patienten har vårdats inneliggande under ett dygn och hjärtinfarkt har uteslutits. Smärtorna bedöms som muskuloskelettala. Under vårdtiden har förhöjda blodsockervärden uppmätts vid flera tillfällen som högst 10,8. Patienten har ingen känd diabetes. Tacksam för uppföljning av patientens förhöjda blodsockervärden.
+
+                Vänliga hälsningar
+                Elin EK
+                AT-läkare
+            </description>
+        </clinicalInformation>
+    </questionFormulation>
+</request>

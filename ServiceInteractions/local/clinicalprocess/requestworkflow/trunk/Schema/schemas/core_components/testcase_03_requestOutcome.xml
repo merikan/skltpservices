@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SLL eRemiss testcase 3 -->
+<requestOutcome xmlns:gcda="AlschulerAssociates::GreenCDA" xmlns:gcdan="AlschulerAssociates::GreenCDA::Narrative" xmlns="urn:riv:clinicalprocess:requestworkflow:request"
+                xsi:schemaLocation="urn:riv:clinicalprocess:requestworkflow:request remiss.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <requestId root="1.2.752.129.2.1.2.1" extension="testfall3"/>
+    <requestOutcomeId root="1.2.752.129.2.1.2.1" extension="testfall1"/>
+    <typeOfRequestOutcome code="SS" codeSystem="1.2.752.97.3.2.8.6"/>
+    <versionTimeStamp value="201203011636"/>
+    <versionNumber>1</versionNumber>
+            
+    <!-- RB -->
+    <author>
+        <dateOfRequest value="20120315"/>
+        <staff>
+            <id root="1.2.752.129.2.1.4.1" extension="HSA-id for RB"/>
+            <name>Lennart Ljung</name>
+        </staff>
+        <typeOfStaff code="LK" codeSystem="1.2.752.97.3.2.8.8" />
+        <staffOrganisation>
+            <careUnitId root="1.2.752.129.2.1.4.1" extension="HSAid"/>
+            <careUnitName>Råcksta-Vällingby Närvårdsmottagning</careUnitName>
+        </staffOrganisation>
+
+        <legalAuthenticator>
+            <timeOfSigning value="201203151233" />
+            <signature>
+                <id root="1.2.752.129.2.1.4.1" extension="HSA-id for signer"/>
+                <name>Lennart Ljung</name>
+            </signature>
+        </legalAuthenticator>
+    </author>
+    
+    <!-- SM -->
+    <recipient>
+        <staff>
+            <id root="1.2.752.129.2.1.4.1" extension="HSA-id for SM"/>
+            <name>Elin Ek</name>
+        </staff>
+        <typeOfStaff code="LK" displayName="Läkare" codeSystem="1.2.752.97.3.2.8.8"/>
+        <organisation>
+            <careUnitId root="1.2.752.129.2.1.4.1" extension="HSAid"/>
+            <careUnitName>Avd 33, Medicinkliniken, Capio S:t Görans sjukhus</careUnitName>
+        </organisation>
+    </recipient>
+
+    <outcome>
+        <text>
+            Tack för remissen! Patienten har genomgått glukosbelastning som visade att patienten har diabetes. Fortsatt omhändertagande av patientens diabetes kommer att ske via kontroller på vårdcentralen.
+
+            Vänliga hälsningar
+            Lennart Ljung
+            Vik. distriktsläkare
+        </text>
+    </outcome>
+</requestOutcome>

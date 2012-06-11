@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SLL eRemiss testcase 6, RB -->
+<requestOutcome xmlns:gcda="AlschulerAssociates::GreenCDA" xmlns:gcdan="AlschulerAssociates::GreenCDA::Narrative" xmlns="urn:riv:clinicalprocess:requestworkflow:request"
+                xsi:schemaLocation="urn:riv:clinicalprocess:requestworkflow:request remiss.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+             
+    <requestId root="1.2.752.129.2.1.2.1" extension="testfall8"/>
+    <requestOutcomeId root="1.2.752.129.2.1.2.1" extension="testfall7"/>
+    <typeOfRequestOutcome code="RB" codeSystem="1.2.752.97.3.2.8.6"/>
+    <versionTimeStamp value="201203011636"/>
+    <versionNumber>1</versionNumber>
+    
+    <author>
+        <dateOfRequest value="20120318"/>
+        <staff>
+            <id root="1.2.752.129.2.1.4.1" extension="HSAid"/>
+            <name>Lena Andersson</name>
+        </staff>
+        <typeOfStaff code="LK" codeSystem="1.2.752.97.3.2.8.8" />
+        <staffOrganisation>
+            <careUnitId root="1.2.752.129.2.1.4.1" extension="HSAid"/>
+            <careUnitName>Capio S:t Görans sjukhus, Ortopedmottagningen</careUnitName>
+        </staffOrganisation>
+            
+        <legalAuthenticator>
+            <timeOfSigning value="201203151233"/>
+            <signature>
+                <id root="1.2.752.129.2.1.4.1" extension="HSA-id for signer"/>
+                <name>Lena Andersson</name>
+            </signature>
+        </legalAuthenticator>
+    </author>
+    
+    <recipient>
+        <staff>
+            <id root="1.2.752.129.2.1.4.1" extension="HSAid"/>
+            <name>Jonas Dahl</name>
+        </staff>
+        <organisation>
+            <careUnitId root="1.2.752.129.2.1.4.1" extension="HSAid"/>
+            <careUnitName>Hässelby vårdcentral</careUnitName>
+        </organisation>
+    </recipient>
+    
+    <outcome>
+        <text>Vi har mottagit remissen.
+            Pat är satt på väntelista och beräknas att kallas inom 10 veckor.
+        </text>
+    </outcome>
+</requestOutcome>
