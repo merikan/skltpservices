@@ -3,14 +3,14 @@
 
   <groupId>se.skl.tp</groupId>
   <artifactId>DeleteQuestions-service</artifactId>
-  <version>1.6-SNAPSHOT</version>
+  <version>1.6</version>
   <packaging>pom</packaging>
   <name>DeleteQuestions-service</name>
 
  	<parent>
   		<groupId>se.skl.tp</groupId>
   		<artifactId>ifv</artifactId>
-  		<version>1.6-SNAPSHOT</version>
+  		<version>1.6</version>
    </parent>
 
   <!-- Modules to be created for each service -->
