@@ -37,23 +37,23 @@
 		<http:inbound-endpoint
 			address="${GETALLTIMETYPES_INBOUND_URL}"
 			exchange-pattern="request-response"
-			transformer-refs="objToStr logReqIn"
-			responseTransformer-refs="createSoapFaultIfException logRespOut">
+			transformer-refs="logReqIn"
+			responseTransformer-refs="createSoapFaultIfException logRespOut" >
 			<cxf:proxy-service 
 				service="GetAllTimeTypesResponderService"
 				wsdlLocation="classpath:/schemas/interactions/GetAllTimeTypesInteraction/GetAllTimeTypesInteraction_1.0_rivtabp20.wsdl" 
 				namespace="urn:riv:crm:scheduling:GetAllTimeTypes:1:rivtabp20">
 			</cxf:proxy-service>
 		</http:inbound-endpoint>
-			
+						
 		<custom-transformer name="transform-request" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesRequestTransformer"/>
-    
+     
     	<response>
     		<custom-transformer name="transform-response" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesResponseTransformer"/>
     	</response>
     
         <cxf:proxy-client/>
-        
+           
 		<http:outbound-endpoint 
 			address="${GETALLTIMETYPES_OUTBOUND_URL}" 
 			exchange-pattern="request-response"
