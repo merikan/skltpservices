@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SLL eRemiss testcase 5 -->
+<requestOutcome xmlns:gcda="AlschulerAssociates::GreenCDA" xmlns:gcdan="AlschulerAssociates::GreenCDA::Narrative" xmlns="urn:riv:clinicalprocess:requestworkflow:request"
+                xsi:schemaLocation="urn:riv:clinicalprocess:requestworkflow:request remiss.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">     
+    <requestId root="1.2.752.129.2.1.2.1" extension="testfall5"/>
+    <requestOutcomeId root="1.2.752.129.2.1.2.1" extension="testfall4"/>
+    <typeOfRequestOutcome code="SS" codeSystem="1.2.752.97.3.2.8.6"/>
+    <versionTimeStamp value="201203011636"/>
+    <versionNumber>1</versionNumber>
+   
+    <!-- <requestrolltyp code="RB" displayName="Remissbesvarare" codeSystem="1.2.752.97.3.2.8.4"/> -->
+    <author>
+        <dateOfRequest value="20120418"/>
+        <staff>
+            <id root="1.2.752.129.2.1.4.1" extension="HSA-id for RB"/>
+            <name>Gustav Olebratt</name>
+        </staff>
+        <typeOfStaff code="LK" codeSystem="1.2.752.97.3.2.8.8" />
+        <staffOrganisation>
+            <careUnitId root="1.2.752.97.3.1.1" extension="HSAid"/>
+            <careUnitName>Capio S:t Görans sjukhus, Ortopedmottagningen</careUnitName>
+        </staffOrganisation>
+        <legalAuthenticator>
+            <timeOfSigning value="201204181233"/>
+            <signature>
+                <id root="1.2.752.129.2.1.4.1" extension="HSA-id for signer"/>
+                <name>Gustav Olebratt</name>
+            </signature>
+        </legalAuthenticator>
+    </author>
+    
+    <!-- <requestrolltyp code="SM" displayName="Svarsmottagare" codeSystem="1.2.752.97.3.2.8.4"/> -->
+    <recipient>
+        <staff>
+            <id root="1.2.752.129.2.1.4.1" extension="HSA-id for SM"/>
+            <name>Jonas Dahl</name>
+        </staff>
+        <typeOfStaff code="LK" codeSystem="1.2.752.97.3.2.8.8" />
+        <organisation>
+            <careUnitId root="1.2.752.129.2.1.4.1" extension="HSAid"/>
+            <careUnitName>Hässelby vårdcentral</careUnitName>
+        </organisation>
+    </recipient>
+
+    <outcome>
+        <text>Tack för remissen! 
+            Pat har idag 18/4 genomgått artroskopi som visade medial meniskruptur samt främre korsbandsskada. En partiell meniskresektion gjordes vid ingreppet. Avseende korsbandsskadan är patienten ordinerad stabilitetsträning via sjukgymnast. Inget planerat återbesök.
+
+            Hälsningar
+            Gustav Olebratt
+            Specialistläkare
+        </text>
+        <clinicalInformation>
+            <id root="1.2.752.116.1.1.1.1.3" extension="S83.2M" />
+        </clinicalInformation>
+        <clinicalInformation>
+            <id root="1.2.752.116.1.1.1.1.3" extension="S83.5R" />
+        </clinicalInformation>
+        <accomplishedAction>
+            <id root="1.2.752.116.1.3.2.1.4" extension="NGA11"/>  
+            <description>Artroskopi höger knä</description>
+        </accomplishedAction>
+        <accomplishedAction>
+            <id root="1.2.752.116.1.3.2.1.4" extension="NGD11"/> 
+            <description>Partiell resektion av menisk</description>
+        </accomplishedAction>    
+    </outcome>
+</requestOutcome>

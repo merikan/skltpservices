@@ -6,7 +6,336 @@
     xmlns:gcda="AlschulerAssociates::GreenCDA" > 
     
     <xs:import schemaLocation='green_ccd.xsd' namespace='AlschulerAssociates::GreenCDA' />
+
+    <xs:simpleType name="codeForRequestType_values">
+        <xs:restriction base="xs:int">
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>röntgenremisss</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>labbremiss</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation>konferensremiss</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="4">
+                <xs:annotation>
+                    <xs:documentation>allmänremiss</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="5">
+                <xs:annotation>
+                    <xs:documentation>screeningremiss</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="6">
+                <xs:annotation>
+                    <xs:documentation>”egentagna prover”</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="7">
+                <xs:annotation>
+                    <xs:documentation>egen framställan</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="8">
+                <xs:annotation>
+                    <xs:documentation>begäran om övertagande av vårdansvar</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>      
+    </xs:simpleType>
     
+    <xs:complexType name="codeForRequestType">
+        <xs:annotation>
+            <xs:documentation>Denna värdemängd innehåller information om vilken typ av remiss som avses.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:restriction base="gcda:cd">
+                <xs:attribute name="code" type="codeForRequestType_values"/>
+                <xs:attribute name="codeSystem" fixed="1.2.752.129.2.2.2.24"/>			
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:simpleType name="codeForProfession_values">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AP">
+                <xs:annotation>
+                    <xs:documentation>Apotekare</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AT">
+                <xs:annotation>
+                    <xs:documentation>Arbetsterapeut</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AU">
+                <xs:annotation>
+                    <xs:documentation>Audionom</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BM">
+                <xs:annotation>
+                    <xs:documentation>Barnmorska</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BA">
+                <xs:annotation>
+                    <xs:documentation>Biomedicinsk analytiker</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DT">
+                <xs:annotation>
+                    <xs:documentation>Dietist</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KP">
+                <xs:annotation>
+                    <xs:documentation>Kiropraktor</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="LG">
+                <xs:annotation>
+                    <xs:documentation>Logoped</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="LK">
+                <xs:annotation>
+                    <xs:documentation>Läkare</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NA">
+                <xs:annotation>
+                    <xs:documentation>Naprapat</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="OP">
+                <xs:annotation>
+                    <xs:documentation>Optiker</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="OT">
+                <xs:annotation>
+                    <xs:documentation>Ortopedingenjör</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PS">
+                <xs:annotation>
+                    <xs:documentation>Psykolog</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PT">
+                <xs:annotation>
+                    <xs:documentation>Psykoterapeut</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RC">
+                <xs:annotation>
+                    <xs:documentation>Receptarie</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RS">
+                <xs:annotation>
+                    <xs:documentation>Röntgensjuksköterska</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SG">
+                <xs:annotation>
+                    <xs:documentation>Sjukgymnast</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SF">
+                <xs:annotation>
+                    <xs:documentation>Sjukhusfysiker</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SJ">
+                <xs:annotation>
+                    <xs:documentation>Sjuksköterska</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TH">
+                <xs:annotation>
+                    <xs:documentation>Tandhygienist</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TL">
+                <xs:annotation>
+                    <xs:documentation>Tandläkare</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>       
+        </xs:restriction>      
+    </xs:simpleType>
+    
+    <xs:complexType name="codeForProfession">
+        <xs:annotation>
+            <xs:documentation>Anger yrkesgrupper som är aktuella i remisshanteringen.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:restriction base="gcda:cd">
+                <xs:attribute name="code" type="codeForProfession_values"/>
+                <xs:attribute name="codeSystem" fixed="1.2.752.97.3.2.8.8"/>			
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:simpleType name="codeVersionReason_values">
+        <xs:annotation>
+            <xs:documentation>Anger varför en ny version skapats</xs:documentation>
+            <xs:documentation>OID:1.2.752.97.3.2.8.5</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NR">
+                <xs:annotation>
+                    <xs:documentation>Ny remiss</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AR">
+                <xs:annotation>
+                    <xs:documentation>Ändrad remiss</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="VR">
+                <xs:annotation>
+                    <xs:documentation>Vidareskickad remiss</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="AB">
+                <xs:annotation>
+                    <xs:documentation>Ändrat betalningsansvar</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>      
+    </xs:simpleType>
+    
+    <xs:complexType name="codeVersionReason">
+        <xs:annotation>
+            <xs:documentation>Anger varför en ny version skapats.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:restriction base="gcda:cd">
+                <xs:attribute name="code" type="codeVersionReason_values"/>
+                <xs:attribute name="codeSystem" fixed="1.2.752.97.3.2.8.5"/>			
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:simpleType name="codeRequestOutcomeType_values">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SR">
+                <xs:annotation>
+                    <xs:documentation>Svar på remissfråga</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SS">
+                <xs:annotation>
+                    <xs:documentation>Slutsvar på remissfråga</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="KB">
+                <xs:annotation>
+                    <xs:documentation>Kompletteringsbegäran</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RB">
+                <xs:annotation>
+                    <xs:documentation>Remissbekräftelse</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BV">
+                <xs:annotation>
+                    <xs:documentation>Besked om vidareskickning</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>      
+    </xs:simpleType>
+    
+    <xs:complexType name="codeRequestOutcomeType">
+        <xs:annotation>
+            <xs:documentation>Anger typen av svar.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:restriction base="gcda:cd">
+                <xs:attribute name="code" type="codeRequestOutcomeType_values"/>
+                <xs:attribute name="codeSystem" fixed="1.2.752.97.3.2.8.6"/>			
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:simpleType name="codeForGenderType_values">
+        <xs:restriction base="xs:int">
+            <xs:enumeration value="0">
+                <xs:annotation>
+                    <xs:documentation>okänt</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>man</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>kvinna</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="9">
+                <xs:annotation>
+                    <xs:documentation>ej tillämpligt</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>      
+    </xs:simpleType>
+    
+    <xs:complexType name="codeForGenderType">
+        <xs:annotation>
+            <xs:documentation>Anger adminstrativt kön.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:restriction base="gcda:cd">
+                <xs:attribute name="code" type="codeForGenderType_values"/>
+                <xs:attribute name="codeSystem" fixed="1.2.752.129.2.2.1.1"/>			
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:simpleType name="codeForTelecomType_values">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="H">
+                <xs:annotation>
+                    <xs:documentation>hemtelefon</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MC">
+                <xs:annotation>
+                    <xs:documentation>mobiltelefon</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>      
+    </xs:simpleType>
+    
+    <xs:complexType name="codeForTelecomType">
+        <xs:annotation>
+            <xs:documentation>Anger olika typer av telekomadresser</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:restriction base="gcda:cd">
+                <xs:attribute name="code" type="codeForTelecomType_values"/>
+                <xs:attribute name="codeSystem" fixed="1.2.752.129.2.2.1.30"/>			
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+    
+
+
+
     <xs:simpleType name="kv_e-remissmomenttyp_codes">
         <xs:restriction base="xs:string">
             <xs:enumeration value="SE">
@@ -64,62 +393,6 @@
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:simpleType name="kv_framstallantyp_NeR_codes">
-        <xs:restriction base="xs:int">
-            <xs:enumeration value="1">
-                <xs:annotation>
-                    <xs:documentation>röntgenremisss</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="2">
-                <xs:annotation>
-                    <xs:documentation>labbremiss</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="3">
-                <xs:annotation>
-                    <xs:documentation>konferensremiss</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="4">
-                <xs:annotation>
-                    <xs:documentation>allmänremiss</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="5">
-                <xs:annotation>
-                    <xs:documentation>screeningremiss</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="6">
-                <xs:annotation>
-                    <xs:documentation>”egentagna prover”</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="7">
-                <xs:annotation>
-                    <xs:documentation>egen framställan</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="8">
-                <xs:annotation>
-                    <xs:documentation>begäran om övertagande av vårdansvar</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-        </xs:restriction>      
-    </xs:simpleType>
-
-    <xs:complexType name="kv_framstallantyp_NeR">
-        <xs:annotation>
-            <xs:documentation>Denna värdemängd innehåller information om vilken typ av remiss som avses.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:restriction base="gcda:cd">
-                <xs:attribute name="code" type="kv_framstallantyp_NeR_codes"/>
-                <xs:attribute name="codeSystem" fixed="1.2.752.129.2.2.2.24"/>			
-            </xs:restriction>
-        </xs:complexContent>
-    </xs:complexType>
     
     <xs:simpleType name="kv_eRemissStatus_codes">
         <xs:restriction base="xs:string">
@@ -297,127 +570,6 @@
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:simpleType name="kv_yrkeskoder_codes">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="AP">
-                <xs:annotation>
-                    <xs:documentation>Apotekare</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="AT">
-                <xs:annotation>
-                    <xs:documentation>Arbetsterapeut</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="AU">
-                <xs:annotation>
-                    <xs:documentation>Audionom</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="BM">
-                <xs:annotation>
-                    <xs:documentation>Barnmorska</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="BA">
-                <xs:annotation>
-                    <xs:documentation>Biomedicinsk analytiker</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="DT">
-                <xs:annotation>
-                    <xs:documentation>Dietist</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="KP">
-                <xs:annotation>
-                    <xs:documentation>Kiropraktor</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="LG">
-                <xs:annotation>
-                    <xs:documentation>Logoped</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="LK">
-                <xs:annotation>
-                    <xs:documentation>Läkare</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="NA">
-                <xs:annotation>
-                    <xs:documentation>Naprapat</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="OP">
-                <xs:annotation>
-                    <xs:documentation>Optiker</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="OT">
-                <xs:annotation>
-                    <xs:documentation>Ortopedingenjör</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="PS">
-                <xs:annotation>
-                    <xs:documentation>Psykolog</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="PT">
-                <xs:annotation>
-                    <xs:documentation>Psykoterapeut</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="RC">
-                <xs:annotation>
-                    <xs:documentation>Receptarie</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="RS">
-                <xs:annotation>
-                    <xs:documentation>Röntgensjuksköterska</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="SG">
-                <xs:annotation>
-                    <xs:documentation>Sjukgymnast</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="SF">
-                <xs:annotation>
-                    <xs:documentation>Sjukhusfysiker</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="SJ">
-                <xs:annotation>
-                    <xs:documentation>Sjuksköterska</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="TH">
-                <xs:annotation>
-                    <xs:documentation>Tandhygienist</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="TL">
-                <xs:annotation>
-                    <xs:documentation>Tandläkare</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>       
-        </xs:restriction>      
-    </xs:simpleType>
-
-    <xs:complexType name="kv_yrkeskoder">
-        <xs:annotation>
-            <xs:documentation>Anger yrkesgrupper som är aktuella i remisshanteringen.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:restriction base="gcda:cd">
-                <xs:attribute name="code" type="kv_yrkeskoder_codes"/>
-                <xs:attribute name="codeSystem" fixed="1.2.752.97.3.2.8.8"/>			
-            </xs:restriction>
-        </xs:complexContent>
-    </xs:complexType>
     
     <xs:simpleType name="kv_sprakkommunikationsmetod_codes">
         <xs:restriction base="xs:string">
@@ -466,46 +618,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:simpleType name="kv_e_remiss_versionsorsak_codes">
-        <xs:annotation>
-            <xs:documentation>Anger varför en ny version skickas av redan skickad remiss.</xs:documentation>
-            <xs:documentation>OID:1.2.752.97.3.2.8.5</xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="NR">
-                <xs:annotation>
-                    <xs:documentation>Ny remiss</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="AR">
-                <xs:annotation>
-                    <xs:documentation>Ändrad remiss</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="VR">
-                <xs:annotation>
-                    <xs:documentation>Vidareskickad remiss</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="AB">
-                <xs:annotation>
-                    <xs:documentation>Ändrat betalningsansvar</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-        </xs:restriction>      
-    </xs:simpleType>
-
-    <xs:complexType name="kv_e_remiss_versionsorsak">
-        <xs:annotation>
-            <xs:documentation>Anger varför en ny version skickas av redan skickad remiss.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:restriction base="gcda:cd">
-                <xs:attribute name="code" type="kv_e_remiss_versionsorsak_codes"/>
-                <xs:attribute name="codeSystem" fixed="1.2.752.97.3.2.8.5"/>			
-            </xs:restriction>
-        </xs:complexContent>
-    </xs:complexType>
     
     <xs:simpleType name="kv_svarsmeddelandetyp_codes">
         <xs:restriction base="xs:string">
@@ -621,42 +733,6 @@
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:simpleType name="kv_kon_codes">
-        <xs:restriction base="xs:int">
-            <xs:enumeration value="0">
-                <xs:annotation>
-                    <xs:documentation>okänt</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="1">
-                <xs:annotation>
-                    <xs:documentation>man</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="2">
-                <xs:annotation>
-                    <xs:documentation>kvinna</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="9">
-                <xs:annotation>
-                    <xs:documentation>ej tillämpligt</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-        </xs:restriction>      
-    </xs:simpleType>
-
-    <xs:complexType name="kv_kon">
-        <xs:annotation>
-            <xs:documentation>Anger adminstrativt kön.</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:restriction base="gcda:cd">
-                <xs:attribute name="code" type="kv_kon_codes"/>
-                <xs:attribute name="codeSystem" fixed="1.2.752.129.2.2.1.1"/>			
-            </xs:restriction>
-        </xs:complexContent>
-    </xs:complexType>
     
     <xs:simpleType name="kv_narstaenderelation_codes">
         <xs:restriction base="xs:int">
@@ -740,7 +816,7 @@
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:simpleType name="kv_adresstyp_codes">
+    <xs:simpleType name="codeForAdressType_values">
         <xs:restriction base="xs:int">
             <xs:enumeration value="1">
                 <xs:annotation>
@@ -765,53 +841,17 @@
         </xs:restriction>      
     </xs:simpleType>
 
-    <xs:complexType name="kv_adresstyp">
+    <xs:complexType name="codeForAdressType">
         <xs:annotation>
             <xs:documentation>Anger olika typer av adresser</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:restriction base="gcda:cd">
-                <xs:attribute name="code" type="kv_adresstyp_codes"/>
+                <xs:attribute name="code" type="codeForAdressType_values"/>
                 <xs:attribute name="codeSystem" fixed="1.2.752.129.2.2.1.20"/>			
             </xs:restriction>
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:simpleType name="kv_telekomtyp_codes">
-        <xs:restriction base="xs:int">
-            <xs:enumeration value="1">
-                <xs:annotation>
-                    <xs:documentation>telefon</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="2">
-                <xs:annotation>
-                    <xs:documentation>fax</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="3">
-                <xs:annotation>
-                    <xs:documentation>mobiltelefon</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="4">
-                <xs:annotation>
-                    <xs:documentation>personsökare</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-        </xs:restriction>      
-    </xs:simpleType>
-    
-    <xs:complexType name="kv_telekomtyp">
-        <xs:annotation>
-            <xs:documentation>Anger olika typer av telekomadresser</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:restriction base="gcda:cd">
-                <xs:attribute name="code" type="kv_telekomtyp_codes"/>
-                <xs:attribute name="codeSystem" fixed="1.2.752.129.2.2.1.30"/>			
-            </xs:restriction>
-        </xs:complexContent>
-    </xs:complexType>
     
 </xs:schema>
