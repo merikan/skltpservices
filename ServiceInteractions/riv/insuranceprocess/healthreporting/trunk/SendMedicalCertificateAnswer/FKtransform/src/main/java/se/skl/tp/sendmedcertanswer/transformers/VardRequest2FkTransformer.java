@@ -65,6 +65,7 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
     
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
 		ResourceBundle rb = ResourceBundle.getBundle("fkdataSendMCAnswer");	    
+		final String FK_ID = "2021005521";
 		XMLStreamReader streamPayload = null;
 
 		try {			
@@ -76,7 +77,7 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
             validateRequest(inRequest);
             
 			// Get receiver to adress from Mule property
-			String receiverId = (String)message.getProperty("receiverid");			
+//			String receiverId = (String)message.getProperty("receiverid");			
 
 			// Create new JAXB object for the outgoing data
 			TaEmotSvarType outRequest = new TaEmotSvarType();
@@ -230,7 +231,7 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 			outTaEmotSvar.setSvar(svar );
 						    		
     		AttributedURIType logicalAddressHeader = new AttributedURIType();
-    		logicalAddressHeader.setValue(receiverId);
+    		logicalAddressHeader.setValue(FK_ID);
 
     		Object[] payloadOut = new Object[] {logicalAddressHeader, outRequest};
             

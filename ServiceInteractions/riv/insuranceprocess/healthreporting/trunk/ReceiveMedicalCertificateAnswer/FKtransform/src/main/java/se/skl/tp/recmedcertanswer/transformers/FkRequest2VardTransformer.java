@@ -217,7 +217,7 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
     		// Set new receiverid based on caregiver and careunit id
     		String newReceiverId = inOrganisationMottagare.getId().getValue() + "#" + inEnhetMottagare.getId().getValue();
     		logicalAddressHeader.setValue(newReceiverId);
-    		message.setProperty("receiverid", newReceiverId);			
+//    		message.setProperty("receiverid", newReceiverId);			
 
     		Object[] payloadOut = new Object[] {logicalAddressHeader, outRequest};
             
