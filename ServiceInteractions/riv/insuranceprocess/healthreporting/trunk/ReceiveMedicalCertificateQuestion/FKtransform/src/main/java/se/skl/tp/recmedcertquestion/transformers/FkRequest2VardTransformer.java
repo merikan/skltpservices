@@ -234,7 +234,11 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
     				Falt inTempFalt = inKompletteringar.get(i);
     				KompletteringType outKomplettering = new KompletteringType();
     				outKomplettering.setFalt(inTempFalt.getNamn());
-    				outKomplettering.setText(inTempFalt.getKommentar());
+    				if (inTempFalt.getKommentar() != null && inTempFalt.getKommentar().length() > 0) {
+        				outKomplettering.setText(inTempFalt.getKommentar());
+    				} else {
+        				outKomplettering.setText("<Ingen text satt>");
+    				}    				
     				outMeddelande.getFkKomplettering().add(outKomplettering);
     			}
     		}
@@ -248,7 +252,7 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
     		// Set new receiverid based on caregiver and careunit id
     		String newReceiverId = inOrganisationMottagare.getId().getValue() + "#" + inEnhetMottagare.getId().getValue();
     		logicalAddressHeader.setValue(newReceiverId);
-    		message.setProperty("receiverid", newReceiverId);			
+//    		message.setProperty("receiverid", newReceiverId);			
 
     		Object[] payloadOut = new Object[] {logicalAddressHeader, outRequest};
             

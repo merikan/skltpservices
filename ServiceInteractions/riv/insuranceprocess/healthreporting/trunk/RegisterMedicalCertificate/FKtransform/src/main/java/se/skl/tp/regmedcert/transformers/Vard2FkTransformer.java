@@ -100,7 +100,8 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
     }
     
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
-		ResourceBundle rb = ResourceBundle.getBundle("fkdataRegMedCert");	    
+		ResourceBundle rb = ResourceBundle.getBundle("fkdataRegMedCert");
+		final String FK_ID = "2021005521";
 		XMLStreamReader streamPayload = null;
 		
 		try {			
@@ -110,7 +111,7 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
             RegisterMedicalCertificateType inRequest = (RegisterMedicalCertificateType)((JAXBElement)unmarshaller.unmarshal(streamPayload)).getValue();
 
 			// Get receiver to adress from Mule property
-			String receiverId = (String)message.getProperty("receiverid");
+//			String receiverId = (String)message.getProperty("receiverid");
 			
 			// Validate incoming request
 			validateRequest(inRequest);
@@ -546,7 +547,7 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer
             fkSklTELA.setLakarintyg(lakarintyg);
 
     		AttributedURIType logicalAddressHeader = new AttributedURIType();
-    		logicalAddressHeader.setValue(receiverId);
+    		logicalAddressHeader.setValue(FK_ID);
 
 	        Object[] payloadOut = new Object[] {logicalAddressHeader, outRequest};
             
