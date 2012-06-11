@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<request xmlns:gcda="AlschulerAssociates::GreenCDA" xmlns:gcdan="AlschulerAssociates::GreenCDA::Narrative"
+    xmlns="urn:riv:clinicalprocess:requestworkflow:request"
+         xsi:schemaLocation="urn:riv:clinicalprocess:requestworkflow:request remiss.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <!-- Maps to clinicalDocument/id -->
+    <requestId root="1.2.752.129.2.1.2.1" extension="HSA-id#local-id"/>
+    <!-- Maps to clinicalDocument/code -->
+    <typeOfRequest code="4" codeSystem="1.2.752.129.2.2.2.24" />
+    <!-- No map for clinicalDocument/title -->
+    <!-- Maps to clinicalDocument/effectiveTime -->
+    <versionTimeStamp value="201204221704"/>
+    <!-- No map for clinicalDocument/confidentialityCode -->
+    <!-- clinicalDocument/setId already mapped to requestId -->
+    <!-- Maps to clinicalDocument/versionNumber -->
+    <versionNumber>1</versionNumber>
+    
+    <reasonForVersion>
+        <typeOfReason code="NR" codeSystem="1.2.752.97.3.2.8.5"/>
+        <text>Versionsorsakstext</text>
+    </reasonForVersion>
+    
+    <!-- Patient -->
+    <patient>
+        <!-- Maps to clinicalDocument/recordTarget/patientRole/id -->
+        <personId root="1.2.752.129.2.1.3.1" extension="191212121212"/>
+        <!-- Maps to clinicalDocument/recordTarget/patientRole/addr -->
+        <address>
+            <!-- Maps to clinicalDocument/recordTarget/patientRole/addr/careOf -->
+            <careOf />
+            <!-- RSV standard -->
+            <streetName1>Tolvangatan 12</streetName1>
+            <streetName2></streetName2>
+            <streetName3></streetName3>
+            <postalCode>12121</postalCode>
+            <postalCity>Tolvankommunen</postalCity>
+        </address>
+        
+        <!-- Maps to clinicalDocument/recordTarget/patientRole/telecom -->        
+        <telecom>
+            <typeOfTelecom code="MC" codeSystem="1.2.752.129.2.2.1.30"/>
+            <number>0707121212</number>
+        </telecom>
+        <telecom>
+            <typeOfTelecom code="H" codeSystem="1.2.752.129.2.2.1.30"/>
+            <number>0812121212</number>
+        </telecom>
+
+        <!-- Maps to clinicalDocument/recordTarget/patientRole/patient -->                               
+        <name>Tolvansson//Tolvan/</name>
+        <gender code="1" codeSystem="1.2.752.129.2.2.1.1"/>
+        <dateOfBirth value="19500101"/>
+    </patient>
+
+    <author>
+        <!-- Author block -->
+        <!-- Maps to clinicalDocument/author -->                                 
+        <!-- Maps to clinicalDocument/author/time -->                               
+        <dateOfRequest value="20120312"/>
+        <!-- No mapping for clinicalDocument/author/assignedAuthor -->                               
+        <!-- Maps to clinicalDocument/author/assignedAuthor/id -->   
+        <staff>
+            <id root="1.2.752.129.2.1.4.1" extension="HSA-id for RT"/>
+            <!-- Maps to clinicalDocument/author/assignedAuthor/assignedPerson/name -->                               
+            <name>Jonas Dahl</name>
+        </staff>
+        
+        <!-- Maps to clinicalDocument/author/assignedAuthor/code -->                               
+        <typeOfStaff code="LK" codeSystem="1.2.752.97.3.2.8.8" />
+    
+        <!-- Custodian block -->
+        <!-- Maps to clinicalDocument/custodian --> 
+        <staffOrganisation>
+            <!-- Maps to clinicalDocument/custodian/assignedCustodian/representedCustodianOrganization/id -->                                     
+            <careUnitId root="1.2.752.129.2.1.4.1" extension="HSA-id for RT organization"/>
+            <!-- Maps to clinicalDocument/custodian/assignedCustodian/representedCustodianOrganization/name -->                                     
+            <careUnitName>Hasselby vardcentral</careUnitName>
+        </staffOrganisation>
+
+        <staffOriginOrganisation>
+            <!-- Maps to clinicalDocument/author/assignedAuthor/representedOrganization/id -->                                     
+            <careUnitId root="1.2.752.129.2.1.4.1" extension="HSA-id for RT organization"/>
+            <!-- Maps to clinicalDocument/author/assignedAuthor/representedOrganization/name -->                                     
+            <careUnitName>Hasselby vardcentral</careUnitName>
+        </staffOriginOrganisation>
+
+        <!-- LegalAuthenticator block -->
+        <!-- Maps to clinicalDocument/legalAuthenticator -->                                  
+        <legalAuthenticator>    
+            <timeOfSigning value="201204221901"/>        
+            <!-- assignedEntity/id already mapped in author/id -->          
+            <signature>
+                <id root="1.2.752.129.2.1.4.1" extension="HSAid" />
+                <name>Gustav Alvfeldt</name>
+            </signature>
+        </legalAuthenticator>        
+    </author>
+    
+    <!-- Maps to clinicalDocument/informationRecipient -->                                  
+    <recipient>
+        <staff>
+            <!-- Maps to clinicalDocument/informationRecipient/intendedRecipient/id -->                                     
+            <id root="1.2.752.129.2.1.4.1" extension="HSA-id for RM"/>
+            <!-- Maps to clinicalDocument/informationRecipient/intendedRecipient/name -->                                     
+            <name>Gunnar Ehn</name>
+        </staff>
+        <organisation>
+            <!-- Maps to clinicalDocument/informationRecipient/receivedOrganization/id -->  
+            <careUnitId root="1.2.752.129.2.1.4.1" extension="HSAid for remissmottagande organisation"/>
+            <!-- Maps to clinicalDocument/informationRecipient/receivedOrganization/name -->                                     
+            <careUnitName>Nagon avdelning pa ST:Gorans sjukhus?!</careUnitName>
+        </organisation>
+    </recipient>
+    
+    <participant>
+        <staff>            
+            <id root="1.2.752.129.2.1.4.1" extension="HSA-id for RM"/>
+            <!-- Maps to clinicalDocument/participant/associatedEntity/name -->                                     
+            <name>Khaled Daham</name>
+        </staff>
+        <organisation>
+            <!-- Maps to clinicalDocument/participant/scopingOrganization/id -->          
+            <careUnitId root="1.2.752.129.2.1.4.1" extension="HSAid f?r remissSvarsmottagande organisation"/>
+            <!-- Maps to clinicalDocument/participant/scopingOrganization/name -->                                     
+            <careUnitName>Nagon avdelning pa ST:Gorans sjukhus?!</careUnitName>
+        </organisation>
+    </participant>
+    
+    <additionalInformation>   
+        <desiredDateForPerformance start="20120501" end="20120601" />
+        <desiredRequestRecipient>Onskad remissmottagare: enhet, person, yrkesroll</desiredRequestRecipient>                
+        <administrativeInformation>Kompletterande administrativ information</administrativeInformation>
+        <interpreterRequirement>Tolkbehovsbeskrivning</interpreterRequirement>
+    </additionalInformation>
+  
+    <awarenessInformation>
+        <text>Uppmärksamhetsinformation text</text>
+        <clinicalInformation>
+            <!-- a unique id for each clinical information -->
+            <id root="1.2.752.129.2.1.2.1" extension="1"/>
+            <description>33-årig blandmissbrukande man som inkom 11/3 pga centrala bröstsmärtor. Patienten har vårdats inneliggande under ett dygn och hjärtinfarkt har uteslutits. Smärtorna bedöms som muskuloskelettala. Under vårdtiden har förhöjda blodsockervärden uppmätts vid flera tillfällen som högst 10,8. Patienten har ingen känd diabetes. Tacksam för uppföljning av patientens förhöjda blodsockervärden.
+                
+                Vänliga hälsningar
+                Elin EK
+                AT-läkare
+            </description>
+        </clinicalInformation>
+    </awarenessInformation>
+    
+    <questionFormulation>
+        <!-- a unique id for each question formulation, only one is allowed in the pilot for SLL -->
+        <id root="1.2.752.129.2.1.2.1" extension="1"/>
+        <text>Diabetes?</text>
+<!--        <desiredAction></desiredAction> -->
+        <clinicalInformation>
+            <!-- a unique id for each clinical information -->
+            <id root="1.2.752.129.2.1.2.1" extension="1"/>
+            <description>33-årig blandmissbrukande man som inkom 11/3 pga centrala bröstsmärtor. Patienten har vårdats inneliggande under ett dygn och hjärtinfarkt har uteslutits. Smärtorna bedöms som muskuloskelettala. Under vårdtiden har förhöjda blodsockervärden uppmätts vid flera tillfällen som högst 10,8. Patienten har ingen känd diabetes. Tacksam för uppföljning av patientens förhöjda blodsockervärden.
+
+                Vänliga hälsningar
+                Elin EK
+                AT-läkare
+            </description>
+        </clinicalInformation>
+    </questionFormulation>
+</request>
