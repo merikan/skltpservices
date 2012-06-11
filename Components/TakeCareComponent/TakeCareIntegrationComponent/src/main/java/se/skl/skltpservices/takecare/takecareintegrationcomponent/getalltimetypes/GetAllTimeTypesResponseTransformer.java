@@ -2,6 +2,7 @@ package se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetyp
 
 import javax.xml.bind.JAXBElement;
 
+import org.apache.commons.lang.StringUtils;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
@@ -20,43 +21,33 @@ import se.skl.skltpservices.takecare.booking.gettimetypesresponse.ProfdocHISMess
 public class GetAllTimeTypesResponseTransformer extends AbstractMessageTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(GetAllTimeTypesResponseTransformer.class);
+
 	private static final JaxbUtil jaxbUtil_incoming = new JaxbUtil(GetTimeTypesResponse.class);
 	private static final JaxbUtil jaxbUtil_message = new JaxbUtil(ProfdocHISMessage.class);
+	private static final JaxbUtil jaxbUtil_error = new JaxbUtil(
+			se.skl.skltpservices.takecare.booking.error.ProfdocHISMessage.class);
 	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetAllTimeTypesResponseType.class);
 
 	/**
-	 * Message aware transformer that ...
+	 * Message aware transformer that transforms to crm:scheduling 1.0 from Take
+	 * Care format.
 	 */
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
-
-		// Perform any message aware processing here, otherwise delegate as much
-		// as possible to pojoTransform() for easier unit testing
-
 		return pojoTransform(message.getPayload(), outputEncoding);
 	}
 
-	/**
-	 * Simple pojo transformer method that can be tested with plain unit
-	 * testing...
-	 */
-	public Object pojoTransform(Object src, String outputEncoding) throws TransformerException {
+	protected Object pojoTransform(Object src, String outputEncoding) throws TransformerException {
 		log.debug("Transforming response payload: {}", src);
 
 		GetTimeTypesResponse incoming_res = (GetTimeTypesResponse) jaxbUtil_incoming.unmarshal(src);
-
 		String incoming_string = incoming_res.getGetTimeTypesResult();
-		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
-		TimeTypes incoming_timeTypes = message.getTimeTypes();
 
-		JAXBElement<GetAllTimeTypesResponseType> outgoing_res = createGetAllTimeTypesResponse();
-		for (TimeType incoming_timeType : incoming_timeTypes.getTimeType()) {
-			TimeTypeType outgoing_timeType = new TimeTypeType();
-			outgoing_timeType.setTimeTypeId(String.valueOf(incoming_timeType.getTimeTypeId()));
-			outgoing_timeType.setTimeTypeName(incoming_timeType.getTimeTypeName());
-			outgoing_res.getValue().getListOfTimeTypes().add(outgoing_timeType);
+		if (containsError(incoming_string)) {
+			throwErrorResponse(incoming_string);
 		}
 
+		JAXBElement<GetAllTimeTypesResponseType> outgoing_res = creareOkResponse(incoming_string);
 		Object payloadOut = jaxbUtil_outgoing.marshal(outgoing_res);
 
 		if (logger.isDebugEnabled()) {
@@ -64,18 +55,33 @@ public class GetAllTimeTypesResponseTransformer extends AbstractMessageTransform
 		}
 
 		return payloadOut;
-
 	}
 
-	private JAXBElement<GetAllTimeTypesResponseType> createGetAllTimeTypesResponse() {
-		return new ObjectFactory().createGetAllTimeTypesResponse(new GetAllTimeTypesResponseType());
+	private boolean containsError(String incoming_string) {
+		return StringUtils.contains(incoming_string, "Error");
 	}
 
-	private String createFault(String errorMessage) {
-		return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
-				+ "<soap:Fault xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
-				+ "<faultcode>soap:Server</faultcode>" + "<faultstring>" + errorMessage + "</faultstring>"
-				+ "</soap:Fault>";
+	private JAXBElement<GetAllTimeTypesResponseType> creareOkResponse(String incoming_string) {
+		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
+		TimeTypes incoming_timeTypes = message.getTimeTypes();
+
+		JAXBElement<GetAllTimeTypesResponseType> outgoing_res = new ObjectFactory()
+				.createGetAllTimeTypesResponse(new GetAllTimeTypesResponseType());
+
+		for (TimeType incoming_timeType : incoming_timeTypes.getTimeType()) {
+			TimeTypeType outgoing_timeType = new TimeTypeType();
+			outgoing_timeType.setTimeTypeId(String.valueOf(incoming_timeType.getTimeTypeId()));
+			outgoing_timeType.setTimeTypeName(incoming_timeType.getTimeTypeName());
+			outgoing_res.getValue().getListOfTimeTypes().add(outgoing_timeType);
+		}
+		return outgoing_res;
 	}
 
+	private void throwErrorResponse(String incoming_string) {
+		se.skl.skltpservices.takecare.booking.error.ProfdocHISMessage message = (se.skl.skltpservices.takecare.booking.error.ProfdocHISMessage) jaxbUtil_error
+				.unmarshal(incoming_string);
+
+		throw new RuntimeException("resultCode: " + message.getError().getCode() + " resultText: "
+				+ message.getError().getMsg());
+	}
 }

@@ -11,10 +11,6 @@ import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getallt
 import javax.xml.ws.soap.SOAPFaultException;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.soitoolkit.commons.mule.test.AbstractJmsTestUtil;
-import org.soitoolkit.commons.mule.test.ActiveMqJmsTestUtil;
 import org.soitoolkit.commons.mule.test.junit4.AbstractTestCase;
 import org.soitoolkit.refapps.sd.sample.wsdl.v1.Fault;
 
@@ -22,14 +18,8 @@ import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesResponseType;
 
 public class GetAllTimeTypesIntegrationTest extends AbstractTestCase {
 
-	private static final Logger log = LoggerFactory.getLogger(GetAllTimeTypesIntegrationTest.class);
-
 	private static final String EXPECTED_ERR_TIMEOUT_MSG = "Read timed out";
-
 	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("GETALLTIMETYPES_INBOUND_URL");
-
-	private static final String ERROR_LOG_QUEUE = "SOITOOLKIT.LOG.ERROR";
-	private AbstractJmsTestUtil jmsUtil = null;
 
 	public GetAllTimeTypesIntegrationTest() {
 
@@ -51,20 +41,6 @@ public class GetAllTimeTypesIntegrationTest extends AbstractTestCase {
 	@Override
 	protected void doSetUp() throws Exception {
 		super.doSetUp();
-
-		doSetUpJms();
-	}
-
-	private void doSetUpJms() {
-		// TODO: Fix lazy init of JMS connection et al so that we can create
-		// jmsutil in the declaration
-		// (The embedded ActiveMQ queue manager is not yet started by Mule when
-		// jmsutil is delcared...)
-		if (jmsUtil == null)
-			jmsUtil = new ActiveMqJmsTestUtil();
-
-		// Clear queues used for error handling
-		jmsUtil.clearQueues(ERROR_LOG_QUEUE);
 	}
 
 	@Test
@@ -74,7 +50,9 @@ public class GetAllTimeTypesIntegrationTest extends AbstractTestCase {
 		GetAllTimeTypesTestConsumer consumer = new GetAllTimeTypesTestConsumer(DEFAULT_SERVICE_ADDRESS);
 		GetAllTimeTypesResponseType response = consumer.callService(healthcareFacility);
 		assertEquals("0", response.getListOfTimeTypes().get(0).getTimeTypeId());
-		assertEquals("OPEN", response.getListOfTimeTypes().get(0).getTimeTypeName());
+		assertEquals("Tidstyp0", response.getListOfTimeTypes().get(0).getTimeTypeName());
+		assertEquals("1", response.getListOfTimeTypes().get(1).getTimeTypeId());
+		assertEquals("Tidstyp1", response.getListOfTimeTypes().get(1).getTimeTypeName());
 	}
 
 	@Test
@@ -89,9 +67,7 @@ public class GetAllTimeTypesIntegrationTest extends AbstractTestCase {
 					+ ((response == null) ? "NULL" : response.getClass().getName()));
 
 		} catch (SOAPFaultException e) {
-
-			assertEquals("Invalid status code: 500", e.getMessage());
-
+			assertEquals("resultCode: 3001 resultText: Illegal argument!", e.getMessage());
 		}
 	}
 

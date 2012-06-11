@@ -37,36 +37,19 @@
     xmlns:xsd4xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:io6="http://www.w3.org/2005/08/addressing"
     xmlns:out4="urn:mvk:asb:takecare:v100:getTimeTypesInternalInterface"
-    xmlns:TimebookUtils="xalan://se.modul1.mvk.asb.timebooking.takecare.java.TimebookUtils"
     xmlns:map="http://Mvk_Scheduling_TakeCare_Adapter/xslt/MapRivToProfDocHisMessage_GetAllTimeTypes_req"
     xmlns:msl="http://www.ibm.com/xmlmap"
-    exclude-result-prefixes="set in msl math exsl in2 in3 date in4 xalan str TimebookUtils map"
-    version="1.0">
+    exclude-result-prefixes="set in msl math exsl  in date in4 xalan str map"
+    version="2.0">
   <xsl:output method="xml" encoding="UTF-8" indent="no"/>
 
   <!-- root wrapper template  -->
   <xsl:template match="/">
-    <xsl:choose>
-      <xsl:when test="msl:datamap">
-        <msl:datamap>
-          <dataObject>
-            <xsl:attribute name="xsi:type">
-              <xsl:value-of select="'out2:invokeTakeCareRequestMsg'"/>
-            </xsl:attribute>
-            <xsl:call-template name="map:MapRivToProfDocHisMessage_GetAllTimeTypes_req2">
-              <xsl:with-param name="body" select="msl:datamap/dataObject[1]"/>
-            </xsl:call-template>
-          </dataObject>
-        </msl:datamap>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:apply-templates select="body" mode="map:MapRivToProfDocHisMessage_GetAllTimeTypes_req"/>
-      </xsl:otherwise>
-    </xsl:choose>
+    <xsl:apply-templates select="Body"/>
   </xsl:template>
 
   <!-- This rule represents an element mapping: "body" to "body".  -->
-  <xsl:template match="body"  mode="map:MapRivToProfDocHisMessage_GetAllTimeTypes_req">
+  <xsl:template match="Body">
     <body>
       <xsl:attribute name="xsi:type">
         <xsl:value-of select="'out2:invokeTakeCareRequestMsg'"/>
@@ -83,7 +66,7 @@
           </xsl:attribute>
           <!-- a simple mapping with no associated source:  to "Time"(unsignedLong) -->
           <xsl:attribute name="Time">
-            <xsl:value-of select="TimebookUtils:getTodayDatesAsYYYYMMDDHHMMSS()"/>
+            <xsl:value-of select="123"/>
           </xsl:attribute>
           <!-- a simple mapping with no associated source:  to "CareUnitIdType"(string) -->
           <CareUnitIdType>
@@ -134,70 +117,7 @@
     </body>
   </xsl:template>
 
-  <!-- This rule represents a type mapping: "body" to "body".  -->
-  <xsl:template name="map:MapRivToProfDocHisMessage_GetAllTimeTypes_req2">
-    <xsl:param name="body"/>
-    <out4:invokeTakeCare>
-      <out3:ProfdocHISMessage>
-        <!-- a simple mapping with no associated source:  to "InvokingSystem"(string) -->
-        <xsl:attribute name="InvokingSystem">
-          <xsl:value-of select="'InvSysMVK'"/>
-        </xsl:attribute>
-        <!-- a simple mapping with no associated source:  to "MsgType"(string) -->
-        <xsl:attribute name="MsgType">
-          <xsl:value-of select="'Request'"/>
-        </xsl:attribute>
-        <!-- a simple mapping with no associated source:  to "Time"(unsignedLong) -->
-        <xsl:attribute name="Time">
-          <xsl:value-of select="TimebookUtils:getTodayDatesAsYYYYMMDDHHMMSS()"/>
-        </xsl:attribute>
-        <!-- a simple mapping with no associated source:  to "CareUnitIdType"(string) -->
-        <CareUnitIdType>
-          <xsl:text>hsaid</xsl:text>
-        </CareUnitIdType>
-        <!-- a simple data mapping: "$body/in4:GetAllTimeTypes/in4:healthcare_facility"(HsaIdType) to "CareUnitId"(string) -->
-        <CareUnitId>
-          <xsl:value-of select="$body/in4:GetAllTimeTypes/in4:healthcare_facility"/>
-        </CareUnitId>
-        <!-- a simple mapping with no associated source:  to "TimeTypeRequest"(string) -->
-        <TimeTypeRequest>
-          <xsl:text>Web</xsl:text>
-        </TimeTypeRequest>
-      </out3:ProfdocHISMessage>
-      <!-- a simple data mapping: "$body/in4:GetAllTimeTypes/in4:mvkAdressering/in2:configData/serviceComponent/endpointAddress"(EndpointAddressType) to "TargetAdressURLString"(string) -->
-      <TargetAdressURLString>
-        <xsl:value-of select="$body/in4:GetAllTimeTypes/in4:mvkAdressering/in2:configData/serviceComponent/endpointAddress"/>
-      </TargetAdressURLString>
-      <ProfdocHISMessageHeader>
-        <!-- a simple mapping with no associated source:  to "TCUser"(string) -->
-        <TCUser>
-          <xsl:text></xsl:text>
-        </TCUser>
-        <!-- a simple mapping with no associated source:  to "TCPassword"(string) -->
-        <TCPassword>
-          <xsl:text></xsl:text>
-        </TCPassword>
-        <!-- a simple mapping with no associated source:  to "externalUser"(string) -->
-        <externalUser>
-          <xsl:text>ExtUsrMVK</xsl:text>
-        </externalUser>
-        <!-- a simple mapping with no associated source:  to "careUnitIdType"(string) -->
-        <careUnitIdType>
-          <xsl:text>HSAID</xsl:text>
-        </careUnitIdType>
-        <!-- a simple data mapping: "$body/in4:GetAllTimeTypes/in4:mvkAdressering/in2:configData/logicalAdressat/logicalAddress"(LogicalAddressType) to "hsaId"(string) -->
-        <xsl:if test="$body/in4:GetAllTimeTypes/in4:mvkAdressering/in2:configData/logicalAdressat/logicalAddress">
-          <hsaId>
-            <xsl:value-of select="$body/in4:GetAllTimeTypes/in4:mvkAdressering/in2:configData/logicalAdressat/logicalAddress"/>
-          </hsaId>
-        </xsl:if>
-        <!-- a simple mapping with no associated source:  to "invokingSystem"(string) -->
-        <invokingSystem>
-          <xsl:text>InvSysMVK</xsl:text>
-        </invokingSystem>
-      </ProfdocHISMessageHeader>
-    </out4:invokeTakeCare>
-  </xsl:template>
+ 
 
   <!-- *****************    Utility Templates    ******************  -->
   <!-- copy the namespace declarations from the source to the target -->

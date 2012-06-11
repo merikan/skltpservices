@@ -1,6 +1,7 @@
 package se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes;
 
 import java.math.BigInteger;
+import java.util.Date;
 
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -22,59 +23,53 @@ public class GetAllTimeTypesRequestTransformer extends AbstractMessageTransforme
 	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetTimeTypes.class);
 
 	/**
-	 * Message aware transformer that ...
+	 * Message aware transformer that transforms from crm:scheduling 1.0 to Take
+	 * Care format.
 	 */
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
 
-		// Perform any message aware processing here, otherwise delegate as much
-		// as possible to pojoTransform() for easier unit testing
-
-		return pojoTransform(message.getPayload(), outputEncoding);
+		Object src = ((Object[]) message.getPayload())[1];
+		message.setPayload(pojoTransform(src, outputEncoding));
+		return message;
 	}
 
-	/**
-	 * Simple pojo transformer method that can be tested with plain unit
-	 * testing...
-	 */
 	protected Object pojoTransform(Object src, String encoding) throws TransformerException {
 
-		log.debug("Transforming request payload: {}", src);
+		if (logger.isDebugEnabled()) {
+			log.debug("Transforming request payload: {}", src);
+		}
 
-		// Perform any message aware processing here, otherwise delegate as much
-		// as possible to pojoTransform() for easier unit testing
-
-		GetAllTimeTypesType incoming_req = (GetAllTimeTypesType) jaxbUtil_incoming.unmarshal(src);
-		String incoming_healthcarefacility = incoming_req.getHealthcareFacility();
+		GetAllTimeTypesType incomingRequest = (GetAllTimeTypesType) jaxbUtil_incoming.unmarshal(src);
+		String incomingHealthcarefacility = incomingRequest.getHealthcareFacility();
 
 		ProfdocHISMessage message = new ProfdocHISMessage();
-		message.setCareUnitId(incoming_healthcarefacility);
+		message.setCareUnitId(incomingHealthcarefacility);
 		message.setCareUnitIdType("hsaid");
 		message.setInvokingSystem("InvSysMVK");
 		message.setMsgType("Request");
 		message.setTime(now());
 		message.setTimeTypeRequest("Web");
 
-		GetTimeTypes outRequest = new GetTimeTypes();
-		outRequest.setCareunitid(incoming_healthcarefacility);
-		outRequest.setCareunitidtype("HSAID");
-		outRequest.setExternaluser("ExtUsrMVK");
-		outRequest.setTcpassword("");
-		outRequest.setTcusername("");
-		outRequest.setXml(jaxbUtil_message.marshal(message));
-
-		Object payloadOut = jaxbUtil_outgoing.marshal(outRequest);
+		GetTimeTypes outgoingRequest = new GetTimeTypes();
+		outgoingRequest.setCareunitid(incomingHealthcarefacility);
+		outgoingRequest.setCareunitidtype("HSAID");
+		outgoingRequest.setExternaluser("ExtUsrMVK");
+		outgoingRequest.setTcpassword("");
+		outgoingRequest.setTcusername("");
+		outgoingRequest.setXml(jaxbUtil_message.marshal(message));
+		
+		Object outgoingPayload = jaxbUtil_outgoing.marshal(outgoingRequest);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("transformed payload to: " + payloadOut);
+			logger.debug("transformed payload to: " + outgoingPayload);
 		}
 
-		return payloadOut;
+		return outgoingPayload;
 
 	}
 
 	private BigInteger now() {
-		// TODO Hur skall tiden representeras för TakeCare, kolla specen!
-		return new BigInteger("20120607110000");
+		return BigInteger.valueOf(new Date().getTime());
 	}
 }

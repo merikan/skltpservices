@@ -16,7 +16,7 @@ public class GetAllTimeTypesRequestTransformerTest {
 
 		GetAllTimeTypesRequestTransformer transformer = new GetAllTimeTypesRequestTransformer();
 		String result = (String) transformer.pojoTransform(input, "UTF-8");
-
+		
 		assertEquals(expectedResult, result);
 	}
 }
