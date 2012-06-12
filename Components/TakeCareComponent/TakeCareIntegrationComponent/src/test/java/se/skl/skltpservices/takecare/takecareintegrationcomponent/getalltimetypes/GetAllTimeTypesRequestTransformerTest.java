@@ -3,9 +3,15 @@ package se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetyp
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import org.soitoolkit.commons.mule.util.MiscUtil;
 
+import se.skl.skltpservices.takecare.booking.GetTimeTypes;
+import se.skl.skltpservices.takecare.booking.gettimetypesrequest.ProfdocHISMessage;
+
 public class GetAllTimeTypesRequestTransformerTest {
+	
+	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetTimeTypes.class);
 
 	@Test
 	public void testTransformer_ok() throws Exception {

@@ -15,6 +15,7 @@
 	xmlns:json="http://www.mulesoft.org/schema/mule/json"
 	xmlns:script="http://www.mulesoft.org/schema/mule/scripting"
 	xmlns:rest="http://www.mulesoft.org/schema/mule/rest"
+	xmlns:https="http://www.mulesoft.org/schema/mule/https"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.mulesoft.org/schema/mule/core      http://www.mulesoft.org/schema/mule/core/current/mule.xsd
@@ -28,23 +29,25 @@
 		http://www.mulesoft.org/schema/mule/json      http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
 		http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
 		http://www.mulesoft.org/schema/mule/rest      http://www.mulesoft.org/schema/mule/rest/current/mule-rest.xsd
+		http://www.mulesoft.org/schema/mule/https      http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
 	">
 
 	<!-- TODO: Add service specific definitions here -->
 
 	<flow name="GetAllTimeTypes-service">
 	
-		<http:inbound-endpoint
+		<https:inbound-endpoint
 			address="${GETALLTIMETYPES_INBOUND_URL}"
 			exchange-pattern="request-response"
 			transformer-refs="logReqIn"
-			responseTransformer-refs="createSoapFaultIfException logRespOut" >
+			responseTransformer-refs="createSoapFaultIfException logRespOut" 
+			connector-ref="soitoolkit-https-connector">
 			<cxf:proxy-service 
 				service="GetAllTimeTypesResponderService"
 				wsdlLocation="classpath:/schemas/interactions/GetAllTimeTypesInteraction/GetAllTimeTypesInteraction_1.0_rivtabp20.wsdl" 
 				namespace="urn:riv:crm:scheduling:GetAllTimeTypes:1:rivtabp20">
 			</cxf:proxy-service>
-		</http:inbound-endpoint>
+		</https:inbound-endpoint>
 						
 		<custom-transformer name="transform-request" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesRequestTransformer"/>
      
@@ -54,13 +57,14 @@
     
         <cxf:proxy-client/>
            
-		<http:outbound-endpoint 
+		<https:outbound-endpoint 
 			address="${GETALLTIMETYPES_OUTBOUND_URL}" 
 			exchange-pattern="request-response"
 			responseTimeout="${SERVICE_TIMEOUT_MS}"
 			transformer-refs="logReqOut"
-			responseTransformer-refs="logRespIn">
-		</http:outbound-endpoint>
+			responseTransformer-refs="logRespIn" 
+			connector-ref="soitoolkit-https-connector">
+		</https:outbound-endpoint>
  
 		<custom-exception-strategy class="org.soitoolkit.commons.mule.error.ServiceExceptionStrategy"/>
 	</flow>

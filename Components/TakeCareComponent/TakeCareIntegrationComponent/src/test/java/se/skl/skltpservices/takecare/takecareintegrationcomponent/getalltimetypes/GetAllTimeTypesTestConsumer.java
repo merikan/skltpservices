@@ -5,6 +5,8 @@ import static se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCar
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.cxf.Bus;
+import org.apache.cxf.bus.spring.SpringBusFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.refapps.sd.sample.wsdl.v1.Fault;
@@ -32,6 +34,7 @@ public class GetAllTimeTypesTestConsumer {
 
 	public GetAllTimeTypesTestConsumer(String serviceAddress) {
 		try {
+			initHttpsCommunication();
 			URL url = new URL(serviceAddress + "?wsdl");
 			_service = new GetAllTimeTypesResponderService(url).getGetAllTimeTypesResponderPort();
 		} catch (MalformedURLException e) {
@@ -48,4 +51,18 @@ public class GetAllTimeTypesTestConsumer {
 
 		return _service.getAllTimeTypes(new AttributedURIType(), request);
 	}
+
+	private static void initHttpsCommunication() {
+		System.setProperty("javax.net.ssl.keyStore", "src/test/resources/test-certs/consumer.jks");
+		System.setProperty("javax.net.ssl.keyStorePassword", "password");
+		System.setProperty("javax.net.ssl.trustStore", "src/test/resources/test-certs/truststore.jks");
+		System.setProperty("javax.net.ssl.trustStorePassword", "password");
+
+		SpringBusFactory bf = new SpringBusFactory();
+		URL busFile = GetAllTimeTypesTestConsumer.class.getClassLoader().getResource(
+				"TakeCareTestConsumer-cxf-config.xml");
+		Bus bus = bf.createBus(busFile.toString());
+		SpringBusFactory.setDefaultBus(bus);
+	}
+
 }
