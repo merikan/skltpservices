@@ -3,6 +3,7 @@ package se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetyp
 import java.math.BigInteger;
 import java.util.Date;
 
+import org.apache.commons.lang.time.FastDateFormat;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
@@ -48,17 +49,17 @@ public class GetAllTimeTypesRequestTransformer extends AbstractMessageTransforme
 		message.setCareUnitIdType("hsaid");
 		message.setInvokingSystem("InvSysMVK");
 		message.setMsgType("Request");
-		message.setTime(now());
+		message.setTime(yyyyMMddHHmmss());
 		message.setTimeTypeRequest("Web");
 
 		GetTimeTypes outgoingRequest = new GetTimeTypes();
 		outgoingRequest.setCareunitid(incomingHealthcarefacility);
-		outgoingRequest.setCareunitidtype("HSAID");
+		outgoingRequest.setCareunitidtype("hsaid");
 		outgoingRequest.setExternaluser("ExtUsrMVK");
 		outgoingRequest.setTcpassword("");
 		outgoingRequest.setTcusername("");
 		outgoingRequest.setXml(jaxbUtil_message.marshal(message));
-		
+
 		Object outgoingPayload = jaxbUtil_outgoing.marshal(outgoingRequest);
 
 		if (logger.isDebugEnabled()) {
@@ -69,7 +70,8 @@ public class GetAllTimeTypesRequestTransformer extends AbstractMessageTransforme
 
 	}
 
-	private BigInteger now() {
-		return BigInteger.valueOf(new Date().getTime());
+	private BigInteger yyyyMMddHHmmss() {
+		FastDateFormat dateFormat = FastDateFormat.getInstance("yyyyMMddHHmmss");
+		return new BigInteger(dateFormat.format(new Date()));
 	}
 }
