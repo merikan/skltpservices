@@ -83,6 +83,8 @@
 	</message-properties-transformer>
 
 	<json:object-to-json-transformer name="jaxbToJson" />
+	
+	<custom-transformer name="exceptionTransformer" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.ExceptionTransformer"/>
 
 	<custom-transformer name="objToStr"
 		class="org.soitoolkit.commons.mule.core.ObjectToStringTransformer" />

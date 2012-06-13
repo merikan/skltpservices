@@ -52,6 +52,7 @@
 		<custom-transformer name="transform-request" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesRequestTransformer"/>
      
     	<response>
+    		<transformer ref="exceptionTransformer"/>
     		<custom-transformer name="transform-response" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesResponseTransformer"/>
     	</response>
     
