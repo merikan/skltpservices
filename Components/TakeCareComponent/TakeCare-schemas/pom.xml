@@ -92,6 +92,30 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 										<extraarg>-p</extraarg>
 										<extraarg>urn:ProfdocHISMessage:GetTimeTypes:Response=se.skl.skltpservices.takecare.booking.gettimetypesresponse</extraarg>
 										<extraarg>-p</extraarg>
+										<extraarg>urn:ProfdocHISMessage:GetAvailableDates:Request=se.skl.skltpservices.takecare.booking.getavailabledatesrequest</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:ProfdocHISMessage:GetAvailableDates:Response=se.skl.skltpservices.takecare.booking.getavailabledatesresponse</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:ProfdocHISMessage:GetAvailableTimeslots:Request=se.skl.skltpservices.takecare.booking.getavailabletimeslotsrequest</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:ProfdocHISMessage:GetAvailableTimeslots:Response=se.skl.skltpservices.takecare.booking.getavailabletimeslotsresponse</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:ProfdocHISMessage:MakeBooking:Request=se.skl.skltpservices.takecare.booking.makebookingrequest</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:ProfdocHISMessage:MakeBooking:Response=se.skl.skltpservices.takecare.booking.makebookingresponse</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:ProfdocHISMessage:RescheduleBooking:Request=se.skl.skltpservices.takecare.booking.reschedulebookingrequest</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:ProfdocHISMessage:RescheduleBooking:Response=se.skl.skltpservices.takecare.booking.reschedulebookingresponse</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:ProfdocHISMessage:CancelBooking:Request=se.skl.skltpservices.takecare.booking.cancelbookingrequest</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:ProfdocHISMessage:CancelBooking:Response=se.skl.skltpservices.takecare.booking.cancelbookingresponse</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:ProfdocHISMessage:GetBookings:Request=se.skl.skltpservices.takecare.booking.getbookingsrequest</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:ProfdocHISMessage:GetBookings:Response=se.skl.skltpservices.takecare.booking.getbookingsresponse</extraarg>
+										<extraarg>-p</extraarg>
 										<extraarg>urn:ProfdocHISMessage:Error=se.skl.skltpservices.takecare.booking.error</extraarg>
 									</extraargs>
 								</wsdlOption>
