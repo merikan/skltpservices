@@ -85,14 +85,5 @@ public class GetAllTimeTypesIntegrationTest extends AbstractTestCase {
 			assertTrue("Unexpected error message: " + e.getMessage(),
 					e.getMessage().startsWith(EXPECTED_ERR_TIMEOUT_MSG));
 		}
-
-		// Sleep for a short time period to allow the JMS response message to be
-		// delivered, otherwise ActiveMQ data store seems to be corrupt
-		// afterwards...
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-		}
 	}
-
 }

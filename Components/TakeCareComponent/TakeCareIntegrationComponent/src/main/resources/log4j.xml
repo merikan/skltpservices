@@ -61,7 +61,7 @@
 		<level value="INFO" />
 	</logger>
 	
-	<logger name="se.skl.takecare.takecareintegrationcomponent">
+	<logger name="se.skl.skltpservices.takecare">
 		<level value="DEBUG" />
 	</logger>
 

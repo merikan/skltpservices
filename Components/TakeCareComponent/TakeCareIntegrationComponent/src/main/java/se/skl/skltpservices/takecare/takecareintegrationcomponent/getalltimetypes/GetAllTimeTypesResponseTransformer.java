@@ -34,6 +34,9 @@ public class GetAllTimeTypesResponseTransformer extends AbstractMessageTransform
 	 */
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
+		if(message.getExceptionPayload() != null){
+			return message;
+		}
 		return pojoTransform(message.getPayload(), outputEncoding);
 	}
 
