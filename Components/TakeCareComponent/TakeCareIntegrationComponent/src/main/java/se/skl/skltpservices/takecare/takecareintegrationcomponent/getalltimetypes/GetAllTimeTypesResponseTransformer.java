@@ -2,10 +2,8 @@ package se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetyp
 
 import javax.xml.bind.JAXBElement;
 
-import org.apache.commons.lang.StringUtils;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
-import org.mule.transformer.AbstractMessageTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
@@ -13,19 +11,18 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesResponseType;
 import se.riv.crm.scheduling.getalltimetypes.v1.ObjectFactory;
 import se.riv.crm.scheduling.v1.TimeTypeType;
+import se.skl.skltpservices.takecare.TakeCareResponseTransformer;
 import se.skl.skltpservices.takecare.booking.GetTimeTypesResponse;
 import se.skl.skltpservices.takecare.booking.gettimetypesresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.gettimetypesresponse.ProfdocHISMessage.TimeTypes;
 import se.skl.skltpservices.takecare.booking.gettimetypesresponse.ProfdocHISMessage.TimeTypes.TimeType;
 
-public class GetAllTimeTypesResponseTransformer extends AbstractMessageTransformer {
+public class GetAllTimeTypesResponseTransformer extends TakeCareResponseTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(GetAllTimeTypesResponseTransformer.class);
 
 	private static final JaxbUtil jaxbUtil_incoming = new JaxbUtil(GetTimeTypesResponse.class);
 	private static final JaxbUtil jaxbUtil_message = new JaxbUtil(ProfdocHISMessage.class);
-	private static final JaxbUtil jaxbUtil_error = new JaxbUtil(
-			se.skl.skltpservices.takecare.booking.error.ProfdocHISMessage.class);
 	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetAllTimeTypesResponseType.class);
 
 	/**
@@ -34,7 +31,7 @@ public class GetAllTimeTypesResponseTransformer extends AbstractMessageTransform
 	 */
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
-		if(message.getExceptionPayload() != null){
+		if (message.getExceptionPayload() != null) {
 			return message;
 		}
 		return pojoTransform(message.getPayload(), outputEncoding);
@@ -60,10 +57,6 @@ public class GetAllTimeTypesResponseTransformer extends AbstractMessageTransform
 		return payloadOut;
 	}
 
-	private boolean containsError(String incoming_string) {
-		return StringUtils.contains(incoming_string, "Error");
-	}
-
 	private JAXBElement<GetAllTimeTypesResponseType> creareOkResponse(String incoming_string) {
 		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
 		TimeTypes incoming_timeTypes = message.getTimeTypes();
@@ -78,13 +71,5 @@ public class GetAllTimeTypesResponseTransformer extends AbstractMessageTransform
 			outgoing_res.getValue().getListOfTimeTypes().add(outgoing_timeType);
 		}
 		return outgoing_res;
-	}
-
-	private void throwErrorResponse(String incoming_string) {
-		se.skl.skltpservices.takecare.booking.error.ProfdocHISMessage message = (se.skl.skltpservices.takecare.booking.error.ProfdocHISMessage) jaxbUtil_error
-				.unmarshal(incoming_string);
-
-		throw new RuntimeException("resultCode: " + message.getError().getCode() + " resultText: "
-				+ message.getError().getMsg());
 	}
 }

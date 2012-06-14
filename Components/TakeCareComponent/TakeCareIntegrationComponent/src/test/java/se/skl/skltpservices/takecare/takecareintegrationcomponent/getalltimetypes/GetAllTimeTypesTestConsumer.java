@@ -5,8 +5,6 @@ import static se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCar
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.apache.cxf.Bus;
-import org.apache.cxf.bus.spring.SpringBusFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.refapps.sd.sample.wsdl.v1.Fault;
@@ -16,8 +14,9 @@ import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesResponderInterfac
 import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesResponderService;
 import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesResponseType;
 import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesType;
+import se.skl.skltpservices.takecare.TakeCareTestConsumer;
 
-public class GetAllTimeTypesTestConsumer {
+public class GetAllTimeTypesTestConsumer extends TakeCareTestConsumer {
 
 	private static final Logger log = LoggerFactory.getLogger(GetAllTimeTypesTestConsumer.class);
 
@@ -43,26 +42,13 @@ public class GetAllTimeTypesTestConsumer {
 	}
 
 	public GetAllTimeTypesResponseType callService(String healthcareFacility) throws Fault {
-		log.debug("Calling sample-soap-service with healthcareFacility", healthcareFacility);
+		log.debug("Calling GetAllTimeTypes-service with healthcareFacility", healthcareFacility);
 
 		GetAllTimeTypesType request = new GetAllTimeTypesType();
 		request.setHealthcareFacility(healthcareFacility);
 		String senderId = "1";
 
 		return _service.getAllTimeTypes(new AttributedURIType(), request);
-	}
-
-	private static void initHttpsCommunication() {
-		System.setProperty("javax.net.ssl.keyStore", "src/test/resources/test-certs/consumer.jks");
-		System.setProperty("javax.net.ssl.keyStorePassword", "password");
-		System.setProperty("javax.net.ssl.trustStore", "src/test/resources/test-certs/truststore.jks");
-		System.setProperty("javax.net.ssl.trustStorePassword", "password");
-
-		SpringBusFactory bf = new SpringBusFactory();
-		URL busFile = GetAllTimeTypesTestConsumer.class.getClassLoader().getResource(
-				"TakeCareTestConsumer-cxf-config.xml");
-		Bus bus = bf.createBus(busFile.toString());
-		SpringBusFactory.setDefaultBus(bus);
 	}
 
 }
