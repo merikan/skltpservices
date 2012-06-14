@@ -29,5 +29,14 @@
 		          address="${ei.push.address.uri}"/>
 
 	<context:component-scan base-package="se.skl.components.pull"/>
+    <context:annotation-config/>
+
+    <!-- Data source -->
+    <beans:bean id="eiPullDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property name="driverClassName" value="${ei.pull.status.db.driver}"/>
+        <beans:property name="url" value="${ei.pull.status.db.url}"/>
+        <beans:property name="username" value="${ei.pull.status.db.user}"/>
+        <beans:property name="password" value="${ei.pull.status.db.password}"/>
+    </beans:bean>
 
 </beans:beans>

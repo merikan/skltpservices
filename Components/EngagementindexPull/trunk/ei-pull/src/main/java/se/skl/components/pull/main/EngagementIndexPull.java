@@ -16,12 +16,14 @@ import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontract.v1.ri
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractresponder.v1.GetLogicalAddresseesByServiceContractResponseType;
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractresponder.v1.GetLogicalAddresseesByServiceContractType;
 import se.riv.itintegration.registry.v1.ServiceContractNamespaceType;
+import se.skl.components.pull.service.GetUpdatesService;
 import se.skl.components.pull.utils.DateHelper;
 import se.skl.components.pull.utils.EngagementIndexHelper;
 import se.skl.components.pull.utils.HttpHelper;
 import se.skl.components.pull.utils.PropertyResolver;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,43 +35,45 @@ public class EngagementIndexPull {
     @Autowired
     private GetLogicalAddresseesByServiceContractResponderInterface getAddressesClient;
 
-	@Autowired
-	private GetUpdatesResponderInterface getUpdatesClient;
+    @Autowired
+    private GetUpdatesResponderInterface getUpdatesClient;
 
-	@Autowired
-	private UpdateResponderInterface updateClient;
+    @Autowired
+    private UpdateResponderInterface updateClient;
+
+    @Autowired
+    private GetUpdatesService getUpdatesService;
 
     @Autowired
     private HttpHelper httpHelper;
 
     private final static Logger log = Logger.getLogger(EngagementIndexPull.class);
 
-    private String pullLogicalAddress;
+    private String configuredPullLogicalAddress;
 
     private EngagementIndexPull() {
-
+        // Should only be instantiated with a logical address
     }
 
     public EngagementIndexPull(String pullLogicalAddress) {
-        this.pullLogicalAddress = pullLogicalAddress;
+        this.configuredPullLogicalAddress = pullLogicalAddress;
     }
 
     public void doFetchUpdates() {
         log.info("Pull/Push-sequence started.");
-    	httpHelper.configHttpConduit(getAddressesClient);
-    	httpHelper.configHttpConduit(updateClient);
-    	httpHelper.configHttpConduit(getUpdatesClient);
+        httpHelper.configHttpConduit(getAddressesClient);
+        httpHelper.configHttpConduit(updateClient);
+        httpHelper.configHttpConduit(getUpdatesClient);
 
         final String pushServiceContractNamespace = PropertyResolver.get("ei.push.address.servicedomain");
         final String belongsToHsaId = PropertyResolver.get("ei.pull.belongsto.hsaid");
         final String addressServiceAddress = PropertyResolver.get("ei.address.service.address.logical");
         final String pushLogicalAddress = PropertyResolver.get("ei.push.address.logical");
         final String commaSeparatedDomains = PropertyResolver.get("ei.pull.address.servicedomains");
-        final String timeOffset = PropertyResolver.get("ei.pull.time.offset");
         final String timestampFormat = PropertyResolver.get("ei.pull.time.format");
-        final String updatesSinceTimeStamp = EngagementIndexHelper.getFormattedOffsetTime(DateHelper.now(), timeOffset, timestampFormat);
         final List<String> serviceDomainList = EngagementIndexHelper.stringToList(commaSeparatedDomains);
         final GetLogicalAddresseesByServiceContractType parameters = generateAddressParameters(pushServiceContractNamespace, belongsToHsaId);
+        final String pullLogicalAddress = configuredPullLogicalAddress;
         List<String> possiblePullAddresses = new ArrayList<String>();
         try {
             GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(addressServiceAddress, parameters);
@@ -77,31 +81,35 @@ public class EngagementIndexPull {
         } catch (Exception e) {
             log.fatal("Could not acquire addresses from " + addressServiceAddress + " which should be contacted for pulling data. Reason:\n", e);
         }
-        pushAndPull(possiblePullAddresses, pullLogicalAddress, pushLogicalAddress, updatesSinceTimeStamp, serviceDomainList);
+        pushAndPull(possiblePullAddresses, pullLogicalAddress, pushLogicalAddress, serviceDomainList, timestampFormat);
         log.info("Pull/Push-sequence ended.");
     }
 
-	private void pushAndPull(List<String> possiblePullAddresses, String pullLogicalAddress, String pushLogicalAddress, String updatesSinceTimeStamp, List<String> serviceDomainList) {
+    private void pushAndPull(List<String> possiblePullAddresses, String pullLogicalAddress, String pushLogicalAddress, List<String> serviceDomainList, String timestampFormat) {
         if (possiblePullAddresses.contains(pullLogicalAddress)) {
             for (String serviceDomain : serviceDomainList) {
-                doPushAndPull(pullLogicalAddress, serviceDomain, updatesSinceTimeStamp, pushLogicalAddress);
+                doPushAndPull(pullLogicalAddress, serviceDomain, pushLogicalAddress, timestampFormat);
             }
         } else {
             log.error("The address list of allowed logical addresses does not contain the requested logical address '" + pullLogicalAddress + "'. No fetching of updates could be done at this time.");
         }
-	}
+    }
 
-    private void doPushAndPull(String pullLogicalAddress, String serviceDomain, String updatesSinceTimeStamp, String pushLogicalAddress) {
+    private void doPushAndPull(String pullLogicalAddress, String serviceDomain, String pushLogicalAddress, String timestampFormat) {
         String lastFetchedRegisteredResidentIdentification = "";
         int amountOfFetchedResults = 0;
         // Continue while there is more data to fetch
-        boolean done;
+        boolean done = false;
+        boolean success = false;
+        GetUpdatesResponseType updates;
         do {
-            GetUpdatesResponseType updates = pull(pullLogicalAddress, serviceDomain, updatesSinceTimeStamp, lastFetchedRegisteredResidentIdentification);
-            done = pushCycleIsComplete(updates);
+            String timeForLastSuccessfulUpdate = getUpdatesService.getFormattedDateForGetUpdates(pullLogicalAddress, serviceDomain, timestampFormat);
+            Date dateForLastFetch = DateHelper.now();
+            updates = pull(pullLogicalAddress, serviceDomain, timeForLastSuccessfulUpdate, lastFetchedRegisteredResidentIdentification);
             if (updates != null) {
+                done = updates.isResponseIsComplete();
                 log.info("Received " + updates.getRegisteredResidentEngagement().size() + " updates from: " + pullLogicalAddress + " using service domain: " + serviceDomain + ".");
-                push(pushLogicalAddress, updates);
+                success = push(pushLogicalAddress, serviceDomain, updates);
                 if (!done) {
                     // There are more results to fetch, build list of what we fetched so far, since the producer is stateless.
                     List<RegisteredResidentEngagementType> registeredResidentEngagements = updates.getRegisteredResidentEngagement();
@@ -111,31 +119,30 @@ public class EngagementIndexPull {
                     amountOfFetchedResults += listSize;
                 }
             } else {
-                log.error("Received null when pulling data since: " + updatesSinceTimeStamp + ", from address: " + pullLogicalAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + amountOfFetchedResults + " partial results from this address.");
+                success = false;
+                getUpdatesService.incrementErrorsSinceLastFetch(pullLogicalAddress, serviceDomain);
+                log.error("Received null when pulling data since: " + timeForLastSuccessfulUpdate + ", from address: " + pullLogicalAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + amountOfFetchedResults + " partial results from this address.");
             }
-        } while (!done);
+        } while (!done && updates != null);
+        if (success) {
+            getUpdatesService.updateDateForGetUpdates(pullLogicalAddress, serviceDomain, DateHelper.now());
+        }
     }
 
-    private boolean pushCycleIsComplete(GetUpdatesResponseType updates) {
-        return (updates == null) || (updates.isResponseIsComplete());
-    }
-
-
-
-	private GetUpdatesResponseType pull(String pullLogicalAddress, String serviceDomain, String updatesSinceTimeStamp, String lastFetchedRegisteredResidentIdentification) {
-		GetUpdatesType updateRequest = new GetUpdatesType();
-		updateRequest.setServiceDomain(serviceDomain);
-		updateRequest.setTimeStamp(updatesSinceTimeStamp);
+    private GetUpdatesResponseType pull(String pullLogicalAddress, String serviceDomain, String timeForLastSuccessfulUpdate, String lastFetchedRegisteredResidentIdentification) {
+        GetUpdatesType updateRequest = new GetUpdatesType();
+        updateRequest.setServiceDomain(serviceDomain);
+        updateRequest.setTimeStamp(timeForLastSuccessfulUpdate);
         updateRequest.setRegisteredResidentLastFetched(lastFetchedRegisteredResidentIdentification);
         try {
-		    return getUpdatesClient.getUpdates(pullLogicalAddress, updateRequest);
+            return getUpdatesClient.getUpdates(pullLogicalAddress, updateRequest);
         } catch (Exception e) {
             log.fatal("Could not aquire updates from " + pullLogicalAddress + ", using service domain: " + updateRequest.getServiceDomain() + ". Reason:\n", e);
         }
         return null;
-	}
+    }
 
-    private void push(String logicalAddress, GetUpdatesResponseType updates) {
+    private boolean push(String logicalAddress, String serviceDomain, GetUpdatesResponseType updates) {
         UpdateType requestForUpdate = createRequestForUpdate(updates);
         try {
             UpdateResponseType updateResponse = updateClient.update(logicalAddress, requestForUpdate);
@@ -143,21 +150,24 @@ public class EngagementIndexPull {
             switch (resultCode) {
                 case OK:
                     log.info("Received " + resultCode.name() + " when updating to " + logicalAddress + ".");
-                break;
+                    break;
                 case INFO:
                     log.warn("Received unexpected result with code " + resultCode.name() + ". Response comment: " + updateResponse.getComment() + "." + updates.getRegisteredResidentEngagement().size() + " posts was however, successfully pushed to " + logicalAddress + ".");
-                break;
+                    break;
                 case ERROR:
                     log.fatal("Result containing " + updates.getRegisteredResidentEngagement().size() + " posts was pushed to "+ logicalAddress + ", however an error response code was in the reply!\nResult code: " + resultCode.name() + ".\nUpdate response comment: " + updateResponse.getComment());
-                break;
+                    break;
             }
         } catch (Exception e) {
             log.fatal("Error while trying to update index! " + updates.getRegisteredResidentEngagement().size() + " posts were unable to be pushed to: "  + logicalAddress + ". Reason:\n", e);
+            getUpdatesService.incrementErrorsSinceLastFetch(logicalAddress, serviceDomain);
+            return false;
         }
+        return true;
     }
 
-	private UpdateType createRequestForUpdate(GetUpdatesResponseType updateResponse) {
-		UpdateType requestForUpdate = new UpdateType();
+    private UpdateType createRequestForUpdate(GetUpdatesResponseType updateResponse) {
+        UpdateType requestForUpdate = new UpdateType();
         List<RegisteredResidentEngagementType> registeredEngagementTypes = updateResponse.getRegisteredResidentEngagement();
         if (!registeredEngagementTypes.isEmpty()) {
             for (RegisteredResidentEngagementType registeredResidentEngagementType : registeredEngagementTypes) {
@@ -173,8 +183,8 @@ public class EngagementIndexPull {
             // RegisteredResidentEngagement list was either null or empty.
             log.debug("Registered resident engagement list was either null or empty, no data added to the engagement transaction.");
         }
-		return requestForUpdate;
-	}
+        return requestForUpdate;
+    }
 
     private void addTransactionsToUpdateRequest(List<EngagementType> engagementTypes, UpdateType requestForUpdate) {
         for (EngagementType engagementType : engagementTypes) {
