@@ -1,4 +1,4 @@
-package se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes;
+package se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule;
 
 import java.util.Date;
 
@@ -9,49 +9,53 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
-import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesType;
+import se.riv.crm.scheduling.getsubjectofcareschedule.v1.GetSubjectOfCareScheduleType;
 import se.skl.skltpservices.takecare.TakeCareDateHelper;
-import se.skl.skltpservices.takecare.booking.GetTimeTypes;
-import se.skl.skltpservices.takecare.booking.gettimetypesrequest.ProfdocHISMessage;
+import se.skl.skltpservices.takecare.booking.GetBookings;
+import se.skl.skltpservices.takecare.booking.getbookingsrequest.ProfdocHISMessage;
 
-public class GetAllTimeTypesRequestTransformer extends AbstractMessageTransformer {
+public class GetSubjectOfCareScheduleRequestTransformer extends AbstractMessageTransformer {
 
-	private static final Logger log = LoggerFactory.getLogger(GetAllTimeTypesRequestTransformer.class);
+	private static final Logger log = LoggerFactory.getLogger(GetSubjectOfCareScheduleRequestTransformer.class);
 
 	private static final JaxbUtil jaxbUtil_message = new JaxbUtil(ProfdocHISMessage.class);
-	private static final JaxbUtil jaxbUtil_incoming = new JaxbUtil(GetAllTimeTypesType.class);
-	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetTimeTypes.class);
+	private static final JaxbUtil jaxbUtil_incoming = new JaxbUtil(GetSubjectOfCareScheduleType.class);
+	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetBookings.class);
 
 	/**
-	 * Message aware transformer that transforms from crm:scheduling 1.0 to Take
-	 * Care format.
+	 * Message aware transformer that ...
 	 */
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
-
 		Object src = ((Object[]) message.getPayload())[1];
 		message.setPayload(pojoTransform(src, outputEncoding));
 		return message;
 	}
 
+	/**
+	 * Simple pojo transformer method that can be tested with plain unit
+	 * testing...
+	 */
 	protected Object pojoTransform(Object src, String encoding) throws TransformerException {
 
 		if (logger.isDebugEnabled()) {
 			log.debug("Transforming request payload: {}", src);
 		}
 
-		GetAllTimeTypesType incomingRequest = (GetAllTimeTypesType) jaxbUtil_incoming.unmarshal(src);
+		GetSubjectOfCareScheduleType incomingRequest = (GetSubjectOfCareScheduleType) jaxbUtil_incoming.unmarshal(src);
 		String incomingHealthcarefacility = incomingRequest.getHealthcareFacility();
+		String incomingSubjectOfCare = incomingRequest.getSubjectOfCare();
 
 		ProfdocHISMessage message = new ProfdocHISMessage();
 		message.setCareUnitId(incomingHealthcarefacility);
 		message.setCareUnitIdType("hsaid");
 		message.setInvokingSystem("InvSysMVK");
 		message.setMsgType("Request");
+		message.setBookingId(null);
+		message.setPatientId(incomingSubjectOfCare);
 		message.setTime(TakeCareDateHelper.yyyyMMddHHmmss(new Date()));
-		message.setTimeTypeRequest("Web");
 
-		GetTimeTypes outgoingRequest = new GetTimeTypes();
+		GetBookings outgoingRequest = new GetBookings();
 		outgoingRequest.setCareunitid(incomingHealthcarefacility);
 		outgoingRequest.setCareunitidtype("hsaid");
 		outgoingRequest.setExternaluser("ExtUsrMVK");
