@@ -28,8 +28,8 @@ public class GetSubjectOfCareScheduleResponseTransformer extends TakeCareRespons
 	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetSubjectOfCareScheduleResponseType.class);
 
 	/**
-	 * Simple pojo transformer method that can be tested with plain unit
-	 * testing...
+	 * Message aware transformer that transforms to crm:scheduling 1.0 from Take
+	 * Care format.
 	 */
 	public Object pojoTransform(Object src, String outputEncoding) throws TransformerException {
 		log.debug("Transforming response payload: {}", src);
