@@ -1,8 +1,6 @@
 package se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 import static se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareIntegrationComponentMuleServer.getAddress;
 import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule.GetBookingsTestProducer.TEST_ID_FAULT_TIMEOUT;
 import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule.GetBookingsTestProducer.TEST_SUBJECTOFCARE_INVALID_ID;
@@ -59,7 +57,9 @@ public class GetSubjectOfCareScheduleIntegrationTest extends AbstractTestCase {
 				DEFAULT_SERVICE_ADDRESS);
 
 		GetSubjectOfCareScheduleResponseType response = consumer.callService(healtcareFacility, subjectOfCare);
+		assertNotNull(response.getTimeslotDetail());
 		assertEquals(subjectOfCare, response.getTimeslotDetail().get(0).getSubjectOfCare());
+		assertEquals(subjectOfCare, response.getTimeslotDetail().get(1).getSubjectOfCare());
 	}
 
 	@Test
