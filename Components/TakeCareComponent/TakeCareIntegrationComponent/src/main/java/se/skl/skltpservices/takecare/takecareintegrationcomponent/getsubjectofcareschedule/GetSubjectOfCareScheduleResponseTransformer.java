@@ -38,7 +38,7 @@ public class GetSubjectOfCareScheduleResponseTransformer extends TakeCareRespons
 		String incoming_string = incoming_res.getGetBookingsResult();
 
 		if (containsError(incoming_string)) {
-			throwErrorResponse(incoming_string);
+			createErrorFromProfdocHISErrorMessage(incoming_string);
 		}
 
 		JAXBElement<GetSubjectOfCareScheduleResponseType> outgoing_res = creareOkResponse(incoming_string);

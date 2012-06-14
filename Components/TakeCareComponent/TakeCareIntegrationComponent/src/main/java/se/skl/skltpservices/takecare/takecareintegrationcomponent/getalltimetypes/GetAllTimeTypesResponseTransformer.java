@@ -44,7 +44,7 @@ public class GetAllTimeTypesResponseTransformer extends TakeCareResponseTransfor
 		String incoming_string = incoming_res.getGetTimeTypesResult();
 
 		if (containsError(incoming_string)) {
-			throwErrorResponse(incoming_string);
+			createErrorFromProfdocHISErrorMessage(incoming_string);
 		}
 
 		JAXBElement<GetAllTimeTypesResponseType> outgoing_res = creareOkResponse(incoming_string);
