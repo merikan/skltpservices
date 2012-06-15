@@ -15,25 +15,25 @@
 
 	<context:component-scan base-package="se.skl.components.pull" />
 	
-	 <bean id="PropertyResolver" class="se.skl.components.pull.utils.PropertyResolver">
-        <property name="properties">
-            <map>
-                <entry key="ei.push.address.servicedomain" value="${ei.push.address.servicedomain}" />
-                <entry key="ei.pull.belongsto.hsaid" value="${ei.pull.belongsto.hsaid}" />
-                <entry key="ei.address.service.address.logical" value="${ei.address.service.address.logical}" />
-                <entry key="ei.push.address.logical" value="${ei.push.address.logical}" />
-                <entry key="ei.pull.address.servicedomains" value="${ei.pull.address.servicedomains}" />
-                <entry key="ei.pull.time.offset" value="${ei.pull.time.offset}" />
-                <entry key="ei.pull.time.format" value="${ei.pull.time.format}" />
+	<bean id="PropertyResolver" class="se.skl.components.pull.utils.PropertyResolver">
+       <property name="properties">
+           <map>
+               <entry key="ei.push.address.servicedomain" value="${ei.push.address.servicedomain}" />
+               <entry key="ei.pull.belongsto.hsaid" value="${ei.pull.belongsto.hsaid}" />
+               <entry key="ei.address.service.address.logical" value="${ei.address.service.address.logical}" />
+               <entry key="ei.push.address.logical" value="${ei.push.address.logical}" />
+               <entry key="ei.pull.address.servicedomains" value="${ei.pull.address.servicedomains}" />
+               <entry key="ei.pull.time.offset" value="${ei.pull.time.offset}" />
+               <entry key="ei.pull.time.format" value="${ei.pull.time.format}" />
 
-                <entry key="trustStoreType" value="${ei.https.trustStoreType}" />
-                <entry key="trustStoreFile" value="${ei.https.trustStoreFile}" />
-                <entry key="trustStorePassword" value="${ei.https.trustStorePassword}" />
-                <entry key="keyStoreType" value="${ei.https.keyStoreType}" />
-                <entry key="keyStoreFile" value="${ei.https.keyStoreFile}" />
-                <entry key="keyStorePassword" value="${ei.https.keyStorePassword}" />
-            </map>
-        </property>
+               <entry key="trustStoreType" value="${ei.https.trustStoreType}" />
+               <entry key="trustStoreFile" value="${ei.https.trustStoreFile}" />
+               <entry key="trustStorePassword" value="${ei.https.trustStorePassword}" />
+               <entry key="keyStoreType" value="${ei.https.keyStoreType}" />
+               <entry key="keyStoreFile" value="${ei.https.keyStoreFile}" />
+               <entry key="keyStorePassword" value="${ei.https.keyStorePassword}" />
+           </map>
+       </property>
     </bean>
 
 	<jaxws:client id="getAddressesClient"

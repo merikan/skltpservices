@@ -32,6 +32,9 @@
     <context:annotation-config/>
 
     <!-- Data source -->
+    <beans:bean id="eiPullStatusDbName" name="eiPullStatusDbName" class="java.lang.String">
+        <beans:constructor-arg value="${ei.pull.status.db.name}"/>
+    </beans:bean>
     <beans:bean id="eiPullDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <beans:property name="driverClassName" value="${ei.pull.status.db.driver}"/>
         <beans:property name="url" value="${ei.pull.status.db.url}"/>
