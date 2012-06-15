@@ -23,6 +23,9 @@
 	</spring:beans>
 
     <!-- Data source -->
+    <spring:bean id="eiPullStatusDbName" name="eiPullStatusDbName" class="java.lang.String">
+        <spring:constructor-arg value="${ei.pull.status.db.name}"/>
+    </spring:bean>
     <spring:bean id="eiPullDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <spring:property name="driverClassName" value="${ei.pull.status.db.driver}"/>
         <spring:property name="url" value="${ei.pull.status.db.url}"/>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import se.skl.components.pull.domain.GetUpdatesStatus;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,9 +29,10 @@ public class GetUpdatesStatusRepositoryImpl extends JdbcDaoSupport implements Ge
         super.setDataSource(dataSource);
     }
 
-    private final String TABLENAME = "pulldata";
-
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+
+    @Resource(name = "eiPullStatusDbName")
+    private String tableName;
 
     private final ParameterizedRowMapper<GetUpdatesStatus> MAPPER = new ParameterizedRowMapper<GetUpdatesStatus>() {
         public GetUpdatesStatus mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -48,37 +50,38 @@ public class GetUpdatesStatusRepositoryImpl extends JdbcDaoSupport implements Ge
     };
 
     public List<GetUpdatesStatus> fetchAll() {
-        return this.getJdbcTemplate().query("SELECT * FROM " + TABLENAME, MAPPER);
+        return this.getJdbcTemplate().query("SELECT * FROM " + tableName, MAPPER);
     }
 
     public GetUpdatesStatus getStatusForLogicalAddressAndServiceContract(String logicalPullAddress, String pullServiceDomain) {
         try {
-            return this.getJdbcTemplate().queryForObject("SELECT * FROM " + TABLENAME + " WHERE logicalpulladdress = ? AND pullservicedomain = ?", MAPPER, logicalPullAddress, pullServiceDomain);
+            return this.getJdbcTemplate().queryForObject("SELECT * FROM " + tableName + " WHERE logicalpulladdress = ? AND pullservicedomain = ?", MAPPER, logicalPullAddress, pullServiceDomain);
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
 
     public void save(GetUpdatesStatus status) {
-        String sqlInsert = "INSERT INTO " + TABLENAME + " (logicalpulladdress, pullservicedomain, lastsuccess, errorssincelastsuccess) VALUES (?, ?, ?, ?)";
+        String sqlInsert = "INSERT INTO " + tableName + " (logicalpulladdress, pullservicedomain, lastsuccess, errorssincelastsuccess) VALUES (?, ?, ?, ?)";
         this.getJdbcTemplate().update(sqlInsert, status.getLogicalAddress(), status.getServiceDomain(), simpleDateFormat.format(status.getLastSuccess()), status.getAmountOfErrorsSinceLastSuccess());
     }
 
     public void update(GetUpdatesStatus status) {
-        String sqlUpdate = "UPDATE " + TABLENAME + " SET lastsuccess = ?, errorssincelastsuccess = ? WHERE logicalpulladdress = ? AND pullservicedomain = ?";
+        String sqlUpdate = "UPDATE " + tableName + " SET lastsuccess = ?, errorssincelastsuccess = ? WHERE logicalpulladdress = ? AND pullservicedomain = ?";
         this.getJdbcTemplate().update(sqlUpdate, simpleDateFormat.format(status.getLastSuccess()), status.getAmountOfErrorsSinceLastSuccess(), status.getLogicalAddress(), status.getServiceDomain());
     }
 
     public void delete(GetUpdatesStatus status) {
-        String sqlDelete = "DELETE FROM " + TABLENAME + " WHERE logicalpulladdress = ? AND pullservicedomain = ?";
+
+        String sqlDelete = "DELETE FROM " + tableName + " WHERE logicalpulladdress = ? AND pullservicedomain = ?";
         this.getJdbcTemplate().update(sqlDelete, status.getLogicalAddress(), status.getServiceDomain());
     }
 
     @PostConstruct
     private void initDb() throws SQLException {
-        if (!tableExists(TABLENAME)) {
+        if (!tableExists(tableName)) {
             String createTableSql =
-                    "CREATE TABLE " + TABLENAME + " " +
+                    "CREATE TABLE " + tableName + " " +
                     "(" +
                          "logicalpulladdress VARCHAR(255) NOT NULL, " +
                          "pullservicedomain VARCHAR(255) NOT NULL, " +
