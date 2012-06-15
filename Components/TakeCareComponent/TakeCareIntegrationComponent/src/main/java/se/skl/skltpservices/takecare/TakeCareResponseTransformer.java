@@ -25,7 +25,7 @@ public abstract class TakeCareResponseTransformer extends AbstractMessageTransfo
 
 	protected abstract Object pojoTransform(Object src, String outputEncoding) throws TransformerException;
 
-	protected void createErrorFromProfdocHISErrorMessage(String incoming_string) {
+	protected void throwProfdocHISErrorMessage(String incoming_string) {
 		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_error.unmarshal(incoming_string);
 		throw new RuntimeException("resultCode: " + message.getError().getCode() + " resultText: "
 				+ message.getError().getMsg());
