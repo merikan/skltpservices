@@ -11,6 +11,7 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
 import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesType;
 import se.skl.skltpservices.takecare.TakeCareDateHelper;
+import se.skl.skltpservices.takecare.TakeCareUtil;
 import se.skl.skltpservices.takecare.booking.GetTimeTypes;
 import se.skl.skltpservices.takecare.booking.gettimetypesrequest.ProfdocHISMessage;
 
@@ -40,32 +41,38 @@ public class GetAllTimeTypesRequestTransformer extends AbstractMessageTransforme
 			log.debug("Transforming request payload: {}", src);
 		}
 
-		GetAllTimeTypesType incomingRequest = (GetAllTimeTypesType) jaxbUtil_incoming.unmarshal(src);
-		String incomingHealthcarefacility = incomingRequest.getHealthcareFacility();
+		try {
 
-		ProfdocHISMessage message = new ProfdocHISMessage();
-		message.setCareUnitId(incomingHealthcarefacility);
-		message.setCareUnitIdType("hsaid");
-		message.setInvokingSystem("InvSysMVK");
-		message.setMsgType("Request");
-		message.setTime(TakeCareDateHelper.yyyyMMddHHmmss(new Date()));
-		message.setTimeTypeRequest("Web");
+			GetAllTimeTypesType incomingRequest = (GetAllTimeTypesType) jaxbUtil_incoming.unmarshal(src);
+			String incomingHealthcarefacility = incomingRequest.getHealthcareFacility();
 
-		GetTimeTypes outgoingRequest = new GetTimeTypes();
-		outgoingRequest.setCareunitid(incomingHealthcarefacility);
-		outgoingRequest.setCareunitidtype("hsaid");
-		outgoingRequest.setExternaluser("ExtUsrMVK");
-		outgoingRequest.setTcpassword("");
-		outgoingRequest.setTcusername("");
-		outgoingRequest.setXml(jaxbUtil_message.marshal(message));
+			ProfdocHISMessage message = new ProfdocHISMessage();
+			message.setCareUnitId(incomingHealthcarefacility);
+			message.setCareUnitIdType(TakeCareUtil.HSAID);
+			message.setInvokingSystem(TakeCareUtil.INVOKING_SYSTEM);
+			message.setMsgType(TakeCareUtil.REQUEST);
+			message.setTime(TakeCareDateHelper.yyyyMMddHHmmss(new Date()));
+			message.setTimeTypeRequest(TakeCareUtil.WEB);
 
-		Object outgoingPayload = jaxbUtil_outgoing.marshal(outgoingRequest);
+			GetTimeTypes outgoingRequest = new GetTimeTypes();
+			outgoingRequest.setCareunitid(incomingHealthcarefacility);
+			outgoingRequest.setCareunitidtype("hsaid");
+			outgoingRequest.setExternaluser(TakeCareUtil.EXTERNAL_USER);
+			outgoingRequest.setTcpassword("");
+			outgoingRequest.setTcusername("");
+			outgoingRequest.setXml(jaxbUtil_message.marshal(message));
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("transformed payload to: " + outgoingPayload);
+			Object outgoingPayload = jaxbUtil_outgoing.marshal(outgoingRequest);
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("transformed payload to: " + outgoingPayload);
+			}
+
+			return outgoingPayload;
+
+		} catch (Exception e) {
+			throw new TransformerException(this, e);
 		}
-
-		return outgoingPayload;
 
 	}
 

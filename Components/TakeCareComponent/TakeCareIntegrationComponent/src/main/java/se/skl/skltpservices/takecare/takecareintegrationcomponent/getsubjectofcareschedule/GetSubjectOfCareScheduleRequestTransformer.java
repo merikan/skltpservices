@@ -11,6 +11,7 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
 import se.riv.crm.scheduling.getsubjectofcareschedule.v1.GetSubjectOfCareScheduleType;
 import se.skl.skltpservices.takecare.TakeCareDateHelper;
+import se.skl.skltpservices.takecare.TakeCareUtil;
 import se.skl.skltpservices.takecare.booking.GetBookings;
 import se.skl.skltpservices.takecare.booking.getbookingsrequest.ProfdocHISMessage;
 
@@ -42,34 +43,41 @@ public class GetSubjectOfCareScheduleRequestTransformer extends AbstractMessageT
 			log.debug("Transforming request payload: {}", src);
 		}
 
-		GetSubjectOfCareScheduleType incomingRequest = (GetSubjectOfCareScheduleType) jaxbUtil_incoming.unmarshal(src);
-		String incomingHealthcarefacility = incomingRequest.getHealthcareFacility();
-		String incomingSubjectOfCare = incomingRequest.getSubjectOfCare();
+		try {
 
-		ProfdocHISMessage message = new ProfdocHISMessage();
-		message.setCareUnitId(incomingHealthcarefacility);
-		message.setCareUnitIdType("hsaid");
-		message.setInvokingSystem("InvSysMVK");
-		message.setMsgType("Request");
-		message.setBookingId(null);
-		message.setPatientId(incomingSubjectOfCare);
-		message.setTime(TakeCareDateHelper.yyyyMMddHHmmss(new Date()));
+			GetSubjectOfCareScheduleType incomingRequest = (GetSubjectOfCareScheduleType) jaxbUtil_incoming
+					.unmarshal(src);
+			String incomingHealthcarefacility = incomingRequest.getHealthcareFacility();
+			String incomingSubjectOfCare = incomingRequest.getSubjectOfCare();
 
-		GetBookings outgoingRequest = new GetBookings();
-		outgoingRequest.setCareunitid(incomingHealthcarefacility);
-		outgoingRequest.setCareunitidtype("hsaid");
-		outgoingRequest.setExternaluser("ExtUsrMVK");
-		outgoingRequest.setTcpassword("");
-		outgoingRequest.setTcusername("");
-		outgoingRequest.setXml(jaxbUtil_message.marshal(message));
+			ProfdocHISMessage message = new ProfdocHISMessage();
+			message.setCareUnitId(incomingHealthcarefacility);
+			message.setCareUnitIdType(TakeCareUtil.HSAID);
+			message.setInvokingSystem(TakeCareUtil.INVOKING_SYSTEM);
+			message.setMsgType(TakeCareUtil.REQUEST);
+			message.setBookingId(null);
+			message.setPatientId(incomingSubjectOfCare);
+			message.setTime(TakeCareDateHelper.yyyyMMddHHmmss(new Date()));
 
-		Object outgoingPayload = jaxbUtil_outgoing.marshal(outgoingRequest);
+			GetBookings outgoingRequest = new GetBookings();
+			outgoingRequest.setCareunitid(incomingHealthcarefacility);
+			outgoingRequest.setCareunitidtype(TakeCareUtil.HSAID);
+			outgoingRequest.setExternaluser(TakeCareUtil.EXTERNAL_USER);
+			outgoingRequest.setTcpassword("");
+			outgoingRequest.setTcusername("");
+			outgoingRequest.setXml(jaxbUtil_message.marshal(message));
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("transformed payload to: " + outgoingPayload);
+			Object outgoingPayload = jaxbUtil_outgoing.marshal(outgoingRequest);
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("transformed payload to: " + outgoingPayload);
+			}
+
+			return outgoingPayload;
+
+		} catch (Exception e) {
+			throw new TransformerException(this, e);
 		}
-
-		return outgoingPayload;
 
 	}
 

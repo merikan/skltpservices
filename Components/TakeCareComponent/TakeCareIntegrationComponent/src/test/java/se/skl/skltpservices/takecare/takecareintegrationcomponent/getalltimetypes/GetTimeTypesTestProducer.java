@@ -10,6 +10,7 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
 import se.skl.skltpservices.takecare.TakeCareTestProducer;
+import se.skl.skltpservices.takecare.TakeCareUtil;
 import se.skl.skltpservices.takecare.booking.BookingSoap;
 import se.skl.skltpservices.takecare.booking.gettimetypesresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.gettimetypesresponse.ProfdocHISMessage.TimeTypes;
@@ -45,9 +46,9 @@ public class GetTimeTypesTestProducer extends TakeCareTestProducer implements Bo
 	private String createOkResponse(String externaluser, String careunitid) {
 		ProfdocHISMessage outgoing_response = new ProfdocHISMessage();
 		outgoing_response.setCareUnit(careunitid);
-		outgoing_response.setCareUnitType("hsaid");
+		outgoing_response.setCareUnitType(TakeCareUtil.HSAID);
 		outgoing_response.setMethod("Booking.GetTimeTypes");
-		outgoing_response.setMsgType("Response");
+		outgoing_response.setMsgType(TakeCareUtil.RESPONSE);
 		outgoing_response.setSystem("ProfdocHIS");
 		outgoing_response.setSystemInstance(0);
 		outgoing_response.setTime(yyyyMMddHHmmss(new Date()));
@@ -59,7 +60,7 @@ public class GetTimeTypesTestProducer extends TakeCareTestProducer implements Bo
 	private TimeTypes buildTimeTypes(String careunitId) {
 		TimeTypes timeTypes = new TimeTypes();
 		timeTypes.setCareUnitId(careunitId);
-		timeTypes.setCareUnitIdType("hsaid");
+		timeTypes.setCareUnitIdType(TakeCareUtil.HSAID);
 		timeTypes.setCareUnitName("Careunit name");
 
 		timeTypes.getTimeType().add(createTimeType(0, "Tidstyp0"));

@@ -3,13 +3,16 @@ package se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofc
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import java.math.BigInteger;
 
 import org.junit.Test;
+import org.mule.api.transformer.TransformerException;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import org.soitoolkit.commons.mule.util.MiscUtil;
 
+import se.skl.skltpservices.takecare.TakeCareUtil;
 import se.skl.skltpservices.takecare.booking.GetBookings;
 import se.skl.skltpservices.takecare.booking.getbookingsrequest.ProfdocHISMessage;
 
@@ -36,9 +39,9 @@ public class GetSubjectOfCareScheduleRequestTransformerTest {
 		String tcUsername = bookings.getTcusername();
 		String xml = bookings.getXml();
 
-		assertEquals("hsaid", careunitType);
+		assertEquals(TakeCareUtil.HSAID, careunitType);
 		assertEquals("HSA-VKK123", careunitId);
-		assertEquals("ExtUsrMVK", externalUser);
+		assertEquals(TakeCareUtil.EXTERNAL_USER, externalUser);
 		assertEquals("", tcPassword);
 		assertEquals("", tcUsername);
 
@@ -53,12 +56,21 @@ public class GetSubjectOfCareScheduleRequestTransformerTest {
 		String patientId = message.getPatientId();
 
 		assertEquals("HSA-VKK123", msgCareunitId);
-		assertEquals("hsaid", msgCareunitIdType);
-		assertEquals("InvSysMVK", msgInvokingSystem);
-		assertEquals("Request", msgMessageType);
+		assertEquals(TakeCareUtil.HSAID, msgCareunitIdType);
+		assertEquals(TakeCareUtil.INVOKING_SYSTEM, msgInvokingSystem);
+		assertEquals(TakeCareUtil.REQUEST, msgMessageType);
 		assertEquals("191414141414", patientId);
 		assertNull(bookingId);
 		assertNotNull(msgTime);
 
+	}
+
+	@Test(expected = TransformerException.class)
+	public void testBadInputGivesTransformerException() throws Exception {
+		String input = MiscUtil
+				.readFileAsString("src/test/resources/testfiles/GetSubjectOfCareSchedule/request-bad-input.xml");
+		GetSubjectOfCareScheduleRequestTransformer transformer = new GetSubjectOfCareScheduleRequestTransformer();
+		transformer.pojoTransform(input, "UTF-8");
+		fail("Expected TransformException when bad input");
 	}
 }
