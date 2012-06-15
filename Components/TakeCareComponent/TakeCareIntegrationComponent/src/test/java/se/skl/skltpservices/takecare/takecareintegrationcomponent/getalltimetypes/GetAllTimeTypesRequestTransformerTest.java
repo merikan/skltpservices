@@ -1,13 +1,17 @@
 package se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.math.BigInteger;
 
 import org.junit.Test;
+import org.mule.api.transformer.TransformerException;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import org.soitoolkit.commons.mule.util.MiscUtil;
 
+import se.skl.skltpservices.takecare.TakeCareUtil;
 import se.skl.skltpservices.takecare.booking.GetTimeTypes;
 import se.skl.skltpservices.takecare.booking.gettimetypesrequest.ProfdocHISMessage;
 
@@ -32,9 +36,9 @@ public class GetAllTimeTypesRequestTransformerTest {
 		String tcUsername = timeTypes.getTcusername();
 		String xml = timeTypes.getXml();
 
-		assertEquals("hsaid", careunitType);
+		assertEquals(TakeCareUtil.HSAID, careunitType);
 		assertEquals("HSAVKK123", careunitId);
-		assertEquals("ExtUsrMVK", externalUser);
+		assertEquals(TakeCareUtil.EXTERNAL_USER, externalUser);
 		assertEquals("", tcPassword);
 		assertEquals("", tcUsername);
 
@@ -48,10 +52,18 @@ public class GetAllTimeTypesRequestTransformerTest {
 		String msgTimeTypeRequest = message.getTimeTypeRequest();
 
 		assertEquals("HSAVKK123", msgCareunitId);
-		assertEquals("hsaid", msgCareunitIdType);
-		assertEquals("InvSysMVK", msgInvokingSystem);
-		assertEquals("Request", msgMessageType);
-		assertEquals("Web", msgTimeTypeRequest);
+		assertEquals(TakeCareUtil.HSAID, msgCareunitIdType);
+		assertEquals(TakeCareUtil.INVOKING_SYSTEM, msgInvokingSystem);
+		assertEquals(TakeCareUtil.REQUEST, msgMessageType);
+		assertEquals(TakeCareUtil.WEB, msgTimeTypeRequest);
 		assertNotNull(msgTime);
+	}
+
+	@Test(expected = TransformerException.class)
+	public void testBadInputGivesTransformerException() throws Exception {
+		String input = MiscUtil.readFileAsString("src/test/resources/testfiles/GetAllTimeTypes/request-bad-input.xml");
+		GetAllTimeTypesRequestTransformer transformer = new GetAllTimeTypesRequestTransformer();
+		transformer.pojoTransform(input, "UTF-8");
+		fail("Expected TransformException when bad input");
 	}
 }

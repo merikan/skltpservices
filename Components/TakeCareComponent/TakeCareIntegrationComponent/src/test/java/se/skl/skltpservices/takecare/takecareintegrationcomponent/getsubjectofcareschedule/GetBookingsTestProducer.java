@@ -12,6 +12,7 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
 import se.skl.skltpservices.takecare.TakeCareTestProducer;
+import se.skl.skltpservices.takecare.TakeCareUtil;
 import se.skl.skltpservices.takecare.booking.BookingSoap;
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage.Bookings;
@@ -70,9 +71,9 @@ public class GetBookingsTestProducer extends TakeCareTestProducer implements Boo
 	private String createOkResponse(String externaluser, String careunitid, String patientId) {
 		ProfdocHISMessage outgoing_response = new ProfdocHISMessage();
 		outgoing_response.setCareUnit(careunitid);
-		outgoing_response.setCareUnitType("hsaid");
+		outgoing_response.setCareUnitType(TakeCareUtil.HSAID);
 		outgoing_response.setMethod("Booking.GetTimeTypes");
-		outgoing_response.setMsgType("Response");
+		outgoing_response.setMsgType(TakeCareUtil.RESPONSE);
 		outgoing_response.setSystem("ProfdocHIS");
 		outgoing_response.setSystemInstance(0);
 		outgoing_response.setTime(yyyyMMddHHmmss(new Date()));
@@ -84,7 +85,7 @@ public class GetBookingsTestProducer extends TakeCareTestProducer implements Boo
 	private Bookings createBookings(String careUnitId, String patientId) {
 		Bookings bookings = new Bookings();
 		bookings.setCareUnitId(careUnitId);
-		bookings.setCareUnitIdType("hsaid");
+		bookings.setCareUnitIdType(TakeCareUtil.HSAID);
 		bookings.setCareUnitName("Careunit name");
 
 		bookings.getBooking().add(createBooking(NORMAL_BOOKING, patientId));
