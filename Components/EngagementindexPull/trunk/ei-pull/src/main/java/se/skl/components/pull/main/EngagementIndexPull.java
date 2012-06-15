@@ -100,33 +100,38 @@ public class EngagementIndexPull {
         int amountOfFetchedResults = 0;
         // Continue while there is more data to fetch
         boolean done = false;
-        boolean success = false;
-        GetUpdatesResponseType updates;
+        boolean success;
+        Date dateForLastFetch = DateHelper.now();
         do {
             String timeForLastSuccessfulUpdate = getUpdatesService.getFormattedDateForGetUpdates(pullLogicalAddress, serviceDomain, timestampFormat);
-            Date dateForLastFetch = DateHelper.now();
-            updates = pull(pullLogicalAddress, serviceDomain, timeForLastSuccessfulUpdate, lastFetchedRegisteredResidentIdentification);
+            GetUpdatesResponseType updates = pull(pullLogicalAddress, serviceDomain, timeForLastSuccessfulUpdate, lastFetchedRegisteredResidentIdentification);
             if (updates != null) {
                 done = updates.isResponseIsComplete();
                 log.info("Received " + updates.getRegisteredResidentEngagement().size() + " updates from: " + pullLogicalAddress + " using service domain: " + serviceDomain + ".");
                 success = push(pushLogicalAddress, serviceDomain, updates);
                 if (!done) {
                     // There are more results to fetch, build list of what we fetched so far, since the producer is stateless.
-                    List<RegisteredResidentEngagementType> registeredResidentEngagements = updates.getRegisteredResidentEngagement();
-                    int listSize = registeredResidentEngagements.size();
-                    int indexOfLastElement = listSize - 1;
-                    lastFetchedRegisteredResidentIdentification = registeredResidentEngagements.get(indexOfLastElement).getRegisteredResidentIdentification();
-                    amountOfFetchedResults += listSize;
+                    lastFetchedRegisteredResidentIdentification = getLastRegisteredResidentEngagementFromList(updates);
+                    amountOfFetchedResults += updates.getRegisteredResidentEngagement().size();
                 }
             } else {
                 success = false;
-                getUpdatesService.incrementErrorsSinceLastFetch(pullLogicalAddress, serviceDomain);
-                log.error("Received null when pulling data since: " + timeForLastSuccessfulUpdate + ", from address: " + pullLogicalAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + amountOfFetchedResults + " partial results from this address.");
+                log.fatal("Received null when pulling data since: " + timeForLastSuccessfulUpdate + ", from address: " + pullLogicalAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + amountOfFetchedResults + " partial results from this address.");
             }
-        } while (!done && updates != null);
+        } while (!done && success);
         if (success) {
-            getUpdatesService.updateDateForGetUpdates(pullLogicalAddress, serviceDomain, DateHelper.now());
+            getUpdatesService.updateDateForGetUpdates(pullLogicalAddress, serviceDomain, dateForLastFetch);
+        } else {
+            log.fatal("Unable to push data from '" + pullLogicalAddress + "' using service domain '" + serviceDomain + "'.\nEither an error was in the response code from '" + pushLogicalAddress + "', or the updates from the producer was null.");
+            getUpdatesService.incrementErrorsSinceLastFetch(pullLogicalAddress, serviceDomain);
         }
+    }
+
+    private String getLastRegisteredResidentEngagementFromList(GetUpdatesResponseType updates) {
+        List<RegisteredResidentEngagementType> registeredResidentEngagements = updates.getRegisteredResidentEngagement();
+        int listSize = registeredResidentEngagements.size();
+        int indexOfLastElement = listSize - 1;
+        return registeredResidentEngagements.get(indexOfLastElement).getRegisteredResidentIdentification();
     }
 
     private GetUpdatesResponseType pull(String pullLogicalAddress, String serviceDomain, String timeForLastSuccessfulUpdate, String lastFetchedRegisteredResidentIdentification) {
@@ -156,11 +161,10 @@ public class EngagementIndexPull {
                     break;
                 case ERROR:
                     log.fatal("Result containing " + updates.getRegisteredResidentEngagement().size() + " posts was pushed to "+ logicalAddress + ", however an error response code was in the reply!\nResult code: " + resultCode.name() + ".\nUpdate response comment: " + updateResponse.getComment());
-                    break;
+                    return false;
             }
         } catch (Exception e) {
             log.fatal("Error while trying to update index! " + updates.getRegisteredResidentEngagement().size() + " posts were unable to be pushed to: "  + logicalAddress + ". Reason:\n", e);
-            getUpdatesService.incrementErrorsSinceLastFetch(logicalAddress, serviceDomain);
             return false;
         }
         return true;

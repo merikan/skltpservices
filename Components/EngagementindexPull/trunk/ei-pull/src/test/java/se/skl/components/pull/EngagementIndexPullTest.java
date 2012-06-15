@@ -379,6 +379,8 @@ public class EngagementIndexPullTest {
     public void testLoggingOfPushUpdatesError() {
         // Setup
         int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(serviceDomainsPropertyKey), ",") + 1;
+        int amountOfLogicalAddresses = 2;
+        int amountOfExpectedCalls = amountOfLogicalAddresses * amountOfServiceDomains;
         ArgumentCaptor<LoggingEvent> loggingEventArgumentCaptor = ArgumentCaptor.forClass(LoggingEvent.class);
         String logicalAddressWhichShouldBeLogged = PropertyResolver.get(updateDestinationProperty);
         // Generate error after update.
@@ -386,7 +388,7 @@ public class EngagementIndexPullTest {
         // Test
         engagementIndexPull.doFetchUpdates();
         // Verify
-        verify(appender, times(amountOfServiceDomains)).doAppend(loggingEventArgumentCaptor.capture());
+        verify(appender, times(amountOfExpectedCalls)).doAppend(loggingEventArgumentCaptor.capture());
         List<LoggingEvent> loggingEvents = loggingEventArgumentCaptor.getAllValues();
         for (LoggingEvent loggingEvent : loggingEvents) {
             // Check level of log message
