@@ -38,26 +38,34 @@ public class GetAllTimeTypesResponseTransformer extends TakeCareResponseTransfor
 	}
 
 	protected Object pojoTransform(Object src, String outputEncoding) throws TransformerException {
-		log.debug("Transforming response payload: {}", src);
-
-		GetTimeTypesResponse incoming_res = (GetTimeTypesResponse) jaxbUtil_incoming.unmarshal(src);
-		String incoming_string = incoming_res.getGetTimeTypesResult();
-
-		if (containsError(incoming_string)) {
-			createErrorFromProfdocHISErrorMessage(incoming_string);
-		}
-
-		JAXBElement<GetAllTimeTypesResponseType> outgoing_res = creareOkResponse(incoming_string);
-		Object payloadOut = jaxbUtil_outgoing.marshal(outgoing_res);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("transformed payload to: " + payloadOut);
+			log.debug("Transforming response payload: {}", src);
 		}
 
-		return payloadOut;
+		try {
+			GetTimeTypesResponse incoming_res = (GetTimeTypesResponse) jaxbUtil_incoming.unmarshal(src);
+			String incoming_string = incoming_res.getGetTimeTypesResult();
+
+			if (containsError(incoming_string)) {
+				throwProfdocHISErrorMessage(incoming_string);
+			}
+
+			JAXBElement<GetAllTimeTypesResponseType> outgoing_res = createOkResponse(incoming_string);
+			Object payloadOut = jaxbUtil_outgoing.marshal(outgoing_res);
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("transformed payload to: " + payloadOut);
+			}
+
+			return payloadOut;
+
+		} catch (Exception e) {
+			throw new TransformerException(this, e);
+		}
 	}
 
-	private JAXBElement<GetAllTimeTypesResponseType> creareOkResponse(String incoming_string) {
+	private JAXBElement<GetAllTimeTypesResponseType> createOkResponse(String incoming_string) {
 		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
 		TimeTypes incoming_timeTypes = message.getTimeTypes();
 

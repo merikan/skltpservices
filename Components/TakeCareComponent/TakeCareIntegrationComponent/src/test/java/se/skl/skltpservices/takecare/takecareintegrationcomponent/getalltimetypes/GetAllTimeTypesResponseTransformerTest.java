@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
+import org.mule.api.transformer.TransformerException;
 import org.soitoolkit.commons.mule.util.MiscUtil;
 
 public class GetAllTimeTypesResponseTransformerTest {
@@ -20,7 +21,7 @@ public class GetAllTimeTypesResponseTransformerTest {
 		assertEquals(expectedResult, result);
 	}
 
-	@Test(expected = RuntimeException.class)
+	@Test(expected = TransformerException.class)
 	public void testTransformer_error() throws Exception {
 
 		String input = MiscUtil
@@ -41,7 +42,7 @@ public class GetAllTimeTypesResponseTransformerTest {
 		try {
 			transformer.pojoTransform(input, "UTF-8");
 		} catch (Exception e) {
-			assertEquals("resultCode: 3001 resultText: Illegal argument!", e.getMessage());
+			assertEquals("resultCode: 3001 resultText: Illegal argument! (java.lang.RuntimeException)", e.getMessage());
 			return;
 		}
 

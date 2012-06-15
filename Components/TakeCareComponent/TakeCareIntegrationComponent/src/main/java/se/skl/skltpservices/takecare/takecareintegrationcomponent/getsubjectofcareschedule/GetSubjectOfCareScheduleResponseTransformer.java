@@ -32,23 +32,32 @@ public class GetSubjectOfCareScheduleResponseTransformer extends TakeCareRespons
 	 * Care format.
 	 */
 	public Object pojoTransform(Object src, String outputEncoding) throws TransformerException {
-		log.debug("Transforming response payload: {}", src);
-
-		GetBookingsResponse incoming_res = (GetBookingsResponse) jaxbUtil_incoming.unmarshal(src);
-		String incoming_string = incoming_res.getGetBookingsResult();
-
-		if (containsError(incoming_string)) {
-			createErrorFromProfdocHISErrorMessage(incoming_string);
-		}
-
-		JAXBElement<GetSubjectOfCareScheduleResponseType> outgoing_res = creareOkResponse(incoming_string);
-		Object payloadOut = jaxbUtil_outgoing.marshal(outgoing_res);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("transformed payload to: " + payloadOut);
+			log.debug("Transforming response payload: {}", src);
 		}
 
-		return payloadOut;
+		try {
+
+			GetBookingsResponse incoming_res = (GetBookingsResponse) jaxbUtil_incoming.unmarshal(src);
+			String incoming_string = incoming_res.getGetBookingsResult();
+
+			if (containsError(incoming_string)) {
+				throwProfdocHISErrorMessage(incoming_string);
+			}
+
+			JAXBElement<GetSubjectOfCareScheduleResponseType> outgoing_res = creareOkResponse(incoming_string);
+			Object payloadOut = jaxbUtil_outgoing.marshal(outgoing_res);
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("transformed payload to: " + payloadOut);
+			}
+
+			return payloadOut;
+
+		} catch (Exception e) {
+			throw new TransformerException(this, e);
+		}
 	}
 
 	private JAXBElement<GetSubjectOfCareScheduleResponseType> creareOkResponse(String incoming_string) {
