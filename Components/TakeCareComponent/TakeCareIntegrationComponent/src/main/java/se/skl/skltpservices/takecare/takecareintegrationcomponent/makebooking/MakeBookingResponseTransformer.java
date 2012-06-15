@@ -1,0 +1,73 @@
+package se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking;
+
+import javax.xml.bind.JAXBElement;
+
+import org.mule.api.transformer.TransformerException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
+
+import se.riv.crm.scheduling.makebooking.v1.MakeBookingResponseType;
+import se.riv.crm.scheduling.makebooking.v1.ObjectFactory;
+import se.riv.crm.scheduling.v1.ResultCodeEnum;
+import se.skl.skltpservices.takecare.TakeCareResponseTransformer;
+import se.skl.skltpservices.takecare.booking.MakeBookingResponse;
+import se.skl.skltpservices.takecare.booking.makebookingresponse.ProfdocHISMessage;
+import se.skl.skltpservices.takecare.booking.makebookingresponse.ProfdocHISMessage.BookingConfirmation;
+
+public class MakeBookingResponseTransformer extends TakeCareResponseTransformer {
+
+	private static final Logger log = LoggerFactory.getLogger(MakeBookingResponseTransformer.class);
+
+	private static final JaxbUtil jaxbUtil_incoming = new JaxbUtil(MakeBookingResponse.class);
+	private static final JaxbUtil jaxbUtil_message = new JaxbUtil(ProfdocHISMessage.class);
+	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(MakeBookingResponseType.class);
+
+	/**
+	 * Simple pojo transformer method that can be tested with plain unit
+	 * testing...
+	 */
+	public Object pojoTransform(Object src, String outputEncoding) throws TransformerException {
+		if (logger.isDebugEnabled()) {
+			log.debug("Transforming response payload: {}", src);
+		}
+
+		try {
+
+			MakeBookingResponse incoming_res = (MakeBookingResponse) jaxbUtil_incoming.unmarshal(src);
+			String incoming_string = incoming_res.getMakeBookingResult();
+
+			if (containsError(incoming_string)) {
+				throwProfdocHISErrorMessage(incoming_string);
+			}
+
+			JAXBElement<MakeBookingResponseType> outgoing_res = creareOkResponse(incoming_string);
+			Object payloadOut = jaxbUtil_outgoing.marshal(outgoing_res);
+
+			if (logger.isDebugEnabled()) {
+				logger.debug("transformed payload to: " + payloadOut);
+			}
+
+			return payloadOut;
+
+		} catch (Exception e) {
+			throw new TransformerException(this, e);
+		}
+	}
+
+	private JAXBElement<MakeBookingResponseType> creareOkResponse(String incoming_string) {
+		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
+
+		JAXBElement<MakeBookingResponseType> outgoing_res = new ObjectFactory()
+				.createMakeBookingResponse(new MakeBookingResponseType());
+
+		BookingConfirmation incoming_bokkingconfirm = message.getBookingConfirmation();
+
+		outgoing_res.getValue().setBookingId(incoming_bokkingconfirm.getBookingId());
+		outgoing_res.getValue().setResultCode(ResultCodeEnum.OK);
+		outgoing_res.getValue().setResultText("");
+
+		return outgoing_res;
+	}
+
+}
