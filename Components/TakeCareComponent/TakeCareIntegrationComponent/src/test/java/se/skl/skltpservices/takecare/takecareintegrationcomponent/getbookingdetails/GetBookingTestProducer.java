@@ -1,8 +1,7 @@
-package se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule;
+package se.skl.skltpservices.takecare.takecareintegrationcomponent.getbookingdetails;
 
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.UUID;
 
 import javax.jws.WebService;
 
@@ -21,13 +20,13 @@ import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessa
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage.Bookings.Booking.Resources.Resource;
 
 @WebService(targetNamespace = "http://tempuri.org/", name = "BookingSoap", portName = "BookingSoap")
-public class GetBookingsTestProducer extends TakeCareTestProducer implements BookingSoap {
+public class GetBookingTestProducer extends TakeCareTestProducer implements BookingSoap {
 
-	public static final String TEST_SUBJECTOFCARE_OK = "194001079120";
-	public static final String TEST_SUBJECTOFCARE_INVALID_ID = "194001079121";
+	public static final String TEST_BOOKINGID_OK = "194001079120";
+	public static final String TEST_BOOKINGID_INVALID_ID = "194001079121";
 	public static final String TEST_ID_FAULT_TIMEOUT = "194001079122";
 
-	private static final Logger log = LoggerFactory.getLogger(GetBookingsTestProducer.class);
+	private static final Logger log = LoggerFactory.getLogger(GetBookingTestProducer.class);
 	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("TakeCareIntegrationComponent-config");
 	private static final long SERVICE_TIMOUT_MS = Long.parseLong(rb.getString("SERVICE_TIMEOUT_MS"));
 
@@ -54,53 +53,52 @@ public class GetBookingsTestProducer extends TakeCareTestProducer implements Boo
 		se.skl.skltpservices.takecare.booking.getbookingsrequest.ProfdocHISMessage incomingMessage = (se.skl.skltpservices.takecare.booking.getbookingsrequest.ProfdocHISMessage) jaxbUtil_incoming
 				.unmarshal(xml);
 
-		String incomingPatientId = incomingMessage.getPatientId();
+		String bookingId = incomingMessage.getBookingId();
 
-		if (TEST_SUBJECTOFCARE_INVALID_ID.equals(incomingPatientId)) {
+		if (TEST_BOOKINGID_INVALID_ID.equals(bookingId)) {
 			return createErrorResponse(externaluser, careunitid);
-		} else if (TEST_ID_FAULT_TIMEOUT.equals(incomingPatientId)) {
+		} else if (TEST_ID_FAULT_TIMEOUT.equals(bookingId)) {
 			try {
 				Thread.sleep(SERVICE_TIMOUT_MS + 1000);
 			} catch (InterruptedException e) {
 			}
 		}
 
-		return createOkResponse(externaluser, careunitid, incomingPatientId);
+		return createOkResponse(externaluser, careunitid, bookingId);
 	}
 
-	private String createOkResponse(String externaluser, String careunitid, String patientId) {
+	private String createOkResponse(String externaluser, String careunitid, String bookingId) {
 		ProfdocHISMessage outgoing_response = new ProfdocHISMessage();
 		outgoing_response.setCareUnit(careunitid);
 		outgoing_response.setCareUnitType(TakeCareUtil.HSAID);
-		outgoing_response.setMethod("Booking.GetBookings");
+		outgoing_response.setMethod("Booking.Bookings");
 		outgoing_response.setMsgType(TakeCareUtil.RESPONSE);
 		outgoing_response.setSystem("ProfdocHIS");
 		outgoing_response.setSystemInstance(0);
 		outgoing_response.setTime(yyyyMMddHHmmss(new Date()));
 		outgoing_response.setUser(externaluser);
-		outgoing_response.getBookings().add(getBookings(careunitid, patientId));
+		outgoing_response.getBookings().add(getBooking(careunitid, bookingId));
 		return jaxbUtil_outgoing.marshal(outgoing_response);
 	}
 
-	private Bookings getBookings(String careUnitId, String patientId) {
+	private Bookings getBooking(String careUnitId, String bookingId) {
 		Bookings bookings = new Bookings();
 		bookings.setCareUnitId(careUnitId);
 		bookings.setCareUnitIdType(TakeCareUtil.HSAID);
 		bookings.setCareUnitName("Careunit name");
 
-		bookings.getBooking().add(createBooking(NORMAL_BOOKING, patientId));
-		bookings.getBooking().add(createBooking(NORMAL_BOOKING, patientId));
+		bookings.getBooking().add(createBooking(NORMAL_BOOKING, bookingId));
 
 		return bookings;
 	}
 
-	private Booking createBooking(short bookingType, String patientId) {
+	private Booking createBooking(short bookingType, String bookingId) {
 		Booking booking = new Booking();
-		booking.setBookingId(UUID.randomUUID().toString());
+		booking.setBookingId(bookingId);
 		booking.setBookingType(bookingType);
 		booking.setCancelAllowed(Short.valueOf("0"));
 		booking.setEndTime(yyyyMMddHHmm(new Date()));
-		booking.setPatientId(new BigInteger(patientId));
+		booking.setPatientId(new BigInteger("191414141414"));
 		booking.setPatientReason("Patientens orsak till bokningen");
 		booking.setRescheduleAllowed(Short.valueOf("1"));
 		booking.setResources(createResources());

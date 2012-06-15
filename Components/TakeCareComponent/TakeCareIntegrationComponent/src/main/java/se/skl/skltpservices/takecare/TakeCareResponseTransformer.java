@@ -35,4 +35,8 @@ public abstract class TakeCareResponseTransformer extends AbstractMessageTransfo
 		return StringUtils.contains(incoming_string, "Error");
 	}
 
+	public Boolean allowed(Short cancelAllowed) {
+		return cancelAllowed != null && cancelAllowed == 1;
+	}
+
 }

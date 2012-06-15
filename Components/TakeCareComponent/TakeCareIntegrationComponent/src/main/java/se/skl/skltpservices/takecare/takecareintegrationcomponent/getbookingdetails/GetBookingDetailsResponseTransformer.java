@@ -1,4 +1,4 @@
-package se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule;
+package se.skl.skltpservices.takecare.takecareintegrationcomponent.getbookingdetails;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
-import se.riv.crm.scheduling.getsubjectofcareschedule.v1.GetSubjectOfCareScheduleResponseType;
-import se.riv.crm.scheduling.getsubjectofcareschedule.v1.ObjectFactory;
+import se.riv.crm.scheduling.getbookingdetails.v1.GetBookingDetailsResponseType;
+import se.riv.crm.scheduling.getbookingdetails.v1.ObjectFactory;
 import se.riv.crm.scheduling.v1.TimeslotType;
 import se.skl.skltpservices.takecare.TakeCareResponseTransformer;
 import se.skl.skltpservices.takecare.booking.GetBookingsResponse;
@@ -18,14 +18,13 @@ import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessa
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage.Bookings;
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage.Bookings.Booking;
 
-public class GetSubjectOfCareScheduleResponseTransformer extends TakeCareResponseTransformer {
+public class GetBookingDetailsResponseTransformer extends TakeCareResponseTransformer {
 
-	private static final Logger log = LoggerFactory.getLogger(GetSubjectOfCareScheduleResponseTransformer.class);
+	private static final Logger log = LoggerFactory.getLogger(GetBookingDetailsResponseTransformer.class);
 
 	private static final JaxbUtil jaxbUtil_incoming = new JaxbUtil(GetBookingsResponse.class);
 	private static final JaxbUtil jaxbUtil_message = new JaxbUtil(ProfdocHISMessage.class);
-
-	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetSubjectOfCareScheduleResponseType.class);
+	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetBookingDetailsResponseType.class);
 
 	/**
 	 * Message aware transformer that transforms to crm:scheduling 1.0 from Take
@@ -41,7 +40,7 @@ public class GetSubjectOfCareScheduleResponseTransformer extends TakeCareRespons
 			createErrorFromProfdocHISErrorMessage(incoming_string);
 		}
 
-		JAXBElement<GetSubjectOfCareScheduleResponseType> outgoing_res = creareOkResponse(incoming_string);
+		JAXBElement<GetBookingDetailsResponseType> outgoing_res = creareOkResponse(incoming_string);
 		Object payloadOut = jaxbUtil_outgoing.marshal(outgoing_res);
 
 		if (logger.isDebugEnabled()) {
@@ -51,11 +50,11 @@ public class GetSubjectOfCareScheduleResponseTransformer extends TakeCareRespons
 		return payloadOut;
 	}
 
-	private JAXBElement<GetSubjectOfCareScheduleResponseType> creareOkResponse(String incoming_string) {
+	private JAXBElement<GetBookingDetailsResponseType> creareOkResponse(String incoming_string) {
 		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
 
-		JAXBElement<GetSubjectOfCareScheduleResponseType> outgoing_res = new ObjectFactory()
-				.createGetSubjectOfCareScheduleResponse(new GetSubjectOfCareScheduleResponseType());
+		JAXBElement<GetBookingDetailsResponseType> outgoing_res = new ObjectFactory()
+				.createGetBookingDetailsResponse(new GetBookingDetailsResponseType());
 
 		List<Bookings> incoming_timeTypes = message.getBookings();
 		if (!incoming_timeTypes.isEmpty()) {
@@ -84,11 +83,12 @@ public class GetSubjectOfCareScheduleResponseTransformer extends TakeCareRespons
 				timeslot.setTimeTypeID(String.valueOf(booking.getTimeTypeId()));
 				timeslot.setTimeTypeName(booking.getTimeTypeName_0020());
 
-				outgoing_res.getValue().getTimeslotDetail().add(timeslot);
+				outgoing_res.getValue().setTimeslotDetail(timeslot);
 			}
 
 		}
 
 		return outgoing_res;
 	}
+
 }
