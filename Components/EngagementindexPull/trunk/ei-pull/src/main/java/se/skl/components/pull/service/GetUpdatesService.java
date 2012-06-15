@@ -1,5 +1,6 @@
 package se.skl.components.pull.service;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.skl.components.pull.domain.GetUpdatesStatus;
@@ -20,6 +21,10 @@ import java.util.List;
 @Service("getUpdatesService")
 public class GetUpdatesService {
 
+    // DEBUG
+    private final static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(GetUpdatesService.class);
+    // END DEBUG
+
     @Autowired
     private GetUpdatesStatusRepository getUpdatesStatusRepository;
 
@@ -34,18 +39,28 @@ public class GetUpdatesService {
             String timeOffset = PropertyResolver.get("ei.pull.time.offset");
             return EngagementIndexHelper.getFormattedOffsetTime(DateHelper.now(), timeOffset, timestampFormat);
         }
-        // Remove one minute from last success time to make sure in case updates were made just when the update was made.
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(status.getLastSuccess());
-        calendar.set(Calendar.MINUTE, -3);
-        Date returnDate = calendar.getTime();
+        int minutesToRemove = (-(NumberUtils.toInt(PropertyResolver.get("ei.pull.time.margin"))));
+        Date returnDate = getPastTimeInMinutes(status.getLastSuccess(), minutesToRemove);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(timestampFormat);
         return simpleDateFormat.format(returnDate);
     }
 
+    private synchronized Date getPastTimeInMinutes(Date date, int minutesToRemove) {
+        // Remove one minute from last success time to make sure in case updates were made just when the update was made.
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.MINUTE, minutesToRemove);
+        return calendar.getTime();
+    }
+
     public void updateDateForGetUpdates(String logicalAddress, String serviceDomain, Date timeOfFetch) {
         GetUpdatesStatus status = getUpdatesStatusRepository.getStatusForLogicalAddressAndServiceContract(logicalAddress, serviceDomain);
+        // DEBUG
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateAsText = simpleDateFormat.format(timeOfFetch);
+        log.debug("\n\n\nTrying to set the new data: " + dateAsText + " for logical address: " + logicalAddress + ", using service domain: " + serviceDomain + "!\n\n\n");
+        // END DEBUG
         if (status == null) {
             // Let's create one
             status = new GetUpdatesStatus();

@@ -19,8 +19,6 @@ import java.util.UUID;
         wsdlLocation = "schemas/interactions/GetUpdatesInteraction/GetUpdatesInteraction_1.0_RIVTABP21.wsdl")
 public class GetUpdatesTestProducer implements GetUpdatesResponderInterface {
 
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-
 	@Override
 	public GetUpdatesResponseType getUpdates(String arg0, GetUpdatesType request) {
 		String serviceDomain = request.getServiceDomain();
@@ -53,6 +51,7 @@ public class GetUpdatesTestProducer implements GetUpdatesResponderInterface {
 	}
 
 	private EngagementType createEngagement(String serviceDomain, String registeredResidentIdentification) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		EngagementType engagement = new EngagementType();
 		engagement.setBusinessObjectInstanceIdentifier("bookingId");
 		engagement.setCategorization("Booking");
