@@ -26,7 +26,7 @@ public class EngagementIndexHelper {
         return serviceDomainList;
     }
 
-    public final static String getFormattedOffsetTime(Date startingDate, String timeOffset, String dateFormat) {
+    public final synchronized static String getFormattedOffsetTime(Date startingDate, String timeOffset, String dateFormat) {
         int offsetFromNowInSeconds = -NumberUtils.toInt(timeOffset);
         Calendar calendar = Calendar.getInstance();
         calendar.clear();

@@ -108,7 +108,7 @@ public class EngagementIndexPull {
             if (updates != null) {
                 done = updates.isResponseIsComplete();
                 log.info("Received " + updates.getRegisteredResidentEngagement().size() + " updates from: " + pullLogicalAddress + " using service domain: " + serviceDomain + ".");
-                success = push(pushLogicalAddress, serviceDomain, updates);
+                success = push(pushLogicalAddress, updates);
                 if (!done) {
                     // There are more results to fetch, build list of what we fetched so far, since the producer is stateless.
                     lastFetchedRegisteredResidentIdentification = getLastRegisteredResidentEngagementFromList(updates);
@@ -147,7 +147,7 @@ public class EngagementIndexPull {
         return null;
     }
 
-    private boolean push(String logicalAddress, String serviceDomain, GetUpdatesResponseType updates) {
+    private boolean push(String logicalAddress, GetUpdatesResponseType updates) {
         UpdateType requestForUpdate = createRequestForUpdate(updates);
         try {
             UpdateResponseType updateResponse = updateClient.update(logicalAddress, requestForUpdate);

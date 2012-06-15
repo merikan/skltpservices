@@ -29,13 +29,12 @@ public class GetUpdatesStatusRepositoryImpl extends JdbcDaoSupport implements Ge
         super.setDataSource(dataSource);
     }
 
-    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-
     @Resource(name = "eiPullStatusDbName")
     private String tableName;
 
     private final ParameterizedRowMapper<GetUpdatesStatus> MAPPER = new ParameterizedRowMapper<GetUpdatesStatus>() {
         public GetUpdatesStatus mapRow(ResultSet rs, int rowNum) throws SQLException {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
             GetUpdatesStatus status = new GetUpdatesStatus();
             status.setLogicalAddress(rs.getString("logicalpulladdress"));
             status.setServiceDomain(rs.getString("pullservicedomain"));
@@ -62,17 +61,26 @@ public class GetUpdatesStatusRepositoryImpl extends JdbcDaoSupport implements Ge
     }
 
     public void save(GetUpdatesStatus status) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String sqlInsert = "INSERT INTO " + tableName + " (logicalpulladdress, pullservicedomain, lastsuccess, errorssincelastsuccess) VALUES (?, ?, ?, ?)";
-        this.getJdbcTemplate().update(sqlInsert, status.getLogicalAddress(), status.getServiceDomain(), simpleDateFormat.format(status.getLastSuccess()), status.getAmountOfErrorsSinceLastSuccess());
+        String logicalAddress = status.getLogicalAddress();
+        String serviceDomain = status.getServiceDomain();
+        String formattedDate = simpleDateFormat.format(status.getLastSuccess());
+        int amountOfErrorsSinceLastSuccess = status.getAmountOfErrorsSinceLastSuccess();
+        this.getJdbcTemplate().update(sqlInsert, logicalAddress, serviceDomain, formattedDate, amountOfErrorsSinceLastSuccess);
     }
 
     public void update(GetUpdatesStatus status) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String sqlUpdate = "UPDATE " + tableName + " SET lastsuccess = ?, errorssincelastsuccess = ? WHERE logicalpulladdress = ? AND pullservicedomain = ?";
-        this.getJdbcTemplate().update(sqlUpdate, simpleDateFormat.format(status.getLastSuccess()), status.getAmountOfErrorsSinceLastSuccess(), status.getLogicalAddress(), status.getServiceDomain());
+        String formattedDate = simpleDateFormat.format(status.getLastSuccess());
+        int amountOfErrorsSinceLastSuccess = status.getAmountOfErrorsSinceLastSuccess();
+        String logicalAddress = status.getLogicalAddress();
+        String serviceDomain = status.getServiceDomain();
+        this.getJdbcTemplate().update(sqlUpdate, formattedDate, amountOfErrorsSinceLastSuccess, logicalAddress, serviceDomain);
     }
 
     public void delete(GetUpdatesStatus status) {
-
         String sqlDelete = "DELETE FROM " + tableName + " WHERE logicalpulladdress = ? AND pullservicedomain = ?";
         this.getJdbcTemplate().update(sqlDelete, status.getLogicalAddress(), status.getServiceDomain());
     }

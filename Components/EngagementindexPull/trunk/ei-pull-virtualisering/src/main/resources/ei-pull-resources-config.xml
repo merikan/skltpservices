@@ -25,6 +25,7 @@
                <entry key="ei.pull.address.servicedomains" value="${ei.pull.address.servicedomains}" />
                <entry key="ei.pull.time.offset" value="${ei.pull.time.offset}" />
                <entry key="ei.pull.time.format" value="${ei.pull.time.format}" />
+               <entry key="ei.pull.time.margin" value="${ei.pull.time.margin}" />
 
                <entry key="trustStoreType" value="${ei.https.trustStoreType}" />
                <entry key="trustStoreFile" value="${ei.https.trustStoreFile}" />
