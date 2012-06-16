@@ -49,13 +49,4 @@ public abstract class TakeCareResponseTransformer extends AbstractMessageTransfo
 		return StringUtils.contains(incoming_string, "Error");
 	}
 
-	/**
-	 * @param shortValue
-	 *            The short value
-	 * @return true if shortValue is 1, otherwise false
-	 */
-	public Boolean shortToBoolean(Short shortValue) {
-		return shortValue != null && shortValue == 1;
-	}
-
 }

@@ -27,4 +27,13 @@ public class TakeCareUtil {
 		return 0;
 	}
 
+	/**
+	 * @param shortValue
+	 *            The short value
+	 * @return true if shortValue is 1, otherwise false
+	 */
+	public static final Boolean shortToBoolean(Short shortValue) {
+		return shortValue != null && shortValue == 1;
+	}
+
 }

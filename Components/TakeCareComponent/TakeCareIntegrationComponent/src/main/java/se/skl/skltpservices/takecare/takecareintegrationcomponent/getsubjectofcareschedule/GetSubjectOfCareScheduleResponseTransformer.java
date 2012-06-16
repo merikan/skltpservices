@@ -17,6 +17,7 @@ import se.skl.skltpservices.takecare.booking.GetBookingsResponse;
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage.Bookings;
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage.Bookings.Booking;
+import static se.skl.skltpservices.takecare.TakeCareUtil.shortToBoolean;
 
 public class GetSubjectOfCareScheduleResponseTransformer extends TakeCareResponseTransformer {
 
