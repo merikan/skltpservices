@@ -1,5 +1,7 @@
 package se.skl.skltpservices.takecare.takecareintegrationcomponent.getbookingdetails;
 
+import static se.skl.skltpservices.takecare.TakeCareUtil.shortToBoolean;
+
 import java.util.List;
 
 import javax.xml.bind.JAXBElement;
