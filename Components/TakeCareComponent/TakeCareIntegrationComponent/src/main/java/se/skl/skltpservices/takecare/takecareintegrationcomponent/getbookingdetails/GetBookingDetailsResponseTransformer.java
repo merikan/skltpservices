@@ -27,8 +27,11 @@ public class GetBookingDetailsResponseTransformer extends TakeCareResponseTransf
 	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetBookingDetailsResponseType.class);
 
 	/**
-	 * Message aware transformer that transforms to crm:scheduling 1.0 from Take
-	 * Care format.
+	 * Simple pojo transformer that transforms Take Care format to
+	 * crm:scheduling 1.0.
+	 * 
+	 * @param src
+	 * @param outputEncoding
 	 */
 	public Object pojoTransform(Object src, String outputEncoding) throws TransformerException {
 
@@ -37,15 +40,9 @@ public class GetBookingDetailsResponseTransformer extends TakeCareResponseTransf
 		}
 
 		try {
-			GetBookingsResponse incoming_res = (GetBookingsResponse) jaxbUtil_incoming.unmarshal(src);
-			String incoming_string = incoming_res.getGetBookingsResult();
-
-			if (containsError(incoming_string)) {
-				throwProfdocHISErrorMessage(incoming_string);
-			}
-
-			JAXBElement<GetBookingDetailsResponseType> outgoing_res = creareOkResponse(incoming_string);
-			Object payloadOut = jaxbUtil_outgoing.marshal(outgoing_res);
+			String incoming_string = extractResponse(src);
+			handleTakeCareErrorMessages(incoming_string);
+			Object payloadOut = transformResponse(incoming_string);
 
 			if (logger.isDebugEnabled()) {
 				logger.debug("transformed payload to: " + payloadOut);
@@ -58,7 +55,13 @@ public class GetBookingDetailsResponseTransformer extends TakeCareResponseTransf
 		}
 	}
 
-	private JAXBElement<GetBookingDetailsResponseType> creareOkResponse(String incoming_string) {
+	private String extractResponse(Object src) {
+		GetBookingsResponse incoming_res = (GetBookingsResponse) jaxbUtil_incoming.unmarshal(src);
+		String incoming_string = incoming_res.getGetBookingsResult();
+		return incoming_string;
+	}
+
+	private Object transformResponse(String incoming_string) {
 		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
 
 		JAXBElement<GetBookingDetailsResponseType> outgoing_res = new ObjectFactory()
@@ -72,7 +75,7 @@ public class GetBookingDetailsResponseTransformer extends TakeCareResponseTransf
 
 				TimeslotType timeslot = new TimeslotType();
 				timeslot.setBookingId(booking.getBookingId());
-				timeslot.setCancelBookingAllowed(allowed(booking.getCancelAllowed()));
+				timeslot.setCancelBookingAllowed(shortToBoolean(booking.getCancelAllowed()));
 				// timeslot.setCareTypeID(value);
 				// timeslot.setCareTypeName(value);
 				timeslot.setEndTimeExclusive(String.valueOf(booking.getEndTime()));
@@ -83,7 +86,7 @@ public class GetBookingDetailsResponseTransformer extends TakeCareResponseTransf
 				timeslot.setPerformerName(String.valueOf(booking.getResources().getResource().get(0).getResourceName()));
 				// timeslot.setPurpose(value);
 				timeslot.setReason(booking.getPatientReason());
-				timeslot.setRebookingAllowed(allowed(booking.getRescheduleAllowed()));
+				timeslot.setRebookingAllowed(shortToBoolean(booking.getRescheduleAllowed()));
 				timeslot.setResourceID("");
 				timeslot.setResourceName("");
 				timeslot.setStartTimeInclusive(String.valueOf(booking.getStartTime()));
@@ -96,7 +99,7 @@ public class GetBookingDetailsResponseTransformer extends TakeCareResponseTransf
 
 		}
 
-		return outgoing_res;
+		return jaxbUtil_outgoing.marshal(outgoing_res);
 	}
 
 }

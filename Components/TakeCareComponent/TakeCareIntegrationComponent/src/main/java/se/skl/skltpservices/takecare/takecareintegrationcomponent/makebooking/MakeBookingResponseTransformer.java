@@ -24,8 +24,11 @@ public class MakeBookingResponseTransformer extends TakeCareResponseTransformer 
 	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(MakeBookingResponseType.class);
 
 	/**
-	 * Simple pojo transformer method that can be tested with plain unit
-	 * testing...
+	 * Simple pojo transformer that transforms Take Care format to
+	 * crm:scheduling 1.0.
+	 * 
+	 * @param src
+	 * @param outputEncoding
 	 */
 	public Object pojoTransform(Object src, String outputEncoding) throws TransformerException {
 		if (logger.isDebugEnabled()) {
@@ -33,16 +36,9 @@ public class MakeBookingResponseTransformer extends TakeCareResponseTransformer 
 		}
 
 		try {
-
-			MakeBookingResponse incoming_res = (MakeBookingResponse) jaxbUtil_incoming.unmarshal(src);
-			String incoming_string = incoming_res.getMakeBookingResult();
-
-			if (containsError(incoming_string)) {
-				throwProfdocHISErrorMessage(incoming_string);
-			}
-
-			JAXBElement<MakeBookingResponseType> outgoing_res = creareOkResponse(incoming_string);
-			Object payloadOut = jaxbUtil_outgoing.marshal(outgoing_res);
+			String incoming_string = extractResponse(src);
+			handleTakeCareErrorMessages(incoming_string);
+			Object payloadOut = transformResponse(incoming_string);
 
 			if (logger.isDebugEnabled()) {
 				logger.debug("transformed payload to: " + payloadOut);
@@ -55,19 +51,21 @@ public class MakeBookingResponseTransformer extends TakeCareResponseTransformer 
 		}
 	}
 
-	private JAXBElement<MakeBookingResponseType> creareOkResponse(String incoming_string) {
-		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
+	private String extractResponse(Object src) {
+		MakeBookingResponse incoming_res = (MakeBookingResponse) jaxbUtil_incoming.unmarshal(src);
+		String incoming_string = incoming_res.getMakeBookingResult();
+		return incoming_string;
+	}
 
+	private Object transformResponse(String incoming_string) {
+		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
 		JAXBElement<MakeBookingResponseType> outgoing_res = new ObjectFactory()
 				.createMakeBookingResponse(new MakeBookingResponseType());
-
 		BookingConfirmation incoming_bokkingconfirm = message.getBookingConfirmation();
-
 		outgoing_res.getValue().setBookingId(incoming_bokkingconfirm.getBookingId());
 		outgoing_res.getValue().setResultCode(ResultCodeEnum.OK);
 		outgoing_res.getValue().setResultText("");
-
-		return outgoing_res;
+		return jaxbUtil_outgoing.marshal(outgoing_res);
 	}
 
 }
