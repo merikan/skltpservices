@@ -2,36 +2,25 @@ package se.skl.skltpservices.takecare.takecareintegrationcomponent.getbookingdet
 
 import java.util.Date;
 
-import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
-import org.mule.transformer.AbstractMessageTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
 import se.riv.crm.scheduling.getbookingdetails.v1.GetBookingDetailsType;
 import se.skl.skltpservices.takecare.TakeCareDateHelper;
+import se.skl.skltpservices.takecare.TakeCareRequestTransformer;
 import se.skl.skltpservices.takecare.TakeCareUtil;
 import se.skl.skltpservices.takecare.booking.GetBookings;
 import se.skl.skltpservices.takecare.booking.getbookingsrequest.ProfdocHISMessage;
 
-public class GetBookingDetailsRequestTransformer extends AbstractMessageTransformer {
+public class GetBookingDetailsRequestTransformer extends TakeCareRequestTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(GetBookingDetailsRequestTransformer.class);
 
 	private static final JaxbUtil jaxbUtil_message = new JaxbUtil(ProfdocHISMessage.class);
 	private static final JaxbUtil jaxbUtil_incoming = new JaxbUtil(GetBookingDetailsType.class);
 	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetBookings.class);
-
-	/**
-	 * Message aware transformer that ...
-	 */
-	@Override
-	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
-		Object src = ((Object[]) message.getPayload())[1];
-		message.setPayload(pojoTransform(src, outputEncoding));
-		return message;
-	}
 
 	/**
 	 * Simple pojo transformer method that can be tested with plain unit

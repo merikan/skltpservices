@@ -2,7 +2,6 @@ package se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetyp
 
 import javax.xml.bind.JAXBElement;
 
-import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,17 +25,12 @@ public class GetAllTimeTypesResponseTransformer extends TakeCareResponseTransfor
 	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetAllTimeTypesResponseType.class);
 
 	/**
-	 * Message aware transformer that transforms to crm:scheduling 1.0 from Take
-	 * Care format.
+	 * Simple pojo transformer that transforms Take Care format to
+	 * crm:scheduling 1.0.
+	 * 
+	 * @param src
+	 * @param outputEncoding
 	 */
-	@Override
-	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
-		if (message.getExceptionPayload() != null) {
-			return message;
-		}
-		return pojoTransform(message.getPayload(), outputEncoding);
-	}
-
 	protected Object pojoTransform(Object src, String outputEncoding) throws TransformerException {
 
 		if (logger.isDebugEnabled()) {
@@ -44,15 +38,9 @@ public class GetAllTimeTypesResponseTransformer extends TakeCareResponseTransfor
 		}
 
 		try {
-			GetTimeTypesResponse incoming_res = (GetTimeTypesResponse) jaxbUtil_incoming.unmarshal(src);
-			String incoming_string = incoming_res.getGetTimeTypesResult();
-
-			if (containsError(incoming_string)) {
-				throwProfdocHISErrorMessage(incoming_string);
-			}
-
-			JAXBElement<GetAllTimeTypesResponseType> outgoing_res = createOkResponse(incoming_string);
-			Object payloadOut = jaxbUtil_outgoing.marshal(outgoing_res);
+			String incoming_string = extractResponse(src);
+			handleTakeCareErrorMessages(incoming_string);
+			Object payloadOut = transformResponse(incoming_string);
 
 			if (logger.isDebugEnabled()) {
 				logger.debug("transformed payload to: " + payloadOut);
@@ -65,7 +53,13 @@ public class GetAllTimeTypesResponseTransformer extends TakeCareResponseTransfor
 		}
 	}
 
-	private JAXBElement<GetAllTimeTypesResponseType> createOkResponse(String incoming_string) {
+	private String extractResponse(Object src) {
+		GetTimeTypesResponse incoming_res = (GetTimeTypesResponse) jaxbUtil_incoming.unmarshal(src);
+		String incoming_string = incoming_res.getGetTimeTypesResult();
+		return incoming_string;
+	}
+
+	private Object transformResponse(String incoming_string) {
 		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
 		TimeTypes incoming_timeTypes = message.getTimeTypes();
 
@@ -78,6 +72,6 @@ public class GetAllTimeTypesResponseTransformer extends TakeCareResponseTransfor
 			outgoing_timeType.setTimeTypeName(incoming_timeType.getTimeTypeName());
 			outgoing_res.getValue().getListOfTimeTypes().add(outgoing_timeType);
 		}
-		return outgoing_res;
+		return jaxbUtil_outgoing.marshal(outgoing_res);
 	}
 }

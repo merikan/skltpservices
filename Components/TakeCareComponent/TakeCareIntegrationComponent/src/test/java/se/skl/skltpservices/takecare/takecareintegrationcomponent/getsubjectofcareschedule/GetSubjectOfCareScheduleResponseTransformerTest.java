@@ -33,21 +33,21 @@ public class GetSubjectOfCareScheduleResponseTransformerTest {
 	@Test
 	public void testTransformBookingAllowed() throws Exception {
 		GetSubjectOfCareScheduleResponseTransformer transformer = new GetSubjectOfCareScheduleResponseTransformer();
-		boolean bookingAllowed = transformer.allowed(Short.valueOf("1"));
+		boolean bookingAllowed = transformer.shortToBoolean(Short.valueOf("1"));
 		assertTrue(bookingAllowed);
 	}
 
 	@Test
 	public void testTransformBookingNotAllowed() throws Exception {
 		GetSubjectOfCareScheduleResponseTransformer transformer = new GetSubjectOfCareScheduleResponseTransformer();
-		boolean bookingAllowed = transformer.allowed(Short.valueOf("0"));
+		boolean bookingAllowed = transformer.shortToBoolean(Short.valueOf("0"));
 		assertFalse(bookingAllowed);
 	}
 
 	@Test
 	public void testTransformBookingNotAllowedWhenIllegalValue() throws Exception {
 		GetSubjectOfCareScheduleResponseTransformer transformer = new GetSubjectOfCareScheduleResponseTransformer();
-		boolean bookingAllowed = transformer.allowed(Short.valueOf("23"));
+		boolean bookingAllowed = transformer.shortToBoolean(Short.valueOf("23"));
 		assertFalse(bookingAllowed);
 	}
 
