@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule 
-	xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:spring="http://www.springframework.org/schema/beans"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.mulesoft.org/schema/mule/core    http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 	">
 
-    <spring:beans>
-        <!-- Connectors et al that are specific for different environment specific config-files (local unit-test, integration-test or production environments) -->
-
-        <!-- TODO: Add import of environment specific configuration files here as required -->
-        
-        <!-- Import the JMS-provider used in production here, embedded JMS providers used for integration tests are loaded by the *IntegratIonTest.java classes directly -->  
-<!--         <spring:import resource="classpath:soitoolkit-mule-jms-connector-activemq-external.xml"/> -->
-
-
-
-    </spring:beans>
+	<spring:beans>
+		<!-- Connectors and endpoints that that are specific for different config-files (local unit-test, integration-test or production environments) -->
+		<!-- TODO: Add import of connector specific configuration files here as required -->
+			
+		<spring:importresource="classpath:soitoolkit-mule-jms-connector-activemq-external.xml" />
+		<spring:import resource="classpath:TakeCareIntegrationComponent-common.xml" />
+		<spring:import resource="classpath:services/*-service.xml" />
+	</spring:beans>
 
 </mule>
