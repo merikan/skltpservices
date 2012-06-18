@@ -21,10 +21,6 @@ import java.util.List;
 @Service("getUpdatesService")
 public class GetUpdatesService {
 
-    // DEBUG
-    private final static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(GetUpdatesService.class);
-    // END DEBUG
-
     @Autowired
     private GetUpdatesStatusRepository getUpdatesStatusRepository;
 
@@ -56,11 +52,6 @@ public class GetUpdatesService {
 
     public void updateDateForGetUpdates(String logicalAddress, String serviceDomain, Date timeOfFetch) {
         GetUpdatesStatus status = getUpdatesStatusRepository.getStatusForLogicalAddressAndServiceContract(logicalAddress, serviceDomain);
-        // DEBUG
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateAsText = simpleDateFormat.format(timeOfFetch);
-        log.debug("\n\n\nTrying to set the new data: " + dateAsText + " for logical address: " + logicalAddress + ", using service domain: " + serviceDomain + "!\n\n\n");
-        // END DEBUG
         if (status == null) {
             // Let's create one
             status = new GetUpdatesStatus();

@@ -1,6 +1,8 @@
 package se.skl.components.pull.main;
 
+import org.apache.log4j.FileAppender;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 import riv.itintegration.engagementindex._1.EngagementTransactionType;
 import riv.itintegration.engagementindex._1.EngagementType;
@@ -22,6 +24,7 @@ import se.skl.components.pull.utils.EngagementIndexHelper;
 import se.skl.components.pull.utils.HttpHelper;
 import se.skl.components.pull.utils.PropertyResolver;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -57,10 +60,19 @@ public class EngagementIndexPull {
 
     public EngagementIndexPull(String pullLogicalAddress) {
         this.configuredPullLogicalAddress = pullLogicalAddress;
+        if (!log.getAllAppenders().hasMoreElements()) {
+            String filename = PropertyResolver.get("ei.pull.log.file");
+            try {
+                FileAppender fileAppender = new FileAppender(new PatternLayout(), filename);
+                log.addAppender(fileAppender);
+            } catch (IOException e) {
+                throw new RuntimeException("Could not add file appender to " + filename + "!\nReason: ", e);
+            }
+        }
     }
 
     public void doFetchUpdates() {
-        log.info("Pull/Push-sequence started.");
+        log.info("Pull/Push-sequence for " + configuredPullLogicalAddress + " started.");
         httpHelper.configHttpConduit(getAddressesClient);
         httpHelper.configHttpConduit(updateClient);
         httpHelper.configHttpConduit(getUpdatesClient);
@@ -82,7 +94,7 @@ public class EngagementIndexPull {
             log.fatal("Could not acquire addresses from " + addressServiceAddress + " which should be contacted for pulling data. Reason:\n", e);
         }
         pushAndPull(possiblePullAddresses, pullLogicalAddress, pushLogicalAddress, serviceDomainList, timestampFormat);
-        log.info("Pull/Push-sequence ended.");
+        log.info("Pull/Push-sequence for " + configuredPullLogicalAddress + " ended.");
     }
 
     private void pushAndPull(List<String> possiblePullAddresses, String pullLogicalAddress, String pushLogicalAddress, List<String> serviceDomainList, String timestampFormat) {
@@ -160,11 +172,11 @@ public class EngagementIndexPull {
                     log.warn("Received unexpected result with code " + resultCode.name() + ". Response comment: " + updateResponse.getComment() + "." + updates.getRegisteredResidentEngagement().size() + " posts was however, successfully pushed to " + logicalAddress + ".");
                     break;
                 case ERROR:
-                    log.fatal("Result containing " + updates.getRegisteredResidentEngagement().size() + " posts was pushed to "+ logicalAddress + ", however an error response code was in the reply!\nResult code: " + resultCode.name() + ".\nUpdate response comment: " + updateResponse.getComment());
+                    log.fatal("Result containing " + updates.getRegisteredResidentEngagement().size() + " posts was pushed to " + logicalAddress + ", however an error response code was in the reply!\nResult code: " + resultCode.name() + ".\nUpdate response comment: " + updateResponse.getComment());
                     return false;
             }
         } catch (Exception e) {
-            log.fatal("Error while trying to update index! " + updates.getRegisteredResidentEngagement().size() + " posts were unable to be pushed to: "  + logicalAddress + ". Reason:\n", e);
+            log.fatal("Error while trying to update index! " + updates.getRegisteredResidentEngagement().size() + " posts were unable to be pushed to: " + logicalAddress + ". Reason:\n", e);
             return false;
         }
         return true;

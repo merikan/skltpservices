@@ -7,8 +7,7 @@
       xmlns:http="http://www.mulesource.org/schema/mule/cxf/2.2">
 
 
-	<spring:bean id="propertyPlaceholder"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<spring:bean id="propertyPlaceholder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<spring:property name="ignoreResourceNotFound" value="true" />
 		<spring:property name="locations">
 			<spring:list>
