@@ -178,7 +178,7 @@
 									<goal>java</goal>
 								</goals>
 								<configuration>
-									<mainClass>se.skl.takecare.takecareintegrationcomponent.TakeCareIntegrationComponentMuleServer</mainClass>
+									<mainClass>se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareIntegrationComponentMuleServer</mainClass>
 									<classpathScope>test</classpathScope>
 								</configuration>
 							</execution>
