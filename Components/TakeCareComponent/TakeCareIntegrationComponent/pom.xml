@@ -88,11 +88,11 @@
 			<resource>
 				<directory>${basedir}/src/main/resources</directory>
 			</resource>
-<!--
+
 			<resource>
 				<directory>${basedir}/src/main/app</directory>
 			</resource>
--->
+
 		</resources>
 
 		<plugins>
@@ -134,7 +134,7 @@
 				</configuration>
 			</plugin>
 
-<!--
+
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
@@ -151,7 +151,7 @@
 					</execution>
 				</executions>
 			</plugin>
--->
+
 
 		</plugins>
 
