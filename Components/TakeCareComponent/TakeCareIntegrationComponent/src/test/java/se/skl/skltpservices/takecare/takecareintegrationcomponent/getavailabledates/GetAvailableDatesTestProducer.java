@@ -1,12 +1,14 @@
-package se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes;
+package se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabledates;
 
 import static se.skl.skltpservices.takecare.TakeCareUtil.HSAID;
 import static se.skl.skltpservices.takecare.TakeCareUtil.RESPONSE;
 
+import java.math.BigInteger;
 import java.util.Date;
 
 import javax.jws.WebService;
 
+import org.apache.commons.lang.time.FastDateFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
@@ -14,24 +16,23 @@ import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
 import se.skl.skltpservices.takecare.TakeCareTestProducer;
 import se.skl.skltpservices.takecare.booking.BookingSoap;
-import se.skl.skltpservices.takecare.booking.gettimetypesresponse.ProfdocHISMessage;
-import se.skl.skltpservices.takecare.booking.gettimetypesresponse.ProfdocHISMessage.TimeTypes;
-import se.skl.skltpservices.takecare.booking.gettimetypesresponse.ProfdocHISMessage.TimeTypes.TimeType;
+import se.skl.skltpservices.takecare.booking.getavailabledatesresponse.ProfdocHISMessage;
+import se.skl.skltpservices.takecare.booking.getavailabledatesresponse.ProfdocHISMessage.AvailableDates;
 
 @WebService(targetNamespace = "http://tempuri.org/", name = "BookingSoap", portName = "BookingSoap")
-public class GetTimeTypesTestProducer extends TakeCareTestProducer implements BookingSoap {
+public class GetAvailableDatesTestProducer extends TakeCareTestProducer implements BookingSoap {
 
 	public static final String TEST_HEALTHCAREFACILITY_OK = "HSA-VKK123";
 	public static final String TEST_HEALTHCAREFACILITY_INVALID_ID = "-1";
 	public static final String TEST_ID_FAULT_TIMEOUT = "0";
 
-	private static final Logger log = LoggerFactory.getLogger(GetTimeTypesTestProducer.class);
+	private static final Logger log = LoggerFactory.getLogger(GetAvailableDatesTestProducer.class);
 	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("TakeCareIntegrationComponent-config");
 	private static final long SERVICE_TIMOUT_MS = Long.parseLong(rb.getString("SERVICE_TIMEOUT_MS"));
 
 	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(ProfdocHISMessage.class);
 
-	public String getTimeTypes(String tcusername, String tcpassword, String externaluser, String careunitidtype,
+	public String getAvailableDates(String tcusername, String tcpassword, String externaluser, String careunitidtype,
 			String careunitid, String xml) {
 
 		if (TEST_HEALTHCAREFACILITY_INVALID_ID.equals(careunitid)) {
@@ -55,26 +56,30 @@ public class GetTimeTypesTestProducer extends TakeCareTestProducer implements Bo
 		outgoing_response.setSystemInstance(0);
 		outgoing_response.setTime(yyyyMMddHHmmss(new Date()));
 		outgoing_response.setUser(externaluser);
-		outgoing_response.setTimeTypes(buildTimeTypes(careunitid));
+
+		// Take Care always deliver exactly one AvailableDates element according
+		// to spec
+		outgoing_response.getAvailableDates().add(createAvaliableDates(careunitid));
 		return jaxbUtil_outgoing.marshal(outgoing_response);
 	}
 
-	private TimeTypes buildTimeTypes(String careunitId) {
-		TimeTypes timeTypes = new TimeTypes();
-		timeTypes.setCareUnitId(careunitId);
-		timeTypes.setCareUnitIdType(HSAID);
-		timeTypes.setCareUnitName("Careunit name");
-
-		timeTypes.getTimeType().add(createTimeType(0, "Tidstyp0"));
-		timeTypes.getTimeType().add(createTimeType(1, "Tidstyp1"));
-		return timeTypes;
+	private AvailableDates createAvaliableDates(String careunitId) {
+		AvailableDates availableDates = new AvailableDates();
+		availableDates.setCareUnitId(careunitId);
+		availableDates.setCareUnitIdType(HSAID);
+		availableDates.setCareUnitName(careunitId);
+		availableDates.setResourceId(new BigInteger("0"));
+		availableDates.setTimeTypeId(0);
+		availableDates.getDate().add(toCorrectAvailableDateTakeCareFormat(new Date()));
+		availableDates.getDate().add(toCorrectAvailableDateTakeCareFormat(new Date()));
+		availableDates.getDate().add(toCorrectAvailableDateTakeCareFormat(new Date()));
+		return availableDates;
 	}
 
-	private TimeType createTimeType(int timeTypeId, String timeTypeName) {
-		TimeType timeType = new TimeType();
-		timeType.setTimeTypeId(timeTypeId);
-		timeType.setTimeTypeName(timeTypeName);
-		return timeType;
+	public static final long toCorrectAvailableDateTakeCareFormat(Date date) {
+		FastDateFormat dateFormat = FastDateFormat.getInstance("yyyyMMdd");
+		String strDate = dateFormat.format(date);
+		return Long.valueOf(strDate);
 	}
 
 }

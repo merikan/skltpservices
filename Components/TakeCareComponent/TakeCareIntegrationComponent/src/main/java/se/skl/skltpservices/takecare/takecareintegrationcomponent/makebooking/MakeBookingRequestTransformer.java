@@ -1,13 +1,13 @@
 package se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking;
 
-import static se.skl.skltpservices.takecare.TakeCareDateHelper.removeSecondsFromRivTaTime;
+import static se.skl.skltpservices.takecare.TakeCareDateHelper.toTakeCareLongTime;
 import static se.skl.skltpservices.takecare.TakeCareDateHelper.yyyyMMddHHmmss;
 import static se.skl.skltpservices.takecare.TakeCareUtil.EXTERNAL_USER;
 import static se.skl.skltpservices.takecare.TakeCareUtil.HSAID;
 import static se.skl.skltpservices.takecare.TakeCareUtil.INVOKING_SYSTEM;
 import static se.skl.skltpservices.takecare.TakeCareUtil.REQUEST;
 import static se.skl.skltpservices.takecare.TakeCareUtil.numericToBigInteger;
-import static se.skl.skltpservices.takecare.TakeCareUtil.numericToInteger;
+import static se.skl.skltpservices.takecare.TakeCareUtil.numericToInt;
 
 import java.util.Date;
 
@@ -57,13 +57,13 @@ public class MakeBookingRequestTransformer extends TakeCareRequestTransformer {
 			message.setCareUnitIdType(HSAID);
 			message.setInvokingSystem(INVOKING_SYSTEM);
 			message.setMsgType(REQUEST);
-			message.setEndTime(numericToBigInteger(removeSecondsFromRivTaTime(incominEndTime)));
+			message.setEndTime(numericToBigInteger(toTakeCareLongTime(incominEndTime)));
 			message.setPatientId(numericToBigInteger(incomingSubjectOfCare));
 			message.setPatientReason(incomingReason);
 			message.setResourceId(numericToBigInteger(incomingResourceId));
-			message.setStartTime(numericToBigInteger(removeSecondsFromRivTaTime(incominStartTime)));
+			message.setStartTime(numericToBigInteger(toTakeCareLongTime(incominStartTime)));
 			message.setTime(yyyyMMddHHmmss(new Date()));
-			message.setTimeTypeId(numericToInteger(incomingTimeTypeId));
+			message.setTimeTypeId(numericToInt(incomingTimeTypeId));
 
 			MakeBooking outgoingRequest = new MakeBooking();
 			outgoingRequest.setCareunitid(incomingHealthcarefacility);

@@ -23,11 +23,10 @@ public final class TakeCareDateHelper {
 	 * 
 	 * @return
 	 */
-	public static final String removeSecondsFromRivTaTime(String yyyyMMddHHmmss) {
+	public static final String toTakeCareLongTime(String yyyyMMddHHmmss) {
 		if (StringUtils.isEmpty(yyyyMMddHHmmss) || yyyyMMddHHmmss.length() != 14) {
 			throw new RuntimeException("Time is not in correct RIV TA format, expecting yyyyMMddHHmmss");
 		}
 		return yyyyMMddHHmmss.substring(0, 12);
 	}
-
 }

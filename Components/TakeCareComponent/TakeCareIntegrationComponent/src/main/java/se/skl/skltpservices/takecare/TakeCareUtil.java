@@ -20,11 +20,18 @@ public class TakeCareUtil {
 		return null;
 	}
 
-	public static final int numericToInteger(String value) {
+	public static final int numericToInt(String value) {
 		if (StringUtils.isNumeric(value)) {
 			return new Integer(value);
 		}
 		return 0;
+	}
+
+	public static final Integer numericToInteger(String value) {
+		if (StringUtils.isNotEmpty(value) && StringUtils.isNumeric(value)) {
+			return new Integer(value);
+		}
+		return null;
 	}
 
 	/**

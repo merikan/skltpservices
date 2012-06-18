@@ -1,7 +1,9 @@
 package se.skl.skltpservices.takecare;
 
 import java.net.URL;
+import java.util.Date;
 
+import org.apache.commons.lang.time.FastDateFormat;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
 
@@ -20,6 +22,11 @@ public class TakeCareTestConsumer {
 				"TakeCareTestConsumer-cxf-config.xml");
 		Bus bus = bf.createBus(busFile.toString());
 		SpringBusFactory.setDefaultBus(bus);
+	}
+
+	public static final String yyyyMMddHHmmss(Date date) {
+		FastDateFormat dateFormat = FastDateFormat.getInstance("yyyyMMddHHmmss");
+		return dateFormat.format(date);
 	}
 
 }
