@@ -39,18 +39,18 @@ public class GetUpdatesService {
             String timeOffset = PropertyResolver.get("ei.pull.time.offset");
             return EngagementIndexHelper.getFormattedOffsetTime(DateHelper.now(), timeOffset, timestampFormat);
         }
-        int minutesToRemove = (-(NumberUtils.toInt(PropertyResolver.get("ei.pull.time.margin"))));
-        Date returnDate = getPastTimeInMinutes(status.getLastSuccess(), minutesToRemove);
+        int secondsToRemove = (-(NumberUtils.toInt(PropertyResolver.get("ei.pull.time.margin"))));
+        Date returnDate = getPastTimeInSeconds(status.getLastSuccess(), secondsToRemove);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(timestampFormat);
         return simpleDateFormat.format(returnDate);
     }
 
-    private synchronized Date getPastTimeInMinutes(Date date, int minutesToRemove) {
+    private synchronized Date getPastTimeInSeconds(Date date, int secondsToRemove) {
         // Remove one minute from last success time to make sure in case updates were made just when the update was made.
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        calendar.set(Calendar.MINUTE, minutesToRemove);
+        calendar.set(Calendar.SECOND, secondsToRemove);
         return calendar.getTime();
     }
 
