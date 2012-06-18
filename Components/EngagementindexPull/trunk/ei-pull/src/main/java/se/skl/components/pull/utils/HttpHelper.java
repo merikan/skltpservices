@@ -4,7 +4,9 @@ import org.apache.cxf.configuration.jsse.TLSClientParameters;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.transport.http.HTTPConduit;
+import org.apache.log4j.FileAppender;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 import org.springframework.stereotype.Service;
 
 import javax.net.ssl.KeyManagerFactory;
@@ -22,6 +24,18 @@ import java.security.cert.CertificateException;
 public class HttpHelper {
 
 	private final static Logger log = Logger.getLogger(HttpHelper.class);
+
+    public HttpHelper() {
+        if (!log.getAllAppenders().hasMoreElements()) {
+            String filename = PropertyResolver.get("ei.pull.log.file");
+            try {
+                FileAppender fileAppender = new FileAppender(new PatternLayout(), filename);
+                log.addAppender(fileAppender);
+            } catch (IOException e) {
+                throw new RuntimeException("Could not add file appender to " + filename + "!\nReason: ", e);
+            }
+        }
+    }
 
 	public void configHttpConduit(Object service) {
 		final Client clientProxy = ClientProxy.getClient(service);

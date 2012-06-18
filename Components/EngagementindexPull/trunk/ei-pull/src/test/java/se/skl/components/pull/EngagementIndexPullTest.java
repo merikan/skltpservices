@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Appender;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
+import org.apache.log4j.Priority;
 import org.apache.log4j.spi.LoggingEvent;
 import org.junit.After;
 import org.junit.Before;
@@ -335,9 +336,9 @@ public class EngagementIndexPullTest {
         // Test
         engagementIndexPull.doFetchUpdates();
         // Verify
-        verify(appender, times(2)).doAppend(loggingEventArgumentCaptor.capture());
+        verify(appender, Mockito.atLeastOnce()).doAppend(loggingEventArgumentCaptor.capture());
         // Get the first logging message
-        LoggingEvent loggingEvent = loggingEventArgumentCaptor.getAllValues().get(0);
+        LoggingEvent loggingEvent = loggingEventArgumentCaptor.getAllValues().get(1);
         // Check level of log message
         assertEquals("Logging level for exception should be fatal!", Level.FATAL, loggingEvent.getLevel());
         // Check that the message contains the logical address
@@ -358,29 +359,27 @@ public class EngagementIndexPullTest {
         verify(appender, atLeastOnce()).doAppend(loggingEventArgumentCaptor.capture());
         List<LoggingEvent> loggingEvents = loggingEventArgumentCaptor.getAllValues();
         for (LoggingEvent loggingEvent : loggingEvents) {
-            String renderedMessage = loggingEvent.getRenderedMessage();
-            boolean containsLogicalAddress = false;
-            for (String logicalAddressWhichShouldBeLogged : testAddressesForFetchingData) {
-                // One of these addresses should be in the log message
-                containsLogicalAddress = containsLogicalAddress || StringUtils.contains(renderedMessage, logicalAddressWhichShouldBeLogged);
-            }
-            assertTrue("The logical address of the producer was not in the log message when pulling data did not go as anticipated.", containsLogicalAddress);
+            if (loggingEvent.getLevel().toInt() != Priority.INFO_INT) {
+                String renderedMessage = loggingEvent.getRenderedMessage();
+                boolean containsLogicalAddress = false;
+                for (String logicalAddressWhichShouldBeLogged : testAddressesForFetchingData) {
+                    // One of these addresses should be in the log message
+                    containsLogicalAddress = containsLogicalAddress || StringUtils.contains(renderedMessage, logicalAddressWhichShouldBeLogged);
+                }
+                assertTrue("The logical address of the producer was not in the log message when pulling data did not go as anticipated.", containsLogicalAddress);
 
-            boolean containsServiceContract = false;
-            for (String serviceContractWhichShouldBeLogged : testServiceDomainsForFetchingData) {
-                // One of these addresses should be in the log message
-                containsServiceContract = containsServiceContract || StringUtils.contains(renderedMessage, serviceContractWhichShouldBeLogged);
+                boolean containsServiceContract = false;
+                for (String serviceContractWhichShouldBeLogged : testServiceDomainsForFetchingData) {
+                    // One of these addresses should be in the log message
+                    containsServiceContract = containsServiceContract || StringUtils.contains(renderedMessage, serviceContractWhichShouldBeLogged);
+                }
+                assertTrue("The service domain used to contact the producer was not in the log message when pulling data did not go as anticipated.", containsLogicalAddress);
             }
-            assertTrue("The service domain used to contact the producer was not in the log message when pulling data did not go as anticipated.", containsLogicalAddress);
         }
     }
 
     @Test
-    public void testLoggingOfPushUpdatesError() {
-        // Setup
-        int amountOfServiceDomains = StringUtils.countMatches(PropertyResolver.get(serviceDomainsPropertyKey), ",") + 1;
-        int amountOfLogicalAddresses = 2;
-        int amountOfExpectedCalls = amountOfLogicalAddresses * amountOfServiceDomains;
+    public void testLoggingOfLogicalAddresses() {
         ArgumentCaptor<LoggingEvent> loggingEventArgumentCaptor = ArgumentCaptor.forClass(LoggingEvent.class);
         String logicalAddressWhichShouldBeLogged = PropertyResolver.get(updateDestinationProperty);
         // Generate error after update.
@@ -388,13 +387,12 @@ public class EngagementIndexPullTest {
         // Test
         engagementIndexPull.doFetchUpdates();
         // Verify
-        verify(appender, times(amountOfExpectedCalls)).doAppend(loggingEventArgumentCaptor.capture());
+        verify(appender, Mockito.atLeastOnce()).doAppend(loggingEventArgumentCaptor.capture());
         List<LoggingEvent> loggingEvents = loggingEventArgumentCaptor.getAllValues();
         for (LoggingEvent loggingEvent : loggingEvents) {
-            // Check level of log message
-            assertEquals("Logging level for this exception should be fatal!", Level.FATAL, loggingEvent.getLevel());
             // Check that the message contains the logical address
-            assertTrue("The logical address of the engagement index was not in the log message when pushing data did not go as anticipated.", StringUtils.contains(loggingEvent.getRenderedMessage(), logicalAddressWhichShouldBeLogged));
+            boolean contains = (StringUtils.contains(loggingEvent.getRenderedMessage(), logicalAddressWhichShouldBeLogged) || StringUtils.contains(loggingEvent.getRenderedMessage(), configuredPullLogicalAddress));
+            assertTrue("The logical address of the engagement index was not in the log message when pushing data did not go as anticipated.", contains);
         }
     }
 
