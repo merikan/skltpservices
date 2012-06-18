@@ -88,11 +88,11 @@
 			<resource>
 				<directory>${basedir}/src/main/resources</directory>
 			</resource>
+<!--
 			<resource>
-				<!-- To get mule-config files from the Mule Studio defined resource-folder 
-					in the classpath... -->
 				<directory>${basedir}/src/main/app</directory>
 			</resource>
+-->
 		</resources>
 
 		<plugins>
@@ -134,16 +134,13 @@
 				</configuration>
 			</plugin>
 
+<!--
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
-					<!-- if no classifier is declared, then a mvn install results in a file 
-						in the local repo: ic2-1.0.0-SNAPSHOT.mule which is a jar-file - only strangely 
-						named and with a bad extension -->
 					<classifier>core</classifier>
 					<excludes>
 						<exclude>log4j.xml</exclude>
-						<!-- <exclude>mule-deploy.properties</exclude> -->
 					</excludes>
 				</configuration>
 				<executions>
@@ -154,6 +151,7 @@
 					</execution>
 				</executions>
 			</plugin>
+-->
 
 		</plugins>
 
