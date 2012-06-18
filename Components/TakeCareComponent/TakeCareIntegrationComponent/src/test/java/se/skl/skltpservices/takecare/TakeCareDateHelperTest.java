@@ -8,25 +8,25 @@ public class TakeCareDateHelperTest {
 
 	@Test
 	public void testRemoveSecondsFromRivTaTime() {
-		String actual = TakeCareDateHelper.removeSecondsFromRivTaTime("20120612121530");
+		String actual = TakeCareDateHelper.toTakeCareLongTime("20120612121530");
 		assertEquals("201206121215", actual);
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testRemoveSecondsFromRivTaTimeThrowsErrorWhenNull() {
-		TakeCareDateHelper.removeSecondsFromRivTaTime(null);
+		TakeCareDateHelper.toTakeCareLongTime(null);
 		fail("Excpected RuntimeException");
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testRemoveSecondsFromRivTaTimeThrowsErrorWhenEmpty() {
-		TakeCareDateHelper.removeSecondsFromRivTaTime("");
+		TakeCareDateHelper.toTakeCareLongTime("");
 		fail("Excpected RuntimeException");
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testRemoveSecondsFromRivTaTimeThrowsErrorWhenWrongLength() {
-		TakeCareDateHelper.removeSecondsFromRivTaTime("123");
+		TakeCareDateHelper.toTakeCareLongTime("123");
 		fail("Excpected RuntimeException");
 	}
 

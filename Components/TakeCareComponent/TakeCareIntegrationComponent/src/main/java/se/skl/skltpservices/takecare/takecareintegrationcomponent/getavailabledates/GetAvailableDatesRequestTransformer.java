@@ -1,11 +1,11 @@
-package se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes;
+package se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabledates;
 
 import static se.skl.skltpservices.takecare.TakeCareDateHelper.yyyyMMddHHmmss;
 import static se.skl.skltpservices.takecare.TakeCareUtil.EXTERNAL_USER;
 import static se.skl.skltpservices.takecare.TakeCareUtil.HSAID;
 import static se.skl.skltpservices.takecare.TakeCareUtil.INVOKING_SYSTEM;
 import static se.skl.skltpservices.takecare.TakeCareUtil.REQUEST;
-import static se.skl.skltpservices.takecare.TakeCareUtil.WEB;
+import static se.skl.skltpservices.takecare.TakeCareUtil.numericToInteger;
 
 import java.util.Date;
 
@@ -14,18 +14,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
-import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesType;
+import se.riv.crm.scheduling.getavailabledates.v1.GetAvailableDatesType;
 import se.skl.skltpservices.takecare.TakeCareRequestTransformer;
-import se.skl.skltpservices.takecare.booking.GetTimeTypes;
-import se.skl.skltpservices.takecare.booking.gettimetypesrequest.ProfdocHISMessage;
+import se.skl.skltpservices.takecare.booking.GetAvailableDates;
+import se.skl.skltpservices.takecare.booking.getavailabledatesrequest.ProfdocHISMessage;
 
-public class GetAllTimeTypesRequestTransformer extends TakeCareRequestTransformer {
+public class GetAvailableDatesRequestTransformer extends TakeCareRequestTransformer {
 
-	private static final Logger log = LoggerFactory.getLogger(GetAllTimeTypesRequestTransformer.class);
+	private static final Logger log = LoggerFactory.getLogger(GetAvailableDatesRequestTransformer.class);
 
 	private static final JaxbUtil jaxbUtil_message = new JaxbUtil(ProfdocHISMessage.class);
-	private static final JaxbUtil jaxbUtil_incoming = new JaxbUtil(GetAllTimeTypesType.class);
-	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetTimeTypes.class);
+	private static final JaxbUtil jaxbUtil_incoming = new JaxbUtil(GetAvailableDatesType.class);
+	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetAvailableDates.class);
 
 	protected Object pojoTransform(Object src, String encoding) throws TransformerException {
 
@@ -34,9 +34,12 @@ public class GetAllTimeTypesRequestTransformer extends TakeCareRequestTransforme
 		}
 
 		try {
-
-			GetAllTimeTypesType incomingRequest = (GetAllTimeTypesType) jaxbUtil_incoming.unmarshal(src);
+			GetAvailableDatesType incomingRequest = (GetAvailableDatesType) jaxbUtil_incoming.unmarshal(src);
 			String incomingHealthcarefacility = incomingRequest.getHealthcareFacility();
+			String incomingBookingId = incomingRequest.getBookingId();
+			String incomingEndDate = incomingRequest.getEndDateInclusive();
+			String incomingStartDate = incomingRequest.getStartDateInclusive();
+			String incomingTymeTypeId = incomingRequest.getTimeTypeID();
 
 			ProfdocHISMessage message = new ProfdocHISMessage();
 			message.setCareUnitId(incomingHealthcarefacility);
@@ -44,9 +47,13 @@ public class GetAllTimeTypesRequestTransformer extends TakeCareRequestTransforme
 			message.setInvokingSystem(INVOKING_SYSTEM);
 			message.setMsgType(REQUEST);
 			message.setTime(yyyyMMddHHmmss(new Date()));
-			message.setTimeTypeRequest(WEB);
+			message.setBookingId(incomingBookingId);
+			message.setEndDate(Long.valueOf(incomingEndDate));
+			message.setResourceId(null);
+			message.setStartDate(Long.valueOf(incomingStartDate));
+			message.setTimeTypeId(numericToInteger(incomingTymeTypeId));
 
-			GetTimeTypes outgoingRequest = new GetTimeTypes();
+			GetAvailableDates outgoingRequest = new GetAvailableDates();
 			outgoingRequest.setCareunitid(incomingHealthcarefacility);
 			outgoingRequest.setCareunitidtype("hsaid");
 			outgoingRequest.setExternaluser(EXTERNAL_USER);
@@ -67,5 +74,4 @@ public class GetAllTimeTypesRequestTransformer extends TakeCareRequestTransforme
 		}
 
 	}
-
 }
