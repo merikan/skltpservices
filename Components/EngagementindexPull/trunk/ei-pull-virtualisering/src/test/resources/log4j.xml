@@ -10,11 +10,18 @@
 		</layout>
 	</appender>
 
+    <appender name="ei-pull-log-file-appender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/Users/zherkezhi/Work/Config/logs/ei-pull.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{HH:mm:ss,SSS} %p [%t] %c - %m%n"/>
+        </layout>
+    </appender>
+
 	<!-- Loglevels: {OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE, ALL} See: 
 		http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/Level.html -->
 
-	<logger
-		name="org.springframework.beans">
+	<logger name="org.springframework.beans">
 		<level value="INFO" />
 	</logger>
 
@@ -52,20 +59,25 @@
 	</logger>
 
 	<logger name="org.opensaml">
-		<level value="INFO"></level>
+		<level value="INFO"/>
 	</logger>
 
 	<logger name="org.apache.commons.httpclient.Wire">
-		<level value="ALL"></level>
+		<level value="ALL"/>
 	</logger>
 
 	<logger name="org.apache.cxf">
-		<level value="INFO"></level>
+		<level value="INFO"/>
 	</logger>
+
+    <logger name="se.skl.components.pull">
+        <level value="INFO"/>
+        <appender-ref ref="ei-pull-log-file-appender"/>
+    </logger>
 
 	<!-- Message logging -->
 	<logger name="org.soitoolkit.commons.mule.messageLogger">
-		<level value="INFO" />
+		<level value="INFO"/>
 	</logger>
 
 	<root>

@@ -1,8 +1,7 @@
 package se.skl.components.pull.main;
 
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import riv.itintegration.engagementindex._1.EngagementTransactionType;
 import riv.itintegration.engagementindex._1.EngagementType;
@@ -24,7 +23,6 @@ import se.skl.components.pull.utils.EngagementIndexHelper;
 import se.skl.components.pull.utils.HttpHelper;
 import se.skl.components.pull.utils.PropertyResolver;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -50,7 +48,7 @@ public class EngagementIndexPull {
     @Autowired
     private HttpHelper httpHelper;
 
-    private final static Logger log = Logger.getLogger(EngagementIndexPull.class);
+    private static final Logger log = LoggerFactory.getLogger(EngagementIndexPull.class);
 
     private String configuredPullLogicalAddress;
 
@@ -60,15 +58,6 @@ public class EngagementIndexPull {
 
     public EngagementIndexPull(String pullLogicalAddress) {
         this.configuredPullLogicalAddress = pullLogicalAddress;
-        if (!log.getAllAppenders().hasMoreElements()) {
-            String filename = PropertyResolver.get("ei.pull.log.file");
-            try {
-                FileAppender fileAppender = new FileAppender(new PatternLayout(), filename);
-                log.addAppender(fileAppender);
-            } catch (IOException e) {
-                throw new RuntimeException("Could not add file appender to " + filename + "!\nReason: ", e);
-            }
-        }
     }
 
     public void doFetchUpdates() {
@@ -91,7 +80,7 @@ public class EngagementIndexPull {
             GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(addressServiceAddress, parameters);
             possiblePullAddresses = addressResponse.getLogicalAddress();
         } catch (Exception e) {
-            log.fatal("Could not acquire addresses from " + addressServiceAddress + " which should be contacted for pulling data. Reason:\n", e);
+            log.error("Could not acquire addresses from " + addressServiceAddress + " which should be contacted for pulling data. Reason:\n", e);
         }
         pushAndPull(possiblePullAddresses, pullLogicalAddress, pushLogicalAddress, serviceDomainList, timestampFormat);
         log.info("Pull/Push-sequence for " + configuredPullLogicalAddress + " ended.");
@@ -104,6 +93,9 @@ public class EngagementIndexPull {
             }
         } else {
             log.error("The address list of allowed logical addresses does not contain the requested logical address '" + pullLogicalAddress + "'. No fetching of updates could be done at this time.");
+            for (String serviceDomain : serviceDomainList) {
+                getUpdatesService.incrementErrorsSinceLastFetch(pullLogicalAddress, serviceDomain);
+            }
         }
     }
 
@@ -128,13 +120,13 @@ public class EngagementIndexPull {
                 }
             } else {
                 success = false;
-                log.fatal("Received null when pulling data since: " + timeForLastSuccessfulUpdate + ", from address: " + pullLogicalAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + amountOfFetchedResults + " partial results from this address.");
+                log.error("Received null when pulling data since: " + timeForLastSuccessfulUpdate + ", from address: " + pullLogicalAddress + ", using service domain: " + serviceDomain + ".\nPreviously fetched: " + amountOfFetchedResults + " partial results from this address.");
             }
         } while (!done && success);
         if (success) {
             getUpdatesService.updateDateForGetUpdates(pullLogicalAddress, serviceDomain, dateForLastFetch);
         } else {
-            log.fatal("Unable to push data from '" + pullLogicalAddress + "' using service domain '" + serviceDomain + "'.\nEither an error was in the response code from '" + pushLogicalAddress + "', or the updates from the producer was null.");
+            log.error("Unable to push data from '" + pullLogicalAddress + "' using service domain '" + serviceDomain + "'.\nEither an error was in the response code from '" + pushLogicalAddress + "', or the updates from the producer was null.");
             getUpdatesService.incrementErrorsSinceLastFetch(pullLogicalAddress, serviceDomain);
         }
     }
@@ -154,7 +146,7 @@ public class EngagementIndexPull {
         try {
             return getUpdatesClient.getUpdates(pullLogicalAddress, updateRequest);
         } catch (Exception e) {
-            log.fatal("Could not aquire updates from " + pullLogicalAddress + ", using service domain: " + updateRequest.getServiceDomain() + ". Reason:\n", e);
+            log.error("Could not aquire updates from " + pullLogicalAddress + ", using service domain: " + updateRequest.getServiceDomain() + ". Reason:\n", e);
         }
         return null;
     }
@@ -172,11 +164,11 @@ public class EngagementIndexPull {
                     log.warn("Received unexpected result with code " + resultCode.name() + ". Response comment: " + updateResponse.getComment() + "." + updates.getRegisteredResidentEngagement().size() + " posts was however, successfully pushed to " + logicalAddress + ".");
                     break;
                 case ERROR:
-                    log.fatal("Result containing " + updates.getRegisteredResidentEngagement().size() + " posts was pushed to " + logicalAddress + ", however an error response code was in the reply!\nResult code: " + resultCode.name() + ".\nUpdate response comment: " + updateResponse.getComment());
+                    log.error("Result containing " + updates.getRegisteredResidentEngagement().size() + " posts was pushed to " + logicalAddress + ", however an error response code was in the reply!\nResult code: " + resultCode.name() + ".\nUpdate response comment: " + updateResponse.getComment());
                     return false;
             }
         } catch (Exception e) {
-            log.fatal("Error while trying to update index! " + updates.getRegisteredResidentEngagement().size() + " posts were unable to be pushed to: " + logicalAddress + ". Reason:\n", e);
+            log.error("Error while trying to update index! " + updates.getRegisteredResidentEngagement().size() + " posts were unable to be pushed to: " + logicalAddress + ". Reason:\n", e);
             return false;
         }
         return true;
