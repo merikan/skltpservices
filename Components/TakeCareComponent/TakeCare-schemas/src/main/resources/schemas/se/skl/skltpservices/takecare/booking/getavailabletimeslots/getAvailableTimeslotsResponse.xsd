@@ -12,7 +12,7 @@
 										<xs:element name="StartTime" type="xs:unsignedLong" />
 										<xs:element name="EndTime" type="xs:unsignedLong" />
 										<xs:element name="TimeTypeId" type="xs:unsignedShort" />
-										<xs:element name="TimeTypeName " type="xs:string" />
+										<xs:element name="TimeTypeName" type="xs:string" />
 										<xs:element name="ResourceType" type="xs:unsignedByte" />
 										<xs:element name="ResourceId" type="xs:unsignedLong" />
 										<xs:element name="ResourceName" type="xs:string" />
