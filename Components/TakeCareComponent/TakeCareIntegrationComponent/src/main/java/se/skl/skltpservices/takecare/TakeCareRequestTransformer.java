@@ -1,8 +1,12 @@
 package se.skl.skltpservices.takecare;
 
+import org.apache.commons.lang.StringUtils;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
+
+import se.riv.crm.scheduling.v1.SubjectOfCareType;
+import se.riv.crm.scheduling.v1.TimeslotType;
 
 public abstract class TakeCareRequestTransformer extends AbstractMessageTransformer {
 
@@ -21,5 +25,16 @@ public abstract class TakeCareRequestTransformer extends AbstractMessageTransfor
 	}
 
 	protected abstract Object pojoTransform(Object src, String encoding) throws TransformerException;
+
+	protected static final String buildReason(SubjectOfCareType subjectOfCare, TimeslotType incomingTimeslot) {
+		String reason = "";
+		if (incomingTimeslot != null && StringUtils.isNotEmpty(incomingTimeslot.getReason())) {
+			reason = incomingTimeslot.getReason() + " ";
+		}
+		if (subjectOfCare != null && StringUtils.isNotEmpty(subjectOfCare.getPhone())) {
+			reason += subjectOfCare.getPhone();
+		}
+		return reason;
+	}
 
 }

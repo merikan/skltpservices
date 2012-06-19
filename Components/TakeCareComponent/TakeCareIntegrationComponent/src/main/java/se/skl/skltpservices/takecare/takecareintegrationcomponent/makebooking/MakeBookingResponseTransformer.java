@@ -61,8 +61,8 @@ public class MakeBookingResponseTransformer extends TakeCareResponseTransformer 
 		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
 		JAXBElement<MakeBookingResponseType> outgoing_res = new ObjectFactory()
 				.createMakeBookingResponse(new MakeBookingResponseType());
-		BookingConfirmation incoming_bokkingconfirm = message.getBookingConfirmation();
-		outgoing_res.getValue().setBookingId(incoming_bokkingconfirm.getBookingId());
+		BookingConfirmation incoming_bookingconfirm = message.getBookingConfirmation();
+		outgoing_res.getValue().setBookingId(incoming_bookingconfirm.getBookingId());
 		outgoing_res.getValue().setResultCode(ResultCodeEnum.OK);
 		outgoing_res.getValue().setResultText("");
 		return jaxbUtil_outgoing.marshal(outgoing_res);
