@@ -11,12 +11,14 @@ import static se.skl.skltpservices.takecare.TakeCareUtil.numericToInt;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.mule.api.transformer.TransformerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
 import se.riv.crm.scheduling.makebooking.v1.MakeBookingType;
+import se.riv.crm.scheduling.v1.SubjectOfCareType;
 import se.riv.crm.scheduling.v1.TimeslotType;
 import se.skl.skltpservices.takecare.TakeCareRequestTransformer;
 import se.skl.skltpservices.takecare.booking.MakeBooking;
@@ -43,6 +45,7 @@ public class MakeBookingRequestTransformer extends TakeCareRequestTransformer {
 		try {
 			MakeBookingType incomingRequest = (MakeBookingType) jaxbUtil_incoming.unmarshal(src);
 			TimeslotType incomingTimeslot = incomingRequest.getRequestedTimeslot();
+			SubjectOfCareType subjectOfCare = incomingRequest.getSubjectOfCareInfo();
 
 			String incomingHealthcarefacility = incomingTimeslot.getHealthcareFacility();
 			String incominStartTime = incomingTimeslot.getStartTimeInclusive();
@@ -50,7 +53,7 @@ public class MakeBookingRequestTransformer extends TakeCareRequestTransformer {
 			String incomingTimeTypeId = incomingTimeslot.getTimeTypeID();
 			String incomingResourceId = incomingTimeslot.getResourceID();
 			String incomingSubjectOfCare = incomingTimeslot.getSubjectOfCare();
-			String incomingReason = incomingTimeslot.getReason();
+			String incomingReason = buildReason(subjectOfCare, incomingTimeslot);
 
 			ProfdocHISMessage message = new ProfdocHISMessage();
 			message.setCareUnitId(incomingHealthcarefacility);
@@ -85,5 +88,16 @@ public class MakeBookingRequestTransformer extends TakeCareRequestTransformer {
 			throw new TransformerException(this, e);
 		}
 
+	}
+
+	protected String buildReason(SubjectOfCareType subjectOfCare, TimeslotType incomingTimeslot) {
+		String reason = "";
+		if (incomingTimeslot != null && StringUtils.isNotEmpty(incomingTimeslot.getReason())) {
+			reason = incomingTimeslot.getReason() + " ";
+		}
+		if (subjectOfCare != null && StringUtils.isNotEmpty(subjectOfCare.getPhone())) {
+			reason += subjectOfCare.getPhone();
+		}
+		return reason;
 	}
 }

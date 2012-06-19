@@ -10,4 +10,7 @@
 		<urn1:resourceID>2</urn1:resourceID>
 		<urn1:timeTypeID>1</urn1:timeTypeID>
 	</urn:requestedTimeslot>
+	<urn:subject_of_care_info>
+		<urn1:phone>1234567890</urn1:phone>
+	</urn:subject_of_care_info>
 </urn:MakeBooking>

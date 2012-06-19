@@ -34,6 +34,20 @@ public class TakeCareUtil {
 		return null;
 	}
 
+	public static final String bigIntegerToString(BigInteger value) {
+		if (value != null) {
+			return value.toString();
+		}
+		return null;
+	}
+	
+	public static final String integerToString(Integer value) {
+		if (value != null) {
+			return value.toString();
+		}
+		return null;
+	}
+
 	/**
 	 * @param shortValue
 	 *            The short value
