@@ -1,0 +1,9 @@
+#Overview of service/message bridges for SKLTP
+
+= Introduction =
+
+ * [servicebridge_crm_scheduling crm:scheduling]
+ * [servicebridge_clinicalprocess_requestworkflow clinicalprocess:requestworkflow]
+
+= Details =
+
