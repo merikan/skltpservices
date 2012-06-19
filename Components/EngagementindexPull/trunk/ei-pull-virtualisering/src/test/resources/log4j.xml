@@ -11,7 +11,7 @@
 	</appender>
 
     <appender name="ei-pull-log-file-appender" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="/Users/zherkezhi/Work/Config/logs/ei-pull.log"/>
+        <param name="File" value="${app.home}/logs/ei-pull.log"/>
         <param name="DatePattern" value="'.'yyyy-MM-dd"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{HH:mm:ss,SSS} %p [%t] %c - %m%n"/>
