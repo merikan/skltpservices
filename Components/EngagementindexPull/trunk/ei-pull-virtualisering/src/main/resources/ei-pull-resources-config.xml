@@ -33,7 +33,6 @@
                <entry key="keyStoreType" value="${ei.https.keyStoreType}"/>
                <entry key="keyStoreFile" value="${ei.https.keyStoreFile}"/>
                <entry key="keyStorePassword" value="${ei.https.keyStorePassword}"/>
-               <entry key="ei.pull.log.file" value="${ei.pull.log.file}"/>
            </map>
        </property>
     </bean>
