@@ -41,6 +41,7 @@ public class GetUpdatesStatusRepositoryImpl extends JdbcDaoSupport implements Ge
             try {
                 status.setLastSuccess(simpleDateFormat.parse(rs.getString("lastsuccess")));
             } catch (Exception e) {
+                // If date was not found or not set, it should be set upon next success
                 status.setLastSuccess(null);
             }
             status.setAmountOfErrorsSinceLastSuccess(rs.getInt("errorssincelastsuccess"));

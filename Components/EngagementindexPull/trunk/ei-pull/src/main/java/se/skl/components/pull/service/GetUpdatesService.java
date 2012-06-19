@@ -43,7 +43,7 @@ public class GetUpdatesService {
     }
 
     private synchronized Date getPastTimeInSeconds(Date date, int secondsToRemove) {
-        // Remove one minute from last success time to make sure in case updates were made just when the update was made.
+        // Remove some time from last success time to make sure in case updates were made just when the update was made.
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.set(Calendar.SECOND, secondsToRemove);
