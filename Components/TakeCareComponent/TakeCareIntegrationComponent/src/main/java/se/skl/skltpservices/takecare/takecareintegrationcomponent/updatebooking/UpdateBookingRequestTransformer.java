@@ -1,4 +1,4 @@
-package se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking;
+package se.skl.skltpservices.takecare.takecareintegrationcomponent.updatebooking;
 
 import static se.skl.skltpservices.takecare.TakeCareDateHelper.toTakeCareLongTime;
 import static se.skl.skltpservices.takecare.TakeCareDateHelper.yyyyMMddHHmmss;
@@ -16,20 +16,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
-import se.riv.crm.scheduling.makebooking.v1.MakeBookingType;
+import se.riv.crm.scheduling.updatebooking.v1.UpdateBookingType;
 import se.riv.crm.scheduling.v1.SubjectOfCareType;
 import se.riv.crm.scheduling.v1.TimeslotType;
 import se.skl.skltpservices.takecare.TakeCareRequestTransformer;
-import se.skl.skltpservices.takecare.booking.MakeBooking;
-import se.skl.skltpservices.takecare.booking.makebookingrequest.ProfdocHISMessage;
+import se.skl.skltpservices.takecare.booking.RescheduleBooking;
+import se.skl.skltpservices.takecare.booking.reschedulebookingrequest.ProfdocHISMessage;
 
-public class MakeBookingRequestTransformer extends TakeCareRequestTransformer {
+public class UpdateBookingRequestTransformer extends TakeCareRequestTransformer {
 
-	private static final Logger log = LoggerFactory.getLogger(MakeBookingRequestTransformer.class);
+	private static final Logger log = LoggerFactory.getLogger(UpdateBookingRequestTransformer.class);
 
 	private static final JaxbUtil jaxbUtil_message = new JaxbUtil(ProfdocHISMessage.class);
-	private static final JaxbUtil jaxbUtil_incoming = new JaxbUtil(MakeBookingType.class);
-	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(MakeBooking.class);
+	private static final JaxbUtil jaxbUtil_incoming = new JaxbUtil(UpdateBookingType.class);
+	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(RescheduleBooking.class);
 
 	/**
 	 * Simple pojo transformer method that can be tested with plain unit
@@ -42,7 +42,7 @@ public class MakeBookingRequestTransformer extends TakeCareRequestTransformer {
 		}
 
 		try {
-			MakeBookingType incomingRequest = (MakeBookingType) jaxbUtil_incoming.unmarshal(src);
+			UpdateBookingType incomingRequest = (UpdateBookingType) jaxbUtil_incoming.unmarshal(src);
 			TimeslotType incomingTimeslot = incomingRequest.getRequestedTimeslot();
 			SubjectOfCareType subjectOfCare = incomingRequest.getSubjectOfCareInfo();
 
@@ -53,6 +53,7 @@ public class MakeBookingRequestTransformer extends TakeCareRequestTransformer {
 			String incomingResourceId = incomingTimeslot.getResourceID();
 			String incomingSubjectOfCare = incomingTimeslot.getSubjectOfCare();
 			String incomingReason = buildReason(subjectOfCare, incomingTimeslot);
+			String bookingId = incomingTimeslot.getBookingId();
 
 			ProfdocHISMessage message = new ProfdocHISMessage();
 			message.setCareUnitId(incomingHealthcarefacility);
@@ -65,9 +66,10 @@ public class MakeBookingRequestTransformer extends TakeCareRequestTransformer {
 			message.setResourceId(numericToBigInteger(incomingResourceId));
 			message.setStartTime(numericToBigInteger(toTakeCareLongTime(incominStartTime)));
 			message.setTime(yyyyMMddHHmmss(new Date()));
+			message.setBookingId(bookingId);
 			message.setTimeTypeId(numericToInt(incomingTimeTypeId));
 
-			MakeBooking outgoingRequest = new MakeBooking();
+			RescheduleBooking outgoingRequest = new RescheduleBooking();
 			outgoingRequest.setCareunitid(incomingHealthcarefacility);
 			outgoingRequest.setCareunitidtype(HSAID);
 			outgoingRequest.setExternaluser(EXTERNAL_USER);
@@ -88,4 +90,5 @@ public class MakeBookingRequestTransformer extends TakeCareRequestTransformer {
 		}
 
 	}
+
 }

@@ -1,4 +1,4 @@
-<urn:MakeBooking xmlns:urn="urn:riv:crm:scheduling:MakeBookingResponder:1"
+<urn:UpdateBooking xmlns:urn="urn:riv:crm:scheduling:UpdateBookingResponder:1"
 	xmlns:urn1="urn:riv:crm:scheduling:1">
 	<urn:healthcare_facility_med>HSA-VKK123</urn:healthcare_facility_med>
 	<urn:requestedTimeslot>
@@ -9,8 +9,9 @@
 		<urn1:reason>Reason</urn1:reason>
 		<urn1:resourceID>2</urn1:resourceID>
 		<urn1:timeTypeID>1</urn1:timeTypeID>
+		<urn1:bookingId>1234567890</urn1:bookingId>
 	</urn:requestedTimeslot>
 	<urn:subject_of_care_info>
-		<urn1:phone>0566789009</urn1:phone>
+		<urn1:phone>1234567890</urn1:phone>
 	</urn:subject_of_care_info>
-</urn:MakeBooking>
+</urn:UpdateBooking>

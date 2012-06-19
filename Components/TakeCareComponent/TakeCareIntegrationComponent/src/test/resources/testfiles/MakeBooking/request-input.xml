@@ -7,4 +7,7 @@
 		<urn1:healthcare_facility>HSA-VKK123</urn1:healthcare_facility>
 		<urn1:subject_of_care>191414141414</urn1:subject_of_care>
 	</urn:requestedTimeslot>
+	<urn:subject_of_care_info>
+		<urn1:phone>0566789009</urn1:phone>
+	</urn:subject_of_care_info>
 </urn:MakeBooking>
