@@ -94,7 +94,7 @@ public class GetSubjectOfCareScheduleResponseTransformer extends TakeCareRespons
 				timeslot.setStartTimeInclusive(String.valueOf(booking.getStartTime()));
 				timeslot.setSubjectOfCare(String.valueOf(booking.getPatientId()));
 				timeslot.setTimeTypeID(String.valueOf(booking.getTimeTypeId()));
-				timeslot.setTimeTypeName(booking.getTimeTypeName_0020());
+				timeslot.setTimeTypeName(booking.getTimeTypeName());
 
 				outgoing_res.getValue().getTimeslotDetail().add(timeslot);
 			}

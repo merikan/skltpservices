@@ -106,7 +106,7 @@ public class GetBookingsTestProducer extends TakeCareTestProducer implements Boo
 		booking.setResources(createResources());
 		booking.setStartTime(yyyyMMddHHmm(new Date()));
 		booking.setTimeTypeId(TIMETYPE_NORMAL);
-		booking.setTimeTypeName_0020("NORMAL");
+		booking.setTimeTypeName("NORMAL");
 		return booking;
 	}
 

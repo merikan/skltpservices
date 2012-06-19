@@ -104,7 +104,7 @@ public class GetBookingTestProducer extends TakeCareTestProducer implements Book
 		booking.setResources(createResources());
 		booking.setStartTime(yyyyMMddHHmm(new Date()));
 		booking.setTimeTypeId(TIMETYPE_NORMAL);
-		booking.setTimeTypeName_0020("NORMAL");
+		booking.setTimeTypeName("NORMAL");
 		return booking;
 	}
 

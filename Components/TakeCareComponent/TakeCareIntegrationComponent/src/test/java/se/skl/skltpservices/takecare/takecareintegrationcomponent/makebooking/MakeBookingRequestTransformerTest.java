@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import org.soitoolkit.commons.mule.util.MiscUtil;
 
+import se.riv.crm.scheduling.v1.SubjectOfCareType;
+import se.riv.crm.scheduling.v1.TimeslotType;
 import se.skl.skltpservices.takecare.TakeCareUtil;
 import se.skl.skltpservices.takecare.booking.MakeBooking;
 import se.skl.skltpservices.takecare.booking.makebookingrequest.ProfdocHISMessage;
@@ -62,7 +64,7 @@ public class MakeBookingRequestTransformerTest {
 		assertEquals(TakeCareUtil.INVOKING_SYSTEM, msgInvokingSystem);
 		assertEquals(TakeCareUtil.REQUEST, msgMessageType);
 		assertEquals("191414141414", patientId.toString());
-		assertNull(patientReason);
+		assertEquals("", patientReason);
 		assertNotNull(endTime);
 		assertNotNull(startTime);
 		assertNull(resourceId);
@@ -114,11 +116,48 @@ public class MakeBookingRequestTransformerTest {
 		assertEquals(TakeCareUtil.INVOKING_SYSTEM, msgInvokingSystem);
 		assertEquals(TakeCareUtil.REQUEST, msgMessageType);
 		assertEquals("191414141414", patientId.toString());
-		assertEquals("Reason", patientReason);
+		assertEquals("Reason 1234567890", patientReason);
 		assertNotNull(endTime);
 		assertNotNull(startTime);
 		assertEquals(new BigInteger("2"), resourceId);
 		assertEquals(1, timeTypeId);
 		assertNotNull(msgTime);
+	}
+
+	@Test
+	public void testBuildReasonFromReasonAndPhone() throws Exception {
+
+		SubjectOfCareType subjectOfCare = new SubjectOfCareType();
+		subjectOfCare.setPhone("1234567890");
+		TimeslotType timeslot = new TimeslotType();
+		timeslot.setReason("Ont i ryggen");
+
+		MakeBookingRequestTransformer transformer = new MakeBookingRequestTransformer();
+		String reason = transformer.buildReason(subjectOfCare, timeslot);
+		assertEquals("Ont i ryggen 1234567890", reason);
+	}
+
+	@Test
+	public void testBuildReasonWithoutPhone() throws Exception {
+
+		SubjectOfCareType subjectOfCare = new SubjectOfCareType();
+		TimeslotType timeslot = new TimeslotType();
+		timeslot.setReason("Ont i ryggen");
+
+		MakeBookingRequestTransformer transformer = new MakeBookingRequestTransformer();
+		String reason = transformer.buildReason(subjectOfCare, timeslot);
+		assertEquals("Ont i ryggen ", reason);
+	}
+
+	@Test
+	public void testBuildReasonWithOnlyPhone() throws Exception {
+
+		SubjectOfCareType subjectOfCare = new SubjectOfCareType();
+		subjectOfCare.setPhone("1234567890");
+		TimeslotType timeslot = new TimeslotType();
+
+		MakeBookingRequestTransformer transformer = new MakeBookingRequestTransformer();
+		String reason = transformer.buildReason(subjectOfCare, timeslot);
+		assertEquals("1234567890", reason);
 	}
 }
