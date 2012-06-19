@@ -37,12 +37,14 @@ import java.util.*;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.*;
 import static org.mockito.internal.verification.VerificationModeFactory.atLeastOnce;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
-import static org.powermock.api.mockito.PowerMockito.*;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.mockito.PowerMockito.verifyStatic;
 
 /**
  * Author: Henrik Rostam
@@ -207,21 +209,18 @@ public class EngagementIndexPullTest {
 
     @Test
     public void testTimeOffset() throws ParseException {
-        // Setup
-        Date testDate = DateHelper.now();
-        String timeOffset = PropertyResolver.get(timeOffsetPropertyKey);
-        String expectedDate = "20120505150000";
+        String expectedDate = "20120505151337";
+        when(getUpdatesService.getFormattedDateForGetUpdates(anyString(), anyString(), anyString())).thenReturn(expectedDate);
         ArgumentCaptor<GetUpdatesType> getUpdatesTypeArgumentCaptor = ArgumentCaptor.forClass(GetUpdatesType.class);
         // Test
         engagementIndexPull.doFetchUpdates();
         // Verify
-        // 2 method calls - one for the actual call and one is used in this test
+        // One method call per configured service domain
         verify(getUpdatesClient, atLeastOnce()).getUpdates(anyString(), getUpdatesTypeArgumentCaptor.capture());
-        int i = 1;
-        for (GetUpdatesType actualUpdateType : getUpdatesTypeArgumentCaptor.getAllValues()) {
-            String actualDate = actualUpdateType.getTimeStamp();
+        List<GetUpdatesType> allValues = getUpdatesTypeArgumentCaptor.getAllValues();
+        for (int i = 1; i < allValues.size(); i++) {
+            String actualDate = allValues.get(i).getTimeStamp();
             assertEquals("The time used in number " + i + " of the getUpdates call differ from the expected one!", expectedDate, actualDate);
-            i++;
         }
     }
 
@@ -340,7 +339,7 @@ public class EngagementIndexPullTest {
         // Get the first logging message
         LoggingEvent loggingEvent = loggingEventArgumentCaptor.getAllValues().get(1);
         // Check level of log message
-        assertEquals("Logging level for exception should be fatal!", Level.FATAL, loggingEvent.getLevel());
+        assertEquals("Logging level for exception should be error!", Level.ERROR, loggingEvent.getLevel());
         // Check that the message contains the logical address
         assertTrue("The logical address of the address service was not in the log message", StringUtils.contains(loggingEvent.getRenderedMessage(), logicalAddressWhichShouldBeLogged));
     }
