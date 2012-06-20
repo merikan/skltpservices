@@ -33,6 +33,7 @@
     <module>LasLFVardsystem</module>
     <module>LFUtskrift</module>
     <module>RegistreraSamtyckeVardsystem</module>
+    <module>LasLFPrivatperson</module>
   </modules>
 
 	<dependencies>
