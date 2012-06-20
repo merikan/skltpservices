@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>se.skl.bridgedinteractions.se_apotekensservice.lf</groupId>
 		<artifactId>LFUtskrift</artifactId>
-		<version>1.4-SNAPSHOT</version>
+		<version>1.5-SNAPSHOT</version>
 	</parent>
 
 	<groupId>se.skl.bridgedinteractions.se_apotekensservice.lf</groupId>
 	<artifactId>LFUtskrift-TicketTransformer</artifactId>
-	<version>1.4-SNAPSHOT</version>
+	<version>1.5-SNAPSHOT</version>
 	<name>LFUtskrift TicketTransformer</name>
 	<url>http://maven.apache.org</url>
 
