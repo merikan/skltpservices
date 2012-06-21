@@ -1,4 +1,4 @@
-package se.skl.components.pull.main;
+package se.skl.skltpservices.pull.main;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +17,11 @@ import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontract.v1.ri
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractresponder.v1.GetLogicalAddresseesByServiceContractResponseType;
 import se.riv.itintegration.registry.getlogicaladdresseesbyservicecontractresponder.v1.GetLogicalAddresseesByServiceContractType;
 import se.riv.itintegration.registry.v1.ServiceContractNamespaceType;
-import se.skl.components.pull.service.GetUpdatesService;
-import se.skl.components.pull.utils.DateHelper;
-import se.skl.components.pull.utils.EngagementIndexHelper;
-import se.skl.components.pull.utils.HttpHelper;
-import se.skl.components.pull.utils.PropertyResolver;
+import se.skl.skltpservices.pull.service.GetUpdatesService;
+import se.skl.skltpservices.pull.utils.DateHelper;
+import se.skl.skltpservices.pull.utils.EngagementIndexHelper;
+import se.skl.skltpservices.pull.utils.HttpHelper;
+import se.skl.skltpservices.pull.utils.PropertyResolver;
 
 import java.util.ArrayList;
 import java.util.Date;

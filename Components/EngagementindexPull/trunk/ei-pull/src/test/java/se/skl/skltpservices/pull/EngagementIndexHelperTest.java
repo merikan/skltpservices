@@ -1,10 +1,10 @@
-package se.skl.components.pull;
+package se.skl.skltpservices.pull;
 
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-import se.skl.components.pull.utils.EngagementIndexHelper;
+import se.skl.skltpservices.pull.utils.EngagementIndexHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

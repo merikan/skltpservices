@@ -1,4 +1,4 @@
-package se.skl.components.pull.repository;
+package se.skl.skltpservices.pull.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -7,7 +7,7 @@ import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
-import se.skl.components.pull.domain.GetUpdatesStatus;
+import se.skl.skltpservices.pull.domain.GetUpdatesStatus;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;

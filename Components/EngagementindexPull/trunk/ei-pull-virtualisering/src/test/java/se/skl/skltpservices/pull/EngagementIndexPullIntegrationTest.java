@@ -1,4 +1,4 @@
-package se.skl.components.pull;
+package se.skl.skltpservices.pull;
 
 import org.junit.Assert;
 import org.junit.Before;

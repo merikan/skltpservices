@@ -1,13 +1,13 @@
-package se.skl.components.pull.service;
+package se.skl.skltpservices.pull.service;
 
 import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import se.skl.components.pull.domain.GetUpdatesStatus;
-import se.skl.components.pull.repository.GetUpdatesStatusRepository;
-import se.skl.components.pull.utils.DateHelper;
-import se.skl.components.pull.utils.EngagementIndexHelper;
-import se.skl.components.pull.utils.PropertyResolver;
+import se.skl.skltpservices.pull.domain.GetUpdatesStatus;
+import se.skl.skltpservices.pull.repository.GetUpdatesStatusRepository;
+import se.skl.skltpservices.pull.utils.DateHelper;
+import se.skl.skltpservices.pull.utils.EngagementIndexHelper;
+import se.skl.skltpservices.pull.utils.PropertyResolver;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

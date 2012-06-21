@@ -1,4 +1,4 @@
-package se.skl.components.pull.utils;
+package se.skl.skltpservices.pull.utils;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;

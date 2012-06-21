@@ -1,4 +1,4 @@
-package se.skl.components.pull.domain;
+package se.skl.skltpservices.pull.domain;
 
 import java.util.Date;
 
