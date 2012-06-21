@@ -1,6 +1,6 @@
-package se.skl.components.pull.repository;
+package se.skl.skltpservices.pull.repository;
 
-import se.skl.components.pull.domain.GetUpdatesStatus;
+import se.skl.skltpservices.pull.domain.GetUpdatesStatus;
 
 import java.util.List;
 

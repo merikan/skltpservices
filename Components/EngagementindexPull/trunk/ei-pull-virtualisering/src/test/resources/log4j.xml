@@ -70,7 +70,7 @@
 		<level value="INFO"/>
 	</logger>
 
-    <logger name="se.skl.components.pull">
+    <logger name="se.skl.skltpservices.pull">
         <level value="INFO"/>
         <appender-ref ref="ei-pull-log-file-appender"/>
     </logger>

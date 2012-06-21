@@ -1,9 +1,9 @@
-package se.skl.components.pull.controller;
+package se.skl.skltpservices.pull.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import se.skl.components.pull.domain.GetUpdatesStatus;
-import se.skl.components.pull.service.GetUpdatesService;
+import se.skl.skltpservices.pull.domain.GetUpdatesStatus;
+import se.skl.skltpservices.pull.service.GetUpdatesService;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

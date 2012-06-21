@@ -28,7 +28,7 @@
 		          serviceClass="se.riv.itintegration.engagementindex.update.v1.rivtabp21.UpdateResponderInterface"
 		          address="${ei.push.address.uri}"/>
 
-	<context:component-scan base-package="se.skl.components.pull"/>
+	<context:component-scan base-package="se.skl.skltpservices.pull"/>
     <context:annotation-config/>
 
     <!-- Database table name -->

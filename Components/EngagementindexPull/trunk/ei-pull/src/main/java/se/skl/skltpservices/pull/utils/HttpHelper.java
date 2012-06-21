@@ -1,4 +1,4 @@
-package se.skl.components.pull.utils;
+package se.skl.skltpservices.pull.utils;
 
 import org.apache.cxf.configuration.jsse.TLSClientParameters;
 import org.apache.cxf.endpoint.Client;
