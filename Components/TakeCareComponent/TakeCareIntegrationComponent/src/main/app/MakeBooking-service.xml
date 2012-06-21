@@ -28,11 +28,10 @@
 
 	<flow name="MakeBooking-service">
 
-		<https:inbound-endpoint address="${MAKEBOOKING_INBOUND_URL}"
+		<http:inbound-endpoint address="${MAKEBOOKING_INBOUND_URL}"
 			exchange-pattern="request-response" transformer-refs="logReqIn"
-			responseTransformer-refs="createSoapFaultIfException logRespOut"
-			connector-ref="soitoolkit-https-connector">
-		</https:inbound-endpoint>
+			responseTransformer-refs="createSoapFaultIfException logRespOut">
+		</http:inbound-endpoint>
 
 
 		<cxf:proxy-service service="MakeBookingResponderService"

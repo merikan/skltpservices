@@ -28,11 +28,10 @@
 
 	<flow name="GetAvailableTimeslots-service">
 
-		<https:inbound-endpoint address="${GETAVAILABLETIMESLOTS_INBOUND_URL}"
+		<http:inbound-endpoint address="${GETAVAILABLETIMESLOTS_INBOUND_URL}"
 			exchange-pattern="request-response" transformer-refs="logReqIn"
-			responseTransformer-refs="createSoapFaultIfException logRespOut"
-			connector-ref="soitoolkit-https-connector">
-		</https:inbound-endpoint>
+			responseTransformer-refs="createSoapFaultIfException logRespOut">
+		</http:inbound-endpoint>
 
 		<cxf:proxy-service service="GetAvailableTimeslotsResponderService"
 			wsdlLocation="classpath:/schemas/interactions/GetAvailableTimeslotsInteraction/GetAvailableTimeslotsInteraction_1.0_rivtabp20.wsdl"

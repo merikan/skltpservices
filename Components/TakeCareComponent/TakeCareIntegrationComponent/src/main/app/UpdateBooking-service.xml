@@ -36,11 +36,10 @@
 
 	<flow name="UpdateBooking-service">
 	
-		<https:inbound-endpoint address="${UPDATEBOOKING_INBOUND_URL}"
+		<http:inbound-endpoint address="${UPDATEBOOKING_INBOUND_URL}"
 			exchange-pattern="request-response" transformer-refs="logReqIn"
-			responseTransformer-refs="createSoapFaultIfException logRespOut"
-			connector-ref="soitoolkit-https-connector">
-		</https:inbound-endpoint>
+			responseTransformer-refs="createSoapFaultIfException logRespOut">
+		</http:inbound-endpoint>
 
 		<cxf:proxy-service service="UpdateBookingResponderService"
 			wsdlLocation="classpath:/schemas/interactions/UpdateBookingInteraction/UpdateBookingInteraction_1.0_rivtabp20.wsdl"

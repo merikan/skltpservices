@@ -30,11 +30,10 @@
 
 	<flow name="GetAvailableDates-service">
 
-		<https:inbound-endpoint address="${GETAVAILABLEDATES_INBOUND_URL}"
+		<http:inbound-endpoint address="${GETAVAILABLEDATES_INBOUND_URL}"
 			exchange-pattern="request-response" transformer-refs="logReqIn"
-			responseTransformer-refs="createSoapFaultIfException logRespOut"
-			connector-ref="soitoolkit-https-connector">
-		</https:inbound-endpoint>
+			responseTransformer-refs="createSoapFaultIfException logRespOut">
+		</http:inbound-endpoint>
 
 		<cxf:proxy-service service="GetAvailableDatesResponderService"
 			wsdlLocation="classpath:/schemas/interactions/GetAvailableDatesInteraction/GetAvailableDatesInteraction_1.0_rivtabp20.wsdl"
