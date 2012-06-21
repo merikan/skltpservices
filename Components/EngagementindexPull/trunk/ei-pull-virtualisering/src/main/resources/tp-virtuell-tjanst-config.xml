@@ -23,11 +23,11 @@
     <!-- Instantiate the pull modules.. -->
 
     <spring:beans>
-        <spring:bean id="pull-1" class="se.skl.components.pull.main.EngagementIndexPull">
+        <spring:bean id="pull-1" class="se.skl.skltpservices.pull.main.EngagementIndexPull">
             <spring:constructor-arg type="java.lang.String" value="Test"/>
         </spring:bean>
 
-        <spring:bean id="pull-2" class="se.skl.components.pull.main.EngagementIndexPull">
+        <spring:bean id="pull-2" class="se.skl.skltpservices.pull.main.EngagementIndexPull">
             <spring:constructor-arg type="java.lang.String" value="Test2"/>
         </spring:bean>
     </spring:beans>
