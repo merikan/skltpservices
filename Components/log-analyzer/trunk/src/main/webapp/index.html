@@ -182,8 +182,14 @@
 //					 pointInterval: interval,
 					 yAxis: 0,
 					 data: [] 
-				  }
-				  ,{
+				  }, {
+					 name: 'Timed out requests',
+					 color: '#009DE0',
+					 type: 'column',
+//						 pointInterval: interval,
+					 yAxis: 0,
+					 data: [] 
+				  } ,{
 					 name: 'Average latency',
 					 color: '#7798BF',
 					 type: 'spline',
@@ -226,16 +232,16 @@
                   var name = channel;
                   
                   if(category != null){
-                	listDiv = listDiv + channel.replace(':', '');
+                	listDiv = listDiv + channel.replace(new RegExp(':', 'g'), '');
                 	name = category;
                   }
 
                   $('#' + listDiv).append('<li><a href="#" id="'+name+'" class="apieventlink">'+name+'</a></li>').children().last().click(function() {
 					
-					if( category == null && $('#' + listDiv+channel.replace(':', '')).is(':empty')) {
+					if( category == null && $('#' + listDiv+channel.replace(new RegExp(':', 'g'), '')).is(':empty')) {
 					  loadCategories(type, channel);
 				  	} else {
-				  	  $('#' + listDiv+channel.replace(':', '')).empty()
+				  	  $('#' + listDiv+channel.replace(new RegExp(':', 'g'), '')).empty()
 				  	}
 					
 					currentChannel = channel;
@@ -274,7 +280,7 @@
                   
                   
                   if(category == null){
-                	$('#' + listDiv).append('<ul id="'+listDiv+channel.replace(':', '')+'"></ul>'); // click()....?
+                	$('#' + listDiv).append('<ul id="'+listDiv+channel.replace(new RegExp(':', 'g'), '')+'"></ul>'); // click()....?
                   } 
 				  
  	           }
@@ -294,8 +300,6 @@
 					  chart = new Highcharts.Chart(options);
 			   	    });
 				  }
-				   
-				  
 				}
 
 			   function loadRequestGraph(channel, category, interval){
@@ -328,9 +332,9 @@
 				  }
 				  
 				  jQuery.getJSON(latencyUrl + "?interval=" + interval, null, function(data) {
-					  optionsRequestChart.series[2].data = data.stats;
-					  optionsRequestChart.series[2].pointInterval = intervalMillis;
-					  optionsRequestChart.series[2].pointStart = data.timestamp - now.getTimezoneOffset() * 60 * 1000;
+					  optionsRequestChart.series[3].data = data.stats;
+					  optionsRequestChart.series[3].pointInterval = intervalMillis;
+					  optionsRequestChart.series[3].pointStart = data.timestamp - now.getTimezoneOffset() * 60 * 1000;
 
 					  chart = new Highcharts.Chart(optionsRequestChart);
 			   	  });
@@ -351,7 +355,14 @@
 
 					  chart = new Highcharts.Chart(optionsRequestChart);
 			   	  });
-				  
+				  				  
+				  jQuery.getJSON(statsUrl + "?state=TIMEOUT&interval=" + interval, null, function(stats) {
+					  optionsRequestChart.series[2].data = stats.stats;
+					  optionsRequestChart.series[2].pointInterval = intervalMillis;
+					  optionsRequestChart.series[2].pointStart = stats.timestamp - now.getTimezoneOffset() * 60 * 1000;
+
+					  chart = new Highcharts.Chart(optionsRequestChart);
+			   	  });
 				}
 				
 			   

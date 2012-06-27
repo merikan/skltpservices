@@ -1,14 +1,81 @@
 <?xml version='1.0' encoding='UTF-8'?>
 
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+  version="2.5">
 
-	<listener>
-	  <listener-class>
-	    se.skl.components.analyzers.EvactorContextLoaderListener
-	  </listener-class>
-	</listener>
-	
+  <listener>
+    <listener-class>se.skl.skltpservices.components.analyzer.EvactorContextLoaderListener</listener-class>
+  </listener>
+
+  <!-- Bootstrap the root application context as usual using ContextLoaderListener -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <listener>
+    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+  </listener>
+  
+  <filter>
+    <filter-name>api</filter-name>
+    <filter-class>org.evactor.api.BasePlan</filter-class>
+  </filter>
+  
+  <filter-mapping>
+    <filter-name>api</filter-name>
+    <url-pattern>/api/*</url-pattern>
+  </filter-mapping>
+  
+  <servlet>
+    <servlet-name>jersey-serlvet</servlet-name>
+    <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
+    <init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name>
+      <param-value>se.callistaenterprise.rest</param-value>
+    </init-param>
+    <init-param>
+      <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>com.sun.jersey.config.property.MediaTypeMappings</param-name>
+      <param-value>
+        json: application/json
+      </param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>com.sun.jersey.spi.container.ResourceFilters</param-name>
+      <param-value>com.sun.jersey.api.container.filter.ResourceDebuggingFilterFactory</param-value>
+    </init-param>
+    <init-param>
+      <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+      <param-value>com.sun.jersey.api.container.filter.PostReplaceFilter</param-value>
+    </init-param>
+    <init-param>
+      <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+      <param-value>com.sun.jersey.api.container.filter.GZIPContentEncodingFilter</param-value>
+    </init-param>
+    <init-param>
+      <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+      <param-value>com.sun.jersey.api.container.filter.LoggingFilter</param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>com.sun.jersey.spi.container.ContainerResponseFilters</param-name>
+      <param-value>com.sun.jersey.api.container.filter.GZIPContentEncodingFilter</param-value>
+    </init-param>
+    <init-param>
+      <param-name>com.sun.jersey.spi.container.ContainerResponseFilters</param-name>
+      <param-value>com.sun.jersey.api.container.filter.LoggingFilter</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>jersey-serlvet</servlet-name>
+    <url-pattern>/jersey/*</url-pattern>
+  </servlet-mapping>
+
 </web-app>
