@@ -10,7 +10,7 @@ public class ServiceProducer {
     private String domain;
     private String subDomain;
     private String system;
-    private String type;
+    private String municipality;
     
     public Long getId() {
         return id;
@@ -39,11 +39,11 @@ public class ServiceProducer {
     public void setSystem(String system) {
         this.system = system;
     }
-    public String getType() {
-        return type;
+    public String getMunicipality() {
+        return municipality;
     }
-    public void setType(String type) {
-        this.type = type;
+    public void setMunicipality(String municiplaity) {
+        this.municipality = municiplaity;
     }
     
 }

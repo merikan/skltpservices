@@ -21,7 +21,7 @@ public class EvactorService {
 
 
     public List<Event> getEventTimelineForProducer(long producerId) {
-        List<Event> timeline = webResource.path("timeline").path("Producer_" + producerId).accept(MediaType.APPLICATION_JSON).
+        List<Event> timeline = webResource.path("timeline").path("Producer:" + producerId).accept(MediaType.APPLICATION_JSON).
         get(new GenericType<List<Event>>() {});
         return timeline;
     }
