@@ -23,6 +23,14 @@ end note
 
 loop för varje logisk adress
 loop för varje service domän
+
+EI_Pull->Databas: getTime
+Databas -> EI_Pull: Tid för senast lyckade körning med denna adress och tjänstedomän
+
+note over EI_Pull, Databas
+Denna tid för senast lyckade körning avnänds i getUpdates så att endast nya uppdateringar hämtas
+end note
+
 loop för varje deluppdatering (optionellt)
 
 
