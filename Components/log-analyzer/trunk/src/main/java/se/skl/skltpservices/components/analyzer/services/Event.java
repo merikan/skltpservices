@@ -3,9 +3,6 @@ package se.skl.skltpservices.components.analyzer.services;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Event {
     private String id;
     private long timestamp;
@@ -14,8 +11,7 @@ public class Event {
     private String inboundRef;
     private String outboundRef;
     private long latency;
-    
-    private RuntimeStatus state;
+    private State state;
 
     public String getId() {
         return id;
@@ -73,12 +69,12 @@ public class Event {
         this.latency = latency;
     }
 
-    public RuntimeStatus getStatus() {
+    public State getState() {
         return state;
     }
 
-    public void setStatus(RuntimeStatus status) {
-        this.state = status;
+    public void setStatus(State state) {
+        this.state = state;
     }
 
     @Override

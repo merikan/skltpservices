@@ -10,11 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import se.skl.skltpservices.components.analyzer.services.LogAnalyzerService;
-import se.skl.skltpservices.components.analyzer.services.ProducerRuntimeInfo;
 
 @Controller
 @Path("/serviceProducers")
-@Produces({ "application/json;charset=UTF-8"})
+@Produces({"application/xml;charset=UTF-8;qs=3.5", "application/json;charset=UTF-8;qs=2.5"})
 public class ServiceProducerResource {
 
     private LogAnalyzerService logAnalyzerService;
@@ -25,7 +24,8 @@ public class ServiceProducerResource {
     }
 
     @GET
-    public List<ProducerRuntimeInfo> findAll() {
+    public List<ServiceGroup> findAll() {
         return logAnalyzerService.getCurrentStatusFromAllProducers(); 
     }
+    
 }

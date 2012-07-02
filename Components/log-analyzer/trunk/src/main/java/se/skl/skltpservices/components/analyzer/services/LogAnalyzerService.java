@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
+import se.skl.skltpservices.components.analyzer.application.RuntimeStatus;
+import se.skl.skltpservices.components.analyzer.application.Service;
+import se.skl.skltpservices.components.analyzer.application.ServiceGroup;
+import se.skl.skltpservices.components.analyzer.application.ServiceGroup.ServiceGroupBuilder;
 import se.skl.skltpservices.components.analyzer.domain.ServiceProducer;
 import se.skl.skltpservices.components.analyzer.domain.ServiceProducerRepository;
-import se.skl.skltpservices.components.analyzer.services.ProducerRuntimeInfo.ProducerRuntimeInfoBuilder;
 
-@Service
+@org.springframework.stereotype.Service
 public class LogAnalyzerService {
     private ServiceProducerRepository serviceProducerRepository;
     private EvactorService evactorService;
@@ -21,23 +23,47 @@ public class LogAnalyzerService {
         this.evactorService = evactorService;
     }
 
-    public List<ProducerRuntimeInfo> getCurrentStatusFromAllProducers() {
-        List<ProducerRuntimeInfo> producerInfo = new ArrayList<ProducerRuntimeInfo>();
+    public List<ServiceGroup> getCurrentStatusFromAllProducers() {
+        List<ServiceGroup> producerInfo = new ArrayList<ServiceGroup>();
         Iterable<ServiceProducer> producers = serviceProducerRepository.findAll();
-        System.out.println("Has producers: " +  producers.iterator().hasNext());
         for (ServiceProducer serviceProducer : producers) {
-            System.out.println("Fetching latest event for producer " + serviceProducer.getId());
             List<Event> timeline = evactorService.getEventTimelineForProducer(serviceProducer.getId());
-            Event event = null;
             if (!timeline.isEmpty()) {
-                event = timeline.get(0);
-                ProducerRuntimeInfo pri = new ProducerRuntimeInfoBuilder().setDomain(serviceProducer.getDomain())
-                        .setSubdomain(serviceProducer.getSubDomain()).setSystemName(serviceProducer.getSystem())
-                        .setEndpointUrl(serviceProducer.getServiceUrl()).setType(serviceProducer.getType())
+                ServiceGroup pri = new ServiceGroupBuilder().setDomain(serviceProducer.getDomain())
+                        .setSubdomain(serviceProducer.getSubDomain())
+                        .setMunicipality(serviceProducer.getMunicipality())
+                        .addService(new Service.ServiceBuilder()
+                                .setEndpointUrl(serviceProducer.getServiceUrl())
+                                .setSystemName(serviceProducer.getSystem())
+                                .setStatus(calcRuntimeStatus(timeline))
+                                .build()
+                        )
+                        .addService(new Service.ServiceBuilder()
+                                .setEndpointUrl(serviceProducer.getServiceUrl())
+                                .setSystemName(serviceProducer.getSystem())
+                                .setStatus(calcRuntimeStatus(timeline))
+                                .build()
+                        )
                         .build();
                 producerInfo.add(pri);
             }
         }
         return producerInfo;
+    }
+
+    protected RuntimeStatus calcRuntimeStatus(List<Event> timeline) {
+        if (timeline != null) {
+            for (int i = 0; i < Math.min(3, timeline.size()); i++) {
+                Event e = timeline.get(i);
+                if (i == 0 && e.getState().equals(State.SUCCESS)) {
+                    return RuntimeStatus.UP;
+                } else if (i == 1 && !e.getState().equals(State.SUCCESS)) {
+                    return RuntimeStatus.DOWN;
+                } else if (i == 2 && e.getState().equals(State.SUCCESS)) {
+                    return RuntimeStatus.UP;
+                }
+            }
+        }
+        return RuntimeStatus.DOWN;
     }
 }

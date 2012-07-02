@@ -41,6 +41,7 @@
     <init-param>
       <param-name>com.sun.jersey.config.property.MediaTypeMappings</param-name>
       <param-value>
+        xml: application/xml,
         json: application/json
       </param-value>
     </init-param>
