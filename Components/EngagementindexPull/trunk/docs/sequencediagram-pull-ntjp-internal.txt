@@ -70,5 +70,13 @@ gå vidare med nästa logiska adress
 end note
 
 end
+
+EI_Pull->Databas: updateTime
+Databas->EI_Pull: ok
+
+note over EI_Pull, Databas
+Om uppdatering av samtlig information gick bra, uppdatera tiden för senast lyckad körning
+end note
+
 end
 end
