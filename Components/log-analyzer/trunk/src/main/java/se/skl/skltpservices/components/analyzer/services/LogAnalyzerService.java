@@ -38,12 +38,6 @@ public class LogAnalyzerService {
                                 .setStatus(calcRuntimeStatus(timeline))
                                 .build()
                         )
-                        .addService(new Service.ServiceBuilder()
-                                .setEndpointUrl(serviceProducer.getServiceUrl())
-                                .setSystemName(serviceProducer.getSystem())
-                                .setStatus(calcRuntimeStatus(timeline))
-                                .build()
-                        )
                         .build();
                 producerInfo.add(pri);
             }
