@@ -18,7 +18,6 @@ public class EvactorContextLoaderListener implements ServletContextListener {
     private static final Logger log = LoggerFactory.getLogger(EvactorContextLoaderListener.class);
 
     private ActorSystem system;
-    private ActorRef apiServer;
     private ActorRef context;
     private String name = "evactor";
 
@@ -30,14 +29,6 @@ public class EvactorContextLoaderListener implements ServletContextListener {
         log.info("Starting up actor system: {}", system.name());
         context = system.actorOf(new Props(EvactorContext.class), "evactor");
 
-//        Props apiProps = new Props(new UntypedActorFactory() {
-//            public Actor create() {
-//                return new ApiServer(system, 8081);
-//            }
-//        });
-
-//        apiServer = system.actorOf(apiProps, "apiServer");
-//        apiServer.tell("startup");
         log.info("Succefully started actor system: {}", system.name());
     }
 
