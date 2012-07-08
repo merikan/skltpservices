@@ -16,14 +16,14 @@
   <listener>
     <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
   </listener>
-  
+
   <filter>
-    <filter-name>api</filter-name>
+    <filter-name>evactor</filter-name>
     <filter-class>org.evactor.api.BasePlan</filter-class>
   </filter>
-  
+
   <filter-mapping>
-    <filter-name>api</filter-name>
+    <filter-name>evactor</filter-name>
     <url-pattern>/api/*</url-pattern>
   </filter-mapping>
   
@@ -73,10 +73,21 @@
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
-  
+
   <servlet-mapping>
     <servlet-name>jersey-serlvet</servlet-name>
     <url-pattern>/jersey/*</url-pattern>
   </servlet-mapping>
-
+  
+<!--   <resource-ref> -->
+<!--       <description>DB Connection</description> -->
+<!--       <res-ref-name>jdbc/PC</res-ref-name> -->
+<!--       <res-type>javax.sql.DataSource</res-type> -->
+<!--       <res-auth>Container</res-auth> -->
+<!--   </resource-ref> -->
+  
+  <context-param>
+    <param-name>spring.profiles.default</param-name>
+    <param-value>production</param-value>
+  </context-param>
 </web-app>

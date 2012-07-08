@@ -12,6 +12,10 @@
     <appender-ref ref="STDOUT" />
   </root>
 
+  <logger name="org.springframework.core.env">
+    <level value="debug" />
+  </logger>
+  
   <!-- <logger name="se.aorwall.bam"> -->
   <!-- <level value="info" /> -->
   <!-- </logger> -->

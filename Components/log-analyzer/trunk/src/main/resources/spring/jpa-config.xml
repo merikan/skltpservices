@@ -1,37 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+  xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:context="http://www.springframework.org/schema/context"
   xsi:schemaLocation="
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd 
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
   ">
+
+  <context:property-placeholder
+    location="classpath:default.properties,file:${user.home}/.log-analyzer/config.properties,${LOG_ANALYZER_PROPERTIES}"
+    ignore-resource-not-found="true" ignore-unresolvable="true" />
 
   <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     <property name="dataSource" ref="dataSource" />
     <property name="jpaVendorAdapter">
-      <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-        <property name="database" value="POSTGRESQL" />
-      </bean>
+      <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
     </property>
     <property name="persistenceUnitName" value="jpa.skltp" />
-    <property name="jpaPropertyMap">
-      <map>
-        <entry key="hibernate.show_sql" value="true" />
-        <entry key="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-<!--         <entry key="hibernate.hbm2ddl.auto" value="" /> -->
-      </map>
-    </property>
+    <property name="jpaPropertyMap" ref="jpaPropertyMap" />
   </bean>
-  
+
   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
     <property name="entityManagerFactory" ref="entityManagerFactory" />
   </bean>
-
-  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    <property name="driverClassName" value="org.postgresql.Driver" />
-    <property name="url" value="jdbc:postgresql://localhost/ProducerCatalog" />
-    <property name="username" value="anders" />
-    <property name="password" value="" />
-  </bean>
-
+  
 </beans>

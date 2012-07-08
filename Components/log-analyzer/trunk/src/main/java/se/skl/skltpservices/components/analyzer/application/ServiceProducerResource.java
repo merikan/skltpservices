@@ -27,5 +27,4 @@ public class ServiceProducerResource {
     public List<ServiceGroup> findAll() {
         return logAnalyzerService.getCurrentStatusFromAllProducers(); 
     }
-    
 }
