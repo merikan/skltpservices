@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>se.skl.components.engagementindexpull</groupId>
-	<artifactId>ei-pull-virtualisering</artifactId>
+	<artifactId>ei-pull-service</artifactId>
 	<packaging>jar</packaging>
 
-	<name>ei-pull virtualisering</name>
+	<name>ei-pull service</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
