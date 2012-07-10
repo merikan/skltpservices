@@ -46,6 +46,18 @@
            </map>
        </property>
     </bean>
+    
+    <!-- Database table name -->
+    <bean id="eiPullStatusDbName" name="eiPullStatusDbName" class="java.lang.String">
+        <constructor-arg value="${ei.pull.status.db.name}"/>
+    </bean>
+    <!-- Database data source -->
+    <bean id="eiPullDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${ei.pull.status.db.driver}"/>
+        <property name="url" value="${ei.pull.status.db.url}"/>
+        <property name="username" value="${ei.pull.status.db.user}"/>
+        <property name="password" value="${ei.pull.status.db.password}"/>
+    </bean>
 
 	<jaxws:client id="getAddressesClient"
 		serviceClass="se.riv.itintegration.registry.getlogicaladdresseesbyservicecontract.v1.rivtabp21.GetLogicalAddresseesByServiceContractResponderInterface"
