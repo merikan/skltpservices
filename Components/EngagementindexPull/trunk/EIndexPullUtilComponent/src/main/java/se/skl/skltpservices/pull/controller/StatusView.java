@@ -65,7 +65,9 @@ public class StatusView {
                             simpleTable += status.getAmountOfErrorsSinceLastSuccess();
                         simpleTable += "</td>\n";
                         simpleTable += "\t\t\t\t\t<td align=\"left\">";
-                            simpleTable += simpleDateFormat.format(status.getLastSuccess());
+                        	if(status.getLastSuccess() != null){
+                        		 simpleTable += simpleDateFormat.format(status.getLastSuccess());
+                        	}
                         simpleTable += "</td>\n";
                     simpleTable += "\t\t\t\t</tr>\n";
                 }

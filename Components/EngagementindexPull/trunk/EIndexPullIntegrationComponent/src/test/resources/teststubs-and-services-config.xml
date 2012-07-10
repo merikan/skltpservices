@@ -7,19 +7,8 @@
 		http://www.mulesource.org/schema/mule/core/2.2 http://www.mulesource.org/schema/mule/core/2.2/mule.xsd"
       xmlns:http="http://www.mulesource.org/schema/mule/cxf/2.2">
 
-	
-
-	<spring:bean id="propertyPlaceholder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<spring:property name="ignoreResourceNotFound" value="true" />
-		<spring:property name="locations">
-			<spring:list>
-				<spring:value>classpath:vp-config.properties</spring:value>
-			</spring:list>
-		</spring:property>
-	</spring:bean>
-
 	<spring:beans>
-		<spring:import resource="classpath:services/*-Service.xml" />
+		<spring:import resource="classpath:EngagementIndexPull-config.xml" />
 		<spring:import resource="classpath:teststub-services/*-teststub-service.xml" />
 	</spring:beans>
 
