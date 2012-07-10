@@ -2,9 +2,12 @@
 <mule xmlns="http://www.mulesource.org/schema/mule/core/2.2"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
       xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:https="http://www.mulesource.org/schema/mule/https/2.2"
       xsi:schemaLocation="
 		http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-		http://www.mulesource.org/schema/mule/core/2.2 http://www.mulesource.org/schema/mule/core/2.2/mule.xsd"
+		http://www.mulesource.org/schema/mule/core/2.2 http://www.mulesource.org/schema/mule/core/2.2/mule.xsd
+		http://www.mulesource.org/schema/mule/https/2.2		 http://www.mulesource.org/schema/mule/https/2.2/mule-https.xsd"
+		
       xmlns:http="http://www.mulesource.org/schema/mule/cxf/2.2">
 
 	<spring:beans>
@@ -22,16 +25,10 @@
         <spring:property name="username" value="${ei.pull.status.db.user}"/>
         <spring:property name="password" value="${ei.pull.status.db.password}"/>
     </spring:bean>
-
-    <model name="statusViewModel">
-        <service name="statusViewService">
-            <inbound>
-                <inbound-endpoint address="jersey:${ei.pull.status.address}" synchronous="true"/>
-            </inbound>
-            <component>
-                <spring-object bean="statusView" />
-            </component>
-        </service>
-    </model>
+    
+  	<https:connector name="HttpsConnector">
+		<https:tls-key-store class="jks" path="src/test/resources/test-certs/producer-localhost.jks" storePassword="password" keyPassword="password" /> 
+		<https:tls-server    class="jks" path="src/test/resources/test-certs/truststore.jks" storePassword="password" requireClientAuthentication="true"/>
+	</https:connector>
 
 </mule>

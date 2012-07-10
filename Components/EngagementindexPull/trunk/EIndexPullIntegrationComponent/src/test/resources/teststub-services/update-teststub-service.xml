@@ -26,7 +26,8 @@
 			<inbound>	
 				<cxf:inbound-endpoint
 					address="${ei.push.address.uri}"
-					wsdlLocation="schemas/interactions/UpdateInteraction/UpdateInteraction_1.0_RIVTABP21.wsdl" />
+					wsdlLocation="schemas/interactions/UpdateInteraction/UpdateInteraction_1.0_RIVTABP21.wsdl" 
+					protocolConnector="HttpsConnector"/>
 			</inbound>
 
 			<component>
