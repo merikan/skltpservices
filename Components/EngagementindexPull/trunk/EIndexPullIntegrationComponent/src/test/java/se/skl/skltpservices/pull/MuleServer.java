@@ -1,4 +1,4 @@
-package se.skl.skltpservices.mule;
+package se.skl.skltpservices.pull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
