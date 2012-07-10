@@ -25,7 +25,7 @@
 		<service name="GetUpdates-teststub-service">
 			<inbound>	
 				<cxf:inbound-endpoint
-					address="http://localhost:10001/testproducer/GetUpdatesResponder/V1"
+					address="${ei.pull.address.uri}"
 					wsdlLocation="schemas/interactions/GetUpdatesInteraction/GetUpdatesInteraction_1.0_RIVTABP21.wsdl" />
 			</inbound>
 
