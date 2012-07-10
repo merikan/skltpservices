@@ -30,7 +30,6 @@
 	<!-- Modules to be created for each service -->
 	<modules>
 		<module>EIndexPull-Schemas</module>
-		<module>EIndexPullUtilComponent</module>
 		<module>EIndexPullIntegrationComponent</module>
 	</modules>
 
