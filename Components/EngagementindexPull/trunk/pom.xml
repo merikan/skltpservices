@@ -18,6 +18,7 @@
 	
 
 	<properties>
+		<soitoolkit.version>0.3.1</soitoolkit.version>
 		<cxf.version>2.2.12</cxf.version>
 		<mule.version>2.2.8</mule.version>
 		<spring.version>2.5.6</spring.version>
@@ -182,6 +183,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
+            <version>1.5.11</version>
         </dependency>
     </dependencies>
 
