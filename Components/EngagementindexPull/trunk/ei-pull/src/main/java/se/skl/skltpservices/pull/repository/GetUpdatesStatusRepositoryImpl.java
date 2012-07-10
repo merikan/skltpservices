@@ -66,7 +66,12 @@ public class GetUpdatesStatusRepositoryImpl extends JdbcDaoSupport implements Ge
         String sqlInsert = "INSERT INTO " + tableName + " (logicalpulladdress, pullservicedomain, lastsuccess, errorssincelastsuccess) VALUES (?, ?, ?, ?)";
         String logicalAddress = status.getLogicalAddress();
         String serviceDomain = status.getServiceDomain();
-        String formattedDate = simpleDateFormat.format(status.getLastSuccess());
+        
+        String formattedDate = null;
+        if(status.getLastSuccess() != null){
+        	formattedDate = simpleDateFormat.format(status.getLastSuccess());
+        }
+        
         int amountOfErrorsSinceLastSuccess = status.getAmountOfErrorsSinceLastSuccess();
         this.getJdbcTemplate().update(sqlInsert, logicalAddress, serviceDomain, formattedDate, amountOfErrorsSinceLastSuccess);
     }
@@ -74,7 +79,12 @@ public class GetUpdatesStatusRepositoryImpl extends JdbcDaoSupport implements Ge
     public void update(GetUpdatesStatus status) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String sqlUpdate = "UPDATE " + tableName + " SET lastsuccess = ?, errorssincelastsuccess = ? WHERE logicalpulladdress = ? AND pullservicedomain = ?";
-        String formattedDate = simpleDateFormat.format(status.getLastSuccess());
+       
+        String formattedDate = null;
+        if(status.getLastSuccess() != null){
+        	formattedDate = simpleDateFormat.format(status.getLastSuccess());
+        }
+        
         int amountOfErrorsSinceLastSuccess = status.getAmountOfErrorsSinceLastSuccess();
         String logicalAddress = status.getLogicalAddress();
         String serviceDomain = status.getServiceDomain();
@@ -94,7 +104,7 @@ public class GetUpdatesStatusRepositoryImpl extends JdbcDaoSupport implements Ge
                     "(" +
                          "logicalpulladdress VARCHAR(255) NOT NULL, " +
                          "pullservicedomain VARCHAR(255) NOT NULL, " +
-                         "lastsuccess CHAR(14) NOT NULL, " +
+                         "lastsuccess CHAR(14), " +
                          "errorssincelastsuccess INT, " +
                          "PRIMARY KEY (logicalpulladdress, pullservicedomain)" +
                     ")";
