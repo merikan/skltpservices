@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>se.skl.components</groupId>
-	<artifactId>Engagementindexpull-Parent</artifactId>
+	<artifactId>EIndexpull-Parent</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>EngagementindexPull-Parent</name>
+	<name>EIndexPull-Parent</name>
 	<url>http://maven.apache.org</url>
 	
 <!-- 	<parent> -->
@@ -29,9 +29,9 @@
 
 	<!-- Modules to be created for each service -->
 	<modules>
-		<module>Schema</module>
-		<module>EngagementIndexPull</module>
-		<module>EngagementIndexPull-Service</module>
+		<module>EIndexPull-Schemas</module>
+		<module>EIndexPullUtilComponent</module>
+		<module>EIndexPullIntegrationComponent</module>
 	</modules>
 
 	<dependencyManagement>
