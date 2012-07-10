@@ -25,7 +25,7 @@
 		<service name="Update-teststub-service">
 			<inbound>	
 				<cxf:inbound-endpoint
-					address="http://localhost:10001/testproducer/UpdateResponder/V1"
+					address="${ei.push.address.uri}"
 					wsdlLocation="schemas/interactions/UpdateInteraction/UpdateInteraction_1.0_RIVTABP21.wsdl" />
 			</inbound>
 
