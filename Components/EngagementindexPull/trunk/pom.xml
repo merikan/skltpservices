@@ -10,22 +10,19 @@
 	<name>EIndexPull-Parent</name>
 	<url>http://maven.apache.org</url>
 	
-<!-- 	<parent> -->
-<!-- 		<groupId>org.soitoolkit.commons.poms</groupId> -->
-<!-- 		<artifactId>soitoolkit-default-parent</artifactId> -->
-<!-- 		<version>0.3.1</version> -->
-<!-- 	</parent> -->
+	<parent>
+		<groupId>org.soitoolkit.commons.poms</groupId>
+		<artifactId>soitoolkit-default-parent</artifactId>
+		<version>0.3.1</version>
+	</parent>
 	
-
-	<properties>
-		<soitoolkit.version>0.3.1</soitoolkit.version>
+	<properties>	
 		<cxf.version>2.2.12</cxf.version>
 		<mule.version>2.2.8</mule.version>
 		<spring.version>2.5.6</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-
 
 	<!-- Modules to be created for each service -->
 	<modules>
