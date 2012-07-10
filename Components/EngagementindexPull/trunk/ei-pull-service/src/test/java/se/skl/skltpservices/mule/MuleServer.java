@@ -7,7 +7,7 @@ import org.soitoolkit.commons.mule.test.StandaloneMuleServer;
 public class MuleServer {
 
 	private static final Logger logger = LoggerFactory.getLogger(MuleServer.class);
-	public static final String MULE_SERVER_ID = "ei-pull-virtualisering";
+	public static final String MULE_SERVER_ID = "EngagementIndexPull-Service";
 	public static final String MULE_CONFIG = "teststubs-and-services-config.xml";
 
 	public static void main(String[] args) throws Exception {
