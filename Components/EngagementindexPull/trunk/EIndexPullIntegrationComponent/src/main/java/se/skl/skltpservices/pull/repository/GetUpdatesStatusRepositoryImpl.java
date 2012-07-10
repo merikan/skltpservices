@@ -66,12 +66,10 @@ public class GetUpdatesStatusRepositoryImpl extends JdbcDaoSupport implements Ge
         String sqlInsert = "INSERT INTO " + tableName + " (logicalpulladdress, pullservicedomain, lastsuccess, errorssincelastsuccess) VALUES (?, ?, ?, ?)";
         String logicalAddress = status.getLogicalAddress();
         String serviceDomain = status.getServiceDomain();
-        
         String formattedDate = null;
-        if(status.getLastSuccess() != null){
-        	formattedDate = simpleDateFormat.format(status.getLastSuccess());
+        if (status.getLastSuccess() != null) {
+            formattedDate = simpleDateFormat.format(status.getLastSuccess());
         }
-        
         int amountOfErrorsSinceLastSuccess = status.getAmountOfErrorsSinceLastSuccess();
         this.getJdbcTemplate().update(sqlInsert, logicalAddress, serviceDomain, formattedDate, amountOfErrorsSinceLastSuccess);
     }
@@ -79,12 +77,10 @@ public class GetUpdatesStatusRepositoryImpl extends JdbcDaoSupport implements Ge
     public void update(GetUpdatesStatus status) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String sqlUpdate = "UPDATE " + tableName + " SET lastsuccess = ?, errorssincelastsuccess = ? WHERE logicalpulladdress = ? AND pullservicedomain = ?";
-       
         String formattedDate = null;
-        if(status.getLastSuccess() != null){
-        	formattedDate = simpleDateFormat.format(status.getLastSuccess());
+        if (status.getLastSuccess() != null) {
+            formattedDate = simpleDateFormat.format(status.getLastSuccess());
         }
-        
         int amountOfErrorsSinceLastSuccess = status.getAmountOfErrorsSinceLastSuccess();
         String logicalAddress = status.getLogicalAddress();
         String serviceDomain = status.getServiceDomain();
