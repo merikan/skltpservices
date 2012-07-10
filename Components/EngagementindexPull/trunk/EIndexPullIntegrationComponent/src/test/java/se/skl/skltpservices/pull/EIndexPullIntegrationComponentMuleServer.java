@@ -4,9 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.test.StandaloneMuleServer;
 
-public class MuleServer {
+public class EIndexPullIntegrationComponentMuleServer {
 
-	private static final Logger logger = LoggerFactory.getLogger(MuleServer.class);
+	private static final Logger logger = LoggerFactory.getLogger(EIndexPullIntegrationComponentMuleServer.class);
 	public static final String MULE_SERVER_ID = "EngagementIndexPull-Service";
 	public static final String MULE_CONFIG = "teststubs-and-services-config.xml";
 
