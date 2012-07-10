@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>se.skl.components.engagementindexpull</groupId>
+	<artifactId>EngagementIndexPull</artifactId>
+	<packaging>jar</packaging>
+
+	<name>EngagementIndexPull</name>
+	<url>http://maven.apache.org</url>
+
+	<parent>
+		<groupId>se.skl.components</groupId>
+		<artifactId>engagementindexpull</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>se.rivta.tools</groupId>
+			<artifactId>itintegration-engagementindex-schemas</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>se.rivta.tools</groupId>
+			<artifactId>itintegration-registry-schemas</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-beans</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+		<!-- cxf dependencies -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>asm</artifactId>
+                    <groupId>asm</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-beans</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-beans</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- For status view -->
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-simple-server</artifactId>
+            <version>1.12</version>
+        </dependency>
+    </dependencies>
+</project>
