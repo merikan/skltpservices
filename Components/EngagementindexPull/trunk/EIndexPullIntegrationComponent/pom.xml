@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>se.skl.components.engagementindexpull</groupId>
-	<artifactId>EngagementIndexPull-Service</artifactId>
+	<artifactId>EIndexPullIntegrationComponent</artifactId>
 	<packaging>jar</packaging>
 
-	<name>EngagementIndexPull-Service</name>
+	<name>EIndexPullIntegrationComponent</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
@@ -18,7 +18,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>se.skl.components.engagementindexpull</groupId>
-			<artifactId>EngagementIndexPull</artifactId>
+			<artifactId>EIndexPullUtilComponent</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
