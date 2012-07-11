@@ -9,7 +9,7 @@
 
   <import resource="classpath*:spring/*-config.xml" />
   
-  <context:component-scan base-package="se.skl.skltpservices.components.analyzer" />
+  <context:component-scan base-package="se.skl.skltpservices.components.analyzer,se.skl.skltpservices.log.services" />
   <context:annotation-config />
 
   <jpa:repositories base-package="se.skl.skltpservices.components.analyzer.domain" />
