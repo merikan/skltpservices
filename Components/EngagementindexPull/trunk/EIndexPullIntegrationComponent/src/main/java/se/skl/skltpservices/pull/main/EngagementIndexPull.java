@@ -67,20 +67,20 @@ public class EngagementIndexPull {
         httpHelper.configHttpConduit(getUpdatesClient);
 
         final String pushServiceContractNamespace = PropertyResolver.get("ei.push.address.servicedomain");
-        final String belongsToHsaId = PropertyResolver.get("ei.pull.belongsto.hsaid");
-        final String addressServiceAddress = PropertyResolver.get("ei.address.service.address.logical");
+        final String serviceConsumerHsaId = PropertyResolver.get("ei.pull.belongsto.hsaid");
+        final String logicalAddress = PropertyResolver.get("ei.address.service.address.logical");
         final String pushLogicalAddress = PropertyResolver.get("ei.push.address.logical");
         final String commaSeparatedDomains = PropertyResolver.get("ei.pull.address.servicedomains");
         final String timestampFormat = PropertyResolver.get("ei.pull.time.format");
         final List<String> serviceDomainList = EngagementIndexHelper.stringToList(commaSeparatedDomains);
-        final GetLogicalAddresseesByServiceContractType parameters = generateAddressParameters(pushServiceContractNamespace, belongsToHsaId);
+        final GetLogicalAddresseesByServiceContractType parameters = generateAddressParameters(pushServiceContractNamespace, serviceConsumerHsaId);
         final String pullLogicalAddress = configuredPullLogicalAddress;
         List<String> possiblePullAddresses = new ArrayList<String>();
         try {
-            GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(addressServiceAddress, parameters);
+            GetLogicalAddresseesByServiceContractResponseType addressResponse = getAddressesClient.getLogicalAddresseesByServiceContract(logicalAddress, parameters);
             possiblePullAddresses = addressResponse.getLogicalAddress();
         } catch (Exception e) {
-            log.error("Could not acquire addresses from " + addressServiceAddress + " which should be contacted for pulling data. Reason:\n", e);
+            log.error("Could not acquire addresses from " + logicalAddress + " which should be contacted for pulling data. Reason:\n", e);
         }
         pushAndPull(possiblePullAddresses, pullLogicalAddress, pushLogicalAddress, serviceDomainList, timestampFormat);
         log.info("Pull/Push-sequence for " + configuredPullLogicalAddress + " ended.");
