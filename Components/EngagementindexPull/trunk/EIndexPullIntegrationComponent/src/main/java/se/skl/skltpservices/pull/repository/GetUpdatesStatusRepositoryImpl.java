@@ -98,8 +98,8 @@ public class GetUpdatesStatusRepositoryImpl extends JdbcDaoSupport implements Ge
             String createTableSql =
                     "CREATE TABLE " + tableName + " " +
                     "(" +
-                         "logicalpulladdress VARCHAR(255) NOT NULL, " +
-                         "pullservicedomain VARCHAR(255) NOT NULL, " +
+                         "logicalpulladdress VARCHAR(150) NOT NULL, " +
+                         "pullservicedomain VARCHAR(150) NOT NULL, " +
                          "lastsuccess CHAR(14), " +
                          "errorssincelastsuccess INT, " +
                          "PRIMARY KEY (logicalpulladdress, pullservicedomain)" +

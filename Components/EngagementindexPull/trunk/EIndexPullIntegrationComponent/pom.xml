@@ -36,5 +36,11 @@
 			<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
 			<artifactId>vp-mule-2.2.8-dependencies</artifactId>
 		</dependency>
+		<!-- Database -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 	</dependencies>
 </project>
