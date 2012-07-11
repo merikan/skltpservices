@@ -17,7 +17,6 @@
 	</parent>
 	
 	<properties>	
-		<cxf.version>2.2.12</cxf.version>
 		<mule.version>2.2.8</mule.version>
 		<spring.version>2.5.6</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -67,16 +66,6 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context</artifactId>
 				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-frontend-jaxws</artifactId>
-				<version>${cxf.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-transports-http</artifactId>
-				<version>${cxf.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
