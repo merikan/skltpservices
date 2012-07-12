@@ -15,6 +15,12 @@ Add your content here.  Format your content with:
 
 =Installation instructions=
 
+==Runtime environment==
+
+`Java(TM) SE Runtime Environment (build 1.6.0_33)`
+`Mule ESB 3.2.1`
+`ActiveMQ 5.4 (5.x)`
+
 ==Configuration==
 
 In this instruction `<MULE_HOME>` refers to the place where Mule is installed.
