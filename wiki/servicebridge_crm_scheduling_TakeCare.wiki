@@ -10,9 +10,9 @@ Mule flow...
 
 ==Runtime environment==
 
-* `Java(TM) SE Runtime Environment (build 1.6.0_33)`
-* `Mule ESB 3.2.1`
-* `ActiveMQ 5.4 (5.x)`
+  * `Java(TM) SE Runtime Environment (build 1.6.0_33)`
+  * `Mule ESB 3.2.1`
+  * `ActiveMQ 5.4 (5.x)`
 
 ==Configuration==
 
