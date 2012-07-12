@@ -1,0 +1,54 @@
+create keyspace Log
+  with placement_strategy = 'NetworkTopologyStrategy'
+  and strategy_options = {datacenter1 : 1}
+  and durable_writes = true;
+
+use Log;
+
+create column family InfoEvent
+  with column_type = 'Standard'
+  and comparator = 'AsciiType'
+  and key_validation_class = 'AsciiType'
+  and gc_grace = 600
+  and default_validation_class = 'UTF8Type'
+  and comment = 'Log information events'
+  and column_metadata = [
+  { column_name : 'day',		validation_class : 'AsciiType', index_type : KEYS },
+  { column_name : 'contract',		validation_class : 'AsciiType', index_type : KEYS },
+  { column_name : 'sender',		validation_class : 'UTF8Type' },
+  { column_name : 'receiver',		validation_class : 'UTF8Type' },
+  { column_name : 'error',		validation_class : 'AsciiType' },
+  { column_name : 'in.timestamp',	validation_class : 'LongType' },
+  { column_name : 'in.payload',		validation_class : 'UTF8Type' },
+  { column_name : 'in.riv_version',	validation_class : 'AsciiType' },
+  { column_name : 'out.timestamp',	validation_class : 'LongType' },
+  { column_name : 'out.payload',	validation_class : 'UTF8Type' },
+  { column_name : 'out.riv_version',	validation_class : 'AsciiType' },
+];
+
+
+create column family ErrorEvent
+  with column_type = 'Standard'
+  and comparator = 'AsciiType'
+  and key_validation_class = 'AsciiType'
+  and gc_grace = 600
+  and default_validation_class = 'UTF8Type'
+  and comment = 'Log error events'
+  and column_metadata = [
+  { column_name : 'day',		validation_class : 'AsciiType', index_type : KEYS },
+  { column_name : 'contract',		validation_class : 'AsciiType', index_type : KEYS },
+  { column_name : 'sender',		validation_class : 'UTF8Type' },
+  { column_name : 'receiver',		validation_class : 'UTF8Type' },
+  { column_name : 'timestamp',		validation_class : 'LongType' },
+  { column_name : 'message',		validation_class : 'UTF8Type' },
+  { column_name : 'descriptioon',	validation_class : 'UTF8Type' },
+  { column_name : 'detail',		validation_class : 'UTF8Type' },
+  { column_name : 'payload',		validation_class : 'UTF8Type' },
+  { column_name : 'riv_version',	validation_class : 'AsciiType' },
+];
+
+
+create column family WeeklyStats
+with default_validation_class = 'CounterColumnType'
+and key_validation_class = 'AsciiType'
+and comparator = 'AsciiType';
