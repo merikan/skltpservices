@@ -46,17 +46,17 @@ To change the default settings for `TakeCare` crm:scheduling service bridge put 
 || *Key* || *Default value if applicable* || *Description* ||
 || GETALLTIMETYPES_INBOUND_URL || `http://localhost:8081/servicebridge/GetAllTimeTypes/1/rivtabp20`  ||  ||
 || GETALLTIMETYPES_OUTBOUND_URL ||  ||  ||
-|| GETSUBJECTOFCARESCHEDULE_INBOUND_URL ||  ||  ||
+|| GETSUBJECTOFCARESCHEDULE_INBOUND_URL || `http://localhost:8081/servicebridge/GetSubjectOfCareSchedule/1/rivtabp20` ||  ||
 || GETSUBJECTOFCARESCHEDULE_OUTBOUND_URL ||  ||  ||
-|| GETBOOKINGDETAILS_INBOUND_URL ||  ||  ||
+|| GETBOOKINGDETAILS_INBOUND_URL ||  `http://localhost:8081/servicebridge/GetBookingDetails/1/rivtabp20` || ||
 || GETBOOKINGDETAILS_OUTBOUND_URL ||  ||  ||
-|| MAKEBOOKING_INBOUND_URL ||  ||  ||
+|| MAKEBOOKING_INBOUND_URL || `http://localhost:8081/servicebridge/MakeBooking/1/rivtabp20` || ||
 || MAKEBOOKING_OUTBOUND_URL ||  ||  ||
-|| CANCELBOOKING_INBOUND_URL ||  ||  ||
+|| CANCELBOOKING_INBOUND_URL || `http://localhost:8081/servicebridge/CancelBooking/1/rivtabp20` || ||
 || CANCELBOOKING_OUTBOUND_URL ||  ||  ||
-|| GETAVAILABLEDATES_INBOUND_URL ||  ||  ||
+|| GETAVAILABLEDATES_INBOUND_URL || `http://localhost:8081/servicebridge/GetAvailableDates/1/rivtabp20` ||  ||
 || GETAVAILABLEDATES_OUTBOUND_URL ||  ||  ||
-|| GETAVAILABLETIMESLOTS_INBOUND_URL ||  ||  ||
+|| GETAVAILABLETIMESLOTS_INBOUND_URL || `http://localhost:8081/servicebridge/GetAvailableTimeslots/1/rivtabp20` ||  ||
 || GETAVAILABLETIMESLOTS_OUTBOUND_URL ||  ||  ||
-|| UPDATEBOOKING_INBOUND_URL ||  ||  ||
+|| UPDATEBOOKING_INBOUND_URL || `http://localhost:8081/servicebridge/UpdateBooking/1/rivtabp20` ||  ||
 || UPDATEBOOKING_OUTBOUND_URL ||  ||  ||
