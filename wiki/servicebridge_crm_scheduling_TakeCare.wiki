@@ -39,8 +39,9 @@ To change the default settings for `TakeCare` crm:scheduling service bridge put 
 || *Key* || *Default value if applicable* || *Description* ||
 || SERVICE_TIMEOUT_MS || 8000 ms (8 sec) || Timeout for synchronous services ||
 
-INBOUND_URL is the URL where the `TakeCare` crm:scheduling servicebridge accepts incoming requests.
-OUTBOUND_URL is the URL where `TakeCare` system accepts incoming requests.
+*INBOUND_URL* is the URL where the `TakeCare` crm:scheduling servicebridge accepts incoming requests.
+
+*OUTBOUND_URL* is the URL where `TakeCare` system accepts incoming requests.
 
 || *Key* || *Default value if applicable* || *Description* ||
 || GETALLTIMETYPES_INBOUND_URL ||  ||  ||
