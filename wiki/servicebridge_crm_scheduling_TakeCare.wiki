@@ -44,7 +44,7 @@ To change the default settings for `TakeCare` crm:scheduling service bridge put 
 *OUTBOUND_URL* is the URL where `TakeCare` system accepts incoming requests.
 
 || *Key* || *Default value if applicable* || *Description* ||
-|| GETALLTIMETYPES_INBOUND_URL || http://localhost:8081/servicebridge/GetAllTimeTypes/1/rivtabp20  ||  ||
+|| GETALLTIMETYPES_INBOUND_URL || `http://localhost:8081/servicebridge/GetAllTimeTypes/1/rivtabp20`  ||  ||
 || GETALLTIMETYPES_OUTBOUND_URL ||  ||  ||
 || GETSUBJECTOFCARESCHEDULE_INBOUND_URL ||  ||  ||
 || GETSUBJECTOFCARESCHEDULE_OUTBOUND_URL ||  ||  ||
