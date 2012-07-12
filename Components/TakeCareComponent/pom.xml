@@ -28,6 +28,7 @@
 		<module>CrmScheduling-Schemas</module>
 		<module>TakeCare-schemas</module>
 		<module>TakeCareIntegrationComponent</module>
+		<module>TakeCareTestProducer</module>
 	</modules>
 
 	<!--NB! SCM config below assumes system name equals VGR subversion/googlecode 
