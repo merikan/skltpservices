@@ -8,15 +8,29 @@ Mule flow...
 
 =Installation instructions=
 
+In this instruction `<MULE_HOME>` refers to the place where Mule is installed.
+
 ==Runtime environment==
 
   * `Java(TM) SE Runtime Environment (build 1.6.0_33)`
   * `Mule ESB 3.2.1`
   * `ActiveMQ 5.4 (5.x)`
 
-==Configuration==
+==Download distribution==
 
-In this instruction `<MULE_HOME>` refers to the place where Mule is installed.
+Download the latest distribution from xxx.
+
+==Build from source==
+
+Checkout the source code from xxx and build with yyy
+
+==Deploy/Undeploy distribution==
+
+Drop the distribution ZIP file into `<MULE_HOME>`/apps folder. Mule unpack and deploy the app. Check the logfiles `<MULE_HOME>`/logs to verify no errors occurred during deploy.
+
+To undeploy just remove the file named xxx-anchor.txt and Mule will remove the app.
+
+==Configuration==
 
 To change the default settings for `TakeCare` crm:scheduling service bridge put a file with name _`TakeCareIntegrationComponent-config-override.properties`_ in the classpath (`<MULE_HOME>/conf`). 
 
