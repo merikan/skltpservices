@@ -49,14 +49,16 @@ public class GetUpdatesStatusRepositoryImpl extends JdbcDaoSupport implements Ge
         }
     };
 
+    @SuppressWarnings("unchecked")
     public List<GetUpdatesStatus> fetchAll() {
-        return this.getJdbcTemplate().query("SELECT * FROM " + tableName, MAPPER);
+        return (List<GetUpdatesStatus>) this.getJdbcTemplate().query("SELECT * FROM " + tableName, MAPPER);
     }
 
     public GetUpdatesStatus getStatusForLogicalAddressAndServiceContract(String logicalPullAddress, String pullServiceDomain) {
         try {
-            return this.getJdbcTemplate().queryForObject("SELECT * FROM " + tableName + " WHERE logicalpulladdress = ? AND pullservicedomain = ?", MAPPER, logicalPullAddress, pullServiceDomain);
-        } catch (EmptyResultDataAccessException e) {
+            Object[] args = { logicalPullAddress, pullServiceDomain };
+            return (GetUpdatesStatus) this.getJdbcTemplate().query("SELECT * FROM " + tableName + " WHERE logicalpulladdress = ? AND pullservicedomain = ?", args, MAPPER).get(0);
+        } catch (Exception e) {
             return null;
         }
     }
@@ -71,7 +73,8 @@ public class GetUpdatesStatusRepositoryImpl extends JdbcDaoSupport implements Ge
             formattedDate = simpleDateFormat.format(status.getLastSuccess());
         }
         int amountOfErrorsSinceLastSuccess = status.getAmountOfErrorsSinceLastSuccess();
-        this.getJdbcTemplate().update(sqlInsert, logicalAddress, serviceDomain, formattedDate, amountOfErrorsSinceLastSuccess);
+        Object[] args = { logicalAddress, serviceDomain, formattedDate, amountOfErrorsSinceLastSuccess };
+        this.getJdbcTemplate().update(sqlInsert, args);
     }
 
     public void update(GetUpdatesStatus status) {
@@ -84,12 +87,14 @@ public class GetUpdatesStatusRepositoryImpl extends JdbcDaoSupport implements Ge
         int amountOfErrorsSinceLastSuccess = status.getAmountOfErrorsSinceLastSuccess();
         String logicalAddress = status.getLogicalAddress();
         String serviceDomain = status.getServiceDomain();
-        this.getJdbcTemplate().update(sqlUpdate, formattedDate, amountOfErrorsSinceLastSuccess, logicalAddress, serviceDomain);
+        Object[] args = { formattedDate, amountOfErrorsSinceLastSuccess, logicalAddress, serviceDomain };
+        this.getJdbcTemplate().update(sqlUpdate, args);
     }
 
     public void delete(GetUpdatesStatus status) {
         String sqlDelete = "DELETE FROM " + tableName + " WHERE logicalpulladdress = ? AND pullservicedomain = ?";
-        this.getJdbcTemplate().update(sqlDelete, status.getLogicalAddress(), status.getServiceDomain());
+        Object[] args = { status.getLogicalAddress(), status.getServiceDomain() };
+        this.getJdbcTemplate().update(sqlDelete, args);
     }
 
     @PostConstruct
@@ -97,13 +102,13 @@ public class GetUpdatesStatusRepositoryImpl extends JdbcDaoSupport implements Ge
         if (!tableExists(tableName)) {
             String createTableSql =
                     "CREATE TABLE " + tableName + " " +
-                    "(" +
-                         "logicalpulladdress VARCHAR(150) NOT NULL, " +
-                         "pullservicedomain VARCHAR(150) NOT NULL, " +
-                         "lastsuccess CHAR(14), " +
-                         "errorssincelastsuccess INT, " +
-                         "PRIMARY KEY (logicalpulladdress, pullservicedomain)" +
-                    ")";
+                            "(" +
+                            "logicalpulladdress VARCHAR(150) NOT NULL, " +
+                            "pullservicedomain VARCHAR(150) NOT NULL, " +
+                            "lastsuccess CHAR(14), " +
+                            "errorssincelastsuccess INT, " +
+                            "PRIMARY KEY (logicalpulladdress, pullservicedomain)" +
+                            ")";
             this.getJdbcTemplate().update(createTableSql);
         }
         // Do nothing, table already exists
