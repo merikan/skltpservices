@@ -1,5 +1,7 @@
 Service bridge between TakeCare and RIV
 
+<wiki:toc max_depth="2" />
+
 = Introduction =
 
 Mule flow...
@@ -10,3 +12,11 @@ Add your content here.  Format your content with:
   * Text in *bold* or _italic_
   * Headings, paragraphs, and lists
   * Automatic links to other wiki pages
+
+=Installation instructions=
+
+==Configuration==
+
+In this instruction <MULE_HOME> refers to the place where Mule is installed.
+
+To change the default settings for TakeCare crm:scheduling service bridge put a file with name _TakeCareIntegrationComponent-config-override.properties_ in the classpath (<MULE_HOME>/conf). 
