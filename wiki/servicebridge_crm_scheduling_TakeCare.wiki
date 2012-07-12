@@ -21,5 +21,13 @@ In this instruction `<MULE_HOME>` refers to the place where Mule is installed.
 
 To change the default settings for `TakeCare` crm:scheduling service bridge put a file with name _`TakeCareIntegrationComponent-config-override.properties`_ in the classpath (`<MULE_HOME>/conf`). 
 
-|| Key || Default value if applicable || Description ||
+|| *Key* || *Default value if applicable* || *Description* ||
 || SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE || || Repository of security certificates used in SSL communication  ||
+|| SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE_PASSWORD ||  ||  ||
+|| SOITOOLKIT_MULE_HTTPS_TLS_KEY_PASSWORD ||  ||  ||
+|| SOITOOLKIT_MULE_HTTPS_TLS_KEY_TYPE ||  ||  ||
+|| SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE ||  ||  ||
+|| SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_PASSWORD ||  ||  ||
+|| SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_REQUIRE_CLIENT_AUTH ||  ||  ||
+|| SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_REQUIRE_CLIENT_AUTH || ||
+|| SOITOOLKIT_MULE_HTTPS_CLIENT_SO_TIMEOUT || ||
