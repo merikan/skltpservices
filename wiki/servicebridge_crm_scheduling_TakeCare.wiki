@@ -21,6 +21,8 @@ In this instruction `<MULE_HOME>` refers to the place where Mule is installed.
 
 To change the default settings for `TakeCare` crm:scheduling service bridge put a file with name _`TakeCareIntegrationComponent-config-override.properties`_ in the classpath (`<MULE_HOME>/conf`). 
 
+===SSL/TLS settings===
+
 || *Key* || *Default value if applicable* || *Description* ||
 || SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE || || Repository of security certificates used in SSL communication  ||
 || SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE_PASSWORD ||  ||  ||
@@ -31,3 +33,29 @@ To change the default settings for `TakeCare` crm:scheduling service bridge put 
 || SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_REQUIRE_CLIENT_AUTH ||  ||  ||
 || SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_REQUIRE_CLIENT_AUTH || ||
 || SOITOOLKIT_MULE_HTTPS_CLIENT_SO_TIMEOUT || ||
+
+===Service settings===
+
+|| *Key* || *Default value if applicable* || *Description* ||
+|| SERVICE_TIMEOUT_MS || 8000 ms (8 sec) || Timeout for synchronous services ||
+
+INBOUND_URL is the URL where the `TakeCare` crm:scheduling servicebridge accepts incoming requests.
+OUTBOUND_URL is the URL where `TakeCare` system accepts incoming requests.
+
+|| *Key* || *Default value if applicable* || *Description* ||
+|| GETALLTIMETYPES_INBOUND_URL ||  ||  ||
+|| GETALLTIMETYPES_OUTBOUND_URL ||  ||  ||
+|| GETSUBJECTOFCARESCHEDULE_INBOUND_URL ||  ||  ||
+|| GETSUBJECTOFCARESCHEDULE_OUTBOUND_URL ||  ||  ||
+|| GETBOOKINGDETAILS_INBOUND_URL ||  ||  ||
+|| GETBOOKINGDETAILS_OUTBOUND_URL ||  ||  ||
+|| MAKEBOOKING_INBOUND_URL ||  ||  ||
+|| MAKEBOOKING_OUTBOUND_URL ||  ||  ||
+|| CANCELBOOKING_INBOUND_URL ||  ||  ||
+|| CANCELBOOKING_OUTBOUND_URL ||  ||  ||
+|| GETAVAILABLEDATES_INBOUND_URL ||  ||  ||
+|| GETAVAILABLEDATES_OUTBOUND_URL ||  ||  ||
+|| GETAVAILABLETIMESLOTS_INBOUND_URL ||  ||  ||
+|| GETAVAILABLETIMESLOTS_OUTBOUND_URL ||  ||  ||
+|| UPDATEBOOKING_INBOUND_URL ||  ||  ||
+|| UPDATEBOOKING_OUTBOUND_URL ||  ||  ||
