@@ -22,4 +22,9 @@ public interface LogStoreRepository {
 	 * @param errorEvent the event to store.
 	 */
 	void storeErrorEvent(LogEvent errorEvent);
+
+	/**
+	 * Connects to store.
+	 */
+	void connect();
 }

@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-  xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="
+<beans xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.springframework.org/schema/beans"
+    xsi:schemaLocation="
   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
   http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-  ">
+  " >
 
-  <import resource="classpath*:spring/*-config.xml" />
-  
-  <context:component-scan base-package="se.skl.skltpservices.components.analyzer,se.skl.skltpservices.log.services" />
-  <context:annotation-config />
+    <context:property-placeholder
+        ignore-resource-not-found="true"
+        ignore-unresolvable="true"
+        location="classpath:default.properties,file:${user.home}/.log-analyzer/config.properties,${LOG_ANALYZER_PROPERTIES}" />
 
-  <jpa:repositories base-package="se.skl.skltpservices.components.analyzer.domain" />
+    <context:annotation-config />
+
+    <context:component-scan base-package="se.skl.skltpservices.components.analyzer, se.skl.skltpservices.components.log.services, se.skl.skltpservices.components.analyzer.domain" />
+
+    <import resource="classpath:spring/*-config.xml" />
+
+    <jpa:repositories base-package="se.skl.skltpservices.components.analyzer.domain" />
+
 </beans>
