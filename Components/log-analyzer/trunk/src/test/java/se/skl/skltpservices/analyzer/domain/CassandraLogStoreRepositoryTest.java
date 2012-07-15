@@ -1,14 +1,17 @@
 package se.skl.skltpservices.analyzer.domain;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.Collections;
 import java.util.UUID;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
-
 import org.soitoolkit.commons.logentry.schema.v1.LogEntryType;
+import org.soitoolkit.commons.logentry.schema.v1.LogEntryType.ExtraInfo;
 import org.soitoolkit.commons.logentry.schema.v1.LogEvent;
 import org.soitoolkit.commons.logentry.schema.v1.LogMessageType;
 import org.soitoolkit.commons.logentry.schema.v1.LogRuntimeInfoType;
@@ -33,6 +36,10 @@ public class CassandraLogStoreRepositoryTest {
 		when(event.getLogEntry().getRuntimeInfo().getBusinessCorrelationId()).thenReturn(UUID.randomUUID().toString());
 		when(event.getLogEntry().getPayload()).thenReturn("no special");
 		when(event.getLogEntry().getMessageInfo().getMessage()).thenReturn("xreq-in");
+		ExtraInfo extraInfo = new ExtraInfo();
+		extraInfo.setName("cxf_service");
+		extraInfo.setValue("urn:riv:domain:subdomain:method");
+		when(event.getLogEntry().getExtraInfo()).thenReturn(Collections.singletonList(extraInfo));
 		
 		XMLGregorianCalendar cal = mock(XMLGregorianCalendar.class);
 		when(cal.getYear()).thenReturn(2012);

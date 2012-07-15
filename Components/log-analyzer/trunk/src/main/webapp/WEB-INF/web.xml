@@ -4,18 +4,24 @@
   xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   version="2.5">
 
-  <listener>
-    <listener-class>se.skl.skltpservices.components.analyzer.EvactorContextLoaderListener</listener-class>
-  </listener>
 
-  <!-- Bootstrap the root application context as usual using ContextLoaderListener -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>WEB-INF/applicationContext.xml</param-value>
+  </context-param>
+	
   <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    <listener-class>se.skl.skltpservices.components.analyzer.LogStoreContextLoaderListener</listener-class>
   </listener>
 
   <listener>
     <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
   </listener>
+
+  <listener>
+    <listener-class>se.skl.skltpservices.components.analyzer.EvactorContextLoaderListener</listener-class>
+  </listener>
+
 
   <filter>
     <filter-name>evactor</filter-name>

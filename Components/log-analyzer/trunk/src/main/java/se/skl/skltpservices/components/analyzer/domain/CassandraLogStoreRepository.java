@@ -16,22 +16,28 @@ import me.prettyprint.hector.api.beans.HCounterColumn;
 import me.prettyprint.hector.api.factory.HFactory;
 import me.prettyprint.hector.api.mutation.Mutator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.logentry.schema.v1.LogEntryType;
 import org.soitoolkit.commons.logentry.schema.v1.LogEntryType.ExtraInfo;
 import org.soitoolkit.commons.logentry.schema.v1.LogEvent;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
- * Stores events in an apache cassandra database.
+ * Stores events in an Apache Cassandra database.
  * 
  * @author Peter
  *
  */
+@Component
 public class CassandraLogStoreRepository implements LogStoreRepository {
+
+	private static final Logger log = LoggerFactory.getLogger(CassandraLogStoreRepository.class);
 
 	private static final String CF_INFO_EVENT = "InfoEvent";
 	private static final String CF_ERROR_EVENT = "ErrorEvent";
 	private static final String CF_WEEKLY_STATS = "WeeklyStats";
-	private static final String CLUSTER = "Test Cluster";
 	private static final String KEYSPACE = "Log";
 	private static final String WAYPOINT_IN = "in.";
 	private static final String WAYPOINT_OUT = "out.";
@@ -49,13 +55,13 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		columnNames.put("out.sessionErrorDescription", "error_message");
 		columnNames.put("out.sessionErrorTechnicalDescription", "error_detail");
 		// in
-		columnNames.put("in.timestamp", "in.timestamp");
-		columnNames.put("in.payload", "in.payload");
-		columnNames.put("in.rivversion", "in.riv_version");
+		columnNames.put("in.timestamp", "in_timestamp");
+		columnNames.put("in.payload", "in_payload");
+		columnNames.put("in.rivversion", "in_riv_version");
 		// out
-		columnNames.put("out.timestamp", "out.timestamp");
-		columnNames.put("out.rivversion", "out.riv_version");
-		columnNames.put("out.payload", "out.payload");
+		columnNames.put("out.timestamp", "out_timestamp");
+		columnNames.put("out.rivversion", "out_riv_version");
+		columnNames.put("out.payload", "out_payload");
 
 		// error  {key, actual column name}
 		columnNames.put("err.cxf_service", "contract");
@@ -69,6 +75,27 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		columnNames.put("err.rivversion", "riv_version");
 	}
 
+	// config
+    @Value("${log.store.instances}")
+    private String logStoreInstances;
+
+    @Value("${log.store.payloadTTL}")
+    private int payloadTTL;
+    
+    @Value("${log.store.infoTTL}")
+    private int infoTTL;
+    
+    @Value("${log.store.errorTTL}")
+    private int errorTTL;
+    
+    @Value("${log.store.weeklyCounterTTL}")
+    private int weeklyCounterTTL;
+    
+    @Value("${log.store.clusterName}")
+    private String clusterName;
+    
+    
+
 	// hector stuff
 	private Keyspace keyspace;
 	final static StringSerializer SS = StringSerializer.get();
@@ -77,14 +104,29 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 
 	//
 	public CassandraLogStoreRepository() {
-		CassandraHostConfigurator cfg = new CassandraHostConfigurator("localhost:9160");
+		
+	}
+	
+	// connects.
+	@Override
+	public void connect() {
+		CassandraHostConfigurator cfg = new CassandraHostConfigurator(logStoreInstances);
 		cfg.setMaxActive(5);
 		cfg.setCassandraThriftSocketTimeout(3000);
 		cfg.setMaxWaitTimeWhenExhausted(4000);
-		Cluster cluster = HFactory.getOrCreateCluster(CLUSTER, cfg);
-		this.keyspace = HFactory.createKeyspace(KEYSPACE, cluster);
+		Cluster cluster = HFactory.getOrCreateCluster(clusterName, cfg);
+		this.keyspace = HFactory.createKeyspace(KEYSPACE, cluster);		
 	}
 
+	/**
+	 * Returns TTL i seconds.
+	 * 
+	 * @param days TTL in days.
+	 * @return TTL in seconds.
+	 */
+	private static int toSeconds(int days) {
+		return (days * 24 * 3600);
+	}
 
 	@Override
 	public void storeInfoEvent(LogEvent infoEvent) {
@@ -96,6 +138,7 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		} else if ("xresp-out".equals(waypoint)) {
 			waypoint = WAYPOINT_OUT;
 		} else {
+			log.warn("Unexpected waypoint {} (event ignored)", waypoint);
 			return;
 		}
 
@@ -121,55 +164,60 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		calendar.setFirstDayOfWeek(Calendar.MONDAY);
 		calendar.setMinimalDaysInFirstWeek(4);
 
-		long ttl = 300;
-
 		// add day as YYYY-MM-DD (indexed column)
 		if (WAYPOINT_IN.equals(waypoint)) {
-			m.addInsertion(key, columnFamily, toStringColumn("day", String.format("%tF", calendar.getTime()), ttl));
+			m.addInsertion(key, columnFamily, toStringColumn("date", String.format("%tF", calendar.getTime())));
 		}
 
-		m.addInsertion(key, columnFamily,  toLongColumn(columnNames.get(waypoint + "timestamp"), toTimestamp(entry.getRuntimeInfo().getTimestamp()), ttl));        
+		m.addInsertion(key, columnFamily,  toLongColumn(columnNames.get(waypoint + "timestamp"), toTimestamp(entry.getRuntimeInfo().getTimestamp())));        
 
 		for (ExtraInfo info : entry.getExtraInfo()) {
 			String name = columnNames.get(waypoint + info.getName());
-			System.out.printf("add (%s=%s)\n", name, info.getValue());
 			if (name != null) {
 				if ("contract".equals(name)) {
 					updateStatistics(m, info.getValue(), calendar, error);
 				}
-				add(m, columnFamily, key, toStringColumn(name, info.getValue(), ttl));
+				add(m, columnFamily, key, toStringColumn(name, info.getValue(), toSeconds((error) ? errorTTL : infoTTL)));
 			}
 		}
 
-		add(m, columnFamily, key, toStringColumn(columnNames.get(waypoint + "payload"), entry.getPayload(), ttl));
+		add(m, columnFamily, key, toStringColumn(columnNames.get(waypoint + "payload"), entry.getPayload(), toSeconds(payloadTTL)));
 		
 		m.execute();
 	}
 
 	//
-	private static void updateStatistics(Mutator<String> m, String contract, Calendar calendar, boolean error) {
+	private void updateStatistics(Mutator<String> m, String contract, Calendar calendar, boolean error) {
 		if (contract == null) {
 			contract = "Unknown";
 		}
-		String week = String.format("Week%d_%s", (error) ? "Error" : "", calendar.get(Calendar.WEEK_OF_YEAR));
+		String week = String.format("Week%d%s", calendar.get(Calendar.WEEK_OF_YEAR),  (error) ? "_Error" : "");
 		HCounterColumn<String> column = HFactory.createCounterColumn(week, 1L, SS);
+		column.setTtl(weeklyCounterTTL);
 		m.addCounter(contract, CF_WEEKLY_STATS, column);
 	}
 
 	//
-	private static HColumn<String, String> toStringColumn(String name, String value, long ttl) {
-		System.out.printf("setting %s=%s\n", name, value);
+	private static HColumn<String, String> toStringColumn(String name, String value) {
 		if (value == null || value.length() == 0) {
 			return null;
 		}
-		HColumn<String, String> column = HFactory.createColumn(name, value, ttl, SS, SS);
+		HColumn<String, String> column = HFactory.createColumn(name, value, SS, SS);
 		return column;
 	}
 
 	//
-	private static HColumn<String, Long> toLongColumn(String name, long value, long ttl) {
-		System.out.printf("setting %s=%d\n", name, value);
-		HColumn<String, Long> column = HFactory.createColumn(name, value, ttl, SS, LS);
+	private static HColumn<String, String> toStringColumn(String name, String value, int ttl) {
+		HColumn<String, String> column = toStringColumn(name, value);
+		if (column != null) {
+			column.setTtl(ttl);
+		}
+		return column;
+	}
+
+	//
+	private static HColumn<String, Long> toLongColumn(String name, long value) {
+		HColumn<String, Long> column = HFactory.createColumn(name, value, SS, LS);
 		return column;
 	}
 

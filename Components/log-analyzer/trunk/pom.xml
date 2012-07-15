@@ -10,7 +10,7 @@
 
   <properties>
     <evactor.version>0.2-SNAPSHOT</evactor.version>
-    <slf4j.version>1.5.6</slf4j.version>
+    <slf4j.version>1.6.0</slf4j.version>
     <akka.version>2.1-SNAPSHOT</akka.version>
     <spring.version>3.1.1.RELEASE</spring.version>
     <jersey.version>1.12</jersey.version>

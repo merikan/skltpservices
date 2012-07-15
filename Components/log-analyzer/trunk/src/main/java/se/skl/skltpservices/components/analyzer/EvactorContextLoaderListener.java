@@ -39,5 +39,4 @@ public class EvactorContextLoaderListener implements ServletContextListener {
         system.shutdown();
         log.info("Shut down actor system: {}", system.name());
     }
-
 }
