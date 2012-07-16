@@ -16,15 +16,4 @@ public interface LogStoreRepository {
 	 */
 	void storeInfoEvent(LogEvent infoEvent);
 	
-	/** 
-	 * Stores errors.
-	 * 
-	 * @param errorEvent the event to store.
-	 */
-	void storeErrorEvent(LogEvent errorEvent);
-
-	/**
-	 * Connects to store.
-	 */
-	void connect();
 }
