@@ -10,16 +10,23 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.soitoolkit.commons.logentry.schema.v1.LogEntryType;
 import org.soitoolkit.commons.logentry.schema.v1.LogEntryType.ExtraInfo;
 import org.soitoolkit.commons.logentry.schema.v1.LogEvent;
 import org.soitoolkit.commons.logentry.schema.v1.LogMessageType;
 import org.soitoolkit.commons.logentry.schema.v1.LogRuntimeInfoType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import se.skl.skltpservices.components.analyzer.domain.CassandraLogStoreRepository;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="classpath*:applicationContext.xml")
 public class CassandraLogStoreRepositoryTest {
 
+	@Autowired
 	private CassandraLogStoreRepository repo;
 	
 	@Before

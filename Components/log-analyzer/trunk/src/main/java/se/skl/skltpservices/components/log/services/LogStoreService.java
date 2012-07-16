@@ -80,8 +80,6 @@ public class LogStoreService {
 	 * @throws Exception on any configuration error.
 	 */
 	public void start() throws Exception {
-		this.repo.connect();
-		
 		CamelContext camel = new DefaultCamelContext();
 		
 		int i = 0;
@@ -91,7 +89,6 @@ public class LogStoreService {
 			ActiveMQComponent mq = ActiveMQComponent.activeMQComponent(instance.trim());
 			String compName = "activemq-" + i++;
 			camel.addComponent(compName, mq);
-
 			
 			Consumer consumer = camel.getEndpoint(compName + ":SOITOOLKIT.LOG.STORE").createConsumer(new Processor() {		
 				@Override
@@ -107,7 +104,6 @@ public class LogStoreService {
 			});
 			consumers.add(consumer);
 			consumer.start();
-			
 			log.info(String.format("Started %s:SOITOOLKIT.LOG.STORE listener on %s", compName, instance));  
 
 			consumer = camel.getEndpoint(compName + ":SOITOOLKIT.LOG.ERROR").createConsumer(new Processor() {		
@@ -115,7 +111,7 @@ public class LogStoreService {
 				public void process(Exchange exchange) throws Exception {
 					try {
 						LogEvent le = unmarshal((String)exchange.getIn().getBody());
-						repo.storeErrorEvent(le);
+						repo.storeInfoEvent(le);
 					} catch (Exception e) {
 						log.error("Unable to store log error event", e);
 						throw e;
@@ -123,22 +119,10 @@ public class LogStoreService {
 				}
 			});
 			consumers.add(consumer);
-			consumer.start();
-			log.info(String.format("Started %s:SOITOOLKIT.LOG.ERROR listener on %s", compName, instance));  		
+			consumer.start();			
+			log.info(String.format("Started %s:SOITOOLKIT.LOG.ERROR listener on %s", compName, instance));  
+
 		}		
-	}
-
-	public static void main(final String[] args) throws Exception {
-		String curDir = System.getProperty("user.dir");
-		System.out.println(curDir);
-
-		//	    ApplicationContext context = new ClassPathXmlApplicationContext("spring/camel-client.xml");
-		//
-		//	    // get the camel template for Spring template style sending of messages (= producer)
-		//	    ConsumerTemplate camelTemplate = context.getBean("camelTemplate", ConsumerTemplate.class);
-		final LogStoreService s = new LogStoreService();
-		s.start();
-
 	}
 
 }
