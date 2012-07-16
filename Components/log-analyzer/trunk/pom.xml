@@ -10,7 +10,7 @@
 
   <properties>
     <evactor.version>0.2-SNAPSHOT</evactor.version>
-    <slf4j.version>1.6.0</slf4j.version>
+    <slf4j.version>1.5.6</slf4j.version>
     <akka.version>2.1-SNAPSHOT</akka.version>
     <spring.version>3.1.1.RELEASE</spring.version>
     <jersey.version>1.12</jersey.version>
@@ -34,6 +34,32 @@
       <version>${evactor.version}</version>
     </dependency>
 
+    <!-- Cassandra -->
+	<dependency>
+    	<groupId>org.cassandraunit</groupId>
+	    <artifactId>cassandra-unit</artifactId>
+    	<version>1.0.3.1</version>
+   	 <scope>test</scope>
+   	       <exclusions>
+         <exclusion>
+           <groupId>commons-logging</groupId>
+           <artifactId>commons-logging</artifactId>
+         </exclusion>
+         <exclusion>
+	  	 <groupId>org.slf4j</groupId>
+	   	<artifactId>slf4j-api</artifactId>
+         </exclusion>
+         <exclusion>
+			<groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+         </exclusion>
+         <exclusion>
+             <groupId>org.slf4j</groupId>
+             <artifactId>jcl-over-slf4j</artifactId>             
+         </exclusion>
+       </exclusions>
+	</dependency>
+		
     <!-- SOI  -->
     
      <dependency>
