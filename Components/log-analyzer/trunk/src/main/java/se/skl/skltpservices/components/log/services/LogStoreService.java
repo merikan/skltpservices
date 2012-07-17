@@ -85,21 +85,17 @@ public class LogStoreService {
 		int seqNo = 0;
 		this.consumers = new LinkedList<Consumer>();
 		for (String instance : logInstances.split(",")) {
+			log.info("Listen on { instance: {} }", instance);  
 			ActiveMQComponent mq = ActiveMQComponent.activeMQComponent(instance.trim());
 			String compName = "activemq-" + seqNo++;
 			camel.addComponent(compName, mq);
 			consumers.add(createConsumer(camel, compName + ":SOITOOLKIT.LOG.STORE"));
 			consumers.add(createConsumer(camel, compName + ":SOITOOLKIT.LOG.ERROR"));			
-			for (Consumer consumer : consumers) {
-				consumer.start();
-				log.info(String.format("Listener started { endpoint: %s, instance: %s }", consumer.getEndpoint(), instance));  
-			}
 		}
 	}
 
 	//
 	private Consumer createConsumer(CamelContext camel, String endpointName) throws Exception {
-		log.debug("Listener create { endpoint: {} }", endpointName);  
 		Consumer consumer = camel.getEndpoint(endpointName).createConsumer(new Processor() {		
 			@Override
 			public void process(Exchange exchange) throws Exception {
@@ -112,6 +108,8 @@ public class LogStoreService {
 				}
 			}
 		});
+		log.info("Listener started { endpoint: {} }", endpointName);  
+		consumer.start();
 		return consumer;
 	}
 }
