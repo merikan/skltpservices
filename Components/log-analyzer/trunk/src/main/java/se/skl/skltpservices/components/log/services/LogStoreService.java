@@ -28,10 +28,10 @@ public class LogStoreService {
 
 	private static final Logger log = LoggerFactory.getLogger(LogStoreService.class);
 	private static final JAXBContext context = initContext();
-	
-    @Value("${log.mq.instances}")
-    private String logInstances;
-    private List<Consumer> consumers;      
+
+	@Value("${log.mq.instances}")
+	private String logInstances;
+	private List<Consumer> consumers;      
 	@Autowired
 	private LogStoreRepository repo;
 
@@ -42,9 +42,9 @@ public class LogStoreService {
 			throw new RuntimeException("Unable to create JAXBContext for LogEvent", e);
 		}
 	}   
-	
 
-    //
+
+	//
 	public LogStoreService() {
 	}
 
@@ -73,7 +73,7 @@ public class LogStoreService {
 		}
 		consumers = null;
 	}
-	
+
 	/**
 	 * Starts queue listeners.
 	 * 
@@ -81,48 +81,37 @@ public class LogStoreService {
 	 */
 	public void start() throws Exception {
 		CamelContext camel = new DefaultCamelContext();
-		
-		int i = 0;
-		this.consumers= new LinkedList<Consumer>();
 
+		int seqNo = 0;
+		this.consumers = new LinkedList<Consumer>();
 		for (String instance : logInstances.split(",")) {
 			ActiveMQComponent mq = ActiveMQComponent.activeMQComponent(instance.trim());
-			String compName = "activemq-" + i++;
+			String compName = "activemq-" + seqNo++;
 			camel.addComponent(compName, mq);
-			
-			Consumer consumer = camel.getEndpoint(compName + ":SOITOOLKIT.LOG.STORE").createConsumer(new Processor() {		
-				@Override
-				public void process(Exchange exchange) throws Exception {
-					try {
-						LogEvent le = unmarshal((String)exchange.getIn().getBody());
-						repo.storeInfoEvent(le);
-					} catch (Exception e) {
-						log.error("Unable to store log info event", e);
-						throw e;
-					}
-				}
-			});
-			consumers.add(consumer);
-			consumer.start();
-			log.info(String.format("Started %s:SOITOOLKIT.LOG.STORE listener on %s", compName, instance));  
-
-			consumer = camel.getEndpoint(compName + ":SOITOOLKIT.LOG.ERROR").createConsumer(new Processor() {		
-				@Override
-				public void process(Exchange exchange) throws Exception {
-					try {
-						LogEvent le = unmarshal((String)exchange.getIn().getBody());
-						repo.storeInfoEvent(le);
-					} catch (Exception e) {
-						log.error("Unable to store log error event", e);
-						throw e;
-					}
-				}
-			});
-			consumers.add(consumer);
-			consumer.start();			
-			log.info(String.format("Started %s:SOITOOLKIT.LOG.ERROR listener on %s", compName, instance));  
-
-		}		
+			consumers.add(createConsumer(camel, compName + ":SOITOOLKIT.LOG.STORE"));
+			consumers.add(createConsumer(camel, compName + ":SOITOOLKIT.LOG.ERROR"));			
+			for (Consumer consumer : consumers) {
+				consumer.start();
+				log.info(String.format("Listener started { endpoint: %s, instance: %s }", consumer.getEndpoint(), instance));  
+			}
+		}
 	}
 
+	//
+	private Consumer createConsumer(CamelContext camel, String endpointName) throws Exception {
+		log.debug("Listener create { endpoint: {} }", endpointName);  
+		Consumer consumer = camel.getEndpoint(endpointName).createConsumer(new Processor() {		
+			@Override
+			public void process(Exchange exchange) throws Exception {
+				try {
+					LogEvent le = unmarshal((String)exchange.getIn().getBody());
+					repo.storeInfoEvent(le);
+				} catch (Exception e) {
+					log.error("Unable to store log event", e);
+					throw e;
+				}
+			}
+		});
+		return consumer;
+	}
 }
