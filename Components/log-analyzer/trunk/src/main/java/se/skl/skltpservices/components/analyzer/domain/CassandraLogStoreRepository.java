@@ -20,7 +20,6 @@ import me.prettyprint.hector.api.beans.HCounterColumn;
 import me.prettyprint.hector.api.beans.OrderedRows;
 import me.prettyprint.hector.api.beans.Row;
 import me.prettyprint.hector.api.factory.HFactory;
-import me.prettyprint.hector.api.mutation.MutationResult;
 import me.prettyprint.hector.api.mutation.Mutator;
 import me.prettyprint.hector.api.query.QueryResult;
 
@@ -32,15 +31,17 @@ import org.soitoolkit.commons.logentry.schema.v1.LogEvent;
 import org.soitoolkit.commons.logentry.schema.v1.LogLevelType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
- * Stores events in an Apache Cassandra database.
+ * Stores events in an Apache Cassandra database. <p>
+ * 
+ * This implementation also performs scheduled house-keeping jobs, see {@link #clean()}
  * 
  * @author Peter
  *
  */
-@Service
+@Component
 public class CassandraLogStoreRepository implements LogStoreRepository {
 
 	private static final Logger log = LoggerFactory.getLogger(CassandraLogStoreRepository.class);
@@ -291,8 +292,8 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 	 * Housekeeping job, cleaning up database.
 	 */
 	// Every night at 1AM
-	//@Scheduled(fixedRate=30000)
-	@Scheduled(cron = "* * 1 * * ?")
+	@Scheduled(fixedRate=30000)
+	//@Scheduled(cron = "* * 1 * * ?")
 	public void clean() {
 		log.info("LogStore clean-up started!");
 		Calendar cal = Calendar.getInstance();
@@ -317,7 +318,7 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 	private int removeDateBatch(String date, int batchsz) {
 		log.info("Clean-up{ date: {} }", date);
 		IndexedSlicesQuery<String, String, String> indexedSlicesQuery = HFactory.createIndexedSlicesQuery(getKeySpace(), SS, SS, SS);
-		indexedSlicesQuery.addEqualsExpression("date", "2012-07-16");
+		indexedSlicesQuery.addEqualsExpression("date", date);
 		indexedSlicesQuery.setReturnKeysOnly();
 		indexedSlicesQuery.setColumnFamily(CF_INFO_EVENT);
 		indexedSlicesQuery.setStartKey("");

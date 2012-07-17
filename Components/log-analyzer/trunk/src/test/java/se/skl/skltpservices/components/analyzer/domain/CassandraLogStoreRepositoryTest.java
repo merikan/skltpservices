@@ -1,5 +1,7 @@
 package se.skl.skltpservices.components.analyzer.domain;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -10,16 +12,25 @@ import java.util.UUID;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import me.prettyprint.cassandra.model.BasicColumnDefinition;
+import me.prettyprint.cassandra.model.BasicColumnFamilyDefinition;
+import me.prettyprint.cassandra.serializers.StringSerializer;
 import me.prettyprint.cassandra.service.CassandraHostConfigurator;
+import me.prettyprint.cassandra.service.ThriftCfDef;
 import me.prettyprint.cassandra.service.ThriftKsDef;
 import me.prettyprint.hector.api.Cluster;
+import me.prettyprint.hector.api.beans.HColumn;
 import me.prettyprint.hector.api.ddl.ColumnFamilyDefinition;
+import me.prettyprint.hector.api.ddl.ColumnIndexType;
 import me.prettyprint.hector.api.ddl.ComparatorType;
 import me.prettyprint.hector.api.factory.HFactory;
+import me.prettyprint.hector.api.query.ColumnQuery;
+import me.prettyprint.hector.api.query.QueryResult;
 
 import org.cassandraunit.utils.EmbeddedCassandraServerHelper;
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.soitoolkit.commons.logentry.schema.v1.LogEntryType;
 import org.soitoolkit.commons.logentry.schema.v1.LogEntryType.ExtraInfo;
@@ -34,33 +45,59 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 
 	@Autowired
 	private CassandraLogStoreRepository repo;
+
+	private static Cluster cluster;
+	private String key;
 	
+	@BeforeClass
+	public static void start() throws Exception {
+		EmbeddedCassandraServerHelper.startEmbeddedCassandra("embedded-cassandra.yaml");		
+		cluster = HFactory.getOrCreateCluster("TestCluster", new CassandraHostConfigurator("localhost:9162"));
+	}
+	
+	@AfterClass
+	public static void stop() {
+		EmbeddedCassandraServerHelper.stopEmbeddedCassandra();
+	}
+
 	
 	@Before
 	public void init() throws Exception {
-		EmbeddedCassandraServerHelper.startEmbeddedCassandra("embedded-cassandra.yaml");
-		Cluster cluster = HFactory.getOrCreateCluster("SKLTP", new CassandraHostConfigurator("localhost:9161"));
+		EmbeddedCassandraServerHelper.cleanEmbeddedCassandra();
+
 		List<ColumnFamilyDefinition> list = new LinkedList<ColumnFamilyDefinition>();
-		list.add(HFactory.createColumnFamilyDefinition("Log", "InfoEvent"));
-		ColumnFamilyDefinition cdef = HFactory.createColumnFamilyDefinition("Log", "WeeklyStats");
-		cdef.setDefaultValidationClass(ComparatorType.COUNTERTYPE.getClassName());
-		list.add(cdef);
+		ColumnFamilyDefinition eventDf = new BasicColumnFamilyDefinition();
+		eventDf.setKeyspaceName("Log");
+		eventDf.setName("InfoEvent");
+		
+		// Date index
+		BasicColumnDefinition dateDf = new BasicColumnDefinition();
+		dateDf.setName(StringSerializer.get().toByteBuffer("date"));
+		dateDf.setIndexName("date_index");
+		dateDf.setIndexType(ColumnIndexType.KEYS);
+		dateDf.setValidationClass(ComparatorType.ASCIITYPE.getClassName());
+		eventDf.addColumnDefinition(dateDf);
+		
+		list.add(new ThriftCfDef(eventDf));
+		
+		ColumnFamilyDefinition counterDef = HFactory.createColumnFamilyDefinition("Log", "WeeklyStats");
+		counterDef.setDefaultValidationClass(ComparatorType.COUNTERTYPE.getClassName());
+		list.add(counterDef);
+		
 		cluster.addKeyspace(
-				new ThriftKsDef("Log", "org.apache.cassandra.locator.SimpleStrategy", 1, list));
+				new ThriftKsDef("Log", "org.apache.cassandra.locator.SimpleStrategy", 1, list), true);
+		
+		this.key = UUID.randomUUID().toString();
 	}
 	
-	@After
-	public void clean() {
-		EmbeddedCassandraServerHelper.cleanEmbeddedCassandra();
-	}
 	
 	@Test
-	public void infoEvent() {
+	public void create() {
 		LogEvent event = mock(LogEvent.class);
 		when(event.getLogEntry()).thenReturn(mock(LogEntryType.class));
 		when(event.getLogEntry().getMessageInfo()).thenReturn(mock(LogMessageType.class));
 		when(event.getLogEntry().getRuntimeInfo()).thenReturn(mock(LogRuntimeInfoType.class));
-		when(event.getLogEntry().getRuntimeInfo().getBusinessCorrelationId()).thenReturn(UUID.randomUUID().toString());
+		when(event.getLogEntry().getRuntimeInfo().getBusinessCorrelationId()).thenReturn(key);
 		when(event.getLogEntry().getPayload()).thenReturn("no special");
 		when(event.getLogEntry().getMessageInfo().getMessage()).thenReturn("xreq-in");
 		ExtraInfo extraInfo = new ExtraInfo();
@@ -79,5 +116,24 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		
 		when(event.getLogEntry().getRuntimeInfo().getTimestamp()).thenReturn(cal);
 		repo.storeInfoEvent(event);
+		assertNotNull(queryEvent());
+	}
+	
+	@Test
+	public void clean() {
+		create();
+		((CassandraLogStoreRepository)repo).clean();
+		assertNull(queryEvent());
+	}
+	
+	//
+	private HColumn<String, String> queryEvent() {
+		ColumnQuery<String, String, String> columnQuery = HFactory.createStringColumnQuery(HFactory.createKeyspace("Log", cluster));
+		columnQuery.setColumnFamily("InfoEvent");
+		columnQuery.setName("date");
+		columnQuery.setKey(key);
+		QueryResult<HColumn<String, String>> result = columnQuery.execute();
+		return result.get();
+
 	}
 }
