@@ -85,9 +85,9 @@ public class LogStoreService {
 		int seqNo = 0;
 		this.consumers = new LinkedList<Consumer>();
 		for (String instance : logInstances.split(",")) {
-			log.info("Listen on { instance: {} }", instance);  
 			ActiveMQComponent mq = ActiveMQComponent.activeMQComponent(instance.trim());
 			String compName = "activemq-" + seqNo++;
+			log.info("Listen on { instance: {}, name: {} }", instance, compName);  
 			camel.addComponent(compName, mq);
 			consumers.add(createConsumer(camel, compName + ":SOITOOLKIT.LOG.STORE"));
 			consumers.add(createConsumer(camel, compName + ":SOITOOLKIT.LOG.ERROR"));			
