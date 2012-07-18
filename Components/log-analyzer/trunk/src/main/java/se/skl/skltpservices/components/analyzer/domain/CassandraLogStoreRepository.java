@@ -293,7 +293,7 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 	 */
 	// Every night at 1AM
 	//@Scheduled(fixedRate=30000)
-	@Scheduled(cron = "* * 1 * * ?")
+	@Scheduled(cron = "0 0 1 * * ?")
 	public void clean() {
 		log.info("LogStore clean-up started!");
 		Calendar cal = Calendar.getInstance();
