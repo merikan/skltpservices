@@ -13,7 +13,7 @@ import se.skl.skltpservices.components.analyzer.services.LogAnalyzerService;
 
 @Controller
 @Path("/serviceProducers")
-@Produces({"text/xml; charset=UTF-8", "application/json; charset=UTF-8"})
+@Produces({"application/xml; charset=UTF-8", "application/json; charset=UTF-8"})
 public class ServiceProducerResource {
 
     private LogAnalyzerService logAnalyzerService;
