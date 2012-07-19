@@ -23,6 +23,8 @@ create column family InfoEvent
   { column_name : 'out_payload',	validation_class : 'UTF8Type' },
   { column_name : 'out_riv_version',	validation_class : 'AsciiType' },
   { column_name : 'err_flag',		validation_class : 'AsciiType' },
+  { column_name : 'err_timestamp',	validation_class : 'DateType' },
+  { column_name : 'out_payload',	validation_class : 'UTF8Type' },
   { column_name : 'err_message',	validation_class : 'UTF8Type' },
   { column_name : 'err_descriptioon',	validation_class : 'UTF8Type' },
   { column_name : 'err_detail',		validation_class : 'UTF8Type' },
