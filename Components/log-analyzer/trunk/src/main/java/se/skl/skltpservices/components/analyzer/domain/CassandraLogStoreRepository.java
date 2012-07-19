@@ -51,6 +51,7 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 	private static final String KEYSPACE = "Log";
 	private static final String WAYPOINT_IN = "in.";
 	private static final String WAYPOINT_OUT = "out.";
+	private static final String WAYPOINT_ERROR = "err.";
 
 	private static Map<String, String> columnNames = new HashMap<String, String>();
 
@@ -66,12 +67,19 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		columnNames.put("in.rivversion", "in_riv_version");
 		// out
 		columnNames.put("out.timestamp", "out_timestamp");
-		columnNames.put("out.rivversion", "out_riv_version");
 		columnNames.put("out.payload", "out_payload");
-		columnNames.put("out.message", "err_message");
-		columnNames.put("out.sessionStatus", "err_flag");
-		columnNames.put("out.sessionErrorDescription", "err_description");
-		columnNames.put("out.sessionErrorTechnicalDescription", "err_detail");
+		columnNames.put("out.rivversion", "out_riv_version");
+
+		// errors
+		columnNames.put("err.cxf_service", "contract");
+		columnNames.put("err.senderid", "sender");
+		columnNames.put("err.receiverid", "receiver");
+		columnNames.put("err.timestamp", "err_timestamp");
+		columnNames.put("err.payload", "err_payload");
+		columnNames.put("err.message", "err_message");
+		columnNames.put("err.sessionStatus", "err_flag");
+		columnNames.put("err.sessionErrorDescription", "err_description");
+		columnNames.put("err.sessionErrorTechnicalDescription", "err_detail");
 	}
 
 	// config
@@ -147,9 +155,11 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		
 		if ("xreq-in".equals(waypoint)) {
 			waypoint = WAYPOINT_IN;
-		} else if ("xresp-out".equals(waypoint) || error) {
-			waypoint = WAYPOINT_OUT;
-		} 
+		} else if (error) {
+			waypoint = WAYPOINT_ERROR;
+		} else {
+			waypoint = WAYPOINT_OUT;			
+		}
 
 		storeEvent(entry, waypoint, error);
 	}
@@ -172,7 +182,7 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		calendar.setMinimalDaysInFirstWeek(4);
 
 		// add day as YYYY-MM-DD (indexed column)
-		if (WAYPOINT_IN.equals(waypoint)) {
+		if (WAYPOINT_IN.equals(waypoint) || error) {
 			m.addInsertion(key, columnFamily, toStringColumn("date", toDate(calendar)));
 		}
 
