@@ -22,6 +22,6 @@
        name="Ping-service-test"
        address="http://localhost:10000/test/Ping_Service"
        component-class="se.riv.itinfra.tp.ping.PingImpl"
-       type="jax-ws" 
-       responseTransformer-refs="filterResponseHeaders"/>
+       type="jax-ws" />
 </mule>
+
