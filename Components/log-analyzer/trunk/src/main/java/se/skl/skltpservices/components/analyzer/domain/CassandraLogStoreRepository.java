@@ -65,7 +65,6 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		columnNames.put("in.payload", "in_payload");
 		columnNames.put("in.rivversion", "in_riv_version");
 		// out
-		columnNames.put("out.cxf_service", "contract");
 		columnNames.put("out.timestamp", "out_timestamp");
 		columnNames.put("out.rivversion", "out_riv_version");
 		columnNames.put("out.payload", "out_payload");
