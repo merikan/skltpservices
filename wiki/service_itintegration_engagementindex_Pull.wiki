@@ -1,13 +1,14 @@
-#summary One-sentence summary of this page.
+#summary Engagementindex Pull service
 
-= Introduction =
+= Introduktion =
 
-Add your content here.
+Engagemangsindex är ett index som visar var man kan hitta ytterligare information angående en individ, t.ex. vilken/vilka vårdcentraler denna har bokat tid hos. Detta index skall innehålla aktuell information och måste således uppdateras regelbundet. Pull funktionaliteten som beskrivs i detta dokument är endast till för de vårdsystem som inte själva kan uppdatera engagmangsindex. Funktionaliteten användas som en komponent till Mule ESB.
 
+== Konceptuell beskrivning ==
 
-= Details =
+För att pull-komponenten skall fungera korrekt måste tre tjänster vara tillgängliga.
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+  # Tjänsteadressering (itintegration:registry) GetLogicalAddresseesByServiceContract
+  # Engagemangsindex (itintegration:engagementindex) GetUpdates, för att hämta engagemangsuppdateringar
+  # Engagemangsindex (itintegration:engagementindex) Update, för att uppdatera engagemangsinformation
+
