@@ -37,4 +37,6 @@ http://skltpservices.googlecode.com/svn/site/images/engagementindexPull/Update.p
   * [http://activemq.apache.org/ Active MQ xx]
   * En databas, tex [http://www.mysql.com/products/community/ MySQL] eller [http://db.apache.org/derby/ Apache Derby] 
 
+==Installation==
+
 ==Konfiguration==
