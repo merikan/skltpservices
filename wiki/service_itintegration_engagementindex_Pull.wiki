@@ -12,7 +12,7 @@ För att pull-komponenten skall fungera korrekt måste tre tjänster vara tillg�
 
   * *Tjänsteadressering (itintegration:registry) `GetLogicalAddresseesByServiceContract`*. Tjänsten returnerar en lista över logiska adressater som har en tjänsteproducent för angivet tjänstekontrakt (namnrymd)  och som har anropsbehörighet för angiven tjänstekonsument (hsa-id).
   * *Engagemangsindex (itintegration:engagementindex) `GetUpdates`*. Tjänst som Engagemangsindex använder för att hämta uppdateringar från ett källsystem (som alternativ till att källsystemet initierar uppdateringar med hjälp av Update-tjänsten).
-  * *Engagemangsindex (itintegration:engagementindex) Update*. Tjänst som källsystemet använder för att uppdatera engagemangsindex.
+  * *Engagemangsindex (itintegration:engagementindex) `Update`*. Tjänst som källsystemet använder för att uppdatera engagemangsindex.
 
 
 1, Hämta de logiska adresser som skall användas för att adressera producenter där det finns engagemangsinformation. 
