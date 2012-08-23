@@ -15,11 +15,11 @@ För att pull-komponenten skall fungera korrekt måste tre tjänster vara tillg�
   * *Engagemangsindex (itintegration:engagementindex) `Update`*. Tjänst som källsystemet använder för att uppdatera engagemangsindex.
 
 
-1, Hämta de logiska adresser som skall användas för att adressera producenter där det finns engagemangsinformation. 
+1, Hämta de logiska adresser som skall användas för att adressera tjänsteproducenter där det finns engagemangsinformation. 
 
 http://skltpservices.googlecode.com/svn/site/images/engagementindexPull/GetLogicalAddressees.png
 
-2, Hämta uppdateringar från Tjänsteproducenten (källsystemet), ett anrop avser en tjänstedomän. Tjänsteproducenten skall svara med alla patienter vars engagemang förändrats sedan angiven tidpunkt inom tjänstedomänen.
+2, Hämta uppdateringar från tjänsteproducenten (källsystemet), ett anrop avser en tjänstedomän. Tjänsteproducenten skall svara med alla patienter vars engagemang förändrats sedan angiven tidpunkt inom tjänstedomänen.
 
 http://skltpservices.googlecode.com/svn/site/images/engagementindexPull/GetUpdates.png
 
