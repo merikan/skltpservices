@@ -2,7 +2,7 @@
 
 <wiki:toc max_depth="2" />
 
-= Introduktion =
+= Introduktion Engagemangsindex Pull=
 
 Engagemangsindex är ett index som visar var man kan hitta ytterligare information angående en individ, t.ex. vilken/vilka vårdcentraler denna har bokat tid hos. Detta index skall innehålla aktuell information och måste således uppdateras regelbundet. Pull funktionaliteten som beskrivs i detta dokument är endast till för de vårdsystem som inte själva kan uppdatera engagmangsindex. Funktionaliteten användas som en komponent till Mule ESB.
 
