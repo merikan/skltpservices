@@ -16,6 +16,7 @@ För att pull-komponenten skall fungera korrekt måste tre tjänster vara tillg�
   * *Engagemangsindex (itintegration:engagementindex) `GetUpdates`*. Tjänst som Engagemangsindex använder för att hämta uppdateringar från ett källsystem (som alternativ till att källsystemet initierar uppdateringar med hjälp av Update-tjänsten).
   * *Engagemangsindex (itintegration:engagementindex) `Update`*. Tjänst som källsystemet använder för att uppdatera engagemangsindex.
 
+=== Tjänsterna i sitt sammanhang ===
 
 1, Hämta de logiska adresser som skall användas för att adressera tjänsteproducenter där det finns engagemangsinformation. 
 
@@ -33,12 +34,12 @@ http://skltpservices.googlecode.com/svn/site/images/engagementindexPull/Update.p
 
 =Installation=
 
-==Förutsättningar==
+==Vad krävs för att köra Pull-komponenten==
 
   * [http://www.mulesoft.org/download-mule-esb-community-edition Mule 3.3]
   * [http://activemq.apache.org/ Active MQ xx]
   * En databas, tex [http://www.mysql.com/products/community/ MySQL] eller [http://db.apache.org/derby/ Apache Derby] 
 
-==Installation==
+==Installationsanvisning==
 
-==Konfiguration==
+==Konfigurera==
