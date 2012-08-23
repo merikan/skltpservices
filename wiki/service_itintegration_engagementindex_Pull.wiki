@@ -8,7 +8,6 @@ Engagemangsindex är ett index som visar var man kan hitta ytterligare informati
 
 För att pull-komponenten skall fungera korrekt måste tre tjänster vara tillgängliga.
 
-  # Tjänsteadressering (itintegration:registry) GetLogicalAddresseesByServiceContract
-  # Engagemangsindex (itintegration:engagementindex) GetUpdates, för att hämta engagemangsuppdateringar
+  # Tjänsteadressering (itintegration:registry) `GetLogicalAddresseesByServiceContract`
+  # Engagemangsindex (itintegration:engagementindex) `GetUpdates`, för att hämta engagemangsuppdateringar
   # Engagemangsindex (itintegration:engagementindex) Update, för att uppdatera engagemangsinformation
-
