@@ -26,3 +26,15 @@ http://skltpservices.googlecode.com/svn/site/images/engagementindexPull/GetUpdat
 3, Uppdatera engagemangsindex.
 
 http://skltpservices.googlecode.com/svn/site/images/engagementindexPull/Update.png
+
+==Detaljerad beskrivning==
+
+=Installation=
+
+==Förutsättningar==
+
+  *[http://www.mulesoft.org/download-mule-esb-community-edition Mule 3.3]
+  *[http://activemq.apache.org/ Active MQ xx]
+  *En databas, tex [http://www.mysql.com/products/community/ MySQL] eller [http://db.apache.org/derby/ Apache Derby] 
+
+==Konfiguration==
