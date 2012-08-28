@@ -45,7 +45,10 @@ http://skltpservices.googlecode.com/svn/site/images/engagementindexPull/Componen
   * En databas, tex [http://www.mysql.com/products/community/ MySQL] eller [http://db.apache.org/derby/ Apache Derby] 
 
 ==Ladda ner och installera==
-  # Ladda ner senaste distributionen
+  # Ladda ner senaste distributionen från [http://code.google.com/p/skltpservices/downloads/list nedladdningssidan]
+  # Kopiera filen `EIPullIC-<version>.zip` till `<MULE_HOME>/apps`
+  # Konfigurera enligt instruktioner nedan
+  # Starta Mule
 
 ==Konfigurera==
 
