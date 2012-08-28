@@ -50,4 +50,4 @@ http://skltpservices.googlecode.com/svn/site/images/engagementindexPull/Componen
 
 ==Bygga från källkod==
 
-  # Checka ut fån svn enligt följande [http://code.google.com/p/skltpservices/source/checkout instruktion]
+  # Checka ut fån svn enligt följande [http://code.google.com/p/skltpservices/source/checkout instruktion] med följande url `http(s)://skltpservices.googlecode.com/svn/Components/EngagementindexPull`
