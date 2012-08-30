@@ -30,34 +30,19 @@
 	 -->
 
  	<model>
- 		
- 		<service name="RegisterMedicalCertificate-3-service-test">
+		<service name="TaEmotLakarintyg-service-test">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="https://localhost:10000/adapter/testproducer/RegisterMedicalCertificate/3/rivtabp20/test"
-					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
-					synchronous="true" protocolConnector="TBProducerConnector"
+					address="https://localhost:12000/adapter/testproducer/TaEmotLakarintyg/1/rivtabp20"
+					wsdlLocation="classpath:/schemas/fk/TaEmotLakarintygInteraction_1.0_rivtabp20.wsdl"
+					protocolConnector="TBProducerConnector"
 					/>
 			</inbound>
 
 			<component>
-				<singleton-object class="se.skl.tp.insuranceprocess.healthreporting.regmedcert.producer.RegisterMedCertImpl" />
+				<singleton-object class="se.skl.riv.fk.vardgivare.sjukvard.taemotlakarintyg.producer.TaEmotLakarintygImpl" />
 			</component>
 		</service>
-
- 		<service name="RegisterMedicalCertificate-3-service-validate">
- 			<inbound>
- 				<cxf:inbound-endpoint
- 					address="https://localhost:10000/adapter/testproducer/RegisterMedicalCertificate/3/rivtabp20/validate"
-					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
-					synchronous="true" protocolConnector="TBProducerConnector"
-					/>
- 			</inbound>
- 			
- 			<component>
- 				<singleton-object class="se.skl.tp.insuranceprocess.healthreporting.regmedcert.producer.RegisterMedCertValidateImpl" />
- 			</component>
- 		</service>
- 	</model>
+	</model>
 
 </mule>

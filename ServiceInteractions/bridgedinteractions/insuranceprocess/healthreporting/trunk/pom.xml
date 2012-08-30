@@ -39,6 +39,7 @@
 	<modules>
 		<module>Schema</module>
 		<module>RegisterMedicalCertificate</module>
+		<module>TaEmotLakarintyg</module>
 	</modules>
 	
 	<scm>
