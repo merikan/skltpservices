@@ -9,7 +9,7 @@ This page contains information needed to develop services for the service bridge
 
 ==Deployable artifact==
 
-A deployable artifact for the service bridge is a Java jar file containing a service definition file called *`tb-bryggad-tjanst-config.xml`*. The name of the file is important since service bridge vill scan for this name and initialize the services found.
+A deployable artifact for the service bridge is a Java jar file containing a service definition file called *`tp-virtuell-tjanst-config`*. The name of the file is important since service bridge vill scan for this name and initialize the services found.
 
 ==Sample service definition==
 
