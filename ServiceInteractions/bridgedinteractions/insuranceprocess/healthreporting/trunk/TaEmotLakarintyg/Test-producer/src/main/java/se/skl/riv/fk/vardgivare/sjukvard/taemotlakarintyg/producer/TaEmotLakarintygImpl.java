@@ -22,9 +22,12 @@ package se.skl.riv.fk.vardgivare.sjukvard.taemotlakarintyg.producer;
 
 import javax.jws.WebService;
 
-import org.apache.cxf.ws.addressing.AttributedURIType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import se.fk.vardgivare.sjukvard.taemotlakarintyg.v1.rivtabp20.TaEmotLakarintygResponderInterface;
+import se.fk.vardgivare.sjukvard.taemotlakarintygresponder.v1.TaEmotLakarintygResponseType;
+import se.fk.vardgivare.sjukvard.taemotlakarintygresponder.v1.TaEmotLakarintygType;
 
 @WebService(serviceName = "TaEmotLakarintygResponderService", endpointInterface = "se.fk.vardgivare.sjukvard.taemotlakarintyg.v1.rivtabp20.TaEmotLakarintygResponderInterface", portName = "TaEmotLakarintygResponderPort", targetNamespace = "urn:riv:fk:vardgivare:sjukvard:TaEmotLakarintyg:1:rivtabp20", wsdlLocation = "schemas/fk/TaEmotLakarintygInteraction_1.0_rivtabp20.wsdl")
 public class TaEmotLakarintygImpl implements TaEmotLakarintygResponderInterface {
@@ -32,7 +35,8 @@ public class TaEmotLakarintygImpl implements TaEmotLakarintygResponderInterface 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	public TaEmotLakarintygResponseType taEmotLakarintyg(
-			AttributedURIType logicalAddress, TaEmotLakarintygType parameters) {
+			org.w3.wsaddressing10.AttributedURIType logicalAddress,
+			TaEmotLakarintygType parameters) {
 
 		logger.info("taEmotLakarintyg({}, {})", logicalAddress.getValue(),
 				parameters);
@@ -45,4 +49,5 @@ public class TaEmotLakarintygImpl implements TaEmotLakarintygResponderInterface 
 			throw new RuntimeException("Error occured in taEmotLakarintyg", e);
 		}
 	}
+
 }
