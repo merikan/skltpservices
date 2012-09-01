@@ -36,7 +36,7 @@
 				<cxf:inbound-endpoint
 					address="https://localhost:10000/adapter/testproducer/RegisterMedicalCertificate/3/rivtabp20/test"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
-					synchronous="true" protocolConnector="TBProducerConnector"
+					synchronous="true"
 					/>
 			</inbound>
 
@@ -50,7 +50,7 @@
  				<cxf:inbound-endpoint
  					address="https://localhost:10000/adapter/testproducer/RegisterMedicalCertificate/3/rivtabp20/validate"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
-					synchronous="true" protocolConnector="TBProducerConnector"
+					synchronous="true"
 					/>
  			</inbound>
  			
