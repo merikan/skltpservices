@@ -25,13 +25,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.tp</groupId>
 	<artifactId>insuranceprocess-healthreporting-registermedicalcertificate-test-consumer</artifactId>
-	<version>1.6-SNAPSHOT</version>
    <name>${project.artifactId}</name>
 	<url>http://maven.apache.org</url>
 	
 	<parent>
   		<groupId>se.skl.skltpservices.adapter</groupId>
-		<artifactId>RegisterMedicalCertificate</artifactId>
+		<artifactId>insuranceprocess-healthreporting-registermedicalcertificate</artifactId>
   		<version>1.6-SNAPSHOT</version>
    </parent>
 
