@@ -35,7 +35,6 @@
 				<cxf:inbound-endpoint
 					address="https://localhost:12000/adapter/testproducer/TaEmotLakarintyg/1/rivtabp20"
 					wsdlLocation="classpath:/schemas/fk/TaEmotLakarintygInteraction_1.0_rivtabp20.wsdl"
-					protocolConnector="TBProducerConnector"
 					/>
 			</inbound>
 

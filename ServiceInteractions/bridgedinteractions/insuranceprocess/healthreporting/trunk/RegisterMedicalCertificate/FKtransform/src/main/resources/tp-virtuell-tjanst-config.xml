@@ -41,7 +41,7 @@
 		<service name="fk-varden-registermedicalcertificate-service">
 			<inbound>
 				<cxf:inbound-endpoint 
-					address="https://${tb.host}:${tb.port}/${tb.baseUri}/transform/RegisterMedicalCertificate/3/rivtabp20"
+					address="http://${tb.host}:${tb.port}/${tb.baseUri}/transform/RegisterMedicalCertificate/3/rivtabp20"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
 					serviceName="RegisterMedicalCertificateResponderService"
 					namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20"
@@ -50,7 +50,6 @@
 					applyTransformersToProtocol="false"
 					transformer-refs="vard2fk changeNamespaceRegisterCertificate"
 					responseTransformer-refs="fk2vard"
-					protocolConnector="TBProducerConnector"
 				/>							
 			</inbound>
 
@@ -63,7 +62,6 @@
                         	operation="TaEmotLakarintyg" 
                         	clientClass="se.fk.vardgivare.sjukvard.taemotlakarintyg.v1.rivtabp20.TaEmotLakarintygResponderService"
             	        	synchronous="true"
-            	        	protocolConnector="TBProducerConnector"
                         /> 
                 </pass-through-router>
             </outbound>
@@ -72,7 +70,7 @@
 		<service name="fk-varden-registermedicalcertificate-service-test">
 			<inbound>
 				<cxf:inbound-endpoint 
-					address="https://${tb.host}:${tb.port}/${tb.baseUri}/transform/RegisterMedicalCertificate/3/rivtabp20/test"
+					address="http://${tb.host}:${tb.port}/${tb.baseUri}/transform/RegisterMedicalCertificate/3/rivtabp20/test"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
 					serviceName="RegisterMedicalCertificateResponderService"
 					namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20"
@@ -81,7 +79,6 @@
 					applyTransformersToProtocol="false"
 					transformer-refs="vard2fk changeNamespaceRegisterCertificate"
 					responseTransformer-refs="fk2vard"
-					protocolConnector="TBProducerConnector"
 				/>							
 			</inbound>
 
@@ -94,7 +91,6 @@
                         	operation="TaEmotLakarintyg" 
                         	clientClass="se.fk.vardgivare.sjukvard.taemotlakarintyg.v1.rivtabp20.TaEmotLakarintygResponderService"
             	        	synchronous="true"
-            	        	protocolConnector="TBProducerConnector"
                         /> 
                 </pass-through-router>
             </outbound>
@@ -103,7 +99,7 @@
 		<service name="fk-varden-registermedicalcertificate-service-validate">
 			<inbound>
 				<cxf:inbound-endpoint 
-					address="https://${tb.host}:${tb.port}/${tb.baseUri}/transform/RegisterMedicalCertificate/3/rivtabp20/validate"
+					address="http://${tb.host}:${tb.port}/${tb.baseUri}/transform/RegisterMedicalCertificate/3/rivtabp20/validate"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
 					serviceName="RegisterMedicalCertificateResponderService"
 					namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20"
@@ -112,7 +108,6 @@
 					applyTransformersToProtocol="false"
 					transformer-refs="vard2fk changeNamespaceRegisterCertificate"
 					responseTransformer-refs="fk2vard"
-					protocolConnector="TBProducerConnector"
 				/>							
 			</inbound>
 			
@@ -125,7 +120,6 @@
                         	operation="TaEmotLakarintyg" 
                         	clientClass="se.fk.vardgivare.sjukvard.taemotlakarintyg.v1.rivtabp20.TaEmotLakarintygResponderService"
             	        	synchronous="true"
-            	        	protocolConnector="TBProducerConnector"
                         /> 
                 </pass-through-router>
             </outbound>
