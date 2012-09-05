@@ -25,7 +25,6 @@
 	<groupId>se.skl.skltpservices.adapter</groupId>
 	<artifactId>insuranceprocess-healthreporting-registermedicalcertificate</artifactId>
 	<packaging>pom</packaging>
-	<version>1.6-SNAPSHOT</version>
  	<name>${project.artifactId}</name>
 	<url>http://maven.apache.org</url>
 	

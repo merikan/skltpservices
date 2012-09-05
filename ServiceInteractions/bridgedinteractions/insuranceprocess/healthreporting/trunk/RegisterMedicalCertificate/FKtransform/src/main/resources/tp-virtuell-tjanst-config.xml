@@ -37,11 +37,12 @@
 		<add-message-property key="namespace" value="urn:riv:fk:vardgivare:sjukvard:TaEmotLakarintyg:1:rivtabp20"/>
 	</message-properties-transformer>           
 
-	<model>
-		<service name="fk-varden-registermedicalcertificate-service">
+	<model name="varden-fk-registermedicalcertificate">
+	
+		<service name="varden-fk-registermedicalcertificate-service">
 			<inbound>
 				<cxf:inbound-endpoint 
-					address="http://${tb.host}:${tb.port}/${tb.baseUri}/transform/RegisterMedicalCertificate/3/rivtabp20"
+					address="${inbound.endpoint.eintyg.registermedicalcertificate}"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
 					serviceName="RegisterMedicalCertificateResponderService"
 					namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20"
@@ -56,7 +57,7 @@
 			<outbound>
 				 <pass-through-router>
                         <cxf:outbound-endpoint 
-                        	address="${endpoint.insuranceprocess.healthreporting.taemotlakarintyg}"
+                        	address="${outbound.endpoint.eintyg.registermedicalcertificate}"
                         	wsdlLocation="classpath:/schemas/fk/TaEmotLakarintygInteraction_1.0_rivtabp20.wsdl"
                         	wsdlPort="TaEmotLakarintygResponderPort"
                         	operation="TaEmotLakarintyg" 
@@ -67,10 +68,10 @@
             </outbound>
 		</service>
 		
-		<service name="fk-varden-registermedicalcertificate-service-test">
+		<service name="varden-fk-registermedicalcertificate-service-test">
 			<inbound>
 				<cxf:inbound-endpoint 
-					address="http://${tb.host}:${tb.port}/${tb.baseUri}/transform/RegisterMedicalCertificate/3/rivtabp20/test"
+					address="${inbound.endpoint.eintyg.registermedicalcertificate.test}"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
 					serviceName="RegisterMedicalCertificateResponderService"
 					namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20"
@@ -85,7 +86,7 @@
 			<outbound>
 				 <pass-through-router>
                         <cxf:outbound-endpoint 
-                        	address="${endpoint.insuranceprocess.healthreporting.taemotlakarintyg.test}"
+                        	address="${outbound.endpoint.eintyg.registermedicalcertificate.test}"
                         	wsdlLocation="classpath:/schemas/fk/TaEmotLakarintygInteraction_1.0_rivtabp20.wsdl"
                         	wsdlPort="TaEmotLakarintygResponderPort"
                         	operation="TaEmotLakarintyg" 
@@ -96,10 +97,10 @@
             </outbound>
 		</service>
 		
-		<service name="fk-varden-registermedicalcertificate-service-validate">
+		<service name="varden-fk-registermedicalcertificate-service-validate">
 			<inbound>
 				<cxf:inbound-endpoint 
-					address="http://${tb.host}:${tb.port}/${tb.baseUri}/transform/RegisterMedicalCertificate/3/rivtabp20/validate"
+					address="${inbound.endpoint.eintyg.registermedicalcertificate.validate}"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
 					serviceName="RegisterMedicalCertificateResponderService"
 					namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20"
@@ -114,7 +115,7 @@
 			<outbound>
                 <pass-through-router>
                         <cxf:outbound-endpoint 
-                        	address="${endpoint.insuranceprocess.healthreporting.taemotlakarintyg.validate}"
+                        	address="${outbound.endpoint.eintyg.registermedicalcertificate.validate}"
                         	wsdlLocation="classpath:/schemas/fk/TaEmotLakarintygInteraction_1.0_rivtabp20.wsdl"
                         	wsdlPort="TaEmotLakarintygResponderPort"
                         	operation="TaEmotLakarintyg" 
