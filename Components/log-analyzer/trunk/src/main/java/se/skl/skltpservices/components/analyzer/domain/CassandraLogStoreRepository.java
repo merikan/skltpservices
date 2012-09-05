@@ -61,14 +61,18 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		columnNames.put("in.cxf_service", "contract");
 		columnNames.put("in.senderid", "sender");
 		columnNames.put("in.receiverid", "receiver");
+		columnNames.put("in.endpoint", "endpoint");
+		
 		// in
 		columnNames.put("in.timestamp", "in_timestamp");
 		columnNames.put("in.payload", "in_payload");
 		columnNames.put("in.rivversion", "in_riv_version");
+		
 		// out
 		columnNames.put("out.timestamp", "out_timestamp");
 		columnNames.put("out.payload", "out_payload");
 		columnNames.put("out.rivversion", "out_riv_version");
+		columnNames.put("out.time.producer", "time_producer");
 
 		// errors
 		columnNames.put("err.cxf_service", "contract");
@@ -89,6 +93,9 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
     @Value("${log.store.payloadTTL}")
     private int payloadTTL;
     
+    @Value("${log.store.timeout}")
+    private int timeout;
+
     @Value("${log.store.metaTTL}")
     private int metaTTL;
     
@@ -121,8 +128,8 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 				if (this.keyspace == null) {
 					CassandraHostConfigurator cfg = new CassandraHostConfigurator(logStoreInstances);
 					cfg.setMaxActive(5);
-					cfg.setCassandraThriftSocketTimeout(3000);
-					cfg.setMaxWaitTimeWhenExhausted(4000);
+					cfg.setCassandraThriftSocketTimeout(timeout);
+					cfg.setMaxWaitTimeWhenExhausted(10000);
 					Cluster cluster = HFactory.getOrCreateCluster(clusterName, cfg);
 					this.keyspace = HFactory.createKeyspace(KEYSPACE, cluster);
 				}
