@@ -29,12 +29,12 @@
 	Name of this file is mandatory and may not be changed. 
 	 -->
 
- 	<model>
+ 	<model name="varden-fk-registermedicalcertificate-teststub">
  		
- 		<service name="RegisterMedicalCertificate-3-service-test">
+ 		<service name="varden-fk-registermedicalcertificate-teststub-service-test">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="https://localhost:10000/adapter/testproducer/RegisterMedicalCertificate/3/rivtabp20/test"
+					address="https://${tb.host}:${tb.teststub.port}/${tb.baseUri}/eintyg/testproducer/RegisterMedicalCertificate/3/rivtabp20/test"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
 					synchronous="true"
 					/>
@@ -45,10 +45,10 @@
 			</component>
 		</service>
 
- 		<service name="RegisterMedicalCertificate-3-service-validate">
+ 		<service name="varden-fk-registermedicalcertificate-teststub-service-validate">
  			<inbound>
  				<cxf:inbound-endpoint
- 					address="https://localhost:10000/adapter/testproducer/RegisterMedicalCertificate/3/rivtabp20/validate"
+ 					address="https://${tb.host}:${tb.teststub.port}/${tb.baseUri}/eintyg/testproducer/RegisterMedicalCertificate/3/rivtabp20/validate"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
 					synchronous="true"
 					/>
