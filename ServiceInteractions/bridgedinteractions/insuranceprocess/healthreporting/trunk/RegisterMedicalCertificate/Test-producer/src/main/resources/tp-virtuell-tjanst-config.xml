@@ -34,7 +34,7 @@
  		<service name="varden-fk-registermedicalcertificate-teststub-service-test">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="https://${tb.host}:${tb.teststub.port}/${tb.baseUri}/eintyg/testproducer/RegisterMedicalCertificate/3/rivtabp20/test"
+					address="${inbound.endpoint.eintyg.registermedicalcertificate.teststub.test}"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
 					synchronous="true"
 					/>
@@ -48,7 +48,7 @@
  		<service name="varden-fk-registermedicalcertificate-teststub-service-validate">
  			<inbound>
  				<cxf:inbound-endpoint
- 					address="https://${tb.host}:${tb.teststub.port}/${tb.baseUri}/eintyg/testproducer/RegisterMedicalCertificate/3/rivtabp20/validate"
+ 					address="${inbound.endpoint.eintyg.registermedicalcertificate.teststub.validate}"
 					wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl"
 					synchronous="true"
 					/>
