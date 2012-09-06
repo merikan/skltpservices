@@ -32,12 +32,63 @@
 		<module>RegisterMedicalCertificate</module>
 		<module>TaEmotLakarintyg</module>
 		<module>ReceiveMedicalCertificateAnswer</module>
+		<module>ReceiveMedicalCertificateQuestion</module>
+		<module>SendMedicalCertificateAnswer</module>
+		<module>TaEmotSvar</module>
 	</modules>
 
 	<scm>
 		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/insuranceprocess/healthreporting/trunk</connection>
 		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/insuranceprocess/healthreporting/trunk</developerConnection>
 	</scm>
+	
+	<repositories>
+		<repository>
+            <id>codehaus</id>
+            <name>Codehaus Maven 2.x Release Repository</name>
+            <url>http://repository.codehaus.org</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        
+        <repository>
+            <id>codehaus-snapshots</id>
+            <name>Codehaus Maven 2.x Snapshots Repository</name>
+            <url>http://snapshots.repository.codehaus.org</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+ 
+        <!-- osgi -->
+        <repository>
+            <id>mule-deps</id>
+            <name>Mule Dependencies</name>
+            <url>http://dist.codehaus.org/mule/dependencies/maven2</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+		<!-- for jersey-server --> 
+		<repository>
+			<id>maven2-repository.dev.java.net</id>
+			<url>http://download.java.net/maven/2/</url>
+			<layout>default</layout>
+		</repository>
+		
+		<!-- for mule-addons such as jersey  transports -->
+		<repository>
+			<id>muleforge</id>
+			<name>MuleForge Repository</name>
+			<url>http://repository.muleforge.org</url>
+		</repository>
+	</repositories>
+ 
 
 	<dependencies>
 		<dependency>
