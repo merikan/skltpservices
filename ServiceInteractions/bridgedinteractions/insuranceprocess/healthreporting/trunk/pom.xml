@@ -35,6 +35,8 @@
 		<module>ReceiveMedicalCertificateQuestion</module>
 		<module>SendMedicalCertificateAnswer</module>
 		<module>TaEmotSvar</module>
+		<module>SendMedicalCertificateQuestion</module>
+		<module>TaEmotFraga</module>
 	</modules>
 
 	<scm>
