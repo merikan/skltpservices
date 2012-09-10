@@ -61,7 +61,6 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		columnNames.put("in.cxf_service", "contract");
 		columnNames.put("in.senderid", "sender");
 		columnNames.put("in.receiverid", "receiver");
-		columnNames.put("in.endpoint", "endpoint");
 		
 		// in
 		columnNames.put("in.timestamp", "in_timestamp");
@@ -72,7 +71,8 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		columnNames.put("out.timestamp", "out_timestamp");
 		columnNames.put("out.payload", "out_payload");
 		columnNames.put("out.rivversion", "out_riv_version");
-		columnNames.put("out.time.producer", "time_producer");
+		columnNames.put("out.endpoint.time", "endpoint_time");
+		columnNames.put("out.endpoint.url", "endpoint_url");
 
 		// errors
 		columnNames.put("err.cxf_service", "contract");
