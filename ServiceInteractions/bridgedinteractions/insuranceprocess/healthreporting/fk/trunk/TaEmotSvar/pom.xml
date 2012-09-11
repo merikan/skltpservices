@@ -38,4 +38,19 @@
 		<module>Test-producer</module>
 		<module>Test-consumer</module>
 	</modules>
+	
+	<dependencies>
+	<!-- schema dependency -->
+	    <dependency>
+	        <groupId>se.riv.fk</groupId>
+	        <artifactId>insuranceprocess-healthreporting-schemas</artifactId>
+	        <version>1.6-SNAPSHOT</version>
+	    </dependency>
+	    
+	   <dependency>
+			<groupId>se.riv.fk</groupId>
+			<artifactId>fk-vardgivare-sjukvard-schemas</artifactId>
+			<version>1.6-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
