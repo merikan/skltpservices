@@ -39,12 +39,6 @@
 	</properties>
  
  	<dependencies>    
-		<!-- schema dependency -->
- 	    <dependency>
- 	        <groupId>se.riv.fk</groupId>
- 	        <artifactId>fk-vardgivare-sjukvard-schemas</artifactId>
- 	        <version>1.6-SNAPSHOT</version>
- 	    </dependency>
  	    
 	    <!-- cxf dependencies -->
         <dependency>
