@@ -66,6 +66,8 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
     
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
 		XMLStreamReader streamPayload = null;
+		
+		logger.info("Entering fk2vard receive medical certificate question transform");
 
 		// Check caller certificate ID!
 //		String callerCertificateId = getSenderIdFromCertificate(message, pattern);
@@ -259,6 +261,9 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer
 	        if (logger.isDebugEnabled()) {
 	            logger.debug("transformed payload to: " + payloadOut);
 	        }
+	        
+	        logger.info("Exiting fk2vard receive medical certificate question transform");
+	        
 	        return payloadOut;
 		} catch (Exception e) {
 			logger.error("Transform exception:" + e.getMessage());

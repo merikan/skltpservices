@@ -64,6 +64,9 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
     }
     
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
+		
+		logger.info("Entering vard2fk send medical certificate answer transform");
+		
 		ResourceBundle rb = ResourceBundle.getBundle("fkdataSendMCAnswer");	    
 		final String FK_ID = "2021005521";
 		XMLStreamReader streamPayload = null;
@@ -238,6 +241,8 @@ public class VardRequest2FkTransformer extends AbstractMessageAwareTransformer
 	        if (logger.isDebugEnabled()) {
 	            logger.debug("transformed payload to: " + payloadOut);
 	        }
+	        
+	        logger.info("Exiting vard2fk send medical certificate answer transform");
 	        return payloadOut;
 		} catch (Exception e) {
 			logger.error("Transform exception:" + e.getMessage());

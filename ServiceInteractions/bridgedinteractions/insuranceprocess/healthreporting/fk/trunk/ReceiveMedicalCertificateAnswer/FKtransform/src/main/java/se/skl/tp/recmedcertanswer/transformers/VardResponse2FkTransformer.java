@@ -33,6 +33,8 @@ public class VardResponse2FkTransformer extends AbstractMessageAwareTransformer
     
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
 
+		logger.info("Entering vard2fk receive medical certificate answer transform");
+		 
 		boolean faultDetected = false;
 		
     	Object src = message.getPayload();
@@ -108,6 +110,8 @@ public class VardResponse2FkTransformer extends AbstractMessageAwareTransformer
 			// Done, return the string
 			String resultStr = result.toString();
 			logger.debug("Return SOAP Envelope: {}", resultStr);
+			
+			logger.info("Exiting vard2fk receive medical certificate answer transform");
 			return resultStr;
 
 		} catch (Exception e) {

@@ -34,6 +34,8 @@ public class FkResponse2VardTransformer extends AbstractMessageAwareTransformer
     }
   
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
+		
+		logger.info("Entering fk2vard send medical certificate question transform");
 
 		boolean faultDetected = false;
 		boolean validationErrorDetected = false;
@@ -119,6 +121,8 @@ public class FkResponse2VardTransformer extends AbstractMessageAwareTransformer
 			// Done, return the string
 			String resultStr = result.toString();
 			logger.debug("Return SOAP Body: {}", resultStr);
+			
+			logger.info("Exiting fk2vard send medical certificate question transform");
 			return resultStr;
 
 		} catch (Exception e) {
