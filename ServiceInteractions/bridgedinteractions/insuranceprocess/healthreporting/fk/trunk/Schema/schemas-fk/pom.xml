@@ -41,41 +41,14 @@
 	</properties>
  
 	<dependencies>
-	    <!-- cxf dependencies -->
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>${cxf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
-            <version>${cxf.version}</version>
-        </dependency>
-        <dependency>
-             <groupId>org.apache.cxf</groupId>
-             <artifactId>cxf-rt-transports-http-jetty</artifactId>
-             <version>${cxf.version}</version>
-             <!-- exkludera en som stör !!! -->
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-jdk14</artifactId>
-                </exclusion>
-            </exclusions>
-             
-       </dependency>
-       
         <!--  för att undvika att 2.0.8 laddas in -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>2.5.6</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>2.5.6</version>
         </dependency>
 	</dependencies>
 
@@ -84,7 +57,6 @@
             <plugin>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-codegen-plugin</artifactId>
-				<version>${cxf.version}</version>
 				<executions>
 					<execution>
 						<id>generate-sources</id>
