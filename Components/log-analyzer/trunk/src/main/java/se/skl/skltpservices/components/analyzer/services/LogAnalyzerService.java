@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.CannotCreateTransactionException;
 
 import se.skl.skltpservices.components.analyzer.application.RuntimeStatus;
 import se.skl.skltpservices.components.analyzer.application.Service;
@@ -25,7 +26,7 @@ public class LogAnalyzerService {
 
     public List<ServiceGroup> getCurrentStatusFromAllProducers() {
         List<ServiceGroup> producerInfo = new ArrayList<ServiceGroup>();
-        Iterable<ServiceProducer> producers = serviceProducerRepository.findAll();
+        Iterable<ServiceProducer> producers = getServicePproducers();
         for (ServiceProducer serviceProducer : producers) {
             List<Event> timeline = evactorService.getEventTimelineForProducer(serviceProducer.getId());
             if (!timeline.isEmpty()) {
@@ -43,6 +44,16 @@ public class LogAnalyzerService {
             }
         }
         return producerInfo;
+    }
+    
+    // FIXME: ugly workaround to avoid CannotCreateTransactionException after some time of inactivity
+    // Root cause probably is something with the hibernate transaction and connect pool settings
+    private Iterable<ServiceProducer> getServicePproducers() {
+    	try {
+    		return serviceProducerRepository.findAll();
+    	} catch (CannotCreateTransactionException e) {
+    		return serviceProducerRepository.findAll();    		
+    	}
     }
 
     protected RuntimeStatus calcRuntimeStatus(List<Event> timeline) {
