@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Event processor</title>
+		<link type="text/css" href="http://localhost:8080/jquery/css/ui-darkness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+		<script type="text/javascript" src="http://localhost:8080/jquery/js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="http://localhost:8080/jquery/js/jquery-ui-1.8.17.custom.min.js"></script>
+		<script type="text/javascript" src="http://localhost:8080/highcharts/js/highcharts.js"></script>
+		<script type="text/javascript" src="http://localhost:8080/highcharts/js/themes/gray.js"></script>
+		<script type="text/javascript" src="http://localhost:8080/highcharts/js/modules/exporting.js"></script>
+
+		<script type="text/javascript">
+		
+			//var chart;
+			var requestchart;
+			var channel;
+            var currentChannel;
+            var currentCategory;
+			var now = new Date();
+			//var interval = 3600 * 1000;
+
+			$(document).ready(function() {
+
+				$("#eventlist").accordion({ header: "h3" , autoHeight: false});
+				
+				/*
+				var options = {
+
+					chart: {
+						renderTo: 'graph',
+						zoomType: 'x',
+						spacingRight: 20
+					},
+					global: {
+						useUTC: false
+					},
+					title: {
+						text: 'Data event: Eventname'
+					},
+					subtitle: {
+						text: document.ontouchstart === undefined ?
+							'Click and drag in the plot area to zoom in' :
+							'Drag your finger over the plot to zoom in'
+					},
+					xAxis: {
+						type: 'datetime',
+						maxZoom: 12 * 3600000, // 12 hours
+						title: {
+							text: null
+						}
+					},
+					yAxis: {
+						title: {
+							text: 'Events'
+						},
+						min: 0,
+						startOnTick: false,
+						showFirstLabel: false
+					},
+					tooltip: {
+						shared: true					
+					},
+					legend: {
+						enabled: false
+					},
+					plotOptions: {
+						area: {
+							fillColor: {
+								linearGradient: [0, 0, 0, 300],
+								stops: [
+									[0, Highcharts.getOptions().colors[0]],
+									[1, 'rgba(2,0,0,0)']
+								]
+							},
+							lineWidth: 1,
+							marker: {
+								enabled: false,
+								states: {
+									hover: {
+										enabled: true,
+										radius: 5
+									}
+								}
+							},
+							shadow: false,
+							states: {
+								hover: {
+									lineWidth: 1						
+								}
+							}
+						}
+					},
+			
+					series: [{
+						type: 'area',
+						name: 'Events',
+						pointInterval: 3600 * 1000,
+						pointStart: Date.UTC(2012, 1, 23, 14, 0, 0),
+						data: []
+					}]
+				};
+				*/
+				
+			   var optionsRequestChart = {
+				  chart: {
+					 renderTo: 'graph',
+					 zoomType: 'xy'
+				  },
+				  title: {
+					 text: 'Requests on channel: ' + channel
+				  },
+				  xAxis: {
+					type: 'datetime',
+					maxZoom: 12 * 3600000, // 12 hours
+					title: {
+						text: null
+					}
+				  },
+				  yAxis: [{
+					 title: {
+						text: 'No of events',
+						style: {
+						   color: '#89A54E'
+						}
+					 },
+					 labels: {
+						formatter: function() {
+						   return this.value;
+						},
+						style: {
+						   color: '#89A54E'
+						}
+					 }
+				  },
+				  { 
+					 labels: {
+						formatter: function() {
+						   return this.value + " ms";
+						},
+						style: {
+						   color: '#7798BF'
+						}
+					 },
+					 title: {
+						text: 'Avg latency',
+						style: {
+						   color: '#7798BF'
+						}
+					 },
+					 min: 0,
+					 opposite: true
+					}],	
+				  plotOptions: {
+					column: {
+						pointPadding: 0,
+						borderWidth: 0,
+						stacking: 'normal'
+					}
+				  },
+				  legend: {
+					 layout: 'vertical',
+					 align: 'left',
+					 x: 80,
+					 verticalAlign: 'top',
+					 y: 20,
+					 floating: true,
+					 backgroundColor: Highcharts.theme.legendBackgroundColor || '#FFFFFF'
+				  },
+				  series: [{
+					 name: 'Successful requests',
+					 color: '#89A54E',
+					 type: 'column',
+//					 pointInterval: interval,
+					 yAxis: 0,
+					 data: [] 
+				  
+				  }, {
+					 name: 'Failed requests',
+					 color: '#AA4643',
+					 type: 'column',
+//					 pointInterval: interval,
+					 yAxis: 0,
+					 data: [] 
+				  }, {
+					 name: 'Timed out requests',
+					 color: '#009DE0',
+					 type: 'column',
+//						 pointInterval: interval,
+					 yAxis: 0,
+					 data: [] 
+				  } ,{
+					 name: 'Average latency',
+					 color: '#7798BF',
+					 type: 'spline',
+//					 pointInterval: interval,
+					 yAxis: 1,
+					 data: []
+				  }]
+				};
+		
+	            function loadChannels(type) {
+	            	
+		          var url = type + '/channels'
+	              //var url = 'channels';
+			      jQuery.getJSON(url, null, function(data) {
+
+				  	$.each(data, function(no, channel) {
+		  			  load(type, channel.name, null);		
+				    });
+	
+			      });
+	
+			    }
+
+	            function loadCategories(type, channel) {
+		          var url = type + '/categories/' + channel
+	              //var url = 'categories';
+			      jQuery.getJSON(url, null, function(data) {
+				  	$.each(data, function(no, category) {
+		  			  load(type, channel, category.name);		
+				    });
+	
+			      });
+	
+			    }
+	            
+         	    loadChannels("api");
+
+                function load(type, channel, category){       
+                  var listDiv = type + 'eventlist';
+                  var name = channel;
+                  
+                  if(category != null){
+                	listDiv = listDiv + channel.replace(new RegExp(':', 'g'), '');
+                	name = category;
+                  }
+
+                  $('#' + listDiv).append('<li><a href="#" id="'+name+'" class="apieventlink">'+name+'</a></li>').children().last().click(function() {
+					
+					if( category == null && $('#' + listDiv+channel.replace(new RegExp(':', 'g'), '')).is(':empty')) {
+					  loadCategories(type, channel);
+				  	} else {
+				  	  $('#' + listDiv+channel.replace(new RegExp(':', 'g'), '')).empty()
+				  	}
+					
+					currentChannel = channel;
+					currentCategory = category;
+                    
+                  	loadGraph(type, channel, category);
+                  	
+//                   	var eventsUrl = 'events';
+                  	var eventsUrl = type + '/events/' + escape(channel);
+                  	if(category != null){
+                  		eventsUrl = eventsUrl + '/' + escape(category);
+                  	}
+                  	
+				  	jQuery.getJSON(eventsUrl, null, function(data) {            
+                      $("#eventlog").empty().append('<h2>Last 10 requests</h2>');
+                      $.each(data, function(k, event) {
+                        var time = new Date(event.timestamp);
+
+                        $('#eventlog').append('<div class="logitem ui-widget-content ui-corner-bottom ui-corner-top" id="' + event.id+ '"><a href="#">' + event.state + ' at ' + time + '</a></div>');
+                        
+                        if(event.state == 'FAILURE'){
+                        	 $('#' + event.id).addClass('failed');
+                        }
+                        
+                        $('#' + event.id).click(function() {
+                        	jQuery.getJSON('/log/event/' + event.inboundRef.id, null, function(data) {  
+                        		$('#' + event.id).append('<p>' + data.message + '</p>');
+                        	});
+                        	
+                        });
+                      });
+
+                    });
+					
+                  });
+                  
+                  
+                  if(category == null){
+                	$('#' + listDiv).append('<ul id="'+listDiv+channel.replace(new RegExp(':', 'g'), '')+'"></ul>'); // click()....?
+                  } 
+				  
+ 	           }
+
+
+			   function loadGraph(type, channel, category){
+				   
+				  if(type == 'api'){
+					  loadRequestGraph(channel, category, "day");
+				  } else {
+				    jQuery.getJSON(url, null, function(data) {
+
+					  options.title.text = title
+					  options.series[0].data = data._2;
+					  options.series[0].pointInterval = 3600 * 1000;
+					  options.series[0].pointStart = data._1 - now.getTimezoneOffset() * 60 * 1000;
+					  chart = new Highcharts.Chart(options);
+			   	    });
+				  }
+				}
+
+			   function loadRequestGraph(channel, category, interval){
+				   
+				  var key = escape(channel);
+				  if(category != null){
+					key = key + "/" + escape(category);
+					optionsRequestChart.title.text = 'Requests on channel "' + channel + '" with category "' + category + '"'
+				  } else {
+					optionsRequestChart.title.text = 'Requests on channel "' + channel + '"'
+				  }
+
+				  var latencyUrl = '/api/latency/' + escape(channel);				  
+				  var statsUrl = '/api/stats/' + escape(channel);
+				  //var latencyUrl = 'latency';
+				  
+				  if(category != null){
+					  statsUrl = statsUrl + '/' + escape(category)
+					  latencyUrl = latencyUrl + '/' + escape(category)
+				  }
+				  				 
+				  var intervalMillis = 3600 * 1000;
+				  
+				  if(interval == 'day'){
+					  intervalMillis = intervalMillis * 24;
+				  } else if(interval == 'month') {
+					  intervalMillis = intervalMillis * 24 * 30; // TODO:: Create list with months
+				  } else if (interval == 'year'){
+					  intervalMillis = intervalMillis * 24 * 365;
+				  }
+				  
+				  jQuery.getJSON(latencyUrl + "?interval=" + interval, null, function(data) {
+					  optionsRequestChart.series[3].data = data.stats;
+					  optionsRequestChart.series[3].pointInterval = intervalMillis;
+					  optionsRequestChart.series[3].pointStart = data.timestamp - now.getTimezoneOffset() * 60 * 1000;
+
+					  chart = new Highcharts.Chart(optionsRequestChart);
+			   	  });
+				  
+				  //var statsUrl = 'stats';
+				  jQuery.getJSON(statsUrl + "?state=SUCCESS&interval=" + interval, null, function(stats) {
+					  optionsRequestChart.series[0].data = stats.stats;
+					  optionsRequestChart.series[0].pointInterval = intervalMillis;
+					  optionsRequestChart.series[0].pointStart = stats.timestamp - now.getTimezoneOffset() * 60 * 1000;
+
+					  chart = new Highcharts.Chart(optionsRequestChart);
+				  });				  
+
+				  jQuery.getJSON(statsUrl + "?state=FAILURE&interval=" + interval, null, function(stats) {
+					  optionsRequestChart.series[1].data = stats.stats;
+					  optionsRequestChart.series[1].pointInterval = intervalMillis;
+					  optionsRequestChart.series[1].pointStart = stats.timestamp - now.getTimezoneOffset() * 60 * 1000;
+
+					  chart = new Highcharts.Chart(optionsRequestChart);
+			   	  });
+				  				  
+				  jQuery.getJSON(statsUrl + "?state=TIMEOUT&interval=" + interval, null, function(stats) {
+					  optionsRequestChart.series[2].data = stats.stats;
+					  optionsRequestChart.series[2].pointInterval = intervalMillis;
+					  optionsRequestChart.series[2].pointStart = stats.timestamp - now.getTimezoneOffset() * 60 * 1000;
+
+					  chart = new Highcharts.Chart(optionsRequestChart);
+			   	  });
+				}
+				
+			   
+			   $('.interval').click(function(e) {
+				   loadRequestGraph(currentChannel, currentCategory, e.currentTarget.id);
+			   });
+			   
+			});
+		</script>
+		<style type="text/css">
+			body{ font: 62.5% "Trebuchet MS", sans-serif; margin: 10px; background-color: #000000; color: #ffffff}
+			.demoHeaders { margin-top: 2em; }
+			#dialog_link {padding: .4em 1em .4em 20px;text-decoration: none;position: relative;}
+			#dialog_link span.ui-icon {margin: 0 5px 0 0;position: absolute;left: .2em;top: 50%;margin-top: -8px;}
+			ul#icons {margin: 0; padding: 0;}
+			ul#icons li {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;}
+			ul#icons span.ui-icon {float: left; margin: 0 4px;}
+
+			#content {width: 1080px }
+			#eventlist { width: 250px; height: 300px; float: left; padding: 6px }
+			#event {width: 800px; float: right; padding: 6px}
+			#graph {width: 800px; height: 300px; }
+			#eventlog {}
+			.logitem {padding: 4px; margin-top: 10px}
+			#selector {display:none; margin-bottom: 5px}
+
+			.failed {border: 1px solid #884444; display: block}
+			
+			.logDiv {float: left; margin: 4px; display: block}
+			
+			.interval {color: #ffffff}
+			.intervalDiv {padding: 3px;}
+			
+		</style>	
+	</head>
+	<body>
+		<h1>Event processor</h1>
+	
+		<div id="content">
+
+			<div id="eventlist">
+				<div>
+					<h3><a href="#">Request events</a></h3>
+					<ul id="apieventlist">
+						
+					<ul>
+				</div>
+				<!-- 
+				<div>
+					<h3><a href="#">Alert events</a></h3>
+					<ul id="kpieventlist">
+					</ul>
+				</div>
+				-->
+			</div>
+
+			<div id="event">
+				<div class="intervalDiv">Interval: <a href="#" id="hour" class="interval">hour</a> <a href="#" id="day" class="interval">day</a> <a href="#" id="month" class="interval">month</a> <a href="#" id="year" class="interval">year</a></div>
+				<div id="graph">
+					
+				</div>
+
+				<div id="eventlog">
+				
+				</div>
+
+			</div>
+		</div>
+	</body>
+</html>
+
+
