@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:inera.se.apotekensservice:argos:1" xmlns:add="http://www.w3.org/2005/08/addressing" xmlns:urn1="urn:riv:se.apotekensservice:or:HamtaAktuellaOrdinationerResponder:1">
+   <soapenv:Header>
+      <urn:ArgosHeader>
+         <urn:forskrivarkod>1111129</urn:forskrivarkod>
+         <urn:legitimationskod></urn:legitimationskod>
+         <urn:fornamn>Lars</urn:fornamn>
+         <urn:efternamn>Läkare</urn:efternamn>
+         <urn:befattningskod>123456</urn:befattningskod>
+         <urn:arbetsplatskod>1234567890</urn:arbetsplatskod>
+         <urn:arbetsplatsnamn>Sjukhuset</urn:arbetsplatsnamn>
+         <urn:postort>Staden</urn:postort>
+         <urn:postadress>Vägen 1</urn:postadress>
+         <urn:postnummer>11111</urn:postnummer>
+         <urn:telefonnummer>08-1234567</urn:telefonnummer>
+         <urn:requestId>123456</urn:requestId>
+         <urn:rollnamn>FORSKRIVARE</urn:rollnamn>
+         <urn:directoryID>TSE6565656565-1003</urn:directoryID>
+         <urn:hsaID>TSE6565656565-1003</urn:hsaID>
+         <urn:katalog>HSA</urn:katalog>
+         <urn:organisationsnummer>1234567890</urn:organisationsnummer>
+         <urn:systemnamn>Melior</urn:systemnamn>
+         <urn:systemversion>1.0</urn:systemversion>
+         <urn:systemIp>192.0.0.1</urn:systemIp>
+      </urn:ArgosHeader>
+      <add:To>1234567</add:To>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:HamtaAktuellaOrdinationer>
+         <urn1:personnummer>196308212817</urn1:personnummer>
+      </urn1:HamtaAktuellaOrdinationer>
+   </soapenv:Body>
+</soapenv:Envelope>
