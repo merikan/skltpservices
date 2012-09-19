@@ -1,7 +1,10 @@
 package se.skl.skltpservices.components.analyzer.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import javax.xml.bind.annotation.XmlElement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.CannotCreateTransactionException;
@@ -10,6 +13,7 @@ import se.skl.skltpservices.components.analyzer.application.RuntimeStatus;
 import se.skl.skltpservices.components.analyzer.application.Service;
 import se.skl.skltpservices.components.analyzer.application.ServiceGroup;
 import se.skl.skltpservices.components.analyzer.application.ServiceGroup.ServiceGroupBuilder;
+import se.skl.skltpservices.components.analyzer.application.ServiceGroups;
 import se.skl.skltpservices.components.analyzer.domain.ServiceProducer;
 import se.skl.skltpservices.components.analyzer.domain.ServiceProducerRepository;
 
@@ -24,26 +28,36 @@ public class LogAnalyzerService {
         this.evactorService = evactorService;
     }
 
-    public List<ServiceGroup> getCurrentStatusFromAllProducers() {
-        List<ServiceGroup> producerInfo = new ArrayList<ServiceGroup>();
-        Iterable<ServiceProducer> producers = getServicePproducers();
-        for (ServiceProducer serviceProducer : producers) {
-            List<Event> timeline = evactorService.getEventTimelineForProducer(serviceProducer.getId());
-            if (!timeline.isEmpty()) {
-                ServiceGroup pri = new ServiceGroupBuilder().setDomain(serviceProducer.getDomain())
-                        .setSubdomain(serviceProducer.getSubDomain())
-                        .setMunicipality(serviceProducer.getMunicipality())
-                        .addService(new Service.ServiceBuilder()
-                                .setEndpointUrl(serviceProducer.getServiceUrl())
-                                .setSystemName(serviceProducer.getSystem())
-                                .setStatus(calcRuntimeStatus(timeline))
-                                .build()
-                        )
-                        .build();
-                producerInfo.add(pri);
-            }
-        }
-        return producerInfo;
+    public ServiceGroups getCurrentStatusFromAllProducers() {
+    	HashMap<String, ServiceGroup> map = new HashMap<String, ServiceGroup>();
+
+    	for (ServiceProducer serviceProducer : getServicePproducers()) {
+    		List<Event> timeline = evactorService.getEventTimelineForProducer(serviceProducer.getId());
+    		if (!timeline.isEmpty()) {
+    			Service service = new Service.ServiceBuilder()
+    			.setEndpointUrl(serviceProducer.getServiceUrl())
+    			.setSystemName(serviceProducer.getSystem())
+    			.setStatus(calcRuntimeStatus(timeline))
+    			.setId(String.valueOf(serviceProducer.getId()))
+    			.build();
+
+    			// group services by domain names, don't bother if municipality matches or not
+    			ServiceGroup pri = map.get(serviceProducer.getDomain());
+    			if (pri == null) {
+    				pri = new ServiceGroupBuilder().setName(serviceProducer.getDomain())
+    						.setDescription(serviceProducer.getMunicipality())
+    						.addService(service)
+    						.build();
+    				map.put(serviceProducer.getDomain(), pri);
+    			} else {
+    				pri.getServices().add(service);
+    			}
+    		}
+    	}
+    	
+    	ServiceGroups groups = new ServiceGroups.ServiceGroupsBuilder().setServiceGroups(map.values()).build();
+    	
+    	return groups;
     }
     
     // FIXME: ugly workaround to avoid CannotCreateTransactionException after some time of inactivity

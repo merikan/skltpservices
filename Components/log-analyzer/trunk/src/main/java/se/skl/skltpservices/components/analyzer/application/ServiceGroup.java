@@ -7,11 +7,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import se.skl.skltpservices.components.analyzer.services.EntityBuilder;
 
-@XmlRootElement
+@XmlRootElement(name="service-group")
 public class ServiceGroup {
-   @XmlElement private String domain;
-   @XmlElement private String subdomain;
-   @XmlElement private String municipality;
+   @XmlElement(name="name") private String name;
+   @XmlElement(name="description") private String description;
    @XmlElement(name="service") private Collection<Service> services;
 
     public static class ServiceGroupBuilder implements EntityBuilder<ServiceGroup> {
@@ -22,18 +21,14 @@ public class ServiceGroup {
             serviceGroup.services = new ArrayList<Service>();
         }
        
-        public ServiceGroupBuilder setDomain(String domain) {
-            serviceGroup.domain = domain;
+        public ServiceGroupBuilder setName(String name) {
+            serviceGroup.name = name;
             return this;
         }
 
-        public ServiceGroupBuilder setSubdomain(String subdomain) {
-            serviceGroup.subdomain = subdomain;
-            return this;
-        }
-
-        public ServiceGroupBuilder setMunicipality(String municipality) {
-            serviceGroup.municipality = municipality;
+  
+        public ServiceGroupBuilder setDescription(String description) {
+            serviceGroup.description = description;
             return this;
         }
         
@@ -48,16 +43,12 @@ public class ServiceGroup {
         }
     }
 
-    public String getDomain() {
-        return domain;
+    public String getName() {
+        return name;
     }
 
-    public String getSubdomain() {
-        return subdomain;
-    }
-
-    public String getMunicipality() {
-        return municipality;
+    public String getDescription() {
+        return description;
     }
 
     public Collection<Service> getServices() {

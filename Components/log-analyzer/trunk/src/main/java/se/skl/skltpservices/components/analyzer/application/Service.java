@@ -10,15 +10,21 @@ import org.apache.commons.lang.builder.ToStringStyle;
 
 import se.skl.skltpservices.components.analyzer.services.EntityBuilder;
 
-@XmlRootElement
+@XmlRootElement(name="service")
 public class Service implements Serializable {
     private static final long serialVersionUID = 1L;
-    @XmlElement private String systemName;
-    @XmlElement private String endpointUrl;
-    @XmlElement private RuntimeStatus status;
+    @XmlElement(name="id") private String id;
+    @XmlElement(name="name") private String systemName;
+    @XmlElement(name="url") private String endpointUrl;    
+    @XmlElement(name="status") private RuntimeStatus status;
 
     public static class ServiceBuilder implements EntityBuilder<Service> {
         private Service pri = new Service();
+        
+        public ServiceBuilder setId(String id) {
+            pri.id = id;
+            return this;
+        }
         
         public ServiceBuilder setStatus(RuntimeStatus status) {
             pri.status = status;
@@ -49,6 +55,9 @@ public class Service implements Serializable {
         return status;
     }
 
+    public String getId() {
+        return id;
+    }
 
     public String getSystemName() {
         return systemName;

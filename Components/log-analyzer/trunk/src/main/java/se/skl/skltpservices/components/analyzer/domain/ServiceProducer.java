@@ -6,10 +6,13 @@ import javax.persistence.Id;
 @Entity
 public class ServiceProducer {
     @Id private Long id;
+    // Maps to url
     private String serviceUrl;
+    // Maps to name
     private String domain;
-    private String subDomain;
+    // Maps to service name
     private String system;
+    // Maps to description
     private String municipality;
     
     public Long getId() {
@@ -26,12 +29,6 @@ public class ServiceProducer {
     }
     public void setDomain(String domain) {
         this.domain = domain;
-    }
-    public String getSubDomain() {
-        return subDomain;
-    }
-    public void setSubDomain(String subDomain) {
-        this.subDomain = subDomain;
     }
     public String getSystem() {
         return system;
