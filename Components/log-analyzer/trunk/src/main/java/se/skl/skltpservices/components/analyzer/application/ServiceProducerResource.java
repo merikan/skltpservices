@@ -1,7 +1,5 @@
 package se.skl.skltpservices.components.analyzer.application;
 
-import java.util.List;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -12,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import se.skl.skltpservices.components.analyzer.services.LogAnalyzerService;
 
 @Controller
-@Path("/serviceProducers")
+@Path("/service-groups")
 @Produces({"application/xml; charset=UTF-8", "application/json; charset=UTF-8"})
 public class ServiceProducerResource {
 
@@ -24,7 +22,7 @@ public class ServiceProducerResource {
     }
 
     @GET
-    public List<ServiceGroup> findAll() {
+    public ServiceGroups findAll() {
         return logAnalyzerService.getCurrentStatusFromAllProducers(); 
     }
 }
