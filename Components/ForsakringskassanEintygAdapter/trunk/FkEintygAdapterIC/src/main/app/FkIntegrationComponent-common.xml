@@ -42,11 +42,10 @@
 			<spring:list>
 				<!-- Only available in development env, e.g. Eclipse -->
 				<spring:value>classpath:FkIntegrationComponent-security.properties</spring:value>
-				<spring:value>classpath:FkIntegrationComponent-config.properties</spring:value>
+				<spring:value>classpath:FkIntegrationComponent-security-override.properties</spring:value>
 				
-				<!-- Only available when deployed to a servlet container -->
-				<spring:value>file:${app.home}/tjanstebryggan/config/FkIntegrationComponent-security.properties</spring:value>
-				<spring:value>file:${app.home}/tjanstebryggan/config/FkIntegrationComponent-config.properties</spring:value>
+				<spring:value>classpath:FkIntegrationComponent-config.properties</spring:value>
+				<spring:value>classpath:FkIntegrationComponent-config-override.properties</spring:value>
 			</spring:list>
 		</spring:property>
 	</spring:bean>
