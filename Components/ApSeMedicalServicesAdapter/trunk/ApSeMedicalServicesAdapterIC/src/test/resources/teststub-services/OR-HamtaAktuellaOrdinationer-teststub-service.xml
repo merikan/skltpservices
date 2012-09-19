@@ -25,8 +25,9 @@
 		<service name="ApotekenService-HamtaAktuellaOrdinationer-TicketTransformer-teststub-service">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="${inbound.endpoint.apotekensservice.or.HamtaAktuellaOrdinationer.teststub}"
-					wsdlLocation="schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl" />
+							address="${inbound.endpoint.apotekensservice.or.HamtaAktuellaOrdinationer.teststub}"
+							wsdlLocation="classpath:/schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl"
+							serviceName="HamtaAktuellaOrdinationerResponderService" namespace="urn:riv:inera:se.apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20"/>
 			</inbound>
 
 
