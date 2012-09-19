@@ -36,7 +36,7 @@
         <spring:import resource="classpath:ApSeIntegrationComponent-common.xml"/>
         
      	<!-- Import services -->
-        <spring:import resource="classpath:services/*-service.xml"/>
+        <spring:import resource="classpath:services/*-apse-service.xml"/>
         
     </spring:beans>
 
