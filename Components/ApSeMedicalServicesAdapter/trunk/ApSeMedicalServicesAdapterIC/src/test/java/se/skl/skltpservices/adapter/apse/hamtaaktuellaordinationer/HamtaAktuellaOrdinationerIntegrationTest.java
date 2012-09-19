@@ -26,7 +26,7 @@ public class HamtaAktuellaOrdinationerIntegrationTest extends AbstractTestCase {
 
 	@Override
 	protected String getConfigResources() {
-		return "ApSeIntegrationComponent-common.xml,services/OR-HamtaAktuellaOrdinationer-adapter-service.xml,ApSeIntegrationComponent-teststubs-and-services-config.xml";
+		return "ApSeIntegrationComponent-common.xml,services/OR-HamtaAktuellaOrdinationer-apse-service.xml,ApSeIntegrationComponent-teststubs-and-services-config.xml";
 	}
 
 	@Test
