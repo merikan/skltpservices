@@ -18,15 +18,15 @@ public class WhiteListProcessor extends AbstractMessageAwareTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(WhiteListProcessor.class);
 
-	private static final String PEER_CERTIFICATES = "PEER_CERTIFICATES";
 	private static final String CERT_SENDERID_PATTERN = "=([^,]+)";
 	private String whiteList;
 	private String senderIdPropertyName;
 	private Pattern pattern;
+	private String certificatesKey;
 
 	@Override
 	public Object transform(MuleMessage muleMessage, String encoding) throws TransformerException {
-		final Certificate[] certificateChain = (Certificate[]) muleMessage.getProperty(PEER_CERTIFICATES);
+		final Certificate[] certificateChain = (Certificate[]) muleMessage.getProperty(certificatesKey);
 
 		X509Certificate x509Certificate = extractFirstCertificateInChain(certificateChain);
 
@@ -38,6 +38,19 @@ public class WhiteListProcessor extends AbstractMessageAwareTransformer {
 
 		return muleMessage;
 
+	}
+
+	public void setWhiteList(final String whiteList) {
+		this.whiteList = whiteList;
+	}
+
+	public void setSenderIdPropertyName(String senderIdPropertyName) {
+		this.senderIdPropertyName = senderIdPropertyName;
+		pattern = Pattern.compile(this.senderIdPropertyName + CERT_SENDERID_PATTERN);
+	}
+
+	public void setCertificatesKey(final String certificatesKey) {
+		this.certificatesKey = certificatesKey;
 	}
 
 	X509Certificate extractFirstCertificateInChain(final Certificate[] certificateChain) throws TransformerException {
@@ -75,15 +88,6 @@ public class WhiteListProcessor extends AbstractMessageAwareTransformer {
 
 		log.debug("senderNotInWhiteList({}) returns false, senderId not in whitelist", senderId);
 		return false;
-	}
-
-	public void setWhiteList(final String whiteList) {
-		this.whiteList = whiteList;
-	}
-
-	public void setSenderIdPropertyName(String senderIdPropertyName) {
-		this.senderIdPropertyName = senderIdPropertyName;
-		pattern = Pattern.compile(this.senderIdPropertyName + CERT_SENDERID_PATTERN);
 	}
 
 	String extractSenderIdFromCertificate(final X509Certificate certificate) throws TransformerException {
