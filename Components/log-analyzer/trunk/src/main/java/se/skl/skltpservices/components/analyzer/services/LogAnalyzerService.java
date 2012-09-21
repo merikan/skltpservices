@@ -1,10 +1,7 @@
 package se.skl.skltpservices.components.analyzer.services;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.xml.bind.annotation.XmlElement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.CannotCreateTransactionException;
@@ -36,19 +33,19 @@ public class LogAnalyzerService {
     		if (!timeline.isEmpty()) {
     			Service service = new Service.ServiceBuilder()
     			.setEndpointUrl(serviceProducer.getServiceUrl())
-    			.setSystemName(serviceProducer.getSystem())
+    			.setSystemName(serviceProducer.getSystemName())
     			.setStatus(calcRuntimeStatus(timeline))
     			.setId(String.valueOf(serviceProducer.getId()))
     			.build();
 
     			// group services by domain names, don't bother if municipality matches or not
-    			ServiceGroup pri = map.get(serviceProducer.getDomain());
+    			ServiceGroup pri = map.get(serviceProducer.getDomainName());
     			if (pri == null) {
-    				pri = new ServiceGroupBuilder().setName(serviceProducer.getDomain())
-    						.setDescription(serviceProducer.getMunicipality())
+    				pri = new ServiceGroupBuilder().setName(serviceProducer.getDomainName())
+    						.setDescription(serviceProducer.getDomainDescription())
     						.addService(service)
     						.build();
-    				map.put(serviceProducer.getDomain(), pri);
+    				map.put(serviceProducer.getDomainName(), pri);
     			} else {
     				pri.getServices().add(service);
     			}
