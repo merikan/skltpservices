@@ -5,15 +5,15 @@ import javax.persistence.Id;
 
 @Entity
 public class ServiceProducer {
-    @Id private Long id;
+    @Id protected Long id;
     // Maps to url
     private String serviceUrl;
     // Maps to name
-    private String domain;
+    private String domainName;
     // Maps to service name
-    private String system;
+    private String systemName;
     // Maps to description
-    private String municipality;
+    private String domainDescription;
     
     public Long getId() {
         return id;
@@ -24,23 +24,23 @@ public class ServiceProducer {
     public void setServiceUrl(String serviceUrl) {
         this.serviceUrl = serviceUrl;
     }
-    public String getDomain() {
-        return domain;
+    public String getDomainName() {
+        return domainName;
     }
-    public void setDomain(String domain) {
-        this.domain = domain;
+    public void setDomainName(String domainName) {
+        this.domainName = domainName;
     }
-    public String getSystem() {
-        return system;
+    public String getSystemName() {
+        return systemName;
     }
-    public void setSystem(String system) {
-        this.system = system;
+    public void setSystemName(String systemName) {
+        this.systemName = systemName;
     }
-    public String getMunicipality() {
-        return municipality;
+    public String getDomainDescription() {
+        return domainDescription;
     }
-    public void setMunicipality(String municiplaity) {
-        this.municipality = municiplaity;
+    public void setDomainDescription(String domainDescription) {
+        this.domainDescription = domainDescription;
     }
     
 }
