@@ -10,9 +10,6 @@
 
     <spring:beans>
       <!-- Load all resources needed by the core artifact -->
-      <spring:import resource="classpath:GetAggregatedSubjectOfCareSchedule-config.xml"/>
-      
-      <!-- Load property files and other common declarations -->
       <spring:import resource="classpath:GetAggregatedSubjectOfCareSchedule-common.xml"/>
       
       <!-- Load all teststub services -->

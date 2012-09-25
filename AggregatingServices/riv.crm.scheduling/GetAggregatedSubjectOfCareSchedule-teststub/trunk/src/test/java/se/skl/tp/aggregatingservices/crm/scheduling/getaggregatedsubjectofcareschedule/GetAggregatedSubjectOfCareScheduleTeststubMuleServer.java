@@ -1,6 +1,5 @@
 package se.skl.tp.aggregatingservices.crm.scheduling.getaggregatedsubjectofcareschedule;
 
-import org.soitoolkit.commons.mule.test.LoggingHelper;
  
 import org.soitoolkit.commons.mule.test.StandaloneMuleServer;
 
@@ -20,10 +19,6 @@ public class GetAggregatedSubjectOfCareScheduleTeststubMuleServer {
     private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("GetAggregatedSubjectOfCareSchedule-config");
 
 	public static void main(String[] args) throws Exception {
-	
-	  // redirect logging to console, will disable all appenders in log4j.xml
-	  LoggingHelper.logToConsoleOnly();
-
 
  
         // Configure the mule-server
