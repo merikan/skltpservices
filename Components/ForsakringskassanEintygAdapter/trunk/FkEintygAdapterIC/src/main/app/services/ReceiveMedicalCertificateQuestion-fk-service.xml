@@ -61,7 +61,7 @@
 					proxy="true" 
 					synchronous="true"
 					applyTransformersToProtocol="false"
-					transformer-refs="newReceiverIdQuestion FkReq2VardQuestion changeNamespaceRecMedCertQuestion"
+					transformer-refs="fkWhiteListProcessor newReceiverIdQuestion FkReq2VardQuestion changeNamespaceRecMedCertQuestion"
 					responseTransformer-refs="VardResp2FkQuestion"
 				/>							
 			</inbound>
