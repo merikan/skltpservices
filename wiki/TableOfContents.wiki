@@ -1,5 +1,5 @@
-#summary SKL TP Innehållsförteckning.
+#summary Table of contents.
 
-SKL TP Innehållsförteckning.
+Table of contents.
 
   * [HowToDeployAggregatedServices How to deploy aggregated services]
