@@ -16,7 +16,7 @@ Add your content here.
 
 ==Deploy QA==
 
- * Gör beställningar
+ * Gör beställningar (nya kontrakt)
  * Testdata/testmiljöer/soi-toolkit teststubbar
 
  * Deploya Mule App
