@@ -1,5 +1,6 @@
 #summary Table of contents.
 
-Table of contents.
+SKLTP Services
 
   * [HowToDeployAggregatedServices How to deploy aggregated services]
+  * [HowToDeployServices How to deploy virtual services]
