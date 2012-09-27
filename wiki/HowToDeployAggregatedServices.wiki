@@ -11,7 +11,7 @@ These checkpoints needs to be verified before deployment in QA/Prod
  * Documentation
  * Tests (coverage etc)
  * License information is correct
- * Valid Certificates are in place
+ * Valid [http://www.inera.se/Infrastrukturtjanster/SITHS/ SITHS] Certificates are in place
  * [http://www.mulesoft.com/ Mule ESB EE 3.3.1] installed 
  * [http://activemq.apache.org/ Active MQ] installed
  * [http://code.google.com/p/soi-toolkit/ soi-toolkit] installed
