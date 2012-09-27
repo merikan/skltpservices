@@ -1,6 +1,6 @@
 #summary Table of contents.
 
-SKLTP Services
+SKL TP Services
   * [AggregatedServices Aggregated services]
     * [HowToDeployAggregatedServices How to deploy]
   * [VirtualServices Virtual servies]
