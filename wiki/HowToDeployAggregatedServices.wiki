@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Add your content here.
+This pages contains instructions on how to prepare, build and deploy aggregated services onto the Service Virtualization Platform for Service Oriented integration.
 
 ==Prereq==
 
