@@ -2,6 +2,6 @@
 
 SKLTP Services
   * [AggregatedServices Aggregated services]
-    * [HowToDeployAggregatedServices How to deploy aggregated services]
+    * [HowToDeployAggregatedServices How to deploy]
   * [HowToDeployServices How to deploy virtual services]
   * [FAQ FAQ]
