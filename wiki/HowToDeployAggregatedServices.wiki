@@ -22,7 +22,7 @@ These checkpoints needs to be verified before deployment in QA/Prod
 
 ==Deploy QA==
 
- * [http://www.inera.se/Infrastrukturtjanster/Tjansteplattform/Anslutning-till-Tjansteplattformen Beställa anslutningar till Tjänsteplattformen]
+ * [http://www.inera.se/Infrastrukturtjanster/Tjansteplattform/Anslutning-till-Tjansteplattformen Beställa] anslutningar till Tjänsteplattformen
  * Testdata/testmiljöer/soi-toolkit teststubbar?
 
  * Deploya Mule App
