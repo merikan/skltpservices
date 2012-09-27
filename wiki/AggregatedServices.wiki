@@ -2,7 +2,8 @@
 
 = Introduction =
 
-Aggregated services is a service that enables the possibilities for an individual to get a national perspective of the information...   
+*TODO: översätt*
+Aggregerande tjänster syftar till att sammanställa data från alla källsystemen i Sverige som stödjer tjänstedomänen (genom att ha tjänsteproducenter enligt domänens tjänstekontrakt).  
 
 = Resources =
 
