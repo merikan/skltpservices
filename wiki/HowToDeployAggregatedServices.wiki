@@ -27,8 +27,8 @@ These checkpoints needs to be verified before deployment in QA/Prod
  * Testdata/testmiljöer/soi-toolkit teststubbar?
 
  * Deploya Mule App
- * override properties
- * Uppdatera log-inställningar under classes
+ * Override default properties needed by aggregated services 
+ * Update log properties (currently under classes folder in deployed app)
 
 ==Deploy Prod==
 
