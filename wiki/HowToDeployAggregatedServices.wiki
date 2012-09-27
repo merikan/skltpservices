@@ -13,8 +13,7 @@ These checkpoints needs to be verified before deployment in QA/Prod
  * License information is correct
  * Valid [http://www.inera.se/Infrastrukturtjanster/SITHS/ SITHS] Certificates are in place
  * [http://www.mulesoft.com/ Mule ESB EE 3.3.1] installed 
- * [http://activemq.apache.org/ Active MQ] installed
- * [http://code.google.com/p/soi-toolkit/ soi-toolkit] installed
+ * [http://activemq.apache.org/ Active MQ] jar added to mule_home/lib/user
 
 ==Release mule app for aggregated services in domain==
 
