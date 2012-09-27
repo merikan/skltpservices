@@ -3,6 +3,6 @@
 SKL TP Services
   * [AggregatedServices Aggregated services]
     * [HowToDeployAggregatedServices How to deploy]
-  * [VirtualServices Virtual servies]
+  * [VirtualServices Virtual services]
      * [HowToDeployServices How to deploy]
   * [FAQ FAQ]
