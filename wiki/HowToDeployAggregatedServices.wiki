@@ -4,10 +4,15 @@
 
 This pages contains instructions on how to prepare, build and deploy aggregated services onto the Service Virtualization Platform for Service Oriented integration.
 
-==Prereq==
- * Development environment (Mule Studio EE 1.3.1 with Mule ESB EE 3.3.1)
- * Checklist (docs, tests, coverage, etc)
- * Cert
+==Prereq deployment==
+
+These checkpoints needs to be verified before deployment in QA/Prod
+ 
+ * Documentation
+ * Tests (coverage etc)
+ * Valid Certificates are in place
+ * [Mule ESB EE 3.3.1 http://www.mulesoft.com/] installed 
+ * [Active MQ http://activemq.apache.org/] installed
  * Mule installation (AMQ mm, se soi-toolkit)
 
 ==Release mule app for aggregated services in domain==
@@ -24,3 +29,6 @@ This pages contains instructions on how to prepare, build and deploy aggregated 
  * Uppdatera log-inställningar under classes
 
 ==Deploy Prod==
+
+==Development Environment==
+ * Mule Studio EE 1.3.1 with Mule ESB EE 3.3.1
