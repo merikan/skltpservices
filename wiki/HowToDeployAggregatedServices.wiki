@@ -24,7 +24,6 @@ These checkpoints needs to be verified before deployment in QA/Prod
 
  * Build virtual services needed by aggregated services, based on [https://code.google.com/p/rivta/ RIV TA]
    * crm:scheduling 1.2-SNAPSHOT
-   * itintegration:engagementindex 1.1-SNAPSHOT
  * [http://www.inera.se/Infrastrukturtjanster/Tjansteplattform/Anslutning-till-Tjansteplattformen Order] connections to Service Virtualization Platform. Templates found [http://www.inera.se/Infrastrukturtjanster/Tjansteplattform/Dokument-Lankar here]
  * Testdata/testmiljöer/soi-toolkit teststubbar?
 
