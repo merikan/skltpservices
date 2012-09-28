@@ -26,11 +26,11 @@ import java.util.UUID;
 
 import javax.jws.WebService;
 
-import riv.interoperability.headers._1.ActorType;
 import se.riv.crm.scheduling.getsubjectofcareschedule.v1.rivtabp21.GetSubjectOfCareScheduleResponderInterface;
 import se.riv.crm.scheduling.getsubjectofcarescheduleresponder.v1.GetSubjectOfCareScheduleResponseType;
 import se.riv.crm.scheduling.getsubjectofcarescheduleresponder.v1.GetSubjectOfCareScheduleType;
 import se.riv.crm.scheduling.v1.TimeslotType;
+import se.riv.interoperability.headers.v1.ActorType;
 
 
 @WebService(
@@ -38,7 +38,7 @@ import se.riv.crm.scheduling.v1.TimeslotType;
 		endpointInterface="se.riv.crm.scheduling.getsubjectofcareschedule.v1.rivtabp21.GetSubjectOfCareScheduleResponderInterface", 
 		portName = "GetSubjectOfCareScheduleResponderPort", 
 		targetNamespace = "urn:riv:crm:scheduling:GetSubjectOfCareSchedule:1:rivtabp21",
-		wsdlLocation = "schemas/interactions/GetSubjectOfCareScheduleInteraction/GetSubjectOfCareScheduleInteraction_1.1_RIVTABP21.wsdl")
+		wsdlLocation = "interactions/GetSubjectOfCareScheduleInteraction/GetSubjectOfCareScheduleInteraction_1.1_RIVTABP21.wsdl")
 public class ProducerImpl implements GetSubjectOfCareScheduleResponderInterface {
 	
 	static final SimpleDateFormat timeFformat = new SimpleDateFormat("yyyyMMddHHmmss");

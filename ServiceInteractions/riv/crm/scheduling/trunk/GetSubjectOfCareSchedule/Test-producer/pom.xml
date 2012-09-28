@@ -25,14 +25,14 @@
 		<version>1.2-SNAPSHOT</version>
 	</parent>
 
-	<dependencies>
-		<!-- schema dependency -->
-		<dependency>
-			<groupId>se.rivta.tools</groupId>
-			<artifactId>crm-scheduling-schemas</artifactId>
-			<version>1</version>
-		</dependency>
+	<properties>
+		<cxf.version>2.1.2</cxf.version>
+		<spring.version>3.0.5</spring.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
 
+	<dependencies>
 		<!-- CXF -->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
