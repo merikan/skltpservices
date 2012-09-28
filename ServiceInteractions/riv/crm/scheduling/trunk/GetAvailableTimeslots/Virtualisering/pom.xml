@@ -23,32 +23,4 @@
 		<version>1.2-SNAPSHOT</version>
 	</parent>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.5</version>
-				<executions>
-					<execution>
-						<id>copy-service-schema-files</id>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<phase>generate-sources</phase>
-						<configuration>
-							<outputDirectory>src/main/resources/schemas</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${project.build.directory}/schemas</directory>
-									<filtering>false</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
-
 </project>
