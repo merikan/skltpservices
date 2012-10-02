@@ -1,17 +1,25 @@
 #summary How to deploy transformation services in Service bridge
 
+<wiki:toc max_depth="3" />
+
 = Introduction =
 
 This page contains information on how to deploy and setup transformations for the Service bridge.
 
 = Apoteken service =
 
-*TBD*
+==Deploy==
+
+==Configuration==
 
 = HVAL24 =
 
-*TBD*
+==Deploy==
+
+==Configuration==
 
 = IFV =
 
-*TBD*
+==Deploy==
+
+==Configuration==
