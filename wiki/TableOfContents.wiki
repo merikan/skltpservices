@@ -5,4 +5,6 @@ SKL TP Services
     * [HowToDeployAggregatedServices How to deploy]
   * [VirtualServices Virtual services]
      * [HowToDeployServices How to deploy]
+  * [TransformationServices Transformation services] 
+     * [HowToDeployTransformationServices How to deploy]
   * [FAQ FAQ]
