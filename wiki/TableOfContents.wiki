@@ -5,7 +5,7 @@ SKL TP Services
     * [HowToDeployAggregatedServices How to deploy]
   * [VirtualServices Virtual services]
      * [HowToDeployServices How to deploy]
-     * [Tools Generera virtuella tjänster] 
+     * [Tools Generate virtual services for Service platform] 
   * [TransformationServices Transformation services] 
      * [HowToDeployTransformationServices How to deploy]
   * [FAQ FAQ]
