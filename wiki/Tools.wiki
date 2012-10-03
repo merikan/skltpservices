@@ -1,17 +1,17 @@
-#summary Tools to help you in your daily work with services creation for VP 1.3.x
+#summary Tools to help you in your daily work with services creation
 #labels Featured
 
 <wiki:toc max_depth="3" />
 
 = Tools =
 
-Tools to help you in your daily work with services creation for VP 1.3.x
+Tools to help you in your daily work with services creation
 
-==Generate deployable service artifacts==
+==Generate deployable service artifacts for VP 1.3.x==
 
 *Description*
 
-A script to generate deployable jar files for the Virtualized Platform. *NOTE* that this currently only applies for VP 1.3.x.
+A script to generate deployable jar files for the Virtualized Platform (VP 1.3.x).
 
 *Prerequisites*
 
