@@ -49,7 +49,7 @@
         -->
         
         <outbound-endpoint
-			address="http://#[header:INBOUND:host]#[header:INBOUND:port]#[header:INBOUND:path]"
+			address="https://#[header:INBOUND:host]#[header:INBOUND:port]#[header:INBOUND:path]"
 			responseTimeout="${SERVICE_TIMEOUT_MS}" transformer-refs="createCorrId monitorLogRequest"
 			responseTransformer-refs="exceptionTransformer monitorLogResponse">
 			 <cxf:jaxws-client
