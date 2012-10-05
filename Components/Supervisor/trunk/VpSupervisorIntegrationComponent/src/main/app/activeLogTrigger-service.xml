@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Copyright (c) 2012, Sjukvardsradgivningen. All rights reserved.
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+    MA 02110-1301  USA
+
+-->
+<!-- Reads Procucer URLs from TK database (JDBC) and Ids to perform active 
+	monitoring requests -->
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns:jdbc="http://www.mulesoft.org/schema/mule/jdbc" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xsi:schemaLocation="          
+				http://www.springframework.org/schema/beans	  http://www.springframework.org/schema/beans/spring-beans-3.1.xsd                                                                                                             
+                http://www.mulesoft.org/schema/mule/core      http://www.mulesoft.org/schema/mule/core/current/mule.xsd                      
+                http://www.mulesoft.org/schema/mule/vm        http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd                         
+                http://www.mulesoft.org/schema/mule/jdbc      http://www.mulesoft.org/schema/mule/jdbc/current/mule-jdbc.xsd                 
+        ">
+
+	<spring:beans>
+		<spring:bean id="logDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+			destroy-method="close">
+			<spring:property name="driverClassName" value="${SOITOOLKIT_JDBC_DRIVER}" />
+			<spring:property name="url" value="${SOITOOLKIT_JDBC_URL}" />
+			<spring:property name="username" value="${SOITOOLKIT_JDBC_USR}" />
+			<spring:property name="password" value="${SOITOOLKIT_JDBC_PWD}" />
+			<spring:property name="initialSize" value="0" />
+			<spring:property name="maxActive" value="1" />
+			<spring:property name="maxIdle" value="1" />
+			<spring:property name="minIdle" value="0" />
+			<spring:property name="maxWait" value="-1" />
+		</spring:bean>
+	</spring:beans>
+
+	<jdbc:connector name="jdbcConnector" dataSource-ref="logDataSource"
+		pollingFrequency="${SOITOOLKIT_JDBC_CON_POLLING_MS}">
+		<jdbc:query key="activelogtrigger-export-query"
+			value="SELECT id, serviceUrl FROM ServiceProducer" />
+	</jdbc:connector>
+
+	<flow name="activeLogTrigger-flow">
+
+		<jdbc:inbound-endpoint connector-ref="jdbcConnector"
+			queryKey="activelogtrigger-export-query" />
+
+		<custom-transformer
+			class="se.skl.tp.vp.supervisor.transformer.EndpointExtractionTransformer" />
+
+		<vm:outbound-endpoint exchange-pattern="request-response"
+			path="${ACTIVELOGTRIGGER_OUT_VM_QUEUE}" />
+
+		<custom-exception-strategy class="se.skl.tp.vp.util.VPExceptionStrategy">
+			<spring:property name="jaxbObjectToXml" ref="objToXml" />
+		</custom-exception-strategy>
+
+	</flow>
+
+</mule>
