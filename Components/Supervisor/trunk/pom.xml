@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT 
+	YOU ARE DOING! [soi-toolkit.gen.version=0.5.0] [soi-toolkit.gen.type=services] 
+	[soi-toolkit.gen.createDate=2012-07-13T08:44:12.308+02:00] [soi-toolkit.gen.artifactId=VpSupervisor] -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.soitoolkit.commons.poms</groupId>
+		<artifactId>soitoolkit-default-parent</artifactId>
+		<version>0.5.0</version>
+	</parent>
+
+	<groupId>se.skl.tp.vp</groupId>
+	<artifactId>VpSupervisor</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>${project.artifactId}</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<cxf.version>2.3.1</cxf.version>
+    	<compileSource>1.6</compileSource>
+	</properties>
+
+	<modules>
+		<module>VpSupervisorIntegrationComponent</module>
+	</modules>
+	
+	<build>
+		<pluginManagement>
+			<!-- maven-license-plugin helps you managing license headers in source 
+				files. -->
+			<plugins>
+				<plugin>
+					<groupId>com.mycila.maven-license-plugin</groupId>
+					<artifactId>maven-license-plugin</artifactId>
+					<version>1.9.0</version>
+					<configuration>
+						<header>http://skltp.googlecode.com/svn/tp/docs/license-header-template.txt</header>
+						<useDefaultExcludes>true</useDefaultExcludes>
+						<skipExistingHeaders>true</skipExistingHeaders>
+						<strictCheck>true</strictCheck>
+						<properties>
+							<organization>Sjukvardsradgivningen</organization>
+							<year>2012</year>
+						</properties>
+						<excludes>
+							<exclude>target/**</exclude>
+							<exclude>**/NOTICES.txt</exclude>
+							<exclude>thirdpartylicenses/**</exclude>
+							<exclude>**/LICENSE.rtf</exclude>
+							<exclude>**/context.xml</exclude>
+							<exclude>**/*.properties</exclude>
+							<exclude>**/*.log</exclude>
+							<exclude>**/*.dtd</exclude>
+							<exclude>**/*.jks</exclude>
+							<exclude>**/*.sql</exclude>
+							<exclude>**/*.mflow</exclude>
+							<exclude>**/COPYING</exclude>
+							<exclude>**/COPYING.LESSER</exclude>
+							<exclude>**/schemas/**</exclude>
+							<exclude>**/docs/**</exclude>
+							<exclude>**/resources/testfiles/**</exclude>
+						</excludes>
+					</configuration>
+					<executions>
+						<!-- <execution> <id>format</id> <phase>process-sources</phase> <goals> 
+							<goal>format</goal> </goals> </execution> -->
+						<execution>
+							<id>check</id>
+							<phase>compile</phase>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											com.mycila.maven-license-plugin
+										</groupId>
+										<artifactId>
+											maven-license-plugin
+										</artifactId>
+										<versionRange>
+											[1.9.0,)
+										</versionRange>
+										<goals>
+											<goal>check</goal>
+											<goal>format</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${compileSource}</source>
+					<target>${compileSource}</target>
+					<optimize>false</optimize>
+					<debug>true</debug>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>license</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.mycila.maven-license-plugin</groupId>
+						<artifactId>maven-license-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>format</id>
+								<phase>process-sources</phase>
+								<goals>
+									<goal>format</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>check</id>
+								<phase>compile</phase>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
