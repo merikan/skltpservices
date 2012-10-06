@@ -46,10 +46,6 @@
 			<groupId>org.soitoolkit.commons.components</groupId>
 			<artifactId>soitoolkit-commons-log</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
-			<artifactId>soitoolkit-mule-dependencies</artifactId>
-		</dependency>
 
 		<!-- cxf -->
 
