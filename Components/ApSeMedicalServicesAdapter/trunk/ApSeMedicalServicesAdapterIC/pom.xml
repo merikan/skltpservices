@@ -28,27 +28,27 @@
 		<!-- schema dependency -->
 
 		<dependency>
-			<groupId>se.skl.skltpservices.se_apotekensservice.axs</groupId>
+			<groupId>se.rivta.tools</groupId>
 			<artifactId>se_apotekensservice-axs-schemas</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>se.skl.skltpservices.se_apotekensservice.expo</groupId>
+			<groupId>se.rivta.tools</groupId>
 			<artifactId>se_apotekensservice-expo-schemas</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>se.skl.skltpservices.se_apotekensservice.folk</groupId>
+			<groupId>se.rivta.tools</groupId>
 			<artifactId>se_apotekensservice-folk-schemas</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>se.skl.skltpservices.se_apotekensservice.lf</groupId>
+			<groupId>se.rivta.tools</groupId>
 			<artifactId>se_apotekensservice-lf-schemas</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>se.skl.skltpservices.se_apotekensservice.or</groupId>
+			<groupId>se.rivta.tools</groupId>
 			<artifactId>se_apotekensservice-or-schemas</artifactId>
 		</dependency>
 

@@ -2,16 +2,16 @@ package se.skl.skltpservices.adapter.apse.hamtaaktuellaordinationer;
 
 import javax.jws.WebService;
 
-import riv.se_apotekensservice.or._1.ApoteksinformationResponse;
-import riv.se_apotekensservice.or._1.ArbetsplatsInfoResponse;
-import riv.se_apotekensservice.or._1.ArtikelResponse;
-import riv.se_apotekensservice.or._1.DosunderlagResponse;
-import riv.se_apotekensservice.or._1.ForskrivarinfoResponse;
-import riv.se_apotekensservice.or._1.OrdinationslistaResponse;
 import se.riv.inera.se.apotekensservice.argos.v1.ArgosHeaderType;
 import se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.HamtaAktuellaOrdinationerResponderInterface;
 import se.riv.se.apotekensservice.or.hamtaaktuellaordinationerresponder.v1.HamtaAktuellaOrdinationerRequestType;
 import se.riv.se.apotekensservice.or.hamtaaktuellaordinationerresponder.v1.HamtaAktuellaOrdinationerResponseType;
+import se.riv.se.apotekensservice.or.v1.ApoteksinformationResponse;
+import se.riv.se.apotekensservice.or.v1.ArbetsplatsInfoResponse;
+import se.riv.se.apotekensservice.or.v1.ArtikelResponse;
+import se.riv.se.apotekensservice.or.v1.DosunderlagResponse;
+import se.riv.se.apotekensservice.or.v1.ForskrivarinfoResponse;
+import se.riv.se.apotekensservice.or.v1.OrdinationslistaResponse;
 
 @WebService(serviceName = "HamtaAktuellaOrdinationerResponderService", endpointInterface = "se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.HamtaAktuellaOrdinationerResponderInterface", portName = "HamtaAktuellaOrdinationerResponderPort", targetNamespace = "urn:riv:inera:se.apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20", wsdlLocation = "schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl")
 public class HamtaAllaAktuellaOrdinationerTestProducer implements HamtaAktuellaOrdinationerResponderInterface {
