@@ -85,27 +85,12 @@
 			</dependency>
 			<dependency>
 				<groupId>org.mule.modules</groupId>
-				<artifactId>mule-module-scripting</artifactId>
-				<version>${mule.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mule.modules</groupId>
-				<artifactId>mule-module-xml</artifactId>
-				<version>${mule.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mule.modules</groupId>
 				<artifactId>mule-module-client</artifactId>
 				<version>${mule.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.mule.tests</groupId>
 				<artifactId>mule-tests-functional</artifactId>
-				<version>${mule.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mule.transports</groupId>
-				<artifactId>mule-transport-vm</artifactId>
 				<version>${mule.version}</version>
 			</dependency>
 			<dependency>
