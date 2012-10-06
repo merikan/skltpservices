@@ -35,11 +35,6 @@
 	<modules>
 		<module>Schema</module>
 		<module>FkEintygAdapterIC</module>
-		<module>ReceiveMedicalCertificateAnswer</module>
-		<module>ReceiveMedicalCertificateQuestion</module>
-		<module>RegisterMedicalCertificate</module>
-		<module>SendMedicalCertificateAnswer</module>
-		<module>SendMedicalCertificateQuestion</module>
 		<module>TaEmotFraga</module>
 		<module>TaEmotLakarintyg</module>
 		<module>TaEmotSvar</module>
