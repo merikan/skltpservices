@@ -21,11 +21,10 @@ Requires [http://groovy.codehaus.org/ groovy] 1.8.2 or newer. [http://groovy.cod
 
 You need to install Maven service archetype in order to run the script
 
-1. cd `/skltpservices/tools/generators/archetypes/trunk/ServiceArchetype`
+ # cd `/skltpservices/tools/generators/archetypes/trunk/ServiceArchetype`
+ # mvn install
 
-2. mvn install
-
-*To run*
+*To create service virtualizations*
 
  # Download RIV TA zip with the service contracts and unzip it
  # Download [https://code.google.com/p/skltpservices/source/browse/#svn%2Ftools%2Fgenerators%2Fscripts%2Ftrunk files needed for running] 
