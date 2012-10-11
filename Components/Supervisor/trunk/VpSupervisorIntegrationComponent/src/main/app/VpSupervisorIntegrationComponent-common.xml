@@ -30,7 +30,9 @@
 	xmlns:script="http://www.mulesoft.org/schema/mule/scripting"
 	xmlns:rest="http://www.mulesoft.org/schema/mule/rest"
 	xmlns:https="http://www.mulesoft.org/schema/mule/https"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
 	xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.mulesoft.org/schema/mule/core       http://www.mulesoft.org/schema/mule/core/current/mule.xsd
@@ -41,7 +43,9 @@
 		http://www.mulesoft.org/schema/mule/scripting  http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
 		http://www.mulesoft.org/schema/mule/rest       http://www.mulesoft.org/schema/mule/rest/current/mule-rest.xsd
 		http://www.mulesoft.org/schema/mule/https      http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
+		http://www.mulesoft.org/schema/mule/http      http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 		http://www.mulesoft.org/schema/mule/vm        http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+		http://www.mulesoft.org/schema/mule/xml        http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
 	">
 
   <!-- Load property files in three steps... -->
@@ -87,15 +91,10 @@
 
     <!-- Common connectors and endpoints, i.e. that not needs to be changed for different config-files (local unit-test, integration-test or production environments) -->
   
-
-  	<https:connector name="supervisor-soitoolkit-https-connector" clientSoTimeout="${SOITOOLKIT_MULE_HTTPS_CLIENT_SO_TIMEOUT}" >
-  		<service-overrides sessionHandler="org.mule.session.NullSessionHandler"/>
-    	<https:tls-key-store path="${SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE}" storePassword="${SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE_PASSWORD}" keyPassword="${SOITOOLKIT_MULE_HTTPS_TLS_KEY_PASSWORD}" class="${SOITOOLKIT_MULE_HTTPS_TLS_KEY_TYPE}" />
-    	<https:tls-server path="${SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE}" storePassword="${SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_PASSWORD}" requireClientAuthentication="${SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_REQUIRE_CLIENT_AUTH}"/>
-	</https:connector>
 	
     <spring:beans>
-  
+    	 <spring:import resource="classpath:soitoolkit-mule-http-connector.xml"/>
+   		 <spring:import resource="classpath:soitoolkit-mule-https-connector.xml"/>
     </spring:beans>
 
     <message-properties-transformer name="setJsonContentType" scope="outbound">
@@ -112,57 +111,51 @@
 	<custom-transformer name="saveCorrId"    class="org.soitoolkit.commons.mule.log.correlationid.SaveCorrelationIdTransformer" />
 	<custom-transformer name="restoreCorrId" class="org.soitoolkit.commons.mule.log.correlationid.RestoreCorrelationIdTransformer" />
 
-	<custom-transformer name="objToXml" class="org.soitoolkit.commons.mule.jaxb.JaxbObjectToXmlTransformer">
-		<spring:property name="contextPath"  value="org.soitoolkit.commons.logentry.schema.v1:se.skl.skltp.tp.components.eipull.v1"/>
-	</custom-transformer>
-
-	<custom-transformer name="xmlToObj" class="org.soitoolkit.commons.mule.jaxb.XmlToJaxbObjectTransformer">
-		<spring:property name="contextPath"  value="org.soitoolkit.commons.logentry.schema.v1:se.skl.skltp.tp.components.eipull.v1"/>
-	</custom-transformer>
+	 <mulexml:jaxb-context name="jaxbContext" packageNames="org.soitoolkit.commons.logentry.schema.v1:se.riv.itintegration.monitoring.v1"/>
 
     <custom-transformer name="createSoapFaultIfException" class="org.soitoolkit.commons.mule.soap.CreateSoapFaultIfExceptionTransformer"/>
 
 	<custom-transformer name="mimeToStr" class="org.soitoolkit.commons.mule.mime.MimeToStringTransformer" />
 
-    <custom-transformer name="logMsgIn" class="org.soitoolkit.commons.mule.log.LogTransformer">
-		<spring:property name="logType"  value="msg-in"/>
-		<spring:property name="jaxbObjectToXml"  ref="objToXml"/>
+    <custom-transformer class="org.soitoolkit.commons.mule.log.LogTransformer" name="logMsgIn">
+		<spring:property name="logType" value="msg-in"/>
+        <spring:property name="jaxbContext" ref="jaxbContext"/>
     </custom-transformer>
 
-    <custom-transformer name="logMsgOut" class="org.soitoolkit.commons.mule.log.LogTransformer">
-		<spring:property name="logType"  value="msg-out"/>
-		<spring:property name="jaxbObjectToXml"  ref="objToXml"/>
+    <custom-transformer class="org.soitoolkit.commons.mule.log.LogTransformer" name="logMsgOut">
+		<spring:property name="logType" value="msg-out"/>
+        <spring:property name="jaxbContext" ref="jaxbContext"/>
     </custom-transformer>
 
-    <custom-transformer name="logReqIn" class="org.soitoolkit.commons.mule.log.LogTransformer">
-		<spring:property name="logType"  value="req-in"/>
-		<spring:property name="jaxbObjectToXml"  ref="objToXml"/>
+    <custom-transformer class="org.soitoolkit.commons.mule.log.LogTransformer" name="logReqIn">
+		<spring:property name="logType" value="req-in"/>
+        <spring:property name="jaxbContext" ref="jaxbContext"/>
     </custom-transformer>
 
-    <custom-transformer name="logReqOut" class="org.soitoolkit.commons.mule.log.LogTransformer">
-		<spring:property name="logType"  value="req-out"/>
-		<spring:property name="jaxbObjectToXml"  ref="objToXml"/>
+    <custom-transformer class="org.soitoolkit.commons.mule.log.LogTransformer" name="logReqOut">
+		<spring:property name="logType" value="req-out"/>
+        <spring:property name="jaxbContext" ref="jaxbContext"/>
     </custom-transformer>
 
-    <custom-transformer name="logRespIn" class="org.soitoolkit.commons.mule.log.LogTransformer">
-		<spring:property name="logType"  value="resp-in"/>
-		<spring:property name="jaxbObjectToXml"  ref="objToXml"/>
+    <custom-transformer class="org.soitoolkit.commons.mule.log.LogTransformer" name="logRespIn">
+		<spring:property name="logType" value="resp-in"/>
+        <spring:property name="jaxbContext" ref="jaxbContext"/>
     </custom-transformer>
 
-    <custom-transformer name="logRespOut" class="org.soitoolkit.commons.mule.log.LogTransformer">
-		<spring:property name="logType"  value="resp-out"/>
-		<spring:property name="jaxbObjectToXml"  ref="objToXml"/>
+    <custom-transformer class="org.soitoolkit.commons.mule.log.LogTransformer" name="logRespOut">
+		<spring:property name="logType" value="resp-out"/>
+        <spring:property name="jaxbContext" ref="jaxbContext"/>
     </custom-transformer>  
     
      <!--  FIXME: do not change logType, beacuse it's a hard-coded type used by Evactor active monitoring sub-system -->
     <custom-transformer name="monitorLogRequest" class="se.skl.tp.vp.util.MonitorLogTransformer">
 		<spring:property name="logType"  value="req-out"/>
-		<spring:property name="jaxbObjectToXml"  ref="objToXml"/>
+		<spring:property name="jaxbContext"  ref="jaxbContext"/>
     </custom-transformer>
     
     <custom-transformer name="monitorLogResponse" class="se.skl.tp.vp.util.MonitorLogTransformer">
 		<spring:property name="logType"  value="resp-in"/>
-		<spring:property name="jaxbObjectToXml"  ref="objToXml"/>
+		<spring:property name="jaxbContext"  ref="jaxbContext"/>
     </custom-transformer>
 
     <!-- TODO: Add global definitions here -->

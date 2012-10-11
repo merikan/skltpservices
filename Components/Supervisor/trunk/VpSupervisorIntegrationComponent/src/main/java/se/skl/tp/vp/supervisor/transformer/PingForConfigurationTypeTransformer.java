@@ -18,8 +18,10 @@
  */
 package se.skl.tp.vp.supervisor.transformer;
 
+import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
-import org.mule.transformer.AbstractTransformer;
+import org.mule.api.transport.PropertyScope;
+import org.mule.transformer.AbstractMessageTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,17 +33,19 @@ import se.riv.itintegration.monitoring.v1.PingForConfigurationType;
  * @since VP-2.0
  * @author Anders
  */
-public class PingForConfigurationTypeTransformer extends AbstractTransformer {
+public class PingForConfigurationTypeTransformer extends AbstractMessageTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(PingForConfigurationTypeTransformer.class);
 
 	@Override
-	protected Object doTransform(Object src, String encoding) throws TransformerException {
-
+	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
 		PingForConfigurationType type = new PingForConfigurationType();
 
+		String producerId = message.getProperty("producerId", PropertyScope.INBOUND);
+		message.setProperty("producerId", producerId, PropertyScope.SESSION);
+
 		if (logger.isDebugEnabled()) {
-			log.debug("doTransform(" + src.getClass().getSimpleName() + ", " + encoding + ") returns: " + type);
+			log.debug("doTransform(" + message.getClass().getSimpleName() + ", " + encoding + ") returns: " + type);
 		}
 
 		return new Object[] { "SE165565594230-1000", type };
