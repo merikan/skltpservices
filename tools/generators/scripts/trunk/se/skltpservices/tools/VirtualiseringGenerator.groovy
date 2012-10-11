@@ -167,4 +167,4 @@ copyCoreSchemas(serviceInteractionDirectories, coreSchemaDirectory, targetDir)
 
 println ""
 println ""
-println "NOTE! Remember to update root pom with domain and subdomain"
+println "NOTE! Run mvn clean install to build deployable jar-files for service platform"

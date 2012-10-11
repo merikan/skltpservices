@@ -18,17 +18,18 @@
  *   Free Software Foundation, Inc., 59 Temple Place, Suite 330,
 
  *   Boston, MA 02111-1307  USA
- --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ -->
+ <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>se.skl.tp</groupId>
-  <artifactId>domain-subdomain</artifactId>
-  <version>1.0.0</version>
+  <groupId>se.skl.skltpservices</groupId>
+  <artifactId>itintegration-engagementindex</artifactId>
+  <version>1-RC4</version>
   <packaging>pom</packaging>
-  <name>domain-subdomain</name>
+  <name>itintegration-engagementindex</name>
 
   <properties>
-	<cxf.version>2.2.12</cxf.version>
+	<cxf.version>2.1.2</cxf.version>
 	<spring.version>3.0.5</spring.version>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -38,9 +39,9 @@
   <modules>
   </modules>
   
-  	<scm>
-		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/domain/subdomain/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/domain/subdomain/trunk</developerConnection>
+ 	<scm>
+		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/itintegration/engagementindex/trunk</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/itintegration/engagementindex/trunk</developerConnection>
 	</scm>
 	
 	<build>
@@ -49,9 +50,10 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
-                    <tagBase>https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/domain/subdomain/tags</tagBase>
+                    <tagBase>https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/itintegration/engagementindex/tags</tagBase>
                 </configuration>
             </plugin> 
+             <!-- Use Java 1.6 for source and target files -->
   			<plugin>
   				<groupId>org.apache.maven.plugins</groupId>
   				<artifactId>maven-compiler-plugin</artifactId>
