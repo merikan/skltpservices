@@ -48,6 +48,8 @@ You need to install Maven service archetype in order to run the script
           main
              resources
                 schemas
+                  core_components
+                  interactions 
                 tp-virtuell-tjanst-config.xml
   GetUpdates
   ProcessNotification
