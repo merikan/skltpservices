@@ -28,7 +28,12 @@ You need to install Maven service archetype in order to run the script
 
  # Download RIV TA zip with the service contracts and unzip it, [http://code.google.com/p/rivta/ RIV TA]
  # Download [https://code.google.com/p/skltpservices/source/browse/#svn%2Ftools%2Fgenerators%2Fscripts%2Ftrunk%2Fse%2Fskltpservices%2Ftools files needed for running] 
- # Update pomtemplate.xml with correct groupid and artifactid depending on what domain/subdomain is used and what version of RIV TA contract is used
+ # Update pomtemplate.xml with correct groupid, artifactid and version depending on what domain/subdomain is used and what version of RIV TA contract is used 
+{{{
+  <groupId>se.skl.skltpservices</groupId>
+  <artifactId>itintegration-engagementindex</artifactId>
+  <version>1-RC4</version>
+}}}
  # Run {{{ $./VirtualiseringGenerator.groovy <path to unzipped RIV TA file, schemas folder> }}}
 
 You can run the script to get further information in parameters and usage, to run on different environemnts see below:
