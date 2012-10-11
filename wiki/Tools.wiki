@@ -19,26 +19,21 @@ Java is installed and JAVA_HOME is set in environment.
 
 Requires [http://groovy.codehaus.org/ groovy] 1.8.2 or newer. [http://groovy.codehaus.org/Installing+Groovy See groovy installation instructions]
 
-
-*To run*
-
-*NOTE!* Some stuff are hardcoded in script as for now, please read the docs inside scripts header.
-
-Run the script to get further information in parameters and usage, to run on different environemnts see below:
-
-On Linux/mac termianl run _`<path to script folder>./VirtualiseringGenerator.groovy`_ 
-
-On Windos terminal run _`<path to script folder> groovy VirtualiseringGenerator.groovy`_
-
-*NOTE*
-
 You need to install Maven service archetype in order to run the script
 
 1. cd `/skltpservices/tools/generators/archetypes/trunk/ServiceArchetype`
 
 2. mvn install
 
+*To run*
 
-*Source*
+# Download RIV TA zip with the service contracts and unzip it
+# Download [https://code.google.com/p/skltpservices/source/browse/#svn%2Ftools%2Fgenerators%2Fscripts%2Ftrunk files needed for running] 
+# Update pomtemplate.xml with correct groupid and artifactid depending on what domain/subdomain is used and what version of RIV TA contract is used
+# Run {{{ $./VirtualiseringGenerator.groovy <path to unzipped RIV TA file, schemas folder> }}}
 
-[http://code.google.com/p/skltpservices/source/browse/tools/generators/scripts/trunk/se/skltpservices/tools/VirtualiseringGenerator.groovy VirtualiseringGenerator]
+You can run the script to get further information in parameters and usage, to run on different environemnts see below:
+
+On Linux/mac termianl run _`<path to script folder>./VirtualiseringGenerator.groovy`_ 
+
+On Windos terminal run _`<path to script folder> groovy VirtualiseringGenerator.groovy`_
