@@ -32,6 +32,7 @@
 					<directory>src/main/resources</directory>
 					<includes>
 						<include>tp-virtuell-tjanst-config.xml</include>
+						<include>tp2-service-mule-descriptor.xml</include>
 					</includes>
 				</fileSet>
 				<fileSet encoding="UTF-8">
