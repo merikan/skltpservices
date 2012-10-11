@@ -24,6 +24,8 @@ You need to install Maven service archetype in order to run the script
  # cd `/skltpservices/tools/generators/archetypes/trunk/ServiceArchetype`
  # mvn install
 
+Script is based on the [http://rivta.googlecode.com/svn/wiki/specs/RIV_Tekniska_Anvisningar_Konfigurationsstyrning.pdf RIV TA Konfigurationsstyrning 1.0]
+
 *To create service virtualizations*
 
  # Download RIV TA zip with the service contracts and unzip it, [http://code.google.com/p/rivta/ RIV TA]
@@ -56,9 +58,3 @@ You need to install Maven service archetype in order to run the script
   Update
   pom.xml
 }}}
-
-You can run the script to get further information in parameters and usage, to run on different environemnts see below:
-
-On Linux/mac termianl run _`<path to script folder>./VirtualiseringGenerator.groovy`_ 
-
-On Windos terminal run _`<path to script folder> groovy VirtualiseringGenerator.groovy`_
