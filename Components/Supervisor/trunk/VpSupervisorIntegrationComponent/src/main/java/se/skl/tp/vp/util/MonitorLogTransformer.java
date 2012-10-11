@@ -27,9 +27,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import javax.xml.bind.JAXBContext;
+
 import org.mule.api.ExceptionPayload;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleMessage;
+import org.mule.api.context.MuleContextAware;
 import org.mule.api.transformer.TransformerException;
 import org.mule.api.transport.PropertyScope;
 import org.mule.message.ExceptionMessage;
@@ -39,7 +42,6 @@ import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.logentry.schema.v1.LogLevelType;
 import org.soitoolkit.commons.mule.api.log.EventLogMessage;
 import org.soitoolkit.commons.mule.api.log.EventLogger;
-import org.soitoolkit.commons.mule.jaxb.JaxbObjectToXmlTransformer;
 import org.soitoolkit.commons.mule.log.DefaultEventLogger;
 import org.soitoolkit.commons.mule.log.EventLoggerFactory;
 
@@ -49,13 +51,13 @@ import org.soitoolkit.commons.mule.log.EventLoggerFactory;
  * @author Peter
  * 
  */
-public class MonitorLogTransformer extends AbstractMessageTransformer {
+public class MonitorLogTransformer extends AbstractMessageTransformer implements MuleContextAware {
 
 	private static final Logger log = LoggerFactory.getLogger(MonitorLogTransformer.class);
 
 	private EventLogger eventLogger;
 
-	private PayloadToStringTransformer payloadToStringTransformer;
+	private JAXBContext jaxbContext = null;
 
 	@Override
 	public void setMuleContext(MuleContext muleContext) {
@@ -72,7 +74,7 @@ public class MonitorLogTransformer extends AbstractMessageTransformer {
 		// TODO: this is an ugly workaround for injecting the jaxbObjToXml
 		// dependency ...
 		if (eventLogger instanceof DefaultEventLogger) {
-			((DefaultEventLogger) eventLogger).setJaxbToXml(payloadToStringTransformer.getJaxbObjectToXmlTransformer());
+			((DefaultEventLogger) eventLogger).setJaxbContext(jaxbContext);
 		}
 	}
 
@@ -124,11 +126,17 @@ public class MonitorLogTransformer extends AbstractMessageTransformer {
 		this.extraInfo = extraInfo;
 	}
 
-	public void setJaxbObjectToXml(JaxbObjectToXmlTransformer jaxbToXml) {
+	/**
+	 * Setter for the jaxbContext
+	 * 
+	 * @param jaxbContext
+	 */
+	public void setJaxbContext(JAXBContext jaxbContext) {
+		this.jaxbContext = jaxbContext;
+
 		if (eventLogger instanceof DefaultEventLogger) {
-			((DefaultEventLogger) eventLogger).setJaxbToXml(jaxbToXml);
+			((DefaultEventLogger) eventLogger).setJaxbContext(jaxbContext);
 		}
-		this.payloadToStringTransformer = new PayloadToStringTransformer(jaxbToXml);
 	}
 
 	@Override

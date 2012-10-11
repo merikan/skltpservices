@@ -22,6 +22,7 @@ import static org.soitoolkit.commons.mule.core.PropertyNames.SOITOOLKIT_BUSINESS
 import static org.soitoolkit.commons.mule.core.PropertyNames.SOITOOLKIT_CONTRACT_ID;
 import static org.soitoolkit.commons.mule.core.PropertyNames.SOITOOLKIT_CORRELATION_ID;
 import static org.soitoolkit.commons.mule.core.PropertyNames.SOITOOLKIT_INTEGRATION_SCENARIO;
+import static se.skl.tp.vp.util.VPUtil.nvl;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
@@ -37,6 +38,7 @@ import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import javax.xml.bind.JAXBContext;
 
 import org.mule.RequestContext;
 import org.mule.api.MuleContext;
@@ -57,11 +59,9 @@ import org.soitoolkit.commons.logentry.schema.v1.LogMessageType;
 import org.soitoolkit.commons.logentry.schema.v1.LogMetadataInfoType;
 import org.soitoolkit.commons.logentry.schema.v1.LogRuntimeInfoType;
 import org.soitoolkit.commons.logentry.schema.v1.LogRuntimeInfoType.BusinessContextId;
-import org.soitoolkit.commons.mule.jaxb.JaxbObjectToXmlTransformer;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import org.soitoolkit.commons.mule.util.MuleUtil;
 import org.soitoolkit.commons.mule.util.XmlUtil;
-import static se.skl.tp.vp.util.VPUtil.nvl;
 
 /**
  * Log events in a standardized way
@@ -125,14 +125,13 @@ public class EventLogger {
 		this.muleContext = muleContext;
 	}
 	
-	
 	/**
-	 * Setter for the jaxbToXml property
+	 * Setter for the jaxbContext
 	 * 
-	 * @param jaxbToXml
+	 * @param jaxbContext
 	 */
-	public void setJaxbToXml(JaxbObjectToXmlTransformer jaxbToXml) {
-		this.payloadToStringTransformer  = new PayloadToStringTransformer(jaxbToXml);
+	public void setJaxbContext(JAXBContext jaxbContext) {
+		this.payloadToStringTransformer = new PayloadToStringTransformer(jaxbContext);
 	}
 
 	//
