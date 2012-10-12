@@ -3,6 +3,7 @@ package se.skl.skltpservices.adapter.fk.sendmedcertanswer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.stream.XMLStreamException;
