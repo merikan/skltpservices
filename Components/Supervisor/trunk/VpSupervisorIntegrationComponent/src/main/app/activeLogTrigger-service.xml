@@ -64,7 +64,7 @@
 			path="${ACTIVELOGTRIGGER_OUT_VM_QUEUE}" />
 
 		<custom-exception-strategy class="se.skl.tp.vp.util.VPExceptionStrategy">
-			<spring:property name="jaxbObjectToXml" ref="objToXml" />
+			<spring:property name="jaxbContext" ref="jaxbContext"/>
 		</custom-exception-strategy>
 
 	</flow>
