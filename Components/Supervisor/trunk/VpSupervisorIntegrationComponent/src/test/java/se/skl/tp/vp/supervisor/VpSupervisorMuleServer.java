@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package se.skl.tp.vp.supervisoric;
+package se.skl.tp.vp.supervisor;
 
 import org.soitoolkit.commons.mule.test.StandaloneMuleServer;
 
