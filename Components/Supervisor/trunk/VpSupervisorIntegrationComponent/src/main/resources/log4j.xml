@@ -81,13 +81,17 @@
 		<level value="INFO" />
 	</logger>
 	
+	<logger name="se.skl.tp.vp.util.MonitorLogTransformer">
+		<level value="DEBUG" />
+	</logger>
+	
 	<logger name="se.skl.tp">
 		<level value="DEBUG" />
 	</logger>
 	
 	<!-- Message logging -->
 	<logger name="org.soitoolkit.commons.mule.messageLogger">
-		<level value="INFO" />
+		<level value="DEBUG" />
 	</logger>
 	
 	<root>
