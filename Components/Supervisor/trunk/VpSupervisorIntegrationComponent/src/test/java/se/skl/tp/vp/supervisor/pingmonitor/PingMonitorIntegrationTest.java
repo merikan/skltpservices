@@ -93,7 +93,7 @@ public class PingMonitorIntegrationTest extends AbstractTestCase {
 	}
 
 	@Test
-	public void existingPullRequestLogShouldBeUpdatedWithCurrentTime() throws JMSException {
+	public void callingProducerShouldGiveAInfoLogEvent() throws JMSException {
 
 		Map<String, String> props = new HashMap<String, String>();
 		props.put("protocol", "https");
@@ -121,8 +121,6 @@ public class PingMonitorIntegrationTest extends AbstractTestCase {
 		assertEquals(true, payload.contains("<extraInfo><name>producerId</name><value>kalle</value></extraInfo>"));
 		assertEquals(true, payload.contains("<extraInfo><name>source</name><value>se.skl.tp.vp.util.MonitorLogTransformer</value></extraInfo>"));
 		assertEquals(false, payload.contains("<payload>org.mule.module.cxf.transport.MuleUniversalConduit"));
-
-		System.err.println(payload);
 
 		// Verify error-queue
 		assertEquals(0, jmsUtil.browseMessagesOnQueue(ERROR_LOG_QUEUE).size());
