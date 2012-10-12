@@ -166,7 +166,7 @@ public class MonitorLogTransformer extends AbstractMessageTransformer implements
 				evaluatedExtraInfo = new HashMap<String, String>();
 			}
 
-			String producerId = (String) message.getProperty("producerId", PropertyScope.SESSION);
+			String producerId = getProducerId(message);
 			evaluatedExtraInfo.put("producerId", producerId);
 			evaluatedExtraInfo.put("source", getClass().getName());
 
@@ -228,6 +228,14 @@ public class MonitorLogTransformer extends AbstractMessageTransformer implements
 
 		return message;
 
+	}
+
+	private String getProducerId(MuleMessage message) {
+		String producerId = (String) message.getProperty("producerId", PropertyScope.INBOUND);
+		if (producerId == null) {
+			producerId = (String) message.getProperty("producerId", PropertyScope.SESSION);
+		}
+		return producerId;
 	}
 
 	// returns a context log mesage
