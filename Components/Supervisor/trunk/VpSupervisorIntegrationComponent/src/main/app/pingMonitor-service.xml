@@ -19,48 +19,56 @@
     MA 02110-1301  USA
 
 -->
-<!--  Invokes active monitoring endpoints, to check if the producer is up and running  -->
+<!-- Copyright (c) 2012, Sjukvardsradgivningen. All rights reserved. This 
+	library is free software; you can redistribute it and/or modify it under 
+	the terms of the GNU Lesser General Public License as published by the Free 
+	Software Foundation; either version 2.1 of the License, or (at your option) 
+	any later version. This library is distributed in the hope that it will be 
+	useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+	or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+	for more details. You should have received a copy of the GNU Lesser General 
+	Public License along with this library; if not, write to the Free Software 
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 
+	USA -->
+<!-- Invokes active monitoring endpoints, to check if the producer is up 
+	and running -->
 <mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- 	xmlns:spring="http://www.springframework.org/schema/beans"
-    xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
-    xmlns:https="http://www.mulesoft.org/schema/mule/https"
-    xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
-    xmlns="http://www.mulesoft.org/schema/mule/core"
-    xsi:schemaLocation="            
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
+	xmlns:https="http://www.mulesoft.org/schema/mule/https" xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xsi:schemaLocation="            
     			http://www.springframework.org/schema/beans	  http://www.springframework.org/schema/beans/spring-beans-3.1.xsd                                                                                                                                                                                                      
                 http://www.mulesoft.org/schema/mule/core      http://www.mulesoft.org/schema/mule/core/current/mule.xsd                          
         		http://www.mulesoft.org/schema/mule/vm        http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd                                 
                 http://www.mulesoft.org/schema/mule/cxf       http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd                       
         		http://www.mulesoft.org/schema/mule/https     http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd                           
-    " >
+    ">
 
-    <flow name="pingMonitor-flow" >
+	<flow name="pingMonitor-flow">
 
-        <vm:inbound-endpoint
-            exchange-pattern="request-response"
-            path="${ACTIVELOGTRIGGER_OUT_VM_QUEUE}"
-            />
+		<vm:inbound-endpoint exchange-pattern="one-way"
+			path="${ACTIVELOGTRIGGER_OUT_VM_QUEUE}" />
 
-        <custom-transformer class="se.skl.tp.vp.supervisor.transformer.PingForConfigurationTypeTransformer" />
+		<custom-transformer
+			class="se.skl.tp.vp.supervisor.transformer.PingForConfigurationTypeTransformer" />
 
-        <!--
-      Due to a bug http://www.mulesoft.org/jira/browse/MULE-5379 we can't use host, port, path attribute. Change when                     
-      bug is fixed in Mule 3.3
-        -->
-        
-        <outbound-endpoint
-			address="https://#[header:INBOUND:host]#[header:INBOUND:port]#[header:INBOUND:path]"
-			responseTimeout="${SERVICE_TIMEOUT_MS}" transformer-refs="createCorrId monitorLogRequest"
-			responseTransformer-refs="exceptionTransformer monitorLogResponse">
-			 <cxf:jaxws-client
-            	clientClass="se.riv.itintegration.monitoring.v1.rivtabp21.PingForConfigurationResponderService"
-            	operation="PingForConfiguration"
-            	port="PingForConfigurationResponderPort" />
-		</outbound-endpoint>
-        
-        <custom-exception-strategy class="se.skl.tp.vp.util.VPExceptionStrategy" >
-			<spring:property name="jaxbObjectToXml"  ref="objToXml"/>
-        </custom-exception-strategy>
-  </flow>
+		<https:outbound-endpoint 
+	            connector-ref="soitoolkit-https-connector"
+				address="https://#[header:INBOUND:host]#[header:INBOUND:port]#[header:INBOUND:path]"
+				exchange-pattern="request-response"
+				responseTimeout="${SERVICE_TIMEOUT_MS}"
+				transformer-refs="createCorrId monitorLogRequest"
+				responseTransformer-refs="exceptionTransformer monitorLogResponse">
+		        <cxf:jaxws-client 
+		        	port="PingForConfigurationResponderPort" 
+		        	operation="PingForConfiguration" 
+		        	clientClass="se.riv.itintegration.monitoring.rivtabp21.v1.PingForConfigurationResponderService"
+		       	/>
+		</https:outbound-endpoint>
+
+		<custom-exception-strategy class="se.skl.tp.vp.util.VPExceptionStrategy">
+			<spring:property name="jaxbContext" ref="jaxbContext"/>
+		</custom-exception-strategy>
+	</flow>
 
 </mule>
