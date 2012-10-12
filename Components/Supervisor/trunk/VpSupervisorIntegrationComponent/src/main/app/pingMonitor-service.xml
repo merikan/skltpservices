@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-
-    Copyright (c) 2012, Sjukvardsradgivningen. All rights reserved.
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-    MA 02110-1301  USA
-
--->
+<!-- Copyright (c) 2012, Sjukvardsradgivningen. All rights reserved. This 
+	library is free software; you can redistribute it and/or modify it under 
+	the terms of the GNU Lesser General Public License as published by the Free 
+	Software Foundation; either version 2.1 of the License, or (at your option) 
+	any later version. This library is distributed in the hope that it will be 
+	useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+	or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+	for more details. You should have received a copy of the GNU Lesser General 
+	Public License along with this library; if not, write to the Free Software 
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 
+	USA -->
 <!-- Invokes active monitoring endpoints, to check if the producer is up 
 	and running -->
 <mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -41,22 +32,19 @@
 		<custom-transformer
 			class="se.skl.tp.vp.supervisor.transformer.PingForConfigurationTypeTransformer" />
 
-		<https:outbound-endpoint 
-	            connector-ref="soitoolkit-https-connector"
-				address="https://#[header:INBOUND:host]#[header:INBOUND:port]#[header:INBOUND:path]"
-				exchange-pattern="request-response"
-				responseTimeout="${SERVICE_TIMEOUT_MS}"
-				transformer-refs="createCorrId monitorLogRequest"
-				responseTransformer-refs="exceptionTransformer monitorLogResponse">
-		        <cxf:jaxws-client 
-		        	port="PingForConfigurationResponderPort" 
-		        	operation="PingForConfiguration" 
-		        	clientClass="se.riv.itintegration.monitoring.rivtabp21.v1.PingForConfigurationResponderService"
-		       	/>
+		<cxf:jaxws-client port="PingForConfigurationResponderPort"
+			operation="PingForConfiguration"
+			clientClass="se.riv.itintegration.monitoring.rivtabp21.v1.PingForConfigurationResponderService" />
+
+		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
+			address="https://#[header:INBOUND:host]#[header:INBOUND:port]#[header:INBOUND:path]"
+			exchange-pattern="request-response" responseTimeout="${SERVICE_TIMEOUT_MS}"
+			transformer-refs="createCorrId monitorLogRequest"
+			responseTransformer-refs="exceptionTransformer monitorLogResponse">
 		</https:outbound-endpoint>
 
 		<custom-exception-strategy class="se.skl.tp.vp.util.VPExceptionStrategy">
-			<spring:property name="jaxbContext" ref="jaxbContext"/>
+			<spring:property name="jaxbContext" ref="jaxbContext" />
 		</custom-exception-strategy>
 	</flow>
 
