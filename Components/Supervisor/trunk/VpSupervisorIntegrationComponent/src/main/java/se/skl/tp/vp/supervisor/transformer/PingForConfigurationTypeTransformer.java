@@ -20,7 +20,6 @@ package se.skl.tp.vp.supervisor.transformer;
 
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
-import org.mule.api.transport.PropertyScope;
 import org.mule.transformer.AbstractMessageTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,9 +39,6 @@ public class PingForConfigurationTypeTransformer extends AbstractMessageTransfor
 	@Override
 	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
 		PingForConfigurationType type = new PingForConfigurationType();
-
-		String producerId = message.getProperty("producerId", PropertyScope.INBOUND);
-		message.setProperty("producerId", producerId, PropertyScope.SESSION);
 
 		if (logger.isDebugEnabled()) {
 			log.debug("doTransform(" + message.getClass().getSimpleName() + ", " + encoding + ") returns: " + type);
