@@ -15,7 +15,8 @@ import javax.xml.stream.XMLStreamReader;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.config.i18n.MessageFactory;
-import org.mule.transformer.AbstractMessageAwareTransformer;
+import org.mule.transformer.AbstractMessageTransformer;
+import org.mule.transformer.types.DataTypeFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
@@ -85,18 +86,18 @@ import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 
-public class Vard2FkTransformer extends AbstractMessageAwareTransformer {
+public class Vard2FkTransformer extends AbstractMessageTransformer {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	private static final JaxbUtil jaxbUtil = new JaxbUtil(RegisterMedicalCertificateType.class);
 
 	public Vard2FkTransformer() {
 		super();
-		registerSourceType(Object.class);
-		setReturnClass(Object.class);
+		registerSourceType(DataTypeFactory.create(Object.class));
 	}
 
-	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
+	@Override
+	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
 
 		logger.info("Entering vard2fk register medical certificate transform");
 
@@ -675,7 +676,7 @@ public class Vard2FkTransformer extends AbstractMessageAwareTransformer {
 
 			// Check format of patient id - personnummer valid format is
 			// 19121212-1212 or 19121212+1212
-			if (!Pattern.matches("[0-9]{8}[-+][0-9]{4}", inPersonnummer) ) {
+			if (!Pattern.matches("[0-9]{8}[-+][0-9]{4}", inPersonnummer)) {
 				validationErrors.add("Wrong format for person-id! Valid format is YYYYMMDD-XXXX or YYYYMMDD+XXXX.");
 			}
 
