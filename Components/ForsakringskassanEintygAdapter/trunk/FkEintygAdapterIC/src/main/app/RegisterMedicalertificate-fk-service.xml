@@ -74,4 +74,74 @@
         </response>
 
 	</flow>
+	
+	<flow name="varden-fk-registermedicalcertificate-service-test">
+
+		<https:inbound-endpoint address="${inbound.endpoint.eintyg.registermedicalcertificate.test}"
+			connector-ref="soitoolkit-https-connector" 
+			exchange-pattern="request-response"
+			responseTransformer-refs="logRespOut"
+			transformer-refs="logReqIn changeNamespaceRegisterCertificate">
+		</https:inbound-endpoint>
+
+		<cxf:proxy-service
+			namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20"
+			payload="body" 
+			service="RegisterMedicalCertificateResponderService"
+			wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl" />
+			
+		<custom-transformer doc:name="transform-request" class="se.skl.skltpservices.adapter.fk.regmedcert.Vard2FkTransformer"/>
+			
+		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
+			address="${outbound.endpoint.eintyg.registermedicalcertificate.test}"
+			exchange-pattern="request-response" 
+			responseTimeout="${SERVICE_TIMEOUT_MS}"
+			transformer-refs="logReqOut" 
+			responseTransformer-refs="logRespIn">
+			<cxf:jaxws-client port="TaEmotLakarintygResponderPort"
+				operation="TaEmotLakarintyg"
+				clientClass="se.fk.vardgivare.sjukvard.taemotlakarintyg.v1.rivtabp20.TaEmotLakarintygResponderService"
+				wsdlLocation="classpath:/schemas/fk/TaEmotLakarintygInteraction_1.0_rivtabp20.wsdl" />
+		</https:outbound-endpoint>
+		
+		 <response>
+            <custom-transformer doc:name="transform-response" class="se.skl.skltpservices.adapter.fk.regmedcert.Fk2VardTransformer"/>
+        </response>
+
+	</flow>
+	
+	<flow name="varden-fk-registermedicalcertificate-service-validate">
+
+		<https:inbound-endpoint address="${inbound.endpoint.eintyg.registermedicalcertificate.validate}"
+			connector-ref="soitoolkit-https-connector" 
+			exchange-pattern="request-response"
+			responseTransformer-refs="logRespOut"
+			transformer-refs="logReqIn changeNamespaceRegisterCertificate">
+		</https:inbound-endpoint>
+
+		<cxf:proxy-service
+			namespace="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20"
+			payload="body" 
+			service="RegisterMedicalCertificateResponderService"
+			wsdlLocation="classpath:/schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl" />
+			
+		<custom-transformer doc:name="transform-request" class="se.skl.skltpservices.adapter.fk.regmedcert.Vard2FkTransformer"/>
+			
+		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
+			address="${outbound.endpoint.eintyg.registermedicalcertificate.validate}"
+			exchange-pattern="request-response" 
+			responseTimeout="${SERVICE_TIMEOUT_MS}"
+			transformer-refs="logReqOut" 
+			responseTransformer-refs="logRespIn">
+			<cxf:jaxws-client port="TaEmotLakarintygResponderPort"
+				operation="TaEmotLakarintyg"
+				clientClass="se.fk.vardgivare.sjukvard.taemotlakarintyg.v1.rivtabp20.TaEmotLakarintygResponderService"
+				wsdlLocation="classpath:/schemas/fk/TaEmotLakarintygInteraction_1.0_rivtabp20.wsdl" />
+		</https:outbound-endpoint>
+		
+		 <response>
+            <custom-transformer doc:name="transform-response" class="se.skl.skltpservices.adapter.fk.regmedcert.Fk2VardTransformer"/>
+        </response>
+
+	</flow>
 </mule>
