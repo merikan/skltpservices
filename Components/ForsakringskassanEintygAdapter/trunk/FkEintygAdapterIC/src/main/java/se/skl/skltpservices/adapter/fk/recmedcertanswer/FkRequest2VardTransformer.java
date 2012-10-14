@@ -9,7 +9,8 @@ import javax.xml.stream.XMLStreamReader;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.config.i18n.MessageFactory;
-import org.mule.transformer.AbstractMessageAwareTransformer;
+import org.mule.transformer.AbstractMessageTransformer;
+import org.mule.transformer.types.DataTypeFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
@@ -36,18 +37,18 @@ import se.skl.riv.insuranceprocess.healthreporting.v2.HosPersonalType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.PatientType;
 import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 
-public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer {
+public class FkRequest2VardTransformer extends AbstractMessageTransformer {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	private static final JaxbUtil jaxbUtil = new JaxbUtil(TaEmotSvarType.class);
 
 	public FkRequest2VardTransformer() {
 		super();
-		registerSourceType(Object.class);
-		setReturnClass(Object.class);
+		registerSourceType(DataTypeFactory.create(Object.class));
 	}
 
-	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
+	@Override
+	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
 		XMLStreamReader streamPayload = null;
 
 		logger.info("Entering fk2vard receive medical certificate answer transform");
@@ -268,4 +269,5 @@ public class FkRequest2VardTransformer extends AbstractMessageAwareTransformer {
 			return Amnetyp.OVRIGT;
 		}
 	}
+
 }

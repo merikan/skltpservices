@@ -37,7 +37,7 @@ public class AutosvarAnswer extends Thread {
 				
 		MuleClient client;
 		try {
-			client = new MuleClient();
+			client = new MuleClient(true);
 			
 			AttributedURIType logicalAddressHeader = new AttributedURIType();
 			logicalAddressHeader.setValue("2021005521");
