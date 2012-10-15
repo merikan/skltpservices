@@ -1,4 +1,4 @@
-#Overview of service/message bridges for the service domain crm:scheduling
+#summary of service/message bridges for the service domain crm:scheduling
 
 = Introduction =
 
