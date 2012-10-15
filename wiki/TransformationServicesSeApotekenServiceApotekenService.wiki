@@ -1,10 +1,20 @@
 #summary Transformation services for Apotekens Service
 
-<wiki:toc max_depth="3" />
-
 = Introduction =
 
-=Installation instructions=
+=Installation instructions mule 2.2.8=
+
+==Runtime environment==
+
+==Download distribution==
+
+==Build from source==
+
+==Deploy/Undeploy distribution==
+
+==Configuration==
+
+=Installation instructions mule 3.3.x=
 
 ==Runtime environment==
 
