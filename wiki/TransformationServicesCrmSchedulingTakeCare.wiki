@@ -1,0 +1,75 @@
+Service bridge between TakeCare and RIV
+
+<wiki:toc max_depth="3" />
+
+= Introduction =
+
+Mule flow...
+
+=Installation instructions=
+
+In this instruction `<MULE_HOME>` refers to the place where Mule is installed.
+
+==Runtime environment==
+
+  * `Java(TM) SE Runtime Environment (build 1.6.0_33)`
+  * `Mule ESB 3.2.1`
+  * `ActiveMQ 5.4 (5.x)`
+
+==Download distribution==
+
+Download the latest distribution from xxx.
+
+==Build from source==
+
+Checkout the source code from xxx and build with yyy
+
+==Deploy/Undeploy distribution==
+
+Drop the distribution ZIP file into `<MULE_HOME>`/apps folder. Mule unpack and deploy the app. Check the logfiles `<MULE_HOME>`/logs to verify no errors occurred during deploy.
+
+To undeploy just remove the file named xxx-anchor.txt and Mule will remove the app.
+
+==Configuration==
+
+To change the default settings for `TakeCare` crm:scheduling service bridge put a file with name _`TakeCareIntegrationComponent-config-override.properties`_ in the classpath (`<MULE_HOME>/conf`). 
+
+===SSL/TLS settings===
+
+|| *Key* || *Default value if applicable* || *Description* ||
+|| SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE || || Repository of security certificates used in SSL communication  ||
+|| SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE_PASSWORD ||  ||  ||
+|| SOITOOLKIT_MULE_HTTPS_TLS_KEY_PASSWORD ||  ||  ||
+|| SOITOOLKIT_MULE_HTTPS_TLS_KEY_TYPE ||  ||  ||
+|| SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE ||  ||  ||
+|| SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_PASSWORD ||  ||  ||
+|| SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_REQUIRE_CLIENT_AUTH ||  ||  ||
+|| SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_REQUIRE_CLIENT_AUTH || || || 
+|| SOITOOLKIT_MULE_HTTPS_CLIENT_SO_TIMEOUT || || || 
+
+===Service settings===
+
+|| *Key* || *Default value if applicable* || *Description* ||
+|| SERVICE_TIMEOUT_MS || 8000 ms (8 sec) || Timeout for synchronous services ||
+
+*INBOUND_URL* is the URL where the `TakeCare` crm:scheduling servicebridge accepts incoming requests.
+
+*OUTBOUND_URL* is the URL where `TakeCare` system accepts incoming requests.
+
+|| *Key* || *Default value if applicable* || *Description* ||
+|| GETALLTIMETYPES_INBOUND_URL || `http://localhost:8081/servicebridge/GetAllTimeTypes/1/rivtabp20`  ||  ||
+|| GETALLTIMETYPES_OUTBOUND_URL ||  ||  ||
+|| GETSUBJECTOFCARESCHEDULE_INBOUND_URL || `http://localhost:8081/servicebridge/GetSubjectOfCareSchedule/1/rivtabp20` ||  ||
+|| GETSUBJECTOFCARESCHEDULE_OUTBOUND_URL ||  ||  ||
+|| GETBOOKINGDETAILS_INBOUND_URL ||  `http://localhost:8081/servicebridge/GetBookingDetails/1/rivtabp20` || ||
+|| GETBOOKINGDETAILS_OUTBOUND_URL ||  ||  ||
+|| MAKEBOOKING_INBOUND_URL || `http://localhost:8081/servicebridge/MakeBooking/1/rivtabp20` || ||
+|| MAKEBOOKING_OUTBOUND_URL ||  ||  ||
+|| CANCELBOOKING_INBOUND_URL || `http://localhost:8081/servicebridge/CancelBooking/1/rivtabp20` || ||
+|| CANCELBOOKING_OUTBOUND_URL ||  ||  ||
+|| GETAVAILABLEDATES_INBOUND_URL || `http://localhost:8081/servicebridge/GetAvailableDates/1/rivtabp20` ||  ||
+|| GETAVAILABLEDATES_OUTBOUND_URL ||  ||  ||
+|| GETAVAILABLETIMESLOTS_INBOUND_URL || `http://localhost:8081/servicebridge/GetAvailableTimeslots/1/rivtabp20` ||  ||
+|| GETAVAILABLETIMESLOTS_OUTBOUND_URL ||  ||  ||
+|| UPDATEBOOKING_INBOUND_URL || `http://localhost:8081/servicebridge/UpdateBooking/1/rivtabp20` ||  ||
+|| UPDATEBOOKING_OUTBOUND_URL ||  ||  ||
