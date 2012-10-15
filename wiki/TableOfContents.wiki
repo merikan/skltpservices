@@ -8,6 +8,7 @@ SKL TP Services
      * [Tools Generate virtual services for Service platform] 
   * [TransformationServices Transformation services] 
     * [TransformationServicesClinicalprocessRequestworkflow	 clinicalprocess:requestworkflow]
+    * [TransformationServicesCrmListing crm:listing]
     * [TransformationServicesCrmScheduling crm:scheduling]
       * [TransformationServicesCrmSchedulingTakeCare TakeCare]
     * [TransformationServicesInsuranceprocessHealthreporting insuranceprocess:healthreporting]
