@@ -1,5 +1,7 @@
 #summary Transformation services for Apotekens Service
 
+<wiki:toc max_depth="3" />
+
 = Introduction =
 
 =Installation instructions mule 2.2.8=
