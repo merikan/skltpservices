@@ -1,4 +1,4 @@
-Service bridge between TakeCare and RIV
+#summary Transformation services for Apotekens Service
 
 <wiki:toc max_depth="3" />
 
