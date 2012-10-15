@@ -11,6 +11,7 @@ SKL TP Services
     * [TransformationServicesCrmScheduling crm:scheduling]
       * [TransformationServicesCrmSchedulingTakeCare TakeCare]
     * [TransformationServicesInsuranceprocessHealthreporting insuranceprocess:healthreporting]
+      * [TransformationServicesInsuranceprocessHealthreportingFK Försäkringskassan]
     * [TransformationServicesSeApotekenService se_apotekensservice (AXS, etc)]
       * [TransformationServicesSeApotekenServiceApotekenService Apotekens Service]
 
