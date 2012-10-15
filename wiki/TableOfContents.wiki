@@ -12,6 +12,6 @@ SKL TP Services
       * [TransformationServicesCrmSchedulingTakeCare TakeCare]
     * [TransformationServicesInsuranceprocessHealthreporting insuranceprocess:healthreporting]
     * [TransformationServicesSeApotekenService se_apotekensservice (AXS, EXPO etc)]
-      * [TransformationServicesSeApotekenService Apotekens Service]
+      * [TransformationServicesSeApotekenServiceApotekenService Apotekens Service]
 
   * [FAQ FAQ]
