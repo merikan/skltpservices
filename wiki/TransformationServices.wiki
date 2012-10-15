@@ -8,6 +8,6 @@ Transformation services is a...
 
   * [HowToDeployTransformationServices How to deploy]
 
-  * [servicebridge_crm_scheduling crm:scheduling]
-  * [servicebridge_clinicalprocess_requestworkflow clinicalprocess:requestworkflow]
-  * [servicebridge_insuranceprocess_healthreporting insuranceprocess:healthreporting]
+  * [TransformationServicesCrmScheduling crm:scheduling]
+  * [TransformationServicesClinicalprocessRequestworkflow	 clinicalprocess:requestworkflow]
+  * [TransformationServicesInsuranceprocessHealthreporting insuranceprocess:healthreporting]
