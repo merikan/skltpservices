@@ -9,6 +9,7 @@ SKL TP Services
   * [TransformationServices Transformation services] 
     * [TransformationServicesClinicalprocessRequestworkflow	 clinicalprocess:requestworkflow]
     * [TransformationServicesCrmListing crm:listing]
+      * [TransformationServicesCrmListingHval HVAL24]
     * [TransformationServicesCrmScheduling crm:scheduling]
       * [TransformationServicesCrmSchedulingTakeCare TakeCare]
     * [TransformationServicesInsuranceprocessHealthreporting insuranceprocess:healthreporting]
