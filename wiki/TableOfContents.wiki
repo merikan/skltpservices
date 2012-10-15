@@ -8,4 +8,8 @@ SKL TP Services
      * [Tools Generate virtual services for Service platform] 
   * [TransformationServices Transformation services] 
      * [HowToDeployTransformationServices How to deploy]
+     * [servicebridge_crm_scheduling crm:scheduling]
+     * [servicebridge_clinicalprocess_requestworkflow clinicalprocess:requestworkflow]
+     * [servicebridge_insuranceprocess_healthreporting insuranceprocess:healthreporting]
+
   * [FAQ FAQ]
