@@ -1,10 +1,9 @@
-#summary of service/message bridges for the service domain crm:scheduling
+#summary Transformation services for crm:scheduling
 
 = Introduction =
 
 Add your content here.
 
-
 = Details =
 
-[servicebridge_crm_scheduling_TakeCare] Service bridge between TakeCare and RIV
+[TransformationServicesCrmSchedulingTakeCare] Transformation between TakeCare and RIV
