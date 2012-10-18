@@ -33,6 +33,10 @@
 		<artifactId>ForsakringskassanEintygAdapter</artifactId>
 		<version>1.6.0-SNAPSHOT</version>
 	</parent>
+	
+	<properties>
+		<cxf.version>2.5.0</cxf.version>
+	</properties>
 
 	<modules>
 		<module>Test-producer</module>

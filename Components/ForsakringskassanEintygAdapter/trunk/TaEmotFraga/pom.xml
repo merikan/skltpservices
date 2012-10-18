@@ -28,6 +28,10 @@
  	<name>${project.artifactId}</name>
 	<url>http://maven.apache.org</url>
 	
+	<properties>
+		<cxf.version>2.5.0</cxf.version>
+	</properties>
+	
 	<parent>
 		<groupId>se.skl.skltpservices.fk</groupId>
 		<artifactId>ForsakringskassanEintygAdapter</artifactId>
