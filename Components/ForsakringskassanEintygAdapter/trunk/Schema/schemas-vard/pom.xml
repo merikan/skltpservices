@@ -1,48 +1,28 @@
 <?xml version="1.0"?>
-<!--
- * Copyright 2009 Sjukvardsradgivningen
- *
- *   This library is free software; you can redistribute it and/or modify
- *   it under the terms of version 2.1 of the GNU Lesser General Public
-
- *   License as published by the Free Software Foundation.
- *
- *   This library is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
- *   GNU Lesser General Public License for more details.
- *
- *   You should have received a copy of the GNU Lesser General Public
- *   License along with this library; if not, write to the
- *   Free Software Foundation, Inc., 59 Temple Place, Suite 330,
-
- *   Boston, MA 02111-1307  USA
- -->
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.riv.fk</groupId>
 	<artifactId>insuranceprocess-healthreporting-schemas</artifactId>
 	<name>insuranceprocess-healthreporting-schemas</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<parent>
-  		<groupId>se.skl.tp</groupId>
-  		<artifactId>Schemas</artifactId>
-  		<version>1.6.0-SNAPSHOT</version>
-   </parent>
+		<groupId>se.skl.tp</groupId>
+		<artifactId>Schemas</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
+	</parent>
 
 	<properties>
 		<schema.path>interactions</schema.path>
 		<project.build.sourceEncoding />
 		<project.reporting.outputEncoding />
 	</properties>
- 
+
 	<build>
 		<plugins>
-            <plugin>
+			<plugin>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-codegen-plugin</artifactId>
 				<executions>
@@ -52,7 +32,7 @@
 						<configuration>
 							<sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
 							<wsdlOptions>
-									
+
 								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
@@ -84,7 +64,7 @@
 									</extraargs>
 									<wsdl>${schema.path}/ReceiveMedicalCertificateAnswerInteraction/ReceiveMedicalCertificateAnswerInteraction_1.0_rivtabp20.wsdl</wsdl>
 								</wsdlOption>
-								
+
 								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
@@ -116,7 +96,7 @@
 									</extraargs>
 									<wsdl>${schema.path}/ReceiveMedicalCertificateQuestionInteraction/ReceiveMedicalCertificateQuestionInteraction_1.0_rivtabp20.wsdl</wsdl>
 								</wsdlOption>
-								
+
 								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
@@ -148,7 +128,7 @@
 									</extraargs>
 									<wsdl>${schema.path}/SendMedicalCertificateAnswerInteraction/SendMedicalCertificateAnswerInteraction_1.0_rivtabp20.wsdl</wsdl>
 								</wsdlOption>
-								
+
 								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
@@ -180,7 +160,7 @@
 									</extraargs>
 									<wsdl>${schema.path}/SendMedicalCertificateQuestionInteraction/SendMedicalCertificateQuestionInteraction_1.0_rivtabp20.wsdl</wsdl>
 								</wsdlOption>
-								
+
 								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
@@ -312,7 +292,7 @@
 									</extraargs>
 									<wsdl>${schema.path}/DeleteAnswersInteraction/DeleteAnswersInteraction_1.0_rivtabp20.wsdl</wsdl>
 								</wsdlOption>
-								
+
 								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
@@ -346,7 +326,7 @@
 									</extraargs>
 									<wsdl>${schema.path}/DeleteQuestionsInteraction/DeleteQuestionsInteraction_1.0_rivtabp20.wsdl</wsdl>
 								</wsdlOption>
-								
+
 							</wsdlOptions>
 						</configuration>
 						<goals>
@@ -355,8 +335,13 @@
 					</execution>
 				</executions>
 			</plugin>
-									
+
 		</plugins>
+		<resources>
+			<resource>
+				<directory>${schema.path}</directory>
+			</resource>
+		</resources>
 	</build>
 
 </project>
