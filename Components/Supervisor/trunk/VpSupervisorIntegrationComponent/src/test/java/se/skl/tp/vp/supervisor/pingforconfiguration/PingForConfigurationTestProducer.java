@@ -25,6 +25,7 @@ import javax.jws.WebService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
 import se.riv.itintegration.monitoring.rivtabp21.v1.PingForConfigurationResponderInterface;
 import se.riv.itintegration.monitoring.v1.ConfigurationType;
@@ -34,12 +35,36 @@ import se.riv.itintegration.monitoring.v1.PingForConfigurationType;
 @WebService(portName = "PingForConfigurationResponderPort", name = "PingForConfigurationResponderPort", targetNamespace = "urn:riv:itintegration:monitoring:PingForConfigurationResponder:1")
 public class PingForConfigurationTestProducer implements PingForConfigurationResponderInterface {
 
+	public static final String TEST_ID_FAULT_TIMEOUT = "0";
+	public static final String TEST_ID_ERROR = "-1";
+	public static final String TEST_ID_OK = "SE165565594230-1000";
+
+	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle(
+			"VpSupervisorIntegrationComponent-config");
+	private static final long SERVICE_TIMOUT_MS = Long.parseLong(rb.getString("SERVICE_TIMEOUT_MS"));
+
 	private static final Logger logger = LoggerFactory.getLogger(PingForConfigurationTestProducer.class);
 
 	public PingForConfigurationResponseType pingForConfiguration(String logicalAddress,
 			PingForConfigurationType parameters) {
 
 		logger.info("pingForConfiguration({},{})", logicalAddress, parameters);
+		logger.debug("Ping for configuration, logical adress: {}", parameters.getLogicalAddress());
+		logger.debug("Ping for configuration, servicecontract namespace: {}", parameters.getServiceContractNamespace());
+
+		String id = parameters.getLogicalAddress();
+
+		if (TEST_ID_ERROR.equals(id)) {
+			throw new RuntimeException("Exception logical adress was found, return RuntimeException");
+		}
+
+		// Force a timeout if zero logicalAddress
+		if (TEST_ID_FAULT_TIMEOUT.equals(id)) {
+			try {
+				Thread.sleep(SERVICE_TIMOUT_MS + 1000);
+			} catch (InterruptedException e) {
+			}
+		}
 
 		PingForConfigurationResponseType configurationResponseType = new PingForConfigurationResponseType();
 		configurationResponseType.setPingDateTime(new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()));
@@ -47,6 +72,7 @@ public class PingForConfigurationTestProducer implements PingForConfigurationRes
 
 		configurationResponseType.getConfiguration().add(createConfigurationType("Testproducer", "true"));
 		configurationResponseType.getConfiguration().add(createConfigurationType("Anothervalue", "yes another value"));
+
 		return configurationResponseType;
 	}
 
