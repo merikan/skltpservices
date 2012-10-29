@@ -29,11 +29,12 @@
 
 	<modules>
 		<module>GetListing</module>
+		<module>Schema</module>
 	</modules>
 
 	<scm>
-		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/crm/carelisting/hval24/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/bridgedinteractions/crm/carelisting/hval24/trunk</developerConnection>
+		<connection>http://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/trunk</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/trunk</developerConnection>
 	</scm>
 	
 	<repositories>
@@ -130,7 +131,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.2.1</version>
 				<configuration>
-					<tagBase>https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/insuranceprocess/healthreporting/tags</tagBase>
+					<tagBase>https://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/tags</tagBase>
 				</configuration>
 			</plugin>
 			<!-- Use Java 1.6 for source and target files -->
