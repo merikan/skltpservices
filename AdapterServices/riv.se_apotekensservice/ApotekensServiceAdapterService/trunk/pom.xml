@@ -34,7 +34,6 @@
 
 	<modules>
 		<module>ApSeMedicalServicesAdapterIC</module>
-		<module>TicketMachine</module>
 	</modules>
 
 	<dependencyManagement>
@@ -76,7 +75,7 @@
 			<dependency>
 				<groupId>se.inera.pascal.ticket</groupId>
 				<artifactId>TicketMachine</artifactId>
-				<version>${project.version}</version>
+				<version>1.0.0</version>
 			</dependency>
 
 			<!-- soi toolkit dependencies -->
@@ -95,10 +94,9 @@
 
 			<dependency>
 				<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
-				<artifactId>soitoolkit-mule-dependencies</artifactId>
+				<artifactId>soitoolkit-mule-2.2.8-dependencies</artifactId>
 				<version>${soitoolkit.version}</version>
 			</dependency>
-
 
 			<!-- Mule dependencies -->
 
@@ -107,78 +105,7 @@
 				<artifactId>mule-core</artifactId>
 				<version>${mule.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.mule.modules</groupId>
-				<artifactId>mule-module-spring-config</artifactId>
-				<version>${mule.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mule.modules</groupId>
-				<artifactId>mule-module-scripting</artifactId>
-				<version>${mule.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mule.modules</groupId>
-				<artifactId>mule-module-xml</artifactId>
-				<version>${mule.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mule.modules</groupId>
-				<artifactId>mule-module-client</artifactId>
-				<version>${mule.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mule.tests</groupId>
-				<artifactId>mule-tests-functional</artifactId>
-				<version>${mule.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mule.transports</groupId>
-				<artifactId>mule-transport-vm</artifactId>
-				<version>${mule.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mule.transports</groupId>
-				<artifactId>mule-transport-http</artifactId>
-				<version>${mule.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mule.transports</groupId>
-				<artifactId>mule-transport-cxf</artifactId>
-				<version>${mule.version}</version>
-			</dependency>
-
-			<!-- cxf -->
-
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-frontend-jaxws</artifactId>
-				<version>${cxf.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-transports-http</artifactId>
-				<version>${cxf.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-transports-http-jetty</artifactId>
-				<version>${cxf.version}</version>
-			</dependency>
-
-			<!-- Spring -->
-
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-context</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-web</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-
+			
 			<!-- log4j -->
 
 			<dependency>
