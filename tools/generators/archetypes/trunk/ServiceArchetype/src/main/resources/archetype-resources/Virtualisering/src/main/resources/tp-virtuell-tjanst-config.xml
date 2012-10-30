@@ -24,9 +24,9 @@
 
 	<!-- Name of this file is mandatory and may not be changed. -->
 
-	<model name="Get-${serviceMethod}-model">
+	<model name="${domainName}-${domainSubName}-${serviceInteraction}-virtualisering-model">
 
-		<service name="Get-${serviceMethod}-service">
+		<service name="${domainName}-${domainSubName}-${serviceInteraction}-virtualisering-service">
 			<inbound>
 				<cxf:inbound-endpoint
 					address="https://${tp.host}:${tp.port}/${tp.baseUri}/${serviceRelativePath}"
