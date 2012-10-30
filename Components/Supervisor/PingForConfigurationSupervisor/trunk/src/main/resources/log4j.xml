@@ -80,12 +80,8 @@
 	<logger name="org.soitoolkit.commons">
 		<level value="INFO" />
 	</logger>
-	
-	<logger name="se.skl.tp.vp.util.MonitorLogTransformer">
-		<level value="DEBUG" />
-	</logger>
-	
-	<logger name="se.skl.tp">
+		
+	<logger name="se.skl.tp.vp">
 		<level value="DEBUG" />
 	</logger>
 	
@@ -96,7 +92,7 @@
 	
 	<root>
 		<priority value="INFO" />
-		<appender-ref ref="CONSOLE" />
-		<!-- <appender-ref ref="ROLLINGFILE"/> -->
+		<!-- <appender-ref ref="CONSOLE" /> -->
+		<appender-ref ref="ROLLINGFILE"/>
 	</root>
 </log4j:configuration>
