@@ -144,9 +144,6 @@
     <!-- TODO: Add global definitions here -->
 
 	<configuration>
-		<default-dispatcher-threading-profile
-			maxThreadsActive="${FK_DISPATCH_MAX_THREADS_ACTIVE}" maxThreadsIdle="${FK_DISPATCH_MAX_THREADS_IDLE}"
-			threadTTL="${FK_DISPATCH_MAX_THREADS_TTL}" />
 		<default-receiver-threading-profile
 			maxThreadsActive="${FK_RECEIVE_MAX_THREADS_ACTIVE}" maxThreadsIdle="${FK_RECEIVE_MAX_THREADS_IDLE}"
 			threadTTL="${FK_RECEIVE_MAX_THREADS_TTL}" />
