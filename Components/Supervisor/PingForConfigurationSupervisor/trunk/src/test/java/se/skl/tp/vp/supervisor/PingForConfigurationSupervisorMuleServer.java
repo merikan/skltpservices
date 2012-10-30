@@ -25,17 +25,17 @@ import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class VpSupervisorMuleServer {
+public class PingForConfigurationSupervisorMuleServer {
 
-	public static final String MULE_SERVER_ID = "EIPullIC";
+	public static final String MULE_SERVER_ID = "PingForConfigurationSupervisorServer";
 
-	private static final Logger logger = LoggerFactory.getLogger(VpSupervisorMuleServer.class);
+	private static final Logger logger = LoggerFactory.getLogger(PingForConfigurationSupervisorMuleServer.class);
 	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle(
-			"VpSupervisorIntegrationComponent-config");
+			"PingForConfigurationSupervisor-config");
 
 	public static void main(String[] args) throws Exception {
 
-		StandaloneMuleServer muleServer = new StandaloneMuleServer(MULE_SERVER_ID, "VpSupervisorIntegrationComponent-teststubs-and-services-config.xml", true);
+		StandaloneMuleServer muleServer = new StandaloneMuleServer(MULE_SERVER_ID, "PingForConfigurationSupervisor-teststubs-and-services-config.xml", true);
 
 		muleServer.run();
 	}
