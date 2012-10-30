@@ -63,3 +63,28 @@ Script is based on the [http://rivta.googlecode.com/svn/wiki/specs/RIV_Tekniska_
 {{{ 
  $mvn clean install
 }}}
+
+==Trouble running scrip ==
+
+===Script hangs on mvn archetype:generate ===
+
+Run the mvn archetype:generate command manually to download dependencies needed by the script. When dependencies are downloaded try running the script again.
+
+{{{
+mvn archetype:generate 
+		-DinteractiveMode=false 
+		-DarchetypeArtifactId=service-archetype 
+		-DarchetypeGroupId=se.skl.tp.archetype 
+		-DarchetypeVersion=1.0-SNAPSHOT 
+		-Duser.dir=.
+		-DgroupId=se.skl.skltpservices.itintegration.engagementindex
+		-DartifactId=FindContent 
+		-Dversion=1.0
+		-DdomainName=itintegration 
+		-DdomainSubName=engagementindex 
+		-DserviceMethod=FindContent 
+		-DserviceInteraction=FindContentInteraction  
+		-DserviceRelativePath=FindContent/1/rivtabp21 
+		-DserviceWsdlFile=FindContentInteraction_1.0_RIVTABP21.wsdl 
+		-DserviceNamespace=urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21
+}}}
