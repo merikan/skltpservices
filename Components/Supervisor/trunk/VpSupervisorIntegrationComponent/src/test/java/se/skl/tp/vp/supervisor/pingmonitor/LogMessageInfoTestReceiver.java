@@ -22,11 +22,11 @@ package se.skl.tp.vp.supervisor.pingmonitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ActiveMonitorTestReceiver {
+public class LogMessageInfoTestReceiver {
 
-	private static final Logger log = LoggerFactory.getLogger(ActiveMonitorTestReceiver.class);
+	private static final Logger log = LoggerFactory.getLogger(LogMessageInfoTestReceiver.class);
 
 	public void process(Object message) {
-		log.info("ActiveMonitorTestReceiver received the message: {}", message);
+		log.info("LogMessageInfoTestReceiver received the message: {}", message);
 	}
 }
