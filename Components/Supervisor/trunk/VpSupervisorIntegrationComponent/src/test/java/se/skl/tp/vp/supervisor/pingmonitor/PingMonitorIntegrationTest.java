@@ -58,8 +58,8 @@ public class PingMonitorIntegrationTest extends AbstractTestCase {
 		return "soitoolkit-mule-jms-connector-activemq-embedded.xml," +
 
 		"soitoolkit-mule-jdbc-datasource-hsql-embedded.xml," + "VpSupervisorIntegrationComponent-common.xml,"
-				+ "VpSupervisorIntegrationComponent-integrationtests-common.xml," + "pingMonitor-service.xml,"
-				+ "teststub-services/PingMonitor-teststub-service.xml,"
+				+ "VpSupervisorIntegrationComponent-integrationtests-common.xml," + "PingForConfigurationMonitor-service.xml,"
+				+ "teststub-services/LogEventMonitor-teststub-service.xml,"
 				+ "teststub-services/PingForConfiguration-testproducer-teststub-service.xml";
 	}
 
@@ -103,7 +103,7 @@ public class PingMonitorIntegrationTest extends AbstractTestCase {
 		props.put("producerId", "kalle");
 
 		final String inputFile = "src/test/resources/testfiles/pingMonitorInput.txt";
-		String receivingService = "ActiveMonitor-teststub-service";
+		String receivingService = "LogEventInfo-teststub-service";
 
 		final int timeout = 5000;
 

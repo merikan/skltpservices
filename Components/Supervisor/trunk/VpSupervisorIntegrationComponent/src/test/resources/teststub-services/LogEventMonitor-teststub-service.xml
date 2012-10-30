@@ -35,9 +35,15 @@
 		http://www.mulesoft.org/schema/mule/jms     http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
 	">
 	
-	<flow name="ActiveMonitor-teststub-service">
+	<flow name="LogEventInfo-teststub-service">
 		<inbound-endpoint address="jms://SOITOOLKIT.LOG.INFO" />
 		<component
-			class="se.skl.tp.vp.supervisor.pingmonitor.ActiveMonitorTestReceiver" />
+			class="se.skl.tp.vp.supervisor.pingmonitor.LogMessageInfoTestReceiver" />
+	</flow>
+	
+	<flow name="LogEventError-teststub-service">
+		<inbound-endpoint address="jms://SOITOOLKIT.LOG.ERROR" />
+		<component
+			class="se.skl.tp.vp.supervisor.pingmonitor.LogMessageErrorTestReceiver" />
 	</flow>
 </mule>
