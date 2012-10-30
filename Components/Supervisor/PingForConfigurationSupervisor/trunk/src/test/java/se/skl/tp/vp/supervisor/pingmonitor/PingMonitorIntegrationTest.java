@@ -43,7 +43,7 @@ public class PingMonitorIntegrationTest extends AbstractTestCase {
 
 	private static final Logger log = LoggerFactory.getLogger(PingMonitorIntegrationTest.class);
 	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle(
-			"VpSupervisorIntegrationComponent-config");
+			"PingForConfigurationSupervisor-config");
 
 	private static final String IN_VM_QUEUE = rb.getString("ACTIVELOGTRIGGER_OUT_VM_QUEUE");
 
@@ -57,8 +57,9 @@ public class PingMonitorIntegrationTest extends AbstractTestCase {
 	protected String getConfigResources() {
 		return "soitoolkit-mule-jms-connector-activemq-embedded.xml," +
 
-		"soitoolkit-mule-jdbc-datasource-hsql-embedded.xml," + "VpSupervisorIntegrationComponent-common.xml,"
-				+ "VpSupervisorIntegrationComponent-integrationtests-common.xml," + "PingForConfigurationMonitor-service.xml,"
+		"soitoolkit-mule-jdbc-datasource-hsql-embedded.xml," + "PingForConfigurationSupervisor-common.xml,"
+				+ "PingForConfigurationSupervisor-integrationtests-common.xml,"
+				+ "PingForConfigurationMonitor-service.xml,"
 				+ "teststub-services/LogEventMonitor-teststub-service.xml,"
 				+ "teststub-services/PingForConfiguration-testproducer-teststub-service.xml";
 	}
@@ -117,9 +118,11 @@ public class PingMonitorIntegrationTest extends AbstractTestCase {
 		MuleMessage reply = dispatchAndWaitForServiceComponent(inboundEndpoint, input, props, receivingService, timeout);
 
 		String payload = (String) reply.getPayload();
-		
+
 		assertEquals(true, payload.contains("<extraInfo><name>producerId</name><value>kalle</value></extraInfo>"));
-		assertEquals(true, payload.contains("<extraInfo><name>source</name><value>se.skl.tp.vp.util.MonitorLogTransformer</value></extraInfo>"));
+		assertEquals(
+				true,
+				payload.contains("<extraInfo><name>source</name><value>se.skl.tp.vp.util.MonitorLogTransformer</value></extraInfo>"));
 		assertEquals(false, payload.contains("<payload>org.mule.module.cxf.transport.MuleUniversalConduit"));
 
 		// Verify error-queue

@@ -73,8 +73,8 @@
     <spring:property name="ignoreResourceNotFound" value="true"/>
     <spring:property name="locations">
       <spring:list>
-        <spring:value>classpath:VpSupervisorIntegrationComponent-config.properties</spring:value>
-        <spring:value>classpath:VpSupervisorIntegrationComponent-config-override.properties</spring:value>
+        <spring:value>classpath:PingForConfigurationSupervisor-config.properties</spring:value>
+        <spring:value>classpath:PingForConfigurationSupervisor-config-override.properties</spring:value>
       </spring:list>
     </spring:property>
   </spring:bean>

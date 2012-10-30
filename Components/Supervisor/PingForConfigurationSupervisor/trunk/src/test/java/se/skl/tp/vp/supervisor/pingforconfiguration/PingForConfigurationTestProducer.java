@@ -40,7 +40,7 @@ public class PingForConfigurationTestProducer implements PingForConfigurationRes
 	public static final String TEST_ID_OK = "SE165565594230-1000";
 
 	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle(
-			"VpSupervisorIntegrationComponent-config");
+			"PingForConfigurationSupervisor-config");
 	private static final long SERVICE_TIMOUT_MS = Long.parseLong(rb.getString("SERVICE_TIMEOUT_MS"));
 
 	private static final Logger logger = LoggerFactory.getLogger(PingForConfigurationTestProducer.class);
