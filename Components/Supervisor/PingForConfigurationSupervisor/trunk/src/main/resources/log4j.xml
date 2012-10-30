@@ -31,7 +31,7 @@
 	</appender>
 
     <appender name="ROLLINGFILE" class="org.apache.log4j.RollingFileAppender">
-        <param name="file" value="${mule.home}/logs/mule-app-VpSupervisorIntegrationComponent.log" />
+        <param name="file" value="${mule.home}/logs/mule-app-PingForConfigurationSupervisor.log" />
         <param name="MaxFileSize" value="1000KB" />
         <param name="MaxBackupIndex" value="3" />
         <layout class="org.apache.log4j.PatternLayout">
@@ -81,7 +81,15 @@
 		<level value="INFO" />
 	</logger>
 		
-	<logger name="se.skl.tp.vp">
+	<logger name="se.skl.tp.vp.util">
+		<level value="DEBUG" />
+	</logger>
+	
+	<logger name="se.skl.tp.vp.supervisor.transformer">
+		<level value="DEBUG" />
+	</logger>
+	
+	<logger name="se.skl.tp.vp.vagvalrouter">
 		<level value="DEBUG" />
 	</logger>
 	
