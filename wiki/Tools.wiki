@@ -19,7 +19,7 @@ Java is installed and JAVA_HOME is set in environment.
 
 Requires [http://groovy.codehaus.org/ groovy]  1.8 or newer. [http://groovy.codehaus.org/Installing+Groovy See groovy installation instructions]
 
-Requires |http://maven.apache.org/ Maven] 3.0 or newer.
+Requires [http://maven.apache.org/ Maven] 3.0 or newer.
 
 You need to install Maven service archetype in order to run the script
 
