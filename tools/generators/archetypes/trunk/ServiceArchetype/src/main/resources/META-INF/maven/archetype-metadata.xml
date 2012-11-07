@@ -11,6 +11,9 @@
 		<requiredProperty key="serviceMethod">
 			<defaultValue>${artifactId}</defaultValue>
 		</requiredProperty>
+		<requiredProperty key="serviceWsdlFileDir">
+			<defaultValue>${serviceWsdlFileDir}</defaultValue>
+		</requiredProperty>
 		<requiredProperty key="serviceInteraction">
 			<defaultValue>${serviceMethod}Interaction</defaultValue>
 		</requiredProperty>
