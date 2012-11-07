@@ -34,7 +34,7 @@
             namespace="${serviceNamespace}"
             payload="envelope"
             service="${serviceMethod}ResponderService"
-            wsdlLocation="classpath:/schemas/interactions/${serviceInteraction}/${serviceWsdlFile}" />
+            wsdlLocation="${serviceWsdlFileDir}" />
 
         <flow-ref name="vagval-dynamic-routing-flow" />
     </flow>
