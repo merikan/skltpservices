@@ -28,8 +28,6 @@
   <name>domain-subdomain</name>
 
   <properties>
-	<cxf.version>2.2.12</cxf.version>
-	<spring.version>3.0.5</spring.version>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
@@ -37,21 +35,9 @@
   <!-- Modules to be created for each service -->
   <modules>
   </modules>
-  
-  	<scm>
-		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/domain/subdomain/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/domain/subdomain/trunk</developerConnection>
-	</scm>
 	
 	<build>
 		<plugins>
-			  <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.2.1</version>
-                <configuration>
-                    <tagBase>https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/domain/subdomain/tags</tagBase>
-                </configuration>
-            </plugin> 
   			<plugin>
   				<groupId>org.apache.maven.plugins</groupId>
   				<artifactId>maven-compiler-plugin</artifactId>
