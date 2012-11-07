@@ -60,6 +60,7 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 
 	serviceInteractionDirectories.each { serviceInteractionDirectory ->
 
+		def (name, schemaDir) = serviceInteractionDirectory.parent.split("schemas")	
 		def artifactId = serviceInteractionDirectory.name - 'Interaction'
 		def schemasFiles = getAllFilesMatching(serviceInteractionDirectory, /.*\.wsdl/)
 		
@@ -75,8 +76,7 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 		
 		def wsdlFileName = schemasFiles[0].name
 	
-		def version = '1.0'
-		
+		def version = '2.0'
 		
 		def mvnCommand = """mvn archetype:generate 
 		-DinteractiveMode=false 
@@ -90,11 +90,12 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 		-DdomainName=${maindomain} 
 		-DdomainSubName=${subdomain} 
 		-DserviceMethod=${artifactId} 
+		-DserviceWsdlFileDir=classpath:/schemas$schemaDir/${artifactId}Interaction/${wsdlFileName}
 		-DserviceInteraction=${artifactId}Interaction  
 		-DserviceRelativePath=${artifactId}/${serviceVersion}/${rivtaVersion} 
-		-DserviceWsdlFile=${wsdlFileName} 
 		-DserviceNamespace=${serviceNameSpace}  
 		"""
+		println "$mvnCommand"
 		
 		def process = mvnCommand.execute()
 		process.waitFor()
@@ -109,9 +110,10 @@ def copyServiceSchemas(serviceInteractionDirectories, targetDir){
 	serviceInteractionDirectories.each { serviceInteractionDirectory ->
 		def schemasFiles = getAllFilesMatching(serviceInteractionDirectory, /.*\.xsd|.*\.xml|.*\.wsdl/)
 		
+		def (name, parentDir) = serviceInteractionDirectory.parent.split("schemas")		
 		def serviceInteraction = serviceInteractionDirectory.name
 		def serviceDirectory = serviceInteraction - 'Interaction'
-		def schemaTargetDir = "${targetDir}/${serviceDirectory}/Virtualisering/src/main/resources/schemas/interactions/${serviceInteraction}"
+		def schemaTargetDir = "${targetDir}/${serviceDirectory}/Virtualisering/src/main/resources/schemas/$parentDir/${serviceInteraction}"
 		new File("${schemaTargetDir}").mkdirs()
 		
 		schemasFiles.each {sourceSchemaFile -> 
