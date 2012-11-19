@@ -16,23 +16,17 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package se.skl.tp.vp.supervisor.pingmonitor;
+package se.skl.skltpservices.supervisor.pingmonitor;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.jms.JMSException;
-import javax.sql.DataSource;
 
 import org.junit.Test;
 import org.mule.api.MuleMessage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.soitoolkit.commons.mule.jdbc.JdbcScriptEngine;
-import org.soitoolkit.commons.mule.jdbc.JdbcUtil;
 import org.soitoolkit.commons.mule.test.AbstractJmsTestUtil;
 import org.soitoolkit.commons.mule.test.ActiveMqJmsTestUtil;
 import org.soitoolkit.commons.mule.test.junit4.AbstractTestCase;
@@ -41,7 +35,6 @@ import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
 public class PingMonitorIntegrationTest extends AbstractTestCase {
 
-	private static final Logger log = LoggerFactory.getLogger(PingMonitorIntegrationTest.class);
 	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle(
 			"PingForConfigurationSupervisor-config");
 
@@ -55,9 +48,8 @@ public class PingMonitorIntegrationTest extends AbstractTestCase {
 	}
 
 	protected String getConfigResources() {
-		return "soitoolkit-mule-jms-connector-activemq-embedded.xml," +
-
-		"soitoolkit-mule-jdbc-datasource-hsql-embedded.xml," + "PingForConfigurationSupervisor-common.xml,"
+		return "soitoolkit-mule-jms-connector-activemq-embedded.xml,"
+				+ "PingForConfigurationSupervisor-common.xml,"
 				+ "PingForConfigurationSupervisor-integrationtests-common.xml,"
 				+ "PingForConfigurationMonitor-service.xml,"
 				+ "teststub-services/LogEventMonitor-teststub-service.xml,"
@@ -69,8 +61,6 @@ public class PingMonitorIntegrationTest extends AbstractTestCase {
 		super.doSetUp();
 
 		doSetUpJms();
-
-		doSetUpDb();
 	}
 
 	private void doSetUpJms() {
@@ -78,19 +68,6 @@ public class PingMonitorIntegrationTest extends AbstractTestCase {
 			jmsUtil = new ActiveMqJmsTestUtil();
 		jmsUtil.clearQueues(ERROR_LOG_QUEUE);
 		jmsUtil.clearQueues("SOITOOLKIT.LOG.STORE");
-	}
-
-	private void doSetUpDb() throws FileNotFoundException {
-		DataSource ds = JdbcUtil.lookupDataSource(muleContext, "soitoolkit-jdbc-datasource");
-		JdbcScriptEngine se = new JdbcScriptEngine(ds);
-
-		try {
-			se.execute("src/environment/setup/skltpSupervisor-db-drop-tables.sql");
-		} catch (Throwable ex) {
-			log.warn("Drop db script failed, maybe no db exists? " + ex.getMessage());
-		}
-		se.execute("src/environment/setup/skltpSupervisor-db-create-tables.sql");
-		se.execute("src/environment/setup/skltpSupervisor-db-insert-testdata.sql");
 	}
 
 	@Test
@@ -122,8 +99,9 @@ public class PingMonitorIntegrationTest extends AbstractTestCase {
 		assertEquals(true, payload.contains("<extraInfo><name>producerId</name><value>kalle</value></extraInfo>"));
 		assertEquals(
 				true,
-				payload.contains("<extraInfo><name>source</name><value>se.skl.tp.vp.util.MonitorLogTransformer</value></extraInfo>"));
-		assertEquals(false, payload.contains("<payload>org.mule.module.cxf.transport.MuleUniversalConduit"));
+				payload.contains("<extraInfo><name>source</name><value>se.skl.skltpservices.supervisor.transformer.MonitorLogTransformer</value></extraInfo>"));
+			
+		assertEquals(true, payload.contains("<payload>org.mule.module.cxf.transport.MuleUniversalConduit"));
 
 		// Verify error-queue
 		assertEquals(0, jmsUtil.browseMessagesOnQueue(ERROR_LOG_QUEUE).size());

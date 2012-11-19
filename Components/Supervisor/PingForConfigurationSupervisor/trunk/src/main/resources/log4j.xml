@@ -99,8 +99,8 @@
 	</logger>
 	
 	<root>
-		<priority value="INFO" />
-		<!-- <appender-ref ref="CONSOLE" /> -->
-		<appender-ref ref="ROLLINGFILE"/>
+		<priority value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<!-- <appender-ref ref="ROLLINGFILE"/>  -->
 	</root>
 </log4j:configuration>

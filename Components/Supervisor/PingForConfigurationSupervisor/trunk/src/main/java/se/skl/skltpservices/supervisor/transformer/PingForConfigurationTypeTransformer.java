@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package se.skl.tp.vp.supervisor.transformer;
+package se.skl.skltpservices.supervisor.transformer;
 
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -43,7 +43,7 @@ public class PingForConfigurationTypeTransformer extends AbstractMessageTransfor
 		if (logger.isDebugEnabled()) {
 			log.debug("doTransform(" + message.getClass().getSimpleName() + ", " + encoding + ") returns: " + type);
 		}
-
+		
 		return new Object[] { "SE165565594230-1000", type };
 	}
 }

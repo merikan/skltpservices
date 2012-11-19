@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package se.skl.tp.vp.supervisor.pingforconfiguration;
+package se.skl.skltpservices.supervisor.pingforconfiguration;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
