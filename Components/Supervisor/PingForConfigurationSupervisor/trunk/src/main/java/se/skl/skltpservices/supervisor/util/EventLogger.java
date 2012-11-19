@@ -22,7 +22,6 @@ import static org.soitoolkit.commons.mule.core.PropertyNames.SOITOOLKIT_BUSINESS
 import static org.soitoolkit.commons.mule.core.PropertyNames.SOITOOLKIT_CONTRACT_ID;
 import static org.soitoolkit.commons.mule.core.PropertyNames.SOITOOLKIT_CORRELATION_ID;
 import static org.soitoolkit.commons.mule.core.PropertyNames.SOITOOLKIT_INTEGRATION_SCENARIO;
-import static se.skl.skltpservices.supervisor.util.Constants.nvl;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
@@ -186,11 +185,11 @@ public class EventLogger {
 	//----------------
 	
 	private void dispatchInfoEvent(String msg) {
-		dispatchEvent("SOITOOLKIT.LOG.STORE", msg);
+		dispatchEvent("SOITOOLKIT.LOG.INFO", msg);
 	}
 
 	private void dispatchErrorEvent(String msg) {
-		dispatchEvent("SOITOOLKIT.LOG.ERROR", msg);
+		dispatchEvent("SOITOOLKIT.LOG.INFO", msg);
 	}
 
 	private void dispatchEvent(String queue, String msg) {
