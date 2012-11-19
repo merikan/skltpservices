@@ -90,7 +90,6 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		this.key = UUID.randomUUID().toString();
 	}
 	
-	
 	@Test
 	public void create() {
 		LogEvent event = mock(LogEvent.class);
