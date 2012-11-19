@@ -17,7 +17,12 @@
  * MA 02110-1301  USA
  */
 
-package se.skl.tp.vp.util;
+package se.skl.skltpservices.supervisor.util;
+
+import java.util.Map;
+
+import org.mule.api.MuleMessage;
+import org.mule.api.transport.PropertyScope;
 
 
 /**
@@ -25,24 +30,38 @@ package se.skl.tp.vp.util;
  * 
  * @author Marcus Krantz [marcus.krantz@callistaenterprise.se]
  */
-public final class VPUtil {
+public final class Constants {
 
 	public static final String SESSION_ERROR = "sessionStatus";
 	public static final String SESSION_ERROR_DESCRIPTION = "sessionErrorDescription";
 	public static final String SESSION_ERROR_TECHNICAL_DESCRIPTION = "sessionErrorTechnicalDescription";
 
-	public static final String RECEIVER_ID = "receiverid";
-	public static final String SENDER_ID = "senderid";
 	public static final String RIV_VERSION = "rivversion";
 	public static final String SERVICE_NAMESPACE = "cxf_service";
-	public static final String ENDPOINT_URL = "endpoint_url";
-
-	public static final String TIMER_TOTAL = "total";
-	public static final String TIMER_ROUTE = "route";
-	public static final String TIMER_ENDPOINT = "endpoint_time";
+    public static final String SYSTEM_NAME = "system-name";
+	public static final String SUB_DOMAIN = "sub-domain";
+	public static final String DOMAIN = "domain";
+	public static final String ENDPOINT_URL = "endpoint-url";
+	public static final String SOURCE = "source";
 
 	public static String nvl(String s) {
 		return (s == null) ? "" : s;
+	}
+
+	public static void addSessionInfo(MuleMessage message, Map<String, String> map) {
+		map.put(ENDPOINT_URL, message.getProperty(ENDPOINT_URL, PropertyScope.SESSION, ""));
+		map.put(SYSTEM_NAME, message.getProperty(SYSTEM_NAME, PropertyScope.SESSION, ""));
+		map.put(DOMAIN, message.getProperty(DOMAIN, PropertyScope.SESSION, ""));
+		map.put(SUB_DOMAIN, message.getProperty(SUB_DOMAIN, PropertyScope.SESSION, ""));
+
+		final Boolean error = message.getProperty(SESSION_ERROR, PropertyScope.SESSION, Boolean.FALSE);
+		if (Boolean.TRUE.equals(error)) {
+			map.put(SESSION_ERROR, error.toString());
+			map.put(SESSION_ERROR_DESCRIPTION,
+					nvl((String) message.getProperty(Constants.SESSION_ERROR_DESCRIPTION, PropertyScope.SESSION)));
+			map.put(SESSION_ERROR_TECHNICAL_DESCRIPTION,
+					nvl((String) message.getProperty(Constants.SESSION_ERROR_TECHNICAL_DESCRIPTION, PropertyScope.SESSION)));
+		}
 	}
 
 }

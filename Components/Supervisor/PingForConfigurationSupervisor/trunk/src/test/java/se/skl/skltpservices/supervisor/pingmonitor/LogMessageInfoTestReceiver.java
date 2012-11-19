@@ -17,7 +17,7 @@
  * MA 02110-1301  USA
  */
 
-package se.skl.tp.vp.supervisor.pingmonitor;
+package se.skl.skltpservices.supervisor.pingmonitor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

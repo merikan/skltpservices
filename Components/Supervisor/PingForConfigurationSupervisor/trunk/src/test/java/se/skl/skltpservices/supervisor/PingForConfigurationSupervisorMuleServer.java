@@ -16,8 +16,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package se.skl.tp.vp.supervisor;
+package se.skl.skltpservices.supervisor;
 
+import org.apache.activemq.ActiveMQConnectionFactory;
 import org.soitoolkit.commons.mule.test.StandaloneMuleServer;
 
 import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
@@ -34,7 +35,6 @@ public class PingForConfigurationSupervisorMuleServer {
 			"PingForConfigurationSupervisor-config");
 
 	public static void main(String[] args) throws Exception {
-
 		StandaloneMuleServer muleServer = new StandaloneMuleServer(MULE_SERVER_ID, "PingForConfigurationSupervisor-teststubs-and-services-config.xml", true);
 
 		muleServer.run();

@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package se.skl.tp.vp.util;
+package se.skl.skltpservices.supervisor.util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,12 +40,12 @@ import org.slf4j.LoggerFactory;
  * @author Peter
  * @since VP-2.0
  */
-public class VPExceptionStrategy extends DefaultMessagingExceptionStrategy {
-	private static final Logger log = LoggerFactory.getLogger(VPExceptionStrategy.class);
+public class ExceptionStrategy extends DefaultMessagingExceptionStrategy {
+	private static final Logger log = LoggerFactory.getLogger(ExceptionStrategy.class);
 
 	private final EventLogger eventLogger;
 
-	public VPExceptionStrategy(MuleContext muleContext) {
+	public ExceptionStrategy(MuleContext muleContext) {
 		super(muleContext);
 		this.eventLogger = new EventLogger(muleContext);
 	}
@@ -71,10 +71,6 @@ public class VPExceptionStrategy extends DefaultMessagingExceptionStrategy {
 
 		Map<String, String> extraInfo = new HashMap<String, String>();
 		extraInfo.put("source", getClass().getName());
-		ExecutionTimer timer = ExecutionTimer.get(VPUtil.TIMER_ENDPOINT);
-		if (timer != null) {
-			extraInfo.put("time.producer", String.valueOf(timer.getElapsed()));
-		}
 
 		MuleException muleException = ExceptionHelper.getRootMuleException(t);
 		if (muleException != null) {
@@ -86,10 +82,10 @@ public class VPExceptionStrategy extends DefaultMessagingExceptionStrategy {
 
 				Throwable ex = (me.getCause() == null ? me : me.getCause());
 
-				msg.setProperty(VPUtil.SESSION_ERROR, Boolean.TRUE, PropertyScope.SESSION);
-				msg.setProperty(VPUtil.SESSION_ERROR_DESCRIPTION, nvl(ex.getMessage()), PropertyScope.SESSION);
-				msg.setProperty(VPUtil.SESSION_ERROR_TECHNICAL_DESCRIPTION, nvl(ex.toString()), PropertyScope.SESSION);
-				msg.setProperty(VPUtil.SESSION_ERROR, Boolean.TRUE, PropertyScope.SESSION);
+				msg.setProperty(Constants.SESSION_ERROR, Boolean.TRUE, PropertyScope.SESSION);
+				msg.setProperty(Constants.SESSION_ERROR_DESCRIPTION, nvl(ex.getMessage()), PropertyScope.SESSION);
+				msg.setProperty(Constants.SESSION_ERROR_TECHNICAL_DESCRIPTION, nvl(ex.toString()), PropertyScope.SESSION);
+				msg.setProperty(Constants.SESSION_ERROR, Boolean.TRUE, PropertyScope.SESSION);
 
 				eventLogger.addSessionInfo(msg, extraInfo);
 				eventLogger.logErrorEvent(ex, msg, null, extraInfo);
@@ -103,8 +99,5 @@ public class VPExceptionStrategy extends DefaultMessagingExceptionStrategy {
 			eventLogger.logErrorEvent(t, "", null, extraInfo);
 		}
 
-		// stop request.
-		ExecutionTimer.stop(VPUtil.TIMER_TOTAL);
-		log.info(ExecutionTimer.format());
 	}
 }

@@ -19,61 +19,67 @@
     MA 02110-1301  USA
 
 -->
-<!-- Copyright (c) 2012, Sjukvardsradgivningen. All rights reserved. This 
-	library is free software; you can redistribute it and/or modify it under 
-	the terms of the GNU Lesser General Public License as published by the Free 
-	Software Foundation; either version 2.1 of the License, or (at your option) 
-	any later version. This library is distributed in the hope that it will be 
-	useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
-	or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
-	for more details. You should have received a copy of the GNU Lesser General 
-	Public License along with this library; if not, write to the Free Software 
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 
-	USA -->
-<!-- Reads Procucer URLs from TK database (JDBC) and Ids to perform active 
+<!-- Reads Procucer URLs from config file to perform active 
 	monitoring requests -->
 <mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
-	xmlns:jdbc="http://www.mulesoft.org/schema/mule/jdbc" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
 	xsi:schemaLocation="          
-				http://www.springframework.org/schema/beans	  http://www.springframework.org/schema/beans/spring-beans-3.1.xsd                                                                                                             
-                http://www.mulesoft.org/schema/mule/core      http://www.mulesoft.org/schema/mule/core/current/mule.xsd                      
-                http://www.mulesoft.org/schema/mule/vm        http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd                         
-                http://www.mulesoft.org/schema/mule/jdbc      http://www.mulesoft.org/schema/mule/jdbc/current/mule-jdbc.xsd                 
+				http://www.springframework.org/schema/beans	   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd                                                                                                             
+                http://www.mulesoft.org/schema/mule/core       http://www.mulesoft.org/schema/mule/core/current/mule.xsd                      
+                http://www.mulesoft.org/schema/mule/vm         http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd                         
+                http://www.mulesoft.org/schema/mule/file       http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+                http://www.mulesoft.org/schema/mule/scripting  http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd                 
         ">
 
-	<spring:beans>
-		<spring:bean id="logDataSource" class="org.apache.commons.dbcp.BasicDataSource"
-			destroy-method="close">
-			<spring:property name="driverClassName" value="${SOITOOLKIT_JDBC_DRIVER}" />
-			<spring:property name="url" value="${SOITOOLKIT_JDBC_URL}" />
-			<spring:property name="username" value="${SOITOOLKIT_JDBC_USR}" />
-			<spring:property name="password" value="${SOITOOLKIT_JDBC_PWD}" />
-			<spring:property name="initialSize" value="0" />
-			<spring:property name="maxActive" value="1" />
-			<spring:property name="maxIdle" value="1" />
-			<spring:property name="minIdle" value="0" />
-			<spring:property name="maxWait" value="-1" />
-		</spring:bean>
-	</spring:beans>
-
-	<jdbc:connector name="jdbcConnector" dataSource-ref="logDataSource"
-		pollingFrequency="${SOITOOLKIT_JDBC_CON_POLLING_MS}">
-		<jdbc:query key="activelogtrigger-export-query"
-			value="SELECT id, serviceUrl FROM ServiceProducer" />
-	</jdbc:connector>
+	
+	<file:connector
+        name="inputFileConnector"
+        autoDelete="false"
+        streaming="false"
+        pollingFrequency="${INVOCATION_FREQUENCY_MS}"
+        />
 
 	<flow name="activeLogTrigger-flow">
 
-		<jdbc:inbound-endpoint connector-ref="jdbcConnector"
-			queryKey="activelogtrigger-export-query" transformer-refs="logMsgIn"/>
+       <file:inbound-endpoint connector-ref="inputFileConnector" path="${SERVICE_FILE_DIR}" >
+            <file:filename-regex-filter pattern="${SERVICE_FILE_NAME}" caseSensitive="false" />
+        </file:inbound-endpoint>
+        
+        <byte-array-to-string-transformer />
 
-		<custom-transformer
-			class="se.skl.tp.vp.supervisor.transformer.EndpointExtractionTransformer" />
+        <scripting:component>
+            <!-- Script to read configuration file, skip comments and return a list of configurartion records separated by linefeeds [LF] ('\n') 
+            	 Record Syntax:
+            	 [Service URL],[Systen Name],[Domain],[Sub domain][LF]
+             -->
+            <scripting:script engine="groovy" >
+                <scripting:text>
+                    def list = []
+					for (line in  payload.split("\n")) {
+						line = line.trim()
+						if (!line.startsWith("#")) {
+							list.add(line)
+						}
+					}
+					return list
+				</scripting:text>
+            </scripting:script>
+        </scripting:component>
 
-		<vm:outbound-endpoint path="${ACTIVELOGTRIGGER_OUT_VM_QUEUE}" transformer-refs="logMsgOut"/>
+        <collection-splitter />
 
-		<custom-exception-strategy class="se.skl.tp.vp.util.VPExceptionStrategy">
+        <transformer ref="createCorrId" />
+        
+ 		<custom-transformer
+			class="se.skl.skltpservices.supervisor.transformer.EndpointExtractionTransformer" />
+		
+		<vm:outbound-endpoint path="${ACTIVELOGTRIGGER_OUT_VM_QUEUE}" />
+
+		<custom-exception-strategy class="se.skl.skltpservices.supervisor.util.ExceptionStrategy">
 			<spring:property name="jaxbContext" ref="jaxbContext" />
 		</custom-exception-strategy>
 

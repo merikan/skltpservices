@@ -16,13 +16,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package se.skl.tp.vp.util;
+package se.skl.skltpservices.supervisor.util;
 
 import static org.soitoolkit.commons.mule.core.PropertyNames.SOITOOLKIT_BUSINESS_CONTEXT_ID;
 import static org.soitoolkit.commons.mule.core.PropertyNames.SOITOOLKIT_CONTRACT_ID;
 import static org.soitoolkit.commons.mule.core.PropertyNames.SOITOOLKIT_CORRELATION_ID;
 import static org.soitoolkit.commons.mule.core.PropertyNames.SOITOOLKIT_INTEGRATION_SCENARIO;
-import static se.skl.tp.vp.util.VPUtil.nvl;
+import static se.skl.skltpservices.supervisor.util.Constants.nvl;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
@@ -465,21 +465,7 @@ public class EventLogger {
 	
 	//
 	public void addSessionInfo(MuleMessage message, Map<String, String> map) {
-		map.put(VPUtil.SENDER_ID, (String) message.getProperty(VPUtil.SENDER_ID, PropertyScope.SESSION));
-		map.put(VPUtil.RECEIVER_ID, (String) message.getProperty(VPUtil.RECEIVER_ID, PropertyScope.SESSION));
-		map.put(VPUtil.RIV_VERSION, (String) message.getProperty(VPUtil.RIV_VERSION, PropertyScope.SESSION));
-		map.put(VPUtil.SERVICE_NAMESPACE, (String) message.getProperty(VPUtil.SERVICE_NAMESPACE, PropertyScope.SESSION));
-		String endpoint = message.getProperty(VPUtil.ENDPOINT_URL, PropertyScope.SESSION);
-		if (endpoint != null) {
-			map.put(VPUtil.ENDPOINT_URL, endpoint);
-		}
-		final Boolean error = (Boolean) message.getProperty(VPUtil.SESSION_ERROR, PropertyScope.SESSION);
-		if (Boolean.TRUE.equals(error)) {
-			map.put(VPUtil.SESSION_ERROR, error.toString());
-			map.put(VPUtil.SESSION_ERROR_DESCRIPTION,
-					nvl((String) message.getProperty(VPUtil.SESSION_ERROR_DESCRIPTION, PropertyScope.SESSION)));
-			map.put(VPUtil.SESSION_ERROR_TECHNICAL_DESCRIPTION,
-					nvl((String) message.getProperty(VPUtil.SESSION_ERROR_TECHNICAL_DESCRIPTION, PropertyScope.SESSION)));
-		}
+		map.put(Constants.SOURCE, getClass().getName());
+		Constants.addSessionInfo(message, map);
 	}
 }

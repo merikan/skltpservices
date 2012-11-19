@@ -16,11 +16,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package se.skl.tp.vp.supervisor.transformer;
+package se.skl.skltpservices.supervisor.transformer;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Map;
 
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
@@ -29,6 +28,8 @@ import org.mule.transformer.AbstractMessageTransformer;
 import org.mule.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import se.skl.skltpservices.supervisor.util.Constants;
 
 /**
  * Extracts producer Endpoint from payload.
@@ -39,21 +40,26 @@ import org.slf4j.LoggerFactory;
  */
 public class EndpointExtractionTransformer extends AbstractMessageTransformer {
 
-    private static final Logger log = LoggerFactory.getLogger(EndpointExtractionTransformer.class);
+
+	private static final Logger log = LoggerFactory.getLogger(EndpointExtractionTransformer.class);
 
     @Override
     public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
-        @SuppressWarnings("unchecked")
-        Map<String, Object> map = message.getPayload(Map.class);
-        URL endpointUrl = null;
-        String endpoint = (String) map.get("serviceUrl");
-        String producerId = ((Long)map.get("id")).toString();
+        String record = message.getPayload(String.class);
+        
+        String[] fields = record.split(",");
+        String endpoint = fields[0].trim();
+        String system = fields[1].trim();
+        String domain = fields[2].trim();
+        String subDomain = fields[3].trim();
 
         if (StringUtils.isBlank(endpoint)) {
             String msg = "Ignoring endpoint since it's blank";
             log.warn(msg);
             throw new RuntimeException(msg);
         }
+        
+        URL endpointUrl;
         try {
             endpointUrl = new URL(endpoint);
         } catch (MalformedURLException e) {
@@ -74,7 +80,11 @@ public class EndpointExtractionTransformer extends AbstractMessageTransformer {
         	message.setProperty("port", "", PropertyScope.OUTBOUND);
         }
         message.setProperty("path", endpointUrl.getPath(), PropertyScope.OUTBOUND);
-        message.setProperty("producerId", producerId, PropertyScope.SESSION);
+        
+        message.setProperty(Constants.ENDPOINT_URL, endpoint, PropertyScope.SESSION);
+        message.setProperty(Constants.DOMAIN, domain, PropertyScope.SESSION);
+        message.setProperty(Constants.SUB_DOMAIN, subDomain, PropertyScope.SESSION);
+        message.setProperty(Constants.SYSTEM_NAME, system, PropertyScope.SESSION);
 
         return message;
     }

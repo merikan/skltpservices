@@ -38,12 +38,12 @@
 	<flow name="LogEventInfo-teststub-service">
 		<inbound-endpoint address="jms://SOITOOLKIT.LOG.INFO" />
 		<component
-			class="se.skl.tp.vp.supervisor.pingmonitor.LogMessageInfoTestReceiver" />
+			class="se.skl.skltpservices.supervisor.pingmonitor.LogMessageInfoTestReceiver" />
 	</flow>
 	
 	<flow name="LogEventError-teststub-service">
 		<inbound-endpoint address="jms://SOITOOLKIT.LOG.ERROR" />
 		<component
-			class="se.skl.tp.vp.supervisor.pingmonitor.LogMessageErrorTestReceiver" />
+			class="se.skl.skltpservices.supervisor.pingmonitor.LogMessageErrorTestReceiver" />
 	</flow>
 </mule>

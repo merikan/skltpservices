@@ -17,7 +17,7 @@
  * MA 02110-1301  USA
  */
 
-package se.skl.tp.vp.util;
+package se.skl.skltpservices.supervisor.util;
 
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
