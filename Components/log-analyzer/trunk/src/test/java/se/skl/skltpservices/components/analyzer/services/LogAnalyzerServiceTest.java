@@ -115,6 +115,18 @@ public class LogAnalyzerServiceTest extends TestSupport {
 		
 		return event;
     }
+    
+    private void validateService(RuntimeStatus expectedStatus) {
+		for (ServiceGroup sg : analyzerService.getCurrentStatusFromAllProducers().getGroups()) {
+			Assert.assertEquals("domain", sg.getName());
+			Assert.assertEquals("sub-domain", sg.getDescription());
+			for (Service s : sg.getServices()) {
+				Assert.assertEquals(expectedStatus, s.getStatus());
+				Assert.assertEquals("https://localhost:8080", s.getEndpointUrl());
+				Assert.assertEquals("system-name", s.getSystemName());
+			}
+		}    	
+    }
 
     @Test
 	public void analyzeNormal() {
@@ -125,16 +137,9 @@ public class LogAnalyzerServiceTest extends TestSupport {
 		when(event.getLogEntry().getMessageInfo().getMessage()).thenReturn("resp-in");
 		
 		analyzerService.analyze(event);
-				
-		for (ServiceGroup sg : analyzerService.getCurrentStatusFromAllProducers().getGroups()) {
-			Assert.assertEquals("domain", sg.getName());
-			Assert.assertEquals("sub-domain", sg.getDescription());
-			for (Service s : sg.getServices()) {
-				Assert.assertEquals(RuntimeStatus.UP, s.getStatus());
-				Assert.assertEquals("https://localhost:8080", s.getEndpointUrl());
-				Assert.assertEquals("system-name", s.getSystemName());
-			}
-		}
+		
+		validateService(RuntimeStatus.UP);
+		
 	}
 
     @Test
@@ -145,7 +150,7 @@ public class LogAnalyzerServiceTest extends TestSupport {
  		
  		analyzerService.analyze(event);
  		
- 		
+ 		// wait for timeout
  		try {
 			Thread.sleep((timeout * 1000) + 100);
 		} catch (InterruptedException e) {
@@ -156,16 +161,6 @@ public class LogAnalyzerServiceTest extends TestSupport {
  		when(event.getLogEntry().getMessageInfo().getMessage()).thenReturn("resp-in");	
  		analyzerService.analyze(event);
  				
- 		//
- 		for (ServiceGroup sg : analyzerService.getCurrentStatusFromAllProducers().getGroups()) {
- 			Assert.assertEquals("domain", sg.getName());
- 			Assert.assertEquals("sub-domain", sg.getDescription());
- 			for (Service s : sg.getServices()) {
- 				Assert.assertEquals(RuntimeStatus.DOWN, s.getStatus());
- 				Assert.assertEquals("https://localhost:8080", s.getEndpointUrl());
- 				Assert.assertEquals("system-name", s.getSystemName());
- 			}
- 		}
- 	}
-
+		validateService(RuntimeStatus.DOWN);
+    }
 }
