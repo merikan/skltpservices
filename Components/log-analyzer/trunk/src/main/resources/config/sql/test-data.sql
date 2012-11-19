@@ -1,1 +1,0 @@
-insert into ServiceProducer values('1', 'http://example.com/path/to/servicex', 'domain', 'melior', 'Jšnkšpings kommun')

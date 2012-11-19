@@ -19,8 +19,5 @@
     <property name="followRedirects" value="true" />
   </bean>
 
-  <bean id="logAnalyzerResource" factory-bean="jerseyClient" factory-method="resource">
-    <constructor-arg value="${evactor.api}" />
-  </bean>
 </beans>
 

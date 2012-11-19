@@ -26,6 +26,4 @@
 
     <import resource="classpath:spring/*-config.xml" />
 
-    <jpa:repositories base-package="se.skl.skltpservices.components.analyzer.domain" />
-
 </beans>

@@ -26,28 +26,6 @@
 
     <task:annotation-driven />
 
-    <util:map id="jpaPropertyMap" >
-
-        <entry
-            key="hibernate.show_sql"
-            value="true" />
-
-        <entry
-            key="hibernate.dialect"
-            value="org.hibernate.dialect.HSQLDialect" />
-    </util:map>
-
-    <jdbc:embedded-database
-        id="dataSource"
-        type="HSQL" >
-
-        <jdbc:script location="classpath:config/sql/schema.sql" />
-
-        <jdbc:script location="classpath:config/sql/test-data.sql" />
-    </jdbc:embedded-database>
-
     <import resource="classpath*:spring/*-config.xml" />
-
-    <jpa:repositories base-package="se.skl.skltpservices.components.analyzer.domain" />
 
 </beans>
