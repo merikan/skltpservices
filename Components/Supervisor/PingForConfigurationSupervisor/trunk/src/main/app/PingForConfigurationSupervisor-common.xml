@@ -47,8 +47,6 @@
 		http://www.mulesoft.org/schema/mule/vm        http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
 		http://www.mulesoft.org/schema/mule/xml        http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
 	">
-
-  <!-- Load property files in three steps... -->
   
   <!-- 1. Support for decrypting encrypted properties.
        The encryption password will be read from an environment variable
@@ -79,15 +77,9 @@
     </spring:property>
   </spring:bean>
   
-
-    <!-- Common connectors and endpoints, i.e. that not needs to be changed for different config-files (local unit-test, integration-test or production environments) -->
-  
     <spring:beans>
-        <!-- 
-         <spring:import resource="classpath:soitoolkit-mule-jms-connector-activemq-external.xml"/>
-          -->
     	 <spring:import resource="classpath:soitoolkit-mule-http-connector.xml"/>
-   		 <spring:import resource="classpath:soitoolkit-mule-https-connector.xml"/>
+   	 <spring:import resource="classpath:soitoolkit-mule-https-connector.xml"/>
     </spring:beans>
 
 
@@ -96,10 +88,6 @@
 	<custom-transformer name="restoreCorrId" class="org.soitoolkit.commons.mule.log.correlationid.RestoreCorrelationIdTransformer" />
 
 	<mulexml:jaxb-context name="jaxbContext" packageNames="org.soitoolkit.commons.logentry.schema.v1:se.riv.itintegration.monitoring.v1"/>
-
-	<custom-transformer name="XmlToXSR" class="org.mule.module.xml.transformer.XmlToXMLStreamReader">
-   		<spring:property name="reversible" value="true"/>
-	</custom-transformer>
 	    
      <!--  FIXME: do not change logType, beacuse it's a hard-coded type used by Evactor active monitoring sub-system -->
     <custom-transformer name="monitorLogRequest" class="se.skl.skltpservices.supervisor.transformer.MonitorLogTransformer">

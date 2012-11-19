@@ -78,7 +78,6 @@ public class PingMonitorIntegrationTest extends AbstractTestCase {
 		props.put("host", "localhost");
 		props.put("port", ":20001");
 		props.put("path", "/supervisor/PingForConfiguration/1/rivtabp21");
-		props.put("producerId", "kalle");
 
 		final String inputFile = "src/test/resources/testfiles/pingMonitorInput.txt";
 		String receivingService = "LogEventInfo-teststub-service";
@@ -96,7 +95,6 @@ public class PingMonitorIntegrationTest extends AbstractTestCase {
 
 		String payload = (String) reply.getPayload();
 
-		assertEquals(true, payload.contains("<extraInfo><name>producerId</name><value>kalle</value></extraInfo>"));
 		assertEquals(
 				true,
 				payload.contains("<extraInfo><name>source</name><value>se.skl.skltpservices.supervisor.transformer.MonitorLogTransformer</value></extraInfo>"));
