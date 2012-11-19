@@ -3,13 +3,18 @@ package se.skl.skltpservices.components.analyzer.domain;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import se.skl.skltpservices.components.analyzer.services.EntityBuilder;
 import se.skl.skltpservices.components.analyzer.services.Event;
 import se.skl.skltpservices.components.analyzer.services.State;
 
 
 public class ServiceProducer implements Comparable<ServiceProducer> {
-    // Maps to url
+	private static final Logger log = LoggerFactory.getLogger(ServiceProducer.class);
+
+	// Maps to url
     private String serviceUrl;
     // Maps to name
     private String domainName;
@@ -87,14 +92,27 @@ public class ServiceProducer implements Comparable<ServiceProducer> {
     public String getDomainName() {
         return domainName;
     }
-       
+
+    public void setDomainName(String domainName) {
+        this.domainName = domainName ;
+    }
+
     public String getSystemName() {
         return systemName;
     }
-    
+
+    public void setSystemName(String systemName) {
+    	this.systemName = systemName;
+    }
+
     public String getDomainDescription() {
         return domainDescription;
     }
+
+    public void setDomainDescription(String domainDescription) {
+        this.domainDescription = domainDescription;
+    }
+    
         
     public List<Event> getTimeLine() {
     	return timeline;
@@ -107,8 +125,9 @@ public class ServiceProducer implements Comparable<ServiceProducer> {
 		
 		// unlink old events
     	if (timeline.size() > 3) {
-    		timeline.removeLast();
-    	}    	
+    		Event e = timeline.removeLast();
+    		log.debug("remove: " + e);
+    	}
     }
     
     //

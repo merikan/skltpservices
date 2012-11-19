@@ -3,12 +3,15 @@ package se.skl.skltpservices.components.analyzer.services;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.logentry.schema.v1.LogEntryType.ExtraInfo;
 import org.soitoolkit.commons.logentry.schema.v1.LogEvent;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,12 +25,14 @@ import se.skl.skltpservices.components.analyzer.domain.ServiceProducer;
 
 @org.springframework.stereotype.Service
 public class LogAnalyzerService {
-    private static final String SYSTEM_NAME = "system-name";
+	private static final Logger log = LoggerFactory.getLogger(LogAnalyzerService.class);
+
+	private static final String SYSTEM_NAME = "system-name";
     private static final String SUB_DOMAIN = "sub-domain";
     private static final String DOMAIN = "domain";
     private static final String ENDPOINT_URL = "endpoint-url";
 	
-	private Map<String, ServiceProducer> serviceProducerMap = new HashMap<String, ServiceProducer>();
+	private Map<String, ServiceProducer> serviceProducerMap = Collections.synchronizedMap(new HashMap<String, ServiceProducer>());
 
 	// config
     @Value("${analyze.timeout}")
@@ -88,11 +93,16 @@ public class LogAnalyzerService {
 		String endpoint = gv(list, ENDPOINT_URL);
 		ServiceProducer sp = serviceProducerMap.get(endpoint);
 		if (sp == null) {
+			// Always update meta-data
 			sp = new ServiceProducer.ServiceProducerBuilder().setTimeout(timeout)
 				.setDomainDescription(gv(list, SUB_DOMAIN)).setDomainName(gv(list, DOMAIN)).setSystemName(gv(list, SYSTEM_NAME)).setServiceUrl(endpoint).build();
 			serviceProducerMap.put(endpoint, sp);
+		} else {
+			sp.setSystemName(gv(list, SYSTEM_NAME));
+			sp.setDomainDescription(gv(list, SUB_DOMAIN));
+			sp.setDomainName(gv(list, DOMAIN));
 		}
-    	return sp;
+		return sp;
     }
     
     //
@@ -109,6 +119,7 @@ public class LogAnalyzerService {
     	event.setTimestamp(toTimestamp(logEvent.getLogEntry().getRuntimeInfo().getTimestamp()));
     	event.setCorrelationId(logEvent.getLogEntry().getRuntimeInfo().getBusinessCorrelationId());
     	ServiceProducer sp = lookupServiceProducer(logEvent.getLogEntry().getExtraInfo());
+    	log.info("analyze: " + event);
     	sp.update(event);
     }
     

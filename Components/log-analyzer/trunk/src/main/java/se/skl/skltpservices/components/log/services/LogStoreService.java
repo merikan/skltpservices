@@ -21,11 +21,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import se.skl.skltpservices.components.analyzer.domain.LogStoreRepository;
+import se.skl.skltpservices.components.analyzer.services.LogAnalyzerService;
 
 
 @Service
 public class LogStoreService {
 
+	private static final String SOITOOLKIT_LOG_INFO_SUFFIX = ":SOITOOLKIT.LOG.INFO";
 	private static final Logger log = LoggerFactory.getLogger(LogStoreService.class);
 	private static final JAXBContext context = initContext();
 
@@ -34,6 +36,8 @@ public class LogStoreService {
 	private List<Consumer> consumers;      
 	@Autowired
 	private LogStoreRepository repo;
+	@Autowired
+	private LogAnalyzerService analyzer;
 
 	private static JAXBContext initContext() {
 		try {
@@ -91,19 +95,25 @@ public class LogStoreService {
 			camel.addComponent(compName, mq);
 			consumers.add(createConsumer(camel, compName + ":SOITOOLKIT.LOG.STORE"));
 			consumers.add(createConsumer(camel, compName + ":SOITOOLKIT.LOG.ERROR"));			
+			consumers.add(createConsumer(camel, compName + SOITOOLKIT_LOG_INFO_SUFFIX));			
 		}
 	}
 
 	//
 	private Consumer createConsumer(CamelContext camel, String endpointName) throws Exception {
+		final boolean monitor = endpointName.endsWith(SOITOOLKIT_LOG_INFO_SUFFIX);
 		Consumer consumer = camel.getEndpoint(endpointName).createConsumer(new Processor() {		
 			@Override
 			public void process(Exchange exchange) throws Exception {
 				try {
 					LogEvent le = unmarshal((String)exchange.getIn().getBody());
-					repo.storeInfoEvent(le);
+					if (monitor) {
+						analyzer.analyze(le);
+					} else {
+						repo.storeInfoEvent(le);
+					}
 				} catch (Exception e) {
-					log.error("Unable to store log event", e);
+					log.error("Unable to process log event", e);
 					throw e;
 				}
 			}
