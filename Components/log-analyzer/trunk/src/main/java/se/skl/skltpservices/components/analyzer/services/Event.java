@@ -94,6 +94,7 @@ public class Event extends TimerTask {
 	@Override
 	public synchronized void run() {
 		setStatus(State.TIMEOUT);
+		setLatency(-1);
 		if (this.timer != null) {
 			this.timer.cancel();
 			this.timer = null;
