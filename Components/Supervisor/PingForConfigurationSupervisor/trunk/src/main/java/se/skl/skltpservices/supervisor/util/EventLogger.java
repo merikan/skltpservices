@@ -70,6 +70,8 @@ import org.soitoolkit.commons.mule.util.XmlUtil;
  */
 public class EventLogger {
 
+	private static final String SOITOOLKIT_LOG_PING = "SOITOOLKIT.LOG.PING";
+
 	private static final Logger messageLogger = LoggerFactory.getLogger("org.soitoolkit.commons.mule.messageLogger");
 
 	private static final Logger log = LoggerFactory.getLogger(EventLogger.class);
@@ -140,14 +142,14 @@ public class EventLogger {
 		Map<String, String> businessContextId,
 		Map<String, String> extraInfo) {
 		
-		if (messageLogger.isInfoEnabled()) {
-			LogEvent logEvent = createLogEntry(LogLevelType.INFO, message, logMessage, businessContextId, extraInfo, message.getPayload(), null);
-			String xmlString = JAXB_UTIL.marshal(logEvent);
-			dispatchInfoEvent(xmlString);
-
+		LogEvent logEvent = createLogEntry(LogLevelType.INFO, message, logMessage, businessContextId, extraInfo, message.getPayload(), null);
+		String xmlString = JAXB_UTIL.marshal(logEvent);
+		if (messageLogger.isDebugEnabled()) {
 			String logMsg = formatLogMessage(LOG_EVENT_INFO, logEvent);
-			messageLogger.info(logMsg);
+			messageLogger.debug(logMsg);
 		}
+
+		dispatchEvent(SOITOOLKIT_LOG_PING, xmlString);
 	}
 
 	//
@@ -163,7 +165,7 @@ public class EventLogger {
 		messageLogger.error(logMsg);
 
 		String xmlString = JAXB_UTIL.marshal(logEvent);
-		dispatchErrorEvent(xmlString);
+		dispatchEvent(SOITOOLKIT_LOG_PING, xmlString);
 	}
 
 	//
@@ -179,17 +181,7 @@ public class EventLogger {
 		messageLogger.error(logMsg);
 
 		String xmlString = JAXB_UTIL.marshal(logEvent);
-		dispatchErrorEvent(xmlString);
-	}
-
-	//----------------
-	
-	private void dispatchInfoEvent(String msg) {
-		dispatchEvent("SOITOOLKIT.LOG.INFO", msg);
-	}
-
-	private void dispatchErrorEvent(String msg) {
-		dispatchEvent("SOITOOLKIT.LOG.INFO", msg);
+		dispatchEvent(SOITOOLKIT_LOG_PING, xmlString);
 	}
 
 	private void dispatchEvent(String queue, String msg) {
@@ -209,14 +201,13 @@ public class EventLogger {
 	}
 
 	private Session getSession() throws JMSException {
-//		JmsConnector jmsConn = (JmsConnector)MuleServer.getMuleContext().getRegistry().lookupConnector("soitoolkit-jms-connector");
 		JmsConnector jmsConn = (JmsConnector)MuleUtil.getSpringBean(this.muleContext, "soitoolkit-jms-connector");
 		Connection c = jmsConn.getConnection();
 		Session s = c.createSession(false, Session.AUTO_ACKNOWLEDGE);
 		return s;
 	}
 
-	public void sendOneTextMessage(Session session, String queueName, String message) {
+	private void sendOneTextMessage(Session session, String queueName, String message) {
 
         MessageProducer publisher = null;
 

@@ -54,18 +54,20 @@
         <scripting:component>
             <!-- Script to read configuration file, skip comments and return a list of configurartion records separated by linefeeds [LF] ('\n') 
             	 Record Syntax:
-            	 [Service URL],[Systen Name],[Domain],[Sub domain][LF]
+            	 [Service URL],[Systen Name],[Domain],[Domain Description][LF]
              -->
             <scripting:script engine="groovy" >
                 <scripting:text>
-                    def list = []
+                    def list = [];
 					for (line in  payload.split("\n")) {
-						line = line.trim()
-						if (!line.startsWith("#")) {
-							list.add(line)
+						line = line.trim();
+						if (line) {
+						 	if (!line.startsWith("#")) {
+								list.add(line);
+						 	}	
 						}
 					}
-					return list
+					return list;
 				</scripting:text>
             </scripting:script>
         </scripting:component>

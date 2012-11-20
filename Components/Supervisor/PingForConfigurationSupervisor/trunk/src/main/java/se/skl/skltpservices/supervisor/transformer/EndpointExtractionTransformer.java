@@ -81,9 +81,8 @@ public class EndpointExtractionTransformer extends AbstractMessageTransformer {
         }
         message.setProperty("path", endpointUrl.getPath(), PropertyScope.OUTBOUND);
         
-        message.setProperty(Constants.ENDPOINT_URL, endpoint, PropertyScope.SESSION);
         message.setProperty(Constants.DOMAIN, domain, PropertyScope.SESSION);
-        message.setProperty(Constants.SUB_DOMAIN, subDomain, PropertyScope.SESSION);
+        message.setProperty(Constants.DOMAIN_DESCRIPTION, subDomain, PropertyScope.SESSION);
         message.setProperty(Constants.SYSTEM_NAME, system, PropertyScope.SESSION);
 
         return message;
