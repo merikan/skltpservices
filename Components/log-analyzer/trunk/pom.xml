@@ -11,7 +11,7 @@
   <properties>
 <!--     <evactor.version>0.2-SNAPSHOT</evactor.version>  -->
     <slf4j.version>1.6.0</slf4j.version>
-    <spring.version>3.1.1.RELEASE</spring.version>
+    <spring.version>3.1.2.RELEASE</spring.version>
     <jersey.version>1.12</jersey.version>
     <activemq.version>5.7.0</activemq.version>
     <camel.version>2.10.2</camel.version>
@@ -117,11 +117,6 @@
     
     <!-- Spring -->
     <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-jpa</artifactId>
-      <version>1.1.0.RELEASE</version>
-    </dependency>
-    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
       <version>${spring.version}</version>
@@ -132,6 +127,7 @@
         </exclusion>
       </exclusions>
     </dependency>
+    <!-- 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jms</artifactId>
@@ -143,6 +139,7 @@
         </exclusion>
       </exclusions>
     </dependency>
+     -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
@@ -312,13 +309,15 @@
       <version>4.8.2</version>
       <scope>test</scope>
     </dependency>
+    <!-- 
     <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
       <version>2.2.8</version>
       <scope>test</scope>
     </dependency>
-
+ -->
+ 
     <dependency>
     	<groupId>org.springframework</groupId>
     	<artifactId>spring-test</artifactId>
@@ -362,9 +361,59 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
+  
   <build>
     <finalName>log-analyzer</finalName>
+  		<pluginManagement>
+			<!-- maven-license-plugin helps you managing license headers in source 
+				files. -->
+			<plugins>
+				<plugin>
+					<groupId>com.mycila.maven-license-plugin</groupId>
+					<artifactId>maven-license-plugin</artifactId>
+					<version>1.9.0</version>
+					<configuration>
+						<header>http://skltp.googlecode.com/svn/tp/docs/license-header-template.txt</header>
+						<useDefaultExcludes>true</useDefaultExcludes>
+						<skipExistingHeaders>true</skipExistingHeaders>
+						<strictCheck>true</strictCheck>
+						<properties>
+							<organization>Sjukvardsradgivningen</organization>
+							<year>2012</year>
+						</properties>
+						<excludes>
+							<exclude>target/**</exclude>
+							<exclude>**/NOTICES.txt</exclude>
+							<exclude>thirdpartylicenses/**</exclude>
+							<exclude>**/LICENSE.rtf</exclude>
+							<exclude>**/context.xml</exclude>
+							<exclude>**/*.properties</exclude>
+							<exclude>**/*.log</exclude>
+							<exclude>**/*.dtd</exclude>
+							<exclude>**/*.jks</exclude>
+							<exclude>**/*.sql</exclude>
+							<exclude>**/*.mflow</exclude>
+							<exclude>**/COPYING</exclude>
+							<exclude>**/COPYING.LESSER</exclude>
+							<exclude>**/schemas/**</exclude>
+							<exclude>**/docs/**</exclude>
+							<exclude>**/resources/testfiles/**</exclude>
+						</excludes>
+					</configuration>
+					<executions>
+						<!-- <execution> <id>format</id> <phase>process-sources</phase> <goals> 
+							<goal>format</goal> </goals> </execution> -->
+						<execution>
+							<id>check</id>
+							<phase>compile</phase>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+	  </plugins>
+	</pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

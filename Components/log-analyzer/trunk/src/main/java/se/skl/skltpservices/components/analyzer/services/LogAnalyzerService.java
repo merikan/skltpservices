@@ -1,3 +1,21 @@
+/**
+ * Copyright (c) 2012, Sjukvardsradgivningen. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301  USA
+ */
 package se.skl.skltpservices.components.analyzer.services;
 
 import java.util.Arrays;
@@ -13,6 +31,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.logentry.schema.v1.LogEntryType.ExtraInfo;
+import org.soitoolkit.commons.logentry.schema.v1.LogEntryType;
 import org.soitoolkit.commons.logentry.schema.v1.LogEvent;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -28,9 +47,8 @@ public class LogAnalyzerService {
 	private static final Logger log = LoggerFactory.getLogger(LogAnalyzerService.class);
 
 	private static final String SYSTEM_NAME = "system-name";
-    private static final String SUB_DOMAIN = "sub-domain";
+    private static final String DOMAIN_DESCRIPTION = "domain-description";
     private static final String DOMAIN = "domain";
-    private static final String ENDPOINT_URL = "endpoint-url";
 	
 	private Map<String, ServiceProducer> serviceProducerMap = Collections.synchronizedMap(new HashMap<String, ServiceProducer>());
 
@@ -39,6 +57,11 @@ public class LogAnalyzerService {
     private int timeout;
 
 
+    /**
+     * Returns all service groups and services.
+     * 
+     * @return service groups.
+     */
     public ServiceGroups getCurrentStatusFromAllProducers() {
     	HashMap<String, ServiceGroup> map = new HashMap<String, ServiceGroup>();
 
@@ -63,6 +86,11 @@ public class LogAnalyzerService {
     				pri.getServices().add(service);
     			}
     		}
+    		// remove old producers (inactive)
+    		if (serviceProducer.isExpired()) {
+    			log.debug("expired: {}", serviceProducer.getServiceUrl());
+    			serviceProducerMap.remove(serviceProducer.getServiceUrl());
+    		}
     	}
     	
     	ServiceGroups groups = new ServiceGroups.ServiceGroupsBuilder().setServiceGroups(map.values()).build();
@@ -71,7 +99,7 @@ public class LogAnalyzerService {
     }
     
     //
-    protected ServiceProducer[] getServicePproducers() {
+    public ServiceProducer[] getServicePproducers() {
     	Collection<ServiceProducer> c = serviceProducerMap.values();
     	ServiceProducer[] arr = serviceProducerMap.values().toArray(new ServiceProducer[c.size()]);
     	Arrays.sort(arr);    	
@@ -89,19 +117,22 @@ public class LogAnalyzerService {
     }
     
     //
-    protected ServiceProducer lookupServiceProducer(List<ExtraInfo> list) {
-		String endpoint = gv(list, ENDPOINT_URL);
+    protected ServiceProducer lookupServiceProducer(LogEntryType logEntry) {
+		String endpoint = logEntry.getMetadataInfo().getEndpoint();
+		log.debug("Ping monitor message for: {}", endpoint);
 		ServiceProducer sp = serviceProducerMap.get(endpoint);
+		List<ExtraInfo> list = logEntry.getExtraInfo();
 		if (sp == null) {
 			// Always update meta-data
 			sp = new ServiceProducer.ServiceProducerBuilder().setTimeout(timeout)
-				.setDomainDescription(gv(list, SUB_DOMAIN)).setDomainName(gv(list, DOMAIN)).setSystemName(gv(list, SYSTEM_NAME)).setServiceUrl(endpoint).build();
+				.setDomainDescription(gv(list, DOMAIN_DESCRIPTION)).setDomainName(gv(list, DOMAIN)).setSystemName(gv(list, SYSTEM_NAME)).setServiceUrl(endpoint).build();
 			serviceProducerMap.put(endpoint, sp);
 		} else {
 			sp.setSystemName(gv(list, SYSTEM_NAME));
-			sp.setDomainDescription(gv(list, SUB_DOMAIN));
+			sp.setDomainDescription(gv(list, DOMAIN_DESCRIPTION));
 			sp.setDomainName(gv(list, DOMAIN));
 		}
+		log.debug("#producers in  map: {}", serviceProducerMap.size());
 		return sp;
     }
     
@@ -116,10 +147,11 @@ public class LogAnalyzerService {
 		} else {
     		event.setStatus(State.FAILURE);
 		}
+    	event.setComponent(logEvent.getLogEntry().getRuntimeInfo().getComponentId() + "@" + logEvent.getLogEntry().getRuntimeInfo().getHostName());
     	event.setTimestamp(toTimestamp(logEvent.getLogEntry().getRuntimeInfo().getTimestamp()));
     	event.setCorrelationId(logEvent.getLogEntry().getRuntimeInfo().getBusinessCorrelationId());
-    	ServiceProducer sp = lookupServiceProducer(logEvent.getLogEntry().getExtraInfo());
-    	log.info("analyze: " + event);
+    	ServiceProducer sp = lookupServiceProducer(logEvent.getLogEntry());
+    	log.debug("event: {}", event);
     	sp.update(event);
     }
     
