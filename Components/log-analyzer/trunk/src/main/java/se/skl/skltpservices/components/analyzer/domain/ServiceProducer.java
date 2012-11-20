@@ -144,7 +144,11 @@ public class ServiceProducer implements Comparable<ServiceProducer> {
     public long getMaxLatency() {
     	long max = 0;
     	for (Event e : getTimeLine()) {
-    		max = Math.max(max, e.getLatency());
+    		long l = e.getLatency();
+    		if (l == -1) {
+    			return l;
+    		}
+    		max = Math.max(max, l);
     	}
     	return max;
     }
