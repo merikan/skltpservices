@@ -19,10 +19,8 @@
 
 --%>
 <!DOCTYPE html>
-<%@page import="java.util.Calendar"%>
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page
-	import="se.skl.skltpservices.components.analyzer.services.LogAnalyzerService,se.skl.skltpservices.components.analyzer.services.Event,org.springframework.web.context.support.WebApplicationContextUtils,se.skl.skltpservices.components.analyzer.domain.ServiceProducer"%>
+	import="java.util.Date,java.text.SimpleDateFormat,se.skl.skltpservices.components.analyzer.services.LogAnalyzerService,se.skl.skltpservices.components.analyzer.services.Event,org.springframework.web.context.support.WebApplicationContextUtils,se.skl.skltpservices.components.analyzer.domain.ServiceProducer"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <html>
@@ -34,7 +32,7 @@
 
 <style>
 .hide {
-    display:none;
+	display: none;
 }
 </style>
 
@@ -48,8 +46,7 @@
 <script src="http://code.jquery.com/jquery.min.js"></script>
 
 <script type="text/javascript">
-
-
+	
 <%LogAnalyzerService analyzer = (LogAnalyzerService) WebApplicationContextUtils
 					.getWebApplicationContext(getServletContext()).getBean(
 							"logAnalyzerService");
@@ -64,8 +61,8 @@
 				out.print(", \"domain\" : \"" + sp.getDomainName() + "\"");
 				out.print(", \"description\" : \"" + sp.getDomainDescription()
 						+ "\"");
-				
-				java.util.Date ts = new java.util.Date(sp.getLastUpdated());
+
+				Date ts = new Date(sp.getLastUpdated());
 				out.print(", \"timestamp\" : \"" + fmt.format(ts) + "\"");
 				out.print(", \"status\" : \""
 						+ analyzer.calcRuntimeStatus(sp.getTimeLine()) + "\"");
@@ -74,45 +71,56 @@
 				out.print(" }" + ((i < (arr.length - 1)) ? ", " : ""));
 			}
 			out.print("]");%>
-			
-			
-	$(document).ready(function() {
-		$('#status-table tbody > tr').empty();
-		var old = null;
-		$.each(data, function(i, e) {
-			var icon = (e.status == 'UP') ? $('<img>', { src : 'images/up.png' }) : $('<img>', { src : 'images/down.png' });
-			var row = $('<tr>').attr('id', e.status);
-			var domain = $('<td>');
-			if (old != e.domain) {
-				domain.html('<strong>' + e.domain + '</strong><br/>' + e.description);
-			}
-			row.append(domain);
-			row.append($('<td>').append(icon));
-			row.append($('<td>').html(e.system + '<br/>' + e.endpoint));
-			row.append($('<td>').css('text-align', 'right').html(e.latency));
-			row.append($('<td>').css('text-align', 'right').html(e.timestamp));
-			
-			$('#status-table').append(row);
-			old = e.domain;
-		});
-		
-		var hideText = 'Göm fungerande ' + $('#UP').length + ' (' + data.length + ')';
-		$('#toggleBtn').html(hideText);
-		$('#toggleBtn').click(function () {
-			 if ($('#UP').hasClass('hide')) {
-				 $('#UP').removeClass('hide');
-				 $('#toggleBtn').html(hideText);
-			 } else {
-				 $('#UP').addClass('hide'); 
-				 $('#toggleBtn').html('Visa alla ('  + data.length + ')');
-			 }
-		});
-	});
+	$(document).ready(
+			function() {
+				$('#status-table tbody > tr').empty();
+				var old = null;
+				$.each(data,
+						function(i, e) {
+							var icon = (e.status == 'UP') ? $('<img>', {
+								src : 'images/up.png'
+							}) : $('<img>', {
+								src : 'images/down.png'
+							});
+							var row = $('<tr>').attr('id', e.status);
+							var domain = $('<td>');
+							if (old != e.domain) {
+								domain.html('<strong>' + e.domain
+										+ '</strong><br/>' + e.description);
+							}
+							row.append(domain);
+							row.append($('<td>').append(icon));
+							row.append($('<td>').html(
+									e.system + '<br/>' + e.endpoint));
+							row.append($('<td>').css('text-align', 'right')
+									.html(e.latency));
+							row.append($('<td>').css('text-align', 'right')
+									.html(e.timestamp));
+
+							$('#status-table').append(row);
+							old = e.domain;
+						});
+
+				var hideText = 'Göm fungerande ' + $('#UP').length + ' ('
+						+ data.length + ')';
+				$('#toggleBtn').html(hideText);
+				$('#toggleBtn').click(
+						function() {
+							if ($('#UP').hasClass('hide')) {
+								$('#UP').removeClass('hide');
+								$('#toggleBtn').html(hideText);
+							} else {
+								$('#UP').addClass('hide');
+								$('#toggleBtn').html(
+										'Visa alla (' + data.length + ')');
+							}
+						});
+			});
 </script>
 </head>
 <body>
 	<div style="float: left; margin: 10px;">
-		<a href="http://www.inera.se"><img src="images/inera-logo.png"/></a>
+		<a href="http://www.inera.se"><img src="images/inera-logo.png" /></a>
 	</div>
 	<div id="mainwrapper">
 		<div id="contentarea">
@@ -120,7 +128,8 @@
 				(PingForConfiguration)</h1>
 			<p />
 			<div id="contentarea-inner">
-				<button id="toggleBtn" style="background-color: #8A8E36;  color: #ffffff;"></button>
+				<button id="toggleBtn"
+					style="background-color: #8A8E36; color: #ffffff;"></button>
 				<table id="status-table" style="width: 80%">
 					<thead>
 						<tr>
