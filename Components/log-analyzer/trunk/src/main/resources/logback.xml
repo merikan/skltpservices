@@ -28,10 +28,54 @@
       <Pattern>%date{ISO8601} [%thread] %-5level %logger{36} - %msg%n</Pattern>
     </layout>
   </appender>
+  
+    <!--Daily rolling file appender -->
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+  			<param name="Threshold" value="ALL"/>
+	    	<File>tp-event.log</File>
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<FileNamePattern>archived-tp-event.%d{yyyy-MM-dd}.log</FileNamePattern>
+			</rollingPolicy>
+ 
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<Pattern>%date{ISO8601} | %msg%n</Pattern>
+			</layout>
+			
+			<filter class="ch.qos.logback.classic.filter.LevelFilter">
+        		<level>INFO</level>
+        		<onMatch>ACCEPT</onMatch>
+        		<onMismatch>DENY</onMismatch>
+			</filter>
+	</appender>
 
-  <root level="WARN">
+	   <!--Daily rolling file appender -->
+	<appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+  			<param name="Threshold" value="ERROR"/>
+	    	<File>tp-error.log</File>
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<FileNamePattern>archived-tp-error.%d{yyyy-MM-dd}.log</FileNamePattern>
+			</rollingPolicy>
+ 
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<Pattern>%date{ISO8601} | %msg%n</Pattern>
+			</layout>
+			
+			<filter class="ch.qos.logback.classic.filter.LevelFilter">
+        		<level>ERROR</level>
+        		<onMatch>ACCEPT</onMatch>
+        		<onMismatch>DENY</onMismatch>
+			</filter>
+	</appender>
+	
+	
+  <root level="INFO">
     <appender-ref ref="STDOUT" />
   </root>
+
+  <logger name="se.skl.skltpservices.components.log.services.StoreLog" level="INFO">
+   	<appender-ref ref="FILE" />
+   	<appender-ref ref="ERROR" />
+  </logger>
 
   <logger name="org.springframework.core.env">
     <level value="debug" />
@@ -40,9 +84,8 @@
   <logger name="se.skl.skltpservices">
     <level value="debug" />
   </logger>
-  
-  <!-- <logger name="se.aorwall.bam"> -->
-  <!-- <level value="info" /> -->
-  <!-- </logger> -->
 
+  	<appender-ref ref="ERROR" />
+  	<appender-ref ref="FILE" />
+  	
 </configuration>
