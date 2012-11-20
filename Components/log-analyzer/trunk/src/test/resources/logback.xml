@@ -32,7 +32,7 @@
     <!--Daily rolling file appender -->
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
   			<param name="Threshold" value="ALL"/>
-	    	<File>${user.home}/var/log/tp-event.log</File>
+	    	<File>tp-event.log</File>
 			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 				<FileNamePattern>archived-tp-event.%d{yyyy-MM-dd}.log</FileNamePattern>
 			</rollingPolicy>
@@ -51,7 +51,7 @@
 	   <!--Daily rolling file appender -->
 	<appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
   			<param name="Threshold" value="ERROR"/>
-	    	<File>${user.home}/var/log/tp-error.log</File>
+	    	<File>tp-error.log</File>
 			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 				<FileNamePattern>archived-tp-error.%d{yyyy-MM-dd}.log</FileNamePattern>
 			</rollingPolicy>
