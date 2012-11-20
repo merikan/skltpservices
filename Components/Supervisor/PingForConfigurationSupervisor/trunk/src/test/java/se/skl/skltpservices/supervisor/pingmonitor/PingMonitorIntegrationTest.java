@@ -67,7 +67,7 @@ public class PingMonitorIntegrationTest extends AbstractTestCase {
 		if (jmsUtil == null)
 			jmsUtil = new ActiveMqJmsTestUtil();
 		jmsUtil.clearQueues(ERROR_LOG_QUEUE);
-		jmsUtil.clearQueues("SOITOOLKIT.LOG.STORE");
+		jmsUtil.clearQueues("SOITOOLKIT.LOG.PING");
 	}
 
 	@Test

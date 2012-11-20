@@ -37,11 +37,11 @@ import org.mule.transformer.AbstractMessageTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.api.log.EventLogMessage;
-import org.soitoolkit.commons.mule.api.log.EventLogger;
 import org.soitoolkit.commons.mule.log.DefaultEventLogger;
 import org.soitoolkit.commons.mule.log.EventLoggerFactory;
 
 import se.skl.skltpservices.supervisor.util.Constants;
+import se.skl.skltpservices.supervisor.util.EventLogger;
 
 /**
  * Transforms for active monitoring (PingForConfiguration).
@@ -76,13 +76,10 @@ public class MonitorLogTransformer extends AbstractMessageTransformer implements
 		// Also inject the muleContext in the event-logger (since we create the
 		// event-logger for now)
 		if (eventLogger == null) {
-			eventLogger = EventLoggerFactory.getEventLogger(muleContext);
-		}
-
-		// TODO: this is an ugly workaround for injecting the jaxbObjToXml
-		// dependency ...
-		if (eventLogger instanceof DefaultEventLogger) {
-			((DefaultEventLogger) eventLogger).setJaxbContext(jaxbContext);
+			this.eventLogger = new EventLogger(muleContext);
+			if (jaxbContext != null) {
+				this.eventLogger.setJaxbContext(jaxbContext);
+			}
 		}
 	}
 
@@ -133,9 +130,8 @@ public class MonitorLogTransformer extends AbstractMessageTransformer implements
 	 */
 	public void setJaxbContext(JAXBContext jaxbContext) {
 		this.jaxbContext = jaxbContext;
-
-		if (eventLogger instanceof DefaultEventLogger) {
-			((DefaultEventLogger) eventLogger).setJaxbContext(jaxbContext);
+		if (this.eventLogger != null) {
+			eventLogger.setJaxbContext(jaxbContext);
 		}
 	}
 
@@ -187,7 +183,7 @@ public class MonitorLogTransformer extends AbstractMessageTransformer implements
 			infoMsg.setBusinessContextId(evaluatedBusinessContextId);
 			infoMsg.setExtraInfo(evaluatedExtraInfo);
 
-			eventLogger.logInfoEvent(infoMsg);
+			eventLogger.logInfoEvent(message, logType, evaluatedBusinessContextId, evaluatedExtraInfo);
 			
 		} catch (Exception e) {
 			log.error(toDebugLogString(evaluatedExtraInfo, evaluatedBusinessContextId), e);

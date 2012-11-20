@@ -39,9 +39,8 @@ public final class Constants {
 	public static final String RIV_VERSION = "rivversion";
 	public static final String SERVICE_NAMESPACE = "cxf_service";
     public static final String SYSTEM_NAME = "system-name";
-	public static final String SUB_DOMAIN = "sub-domain";
+	public static final String DOMAIN_DESCRIPTION = "domain-description";
 	public static final String DOMAIN = "domain";
-	public static final String ENDPOINT_URL = "endpoint-url";
 	public static final String SOURCE = "source";
 
 	public static String nvl(String s) {
@@ -49,10 +48,9 @@ public final class Constants {
 	}
 
 	public static void addSessionInfo(MuleMessage message, Map<String, String> map) {
-		map.put(ENDPOINT_URL, message.getProperty(ENDPOINT_URL, PropertyScope.SESSION, ""));
 		map.put(SYSTEM_NAME, message.getProperty(SYSTEM_NAME, PropertyScope.SESSION, ""));
 		map.put(DOMAIN, message.getProperty(DOMAIN, PropertyScope.SESSION, ""));
-		map.put(SUB_DOMAIN, message.getProperty(SUB_DOMAIN, PropertyScope.SESSION, ""));
+		map.put(DOMAIN_DESCRIPTION, message.getProperty(DOMAIN_DESCRIPTION, PropertyScope.SESSION, ""));
 
 		final Boolean error = message.getProperty(SESSION_ERROR, PropertyScope.SESSION, Boolean.FALSE);
 		if (Boolean.TRUE.equals(error)) {
