@@ -54,6 +54,12 @@
 	</dependency>
 
 	 <dependency>
+   		<groupId>org.codehaus.jackson</groupId>
+   		<artifactId>jackson-mapper-asl</artifactId>
+   		<version>1.9.1</version>
+	</dependency>
+	
+	 <dependency>
 		<groupId>me.prettyprint</groupId>
 		<artifactId>hector-core</artifactId>
 		<version>1.0-5</version>
@@ -177,10 +183,6 @@
         <exclusion>
           <groupId>org.codehaus.jackson</groupId>
           <artifactId>jackson-core-asl</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.codehaus.jackson</groupId>
-          <artifactId>jackson-mapper-asl</artifactId>
         </exclusion>
         <exclusion>
           <groupId>org.codehaus.jackson</groupId>

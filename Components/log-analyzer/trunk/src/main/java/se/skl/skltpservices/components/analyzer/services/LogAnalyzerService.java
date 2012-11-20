@@ -156,7 +156,7 @@ public class LogAnalyzerService {
     }
     
 
-    protected RuntimeStatus calcRuntimeStatus(List<Event> timeline) {
+    public RuntimeStatus calcRuntimeStatus(List<Event> timeline) {
         if (timeline != null) {
             for (int i = 0; i < Math.min(3, timeline.size()); i++) {
                 Event e = timeline.get(i);

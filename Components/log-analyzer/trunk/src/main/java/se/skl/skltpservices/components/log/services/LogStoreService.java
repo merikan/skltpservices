@@ -18,6 +18,7 @@
  */
 package se.skl.skltpservices.components.log.services;
 
+import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,9 +32,11 @@ import org.apache.camel.Consumer;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.impl.DefaultCamelContext;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.logentry.schema.v1.LogEvent;
+import org.soitoolkit.commons.logentry.schema.v1.LogLevelType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -49,6 +52,8 @@ public class LogStoreService {
 	private static final String SOITOOLKIT_LOG_ERROR_SUFFIX = ":SOITOOLKIT.LOG.ERROR";
 	private static final String SOITOOLKIT_LOG_PING_SUFFIX = ":SOITOOLKIT.LOG.PING";
 	private static final Logger log = LoggerFactory.getLogger(LogStoreService.class);
+	private static final Logger storeLog = LoggerFactory.getLogger("se.skl.skltpservices.components.log.services.StoreLog");
+	
 	private static final JAXBContext context = initContext();
 
 	@Value("${log.mq.instances}")
@@ -80,6 +85,7 @@ public class LogStoreService {
 			throw new IllegalArgumentException(e);
 		}
 	}
+
 
 	/**
 	 * Stops queue listeners.
@@ -118,6 +124,22 @@ public class LogStoreService {
 			consumers.add(createConsumer(camel, compName + SOITOOLKIT_LOG_PING_SUFFIX));			
 		}
 	}
+	
+	//
+	protected void logToFile(LogEvent le) {
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			StringWriter sw = new StringWriter();
+			mapper.writeValue(sw, le.getLogEntry());
+			if (le.getLogEntry().getMessageInfo().getLevel() == LogLevelType.ERROR) {
+				storeLog.error(sw.toString());
+			} else {
+				storeLog.info(sw.toString());
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}	
+	}
 
 	//
 	private Consumer createConsumer(CamelContext camel, String endpointName) throws Exception {
@@ -127,6 +149,7 @@ public class LogStoreService {
 			public void process(Exchange exchange) throws Exception {
 				try {
 					LogEvent le = unmarshal((String)exchange.getIn().getBody());
+					logToFile(le);
 					if (monitor) {
 						analyzer.analyze(le);
 					} else {

@@ -140,6 +140,15 @@ public class ServiceProducer implements Comparable<ServiceProducer> {
     	return (System.currentTimeMillis() - lastUpdated) > EXPIRED_AFTER_MS;
     }
     
+    //
+    public long getMaxLatency() {
+    	long max = 0;
+    	for (Event e : getTimeLine()) {
+    		max = Math.max(max, e.getLatency());
+    	}
+    	return max;
+    }
+    
     /**
      * Returns the last time this provider was updated.
      * 
