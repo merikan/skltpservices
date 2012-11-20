@@ -1,9 +1,29 @@
+/**
+ * Copyright (c) 2012, Sjukvardsradgivningen. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301  USA
+ */
 package se.skl.skltpservices.components.analyzer.services;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,6 +39,7 @@ import org.soitoolkit.commons.logentry.schema.v1.LogEntryType;
 import org.soitoolkit.commons.logentry.schema.v1.LogEntryType.ExtraInfo;
 import org.soitoolkit.commons.logentry.schema.v1.LogEvent;
 import org.soitoolkit.commons.logentry.schema.v1.LogMessageType;
+import org.soitoolkit.commons.logentry.schema.v1.LogMetadataInfoType;
 import org.soitoolkit.commons.logentry.schema.v1.LogRuntimeInfoType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -91,25 +112,26 @@ public class LogAnalyzerServiceTest extends TestSupport {
 		when(event.getLogEntry().getRuntimeInfo().getBusinessCorrelationId()).thenReturn(key);
 		when(event.getLogEntry().getPayload()).thenReturn("no special");
 		when(event.getLogEntry().getMessageInfo().getMessage()).thenReturn(logType);
-		ExtraInfo extraInfo = new ExtraInfo();
-		extraInfo.setName("cxf_service");
-		extraInfo.setValue("urn:riv:domain:subdomain:method");
+
+		when(event.getLogEntry().getMetadataInfo()).thenReturn(mock(LogMetadataInfoType.class));
+		when(event.getLogEntry().getMetadataInfo().getEndpoint()).thenReturn("https://localhost:8080");
 		List<ExtraInfo> list = new LinkedList<ExtraInfo>();
-		list.add(ci("endpoint-url", "https://localhost:8080"));
 		list.add(ci("domain", "domain"));
-		list.add(ci("sub-domain", "sub-domain"));
+		list.add(ci("domain-description", "domain-description"));
 		list.add(ci("system-name", "system-name"));
 		
 		when(event.getLogEntry().getExtraInfo()).thenReturn(list);
 		
 		XMLGregorianCalendar cal = mock(XMLGregorianCalendar.class);
-		when(cal.getYear()).thenReturn(2012);
-		when(cal.getMonth()).thenReturn(7);
-		when(cal.getDay()).thenReturn(12);
-		when(cal.getHour()).thenReturn(14);
-		when(cal.getMinute()).thenReturn(30);
-		when(cal.getSecond()).thenReturn(0);
-		when(cal.getMillisecond()).thenReturn(0);
+		Calendar c = Calendar.getInstance();
+
+		when(cal.getYear()).thenReturn(c.get(Calendar.YEAR));
+		when(cal.getMonth()).thenReturn(c.get(Calendar.MONTH));
+		when(cal.getDay()).thenReturn(c.get(Calendar.DAY_OF_MONTH));
+		when(cal.getHour()).thenReturn(c.get(Calendar.HOUR_OF_DAY));
+		when(cal.getMinute()).thenReturn(c.get(Calendar.MINUTE));
+		when(cal.getSecond()).thenReturn(c.get(Calendar.SECOND));
+		when(cal.getMillisecond()).thenReturn(c.get(Calendar.MILLISECOND));
 		
 		when(event.getLogEntry().getRuntimeInfo().getTimestamp()).thenReturn(cal);
 		
@@ -119,8 +141,10 @@ public class LogAnalyzerServiceTest extends TestSupport {
     private void validateService(RuntimeStatus expectedStatus) {
 		for (ServiceGroup sg : analyzerService.getCurrentStatusFromAllProducers().getGroups()) {
 			Assert.assertEquals("domain", sg.getName());
-			Assert.assertEquals("sub-domain", sg.getDescription());
-			for (Service s : sg.getServices()) {
+			Assert.assertEquals("domain-description", sg.getDescription());
+			Collection<Service> services = sg.getServices();
+			Assert.assertEquals(1, services .size());
+			for (Service s : services) {
 				Assert.assertEquals(expectedStatus, s.getStatus());
 				Assert.assertEquals("https://localhost:8080", s.getEndpointUrl());
 				Assert.assertEquals("system-name", s.getSystemName());
@@ -138,8 +162,7 @@ public class LogAnalyzerServiceTest extends TestSupport {
 		
 		analyzerService.analyze(event);
 		
-		validateService(RuntimeStatus.UP);
-		
+		validateService(RuntimeStatus.UP);		
 	}
 
     @Test

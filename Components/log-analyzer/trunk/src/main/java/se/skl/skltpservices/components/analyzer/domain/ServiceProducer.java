@@ -1,3 +1,21 @@
+/**
+ * Copyright (c) 2012, Sjukvardsradgivningen. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301  USA
+ */
 package se.skl.skltpservices.components.analyzer.domain;
 
 import java.util.LinkedList;
@@ -23,9 +41,13 @@ public class ServiceProducer implements Comparable<ServiceProducer> {
     // Maps to description
     private String domainDescription;
     //
+    private long lastUpdated;
+    //
     private LinkedList<Event> timeline;
-    
+    //
     private int timeout;
+    // If not updated in 1 hour it's assumed to be expired and removed from the list
+    private static long EXPIRED_AFTER_MS = (3600 * 1000);
     
     public static class ServiceProducerBuilder implements EntityBuilder<ServiceProducer> {
     	private ServiceProducer sp = new ServiceProducer();
@@ -59,6 +81,7 @@ public class ServiceProducer implements Comparable<ServiceProducer> {
 		@Override
 		public ServiceProducer build() {
 			sp.timeline = new LinkedList<Event>();
+			sp.touch();
 			return sp;
 		}
     }
@@ -113,7 +136,25 @@ public class ServiceProducer implements Comparable<ServiceProducer> {
         this.domainDescription = domainDescription;
     }
     
-        
+    public boolean isExpired() {
+    	return (System.currentTimeMillis() - lastUpdated) > EXPIRED_AFTER_MS;
+    }
+    
+    /**
+     * Returns the last time this provider was updated.
+     * 
+     * @return the timestamp in millis.
+     */
+    public long getLastUpdated() {
+    	return lastUpdated;
+    }
+    
+    //
+    private void touch() {
+       	this.lastUpdated = System.currentTimeMillis();   	
+    }
+    
+    //
     public List<Event> getTimeLine() {
     	return timeline;
     }
@@ -147,6 +188,7 @@ public class ServiceProducer implements Comparable<ServiceProducer> {
     
     // update timeline
     public void update(Event event) {
+    	touch();
     	if (event.getState() == State.START) {
     		openEvent(event);
     	} else {

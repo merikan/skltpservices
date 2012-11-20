@@ -1,3 +1,21 @@
+/**
+ * Copyright (c) 2012, Sjukvardsradgivningen. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301  USA
+ */
 package se.skl.skltpservices.components.log.services;
 
 import java.util.LinkedList;
@@ -27,7 +45,9 @@ import se.skl.skltpservices.components.analyzer.services.LogAnalyzerService;
 @Service
 public class LogStoreService {
 
-	private static final String SOITOOLKIT_LOG_INFO_SUFFIX = ":SOITOOLKIT.LOG.INFO";
+	private static final String SOITOOLKIT_LOG_STORE_SUFFIX = ":SOITOOLKIT.LOG.STORE";
+	private static final String SOITOOLKIT_LOG_ERROR_SUFFIX = ":SOITOOLKIT.LOG.ERROR";
+	private static final String SOITOOLKIT_LOG_PING_SUFFIX = ":SOITOOLKIT.LOG.PING";
 	private static final Logger log = LoggerFactory.getLogger(LogStoreService.class);
 	private static final JAXBContext context = initContext();
 
@@ -93,15 +113,15 @@ public class LogStoreService {
 			String compName = "activemq-" + seqNo++;
 			log.info("Listen on { instance: {}, name: {} }", instance, compName);  
 			camel.addComponent(compName, mq);
-			consumers.add(createConsumer(camel, compName + ":SOITOOLKIT.LOG.STORE"));
-			consumers.add(createConsumer(camel, compName + ":SOITOOLKIT.LOG.ERROR"));			
-			consumers.add(createConsumer(camel, compName + SOITOOLKIT_LOG_INFO_SUFFIX));			
+			consumers.add(createConsumer(camel, compName + SOITOOLKIT_LOG_STORE_SUFFIX));
+			consumers.add(createConsumer(camel, compName + SOITOOLKIT_LOG_ERROR_SUFFIX));			
+			consumers.add(createConsumer(camel, compName + SOITOOLKIT_LOG_PING_SUFFIX));			
 		}
 	}
 
 	//
 	private Consumer createConsumer(CamelContext camel, String endpointName) throws Exception {
-		final boolean monitor = endpointName.endsWith(SOITOOLKIT_LOG_INFO_SUFFIX);
+		final boolean monitor = endpointName.endsWith(SOITOOLKIT_LOG_PING_SUFFIX);
 		Consumer consumer = camel.getEndpoint(endpointName).createConsumer(new Processor() {		
 			@Override
 			public void process(Exchange exchange) throws Exception {
