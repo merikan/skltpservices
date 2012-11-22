@@ -48,6 +48,7 @@ import se.skl.skltpservices.components.analyzer.TestSupport;
 import se.skl.skltpservices.components.analyzer.application.RuntimeStatus;
 import se.skl.skltpservices.components.analyzer.application.Service;
 import se.skl.skltpservices.components.analyzer.application.ServiceGroup;
+import se.skl.skltpservices.components.analyzer.domain.ServiceProducer;
 
 public class LogAnalyzerServiceTest extends TestSupport {
 
@@ -74,8 +75,8 @@ public class LogAnalyzerServiceTest extends TestSupport {
     @Test
     public void testBusinessLogicForRuntimeStatus() {
         List<Event> emptyTimeline = Collections.emptyList();
-        Assert.assertEquals(RuntimeStatus.DOWN, analyzerService.calcRuntimeStatus(emptyTimeline));
-        Assert.assertEquals(RuntimeStatus.DOWN, analyzerService.calcRuntimeStatus(null));
+        Assert.assertEquals(RuntimeStatus.DOWN, ServiceProducer.calcRuntimeStatus(emptyTimeline));
+        Assert.assertEquals(RuntimeStatus.DOWN, ServiceProducer.calcRuntimeStatus(null));
         Assert.assertEquals(RuntimeStatus.UP, checkProducer(successEvent)); 
         Assert.assertEquals(RuntimeStatus.DOWN, checkProducer(timedOutEvent)); 
         Assert.assertEquals(RuntimeStatus.UP, checkProducer(successEvent, timedOutEvent)); 
@@ -93,7 +94,7 @@ public class LogAnalyzerServiceTest extends TestSupport {
     }
 
     private RuntimeStatus checkProducer(Event...events) {
-        return analyzerService.calcRuntimeStatus(Arrays.asList(events));
+        return ServiceProducer.calcRuntimeStatus(Arrays.asList(events));
     }
     
     private ExtraInfo ci(String name, String value) {

@@ -24,6 +24,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import se.skl.skltpservices.components.analyzer.application.RuntimeStatus;
 import se.skl.skltpservices.components.analyzer.services.EntityBuilder;
 import se.skl.skltpservices.components.analyzer.services.Event;
 import se.skl.skltpservices.components.analyzer.services.State;
@@ -46,6 +47,11 @@ public class ServiceProducer implements Comparable<ServiceProducer> {
     private LinkedList<Event> timeline;
     //
     private int timeout;
+    //
+    private long maxLatency = -1;
+    //
+    private RuntimeStatus status = RuntimeStatus.DOWN;
+    
     // If not updated in 1 hour it's assumed to be expired and removed from the list
     private static long EXPIRED_AFTER_MS = (3600 * 1000);
     
@@ -108,6 +114,7 @@ public class ServiceProducer implements Comparable<ServiceProducer> {
     	return false;
     }
     
+    
     public String getServiceUrl() {
         return serviceUrl;
     }
@@ -141,16 +148,45 @@ public class ServiceProducer implements Comparable<ServiceProducer> {
     }
     
     //
-    public long getMaxLatency() {
+    private void update() {
     	long max = 0;
     	for (Event e : getTimeLine()) {
     		long l = e.getLatency();
     		if (l == -1) {
-    			return l;
+    			max = -1;
+    			break;
     		}
     		max = Math.max(max, l);
     	}
-    	return max;
+    	this.maxLatency = max;
+    	this.status = calcRuntimeStatus(getTimeLine());
+    }
+    
+    //
+    public static RuntimeStatus calcRuntimeStatus(List<Event> timeline) {
+        if (timeline != null) {
+            for (int i = 0; i < Math.min(3, timeline.size()); i++) {
+                Event e = timeline.get(i);
+                if (i == 0 && e.getState().equals(State.SUCCESS)) {
+                    return RuntimeStatus.UP;
+                } else if (i == 1 && !e.getState().equals(State.SUCCESS)) {
+                    return RuntimeStatus.DOWN;
+                } else if (i == 2 && e.getState().equals(State.SUCCESS)) {
+                    return RuntimeStatus.UP;
+                }
+            }
+        }
+        return RuntimeStatus.DOWN;
+    }
+    
+    //
+    public RuntimeStatus getStatus() {
+    	return status;
+    }
+
+    //
+    public long getMaxLatency() {
+    	return maxLatency;
     }
     
     /**
@@ -206,6 +242,7 @@ public class ServiceProducer implements Comparable<ServiceProducer> {
     		openEvent(event);
     	} else {
     		closeEvent(event);
+    		update();
     	}
     }
 }

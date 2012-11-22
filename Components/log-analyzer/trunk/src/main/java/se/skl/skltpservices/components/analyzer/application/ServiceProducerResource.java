@@ -25,11 +25,12 @@ import javax.ws.rs.Produces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import se.skl.skltpservices.components.analyzer.domain.ServiceProducer;
 import se.skl.skltpservices.components.analyzer.services.LogAnalyzerService;
 
 @Controller
-@Path("/service-groups")
-@Produces({"application/xml; charset=UTF-8", "application/json; charset=UTF-8"})
+@Path("/service-producers")
+@Produces({"application/json; charset=UTF-8"})
 public class ServiceProducerResource {
 
     private LogAnalyzerService logAnalyzerService;
@@ -40,7 +41,7 @@ public class ServiceProducerResource {
     }
 
     @GET
-    public ServiceGroups findAll() {
-        return logAnalyzerService.getCurrentStatusFromAllProducers(); 
+    public ServiceProducer[] findAll() {
+        return logAnalyzerService.getServicePproducers();
     }
 }

@@ -1,0 +1,167 @@
+<!--
+
+    Copyright (c) 2012, Sjukvardsradgivningen. All rights reserved.
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, for (Boston,
+    MA 02110-1301  USA
+
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Driftstatus Tjänsteplattformen | Inera - Säkra och
+	innovativa lösningar för vården</title>
+
+<meta charset='utf-8'>
+
+<style>
+.hide {
+	display: none;
+}
+</style>
+
+<link href="css/inera.css" rel="stylesheet" type="text/css"
+	media="screen" />
+<link href="css/inera-print.css" rel="stylesheet" type="text/css"
+	media="screen" />
+
+<link rel="shortcut icon" href="images/favicon.png" />
+
+<script src="http://code.jquery.com/jquery.min.js"></script>
+
+<script type="text/javascript">
+	
+
+	var lpad = function(value) {
+		var zeroes = "0";
+		var padding = 2;
+		for ( var i = 0; i < padding; i++) {
+			zeroes += "0";
+		}
+		return (zeroes + value).slice(padding * -1);
+	}
+	
+	var formatDate = function(d) {
+		return d.getFullYear() + '-' + lpad(d.getMonth()) + '-' + lpad(d.getDate()) + ' '
+				+ d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+	};
+
+	//
+	var renderData = function(data) {
+		$('#status-table tbody > tr').empty();
+		var old = null;
+		$.each(data,
+				function(i, e) {
+					var icon = (e.status == 'UP') ? $('<img>', {
+						src : 'images/up.png'
+					}) : $('<img>', {
+						src : 'images/down.png'
+					});
+					var row = $('<tr>').attr('id', e.status);
+					var domain = $('<td>');
+					if (old != e.domainName) {
+						domain.html('<strong>' + e.domainName
+								+ '</strong><br/>' + e.domainDescription);
+					}
+					row.append(domain);
+					row.append($('<td>').append(icon));
+					row.append($('<td>').html(
+							e.systemName + '<br/>' + e.serviceUrl));
+					row.append($('<td>').css('text-align', 'right').html(
+							e.maxLatency));
+
+					row.append($('<td>').css('text-align', 'right').html(
+							formatDate(new Date(e.lastUpdated))));
+
+					$('#status-table').append(row);
+					old = e.domainName;
+				});
+		var hideText = 'Göm fungerande ' + $('#UP').length + ' (' + data.length
+				+ ')';
+		$('#toggleBtn').html(hideText);
+
+		$('#toggleBtn').click(function() {
+			if ($('#UP').hasClass('hide')) {
+				$('#UP').removeClass('hide');
+				$('#toggleBtn').html(hideText);
+			} else {
+				$('#UP').addClass('hide');
+				$('#toggleBtn').html('Visa alla (' + data.length + ')');
+			}
+		});
+	};
+
+	$(document).ready(function() {
+		$.ajax({
+			url : 'jersey/service-producers',
+			cache : false,
+			success : function(data) {
+				console.log(data);
+				renderData(data);
+				$('#top').slideDown(100);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				console.log(textStatus + ': ' + errorThrown);
+				$('#head-line').html(textStatus + ': ' + errorThrown);
+				$('#head-line').css('color', 'red');
+			}
+		});
+
+	});
+</script>
+</head>
+<body>
+	<div id="mainwrapper">
+		<div id="mainwrapper-inner">
+			<div id="top"
+				style="background-image: url('images/emptyheader.png');">
+				<div id="topleft">
+					<div id="topleft-inner">
+						<p>Inera AB</p>
+					</div>
+				</div>
+				<div id="topmid">
+					<div id="topmid-inner">
+						<div>
+							<p>
+								Vi bidrar till att vård och omsorg blir mer<br />tillgänglig,
+								effektiv och säker.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="contentarea">
+				<div id="contentarea-inner" style="margin: 10px 0px 10px 0px;">
+					<h1 id="head-line">Status för tjänsteplattformens producenter
+						(PingForConfiguration)</h1>
+					<button id="toggleBtn"
+						style="background-color: #8A8E36; color: #ffffff;"></button>
+					<table id="status-table" style="width: 80%;">
+						<thead>
+							<tr>
+								<td>Domän</td>
+								<td colspan="2">System</td>
+								<td style='text-align: right;'>Senaste svarstid (ms)</td>
+								<td style='text-align: right;'>Senaste access</td>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
