@@ -71,7 +71,7 @@ public class LogAnalyzerService {
     			Service service = new Service.ServiceBuilder()
     			.setEndpointUrl(serviceProducer.getServiceUrl())
     			.setSystemName(serviceProducer.getSystemName())
-    			.setStatus(calcRuntimeStatus(timeline))
+    			.setStatus(serviceProducer.getStatus())
     			.build();
 
     			// group services by domain names, don't bother if sub-domain matches or not
@@ -155,22 +155,6 @@ public class LogAnalyzerService {
     	sp.update(event);
     }
     
-
-    public RuntimeStatus calcRuntimeStatus(List<Event> timeline) {
-        if (timeline != null) {
-            for (int i = 0; i < Math.min(3, timeline.size()); i++) {
-                Event e = timeline.get(i);
-                if (i == 0 && e.getState().equals(State.SUCCESS)) {
-                    return RuntimeStatus.UP;
-                } else if (i == 1 && !e.getState().equals(State.SUCCESS)) {
-                    return RuntimeStatus.DOWN;
-                } else if (i == 2 && e.getState().equals(State.SUCCESS)) {
-                    return RuntimeStatus.UP;
-                }
-            }
-        }
-        return RuntimeStatus.DOWN;
-    }
     
 	//
 	private static long toTimestamp(final XMLGregorianCalendar timestamp) {	
