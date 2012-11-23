@@ -73,7 +73,8 @@
       <spring:list>
         <spring:value>classpath:PingForConfigurationSupervisor-config.properties</spring:value>
         <spring:value>classpath:PingForConfigurationSupervisor-config-override.properties</spring:value>
-      </spring:list>
+        <spring:value>file:${user.home}/.supervisor/config.properties</spring:value>
+        </spring:list>
     </spring:property>
   </spring:bean>
   
