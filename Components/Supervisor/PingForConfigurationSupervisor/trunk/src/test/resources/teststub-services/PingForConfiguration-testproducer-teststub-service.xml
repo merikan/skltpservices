@@ -32,7 +32,7 @@
 		http://www.mulesoft.org/schema/mule/jms     http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
 	">
 
-	<!-- TODO: Add teststub-service specific definitions here -->
+	<!-- TODO: Add teststub-service specific definitions here
 	
 	<flow name="PingForConfiguration-teststub-flow">
         <inbound-endpoint
@@ -41,19 +41,17 @@
             exchange-pattern="request-response" >
         </inbound-endpoint>
         
-        <cxf:simple-service serviceClass="se.riv.itintegration.monitoring.rivtabp21.v1.PingForConfigurationResponderInterface" />
+        <cxf:simple-service serviceClass="se.riv.itintegration.monitoring.rivtabp21.v1.PingForConfigurationResponderInterface"  />
         <component class="se.skl.skltpservices.supervisor.pingforconfiguration.PingForConfigurationTestProducer" />
         
         <object-to-string-transformer />
         
     </flow>
+     -->
     
-    <!--
-<simple-service 
+	<simple-service 
 		name="PingForConfiguration-teststub-service"
         address="${PINGFORCONFIGURATION_TESTSTUB_INBOUND_URL}" 
-        component-class="se.skl.tp.vp.supervisor.pingforconfiguration.PingForConfigurationTestProducer"
+        component-class="se.skl.skltpservices.supervisor.pingforconfiguration.PingForConfigurationTestProducer"
         type="jax-ws" />
-    -->
-
 </mule>
