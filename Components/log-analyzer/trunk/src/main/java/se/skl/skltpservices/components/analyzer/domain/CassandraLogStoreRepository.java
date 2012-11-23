@@ -20,25 +20,33 @@ package se.skl.skltpservices.components.analyzer.domain;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import me.prettyprint.cassandra.model.IndexedSlicesQuery;
+import me.prettyprint.cassandra.model.MultigetCountQuery;
 import me.prettyprint.cassandra.serializers.LongSerializer;
 import me.prettyprint.cassandra.serializers.StringSerializer;
 import me.prettyprint.cassandra.service.CassandraHostConfigurator;
 import me.prettyprint.hector.api.Cluster;
 import me.prettyprint.hector.api.Keyspace;
+import me.prettyprint.hector.api.beans.CounterRow;
+import me.prettyprint.hector.api.beans.CounterRows;
 import me.prettyprint.hector.api.beans.HColumn;
 import me.prettyprint.hector.api.beans.HCounterColumn;
 import me.prettyprint.hector.api.beans.OrderedRows;
 import me.prettyprint.hector.api.beans.Row;
 import me.prettyprint.hector.api.factory.HFactory;
 import me.prettyprint.hector.api.mutation.Mutator;
+import me.prettyprint.hector.api.query.CounterQuery;
+import me.prettyprint.hector.api.query.MultigetSliceCounterQuery;
+import me.prettyprint.hector.api.query.MultigetSliceQuery;
 import me.prettyprint.hector.api.query.QueryResult;
 
 import org.slf4j.Logger;
@@ -79,12 +87,12 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		columnNames.put("in.cxf_service", "contract");
 		columnNames.put("in.senderid", "sender");
 		columnNames.put("in.receiverid", "receiver");
-		
+
 		// in
 		columnNames.put("in.timestamp", "in_timestamp");
 		columnNames.put("in.payload", "in_payload");
 		columnNames.put("in.rivversion", "in_riv_version");
-		
+
 		// out
 		columnNames.put("out.timestamp", "out_timestamp");
 		columnNames.put("out.payload", "out_payload");
@@ -105,29 +113,31 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 	}
 
 	// config
-    @Value("${log.store.instances}")
-    private String logStoreInstances;
+	@Value("${log.store.instances}")
+	private String logStoreInstances;
 
-    @Value("${log.store.payloadTTL}")
-    private int payloadTTL;
-    
-    @Value("${log.store.timeout}")
-    private int timeout;
+	@Value("${log.store.payloadTTL}")
+	private int payloadTTL;
 
-    @Value("${log.store.metaTTL}")
-    private int metaTTL;
-    
-    @Value("${log.store.weeklyCounterTTL}")
-    private int weeklyCounterTTL;
-    
-    @Value("${log.store.clusterName}")
-    private String clusterName;
+	@Value("${log.store.timeout}")
+	private int timeout;
 
-    @Value("${log.store.counterDomains}")
-    private String counterDomains;
-    
-    private Map<String, List<String>> domainMap = new HashMap<String, List<String>>();
-    
+	@Value("${log.store.metaTTL}")
+	private int metaTTL;
+
+	@Value("${log.store.weeklyCounterTTL}")
+	private int weeklyCounterTTL;
+
+	@Value("${log.store.clusterName}")
+	private String clusterName;
+
+	@Value("${log.store.counterDomains}")
+	private String counterDomains;
+
+	private List<String> domainList = new LinkedList<String>();
+
+	private Map<String, List<String>> domainMap = new HashMap<String, List<String>>();
+
 	// hector stuff
 	private Keyspace keyspace;
 	final static StringSerializer SS = StringSerializer.get();
@@ -136,9 +146,8 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 
 	//
 	public CassandraLogStoreRepository() {
-		
 	}
-	
+
 	// lazy connection.
 	private Keyspace getKeySpace() {
 		if (this.keyspace == null) {
@@ -148,12 +157,21 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 					cfg.setMaxActive(5);
 					cfg.setCassandraThriftSocketTimeout(timeout);
 					cfg.setMaxWaitTimeWhenExhausted(10000);
+					cfg.setRetryDownedHosts(true);
 					Cluster cluster = HFactory.getOrCreateCluster(clusterName, cfg);
 					this.keyspace = HFactory.createKeyspace(KEYSPACE, cluster);
 				}
 			}
 		}
 		return this.keyspace;
+	}
+
+	@PostConstruct
+	public void init() {
+		for (String domain : counterDomains.split(",")) {
+			domainList.add("d-" + domain.trim());
+		}
+		domainList.add("d-" + "others");
 	}
 
 	/**
@@ -177,7 +195,7 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 			log.info("Store event { key: {}, waypoint: {}, level: {} }", new Object[] { key, waypoint, level });
 		}
 		boolean error = LogLevelType.ERROR.equals(level);
-		
+
 		if ("xreq-in".equals(waypoint)) {
 			waypoint = WAYPOINT_IN;
 		} else if (error) {
@@ -187,6 +205,14 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		}
 
 		storeEvent(entry, waypoint, error);
+	}
+
+	//
+	protected Calendar getCalendar() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setFirstDayOfWeek(Calendar.MONDAY);
+		calendar.setMinimalDaysInFirstWeek(4);
+		return calendar;
 	}
 
 	//
@@ -202,9 +228,7 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 			log.warn("Missing business correlationId for event, new  key { uuid: {} } created.", key);
 		}
 
-		Calendar calendar = Calendar.getInstance();
-		calendar.setFirstDayOfWeek(Calendar.MONDAY);
-		calendar.setMinimalDaysInFirstWeek(4);
+		Calendar calendar = getCalendar();
 
 		// add day as YYYY-MM-DD (indexed column)
 		if (WAYPOINT_IN.equals(waypoint) || error) {
@@ -216,7 +240,7 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		if (error) {
 			add(m, columnFamily, key, toStringColumn(columnNames.get(waypoint + "message"), entry.getMessageInfo().getMessage()));			
 		}
-		
+
 		for (ExtraInfo info : entry.getExtraInfo()) {
 			if (log.isDebugEnabled()) {
 				log.debug("ExtraInfo { name: {}, value: {} }", info.getName(), info.getValue());
@@ -237,7 +261,7 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 	private static String toDate(Calendar calendar) {
 		return String.format("%tF", calendar.getTime());
 	}
-	
+
 	//
 	private void updateStatistics(Mutator<String> m, String contract, Calendar calendar, boolean error) {
 		if (contract == null) {
@@ -253,7 +277,7 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 			m.addCounter("d-" + domain, CF_WEEKLY_STATS, column);
 		}
 	}
-	
+
 	/**
 	 * Returns domains for a contract.
 	 * 
@@ -272,12 +296,12 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 				}
 			}
 			if (list.isEmpty()) {
-				list.add("Other domains");
+				list.add("others");
 			}
 		}
 		return list;
 	}
-	
+
 	//
 	private static HColumn<String, String> toStringColumn(String name, String value) {
 		if (value == null || value.length() == 0) {
@@ -343,7 +367,44 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		log.info("In total has { count: {} } rows been deleted", sum);
 		log.info("LogStore clean-up ready!");
 	}
-	
+
+
+	//
+	public List<Counter> getCounters(int week) {
+		log.info("Get counters: " + week);
+		CounterQuery<String, String> query = HFactory.createCounterColumnQuery(keyspace, SS, SS);
+		query.setColumnFamily(CF_WEEKLY_STATS);
+		
+		String w = String.format("Week%d", week);
+		String e = String.format("Week%d_Error", week);
+
+		List<Counter> list = new LinkedList<Counter>();
+
+		for (String domain : domainList) {
+			query.setKey(domain);
+			query.setName(w);
+			HCounterColumn<String> tot = query.execute().get();
+			query.setName(e);
+			HCounterColumn<String> err = query.execute().get();
+			
+			if (tot != null || err != null) {
+				Counter counter = new Counter();
+				counter.setWeek(week);
+				counter.setName(domain.substring(2));
+				if (tot != null) 
+					counter.setTotal(tot.getValue());
+
+				if (err != null)
+					counter.setError(err.getValue());
+
+				list.add(counter);
+				
+			}
+		}
+		
+		return list;
+	}
+
 	/**
 	 * Removes all keys of a specific date.
 	 * @param date the date (YYYY-MM-DD)
@@ -365,11 +426,13 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		for (Row<String, String, String> row : rows.getList()) {
 			m.addDeletion(row.getKey(), CF_INFO_EVENT);
 		}
-		
+
 		if (rows.getCount() > 0) {
 			m.execute();
 		}
-				
+
 		return rows.getCount();
 	}
+
+
 }

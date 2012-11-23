@@ -43,6 +43,7 @@
 
 <script type="text/javascript">
 	
+
 	// left pad numbers
 	Number.prototype.lpad = function(padding) {
 		var zeroes = "0";
@@ -51,11 +52,12 @@
 		}
 		return (zeroes + this).slice(padding * -1);
 	}
-	
+
 	// format date
 	Date.prototype.format = function() {
-		return this.getFullYear() + '-' + this.getMonth().lpad(2) + '-' + this.getDate().lpad(2) + ' '
-				+ this.getHours().lpad(2) + ':' + this.getMinutes().lpad(2) + ':' +this.getSeconds().lpad(2);
+		return this.getFullYear() + '-' + this.getMonth().lpad(2) + '-'
+				+ this.getDate().lpad(2) + ' ' + this.getHours().lpad(2) + ':'
+				+ this.getMinutes().lpad(2) + ':' + this.getSeconds().lpad(2);
 	};
 
 	//

@@ -18,6 +18,8 @@
  */
 package se.skl.skltpservices.components.analyzer.domain;
 
+import java.util.List;
+
 import org.soitoolkit.commons.logentry.schema.v1.LogEvent;
 
 /**
@@ -34,4 +36,12 @@ public interface LogStoreRepository {
 	 */
 	void storeInfoEvent(LogEvent infoEvent);
 	
+	/**
+	 * Returns domain counters.
+	 * 
+	 * @param week week of year.
+	 * 
+	 * @return the counters.
+	 */
+	List<Counter> getCounters(int week);
 }
