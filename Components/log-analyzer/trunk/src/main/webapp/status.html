@@ -43,19 +43,19 @@
 
 <script type="text/javascript">
 	
-
-	var lpad = function(value) {
+	// left pad numbers
+	Number.prototype.lpad = function(padding) {
 		var zeroes = "0";
-		var padding = 2;
 		for ( var i = 0; i < padding; i++) {
 			zeroes += "0";
 		}
-		return (zeroes + value).slice(padding * -1);
+		return (zeroes + this).slice(padding * -1);
 	}
 	
-	var formatDate = function(d) {
-		return d.getFullYear() + '-' + lpad(d.getMonth()) + '-' + lpad(d.getDate()) + ' '
-				+ d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+	// format date
+	Date.prototype.format = function() {
+		return this.getFullYear() + '-' + this.getMonth().lpad(2) + '-' + this.getDate().lpad(2) + ' '
+				+ this.getHours().lpad(2) + ':' + this.getMinutes().lpad(2) + ':' +this.getSeconds().lpad(2);
 	};
 
 	//
@@ -83,7 +83,7 @@
 							e.maxLatency));
 
 					row.append($('<td>').css('text-align', 'right').html(
-							formatDate(new Date(e.lastUpdated))));
+							new Date(e.lastUpdated).format()));
 
 					$('#status-table').append(row);
 					old = e.domainName;
