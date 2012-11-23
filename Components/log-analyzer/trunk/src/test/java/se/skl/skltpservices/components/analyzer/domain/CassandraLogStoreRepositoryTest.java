@@ -18,11 +18,13 @@
  */
 package se.skl.skltpservices.components.analyzer.domain;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -119,7 +121,7 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		when(event.getLogEntry().getMessageInfo().getMessage()).thenReturn("xreq-in");
 		ExtraInfo extraInfo = new ExtraInfo();
 		extraInfo.setName("cxf_service");
-		extraInfo.setValue("urn:riv:domain:subdomain:method");
+		extraInfo.setValue("urn:riv:insuranceprocess:healthreporting");
 		when(event.getLogEntry().getExtraInfo()).thenReturn(Collections.singletonList(extraInfo));
 		
 		XMLGregorianCalendar cal = mock(XMLGregorianCalendar.class);
@@ -141,6 +143,13 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		create();
 		((CassandraLogStoreRepository)repo).clean();
 		assertNull(queryEvent());
+	}
+	
+	@Test
+	public void counters() {
+		create();
+		List<Counter> list = repo.getCounters(repo.getCalendar().get(Calendar.WEEK_OF_YEAR));
+		assertEquals(1, list.size());
 	}
 	
 	//
