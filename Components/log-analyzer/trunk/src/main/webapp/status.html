@@ -30,20 +30,135 @@
 .hide {
 	display: none;
 }
+
+html {
+	height: 100%;
+}
+
+body {
+	font-size: 75%;
+	font-family: Arial, Verdana, Sans-Serif;
+	height: 100%;
+	width: 98.5%;
+	overflow: hidden;
+}
+
+a {
+	color: grey;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+img {
+	border: none;
+}
+
+h1 {
+	color: #009492;
+	font-size: 1.7em;
+	font-family: Arial, Verdana, Sans-Serif;
+	font-weight: bold;
+	line-height: 1.1em;
+	margin-bottom: 0.3em;
+}
+
+li {
+	list-style: none;
+	font-size: 12px;
+}
+
+table {
+	margin-bottom: 20px;
+	width: 80%;
+}
+
+table tbody tr th,table tbody tr {
+	text-align: left;
+	margin: 0;
+	padding: 0;
+}
+
+table thead td {
+	border-bottom: solid 1px #A2A2A2;
+}
+
+button {
+	border-radius: 6px;
+	-o-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	background-color: #009492; //#8 A8E36;
+	color: #ffffff;
+	width: 150px;
+}
+
+td {
+	white-space: nowrap;
+	padding-right: 10px;
+	text-align: left;
+	margin: 0;
+	height: 50px;
+}
+
+tr {
+	white-space: nowrap;
+}
+
+table .header {
+	text-decoration: underline;
+}
+
+div#top {
+	position: relative;
+	background: url(images/emptyheader.png);
+	margin-top: 0px;
+	margin-bottom: 0px;
+	height: 132px;
+	float: left;
+	width: 100%;
+}
+
+div#top div#topmid {
+	float: left;
+	margin: 47px 50px 0px 155px;
+	color: #fafafa;
+	font-size: 19px;
+}
+
+div#top div#topleft {
+	float: left;
+	margin: 47px 50px 0px 35px;
+	color: #fafafa;
+}
+
+div#content {
+	position: relative;
+	width: 100%;
+}
+
+div#content div#menu {
+	float: left;
+	width: 20%;
+}
+
+div#content div#body {
+	float: right;
+	width: 80%;
+}
 </style>
 
+<!-- 
 <link href="css/inera.css" rel="stylesheet" type="text/css"
 	media="screen" />
 <link href="css/inera-print.css" rel="stylesheet" type="text/css"
 	media="screen" />
+ -->
 
 <link rel="shortcut icon" href="images/favicon.png" />
 
-<script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="js/jquery-1.7.1.min.js"></script>
 
 <script type="text/javascript">
-	
-
 	// left pad numbers
 	Number.prototype.lpad = function(padding) {
 		var zeroes = "0";
@@ -61,7 +176,7 @@
 	};
 
 	//
-	var renderData = function(data) {
+	var renderProducerStatus = function(data) {
 		$('#status-table tbody > tr').empty();
 		var old = null;
 		$.each(data,
@@ -90,29 +205,15 @@
 					$('#status-table').append(row);
 					old = e.domainName;
 				});
-		var hideText = 'Göm fungerande ' + $('#UP').length + ' (' + data.length
-				+ ')';
-		$('#toggleBtn').html(hideText);
-
-		$('#toggleBtn').click(function() {
-			if ($('#UP').hasClass('hide')) {
-				$('#UP').removeClass('hide');
-				$('#toggleBtn').html(hideText);
-			} else {
-				$('#UP').addClass('hide');
-				$('#toggleBtn').html('Visa alla (' + data.length + ')');
-			}
-		});
 	};
 
-	$(document).ready(function() {
+	//
+	var render = function(request) {
 		$.ajax({
-			url : 'jersey/service-producers',
+			url : request.url,
 			cache : false,
 			success : function(data) {
-				console.log(data);
-				renderData(data);
-				$('#top').slideDown(100);
+				request.render(data);
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
 				console.log(textStatus + ': ' + errorThrown);
@@ -121,47 +222,85 @@
 			}
 		});
 
+	};
+
+	var producerRequest = {
+		url : "jersey/service-producers",
+		render : renderProducerStatus
+	};
+
+	$(document).ready(function() {
+		render(producerRequest);
+		
+		$('#toggleBtn').click(function() {
+			if ($('#UP').hasClass('hide')) {
+				$('#UP').removeClass('hide');
+			} else {
+				$('#UP').addClass('hide');
+			}
+		});
+
+		$('#yy').click(function() {
+			$('#status').addClass('hide');
+			$('#aktuellt').removeClass('hide');
+		});
+
+		$('#xx').click(function() {
+			$('#aktuellt').addClass('hide');
+			$('#status').removeClass('hide');
+		});
+		
 	});
 </script>
 </head>
 <body>
-	<div id="mainwrapper">
-		<div id="mainwrapper-inner">
-			<div id="top"
-				style="background-image: url('images/emptyheader.png');">
-				<div id="topleft">
-					<div id="topleft-inner">
-						<p>Inera AB</p>
-					</div>
+	<div id="top">
+		<div id="topleft">
+			<a href="http://www.inera.se"><img src="images/inera-logo.png"
+				width="64px" /></a>
+		</div>
+		<div id="topmid">
+			<p>
+				Vi bidrar till att vård och omsorg blir mer<br />tillgänglig,
+				effektiv och säker.
+			</p>
+		</div>
+	</div>
+	<div id="content">
+		<div id="menu">
+			<h1>&nbsp;</h1>
+			<ul>
+				<li><a id="xx" href="#">Status producenter</a></li>
+				<li><a id="yy" href="#">Aktuellt läge</a></li>
+			</ul>
+		</div>
+		<div id="body">
+			<h1 id="head-line">Status för tjänsteplattformens producenter</h1>
+			<div id="status">
+				<div style="color: #009492;">
+					<input type="checkbox" id="toggleBtn" /> Visa endast problem
 				</div>
-				<div id="topmid">
-					<div id="topmid-inner">
-						<div>
-							<p>
-								Vi bidrar till att vård och omsorg blir mer<br />tillgänglig,
-								effektiv och säker.
-							</p>
-						</div>
-					</div>
-				</div>
+				<!-- <button id="toggleBtn"></button>  -->
+				<table id="status-table">
+					<thead>
+						<tr>
+							<td>Domän</td>
+							<td colspan="2">System</td>
+							<td style='text-align: right;'>Svarstid (ms)</td>
+							<td style='text-align: right;'>Tid</td>
+						</tr>
+					</thead>
+				</table>
 			</div>
-			<div id="contentarea">
-				<div id="contentarea-inner" style="margin: 10px 0px 10px 0px;">
-					<h1 id="head-line">Status för tjänsteplattformens producenter
-						(PingForConfiguration)</h1>
-					<button id="toggleBtn"
-						style="background-color: #8A8E36; color: #ffffff;"></button>
-					<table id="status-table" style="width: 80%;">
-						<thead>
-							<tr>
-								<td>Domän</td>
-								<td colspan="2">System</td>
-								<td style='text-align: right;'>Senaste svarstid (ms)</td>
-								<td style='text-align: right;'>Senaste access</td>
-							</tr>
-						</thead>
-					</table>
-				</div>
+			<div id="aktuellt" class="hide">
+				<table id="aktuellt-table">
+					<thead>
+						<tr>
+							<td>Tjänstedomän</td>
+							<td colspan="2">Antal Anrop</td>
+						</tr>
+					</thead>
+				</table>
 			</div>
 		</div>
 	</div>
