@@ -16,7 +16,7 @@
 	<groupId>se.skl.skltpservices</groupId>
 	<artifactId>hval24-adapter</artifactId>
 	<packaging>pom</packaging>
-	<version>1.2.0-RC1</version>
+	<version>1.2.0</version>
 	<name>${project.artifactId}</name>
 	<url>http://maven.apache.org</url>
 
