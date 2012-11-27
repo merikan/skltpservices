@@ -87,8 +87,5 @@
   <logger name="se.skl.skltpservices">
     <level value="debug" />
   </logger>
-
-  	<appender-ref ref="ERROR" />
-  	<appender-ref ref="FILE" />
   	
 </configuration>
