@@ -16,6 +16,14 @@ See [http://code.google.com/p/skltp/wiki/InstallationServiceBridge Adapterplatfo
 
 ==Build from source==
 
+[https://code.google.com/p/skltpservices/source/checkout Instructions how to checkout source]
+
+How to build ForsakringskassanAdapterService in trunk
+{{{
+cd AdapterServices/riv.insuranceprocess.healthreporting/ForsakringskassanAdapterService/tags/fk-adapter-1.6.0-R/
+mvn clean install 
+}}}
+
 ==Deploy/Undeploy distribution==
 
 Download distribution above.
