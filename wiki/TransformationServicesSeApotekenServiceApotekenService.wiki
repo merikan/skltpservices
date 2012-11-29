@@ -29,6 +29,8 @@ mvn clean install
 
 ==Deploy/Undeploy distribution==
 
+*TBD*
+
 ==Configuration==
 
 [http://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/src/environment/ Config files]
