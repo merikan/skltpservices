@@ -18,8 +18,8 @@ See [http://code.google.com/p/skltp/wiki/InstallationServiceBridge Adapterplatfo
 
 [https://code.google.com/p/skltpservices/source/checkout Instructions how to checkout source]
 
-Build AdapterServices/riv.se_apotekensservice/TicketMachine 
-Build AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService 
+`Build AdapterServices/riv.se_apotekensservice/TicketMachine`
+`Build AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService`
 
 How to build Ticketmachine in trunk
 {{{
