@@ -27,6 +27,13 @@ cd AdapterServices/riv.se_apotekensservice/TicketMachine/trunk
 mvn clean install 
 }}}
 
+
+How to build ApotekensServiceAdapterService in trunk
+{{{
+cd AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk
+mvn clean install 
+}}}
+
 ==Deploy/Undeploy distribution==
 
 *TBD*
