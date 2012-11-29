@@ -10,6 +10,8 @@
 
 ==Download distribution==
 
+[http://skltpservices.googlecode.com/files/FkEintygAdapter_1_6_0.zip lastest distribution]
+
 ==Build from source==
 
 ==Deploy/Undeploy distribution==
