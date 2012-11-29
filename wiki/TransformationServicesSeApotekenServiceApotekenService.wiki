@@ -38,8 +38,8 @@ mvn clean install
 
 Download distribution above.
 
-Extract services to `<adapter platform>/services`
-Extract user to `<MULE_HOME>lib/user`
+ * Extract services to `<adapter platform>/services`
+ * Extract user to `<MULE_HOME>lib/user`
 
 ==Configuration==
 
