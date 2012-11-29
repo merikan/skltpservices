@@ -8,21 +8,24 @@
 
 ==Runtime environment==
 
-==Download distribution==
-
-==Build from source==
-
-==Deploy/Undeploy distribution==
-
-==Configuration==
-
-=Installation instructions mule 3.3.x=
-
-==Runtime environment==
+See [http://code.google.com/p/skltp/wiki/InstallationServiceBridge Adapterplatform]
 
 ==Download distribution==
 
+*TBD*
+
 ==Build from source==
+
+[https://code.google.com/p/skltpservices/source/checkout Instructions how to checkout source]
+
+Build AdapterServices/riv.se_apotekensservice/TicketMachine 
+Build AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService 
+
+How to build Ticketmachine in trunk
+{{{
+cd AdapterServices/riv.se_apotekensservice/TicketMachine/trunk
+mvn clean install 
+}}}
 
 ==Deploy/Undeploy distribution==
 
