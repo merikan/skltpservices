@@ -12,7 +12,7 @@ See [http://code.google.com/p/skltp/wiki/InstallationServiceBridge Adapterplatfo
 
 ==Download distribution==
 
-*TBD*
+[http://skltpservices.googlecode.com/files/ApSeMedicalServicesAdapter1_6_0.zip Download latest release]
 
 ==Build from source==
 
