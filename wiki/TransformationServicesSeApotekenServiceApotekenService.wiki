@@ -36,7 +36,10 @@ mvn clean install
 
 ==Deploy/Undeploy distribution==
 
-*TBD*
+Download distribution above.
+
+Extract services to <adapter platform>/services
+Extract user to <MULE_HOME>lib/user
 
 ==Configuration==
 
