@@ -92,6 +92,10 @@ button {
 	width: 150px;
 }
 
+.error {
+	color: red;
+}
+
 td {
 	white-space: nowrap;
 	padding-right: 10px;
@@ -266,11 +270,12 @@ div#content div#body {
 			cache : false,
 			success : function(data) {
 				request.render(data);
+				$('#head-line').removeClass('error');
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
 				console.log(textStatus + ': ' + errorThrown);
 				$('#head-line').html(textStatus + ': ' + errorThrown);
-				$('#head-line').css('color', 'red');
+				$('#head-line').addClass('error');
 			}
 		});
 
