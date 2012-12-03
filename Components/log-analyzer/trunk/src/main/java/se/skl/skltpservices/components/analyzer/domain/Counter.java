@@ -16,33 +16,45 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package se.skl.skltpservices.components.analyzer.application;
+package se.skl.skltpservices.components.analyzer.domain;
 
-import java.util.List;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
-import se.skl.skltpservices.components.analyzer.domain.Counter;
-import se.skl.skltpservices.components.analyzer.domain.LogStoreRepository;
-
-
-@Controller
-@Path("/counters")
-@Produces({"application/json; charset=UTF-8"})
-public class DomainCounterResource {
-
-	@Autowired
-    private LogStoreRepository logStoreRepository;
-   
-    @GET
-    @Path("/{week}")
-    public List<Counter> find(@PathParam("week") int week) {
-        return logStoreRepository.getDomainCounters(week);
-    }
+//
+public class Counter {
+	private String name;
+	private int week;
+	private long total;
+	private long error;
+	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getWeek() {
+		return week;
+	}
+	public void setWeek(int week) {
+		this.week = week;
+	}
+	public long getError() {
+		return error;
+	}
+	public void setError(long error) {
+		this.error = error;
+	}
+	public long getTotal() {
+		return total;
+	}
+	public void setTotal(long total) {
+		this.total = total;
+	}
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+	}
 }

@@ -25,9 +25,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.nio.ByteBuffer;
-import java.sql.Time;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -42,7 +40,6 @@ import me.prettyprint.cassandra.model.BasicColumnFamilyDefinition;
 import me.prettyprint.cassandra.service.CassandraHostConfigurator;
 import me.prettyprint.cassandra.service.ThriftCfDef;
 import me.prettyprint.cassandra.service.ThriftKsDef;
-import me.prettyprint.cassandra.utils.TimeUUIDUtils;
 import me.prettyprint.hector.api.Cluster;
 import me.prettyprint.hector.api.beans.Composite;
 import me.prettyprint.hector.api.beans.HColumn;
@@ -53,8 +50,6 @@ import me.prettyprint.hector.api.query.ColumnQuery;
 import me.prettyprint.hector.api.query.QueryResult;
 import me.prettyprint.hector.api.query.SliceQuery;
 
-import org.apache.cassandra.utils.ByteBufferUtil;
-import org.apache.cassandra.utils.UUIDGen;
 import org.cassandraunit.utils.EmbeddedCassandraServerHelper;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -180,7 +175,7 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 	@Test
 	public void reverseIndex() {	
 		final long t0 = System.currentTimeMillis();
-		Map<String, CassandraLogStoreRepository.ReverseEvent> map = new HashMap<String, CassandraLogStoreRepository.ReverseEvent>();
+		Map<String, ReverseEvent> map = new HashMap<String, ReverseEvent>();
 		
 		Set<UUID> keySet = new HashSet<UUID>();
 		
@@ -190,7 +185,7 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 			String key = UUID.randomUUID().toString() + "." + i;
 			long timestamp = System.currentTimeMillis();
 			boolean error = false;
-			CassandraLogStoreRepository.ReverseEvent r = new CassandraLogStoreRepository.ReverseEvent(key, payload, error, timestamp);
+			ReverseEvent r = new ReverseEvent(key, payload, error, timestamp);
 			r.add("contract", "urn:riv:insuranceprocess:healthreporting");
 			r.add("sender", "sender-id");
 			r.add("receiver", "receiver-id-" + (i % 10));
@@ -205,13 +200,13 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		assertEquals(n0, keySet.size());
 		
 		// scramble order
-		for (CassandraLogStoreRepository.ReverseEvent r : map.values()) {
+		for (ReverseEvent r : map.values()) {
 			repo.updateReverseIndex(r);
 		}
 		
 		final long t1 = System.currentTimeMillis();
 
-		CassandraLogStoreRepository.ReverseEvent r = new CassandraLogStoreRepository.ReverseEvent(key, payload, false, System.currentTimeMillis());
+		ReverseEvent r = new ReverseEvent(key, payload, false, System.currentTimeMillis());
 		r.add("contract", "urn:riv:insuranceprocess:healthreporting");
 		r.add("sender", "sender-id");
 		r.add("receiver", "receiver-id-0");
