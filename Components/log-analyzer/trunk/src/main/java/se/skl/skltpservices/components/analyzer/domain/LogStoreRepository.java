@@ -19,11 +19,12 @@
 package se.skl.skltpservices.components.analyzer.domain;
 
 import java.util.List;
+import java.util.Set;
 
 import org.soitoolkit.commons.logentry.schema.v1.LogEvent;
 
 /**
- * Stores camel events in a persistent store.
+ * Stores (soi-toolkit) log events in a persistent store.
  * 
  * @author Peter
  */
@@ -34,7 +35,7 @@ public interface LogStoreRepository {
 	 * 
 	 * @param inforEvent the event to store.
 	 */
-	void storeInfoEvent(LogEvent infoEvent);
+	void storeEvent(LogEvent infoEvent);
 	
 	/**
 	 * Returns domain counters.
@@ -43,5 +44,36 @@ public interface LogStoreRepository {
 	 * 
 	 * @return the counters.
 	 */
-	List<Counter> getCounters(int week);
+	List<Counter> getDomainCounters(int week);
+
+	/**
+	 * Returns contract counters.
+	 * 
+	 * @param week week of year.
+	 * 
+	 * @return the counters.
+	 */
+	List<Counter> getContractCounters(int week);
+	
+	/**
+	 * Returns senders.
+	 * 
+	 * @return senders.
+	 */
+	Set<String> getSenders();
+
+	/**
+	 * Returns receivers.
+	 * 
+	 * @return receivers.
+	 */
+	Set<String> getReceivers();
+	
+	/**
+	 * Returns contracts.
+	 * 
+	 * @return contracts.
+	 */
+	Set<String> getContracts();
+
 }

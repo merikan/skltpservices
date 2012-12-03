@@ -42,6 +42,6 @@ public class DomainCounterResource {
    
     @GET
     public List<Counter> find(@PathParam("week") int week) {
-        return logStoreRepository.getCounters(week);
+        return logStoreRepository.getDomainCounters(week);
     }
 }

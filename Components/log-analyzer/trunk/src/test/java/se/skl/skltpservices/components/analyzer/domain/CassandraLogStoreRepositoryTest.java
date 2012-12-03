@@ -20,33 +20,41 @@ package se.skl.skltpservices.components.analyzer.domain;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.nio.ByteBuffer;
+import java.sql.Time;
 import java.util.Calendar;
-import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import me.prettyprint.cassandra.model.BasicColumnDefinition;
 import me.prettyprint.cassandra.model.BasicColumnFamilyDefinition;
-import me.prettyprint.cassandra.serializers.StringSerializer;
 import me.prettyprint.cassandra.service.CassandraHostConfigurator;
 import me.prettyprint.cassandra.service.ThriftCfDef;
 import me.prettyprint.cassandra.service.ThriftKsDef;
+import me.prettyprint.cassandra.utils.TimeUUIDUtils;
 import me.prettyprint.hector.api.Cluster;
+import me.prettyprint.hector.api.beans.Composite;
 import me.prettyprint.hector.api.beans.HColumn;
 import me.prettyprint.hector.api.ddl.ColumnFamilyDefinition;
-import me.prettyprint.hector.api.ddl.ColumnIndexType;
 import me.prettyprint.hector.api.ddl.ComparatorType;
 import me.prettyprint.hector.api.factory.HFactory;
 import me.prettyprint.hector.api.query.ColumnQuery;
 import me.prettyprint.hector.api.query.QueryResult;
+import me.prettyprint.hector.api.query.SliceQuery;
 
+import org.apache.cassandra.utils.ByteBufferUtil;
+import org.apache.cassandra.utils.UUIDGen;
 import org.cassandraunit.utils.EmbeddedCassandraServerHelper;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -86,19 +94,26 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		EmbeddedCassandraServerHelper.cleanEmbeddedCassandra();
 
 		List<ColumnFamilyDefinition> list = new LinkedList<ColumnFamilyDefinition>();
+		
 		ColumnFamilyDefinition eventDf = new BasicColumnFamilyDefinition();
 		eventDf.setKeyspaceName("Log");
-		eventDf.setName("InfoEvent");
-		
-		// Date index
-		BasicColumnDefinition dateDf = new BasicColumnDefinition();
-		dateDf.setName(StringSerializer.get().toByteBuffer("date"));
-		dateDf.setIndexName("date_index");
-		dateDf.setIndexType(ColumnIndexType.KEYS);
-		dateDf.setValidationClass(ComparatorType.ASCIITYPE.getClassName());
-		eventDf.addColumnDefinition(dateDf);
-		
+		eventDf.setName("Event");		
 		list.add(new ThriftCfDef(eventDf));
+		
+		ColumnFamilyDefinition timelineDef = HFactory.createColumnFamilyDefinition("Log", "EventTimeLine");
+		timelineDef.setKeyValidationClass("CompositeType(AsciiType, AsciiType, AsciiType, AsciiType)");
+		timelineDef.setDefaultValidationClass("CompositeType(AsciiType, UTF8Type)");
+		timelineDef.setComparatorType(ComparatorType.TIMEUUIDTYPE);
+		list.add(timelineDef);
+
+		ColumnFamilyDefinition metaDf = new BasicColumnFamilyDefinition();
+		metaDf.setKeyspaceName("Log");
+		metaDf.setName("MetaData");		
+		metaDf.setKeyValidationClass("AsciiType");
+		metaDf.setDefaultValidationClass("UTF8Type");
+		metaDf.setComparatorType(ComparatorType.UTF8TYPE);
+		list.add(new ThriftCfDef(metaDf));
+
 		
 		ColumnFamilyDefinition counterDef = HFactory.createColumnFamilyDefinition("Log", "WeeklyStats");
 		counterDef.setDefaultValidationClass(ComparatorType.COUNTERTYPE.getClassName());
@@ -110,6 +125,13 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		this.key = UUID.randomUUID().toString();
 	}
 	
+	ExtraInfo createExtraInfo(String name, String value) {
+		ExtraInfo info = new ExtraInfo();
+		info.setName(name);
+		info.setValue(value);
+		return info;
+	}
+	
 	@Test
 	public void create() {
 		LogEvent event = mock(LogEvent.class);
@@ -119,10 +141,14 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		when(event.getLogEntry().getRuntimeInfo().getBusinessCorrelationId()).thenReturn(key);
 		when(event.getLogEntry().getPayload()).thenReturn("no special");
 		when(event.getLogEntry().getMessageInfo().getMessage()).thenReturn("xreq-in");
-		ExtraInfo extraInfo = new ExtraInfo();
-		extraInfo.setName("cxf_service");
-		extraInfo.setValue("urn:riv:insuranceprocess:healthreporting");
-		when(event.getLogEntry().getExtraInfo()).thenReturn(Collections.singletonList(extraInfo));
+		
+		List<ExtraInfo> extraInfo = new LinkedList<ExtraInfo>();
+		
+		extraInfo.add(createExtraInfo("cxf_service", "urn:riv:insuranceprocess:healthreporting"));
+		extraInfo.add(createExtraInfo("senderid", "sender-id"));
+		extraInfo.add(createExtraInfo("receiverid", "receiver-id"));	
+		
+		when(event.getLogEntry().getExtraInfo()).thenReturn(extraInfo);
 		
 		XMLGregorianCalendar cal = mock(XMLGregorianCalendar.class);
 		when(cal.getYear()).thenReturn(2012);
@@ -134,28 +160,97 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		when(cal.getMillisecond()).thenReturn(0);
 		
 		when(event.getLogEntry().getRuntimeInfo().getTimestamp()).thenReturn(cal);
-		repo.storeInfoEvent(event);
+		repo.storeEvent(event);
 		assertNotNull(queryEvent());
+		assertEquals(1, repo.getContracts().size());
+		assertEquals(1, repo.getSenders().size());
+		assertEquals(1, repo.getReceivers().size());		
 	}
 	
-	@Test
-	public void clean() {
-		create();
-		((CassandraLogStoreRepository)repo).clean();
-		assertNull(queryEvent());
-	}
-	
+		
 	@Test
 	public void counters() {
 		create();
-		List<Counter> list = repo.getCounters(repo.getCalendar().get(Calendar.WEEK_OF_YEAR));
+		List<Counter> list = repo.getDomainCounters(repo.getCalendar().get(Calendar.WEEK_OF_YEAR));
 		assertEquals(1, list.size());
+		list = repo.getContractCounters(repo.getCalendar().get(Calendar.WEEK_OF_YEAR));
+		assertEquals(1, list.size());		
+	}
+	
+	@Test
+	public void reverseIndex() {	
+		final long t0 = System.currentTimeMillis();
+		Map<String, CassandraLogStoreRepository.ReverseEvent> map = new HashMap<String, CassandraLogStoreRepository.ReverseEvent>();
+		
+		Set<UUID> keySet = new HashSet<UUID>();
+		
+		String payload = "payload";
+		int n0 = 0;
+		for (int i = 0; i < 100; i++) {
+			String key = UUID.randomUUID().toString() + "." + i;
+			long timestamp = System.currentTimeMillis();
+			boolean error = false;
+			CassandraLogStoreRepository.ReverseEvent r = new CassandraLogStoreRepository.ReverseEvent(key, payload, error, timestamp);
+			r.add("contract", "urn:riv:insuranceprocess:healthreporting");
+			r.add("sender", "sender-id");
+			r.add("receiver", "receiver-id-" + (i % 10));
+			if (r.getReceiver().equals("receiver-id-0")) {
+				keySet.add(r.getTimeUUID().getUUID());
+				n0++;
+			}			
+			map.put(key, r);
+		}
+
+		// make sure there are no duplicate column names
+		assertEquals(n0, keySet.size());
+		
+		// scramble order
+		for (CassandraLogStoreRepository.ReverseEvent r : map.values()) {
+			repo.updateReverseIndex(r);
+		}
+		
+		final long t1 = System.currentTimeMillis();
+
+		CassandraLogStoreRepository.ReverseEvent r = new CassandraLogStoreRepository.ReverseEvent(key, payload, false, System.currentTimeMillis());
+		r.add("contract", "urn:riv:insuranceprocess:healthreporting");
+		r.add("sender", "sender-id");
+		r.add("receiver", "receiver-id-0");
+
+		SliceQuery<Composite, ByteBuffer, Composite> query = HFactory.createSliceQuery(repo.getKeySpace(), CassandraLogStoreRepository.CS, CassandraLogStoreRepository.BS, CassandraLogStoreRepository.CS);
+		query.setColumnFamily(CassandraLogStoreRepository.CF_EVENT_TIMELINE).setKey(r.key());
+		ColumnIterator<ByteBuffer, Composite> iter = new ColumnIterator<ByteBuffer, Composite>(query);
+		
+		long lastTimestamp = -1;
+		while (iter.hasNext()) {
+			HColumn<ByteBuffer, Composite> col = iter.next();
+			Composite value = col.getValue();
+			TimeUUID tuuid = new TimeUUID(col.getName());
+			long timestamp = tuuid.getTimestamp();
+			
+			// time order
+			assertTrue(timestamp >= lastTimestamp);
+			// no strange times
+			assertTrue(t0 <= timestamp);
+			assertTrue(timestamp <= t1);
+			lastTimestamp = timestamp;
+			
+			UUID uuid = tuuid.getUUID();
+			assertTrue(keySet.remove(uuid));
+
+			@SuppressWarnings("unchecked")
+			Object v = value.getComponent(1).getValue(CassandraLogStoreRepository.SS);
+			assertTrue(v.equals(payload));
+		}
+
+		// verify that all columns has been retrieved
+		assertEquals(0, keySet.size());
+
 	}
 	
 	//
 	private HColumn<String, String> queryEvent() {
 		ColumnQuery<String, String, String> columnQuery = HFactory.createStringColumnQuery(HFactory.createKeyspace("Log", cluster));
-		columnQuery.setColumnFamily("InfoEvent");
+		columnQuery.setColumnFamily("Event");
 		columnQuery.setName("date");
 		columnQuery.setKey(key);
 		QueryResult<HColumn<String, String>> result = columnQuery.execute();
