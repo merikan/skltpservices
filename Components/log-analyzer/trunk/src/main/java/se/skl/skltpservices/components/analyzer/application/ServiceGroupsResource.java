@@ -18,31 +18,29 @@
  */
 package se.skl.skltpservices.components.analyzer.application;
 
-import java.util.List;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import se.skl.skltpservices.components.analyzer.domain.Counter;
-import se.skl.skltpservices.components.analyzer.domain.LogStoreRepository;
-
+import se.skl.skltpservices.components.analyzer.services.LogAnalyzerService;
 
 @Controller
-@Path("/counters")
-@Produces({"application/json; charset=UTF-8"})
-public class DomainCounterResource {
+@Path("/service-groups")
+@Produces({"application/xml; charset=UTF-8", "application/json; charset=UTF-8"})
+public class ServiceGroupsResource {
 
-	@Autowired
-    private LogStoreRepository logStoreRepository;
-   
+    private LogAnalyzerService logAnalyzerService;
+    
+    @Autowired
+    public ServiceGroupsResource(LogAnalyzerService logAnalyzerService) {
+        this.logAnalyzerService = logAnalyzerService;
+    }
+
     @GET
-    @Path("/{week}")
-    public List<Counter> find(@PathParam("week") int week) {
-        return logStoreRepository.getDomainCounters(week);
+    public ServiceGroups findAll() {
+        return logAnalyzerService.getCurrentStatusFromAllProducers(); 
     }
 }

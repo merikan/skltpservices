@@ -40,7 +40,7 @@ body {
 	font-family: Arial, Verdana, Sans-Serif;
 	height: 100%;
 	width: 98.5%;
-	overflow: hidden;
+	overflow-x: hidden;
 }
 
 a {
@@ -168,6 +168,38 @@ div#content div#body {
 		return (zeroes + this).slice(padding * -1);
 	}
 
+	/** 
+	 * Get the ISO week date week number 
+	 */  
+	Date.prototype.getWeek = function () {  
+	    // Create a copy of this date object  
+	    var target  = new Date(this.valueOf());  
+	  
+	    // ISO week date weeks start on monday  
+	    // so correct the day number  
+	    var dayNr   = (this.getDay() + 6) % 7;  
+	  
+	    // ISO 8601 states that week 1 is the week  
+	    // with the first thursday of that year.  
+	    // Set the target date to the thursday in the target week  
+	    target.setDate(target.getDate() - dayNr + 3);  
+	  
+	    // Store the millisecond value of the target date  
+	    var firstThursday = target.valueOf();  
+	  
+	    // Set the target to the first thursday of the year  
+	    // First set the target to january first  
+	    target.setMonth(0, 1);  
+	    // Not a thursday? Correct the date to the next thursday  
+	    if (target.getDay() != 4) {  
+	        target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);  
+	    }  
+	  
+	    // The weeknumber is the number of weeks between the   
+	    // first thursday of the year and the thursday in the target week  
+	    return 1 + Math.ceil((firstThursday - target) / 604800000); // 604800000 = 7 * 24 * 3600 * 1000  
+	};
+	
 	// format date
 	Date.prototype.format = function() {
 		return this.getFullYear() + '-' + this.getMonth().lpad(2) + '-'
@@ -177,8 +209,11 @@ div#content div#body {
 
 	//
 	var renderProducerStatus = function(data) {
-		$('#status-table tbody > tr').empty();
+		$('#status-table tbody').empty();
+		$('#head-line').html("Status för tjänsteplattformens producenter");
 		var old = null;
+		var downOnly = $('#toggleBtn').is(':checked');
+
 		$.each(data,
 				function(i, e) {
 					var icon = (e.status == 'UP') ? $('<img>', {
@@ -202,13 +237,30 @@ div#content div#body {
 					row.append($('<td>').css('text-align', 'right').html(
 							new Date(e.lastUpdated).format()));
 
-					$('#status-table').append(row);
 					old = e.domainName;
+					if (downOnly && e.status == 'UP') {
+						row.addClass('hide');					
+					}
+					$('#status-table').append(row);
 				});
+	};
+	
+	//
+	var renderDomainCounters = function(data) {
+		$('#aktuellt-table tbody').empty();
+		$('#head-line').html("Antal anrop per tjänstedomän");
+
+		$.each(data, function(i, e) {
+			var row = $('<tr>');
+			row.append($('<td>').html(e.name));
+			row.append($('<td>').css('text-align', 'right').html(e.total));
+			$('#aktuellt-table').append(row);			
+		});
 	};
 
 	//
 	var render = function(request) {
+		console.log(request);
 		$.ajax({
 			url : request.url,
 			cache : false,
@@ -224,13 +276,35 @@ div#content div#body {
 
 	};
 
+	//
 	var producerRequest = {
 		url : "jersey/service-producers",
 		render : renderProducerStatus
 	};
+	
+	//
+	var counterRequest = function(week) {
+		return {
+			url : "jersey/counters/" + week,
+			render : renderDomainCounters
+		};
+	};
 
 	$(document).ready(function() {
 		render(producerRequest);
+		
+		var week = new Date().getWeek();
+		for (var i = 1; i <= week; i++) {
+			var opt = $('<option>').attr('name', i).html(i);
+			if (i == week) {
+				opt.attr('selected', 'selected');
+			}
+			$('#weekSelect').append(opt);
+		}
+		$('#weekSelect').change(function() {
+			var week = $('#weekSelect option:selected').html();
+			render(counterRequest(week));
+		});
 		
 		$('#toggleBtn').click(function() {
 			if ($('#UP').hasClass('hide')) {
@@ -243,11 +317,13 @@ div#content div#body {
 		$('#yy').click(function() {
 			$('#status').addClass('hide');
 			$('#aktuellt').removeClass('hide');
+			$('#weekSelect').change();
 		});
 
 		$('#xx').click(function() {
 			$('#aktuellt').addClass('hide');
 			$('#status').removeClass('hide');
+			render(producerRequest);
 		});
 		
 	});
@@ -275,7 +351,7 @@ div#content div#body {
 			</ul>
 		</div>
 		<div id="body">
-			<h1 id="head-line">Status för tjänsteplattformens producenter</h1>
+			<h1 id="head-line"></h1>
 			<div id="status">
 				<div style="color: #009492;">
 					<input type="checkbox" id="toggleBtn" /> Visa endast problem
@@ -293,11 +369,14 @@ div#content div#body {
 				</table>
 			</div>
 			<div id="aktuellt" class="hide">
+				<label for="select-choice-0" class="select">Week:</label> 
+				<select id="weekSelect" name="select-choice-0" id="select-choice-0">
+				</select>
 				<table id="aktuellt-table">
 					<thead>
 						<tr>
 							<td>Tjänstedomän</td>
-							<td colspan="2">Antal Anrop</td>
+							<td style="text-align: right;">Antal Anrop</td>
 						</tr>
 					</thead>
 				</table>

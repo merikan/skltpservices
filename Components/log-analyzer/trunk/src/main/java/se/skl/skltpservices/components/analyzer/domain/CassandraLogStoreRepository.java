@@ -36,7 +36,6 @@ import me.prettyprint.cassandra.serializers.ByteBufferSerializer;
 import me.prettyprint.cassandra.serializers.CompositeSerializer;
 import me.prettyprint.cassandra.serializers.LongSerializer;
 import me.prettyprint.cassandra.serializers.StringSerializer;
-import me.prettyprint.cassandra.serializers.TimeUUIDSerializer;
 import me.prettyprint.cassandra.service.CassandraHostConfigurator;
 import me.prettyprint.hector.api.Cluster;
 import me.prettyprint.hector.api.Keyspace;
@@ -48,7 +47,6 @@ import me.prettyprint.hector.api.mutation.Mutator;
 import me.prettyprint.hector.api.query.CounterQuery;
 import me.prettyprint.hector.api.query.SliceQuery;
 
-import org.apache.cassandra.utils.ByteBufferUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.logentry.schema.v1.LogEntryType;
@@ -57,8 +55,6 @@ import org.soitoolkit.commons.logentry.schema.v1.LogEvent;
 import org.soitoolkit.commons.logentry.schema.v1.LogLevelType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import com.eaio.uuid.UUID;
 
 
 /**
@@ -163,80 +159,6 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 	final static LongSerializer LS = LongSerializer.get();
 	final static CompositeSerializer CS = CompositeSerializer.get();
 	final static ByteBufferSerializer BS = ByteBufferSerializer.get();
-
-	//
-	protected static class ReverseEvent {
-		private TimeUUID timeUUID;
-		private String contract;
-		private boolean error;
-		private String receiver;
-		private String sender;
-		private String payload;
-		private String key;
-		private long timestamp;
-			
-		public ReverseEvent(String key, String payload, boolean error, long timestamp) {
-			this.key = key;
-			this.payload = nvl(payload);
-			this.error = error;
-			this.timestamp = timestamp;
-			this.timeUUID = new TimeUUID(timestamp);
-			this.receiver = "";
-			this.sender = "";
-		}
-		
-		//
-		String nvl(String s) {
-			return (s == null || s.length() == 0) ? "" : s;
-		}
-		
-		//
-		public void add(String name, String value) {
-			if (CONTRACT.equals(name)) {
-				this.contract = nvl(value);
-			} else if (RECEIVER.equals(name)) {
-				this.receiver = nvl(value);
-			} else if (SENDER.equals(name)) {
-				this.sender = nvl(value);
-			}
-		}
-		
-		public Composite key() {
-			Composite c = new Composite();
-			c.addComponent(contract, SS);
-			c.addComponent(((error) ? "y" : "n"), SS);
-			c.addComponent(sender, SS);
-			c.addComponent(receiver, SS);
-			return c;
-		}
-		
-		public Composite value() {
-			Composite c = new Composite();
-			c.addComponent(key, SS);
-			c.addComponent(payload, SS);
-			return c;
-		}
-		
-		public long getTimestamp() {
-			return timestamp;
-		}
-		
-		public String getReceiver() {
-			return receiver;
-		}
-		
-		public String getSender() {
-			return sender;
-		}
-		
-		public String getContract() {
-			return contract;
-		}
-		
-		public TimeUUID getTimeUUID() {
-			return timeUUID;
-		}
-	}
 	
 	//
 	public CassandraLogStoreRepository() {
@@ -542,7 +464,7 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 			if (tot != null || err != null) {
 				Counter counter = new Counter();
 				counter.setWeek(week);
-				counter.setName(name.substring(2));
+				counter.setName(name);
 				
 				if (tot != null)  {
 					counter.setTotal(tot.getValue());
@@ -563,7 +485,7 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 	protected Set<String> getMetaData(String key) {
 		SliceQuery<String, String, String> query = HFactory.createSliceQuery(getKeySpace(), SS, SS, SS);
 		query.setColumnFamily(CF_META_DATA).setKey(key);
-		ColumnIterator<String, String> iter = new ColumnIterator<String, String>(query, null);
+		ColumnIterator<String, String> iter = new ColumnIterator<String, String>(query);
 		Set<String> set = new HashSet<String>();
 		while (iter.hasNext()) {
 			set.add(iter.next().getName());
