@@ -153,7 +153,7 @@ public class LogStoreService {
 					if (monitor) {
 						analyzer.analyze(le);
 					} else {
-						repo.storeInfoEvent(le);
+						repo.storeEvent(le);
 					}
 				} catch (Exception e) {
 					log.error("Unable to process log event", e);

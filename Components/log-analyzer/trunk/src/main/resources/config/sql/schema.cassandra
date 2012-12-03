@@ -5,14 +5,14 @@ create keyspace Log
 
 use Log;
 
-create column family InfoEvent
+create column family Event
   with column_type = 'Standard'
   and comparator = 'AsciiType'
   and key_validation_class = 'AsciiType'
   and default_validation_class = 'UTF8Type'
   and comment = 'Log information events'
   and column_metadata = [
-  { column_name : 'date',		validation_class : 'AsciiType', index_type : KEYS },
+  { column_name : 'date',		validation_class : 'AsciiType' },
   { column_name : 'contract',		validation_class : 'AsciiType' },
   { column_name : 'sender',		validation_class : 'UTF8Type' },
   { column_name : 'receiver',		validation_class : 'UTF8Type' },
@@ -29,6 +29,22 @@ create column family InfoEvent
   { column_name : 'err_descriptioon',	validation_class : 'UTF8Type' },
   { column_name : 'err_detail',		validation_class : 'UTF8Type' },
 ];
+
+
+create column family EventTimeLine
+  with column_type = 'Standard'
+  and comparator = 'TimeUUIDType'
+  and key_validation_class = 'CompositeType(AsciiType, AsciiType, AsciiType, AsciiType)'
+  and default_validation_class = 'CompositeType(AsciiType, UTF8Type)'
+  and comment = 'Log reverse index';
+  
+  
+create column family MetaData
+  with column_type = 'Standard'
+  and comparator = 'AsciiType'
+  and key_validation_class = 'AsciiType'
+  and default_validation_class = 'UTF8Type'
+  and comment = 'Log meta data';
 
 
 create column family WeeklyStats
