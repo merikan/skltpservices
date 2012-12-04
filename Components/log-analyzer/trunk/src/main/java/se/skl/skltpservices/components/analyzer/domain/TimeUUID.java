@@ -31,40 +31,28 @@ import com.eaio.uuid.UUIDGen;
  * @author Peter
  */
 public class TimeUUID {
-	private UUID uuid;
+	private ByteBuffer uuid;
 	private long timestamp;
 
 	public TimeUUID(long timestamp) {
 		this.timestamp = timestamp;
-		this.uuid = new UUID(UUIDGen.createTime(timestamp), UUIDGen.getClockSeqAndNode());;
+		this.uuid = ByteBuffer.wrap(TimeUUIDUtils.asByteArray(new UUID(UUIDGen.createTime(timestamp), UUIDGen.getClockSeqAndNode())));
 	}
 
 	public TimeUUID(ByteBuffer uuid) {
-		this.uuid = TimeUUIDUtils.uuid(uuid);
-		this.timestamp = TimeUUIDUtils.getTimeFromUUID(this.uuid);
+		this.uuid = uuid;
+		this.timestamp = TimeUUIDUtils.getTimeFromUUID(TimeUUIDUtils.uuid(uuid));
 	}
-
-	/**
-	 * Returns byte array.
-	 *
-	 * @param uuid the uuid
-	 *
-	 * @return the byte[]
-	 */
-	public ByteBuffer toByteBuffer() {
-		return TimeUUIDUtils.asByteBuffer(uuid);
-	}
-
 
 	/**
 	 * Returns uuid.
 	 * 
 	 * @return the uuid.
 	 */
-	public UUID getUUID() {
+	public ByteBuffer asByteBuffer() {
 		return uuid;
 	}
-	
+
 	/**
 	 * Returns timestamp.
 	 * 
@@ -74,4 +62,7 @@ public class TimeUUID {
 		return timestamp;
 	}
 
+	public UUID getUUID() {
+		return TimeUUIDUtils.uuid(uuid);
+	}
 }
