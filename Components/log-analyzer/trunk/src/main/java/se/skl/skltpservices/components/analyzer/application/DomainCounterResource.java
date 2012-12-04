@@ -41,8 +41,15 @@ public class DomainCounterResource {
     private LogStoreRepository logStoreRepository;
    
     @GET
-    @Path("/{week}")
-    public List<Counter> find(@PathParam("week") int week) {
+    @Path("/domains/{week}")
+    public List<Counter> domains(@PathParam("week") int week) {
         return logStoreRepository.getDomainCounters(week);
     }
+
+    @GET
+    @Path("/contracts/{week}")
+    public List<Counter> contracts(@PathParam("week") int week) {
+        return logStoreRepository.getContractCounters(week);
+    }
+
 }

@@ -19,9 +19,11 @@
 package se.skl.skltpservices.components.analyzer.domain;
 
 import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -93,6 +95,7 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 
 
 	private static Map<String, String> columnNames = new HashMap<String, String>();
+	private static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	static {
 		// info {key, actual column name}
@@ -207,7 +210,7 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		LogLevelType level = infoEvent.getLogEntry().getMessageInfo().getLevel();
 		if (log.isDebugEnabled()) {
 			String key = entry.getRuntimeInfo().getBusinessCorrelationId();
-			log.info("Store event { key: {}, waypoint: {}, level: {} }", new Object[] { key, waypoint, level });
+			log.debug("Store event { key: {}, waypoint: {}, level: {} }", new Object[] { key, waypoint, level });
 		}
 		boolean error = LogLevelType.ERROR.equals(level);
 		
@@ -232,9 +235,6 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 
 	//
 	protected void storeEvent(LogEntryType entry, String waypoint, boolean error) {
-
-		final String columnFamily = CF_EVENT;
-
 		Mutator<String> m = HFactory.createMutator(getKeySpace(), SS);
 		String key = entry.getRuntimeInfo().getBusinessCorrelationId();
 
@@ -246,16 +246,18 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		Calendar calendar = getCalendar();
 
 		long timestamp = toTimestamp(entry.getRuntimeInfo().getTimestamp());
+		int ttl = toSeconds(metaTTL);
+		
 		ReverseEvent reverseEvent = null;
 		if (WAYPOINT_IN.equals(waypoint) || error) {
-			m.addInsertion(key, columnFamily, toStringColumn("date", toDate(calendar), toSeconds(metaTTL)));
+			m.addInsertion(key, CF_EVENT, toStringColumn("date", toDate(calendar), ttl));
 			reverseEvent = new ReverseEvent(key, entry.getPayload(), error, timestamp);
 		}
 
-		m.addInsertion(key, columnFamily,  toLongColumn(columnNames.get(waypoint + "timestamp"), timestamp, toSeconds(metaTTL)));        
+		m.addInsertion(key, CF_EVENT,  toLongColumn(columnNames.get(waypoint + "timestamp"), timestamp, ttl));        
 
 		if (error) {
-			add(m, columnFamily, key, toStringColumn(columnNames.get(waypoint + "message"), entry.getMessageInfo().getMessage(), toSeconds(metaTTL)));
+			add(m, CF_EVENT, key, toStringColumn(columnNames.get(waypoint + "message"), entry.getMessageInfo().getMessage(), ttl));
 		}
 
 		for (ExtraInfo info : entry.getExtraInfo()) {
@@ -270,13 +272,13 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 				if (reverseEvent != null) {
 					reverseEvent.add(name, info.getValue());
 				}
-				add(m, columnFamily, key, toStringColumn(name, info.getValue(), toSeconds(metaTTL)));
+				add(m, CF_EVENT, key, toStringColumn(name, info.getValue(), ttl));
 			}
 		}
-		add(m, columnFamily, key, toStringColumn(columnNames.get(waypoint + "payload"), entry.getPayload(), toSeconds(payloadTTL)));
+		add(m, CF_EVENT, key, toStringColumn(columnNames.get(waypoint + "payload"), entry.getPayload(), toSeconds(payloadTTL)));
 		
 		if (reverseEvent != null) {
-			updateReverseIndex(reverseEvent);
+			updateReverseIndex(reverseEvent, ttl);
 			updateMetaData(m, SENDER, reverseEvent.getSender(), senders);
 			updateMetaData(m, RECEIVER, reverseEvent.getReceiver(), receivers);
 		}
@@ -289,9 +291,9 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 	 * 
 	 * @param reverseEvent the reverse event.
 	 */
-	protected void updateReverseIndex(ReverseEvent reverseEvent) {
+	protected void updateReverseIndex(ReverseEvent reverseEvent, int ttl) {
 		Mutator<Composite> mr = HFactory.createMutator(getKeySpace(), CS);
-		mr.addInsertion(reverseEvent.key(), CF_EVENT_TIMELINE, toTimeUUIDColumn(reverseEvent.getTimeUUID(), reverseEvent.value(), toSeconds(metaTTL)));		
+		mr.addInsertion(reverseEvent.key(), CF_EVENT_TIMELINE, toTimeUUIDColumn(reverseEvent.getTimeUUID(), reverseEvent.value(), ttl));		
 		mr.execute();
 	}
 	
@@ -491,6 +493,63 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 			set.add(iter.next().getName());
 		}
 		return set;
+	}
+	
+	
+
+	@Override
+	public List<EventSummary> getTimeLine(String contract, String error,
+			String sender, String receiver, long time) {
+		
+		Composite key = new Composite();
+		key.addComponent(contract, SS);
+		key.addComponent(error, SS);
+		key.addComponent(sender, SS);
+		key.addComponent(receiver, SS);
+		
+		log.info("getTimeLine: {}, start: {}", key, time);
+		
+		List<EventSummary> list = new LinkedList<EventSummary>();
+		TimeUUID start = new TimeUUID(time);
+		SliceQuery<Composite, ByteBuffer, Composite> query = HFactory.createSliceQuery(getKeySpace(), CS, BS, CS);
+		query.setColumnFamily(CassandraLogStoreRepository.CF_EVENT_TIMELINE).setKey(key);
+		ColumnIterator<ByteBuffer, Composite> iter = new ColumnIterator<ByteBuffer, Composite>(query, start.toByteBuffer());
+		int max = 100;
+		while (iter.hasNext()) {
+			HColumn<ByteBuffer, Composite> col = iter.next();
+			Composite value = col.getValue();
+			TimeUUID tuuid = new TimeUUID(col.getName());
+			EventSummary es = new EventSummary();		
+			es.setKey((String) value.getComponent(0).getValue(SS));
+			es.setError("y".equals(error));
+			es.setTimestamp(tuuid.getTimestamp());
+			es.setPayload((String) value.getComponent(1).getValue(SS));
+			list.add(es);
+			if (max <= 0) {
+				break;
+			}
+			max--;
+		}
+		log.info("getTimeLine: items #{}", list.size());
+
+		return list;
+	}
+	
+
+	@Override
+	public Map<String, String> getEventProperties(String id) {
+		Map<String, String> map = new HashMap<String, String>();
+		SliceQuery<String, String, ByteBuffer> query = HFactory.createSliceQuery(getKeySpace(), CassandraLogStoreRepository.SS, CassandraLogStoreRepository.SS, CassandraLogStoreRepository.BS);
+		query.setColumnFamily(CassandraLogStoreRepository.CF_EVENT).setKey(id);
+		ColumnIterator<String, ByteBuffer> iter = new ColumnIterator<String, ByteBuffer>(query);
+		while (iter.hasNext()) {
+			HColumn<String, ByteBuffer> col = iter.next();	
+			String name = col.getName();
+			String value = (name.endsWith("timestamp")) ? formatter.format(new Date(LS.fromByteBuffer(col.getValue()))) : SS.fromByteBuffer(col.getValue());
+			map.put(name, value);
+		}
+		
+		return map;
 	}
 
 }

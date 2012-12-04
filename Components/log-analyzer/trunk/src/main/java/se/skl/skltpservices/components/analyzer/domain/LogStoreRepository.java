@@ -19,6 +19,7 @@
 package se.skl.skltpservices.components.analyzer.domain;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.soitoolkit.commons.logentry.schema.v1.LogEvent;
@@ -75,5 +76,12 @@ public interface LogStoreRepository {
 	 * @return contracts.
 	 */
 	Set<String> getContracts();
+
+	//
+	List<EventSummary> getTimeLine(String contract, String error, String sender,
+			String receiver, long time);
+
+	//
+	Map<String, String> getEventProperties(String id);
 
 }

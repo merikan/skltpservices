@@ -30,12 +30,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soitoolkit.commons.logentry.schema.v1.LogEntryType.ExtraInfo;
 import org.soitoolkit.commons.logentry.schema.v1.LogEntryType;
+import org.soitoolkit.commons.logentry.schema.v1.LogEntryType.ExtraInfo;
 import org.soitoolkit.commons.logentry.schema.v1.LogEvent;
 import org.springframework.beans.factory.annotation.Value;
 
-import se.skl.skltpservices.components.analyzer.application.RuntimeStatus;
 import se.skl.skltpservices.components.analyzer.application.Service;
 import se.skl.skltpservices.components.analyzer.application.ServiceGroup;
 import se.skl.skltpservices.components.analyzer.application.ServiceGroup.ServiceGroupBuilder;
@@ -168,5 +167,4 @@ public class LogAnalyzerService {
 		c.set(Calendar.DAY_OF_MONTH, timestamp.getDay());
 		return c.getTime().getTime();
 	}
-
 }

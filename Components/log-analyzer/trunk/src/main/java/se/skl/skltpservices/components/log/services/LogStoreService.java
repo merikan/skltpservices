@@ -50,15 +50,17 @@ public class LogStoreService {
 
 	private static final String SOITOOLKIT_LOG_STORE_SUFFIX = ":SOITOOLKIT.LOG.STORE";
 	private static final String SOITOOLKIT_LOG_ERROR_SUFFIX = ":SOITOOLKIT.LOG.ERROR";
-	private static final String SOITOOLKIT_LOG_PING_SUFFIX = ":SOITOOLKIT.LOG.PING";
+	private static final String SOITOOLKIT_LOG_PING_SUFFIX  = ":SOITOOLKIT.LOG.PING";
 	private static final Logger log = LoggerFactory.getLogger(LogStoreService.class);
 	private static final Logger storeLog = LoggerFactory.getLogger("se.skl.skltpservices.components.log.services.StoreLog");
-	
+
 	private static final JAXBContext context = initContext();
+	private static final ObjectMapper mapper = new ObjectMapper();
 
 	@Value("${log.mq.instances}")
 	private String logInstances;
 	private List<Consumer> consumers;      
+
 	@Autowired
 	private LogStoreRepository repo;
 	@Autowired
@@ -115,20 +117,21 @@ public class LogStoreService {
 		int seqNo = 0;
 		this.consumers = new LinkedList<Consumer>();
 		for (String instance : logInstances.split(",")) {
-			ActiveMQComponent mq = ActiveMQComponent.activeMQComponent(instance.trim());
-			String compName = "activemq-" + seqNo++;
-			log.info("Listen on { instance: {}, name: {} }", instance, compName);  
-			camel.addComponent(compName, mq);
-			consumers.add(createConsumer(camel, compName + SOITOOLKIT_LOG_STORE_SUFFIX));
-			consumers.add(createConsumer(camel, compName + SOITOOLKIT_LOG_ERROR_SUFFIX));			
-			consumers.add(createConsumer(camel, compName + SOITOOLKIT_LOG_PING_SUFFIX));			
+			if (instance.length() > 0) {
+				ActiveMQComponent mq = ActiveMQComponent.activeMQComponent(instance.trim());
+				String compName = "activemq-" + seqNo++;
+				log.info("Listen on { instance: {}, name: {} }", instance, compName);  
+				camel.addComponent(compName, mq);
+				consumers.add(createConsumer(camel, compName + SOITOOLKIT_LOG_STORE_SUFFIX));
+				consumers.add(createConsumer(camel, compName + SOITOOLKIT_LOG_ERROR_SUFFIX));			
+				consumers.add(createConsumer(camel, compName + SOITOOLKIT_LOG_PING_SUFFIX));
+			}
 		}
 	}
-	
+
 	//
 	protected void logToFile(LogEvent le) {
 		try {
-			ObjectMapper mapper = new ObjectMapper();
 			StringWriter sw = new StringWriter();
 			mapper.writeValue(sw, le.getLogEntry());
 			if (le.getLogEntry().getMessageInfo().getLevel() == LogLevelType.ERROR) {
