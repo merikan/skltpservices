@@ -132,7 +132,7 @@ div#top div#topmid {
 div#top div#topleft {
 	float: left;
 	margin: 47px 50px 0px 35px;
-	color: #fafafa;
+	color: none;
 }
 
 div#content {
@@ -199,7 +199,7 @@ div#content div#body {
 	<div id="top">
 		<div id="topleft">
 			<a href="http://www.inera.se"><img src="images/inera-logo.png"
-				width="64px" /></a>
+				width="96px" /></a>
 		</div>
 		<div id="topmid">
 			<p>
@@ -244,7 +244,7 @@ div#content div#body {
 				</table>
 			</div>
 			<div id="aktuellt" class="hide">
-				<label for="select-choice-0" style="color: #009492;" class="select">Week:</label> 
+				<label for="select-choice-0" style="color: #009492;" class="select">Vecka:</label> 
 				<select id="weekSelect" name="select-choice-0" id="select-choice-0">
 				</select>
 				<table id="aktuellt-table">
@@ -430,9 +430,9 @@ div#content div#body {
 		$('#log-summary-table tbody').empty();
 		$.each(data, function(i, e) {
 			var row = $('<tr style="vertical-align:top;">');
-			var key = $('<a ref="#">').html(e.key);
+			var key = $('<a ref="#">').append($('<span>').html(e.key));
 			key.click(function() {
-				$('#eventTitle').html("Event: " + e.key);
+				$('#eventTitle').html("Händelse: " + e.key);
 				render(eventRequest(e.key));
 				$("#overlay").show();
 				$("#dialog").fadeIn(500);

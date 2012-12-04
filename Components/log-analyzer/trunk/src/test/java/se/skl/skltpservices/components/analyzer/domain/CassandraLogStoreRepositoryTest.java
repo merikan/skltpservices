@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 
 import java.nio.ByteBuffer;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -177,7 +178,7 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		final long t0 = System.currentTimeMillis();
 		Map<String, ReverseEvent> map = new HashMap<String, ReverseEvent>();
 		
-		Set<UUID> keySet = new HashSet<UUID>();
+		Set<ByteBuffer> keySet = new HashSet<ByteBuffer>();
 		
 		String payload = "payload";
 		int n0 = 0;
@@ -190,7 +191,7 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 			r.add("sender", "sender-id");
 			r.add("receiver", "receiver-id-" + (i % 10));
 			if (r.getReceiver().equals("receiver-id-0")) {
-				keySet.add(r.getTimeUUID().getUUID());
+				keySet.add(r.getTimeUUID().asByteBuffer());
 				n0++;
 			}			
 			map.put(key, r);
@@ -219,9 +220,9 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		while (iter.hasNext()) {
 			HColumn<ByteBuffer, Composite> col = iter.next();
 			Composite value = col.getValue();
-			TimeUUID tuuid = new TimeUUID(col.getName());
-			long timestamp = tuuid.getTimestamp();
+			long timestamp = new TimeUUID(col.getName()).getTimestamp();
 			
+			System.out.println(">>>>>>>>>>>>> " + new Date(timestamp));
 			// time order
 			assertTrue(timestamp >= lastTimestamp);
 			// no strange times
@@ -229,8 +230,7 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 			assertTrue(timestamp <= t1);
 			lastTimestamp = timestamp;
 			
-			UUID uuid = tuuid.getUUID();
-			assertTrue(keySet.remove(uuid));
+			assertTrue(keySet.remove(col.getName()));
 
 			@SuppressWarnings("unchecked")
 			Object v = value.getComponent(1).getValue(CassandraLogStoreRepository.SS);
