@@ -24,7 +24,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.nio.ByteBuffer;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -118,7 +117,7 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		cluster.addKeyspace(
 				new ThriftKsDef("Log", "org.apache.cassandra.locator.SimpleStrategy", 1, list), true);
 		
-		this.key = UUID.randomUUID().toString();
+		this.key = java.util.UUID.randomUUID().toString();
 	}
 	
 	ExtraInfo createExtraInfo(String name, String value) {
@@ -178,12 +177,12 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		final long t0 = System.currentTimeMillis();
 		Map<String, ReverseEvent> map = new HashMap<String, ReverseEvent>();
 		
-		Set<ByteBuffer> keySet = new HashSet<ByteBuffer>();
+		Set<UUID> keySet = new HashSet<UUID>();
 		
 		String payload = "payload";
 		int n0 = 0;
 		for (int i = 0; i < 100; i++) {
-			String key = UUID.randomUUID().toString() + "." + i;
+			String key = java.util.UUID.randomUUID().toString() + "." + i;
 			long timestamp = System.currentTimeMillis();
 			boolean error = false;
 			ReverseEvent r = new ReverseEvent(key, payload, error, timestamp);
@@ -191,7 +190,7 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 			r.add("sender", "sender-id");
 			r.add("receiver", "receiver-id-" + (i % 10));
 			if (r.getReceiver().equals("receiver-id-0")) {
-				keySet.add(r.getTimeUUID().asByteBuffer());
+				keySet.add(r.getTimeUUID().getUUID());
 				n0++;
 			}			
 			map.put(key, r);
@@ -212,13 +211,13 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		r.add("sender", "sender-id");
 		r.add("receiver", "receiver-id-0");
 
-		SliceQuery<Composite, ByteBuffer, Composite> query = HFactory.createSliceQuery(repo.getKeySpace(), CassandraLogStoreRepository.CS, CassandraLogStoreRepository.BS, CassandraLogStoreRepository.CS);
+		SliceQuery<Composite, UUID, Composite> query = HFactory.createSliceQuery(repo.getKeySpace(), CassandraLogStoreRepository.CS, CassandraLogStoreRepository.TS, CassandraLogStoreRepository.CS);
 		query.setColumnFamily(CassandraLogStoreRepository.CF_EVENT_TIMELINE).setKey(r.key());
-		ColumnIterator<ByteBuffer, Composite> iter = new ColumnIterator<ByteBuffer, Composite>(query);
+		ColumnIterator<UUID, Composite> iter = new ColumnIterator<UUID, Composite>(query);
 		
 		long lastTimestamp = -1;
 		while (iter.hasNext()) {
-			HColumn<ByteBuffer, Composite> col = iter.next();
+			HColumn<UUID, Composite> col = iter.next();
 			Composite value = col.getValue();
 			long timestamp = new TimeUUID(col.getName()).getTimestamp();
 			

@@ -30,6 +30,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -38,7 +39,7 @@ import me.prettyprint.cassandra.serializers.ByteBufferSerializer;
 import me.prettyprint.cassandra.serializers.CompositeSerializer;
 import me.prettyprint.cassandra.serializers.LongSerializer;
 import me.prettyprint.cassandra.serializers.StringSerializer;
-import me.prettyprint.cassandra.serializers.TimeUUIDSerializer;
+import me.prettyprint.cassandra.serializers.UUIDSerializer;
 import me.prettyprint.cassandra.service.CassandraHostConfigurator;
 import me.prettyprint.hector.api.Cluster;
 import me.prettyprint.hector.api.Keyspace;
@@ -164,7 +165,7 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 	final static LongSerializer LS = LongSerializer.get();
 	final static CompositeSerializer CS = CompositeSerializer.get();
 	final static ByteBufferSerializer BS = ByteBufferSerializer.get();
-	final static TimeUUIDSerializer TS = TimeUUIDSerializer.get();
+	final static UUIDSerializer TS = UUIDSerializer.get();
 	
 	//
 	public CassandraLogStoreRepository() {
@@ -363,8 +364,8 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 	}
 
 	//
-	static HColumn<ByteBuffer, Composite> toTimeUUIDColumn(TimeUUID uuid, Composite value, int ttl) {
-		HColumn<ByteBuffer, Composite> column = HFactory.createColumn(uuid.asByteBuffer(), value, BS, CS);
+	static HColumn<UUID, Composite> toTimeUUIDColumn(TimeUUID uuid, Composite value, int ttl) {
+		HColumn<UUID, Composite> column = HFactory.createColumn(uuid.getUUID(), value, TS, CS);
 		if (ttl > 0) {
 			column.setTtl(ttl);
 		}
@@ -514,12 +515,12 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		
 		List<EventSummary> list = new LinkedList<EventSummary>();
 		TimeUUID start = new TimeUUID(time);
-		SliceQuery<Composite, ByteBuffer, Composite> query = HFactory.createSliceQuery(getKeySpace(), CS, BS, CS);
+		SliceQuery<Composite, UUID, Composite> query = HFactory.createSliceQuery(getKeySpace(), CS, TS, CS);
 		query.setColumnFamily(CassandraLogStoreRepository.CF_EVENT_TIMELINE).setKey(key);
-		ColumnIterator<ByteBuffer, Composite> iter = new ColumnIterator<ByteBuffer, Composite>(query, start.asByteBuffer());
+		ColumnIterator<UUID, Composite> iter = new ColumnIterator<UUID, Composite>(query, start.getUUID());
 		int max = 100;
 		while (iter.hasNext()) {
-			HColumn<ByteBuffer, Composite> col = iter.next();
+			HColumn<UUID, Composite> col = iter.next();
 			Composite value = col.getValue();
 			TimeUUID tuuid = new TimeUUID(col.getName());
 			EventSummary es = new EventSummary();		
