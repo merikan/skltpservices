@@ -201,7 +201,7 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		
 		// scramble order
 		for (ReverseEvent r : map.values()) {
-			repo.updateReverseIndex(r);
+			repo.updateReverseIndex(r, 3600);
 		}
 		
 		final long t1 = System.currentTimeMillis();

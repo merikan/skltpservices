@@ -16,29 +16,37 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package se.skl.skltpservices.components.analyzer.application;
+package se.skl.skltpservices.components.analyzer.domain;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+public class EventSummary {
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
-import se.skl.skltpservices.components.analyzer.domain.ServiceProducer;
-import se.skl.skltpservices.components.analyzer.services.LogAnalyzerService;
-
-@Controller
-@Path("/")
-@Produces({"application/json; charset=UTF-8"})
-public class ServiceProducerResource  {
-
-	@Autowired
-	private LogAnalyzerService logAnalyzerService;
-
-	@GET
-	@Path("/service-producers")
-	public ServiceProducer[] findAll() {
-		return logAnalyzerService.getServicePproducers();
+	private String key;
+	private long timestamp;
+	private boolean error;
+	private String payload;
+	
+	public String getKey() {
+		return key;
+	}
+	public void setKey(String key) {
+		this.key = key;
+	}
+	public long getTimestamp() {
+		return timestamp;
+	}
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
+	public boolean isError() {
+		return error;
+	}
+	public void setError(boolean error) {
+		this.error = error;
+	}
+	public String getPayload() {
+		return payload;
+	}
+	public void setPayload(String payload) {
+		this.payload = payload;
 	}
 }

@@ -81,11 +81,11 @@
   </logger>
 
   <logger name="org.springframework.core.env">
-    <level value="debug" />
+    <level value="DEBUG" />
   </logger>
 
   <logger name="se.skl.skltpservices">
-    <level value="debug" />
+    <level value="DEBUG" />
   </logger>
   	
 </configuration>
