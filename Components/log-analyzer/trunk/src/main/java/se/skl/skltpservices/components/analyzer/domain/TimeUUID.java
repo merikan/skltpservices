@@ -32,10 +32,16 @@ import com.eaio.uuid.UUIDGen;
 public class TimeUUID {
 	private UUID uuid;
 	private long timestamp;
-	 
-	public TimeUUID(long timestamp) {
+	
+	/**
+	 * Creates a uuid.
+	 * 
+	 * @param timestamp the timestamp.
+	 * @param query true if this shall be input to a query, otherwise it's guaranteed to be unique.
+	 */
+	public TimeUUID(long timestamp, boolean query) {
 		this.timestamp = timestamp;
-		this.uuid = new UUID(UUIDGen.createTime(timestamp), UUIDGen.getClockSeqAndNode());
+		this.uuid = new UUID(query ? createQueryTime(timestamp) : UUIDGen.createTime(timestamp), UUIDGen.getClockSeqAndNode());
 	}
 
 	public TimeUUID(UUID uuid) {
@@ -43,6 +49,28 @@ public class TimeUUID {
 		this.timestamp = TimeUUIDUtils.getTimeFromUUID(uuid);
 	}
 
+	private static long createQueryTime(long currentTimeMillis) {
+		long time;
+
+		// UTC time
+
+		final long timeMillis = (currentTimeMillis * 10000) + 0x01B21DD213814000L;
+
+		// time low
+
+		time = timeMillis << 32;
+
+		// time mid
+
+		time |= (timeMillis & 0xFFFF00000000L) >> 16;
+
+		// time hi and version
+
+		time |= 0x1000 | ((timeMillis >> 48) & 0x0FFF); // version 1
+
+		return time;
+
+	}
 	/**
 	 * Returns timestamp.
 	 * 

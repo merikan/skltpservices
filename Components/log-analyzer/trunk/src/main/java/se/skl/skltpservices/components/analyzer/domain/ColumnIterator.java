@@ -25,6 +25,7 @@ import me.prettyprint.hector.api.beans.ColumnSlice;
 import me.prettyprint.hector.api.beans.HColumn;
 
 import me.prettyprint.hector.api.exceptions.HectorException;
+import me.prettyprint.hector.api.query.QueryResult;
 import me.prettyprint.hector.api.query.SliceQuery;
 
 /**
@@ -76,7 +77,8 @@ public class ColumnIterator<N, V> implements Iterator<HColumn<N, V>> {
     private boolean fetchMore() {
         try {
             query.setRange(start, null, false, count);
-            ColumnSlice<N, V> slice = query.execute().get();
+            QueryResult<ColumnSlice<N, V>> result = query.execute();
+            ColumnSlice<N, V> slice = result.get();
             List<HColumn<N, V>> columns = slice.getColumns();
             int origSize = columns.size();
 
