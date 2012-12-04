@@ -18,7 +18,6 @@
  */
 package se.skl.skltpservices.components.analyzer.domain;
 
-import java.nio.ByteBuffer;
 import java.util.UUID;
 
 import me.prettyprint.cassandra.utils.TimeUUIDUtils;
@@ -31,26 +30,17 @@ import com.eaio.uuid.UUIDGen;
  * @author Peter
  */
 public class TimeUUID {
-	private ByteBuffer uuid;
+	private UUID uuid;
 	private long timestamp;
-
+	 
 	public TimeUUID(long timestamp) {
 		this.timestamp = timestamp;
-		this.uuid = ByteBuffer.wrap(TimeUUIDUtils.asByteArray(new UUID(UUIDGen.createTime(timestamp), UUIDGen.getClockSeqAndNode())));
+		this.uuid = new UUID(UUIDGen.createTime(timestamp), UUIDGen.getClockSeqAndNode());
 	}
 
-	public TimeUUID(ByteBuffer uuid) {
+	public TimeUUID(UUID uuid) {
 		this.uuid = uuid;
-		this.timestamp = TimeUUIDUtils.getTimeFromUUID(TimeUUIDUtils.uuid(uuid));
-	}
-
-	/**
-	 * Returns uuid.
-	 * 
-	 * @return the uuid.
-	 */
-	public ByteBuffer asByteBuffer() {
-		return uuid;
+		this.timestamp = TimeUUIDUtils.getTimeFromUUID(uuid);
 	}
 
 	/**
@@ -63,6 +53,6 @@ public class TimeUUID {
 	}
 
 	public UUID getUUID() {
-		return TimeUUIDUtils.uuid(uuid);
+		return uuid;
 	}
 }
