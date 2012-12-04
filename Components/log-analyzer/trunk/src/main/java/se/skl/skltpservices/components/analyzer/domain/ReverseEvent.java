@@ -36,7 +36,7 @@ public class ReverseEvent {
 		this.payload = nvl(payload);
 		this.error = error;
 		this.timestamp = timestamp;
-		this.timeUUID = new TimeUUID(timestamp);
+		this.timeUUID = new TimeUUID(timestamp, false);
 		this.receiver = "";
 		this.sender = "";
 	}

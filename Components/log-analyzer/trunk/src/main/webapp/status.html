@@ -439,7 +439,7 @@ div#content div#body {
 			});
 			row.append(key);
 			row.append($('<td>').css('text-align', 'right').html(new Date(e.timestamp).format()));
-			row.append($('<td style="white-space: normal; word-wrap: break-word;">').html(e.payload));
+			row.append($('<td style="white-space: pre-wrap; word-wrap: normal;">').append($('<code>').text(e.payload)));
 			$('#log-summary-table').append(row);
 		});
 
@@ -505,7 +505,7 @@ div#content div#body {
 		for (x in data) {
 			var row = $('<tr style="vertical-align:top;">');
 			row.append($('<td style="font-weight: bold;">').html(x));
-			row.append($('<td style="white-space: normal; word-wrap: break-word;">').html(data[x]));
+			row.append($('<td style="white-space: normal; word-wrap: normal;">').append($('<code>').text(data[x])));
 			$('#event-table').append(row);
 		}
 	};

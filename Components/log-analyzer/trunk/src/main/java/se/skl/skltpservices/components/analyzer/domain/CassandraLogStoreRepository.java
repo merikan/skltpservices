@@ -513,11 +513,11 @@ public class CassandraLogStoreRepository implements LogStoreRepository {
 		
 		log.info("getTimeLine: {}, start: {}", key, new Date(time));
 		
-		List<EventSummary> list = new LinkedList<EventSummary>();
-		TimeUUID start = new TimeUUID(time);
 		SliceQuery<Composite, UUID, Composite> query = HFactory.createSliceQuery(getKeySpace(), CS, TS, CS);
-		query.setColumnFamily(CassandraLogStoreRepository.CF_EVENT_TIMELINE).setKey(key);
-		ColumnIterator<UUID, Composite> iter = new ColumnIterator<UUID, Composite>(query, start.getUUID());
+		query.setColumnFamily(CF_EVENT_TIMELINE).setKey(key);
+		UUID start = (time <= 0) ? null : new TimeUUID(time, true).getUUID();
+		ColumnIterator<UUID, Composite> iter = new ColumnIterator<UUID, Composite>(query, start);
+		List<EventSummary> list = new LinkedList<EventSummary>();
 		int max = 100;
 		while (iter.hasNext()) {
 			HColumn<UUID, Composite> col = iter.next();
