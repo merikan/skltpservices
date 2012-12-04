@@ -615,7 +615,9 @@ div#content div#body {
 								receiver = $('#receiverSelect option:selected')
 										.html();
 							}
-							var time = Date.parse($('#datepicker').val());
+							var st = $('#datepicker').val();
+							
+							var time = (st.length == 0) ? 0 : Date.parse(st);
 							render(logSummaryRequest($(
 									'#contractSelect option:selected').html(),
 									$('#logErrorBtn').is(':checked') ? "y"
