@@ -34,9 +34,9 @@ public class TimeUUID {
 	private long timestamp;
 	
 	/**
-	 * Creates a uuid.
+	 * Creates an UUID of type 1 to be used in time series.
 	 * 
-	 * @param timestamp the timestamp.
+	 * @param timestamp the timestamp in millis.
 	 * @param query true if this shall be input to a query, otherwise it's guaranteed to be unique.
 	 */
 	public TimeUUID(long timestamp, boolean query) {
