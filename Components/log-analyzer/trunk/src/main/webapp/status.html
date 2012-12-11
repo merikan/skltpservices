@@ -679,7 +679,7 @@ div#content div#body {
 								var st = $('#datepicker').val();
 
 								var time = (st.length == 0) ? 0 : Date
-										.parseFormatted(st);
+										.parseFormatted(st).getTime();
 								render(logSummaryRequest($(
 										'#contractSelect option:selected')
 										.html(), $('#logErrorBtn').is(
