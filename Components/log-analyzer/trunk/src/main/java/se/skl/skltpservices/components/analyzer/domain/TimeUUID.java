@@ -51,26 +51,13 @@ public class TimeUUID {
 
 	private static long createQueryTime(long currentTimeMillis) {
 		long time;
-
-		// UTC time
-
 		final long timeMillis = (currentTimeMillis * 10000) + 0x01B21DD213814000L;
-
-		// time low
-
 		time = timeMillis << 32;
-
-		// time mid
-
 		time |= (timeMillis & 0xFFFF00000000L) >> 16;
-
-		// time hi and version
-
 		time |= 0x1000 | ((timeMillis >> 48) & 0x0FFF); // version 1
-
 		return time;
-
 	}
+
 	/**
 	 * Returns timestamp.
 	 * 
