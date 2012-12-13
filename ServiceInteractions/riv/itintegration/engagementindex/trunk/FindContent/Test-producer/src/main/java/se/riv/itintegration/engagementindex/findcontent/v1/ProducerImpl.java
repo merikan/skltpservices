@@ -45,13 +45,13 @@ public class ProducerImpl implements FindContentResponderInterface {
 
 		EngagementType engagementType = new EngagementType();
 		engagementType.setBusinessObjectInstanceIdentifier(findContent.getBusinessObjectInstanceIdentifier());
-		engagementType.setCategorization(findContent.getCategorization());
+		engagementType.setCategorization("Booking");
 		engagementType.setCreationTime(new Date().toString());
 		engagementType.setLogicalAddress(findContent.getLogicalAddress());
 		engagementType.setMostRecentContent(findContent.getMostRecentContent());
 		engagementType.setOwner(findContent.getOwner());
-		engagementType.setRegisteredResidentIdentification(findContent.getRegisteredResidentIdentification());
-		engagementType.setServiceDomain(findContent.getServiceDomain());
+		engagementType.setRegisteredResidentIdentification("191111111111");
+		engagementType.setServiceDomain("riv:crm:scheduling");
 		engagementType.setSourceSystem(findContent.getSourceSystem());
 		engagementType.setUpdateTime(new Date().toString());
 
