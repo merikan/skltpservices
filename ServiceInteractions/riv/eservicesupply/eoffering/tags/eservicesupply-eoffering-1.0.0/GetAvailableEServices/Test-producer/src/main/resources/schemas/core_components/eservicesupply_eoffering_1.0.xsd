@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements. See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership. Inera AB licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License. You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied. See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ -->		
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:tns='urn:riv:eservicesupply:eoffering:1' targetNamespace='urn:riv:eservicesupply:eoffering:1' elementFormDefault='qualified' attributeFormDefault='unqualified' version='1.0'>
+
+    <xs:annotation>
+    	<xs:documentation>Beskrivning: Meddelandeformat för eservicesupply:eoffering.
+	  Revisioner: 
+		2010-03-17: Release version 1.0 marco.deluca@callistaenterprise.se.
+</xs:documentation></xs:annotation>
+    <xs:simpleType name="hsaIdType">
+  	<xs:restriction base="xs:string"></xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="eServiceType">
+        <xs:annotation>
+        	<xs:documentation>E-tjänst:
+Informationer om e-tjänsten. En e-tjänst tillhandahålls på elektronisk väg med t.ex. webbläsare(Firefox) eller mobil enhet(mobiltelefon). </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="commonName" type="xs:string" minOccurs="1"
+        		maxOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>E-tjänstens(resursens) namn.</xs:documentation>
+                </xs:annotation>
+        	</xs:element>
+        	<xs:element name="description" type="xs:string"
+        		minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>Information om e-tjänsten. Kan innehålla beskrivningar och villkor för användandet av tjänsten (riktad mot användare/patient).</xs:documentation></xs:annotation>
+        	</xs:element>
+            <xs:element name="resourceId" type="tns:resourceIdType" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>E-tjänstens id. Unikt id för e-tjänsten. Tjänsteproducentens unika id.</xs:documentation></xs:annotation>
+        	</xs:element>
+            <xs:element name="securitylevel"
+        		type="tns:securitylevelType" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>Tjänstens krav på autentiseringsnivå AL (Assurance  level/tillitsnivå ISO/IEC 29115). </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        	<xs:element name="url" type="xs:anyURI" minOccurs="0"
+        		maxOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>URL till e-tjänst. </xs:documentation></xs:annotation>
+        	</xs:element>
+        	<xs:element name="restrictions" type="tns:restrictionType"
+        		minOccurs="0" maxOccurs="1">
+        	</xs:element>
+        	<xs:any namespace='##other' processContents='lax' minOccurs='0'
+    		maxOccurs='unbounded' />
+        </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="restrictionType">
+        <xs:annotation>
+        	<xs:documentation>Restriktion:
+Information om de restriktioner som finns kopplade till e-tjänsten. T ex krav på att remiss krävs för att utnyttja tjänsten.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="eserviceAreaCode"
+        		type="tns:eServiceAreaCodeType" minOccurs="0" maxOccurs="1">
+        	</xs:element>
+        	<xs:element name="gender" minOccurs="0" maxOccurs="1" type="tns:genderType">
+        		<xs:annotation>
+        			<xs:documentation>E-tjänsten riktar sig endast till ett visst kön.
+1 = Man 2 = Kvinna 
+        			</xs:documentation>
+        		</xs:annotation>
+        	</xs:element>
+        	<xs:element name="listing" type="xs:boolean" minOccurs="1"
+        		maxOccurs="1">
+        		<xs:annotation>
+        			<xs:documentation>
+        				S= Kräver listning F = Kräver ej listning
+        			</xs:documentation>
+        		</xs:annotation>
+        	</xs:element>
+        	<xs:element name="referal" type="xs:boolean" minOccurs="1"
+        		maxOccurs="1">
+        		<xs:annotation>
+        			<xs:documentation>
+        				S = Kräver remiss F = Kräver ej remiss
+        			</xs:documentation>
+        		</xs:annotation>
+        	</xs:element>
+        	<xs:element name="referalTypeId"
+        		type="tns:referalTypeIdType" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>Definiera vilken typ av  remiss e-tjänsten kräver.</xs:documentation></xs:annotation>
+        	</xs:element>
+        	<xs:element name="ageMin" type="xs:int" minOccurs="0"
+        		maxOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>Ålderskrav min.</xs:documentation>
+                </xs:annotation>
+        	</xs:element>
+        	<xs:element name="ageMax" type="xs:int" minOccurs="0"
+        		maxOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>Ålder max.</xs:documentation>
+                </xs:annotation>
+        	</xs:element>
+        	<xs:any namespace='##other' processContents='lax' minOccurs='0'
+    		maxOccurs='unbounded' />
+        </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="healthcareFacilityInfoType">
+        <xs:annotation>
+        	<xs:documentation>Vårdenhet som erbjuder e-tjänster.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+  		<xs:element name="healthcare_facility" type="tns:hsaIdType"
+  			minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>Vårdenhetens hsa-id.</xs:documentation>
+                </xs:annotation>
+  		</xs:element>
+  		<xs:element name="healthcare_facility_name" type="xs:string"
+  			minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                	<xs:documentation>Vårdenhetens namn</xs:documentation>
+                </xs:annotation>
+  		</xs:element>
+  		<xs:any namespace='##other' processContents='lax' minOccurs='0'
+    		maxOccurs='unbounded' />
+  	</xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="eServiceAreaCodeType">
+  	<xs:annotation>
+  		<xs:documentation>
+  			Betjäningsområde: Information om e-tjänstens geografiska
+  			betjäningsområde (län, kommun och kommundel)
+  		</xs:documentation>
+  	</xs:annotation>
+  	<xs:sequence>
+  		<xs:element name="countycode" type="tns:countycode"
+  			minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                	<xs:documentation>Beskriver inom vilket län e-tjänsten erbjuds. E-tjänsten betjänar invånare i detta län.</xs:documentation></xs:annotation>
+  		</xs:element>
+  		<xs:element name="municipalityCode"
+  			type="tns:municipalityCode" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                	<xs:documentation>Beskriver inom vilken kommun e-tjänsten erbjuds. E-tjänsten betjänar invånare i denna kommun.</xs:documentation>
+                </xs:annotation>
+  		</xs:element>
+  		<xs:element name="municipalitySectionCode"
+  			type="tns:municipalitySectionCode" minOccurs="0"
+  			maxOccurs="unbounded">
+                <xs:annotation>
+                	<xs:documentation>Beskriver inom vilken kommundelskod e-tjänsten erbjuds. E-tjänsten betjänar invånare i denna kommundel.</xs:documentation>
+                </xs:annotation>
+  		</xs:element>
+  		<xs:any namespace='##other' processContents='lax' minOccurs='0'
+    		maxOccurs='unbounded' />
+  	</xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="countycode">
+  	<xs:restriction base="xs:string"></xs:restriction>
+  </xs:simpleType>
+
+
+    <xs:simpleType name="municipalityCode">
+    	<xs:restriction base="xs:string"></xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="municipalitySectionCode">
+    	<xs:restriction base="xs:string"></xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="securitylevelType">
+        <xs:annotation>
+        	<xs:documentation>Tjänstens krav på autentiseringsnivå (Quality of Autentication Assurance).</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+    		<xs:enumeration value="AL1"></xs:enumeration>
+    		<xs:enumeration value="AL2"></xs:enumeration>
+    		<xs:enumeration value="AL3"></xs:enumeration>
+    		<xs:enumeration value="AL4"></xs:enumeration>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="resourceCategoryType">
+    	<xs:restriction base="xs:string"></xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="resourceType">
+    	<xs:restriction base="xs:string"></xs:restriction>
+    </xs:simpleType>
+
+
+
+
+    <xs:simpleType name="resourceIdType">
+    	<xs:restriction base="xs:string"></xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="genderType">
+    	<xs:restriction base="xs:string"></xs:restriction>
+    </xs:simpleType>
+
+
+
+
+    <xs:simpleType name="referalTypeIdType">
+    	<xs:restriction base="xs:string"></xs:restriction>
+    </xs:simpleType>
+
+
+</xs:schema>
