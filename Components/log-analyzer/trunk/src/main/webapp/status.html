@@ -31,6 +31,9 @@
 	display: none;
 }
 
+.up {
+}
+
 html {
 	height: 100%;
 }
@@ -390,12 +393,16 @@ div#content div#body {
 			var downOnly = $('#toggleBtn').is(':checked');
 
 			$.each(data, function(i, e) {
-				var icon = (e.status == 'UP') ? $('<img>', {
+				var up = (e.status == 'UP');
+				var icon = (up) ? $('<img>', {
 					src : 'images/up.png'
 				}) : $('<img>', {
 					src : 'images/down.png'
 				});
-				var row = $('<tr>').attr('id', e.status);
+				var row = $('<tr>');
+				if (up) {
+					row.addClass('up');
+				}
 				var domain = $('<td>');
 				if (old != e.domainName) {
 					domain.html('<strong>' + e.domainName + '</strong><br/>'
@@ -655,11 +662,12 @@ div#content div#body {
 						render(counterRequest(week));
 					});
 
-					$('#toggleBtn').click(function() {
-						if ($('#UP').hasClass('hide')) {
-							$('#UP').removeClass('hide');
+					$('#toggleBtn').click(function(e) {
+						var down = $('#toggleBtn').is(':checked');
+						if (down) {
+							$('.up').addClass('hide');
 						} else {
-							$('#UP').addClass('hide');
+							$('.up').removeClass('hide');
 						}
 					});
 
