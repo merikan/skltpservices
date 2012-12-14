@@ -187,6 +187,16 @@ div#content div#body {
 	font-size: 10pt;
 	overflow: scroll;
 }
+
+.square {
+	width: 180px;
+	height: 160px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30%;
+	color: #fff;
+	padding: 10px 20px;
+}
 </style>
 
 <link rel="shortcut icon" href="images/favicon.png" />
@@ -194,7 +204,9 @@ div#content div#body {
 
 </head>
 <body>
-	<div id="overlay" class="web_dialog_overlay"></div>
+	<div id="overlay" class="web_dialog_overlay">
+		<div id="busy" class="square"></div>
+	</div>
 
 	<div id="top">
 		<div id="topleft">
@@ -299,6 +311,7 @@ div#content div#body {
 		</div>
 	</div>
 	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/jquery.activity-indicator-1.0.0.min.js"></script>
 
 	<script type="text/javascript">
 		var domains = [];
@@ -579,17 +592,23 @@ div#content div#body {
 		//
 		var render = function(request) {
 			console.log(request);
+			$('#busy').activity({segments: 12, width: 5.5, space: 6, length: 13, speed: 1.2});
+			$('#overlay').show();
 			$.ajax({
 				url : request.url,
 				cache : false,
 				success : function(data) {
 					request.render(data);
 					$('#head-line').removeClass('error');
+					$('#busy').activity(false);
+					$('#overlay').hide();
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					console.log(textStatus + ': ' + errorThrown);
 					$('#head-line').html(textStatus + ': ' + errorThrown);
 					$('#head-line').addClass('error');
+					$('#busy').activity(false);
+					$('#overlay').hide();
 				}
 			});
 
