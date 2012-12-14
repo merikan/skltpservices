@@ -1,0 +1,758 @@
+<!--
+
+    Copyright (c) 2012, Sjukvardsradgivningen. All rights reserved.
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, for (Boston,
+    MA 02110-1301  USA
+
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Driftstatus Tjänsteplattformen | Inera - Säkra och
+	innovativa lösningar för vården</title>
+
+<meta charset='utf-8'>
+
+<style>
+.hide {
+	display: none;
+}
+
+.up {
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	font-size: 75%;
+	font-family: Arial, Verdana, Sans-Serif;
+	height: 100%;
+	width: 98.5%;
+	overflow-x: hidden;
+}
+
+a {
+	color: grey;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+img {
+	border: none;
+}
+
+h1 {
+	color: #009492;
+	font-size: 1.7em;
+	font-family: Arial, Verdana, Sans-Serif;
+	font-weight: bold;
+	line-height: 1.1em;
+	margin-bottom: 0.3em;
+}
+
+li {
+	list-style: none;
+	font-size: 12px;
+}
+
+table {
+	margin-bottom: 20px;
+	width: 80%;
+}
+
+table tbody tr th,table tbody tr {
+	text-align: left;
+	margin: 0;
+	padding: 0;
+}
+
+table thead td {
+	border-bottom: solid 1px #A2A2A2;
+}
+
+button {
+	border-radius: 6px;
+	-o-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	background-color: #009492;
+	color: #ffffff;
+	width: 150px;
+}
+
+.error {
+	color: red;
+}
+
+td {
+	white-space: nowrap;
+	padding-right: 10px;
+	text-align: left;
+	margin: 0;
+	height: 50px;
+}
+
+tr {
+	white-space: nowrap;
+}
+
+table .header {
+	text-decoration: underline;
+}
+
+div#top {
+	position: relative;
+	background: url(images/emptyheader.png);
+	margin-top: 0px;
+	margin-bottom: 0px;
+	height: 132px;
+	float: left;
+	width: 100%;
+}
+
+div#top div#topmid {
+	float: left;
+	margin: 47px 50px 0px 155px;
+	color: #fafafa;
+	font-size: 19px;
+}
+
+div#top div#topleft {
+	float: left;
+	margin: 47px 50px 0px 35px;
+	color: none;
+}
+
+div#content {
+	position: relative;
+	width: 100%;
+}
+
+div#content div#menu {
+	float: left;
+	width: 20%;
+}
+
+div#content div#body {
+	float: right;
+	width: 80%;
+}
+
+.web_dialog_overlay {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background: #000000;
+	opacity: .15;
+	filter: alpha(opacity = 15);
+	-moz-opacity: .15;
+	z-index: 101;
+	display: none;
+}
+
+.web_dialog {
+	display: none;
+	position: fixed;
+	width: 80%;
+	height: 80%;
+	top: 10%;
+	left: 10%;
+	margin-left: -10px;
+	margin-top: -10px;
+	background-color: #ffffff;
+	border: 2px solid #009492;
+	padding: 0px;
+	z-index: 102;
+	font-size: 10pt;
+	overflow: scroll;
+}
+
+.square {
+	display: none;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	color: #aaa;
+	margin: 0;
+	padding: 0;
+}
+</style>
+
+<link rel="shortcut icon" href="images/favicon.png" />
+
+
+</head>
+<body>
+	<div id="overlay" class="web_dialog_overlay">
+	</div>
+
+	<div id="busy" class="square"></div>
+
+	<div id="top">
+		<div id="topleft">
+			<a href="http://www.inera.se"><img src="images/inera-logo.png"
+				width="96px" /></a>
+		</div>
+		<div id="topmid">
+			<p>
+				Vi bidrar till att vård och omsorg blir mer<br />tillgänglig,
+				effektiv och säker.
+			</p>
+		</div>
+	</div>
+	<div id="content">
+		<div id="menu">
+			<h1>&nbsp;</h1>
+			<ul>
+				<li><a id="statusLink" href="#">Status producenter</a></li>
+				<li><a id="domainLink" href="#">Antal anrop tjänstedomän</a></li>
+				<li><a id="contractLink" href="#">Antal anrop
+						tjänstekontrakt</a></li>
+				<li><a id="logLink" href="#">Logg händelser</a></li>
+			</ul>
+		</div>
+
+		<div id="dialog" class="web_dialog">
+			<h1 id="eventTitle"></h1>
+			<table id="event-table">
+			</table>
+		</div>
+
+		<div id="body">
+			<h1 id="head-line"></h1>
+			<div id="status">
+				<div style="color: #009492;">
+					<input type="checkbox" id="toggleBtn" /> Visa endast problem
+				</div>
+				<!-- <button id="toggleBtn"></button>  -->
+				<table id="status-table">
+					<thead>
+						<tr>
+							<td>Domän</td>
+							<td colspan="2">System</td>
+							<td style='text-align: right;'>Svarstid (ms)</td>
+							<td style='text-align: right;'>Tid</td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div id="aktuellt" class="hide">
+				<label for="select-choice-0" style="color: #009492;" class="select">Vecka:</label>
+				<select id="weekSelect" name="select-choice-0" id="select-choice-0">
+				</select>
+				<table id="aktuellt-table">
+					<thead>
+						<tr>
+							<td>Namn</td>
+							<td style="text-align: right;">Antal Anrop</td>
+							<td style="text-align: right;">Antal Fel</td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div id="log" class="hide">
+				<table>
+					<tr>
+						<td style="color: #009492;">Kontrakt:</td>
+						<td><select id="contractSelect"></select></td>
+					</tr>
+					<tr>
+						<td style="color: #009492;">Fel:</td>
+						<td><input type="checkbox" id="logErrorBtn" /></td>
+					</tr>
+					<tr>
+						<td style="color: #009492;">Id Konsument:</td>
+						<td><select id="senderSelect"></select> el. <input
+							id="senderSelectText" /></td>
+					</tr>
+					<tr>
+						<td style="color: #009492;">Id Producent:</td>
+						<td><select id="receiverSelect"></select> el. <input
+							id="receiverSelectText" /></td>
+					</tr>
+					<tr>
+						<td style="color: #009492;">Starttid:</td>
+						<td><input type="text" size="25" id="datepicker" /></td>
+					<tr>
+						<td colspan="2" style="text-align: center;"><button
+								id="logSearchBtn">Search</button></td>
+					</tr>
+				</table>
+				<table id="log-summary-table">
+					<thead>
+						<tr>
+							<td>Id Händelse</td>
+							<td style="text-align: right;">Tidstämpel</td>
+							<td>Innehåll (fråga)</td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/jquery.activity-indicator-1.0.0.min.js"></script>
+
+	<script type="text/javascript">
+		var domains = [];
+		domains['urn:riv:crm:carelisting'] = 'Listning';
+		domains['urn:riv:ehr:accesscontrol'] = 'Tillgänglig Patient (TGP)';
+		domains['urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate'] = 'Elektroniskt sjukintyg';
+		domains['urn:riv:insuranceprocess:healthreporting'] = 'Elektroniskt sjukintyg (inkl. frågor och svar)';
+		domains['urn:riv:eservicesupply'] = 'Erbjuden e-tjänst';
+		domains['urn:riv:informatics:terminology'] = 'Terminologitjänst';
+		domains['urn:riv:processdevelopment:infections'] = 'Infektionsverktyget';
+		domains['urn:riv:crm:scheduling'] = 'Tidbokning';
+		domains['urn:riv:druglogistics:dosedispensing:'] = 'Dos-paketerade läkemedel';
+		domains['urn:riv:inera:se.apotekensservice:axs:'] = 'ApSe - AXS';
+		domains['urn:riv:inera:se.apotekensservice:or:'] = 'ApSe - OR';
+		domains['urn:riv:inera:se.apotekensservice:folk:'] = 'ApSe - FOLK';
+		domains['urn:riv:inera:se.apotekensservice:lf:'] = 'ApSe - LF';
+		domains['urn:riv:inera:se.apotekensservice:expo:'] = 'ApSe - Övriga';
+		domains['others'] = 'Övriga';
+
+		// left pad numbers
+		Number.prototype.lpad = function(padding) {
+			var zeroes = "0";
+			for ( var i = 0; i < padding; i++) {
+				zeroes += "0";
+			}
+			return (zeroes + this).slice(padding * -1);
+		}
+
+		/** 
+		 * Get the ISO week date week number 
+		 */
+		Date.prototype.getWeek = function() {
+			var target = new Date(this.valueOf());
+			var dayNr = (this.getDay() + 6) % 7;
+			target.setDate(target.getDate() - dayNr + 3);
+			var firstThursday = target.valueOf();
+			target.setMonth(0, 1);
+			if (target.getDay() != 4) {
+				target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);
+			}
+			return 1 + Math.ceil((firstThursday - target) / 604800000);
+		};
+
+		// format date
+		Date.prototype.format = function() {
+			return this.getFullYear() + '-' + ((this.getMonth() + 1).lpad(2))
+					+ '-' + this.getDate().lpad(2) + ' '
+					+ this.getHours().lpad(2) + ':' + this.getMinutes().lpad(2)
+					+ ':' + this.getSeconds().lpad(2);
+		};
+
+		//
+		Date.parseFormatted = function(s) {
+			var date = new Date(0);
+			date.setHours(0);
+			var fields = s.split(' ');
+			if (fields.length >= 1) {
+				var d = fields[0].split('-');
+				if (d.length >= 1) {
+					date.setYear(parseInt(d[0]));
+				}
+				if (d.length >= 2) {
+					date.setMonth(parseInt(d[1]) - 1);
+				}
+				if (d.length >= 3) {
+					date.setDate(parseInt(d[2]));
+				}
+			}
+			if (fields.length >= 2) {
+				var t = fields[1].split(':');
+				if (t.length >= 1) {
+					date.setHours(parseInt(t[0]));
+				}
+				if (t.length >= 2) {
+					date.setMinutes(parseInt(t[1]));
+				}
+				if (t.length >= 3) {
+					date.setSeconds(parseInt(t[2]));
+				}
+			}
+			return date;
+		};
+		
+		//
+		var counterRequest = null;
+
+		//
+		var renderProducerStatus = function(data) {
+			$('#status-table tbody').empty();
+			$('#head-line').html("Status för tjänsteplattformens producenter");
+			var old = null;
+			var downOnly = $('#toggleBtn').is(':checked');
+
+			$.each(data, function(i, e) {
+				var up = (e.status == 'UP');
+				var icon = (up) ? $('<img>', {
+					src : 'images/up.png'
+				}) : $('<img>', {
+					src : 'images/down.png'
+				});
+				var row = $('<tr>');
+				if (up) {
+					row.addClass('up');
+				}
+				var domain = $('<td>');
+				if (old != e.domainName) {
+					domain.html('<strong>' + e.domainName + '</strong><br/>'
+							+ e.domainDescription);
+				}
+				row.append(domain);
+				row.append($('<td>').append(icon));
+				row.append($('<td>')
+						.html(e.systemName + '<br/>' + e.serviceUrl));
+				row.append($('<td>').css('text-align', 'right').html(
+						e.maxLatency));
+
+				row.append($('<td>').css('text-align', 'right').html(
+						new Date(e.lastUpdated).format()));
+
+				old = e.domainName;
+				if (downOnly && e.status == 'UP') {
+					row.addClass('hide');
+				}
+				$('#status-table').append(row);
+			});
+		};
+
+		//
+		var sortLexical = function(a, b) {
+			if (a < b) {
+				return -1;
+			} else if (a > b) {
+				return 1;
+			} else {
+				return 0;
+			}
+		};
+
+		//
+		var sortCounter = function(a, b) {
+			return sortLexical(a.name, b.name);
+		};
+
+		//
+		var renderDomainCounters = function(data) {
+			data.sort(sortCounter);
+
+			$('#aktuellt-table tbody').empty();
+			$('#head-line').html("Antal anrop per tjänstedomän");
+
+			var sum = new Object();
+			sum.total = 0;
+			sum.error = 0;
+
+			$.each(data, function(i, e) {
+				var row = $('<tr>');
+				var name = domains[e.name];
+				if (name == undefined) {
+					name = e.name;
+				}
+				row.append($('<td>').html(
+						'<strong>' + name + '</strong>' + '<br/>' + e.name
+								+ '...'));
+				row.append($('<td>').css('text-align', 'right').html(e.total));
+				row.append($('<td>').css('text-align', 'right').html(e.error));
+				$('#aktuellt-table').append(row);
+				sum.total += e.total;
+				sum.error += e.error;
+			});
+			var row = $('<tr>');
+			row.append($('<td>').html('<strong>Summa</Strong>'));
+			row.append($('<td>').css('text-align', 'right').html(
+					'<strong>' + sum.total + '</strong>'));
+			row.append($('<td>').css('text-align', 'right').html(
+					'<strong>' + sum.error + '</strong>'));
+			$('#aktuellt-table').append(row);
+		};
+
+		//
+		var renderLogSummary = function(data) {
+			$('#log-summary-table tbody').empty();
+			$.each(data,
+							function(i, e) {
+								var row = $('<tr style="vertical-align:top;">');
+								var key = $('<a ref="#">').append(
+										$('<span>').html(e.key));
+								key.click(function() {
+											$('#eventTitle').html(
+													"Händelse: " + e.key);
+											render(eventRequest(e.key));
+											$("#overlay").show();
+											$("#dialog").fadeIn(500);
+										});
+								row.append(key);
+								row.append($('<td>').css('text-align', 'right')
+										.html(new Date(e.timestamp).format()));
+								row.append($(
+												'<td style="white-space: pre-wrap; word-wrap: normal;">')
+												.append(
+														$('<code>').text(
+																e.payload)));
+								$('#log-summary-table').append(row);
+							});
+
+			if (data.length > 0) {
+				var row = $('<tr>');
+				var next = $('<a id="nextLink" href="#" />').html('>>>>');
+				row.append($('<td colspan="3">').css('text-align', 'right')
+						.append(next));
+				$('#log-summary-table').append(row);
+				$('#nextLink').click(
+						function() {
+							$('#datepicker').val(
+									new Date(data[data.length - 1].timestamp)
+											.format());
+							$('#logSearchBtn').click();
+						});
+			}
+		};
+
+		//
+		var renderMetaData = function(data) {
+			console.log(data);
+			var add = function(els, to) {
+				els.sort(sortLexical);
+				$.each(els, function(i, e) {
+					var opt = $('<option>').attr('name', e).html(e);
+					to.append(opt);
+				});
+			};
+
+			add(data.contracts, $('#contractSelect'));
+			add(data.senders, $('#senderSelect'));
+			add(data.receivers, $('#receiverSelect'));
+		};
+
+		//
+		var renderContractCounters = function(data) {
+			data.sort(sortCounter);
+			var sum = new Object();
+			sum.total = 0;
+			sum.error = 0;
+
+			$('#aktuellt-table tbody').empty();
+			$('#head-line').html("Antal anrop per tjänstekontrakt");
+
+			$.each(data, function(i, e) {
+				var row = $('<tr>');
+				row.append($('<td>').html(e.name));
+				row.append($('<td>').css('text-align', 'right').html(e.total));
+				row.append($('<td>').css('text-align', 'right').html(e.error));
+				$('#aktuellt-table').append(row);
+				sum.total += e.total;
+				sum.error += e.error;
+			});
+			var row = $('<tr>');
+			row.append($('<td>').html('<strong>Summa</Strong>'));
+			row.append($('<td>').css('text-align', 'right').html(
+					'<strong>' + sum.total + '</strong>'));
+			row.append($('<td>').css('text-align', 'right').html(
+					'<strong>' + sum.error + '</strong>'));
+			$('#aktuellt-table').append(row);
+		};
+
+		//
+		var renderEvent = function(data) {
+			$('#event-table tbody').empty();
+			for (x in data) {
+				var row = $('<tr style="vertical-align:top;">');
+				row.append($('<td style="font-weight: bold;">').html(x));
+				row.append($(
+						'<td style="white-space: normal; word-wrap: normal;">')
+						.append($('<code>').text(data[x])));
+				$('#event-table').append(row);
+			}
+		};
+
+		//
+		var render = function(request) {
+			console.log(request);
+			$('#busy').activity({segments: 12, width: 5.5, space: 6, length: 13, speed: 1.2}).show();
+			$.ajax({
+				url : request.url,
+				cache : false,
+				success : function(data) {
+					request.render(data);
+					$('#head-line').removeClass('error');
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					console.log(textStatus + ': ' + errorThrown);
+					$('#head-line').html(textStatus + ': ' + errorThrown);
+					$('#head-line').addClass('error');
+				}
+			}).done(function() { 
+				$('#busy').activity(false).hide();
+			});
+
+		};
+
+		//
+		var producerRequest = {
+			url : "jersey/service-producers",
+			render : renderProducerStatus
+		};
+
+		//
+		var counterDomainRequest = function(week) {
+			return {
+				url : "jersey/counters/domains/" + week,
+				render : renderDomainCounters
+			};
+		};
+
+		//
+		var counterContractRequest = function(week) {
+			return {
+				url : "jersey/counters/contracts/" + week,
+				render : renderContractCounters
+			};
+		};
+
+		//
+		var metaDataRequest = {
+			url : "jersey/log/metadata",
+			render : renderMetaData
+		};
+
+		//
+		var eventRequest = function(key) {
+			return {
+				url : "jersey/log/event/" + key,
+				render : renderEvent
+			};
+		};
+
+		//
+		var logSummaryRequest = function(contract, error, sender, receiver,
+				time) {
+			return {
+				url : "jersey/log/timeline/" + contract + "/" + error + "/"
+						+ sender + "/" + receiver + "/" + time,
+				render : renderLogSummary
+			};
+		};
+
+		//
+		$(document).ready(
+				function() {
+
+					render(metaDataRequest);
+
+					render(producerRequest);
+
+					var week = new Date().getWeek();
+					for ( var i = 1; i <= week; i++) {
+						var opt = $('<option>').attr('name', i).html(i);
+						if (i == week) {
+							opt.attr('selected', 'selected');
+						}
+						$('#weekSelect').append(opt);
+					}
+					$('#weekSelect').change(function() {
+						var week = $('#weekSelect option:selected').html();
+						render(counterRequest(week));
+					});
+
+					$('#toggleBtn').click(function(e) {
+						var down = $('#toggleBtn').is(':checked');
+						if (down) {
+							$('.up').addClass('hide');
+						} else {
+							$('.up').removeClass('hide');
+						}
+					});
+
+					$('#logSearchBtn').click(
+							function() {
+								var sender = $('#senderSelectText').val();
+								if (sender.length == 0) {
+									sender = $('#senderSelect option:selected')
+											.html();
+								}
+								var receiver = $('#receiverSelectText').val();
+								if (receiver.length == 0) {
+									receiver = $(
+											'#receiverSelect option:selected')
+											.html();
+								}
+								var st = $('#datepicker').val();
+
+								var time = (st.length == 0) ? 0 : Date
+										.parseFormatted(st).getTime();
+								render(logSummaryRequest($(
+										'#contractSelect option:selected')
+										.html(), $('#logErrorBtn').is(
+										':checked') ? "y" : "n", sender,
+										receiver, time));
+							});
+
+					$('#domainLink').click(function() {
+						counterRequest = counterDomainRequest;
+						$('#log').addClass('hide');
+						$('#status').addClass('hide');
+						$('#aktuellt').removeClass('hide');
+						$('#weekSelect').change();
+					});
+
+					$('#contractLink').click(function() {
+						counterRequest = counterContractRequest;
+						$('#log').addClass('hide');
+						$('#status').addClass('hide');
+						$('#aktuellt').removeClass('hide');
+						$('#weekSelect').change();
+					});
+
+					$('#statusLink').click(function() {
+						$('#log').addClass('hide');
+						$('#aktuellt').addClass('hide');
+						$('#status').removeClass('hide');
+						render(producerRequest);
+					});
+
+					$('#logLink').click(function() {
+						$('#status').addClass('hide');
+						$('#aktuellt').addClass('hide');
+						$('#log').removeClass('hide');
+						$('#head-line').html("Sök efter logg händelser");
+					});
+
+					$('#datepicker').val(new Date().format());
+
+					$("#overlay").click(function(e) {
+						$("#overlay").hide();
+						$("#dialog").slideUp(500);
+					});
+				});
+	</script>
+</body>
+</html>
