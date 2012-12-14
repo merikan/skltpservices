@@ -501,7 +501,7 @@ div#content div#body {
 								key.click(function() {
 											$('#eventTitle').html(
 													"Händelse: " + e.key);
-											render(eventRequest(e.key));
+											render(eventRequest(e.key), true);
 											$("#overlay").show();
 											$("#dialog").fadeIn(500);
 										});
@@ -592,23 +592,29 @@ div#content div#body {
 		//
 		var render = function(request) {
 			console.log(request);
-			$('#busy').activity({segments: 12, width: 5.5, space: 6, length: 13, speed: 1.2});
-			$('#overlay').show();
+			if (request.activity) {
+				$('#busy').activity({segments: 12, width: 5.5, space: 6, length: 13, speed: 1.2});
+				$('#overlay').show();
+			}
 			$.ajax({
 				url : request.url,
 				cache : false,
 				success : function(data) {
 					request.render(data);
 					$('#head-line').removeClass('error');
-					$('#busy').activity(false);
-					$('#overlay').hide();
+					if (request.activity) {
+						$('#busy').activity(false);
+						$('#overlay').hide();
+					}
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					console.log(textStatus + ': ' + errorThrown);
 					$('#head-line').html(textStatus + ': ' + errorThrown);
 					$('#head-line').addClass('error');
-					$('#busy').activity(false);
-					$('#overlay').hide();
+					if (request.activity) {
+						$('#busy').activity(false);
+						$('#overlay').hide();
+					}
 				}
 			});
 
@@ -617,14 +623,16 @@ div#content div#body {
 		//
 		var producerRequest = {
 			url : "jersey/service-producers",
-			render : renderProducerStatus
+			render : renderProducerStatus,
+			activity : true
 		};
 
 		//
 		var counterDomainRequest = function(week) {
 			return {
 				url : "jersey/counters/domains/" + week,
-				render : renderDomainCounters
+				render : renderDomainCounters,
+				activity : true
 			};
 		};
 
@@ -632,21 +640,24 @@ div#content div#body {
 		var counterContractRequest = function(week) {
 			return {
 				url : "jersey/counters/contracts/" + week,
-				render : renderContractCounters
+				render : renderContractCounters,
+				activity : true
 			};
 		};
 
 		//
 		var metaDataRequest = {
 			url : "jersey/log/metadata",
-			render : renderMetaData
+			render : renderMetaData,
+			activity : true
 		};
 
 		//
 		var eventRequest = function(key) {
 			return {
 				url : "jersey/log/event/" + key,
-				render : renderEvent
+				render : renderEvent,
+				activity : false
 			};
 		};
 
@@ -656,7 +667,8 @@ div#content div#body {
 			return {
 				url : "jersey/log/timeline/" + contract + "/" + error + "/"
 						+ sender + "/" + receiver + "/" + time,
-				render : renderLogSummary
+				render : renderLogSummary,
+				activity : true
 			};
 		};
 
