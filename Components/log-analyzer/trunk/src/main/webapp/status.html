@@ -501,7 +501,7 @@ div#content div#body {
 								key.click(function() {
 											$('#eventTitle').html(
 													"Händelse: " + e.key);
-											render(eventRequest(e.key), true);
+											render(eventRequest(e.key));
 											$("#overlay").show();
 											$("#dialog").fadeIn(500);
 										});
@@ -668,7 +668,7 @@ div#content div#body {
 				url : "jersey/log/timeline/" + contract + "/" + error + "/"
 						+ sender + "/" + receiver + "/" + time,
 				render : renderLogSummary,
-				activity : true
+				activity : false
 			};
 		};
 
