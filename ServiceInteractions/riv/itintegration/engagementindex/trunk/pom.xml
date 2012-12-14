@@ -29,8 +29,7 @@
   <name>itintegration-engagementindex</name>
 
   <properties>
-	<cxf.version>2.1.2</cxf.version>
-	<spring.version>3.0.5</spring.version>
+	<cxf.version>2.5.6</cxf.version>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
