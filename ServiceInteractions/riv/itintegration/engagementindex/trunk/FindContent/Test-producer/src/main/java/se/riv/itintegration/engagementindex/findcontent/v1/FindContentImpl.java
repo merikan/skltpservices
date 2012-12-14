@@ -30,7 +30,7 @@ import se.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentR
 import se.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentType;
 
 @WebService(serviceName = "FindContentResponderService", endpointInterface = "se.riv.itintegration.engagementindex.findcontent.v1.rivtabp21.FindContentResponderInterface", portName = "FindContentResponderPort", targetNamespace = "urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21", wsdlLocation = "schemas/interactions/FindContentInteraction/FindContentInteraction_1.0_RIVTABP21.wsdl")
-public class ProducerImpl implements FindContentResponderInterface {
+public class FindContentImpl implements FindContentResponderInterface {
 
 	@Override
 	public FindContentResponseType findContent(String arg0, FindContentType findContent) {

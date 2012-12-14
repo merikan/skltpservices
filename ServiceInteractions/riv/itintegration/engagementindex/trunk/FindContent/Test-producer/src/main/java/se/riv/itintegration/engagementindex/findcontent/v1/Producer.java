@@ -27,37 +27,28 @@ import javax.xml.ws.Endpoint;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
 
-public class Producer {
+public class Producer implements Runnable{
 
-//	protected Producer() throws Exception {
-//		System.out.println("Starting Producer");
-//
-//		// Loads a cxf configuration file to use
-//		final SpringBusFactory bf = new SpringBusFactory();
-//		final URL busFile = this.getClass().getClassLoader().getResource("cxf-producer.xml");
-//		final Bus bus = bf.createBus(busFile.toString());
-//
-//		SpringBusFactory.setDefaultBus(bus);
-//
-//		final Object implementor = new ProducerImpl();
-//		final String address = "https://localhost:21000/vp/FindContent/1/rivtabp21";
-//		Endpoint.publish(address, implementor);
-//	}
-	
-	protected Producer() throws Exception {
-		System.out.println("Starting Producer");
-		final Object implementor = new ProducerImpl();
-		final String address = "http://localhost:21000/vp/FindContent/1/rivtabp21";
+	protected Producer(String address) throws Exception {
+		System.out.println("Starting FindContent testproducer");
+
+		// Loads a cxf configuration file to use
+		final SpringBusFactory bf = new SpringBusFactory();
+		final URL busFile = this.getClass().getClassLoader().getResource("cxf.xml");
+		final Bus bus = bf.createBus(busFile.toString());
+
+		SpringBusFactory.setDefaultBus(bus);
+		final Object implementor = new FindContentImpl();
 		Endpoint.publish(address, implementor);
+	}
+	
+	@Override
+	public void run() {
+		System.out.println("FindContent testproducer ready...");
 	}
 
 	public static void main(String[] args) throws Exception {
-
-		new Producer();
-		System.out.println("Producer ready...");
-
-		Thread.sleep(5 * 60 * 1000);
-		System.out.println("Producer exiting");
-		System.exit(0);
-	}
+		(new Thread(new Producer("https://localhost:22000/testproducer/FindContent/1/rivtabp21"))).start();
+	}	
 }
+
