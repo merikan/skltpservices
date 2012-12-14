@@ -604,14 +604,14 @@ div#content div#body {
 				success : function(data) {
 					request.render(data);
 					$('#head-line').removeClass('error');
-					$('#busy').activity(false).hide();
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					console.log(textStatus + ': ' + errorThrown);
 					$('#head-line').html(textStatus + ': ' + errorThrown);
 					$('#head-line').addClass('error');
-					$('#busy').activity(false).hide();
 				}
+			}).done(function() { 
+				$('#busy').activity(false).hide();
 			});
 
 		};
