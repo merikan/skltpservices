@@ -189,13 +189,17 @@ div#content div#body {
 }
 
 .square {
-	width: 180px;
-	height: 160px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 30%;
-	color: #fff;
-	padding: 10px 20px;
+	display: none;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	color: #aaa;
+	margin: 0;
+	padding: 0;
 }
 </style>
 
@@ -205,8 +209,9 @@ div#content div#body {
 </head>
 <body>
 	<div id="overlay" class="web_dialog_overlay">
-		<div id="busy" class="square"></div>
 	</div>
+
+	<div id="busy" class="square"></div>
 
 	<div id="top">
 		<div id="topleft">
@@ -592,29 +597,20 @@ div#content div#body {
 		//
 		var render = function(request) {
 			console.log(request);
-			if (request.activity) {
-				$('#busy').activity({segments: 12, width: 5.5, space: 6, length: 13, speed: 1.2});
-				$('#overlay').show();
-			}
+			$('#busy').activity({segments: 12, width: 5.5, space: 6, length: 13, speed: 1.2}).show();
 			$.ajax({
 				url : request.url,
 				cache : false,
 				success : function(data) {
 					request.render(data);
 					$('#head-line').removeClass('error');
-					if (request.activity) {
-						$('#busy').activity(false);
-						$('#overlay').hide();
-					}
+					$('#busy').activity(false).hide();
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					console.log(textStatus + ': ' + errorThrown);
 					$('#head-line').html(textStatus + ': ' + errorThrown);
 					$('#head-line').addClass('error');
-					if (request.activity) {
-						$('#busy').activity(false);
-						$('#overlay').hide();
-					}
+					$('#busy').activity(false).hide();
 				}
 			});
 
@@ -623,16 +619,14 @@ div#content div#body {
 		//
 		var producerRequest = {
 			url : "jersey/service-producers",
-			render : renderProducerStatus,
-			activity : true
+			render : renderProducerStatus
 		};
 
 		//
 		var counterDomainRequest = function(week) {
 			return {
 				url : "jersey/counters/domains/" + week,
-				render : renderDomainCounters,
-				activity : true
+				render : renderDomainCounters
 			};
 		};
 
@@ -640,24 +634,21 @@ div#content div#body {
 		var counterContractRequest = function(week) {
 			return {
 				url : "jersey/counters/contracts/" + week,
-				render : renderContractCounters,
-				activity : true
+				render : renderContractCounters
 			};
 		};
 
 		//
 		var metaDataRequest = {
 			url : "jersey/log/metadata",
-			render : renderMetaData,
-			activity : true
+			render : renderMetaData
 		};
 
 		//
 		var eventRequest = function(key) {
 			return {
 				url : "jersey/log/event/" + key,
-				render : renderEvent,
-				activity : false
+				render : renderEvent
 			};
 		};
 
@@ -667,8 +658,7 @@ div#content div#body {
 			return {
 				url : "jersey/log/timeline/" + contract + "/" + error + "/"
 						+ sender + "/" + receiver + "/" + time,
-				render : renderLogSummary,
-				activity : false
+				render : renderLogSummary
 			};
 		};
 
