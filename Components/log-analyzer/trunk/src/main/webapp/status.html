@@ -610,7 +610,7 @@ div#content div#body {
 					$('#head-line').html(textStatus + ': ' + errorThrown);
 					$('#head-line').addClass('error');
 				}
-			}).done(function() { 
+			}).always(function() { 
 				$('#busy').activity(false).hide();
 			});
 
