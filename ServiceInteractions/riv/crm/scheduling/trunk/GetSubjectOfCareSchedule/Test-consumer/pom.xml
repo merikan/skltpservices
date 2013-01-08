@@ -34,6 +34,13 @@
 	</properties>
 
 	<dependencies>
+	
+		<dependency>
+			<groupId>se.rivta.tools</groupId>
+  			<artifactId>ehr-scheduling-schemas</artifactId>
+  			<version>1</version>
+		</dependency>
+		
 		<!-- cxf dependencies -->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
