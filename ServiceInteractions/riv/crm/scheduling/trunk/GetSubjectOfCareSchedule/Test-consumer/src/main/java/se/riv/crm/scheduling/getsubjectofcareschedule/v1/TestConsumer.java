@@ -44,10 +44,7 @@ public final class TestConsumer {
 	private static final String LOGICAL_ADDRESS = "Test";
 
 	private static final String LOGISK_ADDRESS = "/GetSubjectOfCareSchedule/1/rivtabp21";
-
-	// private static String host = "192.168.25.40:20000/vp";
-
-	private static String host = "test1.esb.ntjp.se/vp";
+	private static String host = "localhost:20000/testproducer";
 
 	public static void main(String[] args) {
 
@@ -55,7 +52,7 @@ public final class TestConsumer {
 			host = args[0];
 		}
 
-		String endpointAddress = "https://" + host + LOGISK_ADDRESS;
+		String endpointAddress = "http://" + host + LOGISK_ADDRESS;
 		System.out.println("Consumer connecting to " + endpointAddress);
 		String p = callService2(endpointAddress, "Test");
 		System.out.println("Returned: " + p);
@@ -67,7 +64,7 @@ public final class TestConsumer {
 			// Get URL to wsdl file
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();
 			URL wsdlUrl = loader
-					.getResource("schemas/interactions/GetSubjectOfCareScheduleInteraction/GetSubjectOfCareScheduleInteraction_1.1_RIVTABP21.wsdl");
+					.getResource("interactions/GetSubjectOfCareScheduleInteraction/GetSubjectOfCareScheduleInteraction_1.1_RIVTABP21.wsdl");
 
 			GetSubjectOfCareScheduleResponderService service = new GetSubjectOfCareScheduleResponderService(wsdlUrl);
 			GetSubjectOfCareScheduleResponderInterface serviceInterface = service
@@ -90,8 +87,8 @@ public final class TestConsumer {
 			httpClientPolicy.setReceiveTimeout(32000);
 			http.setClient(httpClientPolicy);
 
-			TLSClientParameters tlsCP = setUpTlsClientParams();
-			http.setTlsClientParameters(tlsCP);
+			//TLSClientParameters tlsCP = setUpTlsClientParams();
+			//http.setTlsClientParameters(tlsCP);
 
 			GetSubjectOfCareScheduleResponseType response = serviceInterface.getSubjectOfCareSchedule(LOGICAL_ADDRESS,
 					null, request);
