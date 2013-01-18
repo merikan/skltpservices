@@ -79,5 +79,8 @@ org.mule.api.transport.ConnectorException: There is already a listener registere
 ==Verify service from SOAUI==
 
   * In SOAPUI go to File => New soapUI Project
-  * Fill in a _Project Name_ and _Initial WSDL/WADL_ where URL of WSDL is `<inbound-endpoint adress>?wsdl`
+  * Fill in a _Project Name_ 
+  * Fill in a _Initial WSDL/WADL_ where URL of WSDL is `{inbound-endpoint adress}?wsdl`, for example: https://qa.esb.ntjp.sjunet.org:20000/vp/GetSubjectOfCareSchedule/1/rivtabp21?wsdl
+
+
   
