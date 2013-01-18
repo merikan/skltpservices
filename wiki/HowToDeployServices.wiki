@@ -76,11 +76,13 @@ org.mule.api.transport.ConnectorException: There is already a listener registere
 	at org.tanukisoftware.wrapper.WrapperManager$12.run(WrapperManager.java:3925)
 }}}
 
-==Verify service from SoapUI==
+==Verify service from soapUI==
 
-  * In SOAPUI go to File => New soapUI Project
+  * In soapUI go to File => New soapUI Project
   * Fill in a _Project Name_ 
-  * Fill in a _Initial WSDL/WADL_ where URL of WSDL is `{inbound-endpoint adress}?wsdl`, for example: https://qa.esb.ntjp.sjunet.org:20000/vp/GetSubjectOfCareSchedule/1/rivtabp21?wsdl
+  * Fill in a _Initial WSDL/WADL_ where URL of WSDL is `{inbound-endpoint adress}?wsdl`. The URL can be found in the descriptor file that was created when running the virtualization generator. 
+   For example: 
+   `https://qa.esb.ntjp.sjunet.org:20000/vp/GetSubjectOfCareSchedule/1/rivtabp21?wsdl`
   * Press OK and wait for the wsdl-file to load and create a request in SoapUI.
 
   
