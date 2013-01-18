@@ -75,3 +75,9 @@ org.mule.api.transport.ConnectorException: There is already a listener registere
 	at org.mule.module.boot.MuleServerWrapper.start(MuleServerWrapper.java:48)
 	at org.tanukisoftware.wrapper.WrapperManager$12.run(WrapperManager.java:3925)
 }}}
+
+==Verify service from SOAUI==
+
+  * In SOAPUI go to File => New soapUI Project
+  * Fill in a _Project Name_ and _Initial WSDL/WADL_ where URL of WSDL is `<inbound-endpoint adress>?wsdl`
+  
