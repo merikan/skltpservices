@@ -63,7 +63,7 @@ Script is based on the [http://rivta.googlecode.com/svn/wiki/specs/RIV_Tekniska_
 }}}
  # Run maven install to create deployable jars
 {{{ 
- $mvn clean install
+ $mvn clean package
 }}}
 
 ==Trouble running scrip ==
