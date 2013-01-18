@@ -32,7 +32,7 @@ Script is based on the [http://rivta.googlecode.com/svn/wiki/specs/RIV_Tekniska_
 
  # Download RIV TA zip with the service contracts and unzip it, [http://code.google.com/p/rivta/ RIV TA]
  # Check out [https://code.google.com/p/skltpservices/source/browse/#svn%2Ftools%2Fgenerators%2Fscripts%2Ftrunk%2Fse%2Fskltpservices%2Ftools files needed for running] 
- # Update pomtemplate.xml with correct groupid, artifactid and version depending on what domain/subdomain is used and what version of RIV TA contract is used, see sample below
+ # Update artifactId and version in pomtemplate.xml depending on what domain/subdomain is used and what version of RIV TA contract is used, see sample below
 {{{
   <groupId>se.skl.skltpservices</groupId>
   <artifactId>itintegration-engagementindex</artifactId>
