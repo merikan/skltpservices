@@ -23,7 +23,7 @@ Turn off any alarms that will trigger emails and warnings because any of the pro
   # If download is a zip, unzip all the containing jars
   # Copy jar files to *`$MULE_HOME/apps/vp-services-{version}/lib`* directory
   # Touch mule-config file, eg $MULE_HOME/apps/vp-services.../vp-config.xml to get the VP-app to restart and reload services.
-  # Verify no error occurred during restart in logs, `$MULE_HOME/logs/mule-app-vp-services...log`
+  # Verify no error occurred during restart in logs, `$MULE_HOME/logs/mule-app-vp.log`
 
 ==In case of errors when deploying new services==
 
