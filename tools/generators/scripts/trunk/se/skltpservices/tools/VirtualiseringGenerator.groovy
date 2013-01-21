@@ -82,7 +82,7 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 		-DinteractiveMode=false 
 		-DarchetypeArtifactId=service-archetype 
 		-DarchetypeGroupId=se.skl.tp.archetype 
-		-DarchetypeVersion=1.0 
+		-DarchetypeVersion=1.1
 		-Duser.dir=${targetDir} 
 		-DgroupId=se.skl.skltpservices.${maindomain}.${subdomain}
 		-DartifactId=${artifactId} 
@@ -158,6 +158,7 @@ if( args.size() < 1){
 def sourceDir = new File(args[0])
 def targetDir = "."
 
+new File("pom.xml").delete() 
 new File("${targetDir}/pom.xml") << new File("pomtemplate.xml").asWritable()
 
 def serviceInteractionDirectories = getAllDirectoriesMatching(sourceDir,/.*Interaction$/)
@@ -169,4 +170,4 @@ copyCoreSchemas(serviceInteractionDirectories, coreSchemaDirectory, targetDir)
 
 println ""
 println ""
-println "NOTE! Run mvn clean install to build deployable jar-files for service platform"
+println "NOTE! Run mvn clean package to build deployable jar-files for service platform without adding to your local repo"
