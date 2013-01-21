@@ -1,0 +1,20 @@
+<archetype xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype/1.0.0 http://maven.apache.org/xsd/archetype-1.0.0.xsd">
+  <id>service-bundle</id>
+
+  <resources>
+    <resource>Schema/pom.xml</resource>
+    <resource>Service/pom.xml</resource>
+    <resource>Service/Virtualisering/pom.xml</resource>
+    <resource>Service/Virtualisering/template/xml/tp-virtuell-tjanst-config.xml</resource>
+    <resource>Service/Test-producer/pom.xml</resource>
+    <resource>Service/Test-producer/template/java/Producer.java</resource>
+    <resource>Service/Test-producer/template/java/ProducerImpl.java</resource>
+    <resource>Service/Test-producer/template/xml/cxf-producer.xml</resource>
+    <resource>Service/Test-producer/template/xml/tp-virtuell-tjanst-config.xml</resource>
+    <resource>Service/Test-consumer/pom.xml</resource>
+    <resource>Service/Test-consumer/template/java/Consumer.java</resource>
+    <resource>Service/Test-consumer/template/xml/cxf.xml</resource>
+  </resources>
+
+</archetype>
