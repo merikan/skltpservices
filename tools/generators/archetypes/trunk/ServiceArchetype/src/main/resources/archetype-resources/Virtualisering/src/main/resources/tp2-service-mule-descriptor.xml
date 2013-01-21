@@ -24,7 +24,7 @@
 	<flow name="${domainName}-${domainSubName}-${serviceInteraction}-virtualisering-flow" >
 
         <https:inbound-endpoint
-            address="https://${TP_HOST}:${TP_PORT}/${TP_BASE_URI}/${serviceRelativePath}"
+            address="https://${TP_HOST}:${TP_PORT}/${TP_BASE_URI}/${domainName}/${domainSubName}/${serviceRelativePath}"
             connector-ref="VPProducerConnector"
             exchange-pattern="request-response" 
             responseTransformer-refs="filterResponseHeaders">

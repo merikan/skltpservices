@@ -29,7 +29,7 @@
 		<service name="${domainName}-${domainSubName}-${serviceInteraction}-virtualisering-service">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="https://${tp.host}:${tp.port}/${tp.baseUri}/${serviceRelativePath}"
+					address="https://${tp.host}:${tp.port}/${tp.baseUri}/${domainName}/${domainSubName}/${serviceRelativePath}"
 					wsdlLocation="${serviceWsdlFileDir}"
 					serviceName="${serviceMethod}ResponderService" namespace="${serviceNamespace}"
 					proxy="true" payload="envelope" synchronous="true" 
