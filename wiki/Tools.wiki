@@ -21,9 +21,9 @@ Requires [http://groovy.codehaus.org/ groovy]  1.8 or newer. [http://groovy.code
 
 Requires [http://maven.apache.org/ Maven] 3.0 or newer.
 
-You need to install Maven service archetype in order to run the script
+You need to install Maven service archetype of correct version in order to run the script
 
- # cd `/skltpservices/tools/generators/archetypes/trunk/ServiceArchetype`
+ # cd `/skltpservices/tools/generators/archetypes/tags/1.1/ServiceArchetype`
  # mvn install
 
 Script is based on the [http://rivta.googlecode.com/svn/wiki/specs/RIV_Tekniska_Anvisningar_Konfigurationsstyrning.pdf RIV TA Konfigurationsstyrning 1.0]
