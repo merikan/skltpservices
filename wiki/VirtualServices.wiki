@@ -1,5 +1,7 @@
 #summary Virtual services
 
+<wiki:toc max_depth="3" />
+
 = Introduction =
 
 Virtual services is a...
