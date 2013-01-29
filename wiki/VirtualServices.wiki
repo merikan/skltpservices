@@ -4,6 +4,15 @@
 
 Virtual services is a...
 
+==Endpoint adress naming conventions==
+
+RIV TA provides only rules regarding the versioning of the endpoint adress. 
+
+`https://host:port/vp/<domain>/<subdomain's>/<ServiceInteractionName>/<version>/<rivtaversion>`
+
+`https://localhost:20000/vp/ehr/blocking/administration/CancelTemporaryExtendedRevoke/2/rivtabp21`
+
+
 = Resources =
 
   * [HowToDeployServices How to deploy]
