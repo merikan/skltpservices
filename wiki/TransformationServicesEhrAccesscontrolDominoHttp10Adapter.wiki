@@ -10,7 +10,7 @@ Domino HTTP 1.0 adapter is used to handle the case when a producer is running an
 
 ==Build from source==
 
-Checkout code from:
+Checkout code and run mvn clean install or mvn clean package.
 
 {{{
 https://code.google.com/p/skltpservices/source/browse/AdapterServices/riv.ehr.accesscontrol/DominoHttp10Adapter
