@@ -6,10 +6,6 @@
 
 =Installation instructions mule 2.2.8=
 
-==Runtime environment==
-
-==Download distribution==
-
 ==Build from source==
 
 ==Deploy/Undeploy distribution==
