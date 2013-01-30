@@ -19,8 +19,10 @@ https://code.google.com/p/skltpservices/source/browse/AdapterServices/riv.ehr.ac
 ==Deploy/Undeploy distribution==
 
 Deploy the adapter by 
- # copying the DominoHttp10Adapter-1.0.0.jar into the folder <vp-home>/tjanstebryggan/services.
-
+ # copying the ehr-accescontrol-schemas found in RIV TA into the folder `<vp-home>/tjanstebryggan/services`.
+ # copying the DominoHttp10Adapter-1.0.0.jar into the folder `<vp-home>/tjanstebryggan/services`.
+ # Configure as described below in Configuration
+ # Restart Mule 2
 
 ==Configuration==
 
