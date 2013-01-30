@@ -2,14 +2,14 @@
 
 = Introduction =
 
-Add your content here.
+This page contains information on how to use SOAPUI. You can also download existing projects in SOAPUI.
 
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+==Getting started with SOAPUI==
+First thing you need to do is download the latest version of SOAPUI. This can be done here: 
+[http://http://www.soapui.org/ SOAPUI]. When it's finished downloading, install the program. Now you're finished to start using the program. Now you can chose to either create new projects or import existing projects.
 
-[http://code.google.com/p/skltpservices/downloads/list downloads]
+==Importing projects==
+You can import an already existing project File/Import project. There are already projects created for the services of Tjänsteplattformen. These can be found here: [http://code.google.com/p/skltpservices/downloads/list downloads]
