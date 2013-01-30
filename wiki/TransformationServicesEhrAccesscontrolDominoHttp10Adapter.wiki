@@ -4,10 +4,24 @@
 
 = Introduction =
 
+Domino HTTP 1.0 adapter is used to handle the case when a producer is running an application that does not support HTTP 1.1 and therefore can not handle the case that Mule 2.2.8 sends transferencoding chunked. The adapter only forces the outgoing http request to use http 1.0.
+
 =Installation instructions mule 2.2.8=
 
 ==Build from source==
 
+Checkout code from:
+
+{{{
+https://code.google.com/p/skltpservices/source/browse/AdapterServices/riv.ehr.accesscontrol/DominoHttp10Adapter
+}}}
+
 ==Deploy/Undeploy distribution==
 
+Deploy the adapter by 
+ # copying the DominoHttp10Adapter-1.0.0.jar into the folder <vp-home>/tjanstebryggan/services.
+
+
 ==Configuration==
+
+When running in adapter platform on Mule 2 the properties in DominoHttp10Adapter-config.properties needs to be added to the adapter platform config file tb-config.properties.
