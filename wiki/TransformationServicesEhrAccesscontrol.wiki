@@ -6,4 +6,4 @@ Add your content here.
 
 = Details =
 
-[TransformationServicesCrmSchedulingTakeCare Transformation between TakeCare and RIV]
+[TransformationServicesEhrAccesscontrolDominoHttp10Adapter  Domino HTTP 1.0 adapter]
