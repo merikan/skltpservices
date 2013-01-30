@@ -8,7 +8,7 @@ Virtual services is a...
 
 ==Endpoint adress naming conventions==
 
-RIV TA provides only rules regarding the version of the endpoint adress. For SKLTP the following naming convention is used for endpoint adresses. 
+RIV TA provides only rules regarding the version part of the endpoint adress. For SKLTP the following naming convention is used for endpoint adresses. 
 
 `https://host:port/vp/<domain>/<subdomain's>/<ServiceInteractionName>/<version>/<rivtaversion>`
 
