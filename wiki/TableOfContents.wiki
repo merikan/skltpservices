@@ -6,6 +6,7 @@ SKL TP Services
   * [VirtualServices Virtual services]
      * [HowToDeployServices How to deploy]
      * [Tools Generate virtual services for Service platform] 
+     * [VpSoapUiProjects Soap UI projekt för testning] 
   * [TransformationServices Adapter services] 
     * [TransformationServicesClinicalprocessRequestworkflow	 clinicalprocess:requestworkflow]
     * [TransformationServicesCrmListing crm:listing]
