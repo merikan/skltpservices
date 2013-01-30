@@ -1,0 +1,1605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="APOservice - AXS" resourceRoot="" soapui-version="4.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="HamtaFolkInfoResponderBinding" type="wsdl" bindingName="{urn:riv:inera:se.apotekensservice:axs:HamtaFolkInfo:1:rivtabp20}HamtaFolkInfoResponderBinding" soapVersion="1_1" anonymous="optional" definition="https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaFolkInfo/1/rivtabp20?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaFolkInfo/1/rivtabp20?wsdl"><con:part><con:url>https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaFolkInfo/1/rivtabp20?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="HamtaFolkInfoInteraction" targetNamespace="urn:riv:inera:se.apotekensservice:axs:HamtaFolkInfo:1:rivtabp20" xmlns="urn:riv:inera:se.apotekensservice:axs:HamtaFolkInfo:1:rivtabp20" xmlns:argos="urn:riv:inera.se.apotekensservice:argos:1" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:spdr="urn:riv:se.apotekensservice:axs:HamtaFolkInfoResponder:1" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema targetNamespace="urn:riv:inera:se.apotekensservice:axs:HamtaFolkInfo:1:rivtabp20">
+      <xs:import namespace="urn:riv:se.apotekensservice:axs:HamtaFolkInfoResponder:1" schemaLocation="https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaFolkInfo/1/rivtabp20?xsd=HamtaFolkInfoResponder_1.0.xsd"/>
+      <xs:import namespace="http://www.w3.org/2005/08/addressing" schemaLocation="https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaFolkInfo/1/rivtabp20?xsd=../../core_components/ws-addressing-1.0.xsd"/>
+      <xs:import namespace="urn:riv:inera.se.apotekensservice:argos:1" schemaLocation="https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaFolkInfo/1/rivtabp20?xsd=../../core_components/ArgosHeader_1.0.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ApplicationException">
+    <wsdl:part element="spdr:ApplicationException" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HamtaFolkInfoResponse">
+    <wsdl:part element="spdr:HamtaFolkInfoResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SystemException">
+    <wsdl:part element="spdr:SystemException" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HamtaFolkInfoRequest">
+    <wsdl:part element="spdr:HamtaFolkInfo" name="parameters"></wsdl:part>
+    <wsdl:part element="wsa:To" name="LogicalAddress">
+      <wsdl:documentation>Orgnr of Apotekens Service AB</wsdl:documentation>
+    </wsdl:part>
+    <wsdl:part element="argos:ArgosHeader" name="ArgosHeader">
+      <wsdl:documentation>Argos header of Apotekens Service AB. Check documentation regarding mandatory for this specific service interaction</wsdl:documentation>
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="HamtaFolkInfoResponderInterface">
+    <wsdl:operation name="HamtaFolkInfo">
+      <wsdl:input message="HamtaFolkInfoRequest"></wsdl:input>
+      <wsdl:output message="HamtaFolkInfoResponse"></wsdl:output>
+      <wsdl:fault message="SystemException" name="SystemException"></wsdl:fault>
+      <wsdl:fault message="ApplicationException" name="ApplicationException"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HamtaFolkInfoResponderBinding" type="HamtaFolkInfoResponderInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="HamtaFolkInfo">
+      <soap:operation soapAction="urn:riv:se.apotekensservice:axs:HamtaFolkInfoResponder:1:HamtaFolkInfo"/>
+      <wsdl:input>
+        <soap:body parts="parameters" use="literal"/>
+        <soap:header message="HamtaFolkInfoRequest" part="LogicalAddress" use="literal"></soap:header>
+        <soap:header message="HamtaFolkInfoRequest" part="ArgosHeader" use="literal"></soap:header>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SystemException">
+        <soap:fault name="SystemException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationException">
+        <soap:fault name="ApplicationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HamtaFolkInfoResponderService">
+    <wsdl:port binding="HamtaFolkInfoResponderBinding" name="HamtaFolkInfoResponderPort">
+      <soap:address location="https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaFolkInfo/1/rivtabp20"/>
+    </wsdl:port>
+  </wsdl:service>
+  <xs:annotation>
+    <xs:documentation>Beskrivning: Tjänstekontraktet som avser att konkretisera tillämpningen av RIV.
+            Revisioner: 2011-04-05 Version 1.0
+            Tjänstedomän: se.apotekensservice:axs.
+            Tjänsteinteraktionens namn: HamtaFolkInfo.
+            Tjänsteinteraktionstyp: Fråga-Svar.
+            RIV Tekniska Anvisning: Basic Profile 2.0</xs:documentation>
+  </xs:annotation>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaFolkInfo/1/rivtabp20?xsd=HamtaFolkInfoResponder_1.0.xsd</con:url><con:content><![CDATA[<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:riv:se.apotekensservice:axs:HamtaFolkInfoResponder:1" version="1.0" xmlns="urn:riv:se.apotekensservice:axs:HamtaFolkInfoResponder:1" xmlns:axs="urn:riv:se.apotekensservice:axs:1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="urn:riv:se.apotekensservice:axs:1" schemaLocation="https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaFolkInfo/1/rivtabp20?xsd=../../core_components/se.apotekensservice_axs_1.0.xsd"/>
+  <xs:element name="HamtaFolkInfo" type="HamtaFolkInfoRequestType"/>
+  <xs:element name="HamtaFolkInfoResponse" type="HamtaFolkInfoResponseType"/>
+  <xs:element name="ApplicationException" type="axs:ApplicationException"/>
+  <xs:element name="SystemException" type="axs:SystemException"/>
+  <xs:complexType name="HamtaFolkInfoRequestType">
+    <xs:sequence>
+      <xs:element name="klientinformation" nillable="false" type="axs:KlientinformationRequest">
+        <xs:annotation>
+          <xs:documentation>KlientInfo - innehåller information om klienten som gjorde ändringen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="personnummer" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Personnummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HamtaFolkInfoResponseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="apotek" type="axs:ApoteksinformationResponse">
+        <xs:annotation>
+          <xs:documentation>Ev. DOS-apotek som kunden är kopplad till. Om anrop mot underliggande system
+(FOLK eller EXPO) misslyckas så lämnas fältet tomt. Om apoteket inte
+finns registrerat så returneras apoteksinformation med endast GLN-kod
+flaggad som oregistrerad.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="kundinformation" nillable="false" type="axs:KundinformationResponse">
+        <xs:annotation>
+          <xs:documentation>Kundinformation från FOLK. Om anrop mot FOLK misslyckas så lämnas fältet
+tomt. Inget apotek kommer då heller returneras i svaret.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaFolkInfo/1/rivtabp20?xsd=../../core_components/se.apotekensservice_axs_1.0.xsd</con:url><con:content><![CDATA[<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:riv:se.apotekensservice:axs:1" version="1.0" xmlns="urn:riv:se.apotekensservice:axs:1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation>Beskrivning: Meddelandetyper som är gemensamma för axs.
+            Revisioner: 2011-04-05, version 1.0</xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="ApoteksinformationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="aktorsnamn" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Aktörsnamn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="aktorsorgnr" type="xs:long">
+        <xs:annotation>
+          <xs:documentation>Aktörens organisationsnummer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="allmantelefon" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>allmäntelefon</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="besoksadress" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Expeditionsställets besöksadress</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="eReceptDjur" nillable="false" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Anger om apoteket finns expedierar erecept för djur</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="fax" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>fax</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="glnKod" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>GLN-kod</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="huvudtypkod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Kod som beskriver huvudverksamheten för expeditionsstället</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="namn" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Apotekets Namn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ort" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Expeditionsställets besöksort</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="registrerad" nillable="false" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Anger om apoteket finns registrerat i EXPO. Om false så saknar alla fält
+utom glnKod värden.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="slutdatum" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum för stängning av verksamhet</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="startdatum" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum för start av verksamhet</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BalansRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="brutto" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Bruttobelopp i kronor och ören</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="netto" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Nettobelopp i kronor och ören</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BalansResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="brutto" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Bruttobelopp i kronor och ören</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="netto" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Nettobelopp i kronor och ören</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EesStatusRequest">
+    <xs:sequence>
+      <xs:element name="personnummer" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Kundens personnummer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EesStatusResponse">
+    <xs:sequence>
+      <xs:element name="aktuellaSignaler" nillable="false" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Flagga som indikerar om kunden har aktuella signaler som inte tagits hand om.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="jobbPagar" nillable="false" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Flagga som indikerar om annan handläggare jobbar med kunden.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="kundHittad" nillable="false" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Flagga som indikerar om kunden hittades i EES.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="personnummer" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Kundens personnummer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KlientinformationRequest">
+    <xs:sequence>
+      <xs:element name="anvandare" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Unikt användarid i anropande system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="session" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Sessionens id i anropande system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="system" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>GLN-kod för anropande system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KontoinformationRequest">
+    <xs:sequence>
+      <xs:element name="persNr" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Personnummer för den som sökningen gäller.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KontoinformationResponse">
+    <xs:sequence>
+      <xs:element name="anslutStatus" nillable="false" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Personens högkostnadsstatus.
+False - Ej ansluten
+True - Ansluten</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="barnkonton" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>OBS! Sätts inte längre av underliggande tjänst!
+Eventuell lista med personnummer för alla barn knutna till ett och samma samlingskonto. Saknar värde om
+personen ej är ansluten till högkostnadstrappan (status är false) eller om kontot ej är ett samlingskonto
+alternativt ej heller är kopplat till ett samlingskonto.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="foregPeriod" type="PeriodResponse">
+        <xs:annotation>
+          <xs:documentation>Föregående högkostnadsperiods startdatum. 
+Saknar värde om personen ej är ansluten till högkostnadstrappan (status är false)
+eller om ingen föregående period existerar.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="formansniva" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Kundens aktuella förmånsnivå i procent.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="huvudPersNr" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Personnummer för eventuell huvudperson (förmånsmottagare). Saknar värde om huvudperson saknas.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="innevPeriod" type="PeriodResponse">
+        <xs:annotation>
+          <xs:documentation>Innevarande högkostnadsperiod. 
+Saknar värde om personen ej är ansluten till högkostnadstrappan (status är false).
+Om personen är ansluten men saknar aktiv period kommer startdatum lämnas tomt och beloppen sättas till 0.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kvarTillFrikort" type="BalansResponse">
+        <xs:annotation>
+          <xs:documentation>Brutto och Netto i kronor/ören som återstår innan kunden får frikort.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KundinformationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="lkfKod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Län-, kommun- och församling där personen är folkbokförd.
+Även kallad församlingskod
+
+Har formatet LLKKFF
+LL - Län, 2 tecken
+KK - Kommun, 2 tecken
+FF - Församling, 2 tecken</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="omradeskod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Det område där personen är folkbokförd</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="redNamn" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Redigerat namn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="samtycke" nillable="false" type="SamtyckeResponse"/>
+      <xs:element minOccurs="0" name="statusKod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            StatusKod - status på personen i FOLK.
+Mappat från träffkoder i FOLK.
+ 
+0=Person finns i FOLK.
+1=Person finns ej i FOLK, underliggande system är ej tillgängligt.
+2=Person finns ej.
+3=Person sekretesskyddad.
+4=Person är avliden.
+5=Träffkod okänd.
+6=Testperson.
+            <para>Vissa av dessa statuskoder innebär att det inte finns någon personinformation i svaret.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="traffkod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            Träffkod - status på personen i FOLK.
+Kommer att utgå och ersättas av statusKod.
+            <para>92 - ok, träff i Spar</para>
+            <para>93 - Felaktigt personnummer eller personen finns inte i Spar</para>
+            <para>20 - Nyupplagd person</para>
+            <para>23 - Teknisk insättning</para>
+            <para>24 - Personnummerändring</para>
+            <para>26 - Upphävd sekretess</para>
+            <para>40 - Omregistrering/utbyte av befintlig personpost</para>
+            <para>50 - Ändring av befintlig personpost</para>
+            <para>71 - Avliden</para>
+            <para>72 - Avregistrerad</para>
+            <para>73 - Teknisk avregistrering</para>
+            <para>74 - Personnummerändring</para>
+            <para>76 - Sekretesskyddad</para>
+            <para>81 - Ändring av dödsdatum</para>
+            <para>03 - Personen finns inte i FOLK. Spar är inte tillgängligt.</para>
+            <para>01 - Apotekens Service påhittade träffkod för testperson.</para>
+            <para>Vissa av dessa träffkoder innebär att det inte finns någon personinformation i svaret.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PatientInformationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="lkfKod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            Län-, kommun- och församling där personen är folkbokförd.
+Även kallad församlingskod
+
+Har formatet LLKKFF
+            <para>LL - Län, 2 tecken</para>
+            <para>KK - Kommun, 2 tecken</para>
+            <para>FF - Församling, 2 tecken</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="omradeskod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Det område där personen är folkbokförd</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="redNamn" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Redigerat namn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="samtycke" nillable="false" type="SamtyckeResponse"/>
+      <xs:element minOccurs="0" name="statusKod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            StatusKod - status på personen i FOLK.
+Mappat från träffkoder i FOLK.
+            <para>0=Person finns i FOLK.</para>
+            <para>1=Person finns ej i FOLK, underliggande system är ej tillgängligt.</para>
+            <para>2=Person finns ej.</para>
+            <para>3=Person sekretesskyddad.</para>
+            <para>4=Person är avliden.</para>
+            <para>5=Träffkod okänd.</para>
+            <para>6=Testperson.</para>
+            <para>Vissa av dessa statuskoder innebär att det inte finns någon personinformation i svaret.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PeriodResponse">
+    <xs:sequence>
+      <xs:element name="balans" nillable="false" type="BalansResponse">
+        <xs:annotation>
+          <xs:documentation>Ackumulerad balans.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="start" nillable="false" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Periodens startdatum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SamtyckeRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ees" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            Flagga för registrerat eessamtycke.
+            <para>False - Om kunden sagt nej till att vara med i EES.</para>
+            <para>True  - Kunden har samtyckt till att vara med i EES.</para>
+            <para>Null  - kunden har inte tillfrågats/tagit ställning.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="hkdb" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            Flagga för registrerat samtycke.
+I indata är det endast möjligt att ange false och endast om inget värde finns registrerat.
+Samtycke uppdateras genom att skapa eller ta bort konto i HKDB.
+            <para>False - Om kunden sagt nej till att vara med i HKDB.</para>
+            <para>True  - Kunden har samtyckt till att vara med i HKDB.</para>
+            <para>Null  - kunden har inte tillfrågats/tagit ställning.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rr" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            <para>false - Om kunden inte lämnat samtycke till att spara sina recept i RR.</para>
+            <para>true - Kunden har samtyckt till att vara med i RR.</para>
+            <para>Null - kunden har inte tillfrågats/tagit ställning. Detta är enbart vid utdata.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rrd" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            <para>false - Kunden (privatpersonen) samtycker inte till att spara djurrecept på sitt personnummer i RR för djur.</para>
+            <para>true - Kunden (privatpersonen) samtycker till att spara djurrecept på sitt personnummer i RR för djur.</para>
+            <para>Null - kunden (privatpersonen) har inte tillfrågats/tagit ställning. Detta är enbart vid utdata.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SamtyckeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="dosSamtycke" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            <para>false - Kunden (privatpersonen) samtycker inte till att spara recept på sitt personnummer för dosapotek.</para>
+            <para>true - Kunden (privatpersonen) samtycker till att spara recept på sitt personnummer för dosapotek.</para>
+            <para>Null - kunden (privatpersonen) har inte tillfrågats/tagit ställning. Detta är enbart vid utdata.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="dosSamtyckeDatum" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum för senaste ändring av dos-samtycke</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ees" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            Flagga för registrerat eessamtycke.
+            <para>False - Om kunden sagt nej till att vara med i EES.</para>
+            <para>True  - Kunden har samtyckt till att vara med i EES.</para>
+            <para>Null  - kunden har inte tillfrågats/tagit ställning.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="eesSamtyckeDatum" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum för senaste ändring av EES-samtycke</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="hkdb" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            Flagga för registrerat samtycke.
+I indata är det endast möjligt att ange false och endast om inget värde finns registrerat.
+Samtycke uppdateras genom att skapa eller ta bort konto i HKDB.
+            <para>False - Om kunden sagt nej till att vara med i HKDB.</para>
+            <para>True  - Kunden har samtyckt till att vara med i HKDB.</para>
+            <para>Null  - kunden har inte tillfrågats/tagit ställning.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="hkdbSamtyckeDatum" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum för senaste ändring av HKDB-samtycke</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rr" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            <para>false - Om kunden inte lämnat samtycke till att spara sina recept i RR.</para>
+            <para>true - Kunden har samtyckt till att vara med i RR.</para>
+            <para>Null - kunden har inte tillfrågats/tagit ställning. Detta är enbart vid utdata.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rrSamtyckeDatum" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum för senaste ändring av RR-samtycke</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rrd" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            <para>false - Kunden (privatpersonen) samtycker inte till att spara djurrecept på sitt personnummer i RR för djur.</para>
+            <para>true - Kunden (privatpersonen) samtycker till att spara djurrecept på sitt personnummer i RR för djur.</para>
+            <para>Null - kunden (privatpersonen) har inte tillfrågats/tagit ställning. Detta är enbart vid utdata.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rrdSamtyckeDatum" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum för senaste ändring av RRD-samtycke</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ApplicationException">
+    <xs:annotation>
+      <xs:documentation>Applikationsfel</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="code" type="xs:string"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SystemException">
+    <xs:annotation>
+      <xs:documentation>Systemfel</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="code" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="char">
+    <xs:restriction base="xs:string">
+      <xs:length value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaFolkInfo/1/rivtabp20?xsd=../../core_components/ws-addressing-1.0.xsd</con:url><con:content><![CDATA[<!--W3C XML Schema defined in the Web Services Addressing 1.0 specification
+    http://www.w3.org/TR/ws-addr-core
+
+   Copyright �� 2005 World Wide Web Consortium,
+
+   (Massachusetts Institute of Technology, European Research Consortium for
+   Informatics and Mathematics, Keio University). All Rights Reserved. This
+   work is distributed under the W3C�� Software License [1] in the hope that
+   it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+   warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+   [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+
+   $Id: ws-addr.xsd,v 1.4 2008/07/14 18:48:47 plehegar Exp $-->
+<xs:schema attributeFormDefault="unqualified" blockDefault="#all" elementFormDefault="qualified" finalDefault="" targetNamespace="http://www.w3.org/2005/08/addressing" xmlns:tns="http://www.w3.org/2005/08/addressing" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!--Constructs from the WS-Addressing Core-->
+  <xs:element name="EndpointReference" type="tns:EndpointReferenceType"/>
+  <xs:complexType mixed="false" name="EndpointReferenceType">
+    <xs:sequence>
+      <xs:element name="Address" type="tns:AttributedURIType"/>
+      <xs:element minOccurs="0" name="ReferenceParameters" type="tns:ReferenceParametersType"/>
+      <xs:element minOccurs="0" ref="tns:Metadata"/>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+  <xs:complexType mixed="false" name="ReferenceParametersType">
+    <xs:sequence>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##any" processContents="lax"/>
+    </xs:sequence>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+  <xs:element name="Metadata" type="tns:MetadataType"/>
+  <xs:complexType mixed="false" name="MetadataType">
+    <xs:sequence>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##any" processContents="lax"/>
+    </xs:sequence>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+  <xs:element name="MessageID" type="tns:AttributedURIType"/>
+  <xs:element name="RelatesTo" type="tns:RelatesToType"/>
+  <xs:complexType mixed="false" name="RelatesToType">
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:attribute default="http://www.w3.org/2005/08/addressing/reply" name="RelationshipType" type="tns:RelationshipTypeOpenEnum" use="optional"/>
+        <xs:anyAttribute namespace="##other" processContents="lax"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="RelationshipTypeOpenEnum">
+    <xs:union memberTypes="tns:RelationshipType xs:anyURI "/>
+  </xs:simpleType>
+  <xs:simpleType name="RelationshipType">
+    <xs:restriction base="xs:anyURI">
+      <xs:enumeration value="http://www.w3.org/2005/08/addressing/reply"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ReplyTo" type="tns:EndpointReferenceType"/>
+  <xs:element name="From" type="tns:EndpointReferenceType"/>
+  <xs:element name="FaultTo" type="tns:EndpointReferenceType"/>
+  <xs:element name="To" type="tns:AttributedURIType"/>
+  <xs:element name="Action" type="tns:AttributedURIType"/>
+  <xs:complexType mixed="false" name="AttributedURIType">
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:anyAttribute namespace="##other" processContents="lax"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <!--Constructs from the WS-Addressing SOAP binding-->
+  <xs:attribute name="IsReferenceParameter" type="xs:boolean"/>
+  <xs:simpleType name="FaultCodesOpenEnumType">
+    <xs:union memberTypes="tns:FaultCodesType xs:QName "/>
+  </xs:simpleType>
+  <xs:simpleType name="FaultCodesType">
+    <xs:restriction base="xs:QName">
+      <xs:enumeration value="tns:InvalidAddressingHeader"/>
+      <xs:enumeration value="tns:InvalidAddress"/>
+      <xs:enumeration value="tns:InvalidEPR"/>
+      <xs:enumeration value="tns:InvalidCardinality"/>
+      <xs:enumeration value="tns:MissingAddressInEPR"/>
+      <xs:enumeration value="tns:DuplicateMessageID"/>
+      <xs:enumeration value="tns:ActionMismatch"/>
+      <xs:enumeration value="tns:MessageAddressingHeaderRequired"/>
+      <xs:enumeration value="tns:DestinationUnreachable"/>
+      <xs:enumeration value="tns:ActionNotSupported"/>
+      <xs:enumeration value="tns:EndpointUnavailable"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="RetryAfter" type="tns:AttributedUnsignedLongType"/>
+  <xs:complexType mixed="false" name="AttributedUnsignedLongType">
+    <xs:simpleContent>
+      <xs:extension base="xs:unsignedLong">
+        <xs:anyAttribute namespace="##other" processContents="lax"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name="ProblemHeaderQName" type="tns:AttributedQNameType"/>
+  <xs:complexType mixed="false" name="AttributedQNameType">
+    <xs:simpleContent>
+      <xs:extension base="xs:QName">
+        <xs:anyAttribute namespace="##other" processContents="lax"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name="ProblemHeader" type="tns:AttributedAnyType"/>
+  <xs:complexType mixed="false" name="AttributedAnyType">
+    <xs:sequence>
+      <xs:any maxOccurs="1" minOccurs="1" namespace="##any" processContents="lax"/>
+    </xs:sequence>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+  <xs:element name="ProblemIRI" type="tns:AttributedURIType"/>
+  <xs:element name="ProblemAction" type="tns:ProblemActionType"/>
+  <xs:complexType mixed="false" name="ProblemActionType">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="tns:Action"/>
+      <xs:element minOccurs="0" name="SoapAction" type="xs:anyURI"/>
+    </xs:sequence>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaFolkInfo/1/rivtabp20?xsd=../../core_components/ArgosHeader_1.0.xsd</con:url><con:content><![CDATA[<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:riv:inera.se.apotekensservice:argos:1" version="1.0" xmlns:tns="urn:riv:inera.se.apotekensservice:argos:1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ArgosHeader" type="tns:ArgosHeaderType"/>
+  <xs:complexType name="ArgosHeaderType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="forskrivarkod" type="xs:string"/>
+      <xs:element minOccurs="0" name="legitimationskod" type="xs:string"/>
+      <xs:element minOccurs="0" name="fornamn" type="xs:string"/>
+      <xs:element minOccurs="0" name="efternamn" type="xs:string"/>
+      <xs:element minOccurs="0" name="yrkesgrupp" type="xs:string"/>
+      <xs:element minOccurs="0" name="befattningskod" type="xs:string"/>
+      <xs:element minOccurs="0" name="arbetsplatskod" type="xs:string"/>
+      <xs:element minOccurs="0" name="arbetsplatsnamn" type="xs:string"/>
+      <xs:element minOccurs="0" name="postort" type="xs:string"/>
+      <xs:element minOccurs="0" name="postadress" type="xs:string"/>
+      <xs:element minOccurs="0" name="postnummer" type="xs:string"/>
+      <xs:element minOccurs="0" name="telefonnummer" type="xs:string"/>
+      <xs:element minOccurs="0" name="requestId" type="xs:string"/>
+      <xs:element minOccurs="0" name="rollnamn" type="xs:string"/>
+      <xs:element minOccurs="0" name="hsaID" type="xs:string"/>
+      <xs:element minOccurs="0" name="katalog" type="xs:string"/>
+      <xs:element minOccurs="0" name="organisationsnummer" type="xs:string"/>
+      <xs:element minOccurs="0" name="systemnamn" type="xs:string"/>
+      <xs:element minOccurs="0" name="systemversion" type="xs:string"/>
+      <xs:element minOccurs="0" name="systemIp" type="xs:string"/>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaFolkInfo/1/rivtabp20</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:riv:se.apotekensservice:axs:HamtaFolkInfoResponder:1:HamtaFolkInfo" name="HamtaFolkInfo" bindingOperationName="HamtaFolkInfo" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaFolkInfo/1/rivtabp20</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:inera.se.apotekensservice:argos:1" xmlns:add="http://www.w3.org/2005/08/addressing" xmlns:urn1="urn:riv:se.apotekensservice:axs:HamtaFolkInfoResponder:1" xmlns:urn2="urn:riv:se.apotekensservice:axs:1">
+   <soapenv:Header>
+      <urn:ArgosHeader>
+         <!--Optional:-->
+         <urn:forskrivarkod>?</urn:forskrivarkod>
+         <!--Optional:-->
+         <urn:legitimationskod>?</urn:legitimationskod>
+         <!--Optional:-->
+         <urn:fornamn>?</urn:fornamn>
+         <!--Optional:-->
+         <urn:efternamn>?</urn:efternamn>
+         <!--Optional:-->
+         <urn:yrkesgrupp>?</urn:yrkesgrupp>
+         <!--Optional:-->
+         <urn:befattningskod>?</urn:befattningskod>
+         <!--Optional:-->
+         <urn:arbetsplatskod>?</urn:arbetsplatskod>
+         <!--Optional:-->
+         <urn:arbetsplatsnamn>?</urn:arbetsplatsnamn>
+         <!--Optional:-->
+         <urn:postort>?</urn:postort>
+         <!--Optional:-->
+         <urn:postadress>?</urn:postadress>
+         <!--Optional:-->
+         <urn:postnummer>?</urn:postnummer>
+         <!--Optional:-->
+         <urn:telefonnummer>?</urn:telefonnummer>
+         <!--Optional:-->
+         <urn:requestId>?</urn:requestId>
+         <!--Optional:-->
+         <urn:rollnamn>?</urn:rollnamn>
+         <!--Optional:-->
+         <urn:hsaID>?</urn:hsaID>
+         <!--Optional:-->
+         <urn:katalog>?</urn:katalog>
+         <!--Optional:-->
+         <urn:organisationsnummer>?</urn:organisationsnummer>
+         <!--Optional:-->
+         <urn:systemnamn>?</urn:systemnamn>
+         <!--Optional:-->
+         <urn:systemversion>?</urn:systemversion>
+         <!--Optional:-->
+         <urn:systemIp>?</urn:systemIp>
+         <!--You may enter ANY elements at this point-->
+      </urn:ArgosHeader>
+      <add:To>?</add:To>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:HamtaFolkInfo>
+         <urn1:klientinformation>
+            <urn2:anvandare>?</urn2:anvandare>
+            <urn2:session>?</urn2:session>
+            <urn2:system>?</urn2:system>
+         </urn1:klientinformation>
+         <urn1:personnummer>?</urn1:personnummer>
+         <!--You may enter ANY elements at this point-->
+      </urn1:HamtaFolkInfo>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:se.apotekensservice:axs:HamtaFolkInfoResponder:1:HamtaFolkInfo"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="HamtaPatientInfoResponderBinding" type="wsdl" bindingName="{urn:riv:inera:se.apotekensservice:axs:HamtaPatientInfo:1:rivtabp20}HamtaPatientInfoResponderBinding" soapVersion="1_1" anonymous="optional" definition="https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaPatientInfo/1/rivtabp20?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaPatientInfo/1/rivtabp20?wsdl"><con:part><con:url>https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaPatientInfo/1/rivtabp20?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="HamtaPatientInfoInteraction" targetNamespace="urn:riv:inera:se.apotekensservice:axs:HamtaPatientInfo:1:rivtabp20" xmlns="urn:riv:inera:se.apotekensservice:axs:HamtaPatientInfo:1:rivtabp20" xmlns:argos="urn:riv:inera.se.apotekensservice:argos:1" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:spdr="urn:riv:se.apotekensservice:axs:HamtaPatientInfoResponder:1" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema targetNamespace="urn:riv:inera:se.apotekensservice:axs:HamtaPatientInfo:1:rivtabp20">
+      <xs:import namespace="urn:riv:se.apotekensservice:axs:HamtaPatientInfoResponder:1" schemaLocation="https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaPatientInfo/1/rivtabp20?xsd=HamtaPatientInfoResponder_1.0.xsd"/>
+      <xs:import namespace="http://www.w3.org/2005/08/addressing" schemaLocation="https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaPatientInfo/1/rivtabp20?xsd=../../core_components/ws-addressing-1.0.xsd"/>
+      <xs:import namespace="urn:riv:inera.se.apotekensservice:argos:1" schemaLocation="https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaPatientInfo/1/rivtabp20?xsd=../../core_components/ArgosHeader_1.0.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="SystemException">
+    <wsdl:part element="spdr:SystemException" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HamtaPatientInfoResponse">
+    <wsdl:part element="spdr:HamtaPatientInfoResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HamtaPatientInfoRequest">
+    <wsdl:part element="spdr:HamtaPatientInfo" name="parameters"></wsdl:part>
+    <wsdl:part element="wsa:To" name="LogicalAddress">
+      <wsdl:documentation>Orgnr of Apotekens Service AB</wsdl:documentation>
+    </wsdl:part>
+    <wsdl:part element="argos:ArgosHeader" name="ArgosHeader">
+      <wsdl:documentation>Argos header of Apotekens Service AB. Check documentation regarding mandatory for this specific service interaction</wsdl:documentation>
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ApplicationException">
+    <wsdl:part element="spdr:ApplicationException" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="HamtaPatientInfoResponderInterface">
+    <wsdl:operation name="HamtaPatientInfo">
+      <wsdl:input message="HamtaPatientInfoRequest"></wsdl:input>
+      <wsdl:output message="HamtaPatientInfoResponse"></wsdl:output>
+      <wsdl:fault message="SystemException" name="SystemException"></wsdl:fault>
+      <wsdl:fault message="ApplicationException" name="ApplicationException"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HamtaPatientInfoResponderBinding" type="HamtaPatientInfoResponderInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="HamtaPatientInfo">
+      <soap:operation soapAction="urn:riv:se.apotekensservice:axs:HamtaPatientInfoResponder:1:HamtaPatientInfo"/>
+      <wsdl:input>
+        <soap:body parts="parameters" use="literal"/>
+        <soap:header message="HamtaPatientInfoRequest" part="LogicalAddress" use="literal"></soap:header>
+        <soap:header message="HamtaPatientInfoRequest" part="ArgosHeader" use="literal"></soap:header>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SystemException">
+        <soap:fault name="SystemException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationException">
+        <soap:fault name="ApplicationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HamtaPatientInfoResponderService">
+    <wsdl:port binding="HamtaPatientInfoResponderBinding" name="HamtaPatientInfoResponderPort">
+      <soap:address location="https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaPatientInfo/1/rivtabp20"/>
+    </wsdl:port>
+  </wsdl:service>
+  <xs:annotation>
+    <xs:documentation>Beskrivning: Tjänstekontraktet som avser att konkretisera tillämpningen av RIV.
+            Revisioner: 2011-04-05 Version 1.0
+            Tjänstedomän: se.apotekensservice:axs.
+            Tjänsteinteraktionens namn: HamtaPatientInfo.
+            Tjänsteinteraktionstyp: Fråga-Svar.
+            RIV Tekniska Anvisning: Basic Profile 2.0</xs:documentation>
+  </xs:annotation>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaPatientInfo/1/rivtabp20?xsd=HamtaPatientInfoResponder_1.0.xsd</con:url><con:content><![CDATA[<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:riv:se.apotekensservice:axs:HamtaPatientInfoResponder:1" version="1.0" xmlns="urn:riv:se.apotekensservice:axs:HamtaPatientInfoResponder:1" xmlns:axs="urn:riv:se.apotekensservice:axs:1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="urn:riv:se.apotekensservice:axs:1" schemaLocation="https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaPatientInfo/1/rivtabp20?xsd=../../core_components/se.apotekensservice_axs_1.0.xsd"/>
+  <xs:element name="HamtaPatientInfo" type="HamtaPatientInfoRequestType"/>
+  <xs:element name="HamtaPatientInfoResponse" type="HamtaPatientInfoResponseType"/>
+  <xs:element name="ApplicationException" type="axs:ApplicationException"/>
+  <xs:element name="SystemException" type="axs:SystemException"/>
+  <xs:complexType name="HamtaPatientInfoRequestType">
+    <xs:sequence>
+      <xs:element name="personnummer" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Giltigt personnummer för patient.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HamtaPatientInfoResponseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="apotek" type="axs:ApoteksinformationResponse">
+        <xs:annotation>
+          <xs:documentation>Ev. DOS-apotek som kunden är kopplad till. Om anrop mot underliggande system
+(FOLK eller EXPO) misslyckas så lämnas fältet tomt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="dosproducent" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Gln kod för ev. dosproducent.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="dosunderlagStatus" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>
+            Status om underlaget är godkänt, registrerat eller avregistrerat.
+
+500 = Ej godkänt.
+            <para>510 = Godkänt.</para>
+            <para>511 = Tidigare godkänt.</para>
+            <para>520 = Avregistrerat.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="finnsOrdination" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            Markering om det finns aktuella ordinationer för patienten i OR.
+            <para>true  = Ordination finns.</para>
+            <para>false = ordination finns ej.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="patientInformation" type="axs:PatientInformationResponse">
+        <xs:annotation>
+          <xs:documentation>Patientinformation från FOLK.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaPatientInfo/1/rivtabp20?xsd=../../core_components/se.apotekensservice_axs_1.0.xsd</con:url><con:content><![CDATA[<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:riv:se.apotekensservice:axs:1" version="1.0" xmlns="urn:riv:se.apotekensservice:axs:1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation>Beskrivning: Meddelandetyper som är gemensamma för axs.
+            Revisioner: 2011-04-05, version 1.0</xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="ApoteksinformationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="aktorsnamn" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Aktörsnamn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="aktorsorgnr" type="xs:long">
+        <xs:annotation>
+          <xs:documentation>Aktörens organisationsnummer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="allmantelefon" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>allmäntelefon</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="besoksadress" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Expeditionsställets besöksadress</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="eReceptDjur" nillable="false" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Anger om apoteket finns expedierar erecept för djur</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="fax" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>fax</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="glnKod" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>GLN-kod</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="huvudtypkod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Kod som beskriver huvudverksamheten för expeditionsstället</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="namn" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Apotekets Namn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ort" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Expeditionsställets besöksort</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="registrerad" nillable="false" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Anger om apoteket finns registrerat i EXPO. Om false så saknar alla fält
+utom glnKod värden.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="slutdatum" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum för stängning av verksamhet</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="startdatum" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum för start av verksamhet</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BalansRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="brutto" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Bruttobelopp i kronor och ören</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="netto" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Nettobelopp i kronor och ören</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BalansResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="brutto" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Bruttobelopp i kronor och ören</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="netto" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Nettobelopp i kronor och ören</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EesStatusRequest">
+    <xs:sequence>
+      <xs:element name="personnummer" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Kundens personnummer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EesStatusResponse">
+    <xs:sequence>
+      <xs:element name="aktuellaSignaler" nillable="false" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Flagga som indikerar om kunden har aktuella signaler som inte tagits hand om.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="jobbPagar" nillable="false" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Flagga som indikerar om annan handläggare jobbar med kunden.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="kundHittad" nillable="false" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Flagga som indikerar om kunden hittades i EES.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="personnummer" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Kundens personnummer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KlientinformationRequest">
+    <xs:sequence>
+      <xs:element name="anvandare" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Unikt användarid i anropande system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="session" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Sessionens id i anropande system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="system" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>GLN-kod för anropande system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KontoinformationRequest">
+    <xs:sequence>
+      <xs:element name="persNr" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Personnummer för den som sökningen gäller.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KontoinformationResponse">
+    <xs:sequence>
+      <xs:element name="anslutStatus" nillable="false" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Personens högkostnadsstatus.
+False - Ej ansluten
+True - Ansluten</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="barnkonton" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>OBS! Sätts inte längre av underliggande tjänst!
+Eventuell lista med personnummer för alla barn knutna till ett och samma samlingskonto. Saknar värde om
+personen ej är ansluten till högkostnadstrappan (status är false) eller om kontot ej är ett samlingskonto
+alternativt ej heller är kopplat till ett samlingskonto.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="foregPeriod" type="PeriodResponse">
+        <xs:annotation>
+          <xs:documentation>Föregående högkostnadsperiods startdatum. 
+Saknar värde om personen ej är ansluten till högkostnadstrappan (status är false)
+eller om ingen föregående period existerar.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="formansniva" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Kundens aktuella förmånsnivå i procent.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="huvudPersNr" nillable="false" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Personnummer för eventuell huvudperson (förmånsmottagare). Saknar värde om huvudperson saknas.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="innevPeriod" type="PeriodResponse">
+        <xs:annotation>
+          <xs:documentation>Innevarande högkostnadsperiod. 
+Saknar värde om personen ej är ansluten till högkostnadstrappan (status är false).
+Om personen är ansluten men saknar aktiv period kommer startdatum lämnas tomt och beloppen sättas till 0.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="kvarTillFrikort" type="BalansResponse">
+        <xs:annotation>
+          <xs:documentation>Brutto och Netto i kronor/ören som återstår innan kunden får frikort.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KundinformationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="lkfKod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Län-, kommun- och församling där personen är folkbokförd.
+Även kallad församlingskod
+
+Har formatet LLKKFF
+LL - Län, 2 tecken
+KK - Kommun, 2 tecken
+FF - Församling, 2 tecken</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="omradeskod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Det område där personen är folkbokförd</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="redNamn" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Redigerat namn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="samtycke" nillable="false" type="SamtyckeResponse"/>
+      <xs:element minOccurs="0" name="statusKod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            StatusKod - status på personen i FOLK.
+Mappat från träffkoder i FOLK.
+ 
+0=Person finns i FOLK.
+1=Person finns ej i FOLK, underliggande system är ej tillgängligt.
+2=Person finns ej.
+3=Person sekretesskyddad.
+4=Person är avliden.
+5=Träffkod okänd.
+6=Testperson.
+            <para>Vissa av dessa statuskoder innebär att det inte finns någon personinformation i svaret.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="traffkod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            Träffkod - status på personen i FOLK.
+Kommer att utgå och ersättas av statusKod.
+            <para>92 - ok, träff i Spar</para>
+            <para>93 - Felaktigt personnummer eller personen finns inte i Spar</para>
+            <para>20 - Nyupplagd person</para>
+            <para>23 - Teknisk insättning</para>
+            <para>24 - Personnummerändring</para>
+            <para>26 - Upphävd sekretess</para>
+            <para>40 - Omregistrering/utbyte av befintlig personpost</para>
+            <para>50 - Ändring av befintlig personpost</para>
+            <para>71 - Avliden</para>
+            <para>72 - Avregistrerad</para>
+            <para>73 - Teknisk avregistrering</para>
+            <para>74 - Personnummerändring</para>
+            <para>76 - Sekretesskyddad</para>
+            <para>81 - Ändring av dödsdatum</para>
+            <para>03 - Personen finns inte i FOLK. Spar är inte tillgängligt.</para>
+            <para>01 - Apotekens Service påhittade träffkod för testperson.</para>
+            <para>Vissa av dessa träffkoder innebär att det inte finns någon personinformation i svaret.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PatientInformationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="lkfKod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            Län-, kommun- och församling där personen är folkbokförd.
+Även kallad församlingskod
+
+Har formatet LLKKFF
+            <para>LL - Län, 2 tecken</para>
+            <para>KK - Kommun, 2 tecken</para>
+            <para>FF - Församling, 2 tecken</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="omradeskod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Det område där personen är folkbokförd</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="redNamn" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Redigerat namn</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="samtycke" nillable="false" type="SamtyckeResponse"/>
+      <xs:element minOccurs="0" name="statusKod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            StatusKod - status på personen i FOLK.
+Mappat från träffkoder i FOLK.
+            <para>0=Person finns i FOLK.</para>
+            <para>1=Person finns ej i FOLK, underliggande system är ej tillgängligt.</para>
+            <para>2=Person finns ej.</para>
+            <para>3=Person sekretesskyddad.</para>
+            <para>4=Person är avliden.</para>
+            <para>5=Träffkod okänd.</para>
+            <para>6=Testperson.</para>
+            <para>Vissa av dessa statuskoder innebär att det inte finns någon personinformation i svaret.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PeriodResponse">
+    <xs:sequence>
+      <xs:element name="balans" nillable="false" type="BalansResponse">
+        <xs:annotation>
+          <xs:documentation>Ackumulerad balans.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="start" nillable="false" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Periodens startdatum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SamtyckeRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ees" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            Flagga för registrerat eessamtycke.
+            <para>False - Om kunden sagt nej till att vara med i EES.</para>
+            <para>True  - Kunden har samtyckt till att vara med i EES.</para>
+            <para>Null  - kunden har inte tillfrågats/tagit ställning.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="hkdb" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            Flagga för registrerat samtycke.
+I indata är det endast möjligt att ange false och endast om inget värde finns registrerat.
+Samtycke uppdateras genom att skapa eller ta bort konto i HKDB.
+            <para>False - Om kunden sagt nej till att vara med i HKDB.</para>
+            <para>True  - Kunden har samtyckt till att vara med i HKDB.</para>
+            <para>Null  - kunden har inte tillfrågats/tagit ställning.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rr" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            <para>false - Om kunden inte lämnat samtycke till att spara sina recept i RR.</para>
+            <para>true - Kunden har samtyckt till att vara med i RR.</para>
+            <para>Null - kunden har inte tillfrågats/tagit ställning. Detta är enbart vid utdata.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rrd" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            <para>false - Kunden (privatpersonen) samtycker inte till att spara djurrecept på sitt personnummer i RR för djur.</para>
+            <para>true - Kunden (privatpersonen) samtycker till att spara djurrecept på sitt personnummer i RR för djur.</para>
+            <para>Null - kunden (privatpersonen) har inte tillfrågats/tagit ställning. Detta är enbart vid utdata.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SamtyckeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="dosSamtycke" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            <para>false - Kunden (privatpersonen) samtycker inte till att spara recept på sitt personnummer för dosapotek.</para>
+            <para>true - Kunden (privatpersonen) samtycker till att spara recept på sitt personnummer för dosapotek.</para>
+            <para>Null - kunden (privatpersonen) har inte tillfrågats/tagit ställning. Detta är enbart vid utdata.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="dosSamtyckeDatum" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum för senaste ändring av dos-samtycke</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ees" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            Flagga för registrerat eessamtycke.
+            <para>False - Om kunden sagt nej till att vara med i EES.</para>
+            <para>True  - Kunden har samtyckt till att vara med i EES.</para>
+            <para>Null  - kunden har inte tillfrågats/tagit ställning.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="eesSamtyckeDatum" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum för senaste ändring av EES-samtycke</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="hkdb" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            Flagga för registrerat samtycke.
+I indata är det endast möjligt att ange false och endast om inget värde finns registrerat.
+Samtycke uppdateras genom att skapa eller ta bort konto i HKDB.
+            <para>False - Om kunden sagt nej till att vara med i HKDB.</para>
+            <para>True  - Kunden har samtyckt till att vara med i HKDB.</para>
+            <para>Null  - kunden har inte tillfrågats/tagit ställning.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="hkdbSamtyckeDatum" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum för senaste ändring av HKDB-samtycke</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rr" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            <para>false - Om kunden inte lämnat samtycke till att spara sina recept i RR.</para>
+            <para>true - Kunden har samtyckt till att vara med i RR.</para>
+            <para>Null - kunden har inte tillfrågats/tagit ställning. Detta är enbart vid utdata.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rrSamtyckeDatum" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum för senaste ändring av RR-samtycke</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rrd" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>
+            <para>false - Kunden (privatpersonen) samtycker inte till att spara djurrecept på sitt personnummer i RR för djur.</para>
+            <para>true - Kunden (privatpersonen) samtycker till att spara djurrecept på sitt personnummer i RR för djur.</para>
+            <para>Null - kunden (privatpersonen) har inte tillfrågats/tagit ställning. Detta är enbart vid utdata.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="rrdSamtyckeDatum" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum för senaste ändring av RRD-samtycke</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ApplicationException">
+    <xs:annotation>
+      <xs:documentation>Applikationsfel</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="code" type="xs:string"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SystemException">
+    <xs:annotation>
+      <xs:documentation>Systemfel</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="code" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="char">
+    <xs:restriction base="xs:string">
+      <xs:length value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaPatientInfo/1/rivtabp20?xsd=../../core_components/ws-addressing-1.0.xsd</con:url><con:content><![CDATA[<!--W3C XML Schema defined in the Web Services Addressing 1.0 specification
+    http://www.w3.org/TR/ws-addr-core
+
+   Copyright �� 2005 World Wide Web Consortium,
+
+   (Massachusetts Institute of Technology, European Research Consortium for
+   Informatics and Mathematics, Keio University). All Rights Reserved. This
+   work is distributed under the W3C�� Software License [1] in the hope that
+   it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+   warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+   [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+
+   $Id: ws-addr.xsd,v 1.4 2008/07/14 18:48:47 plehegar Exp $-->
+<xs:schema attributeFormDefault="unqualified" blockDefault="#all" elementFormDefault="qualified" finalDefault="" targetNamespace="http://www.w3.org/2005/08/addressing" xmlns:tns="http://www.w3.org/2005/08/addressing" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!--Constructs from the WS-Addressing Core-->
+  <xs:element name="EndpointReference" type="tns:EndpointReferenceType"/>
+  <xs:complexType mixed="false" name="EndpointReferenceType">
+    <xs:sequence>
+      <xs:element name="Address" type="tns:AttributedURIType"/>
+      <xs:element minOccurs="0" name="ReferenceParameters" type="tns:ReferenceParametersType"/>
+      <xs:element minOccurs="0" ref="tns:Metadata"/>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+  <xs:complexType mixed="false" name="ReferenceParametersType">
+    <xs:sequence>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##any" processContents="lax"/>
+    </xs:sequence>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+  <xs:element name="Metadata" type="tns:MetadataType"/>
+  <xs:complexType mixed="false" name="MetadataType">
+    <xs:sequence>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##any" processContents="lax"/>
+    </xs:sequence>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+  <xs:element name="MessageID" type="tns:AttributedURIType"/>
+  <xs:element name="RelatesTo" type="tns:RelatesToType"/>
+  <xs:complexType mixed="false" name="RelatesToType">
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:attribute default="http://www.w3.org/2005/08/addressing/reply" name="RelationshipType" type="tns:RelationshipTypeOpenEnum" use="optional"/>
+        <xs:anyAttribute namespace="##other" processContents="lax"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="RelationshipTypeOpenEnum">
+    <xs:union memberTypes="tns:RelationshipType xs:anyURI "/>
+  </xs:simpleType>
+  <xs:simpleType name="RelationshipType">
+    <xs:restriction base="xs:anyURI">
+      <xs:enumeration value="http://www.w3.org/2005/08/addressing/reply"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ReplyTo" type="tns:EndpointReferenceType"/>
+  <xs:element name="From" type="tns:EndpointReferenceType"/>
+  <xs:element name="FaultTo" type="tns:EndpointReferenceType"/>
+  <xs:element name="To" type="tns:AttributedURIType"/>
+  <xs:element name="Action" type="tns:AttributedURIType"/>
+  <xs:complexType mixed="false" name="AttributedURIType">
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:anyAttribute namespace="##other" processContents="lax"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <!--Constructs from the WS-Addressing SOAP binding-->
+  <xs:attribute name="IsReferenceParameter" type="xs:boolean"/>
+  <xs:simpleType name="FaultCodesOpenEnumType">
+    <xs:union memberTypes="tns:FaultCodesType xs:QName "/>
+  </xs:simpleType>
+  <xs:simpleType name="FaultCodesType">
+    <xs:restriction base="xs:QName">
+      <xs:enumeration value="tns:InvalidAddressingHeader"/>
+      <xs:enumeration value="tns:InvalidAddress"/>
+      <xs:enumeration value="tns:InvalidEPR"/>
+      <xs:enumeration value="tns:InvalidCardinality"/>
+      <xs:enumeration value="tns:MissingAddressInEPR"/>
+      <xs:enumeration value="tns:DuplicateMessageID"/>
+      <xs:enumeration value="tns:ActionMismatch"/>
+      <xs:enumeration value="tns:MessageAddressingHeaderRequired"/>
+      <xs:enumeration value="tns:DestinationUnreachable"/>
+      <xs:enumeration value="tns:ActionNotSupported"/>
+      <xs:enumeration value="tns:EndpointUnavailable"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="RetryAfter" type="tns:AttributedUnsignedLongType"/>
+  <xs:complexType mixed="false" name="AttributedUnsignedLongType">
+    <xs:simpleContent>
+      <xs:extension base="xs:unsignedLong">
+        <xs:anyAttribute namespace="##other" processContents="lax"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name="ProblemHeaderQName" type="tns:AttributedQNameType"/>
+  <xs:complexType mixed="false" name="AttributedQNameType">
+    <xs:simpleContent>
+      <xs:extension base="xs:QName">
+        <xs:anyAttribute namespace="##other" processContents="lax"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name="ProblemHeader" type="tns:AttributedAnyType"/>
+  <xs:complexType mixed="false" name="AttributedAnyType">
+    <xs:sequence>
+      <xs:any maxOccurs="1" minOccurs="1" namespace="##any" processContents="lax"/>
+    </xs:sequence>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+  <xs:element name="ProblemIRI" type="tns:AttributedURIType"/>
+  <xs:element name="ProblemAction" type="tns:ProblemActionType"/>
+  <xs:complexType mixed="false" name="ProblemActionType">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="tns:Action"/>
+      <xs:element minOccurs="0" name="SoapAction" type="xs:anyURI"/>
+    </xs:sequence>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaPatientInfo/1/rivtabp20?xsd=../../core_components/ArgosHeader_1.0.xsd</con:url><con:content><![CDATA[<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:riv:inera.se.apotekensservice:argos:1" version="1.0" xmlns:tns="urn:riv:inera.se.apotekensservice:argos:1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ArgosHeader" type="tns:ArgosHeaderType"/>
+  <xs:complexType name="ArgosHeaderType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="forskrivarkod" type="xs:string"/>
+      <xs:element minOccurs="0" name="legitimationskod" type="xs:string"/>
+      <xs:element minOccurs="0" name="fornamn" type="xs:string"/>
+      <xs:element minOccurs="0" name="efternamn" type="xs:string"/>
+      <xs:element minOccurs="0" name="yrkesgrupp" type="xs:string"/>
+      <xs:element minOccurs="0" name="befattningskod" type="xs:string"/>
+      <xs:element minOccurs="0" name="arbetsplatskod" type="xs:string"/>
+      <xs:element minOccurs="0" name="arbetsplatsnamn" type="xs:string"/>
+      <xs:element minOccurs="0" name="postort" type="xs:string"/>
+      <xs:element minOccurs="0" name="postadress" type="xs:string"/>
+      <xs:element minOccurs="0" name="postnummer" type="xs:string"/>
+      <xs:element minOccurs="0" name="telefonnummer" type="xs:string"/>
+      <xs:element minOccurs="0" name="requestId" type="xs:string"/>
+      <xs:element minOccurs="0" name="rollnamn" type="xs:string"/>
+      <xs:element minOccurs="0" name="hsaID" type="xs:string"/>
+      <xs:element minOccurs="0" name="katalog" type="xs:string"/>
+      <xs:element minOccurs="0" name="organisationsnummer" type="xs:string"/>
+      <xs:element minOccurs="0" name="systemnamn" type="xs:string"/>
+      <xs:element minOccurs="0" name="systemversion" type="xs:string"/>
+      <xs:element minOccurs="0" name="systemIp" type="xs:string"/>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaPatientInfo/1/rivtabp20</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:riv:se.apotekensservice:axs:HamtaPatientInfoResponder:1:HamtaPatientInfo" name="HamtaPatientInfo" bindingOperationName="HamtaPatientInfo" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://qa.esb.ntjp.sjunet.org:20000/vp/HamtaPatientInfo/1/rivtabp20</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:inera.se.apotekensservice:argos:1" xmlns:add="http://www.w3.org/2005/08/addressing" xmlns:urn1="urn:riv:se.apotekensservice:axs:HamtaPatientInfoResponder:1">
+   <soapenv:Header>
+      <urn:ArgosHeader>
+         <!--Optional:-->
+         <urn:forskrivarkod>?</urn:forskrivarkod>
+         <!--Optional:-->
+         <urn:legitimationskod>?</urn:legitimationskod>
+         <!--Optional:-->
+         <urn:fornamn>?</urn:fornamn>
+         <!--Optional:-->
+         <urn:efternamn>?</urn:efternamn>
+         <!--Optional:-->
+         <urn:yrkesgrupp>?</urn:yrkesgrupp>
+         <!--Optional:-->
+         <urn:befattningskod>?</urn:befattningskod>
+         <!--Optional:-->
+         <urn:arbetsplatskod>?</urn:arbetsplatskod>
+         <!--Optional:-->
+         <urn:arbetsplatsnamn>?</urn:arbetsplatsnamn>
+         <!--Optional:-->
+         <urn:postort>?</urn:postort>
+         <!--Optional:-->
+         <urn:postadress>?</urn:postadress>
+         <!--Optional:-->
+         <urn:postnummer>?</urn:postnummer>
+         <!--Optional:-->
+         <urn:telefonnummer>?</urn:telefonnummer>
+         <!--Optional:-->
+         <urn:requestId>?</urn:requestId>
+         <!--Optional:-->
+         <urn:rollnamn>?</urn:rollnamn>
+         <!--Optional:-->
+         <urn:hsaID>?</urn:hsaID>
+         <!--Optional:-->
+         <urn:katalog>?</urn:katalog>
+         <!--Optional:-->
+         <urn:organisationsnummer>?</urn:organisationsnummer>
+         <!--Optional:-->
+         <urn:systemnamn>?</urn:systemnamn>
+         <!--Optional:-->
+         <urn:systemversion>?</urn:systemversion>
+         <!--Optional:-->
+         <urn:systemIp>?</urn:systemIp>
+         <!--You may enter ANY elements at this point-->
+      </urn:ArgosHeader>
+      <add:To>?</add:To>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:HamtaPatientInfo>
+         <urn1:personnummer>?</urn1:personnummer>
+         <!--You may enter ANY elements at this point-->
+      </urn1:HamtaPatientInfo>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:se.apotekensservice:axs:HamtaPatientInfoResponder:1:HamtaPatientInfo"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
