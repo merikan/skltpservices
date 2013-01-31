@@ -44,7 +44,7 @@ Script is based on the [http://rivta.googlecode.com/svn/wiki/specs/RIV_Tekniska_
 }}}
  # Run script with schemas as input
 {{{ 
- $./VirtualiseringGenerator.groovy <path to unzipped RIV TA file>/ schemas 
+ $./VirtualiseringGenerator.groovy <path to unzipped RIV TA file>/schemas 
 }}}
  # Folders for each interaction has now been created, each containing a definition of a virtual service.
 {{{
