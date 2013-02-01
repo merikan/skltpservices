@@ -52,7 +52,6 @@ def getAllUniqueRivNameSpaces(wsdlFile){
 			rivNameSpace = namespace.text
 		}
 	}
-	println rivNameSpace
 	return rivNameSpace
 }
 
@@ -67,15 +66,25 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 		def serviceNameSpace = getAllUniqueRivNameSpaces(schemasFiles[0])
 		def serviceNameSpaceArray = serviceNameSpace.split("\\:")
 		
-		def namespacePrefix = serviceNameSpaceArray[0] + ":" + serviceNameSpaceArray[1]
+		def namespacePrefix = serviceNameSpaceArray[0] + ":" + serviceNameSpaceArray[1]		
 		def maindomain = serviceNameSpaceArray[2]
-		def subdomain =  serviceNameSpaceArray[3] 
-		def serviceName = serviceNameSpaceArray[4]
-		def serviceVersion = serviceNameSpaceArray[5]
-		def rivtaVersion = serviceNameSpaceArray[6]
+	
+		def serviceNameSpaceSize=serviceNameSpaceArray.size()-1		
+		def rivtaVersion = serviceNameSpaceArray[serviceNameSpaceSize]
+		def serviceVersion = serviceNameSpaceArray[serviceNameSpaceSize-1]
+		def serviceName = serviceNameSpaceArray[serviceNameSpaceSize-2]
+		def subdomain=serviceNameSpaceArray[3]	
+		
+		def i=serviceNameSpaceSize-3 
+		for (def y=4; i>=y;y++) { 	
+			subdomain = subdomain + ":" + serviceNameSpaceArray[y]
+		}
+		def subdomainAdress = subdomain.replaceAll(':', '/')
+		def subdomainFlow = subdomain.replaceAll(':', '-')
+		def subdomainGroupId = subdomain.replaceAll(':', '.')
 		
 		def wsdlFileName = schemasFiles[0].name
-	
+		
 		def version = '2.0'
 		
 		def mvnCommand = """mvn archetype:generate 
@@ -84,11 +93,13 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 		-DarchetypeGroupId=se.skl.tp.archetype 
 		-DarchetypeVersion=1.1
 		-Duser.dir=${targetDir} 
-		-DgroupId=se.skl.skltpservices.${maindomain}.${subdomain}
+		-DgroupId=se.skl.skltpservices.${maindomain}.${subdomainGroupId}
 		-DartifactId=${artifactId} 
 		-Dversion=${version}
 		-DdomainName=${maindomain} 
-		-DdomainSubName=${subdomain} 
+		-DdomainSubName=${subdomain}
+		-DdomainSubNameAdress=${subdomainAdress}
+		-DdomainSubNameFlow=${subdomainFlow} 
 		-DserviceMethod=${artifactId} 
 		-DserviceWsdlFileDir=classpath:/schemas$schemaDir/${artifactId}Interaction/${wsdlFileName}
 		-DserviceInteraction=${artifactId}Interaction  
@@ -111,6 +122,7 @@ def copyServiceSchemas(serviceInteractionDirectories, targetDir){
 		def schemasFiles = getAllFilesMatching(serviceInteractionDirectory, /.*\.xsd|.*\.xml|.*\.wsdl/)
 		
 		def (name, parentDir) = serviceInteractionDirectory.parent.split("schemas")		
+
 		def serviceInteraction = serviceInteractionDirectory.name
 		def serviceDirectory = serviceInteraction - 'Interaction'
 		def schemaTargetDir = "${targetDir}/${serviceDirectory}/Virtualisering/src/main/resources/schemas/$parentDir/${serviceInteraction}"
@@ -119,6 +131,18 @@ def copyServiceSchemas(serviceInteractionDirectories, targetDir){
 		schemasFiles.each {sourceSchemaFile -> 
 			def targetSchemaFile = new File("${schemaTargetDir}/$sourceSchemaFile.name")
 			FileUtils.copyFile(sourceSchemaFile, targetSchemaFile)}
+			
+		def interactionsDirectory = serviceInteractionDirectory.parent		
+		def interactionsDir = new File("${interactionsDirectory}")
+		def sourceSubSchemaFile = null
+		interactionsDir?.traverse(maxDepth:0,type:FileType.FILES, nameFilter: ~/.*\.xsd$/) {  file ->
+		 	sourceSubSchemaFile = file
+	    }
+	    if (sourceSubSchemaFile != null) {
+			def subSchemaFileTargetDir = "${targetDir}/${serviceDirectory}/Virtualisering/src/main/resources/schemas/$parentDir/"
+			def targetSubSchemaFile = new File("${subSchemaFileTargetDir}/${sourceSubSchemaFile.name}")
+			FileUtils.copyFile(sourceSubSchemaFile, targetSubSchemaFile)
+		}
 	}
 }
 
@@ -133,9 +157,9 @@ def copyCoreSchemas(serviceInteractionDirectories, coreSchemaDirectory, targetDi
 		
 		schemasFiles.each {sourceSchemaFile -> 
 			def targetSchemaFile = new File("${coreSchemaTargetDir}/$sourceSchemaFile.name")
-			FileUtils.copyFile(sourceSchemaFile, targetSchemaFile)}
-		
+			FileUtils.copyFile(sourceSchemaFile, targetSchemaFile)}		
 	}
+	
 }
 
 if( args.size() < 1){
