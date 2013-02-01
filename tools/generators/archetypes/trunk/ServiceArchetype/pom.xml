@@ -24,9 +24,14 @@
 
   <groupId>se.skl.tp.archetype</groupId>
   <artifactId>service-archetype</artifactId>
-  <version>1.2-SNAPSHOT</version>
   <packaging>maven-archetype</packaging>
   <name>service-archetype</name>
+  
+  <parent>
+  	 <groupId>se.skl.tp</groupId>
+    <artifactId>archetype</artifactId>
+    <version>1.2-SNAPSHOT</version>
+  </parent>
 
   <build>
     <extensions>
