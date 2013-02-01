@@ -91,7 +91,7 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 		-DinteractiveMode=false 
 		-DarchetypeArtifactId=service-archetype 
 		-DarchetypeGroupId=se.skl.tp.archetype 
-		-DarchetypeVersion=1.1
+		-DarchetypeVersion=1.2
 		-Duser.dir=${targetDir} 
 		-DgroupId=se.skl.skltpservices.${maindomain}.${subdomainGroupId}
 		-DartifactId=${artifactId} 
