@@ -8,6 +8,8 @@
 	<requiredProperties>
 		<requiredProperty key="domainName" />
 		<requiredProperty key="domainSubName" />
+		<requiredProperty key="domainSubNameAdress" />
+		<requiredProperty key="domainSubNameFlow" />
 		<requiredProperty key="serviceMethod">
 			<defaultValue>${artifactId}</defaultValue>
 		</requiredProperty>
