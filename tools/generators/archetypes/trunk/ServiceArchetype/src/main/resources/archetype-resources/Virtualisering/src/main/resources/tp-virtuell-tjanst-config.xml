@@ -24,12 +24,12 @@
 
 	<!-- Name of this file is mandatory and may not be changed. -->
 
-	<model name="${domainName}-${domainSubName}-${serviceInteraction}-virtualisering-model">
+	<model name="${domainName}-${domainSubNameFlow}-${serviceInteraction}-virtualisering-model">
 
-		<service name="${domainName}-${domainSubName}-${serviceInteraction}-virtualisering-service">
+		<service name="${domainName}-${domainSubNameFlow}-${serviceInteraction}-virtualisering-service">
 			<inbound>
 				<cxf:inbound-endpoint
-					address="https://${tp.host}:${tp.port}/${tp.baseUri}/${domainName}/${domainSubName}/${serviceRelativePath}"
+					address="https://${tp.host}:${tp.port}/${tp.baseUri}/${domainName}/${domainSubNameAdress}/${serviceRelativePath}"
 					wsdlLocation="${serviceWsdlFileDir}"
 					serviceName="${serviceMethod}ResponderService" namespace="${serviceNamespace}"
 					proxy="true" payload="envelope" synchronous="true" 

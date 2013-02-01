@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOING!
+[soi-toolkit.gen.version=0.6.0]
+[soi-toolkit.gen.type=services]
+[soi-toolkit.gen.createDate=2012-09-25T00:17:12.888+02:00]
+[soi-toolkit.gen.artifactId=GetAggregatedSubjectOfCareSchedule]
+-->
+<project 
+	xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+    
+    <groupId>se.skl.tp.archetype</groupId>
+    <artifactId>service-archetype</artifactId>
+    <version>1.2-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>service-archetype</name>
+
+	<modules>
+        <module>ServiceArchetype</module>
+    </modules>
+       
+	<scm>
+    	<connection>http://skltpservices.googlecode.com/svn/skltpservices/tools/generators/archetypes/trunk</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/tools/generators/archetypes/trunk</developerConnection>
+        <url>http://skltpservices.googlecode.com/svn/skltpservices/tools/generators/archetypes/trunk</url>
+    </scm>
+
+</project>
+
+
