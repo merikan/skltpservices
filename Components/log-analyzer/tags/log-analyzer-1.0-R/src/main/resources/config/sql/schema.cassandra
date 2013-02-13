@@ -34,7 +34,7 @@ create column family Event
 create column family EventTimeLine
   with column_type = 'Standard'
   and comparator = 'TimeUUIDType'
-  and key_validation_class = 'CompositeType(CompositeType(AsciiType, AsciiType, AsciiType, AsciiType)'
+  and key_validation_class = 'CompositeType(AsciiType, AsciiType, AsciiType, AsciiType)'
   and default_validation_class = 'CompositeType(AsciiType, UTF8Type)'
   and comment = 'Log reverse index';
   
