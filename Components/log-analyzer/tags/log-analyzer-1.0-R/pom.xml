@@ -5,7 +5,7 @@
   <groupId>se.skl.skltpservices.components</groupId>
   <artifactId>log-analyzer</artifactId>
   <packaging>war</packaging>
-  <version>0.1-SNAPSHOT</version>
+  <version>1.0</version>
   <name>log-analyzer Maven Webapp</name>
 
   <properties>
