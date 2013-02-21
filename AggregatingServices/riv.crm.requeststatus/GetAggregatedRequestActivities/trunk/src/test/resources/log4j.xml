@@ -11,7 +11,7 @@
 	</appender>
 
     <appender name="ROLLINGFILE" class="org.apache.log4j.RollingFileAppender">
-        <param name="file" value="${mule.home}/logs/mule-app-GetAggregatedSubjectOfCareSchedule.log" />
+        <param name="file" value="${mule.home}/logs/mule-app-GetAggregatedRequestActivities.log" />
         <param name="MaxFileSize" value="1000KB" />
         <param name="MaxBackupIndex" value="3" />
         <layout class="org.apache.log4j.PatternLayout">
@@ -73,9 +73,6 @@
 	</logger>
 
     <logger name="se.skltp.agp">
-        <level value="DEBUG" />
-    </logger>
-    <logger name="se.skltp.agp.service.transformers">
         <level value="INFO" />
     </logger>
     

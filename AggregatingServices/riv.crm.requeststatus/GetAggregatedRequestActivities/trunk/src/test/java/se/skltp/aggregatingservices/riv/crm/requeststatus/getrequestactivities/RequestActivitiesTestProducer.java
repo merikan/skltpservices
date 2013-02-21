@@ -1,4 +1,4 @@
-package se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities;
+package se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,14 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
-import se.riv.crm.scheduling.getsubjectofcareschedule.v1.rivtabp21.GetSubjectOfCareScheduleResponderInterface;
-import se.riv.crm.scheduling.getsubjectofcarescheduleresponder.v1.GetSubjectOfCareScheduleResponseType;
-import se.riv.crm.scheduling.getsubjectofcarescheduleresponder.v1.GetSubjectOfCareScheduleType;
-import se.riv.crm.scheduling.v1.TimeslotType;
-import se.riv.interoperability.headers.v1.ActorType;
+import se.riv.crm.requeststatus.getrequestactivities.v1.rivtabp21.GetRequestActivitiesResponderInterface;
+import se.riv.crm.requeststatus.getrequestactivitiesresponder.v1.GetRequestActivitiesResponseType;
+import se.riv.crm.requeststatus.getrequestactivitiesresponder.v1.GetRequestActivitiesType;
+import se.riv.crm.requeststatus.v1.RequestActivityType;
 
-@WebService(serviceName = "GetSubjectOfCareScheduleResponderService", portName = "GetSubjectOfCareScheduleResponderPort", targetNamespace = "urn:riv:crm:scheduling:GetSubjectOfCareSchedule:1:rivtabp21", name = "GetSubjectOfCareScheduleInteraction")
-public class RequestActivitiesTestProducer implements GetSubjectOfCareScheduleResponderInterface {
+@WebService(serviceName = "GetRequestActivitiesResponderService", portName = "GetRequestActivitiesResponderPort", targetNamespace = "urn:riv:crm:requeststatus:GetRequestActivities:1:rivtabp21", name = "GetRequestActivitiesInteraction")
+public class RequestActivitiesTestProducer implements GetRequestActivitiesResponderInterface {
 
 	private static final Logger log = LoggerFactory.getLogger(RequestActivitiesTestProducer.class);
     private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("GetAggregatedRequestActivities-config");
@@ -49,10 +48,10 @@ public class RequestActivitiesTestProducer implements GetSubjectOfCareScheduleRe
 	public static final String TEST_REASON_UPDATED = "updated reason";
 
 	@Override
-	public GetSubjectOfCareScheduleResponseType getSubjectOfCareSchedule(String logicalAddress, ActorType actor, GetSubjectOfCareScheduleType request) {
-		log.info("### Virtual service for GetSubjectOfCareSchedule call the source system with logical address: {} and patientId: {}", logicalAddress, request.getSubjectOfCare());
+	public GetRequestActivitiesResponseType getRequestActivities(String logicalAddress, GetRequestActivitiesType request) {
+		log.info("### Virtual service for GetRequestActivities call the source system with logical address: {} and patientId: {}", logicalAddress, request.getSubjectOfCareId());
 
-		String id = request.getSubjectOfCare();
+		String id = request.getSubjectOfCareId();
 
 		// Return an error-message if invalid id
 		if (TEST_ID_FAULT_INVALID_ID.equals(id)) {
@@ -79,33 +78,43 @@ public class RequestActivitiesTestProducer implements GetSubjectOfCareScheduleRe
 		} catch (InterruptedException e) {}
         
         // Lookup the response
-        GetSubjectOfCareScheduleResponseType response = retreiveFromDb(request.getHealthcareFacility(), request.getSubjectOfCare());
+        GetRequestActivitiesResponseType response = retreiveFromDb(logicalAddress, request.getSubjectOfCareId());
         if (response == null) {
         	// Return an empty response object instead of null if nothing is found
-        	response = new GetSubjectOfCareScheduleResponseType();
+        	response = new GetRequestActivitiesResponseType();
         }
 
-		log.info("### Virtual service got {} booknings in the reply from the source system with logical address: {} and patientId: {}", new Object[] {response.getTimeslotDetail().size(), logicalAddress, request.getSubjectOfCare()});
+		log.info("### Virtual service got {} booknings in the reply from the source system with logical address: {} and patientId: {}", new Object[] {response.getRequestActivity().size(), logicalAddress, request.getSubjectOfCareId()});
 
 		// We are done
         return response;
 	}
 
 	// Let's share this method with other testclasses... 
-	static public TimeslotType createResponse(String logicalAddress, String subjectOfCare, String bookingId) {
-		TimeslotType timeslot = new TimeslotType();
-		timeslot.setHealthcareFacility(logicalAddress);
-		timeslot.setSubjectOfCare(subjectOfCare);
-		timeslot.setBookingId(bookingId);
-		timeslot.setReason(TEST_REASON_DEFAULT);
-		return timeslot;
+	static public RequestActivityType createResponse(String logicalAddress, String subjectOfCare, String id) {
+		RequestActivityType response = new RequestActivityType();
+
+		response.setCareUnit(logicalAddress);
+		response.setSubjectOfCareId(subjectOfCare);
+		response.setSenderRequestId(id);
+		response.setReceiverRequestId("ReceiverRequestId");
+		response.setTypeOfRequest("TypeOfRequest");
+		response.setRequestMedium("RequestMedium");
+		response.setRequestIssuedByPersonName("RequestIssuedByPersonName");
+		response.setRequestIssuedByOrganizationalUnitId("RequestIssuedByOrganizationalUnitId");
+		response.setRequestIssuedByOrganizationalUnitDescription("RequestIssuedByOrganizationalUnitDescription");
+		response.setReceivingPersonName("ReceivingPersonName");
+		response.setReceivingOrganizationalUnitId("ReceivingOrganizationalUnitId");
+		response.setReceivingOrganizationalUnitDescription("ReceivingOrganizationalUnitDescription");
+		
+		return response;
 	}
 
 	//
 	// A small db for timebookings for various test-source systems
 	//
-	private static Map<String, GetSubjectOfCareScheduleResponseType> BOOKING_DB = null;
-	// new HashMap<String, GetSubjectOfCareScheduleResponseType>();
+	private static Map<String, GetRequestActivitiesResponseType> BOOKING_DB = null;
+	// new HashMap<String, GetRequestActivitiesResponseType>();
 	
 	public static void initDb() {
 		log.debug("### INIT-DB INIT CALLED NOW, DB == NULL? " + (BOOKING_DB == null));
@@ -114,31 +123,31 @@ public class RequestActivitiesTestProducer implements GetSubjectOfCareScheduleRe
 		resetDb();
 		
 		// Patient with one booking, id = TEST_ID_ONE_BOOKING
-		GetSubjectOfCareScheduleResponseType response = new GetSubjectOfCareScheduleResponseType();
-		response.getTimeslotDetail().add(createResponse(TEST_LOGICAL_ADDRESS_1, TEST_ID_ONE_BOOKING, TEST_BOOKING_ID_ONE_BOOKING));
+		GetRequestActivitiesResponseType response = new GetRequestActivitiesResponseType();
+		response.getRequestActivity().add(createResponse(TEST_LOGICAL_ADDRESS_1, TEST_ID_ONE_BOOKING, TEST_BOOKING_ID_ONE_BOOKING));
 		storeInDb(TEST_LOGICAL_ADDRESS_1, TEST_ID_ONE_BOOKING, response);
 
 		// Patient with four bookings spread over three logical-addresses, where one is on a slow system, i.e. that cause timeouts
-		response = new GetSubjectOfCareScheduleResponseType();
-		response.getTimeslotDetail().add(createResponse(TEST_LOGICAL_ADDRESS_1, TEST_ID_MANY_BOOKINGS, TEST_BOOKING_ID_MANY_BOOKINGS_1));
+		response = new GetRequestActivitiesResponseType();
+		response.getRequestActivity().add(createResponse(TEST_LOGICAL_ADDRESS_1, TEST_ID_MANY_BOOKINGS, TEST_BOOKING_ID_MANY_BOOKINGS_1));
 		storeInDb(TEST_LOGICAL_ADDRESS_1, TEST_ID_MANY_BOOKINGS, response);
 
-		response = new GetSubjectOfCareScheduleResponseType();
-		response.getTimeslotDetail().add(createResponse(TEST_LOGICAL_ADDRESS_2, TEST_ID_MANY_BOOKINGS, TEST_BOOKING_ID_MANY_BOOKINGS_2));
-		response.getTimeslotDetail().add(createResponse(TEST_LOGICAL_ADDRESS_2, TEST_ID_MANY_BOOKINGS, TEST_BOOKING_ID_MANY_BOOKINGS_3));
+		response = new GetRequestActivitiesResponseType();
+		response.getRequestActivity().add(createResponse(TEST_LOGICAL_ADDRESS_2, TEST_ID_MANY_BOOKINGS, TEST_BOOKING_ID_MANY_BOOKINGS_2));
+		response.getRequestActivity().add(createResponse(TEST_LOGICAL_ADDRESS_2, TEST_ID_MANY_BOOKINGS, TEST_BOOKING_ID_MANY_BOOKINGS_3));
 		storeInDb(TEST_LOGICAL_ADDRESS_2, TEST_ID_MANY_BOOKINGS, response);
 
-		response = new GetSubjectOfCareScheduleResponseType();
-		response.getTimeslotDetail().add(createResponse(TEST_LOGICAL_ADDRESS_3, TEST_ID_MANY_BOOKINGS, TEST_BOOKING_ID_MANY_BOOKINGS_4));
+		response = new GetRequestActivitiesResponseType();
+		response.getRequestActivity().add(createResponse(TEST_LOGICAL_ADDRESS_3, TEST_ID_MANY_BOOKINGS, TEST_BOOKING_ID_MANY_BOOKINGS_4));
 		storeInDb(TEST_LOGICAL_ADDRESS_3, TEST_ID_MANY_BOOKINGS, response);
 	}
 
 	static public void resetDb() {
 		log.debug("### RESET-DB INIT CALLED NOW, DB == NULL? " + (BOOKING_DB == null));
-		BOOKING_DB = new HashMap<String, GetSubjectOfCareScheduleResponseType>();
+		BOOKING_DB = new HashMap<String, GetRequestActivitiesResponseType>();
 	}
 
-	static public void storeInDb(String logicalAddress, String subjectOfCareId, GetSubjectOfCareScheduleResponseType value) {
+	static public void storeInDb(String logicalAddress, String subjectOfCareId, GetRequestActivitiesResponseType value) {
 		log.debug("### STORE-DB INIT CALLED NOW, DB == NULL? " + (BOOKING_DB == null));
 		if (BOOKING_DB == null) {
 			initDb();
@@ -146,7 +155,7 @@ public class RequestActivitiesTestProducer implements GetSubjectOfCareScheduleRe
 		BOOKING_DB.put(logicalAddress + "|" + subjectOfCareId, value);
 	}
 	
-	static public GetSubjectOfCareScheduleResponseType retreiveFromDb(String logicalAddress, String subjectOfCareId) {
+	static public GetRequestActivitiesResponseType retreiveFromDb(String logicalAddress, String subjectOfCareId) {
 		log.debug("### RETREIVE-DB INIT CALLED NOW, DB == NULL? " + (BOOKING_DB == null));
 		if (BOOKING_DB == null) {
 			initDb();

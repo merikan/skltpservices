@@ -1,4 +1,4 @@
-package se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities;
+package se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -9,18 +9,18 @@ import static se.riv.interoperability.headers.v1.CausingAgentEnum.VIRTUALIZATION
 import static se.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_CACHE;
 import static se.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_SOURCE;
 import static se.riv.interoperability.headers.v1.StatusCodeEnum.NO_DATA_SYNCH_FAILED;
-import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_1;
-import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_2;
-import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_3;
-import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_ONE_BOOKING;
-import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_FAULT_INVALID_ID;
-import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_MANY_BOOKINGS;
-import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_ONE_BOOKING;
-import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_ZERO_BOOKINGS;
-import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_1;
-import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_1_RESPONSE_TIME;
-import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_2;
-import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_3;
+import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_1;
+import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_2;
+import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_3;
+import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_ONE_BOOKING;
+import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_FAULT_INVALID_ID;
+import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_MANY_BOOKINGS;
+import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_ONE_BOOKING;
+import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_ZERO_BOOKINGS;
+import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_1;
+import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_1_RESPONSE_TIME;
+import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_2;
+import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_3;
 
 import java.util.List;
 
@@ -33,8 +33,8 @@ import org.soitoolkit.commons.mule.test.AbstractJmsTestUtil;
 import org.soitoolkit.commons.mule.test.ActiveMqJmsTestUtil;
 import org.soitoolkit.commons.mule.test.junit4.AbstractTestCase;
 
-import se.riv.crm.scheduling.getsubjectofcarescheduleresponder.v1.GetSubjectOfCareScheduleResponseType;
-import se.riv.crm.scheduling.v1.TimeslotType;
+import se.riv.crm.requeststatus.getrequestactivitiesresponder.v1.GetRequestActivitiesResponseType;
+import se.riv.crm.requeststatus.v1.RequestActivityType;
 import se.riv.interoperability.headers.v1.CausingAgentEnum;
 import se.riv.interoperability.headers.v1.LastUnsuccessfulSynchErrorType;
 import se.riv.interoperability.headers.v1.ProcessingStatusRecordType;
@@ -111,12 +111,12 @@ public class RequestActivitiesIntegrationTest extends AbstractTestCase {
 
 	private ProcessingStatusType do_test_ok_zero_bookings(String id) {
 		RequestActivitiesTestConsumer consumer = new RequestActivitiesTestConsumer(DEFAULT_SERVICE_ADDRESS);
-		Holder<GetSubjectOfCareScheduleResponseType> responseHolder = new Holder<GetSubjectOfCareScheduleResponseType>();
+		Holder<GetRequestActivitiesResponseType> responseHolder = new Holder<GetRequestActivitiesResponseType>();
 		Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
     	consumer.callService(LOGICAL_ADDRESS, id, processingStatusHolder, responseHolder);
 
-    	GetSubjectOfCareScheduleResponseType response = responseHolder.value;
-		assertEquals(0, response.getTimeslotDetail().size());
+    	GetRequestActivitiesResponseType response = responseHolder.value;
+		assertEquals(0, response.getRequestActivity().size());
 		
 		ProcessingStatusType statusList = processingStatusHolder.value;
 		assertEquals(0, statusList.getProcessingStatusList().size());
@@ -126,17 +126,17 @@ public class RequestActivitiesIntegrationTest extends AbstractTestCase {
 	private ProcessingStatusType do_test_ok_one_booking(String id,
 			String expectedBookingId, String expectedLogicalAddress) {
 		RequestActivitiesTestConsumer consumer = new RequestActivitiesTestConsumer(DEFAULT_SERVICE_ADDRESS);
-		Holder<GetSubjectOfCareScheduleResponseType> responseHolder = new Holder<GetSubjectOfCareScheduleResponseType>();
+		Holder<GetRequestActivitiesResponseType> responseHolder = new Holder<GetRequestActivitiesResponseType>();
 		Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
     	consumer.callService(LOGICAL_ADDRESS, id, processingStatusHolder, responseHolder);
 
-    	GetSubjectOfCareScheduleResponseType response = responseHolder.value;
-		assertEquals(1, response.getTimeslotDetail().size());
+    	GetRequestActivitiesResponseType response = responseHolder.value;
+		assertEquals(1, response.getRequestActivity().size());
 		
-		TimeslotType timeslot = response.getTimeslotDetail().get(0);
-		assertEquals(id, timeslot.getSubjectOfCare());		
-		assertEquals(expectedBookingId, timeslot.getBookingId());		
-		assertEquals(expectedLogicalAddress, timeslot.getHealthcareFacility());		
+		RequestActivityType responseElement = response.getRequestActivity().get(0);
+		assertEquals(id, responseElement.getSubjectOfCareId());		
+		assertEquals(expectedBookingId, responseElement.getSenderRequestId());		
+		assertEquals(expectedLogicalAddress, responseElement.getCareUnit());		
 
 		ProcessingStatusType statusList = processingStatusHolder.value;
 		assertEquals(1, statusList.getProcessingStatusList().size());
@@ -147,28 +147,28 @@ public class RequestActivitiesIntegrationTest extends AbstractTestCase {
     public void test_ok_many_bookings_with_partial_timeout() {
     	String id = TEST_ID_MANY_BOOKINGS;
     	RequestActivitiesTestConsumer consumer = new RequestActivitiesTestConsumer(DEFAULT_SERVICE_ADDRESS);
-		Holder<GetSubjectOfCareScheduleResponseType> responseHolder = new Holder<GetSubjectOfCareScheduleResponseType>();
+		Holder<GetRequestActivitiesResponseType> responseHolder = new Holder<GetRequestActivitiesResponseType>();
 		Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
     	consumer.callService(LOGICAL_ADDRESS, id, processingStatusHolder, responseHolder);
 
     	// Verify the response, expect one booking from source #1, two from source #2 and a timeout from source #3
-    	GetSubjectOfCareScheduleResponseType response = responseHolder.value;
-		assertEquals(3, response.getTimeslotDetail().size());
+    	GetRequestActivitiesResponseType response = responseHolder.value;
+		assertEquals(3, response.getRequestActivity().size());
 		
-		TimeslotType timeslot = response.getTimeslotDetail().get(0);
-		assertEquals(id, timeslot.getSubjectOfCare());		
-		assertEquals(TEST_BOOKING_ID_MANY_BOOKINGS_1, timeslot.getBookingId());		
-		assertEquals(TEST_LOGICAL_ADDRESS_1, timeslot.getHealthcareFacility());		
+		RequestActivityType responseElement = response.getRequestActivity().get(0);
+		assertEquals(id, responseElement.getSubjectOfCareId());		
+		assertEquals(TEST_BOOKING_ID_MANY_BOOKINGS_1, responseElement.getSenderRequestId());		
+		assertEquals(TEST_LOGICAL_ADDRESS_1, responseElement.getCareUnit());		
 		
-		timeslot = response.getTimeslotDetail().get(1);
-		assertEquals(id, timeslot.getSubjectOfCare());		
-		assertEquals(TEST_BOOKING_ID_MANY_BOOKINGS_2, timeslot.getBookingId());		
-		assertEquals(TEST_LOGICAL_ADDRESS_2, timeslot.getHealthcareFacility());		
+		responseElement = response.getRequestActivity().get(1);
+		assertEquals(id, responseElement.getSubjectOfCareId());		
+		assertEquals(TEST_BOOKING_ID_MANY_BOOKINGS_2, responseElement.getSenderRequestId());		
+		assertEquals(TEST_LOGICAL_ADDRESS_2, responseElement.getCareUnit());		
 		
-		timeslot = response.getTimeslotDetail().get(2);
-		assertEquals(id, timeslot.getSubjectOfCare());		
-		assertEquals(TEST_BOOKING_ID_MANY_BOOKINGS_3, timeslot.getBookingId());		
-		assertEquals(TEST_LOGICAL_ADDRESS_2, timeslot.getHealthcareFacility());
+		responseElement = response.getRequestActivity().get(2);
+		assertEquals(id, responseElement.getSubjectOfCareId());		
+		assertEquals(TEST_BOOKING_ID_MANY_BOOKINGS_3, responseElement.getSenderRequestId());		
+		assertEquals(TEST_LOGICAL_ADDRESS_2, responseElement.getCareUnit());
 
     
     	// Verify the Processing Status
@@ -185,13 +185,13 @@ public class RequestActivitiesIntegrationTest extends AbstractTestCase {
 	public void test_fault_invalidInput() throws Exception {
     	String id = TEST_ID_FAULT_INVALID_ID;
     	RequestActivitiesTestConsumer consumer = new RequestActivitiesTestConsumer(DEFAULT_SERVICE_ADDRESS);
-		Holder<GetSubjectOfCareScheduleResponseType> responseHolder = new Holder<GetSubjectOfCareScheduleResponseType>();
+		Holder<GetRequestActivitiesResponseType> responseHolder = new Holder<GetRequestActivitiesResponseType>();
 		Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
     	consumer.callService(LOGICAL_ADDRESS, id, processingStatusHolder, responseHolder);
-    	GetSubjectOfCareScheduleResponseType response = responseHolder.value;
+    	GetRequestActivitiesResponseType response = responseHolder.value;
 
     	// Expect a response with zero booking and error information in the processingstatus
-		assertEquals(0, response.getTimeslotDetail().size());
+		assertEquals(0, response.getRequestActivity().size());
 		
     	// Verify the Processing Status
 		List<ProcessingStatusRecordType> statusList = processingStatusHolder.value.getProcessingStatusList();
@@ -227,10 +227,10 @@ public class RequestActivitiesIntegrationTest extends AbstractTestCase {
         try {
 	    	String id = TEST_ID_FAULT_TIMEOUT;
 	    	RequestActivitiesTestConsumer consumer = new RequestActivitiesTestConsumer(DEFAULT_SERVICE_ADDRESS);
-			Holder<GetSubjectOfCareScheduleResponseType> responseHolder = new Holder<GetSubjectOfCareScheduleResponseType>();
+			Holder<GetRequestActivitiesResponseType> responseHolder = new Holder<GetRequestActivitiesResponseType>();
 			Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
 	    	consumer.callService(LOGICAL_ADDRESS, id, processingStatusHolder, responseHolder);
-	    	GetSubjectOfCareScheduleResponseType response = responseHolder.value;
+	    	GetRequestActivitiesResponseType response = responseHolder.value;
 	        fail("expected fault, but got a response of type: " + ((response == null) ? "NULL" : response.getClass().getName()));
 
         } catch (SOAPFaultException e) {
