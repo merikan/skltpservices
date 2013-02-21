@@ -9,27 +9,24 @@ import static se.riv.interoperability.headers.v1.CausingAgentEnum.VIRTUALIZATION
 import static se.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_CACHE;
 import static se.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_SOURCE;
 import static se.riv.interoperability.headers.v1.StatusCodeEnum.NO_DATA_SYNCH_FAILED;
-import static se.skltp.agp.MuleServer.getAddress;
-import static se.skltp.agp.cache.CacheUtil.getCache;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_1;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_2;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_3;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_BOOKING_ID_ONE_BOOKING;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_ID_FAULT_INVALID_ID;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_ID_MANY_BOOKINGS;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_ID_ONE_BOOKING;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_ID_ZERO_BOOKINGS;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_LOGICAL_ADDRESS_1;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_LOGICAL_ADDRESS_1_RESPONSE_TIME;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_LOGICAL_ADDRESS_2;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_LOGICAL_ADDRESS_3;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_1;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_2;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_3;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_ONE_BOOKING;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_FAULT_INVALID_ID;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_MANY_BOOKINGS;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_ONE_BOOKING;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_ZERO_BOOKINGS;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_1;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_1_RESPONSE_TIME;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_2;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_3;
 
 import java.util.List;
 
 import javax.xml.ws.Holder;
 
 import org.junit.Test;
-import org.mule.api.MuleEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.test.AbstractJmsTestUtil;
@@ -42,9 +39,8 @@ import se.riv.interoperability.headers.v1.CausingAgentEnum;
 import se.riv.interoperability.headers.v1.LastUnsuccessfulSynchErrorType;
 import se.riv.interoperability.headers.v1.ProcessingStatusRecordType;
 import se.riv.interoperability.headers.v1.ProcessingStatusType;
-import se.skltp.agp.cache.CacheMemoryStoreImpl;
 
- 
+
 public class RequestActivitiesIntegrationTest extends AbstractTestCase {
 
 	@SuppressWarnings("unused")
@@ -53,7 +49,7 @@ public class RequestActivitiesIntegrationTest extends AbstractTestCase {
 	private static final String LOGICAL_ADDRESS = "logical-address";
 	private static final String EXPECTED_ERR_TIMEOUT_MSG = "Read timed out";
 	private static final String EXPECTED_ERR_INVALID_ID_MSG = "Invalid Id: -1";
-	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("SERVICE_INBOUND_URL");
+	private static final String DEFAULT_SERVICE_ADDRESS = RequestActivitiesMuleServer.getAddress("SERVICE_INBOUND_URL");
   
 	private static final String ERROR_LOG_QUEUE = "SOITOOLKIT.LOG.ERROR";
 	private AbstractJmsTestUtil jmsUtil = null;
@@ -67,7 +63,7 @@ public class RequestActivitiesIntegrationTest extends AbstractTestCase {
 	protected String getConfigResources() {
 		return "soitoolkit-mule-jms-connector-activemq-embedded.xml," + 
   
-		"GetAggregatedSubjectOfCareSchedule-common.xml," +
+		"GetAggregatedRequestActivities-common.xml," +
 		"aggregating-services-common.xml," + 
         "aggregating-service.xml," +
 		"teststub-services/engagemangsindex-teststub-service.xml," + 

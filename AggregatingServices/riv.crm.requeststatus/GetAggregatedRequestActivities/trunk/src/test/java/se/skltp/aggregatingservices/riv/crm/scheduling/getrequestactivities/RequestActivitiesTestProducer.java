@@ -19,7 +19,7 @@ import se.riv.interoperability.headers.v1.ActorType;
 public class RequestActivitiesTestProducer implements GetSubjectOfCareScheduleResponderInterface {
 
 	private static final Logger log = LoggerFactory.getLogger(RequestActivitiesTestProducer.class);
-    private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("GetAggregatedSubjectOfCareSchedule-config");
+    private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("GetAggregatedRequestActivities-config");
 	private static final long SERVICE_TIMOUT_MS = Long.parseLong(rb.getString("SERVICE_TIMEOUT_MS"));
 
 	public static final String TEST_ID_ZERO_BOOKINGS = "000000000000";

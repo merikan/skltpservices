@@ -2,18 +2,19 @@ package se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities;
 
 import static se.skltp.agp.cache.Contants.CATEGORIZATION_BOOKING;
 import static se.skltp.agp.cache.Contants.SERVICE_DOMAIN_SCHEDULING;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_BOOKING_ID_FAULT_INVALID_ID;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_1;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_2;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_3;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_4;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_BOOKING_ID_ONE_BOOKING;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_ID_FAULT_INVALID_ID;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_ID_MANY_BOOKINGS;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_ID_ONE_BOOKING;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_LOGICAL_ADDRESS_1;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_LOGICAL_ADDRESS_2;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_LOGICAL_ADDRESS_3;
+
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_FAULT_INVALID_ID;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_1;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_2;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_3;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_4;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_ONE_BOOKING;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_FAULT_INVALID_ID;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_MANY_BOOKINGS;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_ONE_BOOKING;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_1;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_2;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_3;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +38,7 @@ public class EngagemangsindexTestProducer implements FindContentResponderInterfa
 	public static final String TEST_ID_FAULT_TIMEOUT_IN_EI    = "EI:TIMEOUT";
 	
 	private static final Logger log = LoggerFactory.getLogger(EngagemangsindexTestProducer.class);
-    private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("GetAggregatedSubjectOfCareSchedule-config");
+    private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("GetAggregatedRequestActivities-config");
 	private static final long SERVICE_TIMOUT_MS = Long.parseLong(rb.getString("SERVICE_TIMEOUT_MS"));
 
 	private static final Map<String, FindContentResponseType> BOOKING_INDEX = new HashMap<String, FindContentResponseType>();

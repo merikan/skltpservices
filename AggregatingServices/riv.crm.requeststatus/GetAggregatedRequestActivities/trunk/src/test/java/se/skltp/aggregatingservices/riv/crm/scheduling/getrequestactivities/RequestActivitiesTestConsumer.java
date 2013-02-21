@@ -1,17 +1,13 @@
 package se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities;
 
-import static se.skltp.agp.MuleServer.getAddress;
-import static se.skltp.agp.tidbokning.TidbokningTestProducer.TEST_ID_ONE_BOOKING;
+import static se.skltp.aggregatingservices.riv.crm.scheduling.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_ONE_BOOKING;
 
 import java.net.URL;
-import java.util.List;
 
 import javax.xml.ws.Holder;
 
 import org.apache.cxf.bus.spring.SpringBusFactory;
-import org.apache.cxf.interceptor.Interceptor;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
-import org.apache.cxf.message.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +26,7 @@ public class RequestActivitiesTestConsumer {
 	private GetSubjectOfCareScheduleResponderInterface _service = null;
 	
 	public static void main(String[] args) {
-		String serviceAddress = getAddress("SERVICE_INBOUND_URL");
+		String serviceAddress = RequestActivitiesMuleServer.getAddress("SERVICE_INBOUND_URL");
 		String personnummer = TEST_ID_ONE_BOOKING;
 
 		RequestActivitiesTestConsumer consumer = new RequestActivitiesTestConsumer(serviceAddress);
