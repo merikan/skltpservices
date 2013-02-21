@@ -29,9 +29,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     
     <scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->		
-        <connection>scm:svn:https://my-subversion-server/svn/GetAggregatedSubjectOfCareSchedule/trunk</connection>
-        <developerConnection>scm:svn:https://my-subversion-server/svn/GetAggregatedSubjectOfCareSchedule/trunk</developerConnection>
-        <url>https://my-subversion-server/svn/GetAggregatedSubjectOfCareSchedule/trunk</url>
+        <connection>scm:svn:https://my-subversion-server/svn/GetAggregatedRequestActivities/trunk</connection>
+        <developerConnection>scm:svn:https://my-subversion-server/svn/GetAggregatedRequestActivities/trunk</developerConnection>
+        <url>https://my-subversion-server/svn/GetAggregatedRequestActivities/trunk</url>
     </scm>
     
     <distributionManagement>
@@ -82,18 +82,12 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 			<artifactId>itintegration-engagementindex-schemas</artifactId>
 			<version>1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>se.rivta.tools</groupId>
 			<artifactId>crm-requeststatus-schemas</artifactId>
 			<version>1</version>
 		</dependency>
-
-        <dependency>
-            <groupId>se.rivta.tools</groupId>
-            <artifactId>ehr-scheduling-schemas</artifactId>
-            <version>1</version>
-        </dependency>
 
         <!-- TEST DEPENDENCIES -->
 

@@ -1,27 +1,27 @@
-package se.skltp.aggregatingservices.riv.crm.scheduling.getaggregatedrequestactivities;
+package se.skltp.aggregatingservices.riv.crm.requeststatus.getaggregatedrequestactivities;
 
-import static se.skltp.agp.cache.Contants.SERVICE_DOMAIN_SCHEDULING;
+import static se.skltp.aggregatingservices.riv.crm.requeststatus.getaggregatedrequestactivities.Constants.SERVICE_DOMAIN_SCHEDULING;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import org.w3c.dom.Node;
 
-import se.riv.crm.scheduling.getsubjectofcarescheduleresponder.v1.GetSubjectOfCareScheduleType;
+import se.riv.crm.requeststatus.getrequestactivitiesresponder.v1.GetRequestActivitiesType;
 import se.skltp.agp.service.api.QueryObjectFactory;
 import se.skltp.agp.service.api.QueryObject;
 
 public class QueryObjectFactoryImpl implements QueryObjectFactory {
 
 	private static final Logger log = LoggerFactory.getLogger(QueryObjectFactoryImpl.class);
-	private static final JaxbUtil ju = new JaxbUtil(GetSubjectOfCareScheduleType.class);
+	private static final JaxbUtil ju = new JaxbUtil(GetRequestActivitiesType.class);
 
 	@Override
 	public QueryObject createQueryObject(Node node) {
 		
-		GetSubjectOfCareScheduleType reqIn = (GetSubjectOfCareScheduleType)ju.unmarshal(node);
+		GetRequestActivitiesType reqIn = (GetRequestActivitiesType)ju.unmarshal(node);
 		
-		String subjectofCareId = reqIn.getSubjectOfCare();
+		String subjectofCareId = reqIn.getSubjectOfCareId();
 		
 		log.debug("Transformed payload: pid: {}", subjectofCareId);
 		

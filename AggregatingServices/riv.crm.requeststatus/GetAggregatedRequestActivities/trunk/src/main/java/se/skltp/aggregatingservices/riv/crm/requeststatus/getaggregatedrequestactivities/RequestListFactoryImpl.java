@@ -1,4 +1,4 @@
-package se.skltp.aggregatingservices.riv.crm.scheduling.getaggregatedrequestactivities;
+package se.skltp.aggregatingservices.riv.crm.requeststatus.getaggregatedrequestactivities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,9 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import riv.itintegration.engagementindex._1.EngagementType;
-import se.riv.crm.scheduling.getsubjectofcarescheduleresponder.v1.GetSubjectOfCareScheduleType;
-import se.riv.interoperability.headers.v1.ActorType;
-import se.riv.interoperability.headers.v1.ActorTypeEnum;
+import se.riv.crm.requeststatus.getrequestactivitiesresponder.v1.GetRequestActivitiesType;
 import se.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentResponseType;
 import se.skltp.agp.service.api.QueryObject;
 import se.skltp.agp.service.api.RequestListFactory;
@@ -29,7 +27,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
 		
 		log.info("Got {} hits in the engagement index", inEngagements.size());
 
-		// Since we are using the GetSubjectOfCareSchedule that returns all bookings from a logical-address in one call we can reduce multiple hits in the index for the same logical-address to lower the number of calls required
+		// Since we are using the GetRequestActivities that returns all bookings from a logical-address in one call we can reduce multiple hits in the index for the same logical-address to lower the number of calls required
 		Map<String, String> uniqueLogicalAddresses = new HashMap<String, String>();
 		for (EngagementType inEng : inEngagements) {
 			uniqueLogicalAddresses.put(inEng.getLogicalAddress(), inEng.getRegisteredResidentIdentification());
@@ -47,16 +45,10 @@ public class RequestListFactoryImpl implements RequestListFactory {
 
 			log.info("Calling source system using logical address {} for subject of care id {}", logicalAdress, subjectOfCare);
 
-			// FIX ME. Get Actor from some invocation variable
-			ActorType actor = new ActorType();
-			actor.setActorId("999");
-			actor.setActorType(ActorTypeEnum.SUBJECT_OF_CARE);
+			GetRequestActivitiesType request = new GetRequestActivitiesType();
+			request.setSubjectOfCareId(subjectOfCare);
 
-			GetSubjectOfCareScheduleType request = new GetSubjectOfCareScheduleType();
-			request.setHealthcareFacility(logicalAdress);
-			request.setSubjectOfCare(subjectOfCare);
-
-			Object[] reqArr = new Object[] {logicalAdress, actor, request};
+			Object[] reqArr = new Object[] {logicalAdress, request};
 			
 			reqList.add(reqArr);
 		}
