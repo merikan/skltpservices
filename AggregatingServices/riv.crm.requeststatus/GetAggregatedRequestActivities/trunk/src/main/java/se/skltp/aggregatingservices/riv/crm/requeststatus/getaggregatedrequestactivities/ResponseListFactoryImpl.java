@@ -26,6 +26,7 @@ public class ResponseListFactoryImpl implements ResponseListFactory {
 			aggregatedResponse.getRequestActivity().addAll(response.getRequestActivity());
 		}
 
+	    // TODO: Vad är detta? subjectOfCare kan kankse hämtas från QueryOBjektet istället?
 	    if (log.isInfoEnabled()) {
     		String subjectOfCareId = "";
         	if (aggregatedResponse.getRequestActivity().size() > 0) {

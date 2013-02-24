@@ -27,6 +27,8 @@ public class RequestListFactoryImpl implements RequestListFactory {
 		
 		log.info("Got {} hits in the engagement index", inEngagements.size());
 
+		// TODO: Filtrera på sökparametrar samt sortera per källsystem.
+		
 		// Since we are using the GetRequestActivities that returns all bookings from a logical-address in one call we can reduce multiple hits in the index for the same logical-address to lower the number of calls required
 		Map<String, String> uniqueLogicalAddresses = new HashMap<String, String>();
 		for (EngagementType inEng : inEngagements) {
