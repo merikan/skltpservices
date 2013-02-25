@@ -5,10 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static se.riv.interoperability.headers.v1.CausingAgentEnum.VIRTUALIZATION_PLATFORM;
-import static se.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_CACHE;
-import static se.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_SOURCE;
-import static se.riv.interoperability.headers.v1.StatusCodeEnum.NO_DATA_SYNCH_FAILED;
 import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_1;
 import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_2;
 import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_BOOKING_ID_MANY_BOOKINGS_3;
@@ -21,6 +17,10 @@ import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactiv
 import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_1_RESPONSE_TIME;
 import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_2;
 import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_LOGICAL_ADDRESS_3;
+import static se.skltp.agp.riv.interoperability.headers.v1.CausingAgentEnum.VIRTUALIZATION_PLATFORM;
+import static se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_CACHE;
+import static se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum.DATA_FROM_SOURCE;
+import static se.skltp.agp.riv.interoperability.headers.v1.StatusCodeEnum.NO_DATA_SYNCH_FAILED;
 
 import java.util.List;
 
@@ -35,10 +35,10 @@ import org.soitoolkit.commons.mule.test.junit4.AbstractTestCase;
 
 import se.riv.crm.requeststatus.getrequestactivitiesresponder.v1.GetRequestActivitiesResponseType;
 import se.riv.crm.requeststatus.v1.RequestActivityType;
-import se.riv.interoperability.headers.v1.CausingAgentEnum;
-import se.riv.interoperability.headers.v1.LastUnsuccessfulSynchErrorType;
-import se.riv.interoperability.headers.v1.ProcessingStatusRecordType;
-import se.riv.interoperability.headers.v1.ProcessingStatusType;
+import se.skltp.agp.riv.interoperability.headers.v1.CausingAgentEnum;
+import se.skltp.agp.riv.interoperability.headers.v1.LastUnsuccessfulSynchErrorType;
+import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusRecordType;
+import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 
 
 public class RequestActivitiesIntegrationTest extends AbstractTestCase {
