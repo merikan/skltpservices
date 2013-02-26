@@ -25,7 +25,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
 
 	/**
 	 * Filtrera svarsposter från i EI (ei-engagement) baserat parametrar i GetRequestActivities requestet (req).
-	 * Följane villkor måste vara sanna för att en svarspost från EI skall tas med i svaret:
+	 * Följande villkor måste vara sanna för att en svarspost från EI skall tas med i svaret:
 	 * 
 	 * 1. req.fromDate <= ei-engagement.mostRecentContent <= req.toDate
 	 * 2. req.careUnitId.size == 0 or req.careUnitId.contains(ei-engagement.logicalAddress)
@@ -59,8 +59,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
 		for (EngagementType inEng : inEngagements) {
 
 			// Filter
-			if (true ||
-				isBetween(reqFrom, reqTo, inEng.getMostRecentContent()) &&
+			if (isBetween(reqFrom, reqTo, inEng.getMostRecentContent()) &&
 				isPartOf(reqCareUnitList, inEng.getLogicalAddress())) {
 
 				System.err.println("Add SS: " + inEng.getSourceSystem() + " for PDL unit: " + inEng.getLogicalAddress());
@@ -112,9 +111,10 @@ public class RequestListFactoryImpl implements RequestListFactory {
 
 	boolean isBetween(Date from, Date to, String tsStr) {
 		try {
+			System.err.println("Is " + tsStr + " between " + from + " and " + to);
 			Date ts = df.parse(tsStr);
-			if (from.after(ts)) return false;
-			if (to.before(ts)) return false;
+			if (from != null && from.after(ts)) return false;
+			if (to != null && to.before(ts)) return false;
 			return true;
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
@@ -122,7 +122,10 @@ public class RequestListFactoryImpl implements RequestListFactory {
 	}
 
 	boolean isPartOf(List<String> careUnitIdList, String careUnit) {
-		if (careUnitIdList == null) return true;
+		
+		System.err.println("Check presence of " + careUnit + " in " + careUnitIdList);
+		
+		if (careUnitIdList == null || careUnitIdList.size() == 0) return true;
 		
 		return careUnitIdList.contains(careUnit);
 	}
