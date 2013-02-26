@@ -119,6 +119,7 @@ public class EngagemangsindexTestProducer implements FindContentResponderInterfa
 		e.setBusinessObjectInstanceIdentifier(bookingId);
 		e.setCreationTime("20111010T100000");
 		e.setUpdateTime("20111010T100000");
+		e.setSourceSystem(receiverLogicalAddress);
 		return e;
 	}
 }
