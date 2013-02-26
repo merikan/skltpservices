@@ -9,6 +9,7 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import se.riv.crm.requeststatus.getrequestactivitiesresponder.v1.GetRequestActivitiesResponseType;
 import se.riv.crm.requeststatus.getrequestactivitiesresponder.v1.ObjectFactory;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
+import se.skltp.agp.service.api.QueryObject;
 import se.skltp.agp.service.api.ResponseListFactory;
 
 public class ResponseListFactoryImpl implements ResponseListFactory {
@@ -18,7 +19,7 @@ public class ResponseListFactoryImpl implements ResponseListFactory {
 	private static final ObjectFactory OF = new ObjectFactory();
 	
 	@Override
-	public String getXmlFromAggregatedResponse(List<Object> aggregatedResponseList) {
+	public String getXmlFromAggregatedResponse(QueryObject queryObject, List<Object> aggregatedResponseList) {
 		GetRequestActivitiesResponseType aggregatedResponse = new GetRequestActivitiesResponseType();
 
 	    for (Object object : aggregatedResponseList) {
@@ -26,13 +27,9 @@ public class ResponseListFactoryImpl implements ResponseListFactory {
 			aggregatedResponse.getRequestActivity().addAll(response.getRequestActivity());
 		}
 
-	    // TODO: Vad är detta? subjectOfCare kan kankse hämtas från QueryOBjektet istället?
 	    if (log.isInfoEnabled()) {
-    		String subjectOfCareId = "";
-        	if (aggregatedResponse.getRequestActivity().size() > 0) {
-        		subjectOfCareId = aggregatedResponse.getRequestActivity().get(0).getSubjectOfCareId();
-        	}
-        	log.info("Returning {} aggregated schedules for subject of care id {}", aggregatedResponse.getRequestActivity().size() ,subjectOfCareId);
+    		String subjectOfCareId = queryObject.getFindContent().getRegisteredResidentIdentification();
+        	log.info("Returning {} aggregated remisstatus for subject of care id {}", aggregatedResponse.getRequestActivity().size() ,subjectOfCareId);
         }
         
         // Since the class GetRequestActivitiesResponseType don't have an @XmlRootElement annotation
