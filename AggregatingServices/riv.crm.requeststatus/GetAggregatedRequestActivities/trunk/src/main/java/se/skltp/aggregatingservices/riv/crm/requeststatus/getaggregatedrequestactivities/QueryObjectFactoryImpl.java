@@ -20,20 +20,25 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
 		this.eiServiceDomain = eiServiceDomain;
 	}
 
+	/**
+	 * Transformerar GetRequestActivities request till EI FindContent request enligt:
+	 * 
+	 * 1. subjectOfCareId --> registeredResidentIdentification
+	 * 2. "riv:crm:requeststatus" --> serviceDomain
+	 * 3. typeOfRequest --> categorization
+	 */
 	@Override
 	public QueryObject createQueryObject(Node node) {
 		
-		GetRequestActivitiesType reqIn = (GetRequestActivitiesType)ju.unmarshal(node);
+		GetRequestActivitiesType req = (GetRequestActivitiesType)ju.unmarshal(node);
 		
-		String subjectofCareId = reqIn.getSubjectOfCareId();
-		
-		// TODO: Fyll på med alla query-paramtrar
-		log.debug("Transformed payload: pid: {}", subjectofCareId);
+		if (log.isDebugEnabled()) log.debug("Transformed payload for pid: {}", req.getSubjectOfCareId());
 
-		FindContentType fc = new FindContentType();
-		fc.setRegisteredResidentIdentification(subjectofCareId);
+		FindContentType fc = new FindContentType();		
+		fc.setRegisteredResidentIdentification(req.getSubjectOfCareId());
 		fc.setServiceDomain(eiServiceDomain);
-		QueryObject qo = new QueryObject(fc, reqIn);
+		fc.setCategorization(req.getTypeOfRequest());
+		QueryObject qo = new QueryObject(fc, req);
 
 		return qo;
 	}
