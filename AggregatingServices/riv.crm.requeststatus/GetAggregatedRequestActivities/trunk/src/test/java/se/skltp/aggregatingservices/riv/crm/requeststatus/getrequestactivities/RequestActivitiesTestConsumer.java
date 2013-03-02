@@ -1,6 +1,6 @@
 package se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities;
 
-import static se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.RequestActivitiesTestProducer.TEST_ID_ONE_BOOKING;
+import static se.skltp.agp.test.producer.TestProducerDb.TEST_RR_ID_ONE_HIT;
 
 import java.net.URL;
 
@@ -25,7 +25,7 @@ public class RequestActivitiesTestConsumer {
 	
 	public static void main(String[] args) {
 		String serviceAddress = RequestActivitiesMuleServer.getAddress("SERVICE_INBOUND_URL");
-		String personnummer = TEST_ID_ONE_BOOKING;
+		String personnummer = TEST_RR_ID_ONE_HIT;
 
 		RequestActivitiesTestConsumer consumer = new RequestActivitiesTestConsumer(serviceAddress);
 		Holder<GetRequestActivitiesResponseType> responseHolder = new Holder<GetRequestActivitiesResponseType>();
