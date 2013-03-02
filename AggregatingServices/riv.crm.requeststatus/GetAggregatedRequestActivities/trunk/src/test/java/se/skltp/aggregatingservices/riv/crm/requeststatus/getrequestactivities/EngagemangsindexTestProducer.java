@@ -30,6 +30,7 @@ import se.skltp.agp.riv.itintegration.engagementindex.v1.EngagementType;
 @WebService(serviceName = "FindContentResponderService", portName = "FindContentResponderPort", targetNamespace = "urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21", name = "FindContentInteraction")
 public class EngagemangsindexTestProducer implements FindContentResponderInterface {
 
+// TODO.	BORT MED DESSA KONSTANTER, TA IN FRÅN TEST-DB + FLYTT TILL AGP-TEST-COMMON!!!
 	public static final String TEST_ID_OK                     = "1234567890";
 	public static final String TEST_ID_FAULT_INVALID_ID_IN_EI = "EI:INV_ID";
 	public static final String TEST_ID_FAULT_TIMEOUT_IN_EI    = "EI:TIMEOUT";
