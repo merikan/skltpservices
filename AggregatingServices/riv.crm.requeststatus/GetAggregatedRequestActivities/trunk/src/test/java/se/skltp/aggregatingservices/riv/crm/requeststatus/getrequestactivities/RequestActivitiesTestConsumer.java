@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import se.riv.crm.requeststatus.getrequestactivities.v1.rivtabp21.GetRequestActivitiesResponderInterface;
 import se.riv.crm.requeststatus.getrequestactivitiesresponder.v1.GetRequestActivitiesResponseType;
 import se.riv.crm.requeststatus.getrequestactivitiesresponder.v1.GetRequestActivitiesType;
-import se.skltp.agp.cache.SoapHeaderCxfInterceptor;
+import se.skltp.agp.test.consumer.SoapHeaderCxfInterceptor;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 
 public class RequestActivitiesTestConsumer {
