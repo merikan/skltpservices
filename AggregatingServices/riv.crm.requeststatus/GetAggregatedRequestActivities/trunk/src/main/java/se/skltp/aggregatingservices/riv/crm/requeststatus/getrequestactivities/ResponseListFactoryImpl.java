@@ -1,4 +1,4 @@
-package se.skltp.aggregatingservices.riv.crm.requeststatus.getaggregatedrequestactivities;
+package se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities;
 
 import java.util.List;
 
