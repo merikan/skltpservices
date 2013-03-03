@@ -1,4 +1,4 @@
-package se.skltp.aggregatingservices.riv.crm.requeststatus.getaggregatedrequestactivities;
+package se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -51,7 +51,6 @@ public class RequestListFactoryImpl implements RequestListFactory {
 		FindContentResponseType eiResp = (FindContentResponseType)src;
 		List<EngagementType> inEngagements = eiResp.getEngagement();
 		
-		System.err.println("Got " +  inEngagements.size() + " hits in the engagement index");
 		log.info("Got {} hits in the engagement index", inEngagements.size());
 
 		Map<String, List<String>> sourceSystem_pdlUnitList_map = new HashMap<String, List<String>>();
@@ -62,8 +61,8 @@ public class RequestListFactoryImpl implements RequestListFactory {
 			if (isBetween(reqFrom, reqTo, inEng.getMostRecentContent()) &&
 				isPartOf(reqCareUnitList, inEng.getLogicalAddress())) {
 
-				System.err.println("Add SS: " + inEng.getSourceSystem() + " for PDL unit: " + inEng.getLogicalAddress());
 				// Add pdlUnit to source system
+				log.debug("Add SS: {} for PDL unit: {}", inEng.getSourceSystem(), inEng.getLogicalAddress());
 				addPdlUnitToSourceSystem(sourceSystem_pdlUnitList_map, inEng.getSourceSystem(), inEng.getLogicalAddress());
 			}
 		}
@@ -78,7 +77,6 @@ public class RequestListFactoryImpl implements RequestListFactory {
 			String sourceSystem = entry.getKey();
  			List<String> careUnitList = entry.getValue();
 
-			System.err.println("Calling source system using logical address " + sourceSystem + " for subject of care id: " + originalRequest.getSubjectOfCareId());
 			if (log.isInfoEnabled()) log.info("Calling source system using logical address {} for subject of care id {}", sourceSystem, originalRequest.getSubjectOfCareId());
 
 			GetRequestActivitiesType request = new GetRequestActivitiesType();
@@ -111,7 +109,10 @@ public class RequestListFactoryImpl implements RequestListFactory {
 
 	boolean isBetween(Date from, Date to, String tsStr) {
 		try {
-			System.err.println("Is " + tsStr + " between " + from + " and " + to);
+			if (log.isDebugEnabled()) {
+				log.debug("Is {} between {} and ", new Object[] {tsStr, from, to});
+			}
+			
 			Date ts = df.parse(tsStr);
 			if (from != null && from.after(ts)) return false;
 			if (to != null && to.before(ts)) return false;
@@ -123,7 +124,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
 
 	boolean isPartOf(List<String> careUnitIdList, String careUnit) {
 		
-		System.err.println("Check presence of " + careUnit + " in " + careUnitIdList);
+		log.debug("Check presence of {} in {}", careUnit, careUnitIdList);
 		
 		if (careUnitIdList == null || careUnitIdList.size() == 0) return true;
 		
