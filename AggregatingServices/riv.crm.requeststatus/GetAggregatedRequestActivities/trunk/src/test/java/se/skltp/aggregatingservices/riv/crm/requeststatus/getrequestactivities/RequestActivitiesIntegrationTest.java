@@ -87,8 +87,7 @@ public class RequestActivitiesIntegrationTest extends AbstractTestCase {
 		// (The embedded ActiveMQ queue manager is not yet started by Mule when jmsutil is delcared...)
 		if (jmsUtil == null) jmsUtil = new ActiveMqJmsTestUtil();
 		
- 
-		// Clear queues used for error handling
+ 		// Clear queues used for error handling
 		jmsUtil.clearQueues(ERROR_LOG_QUEUE);
     }
 
