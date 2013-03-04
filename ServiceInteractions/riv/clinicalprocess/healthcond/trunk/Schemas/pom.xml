@@ -55,15 +55,17 @@
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:clinicalprocess:healthcond:GetCareDocumentationResponder:1=se.riv.clinicalprocess.healthcond.getcaredocumentationresponder.v1</extraarg>
+                    <extraarg>urn:riv:ehr:patientsummary:GetCareDocumentationResponder:2=se.riv.ehr.patientsummary.getcaredocumentationresponder.v1</extraarg>
                     <extraarg>-p</extraarg>
                     <extraarg>urn:riv:interoperability:headers:1=se.riv.interoperability.headers.v1</extraarg>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:clinicalprocess:healthcond:GetCareDocumentation:1:rivtabp21=se.riv.clinicalprocess.healthcond.getcaredocumentation.v2.rivtabp21</extraarg>
+                    <extraarg>urn:riv:ehr:patientsummary:GetCareDocumentation:2:rivtabp21=se.riv.ehr.patientsummary.getcaredocumentation.v2.rivtabp21</extraarg>
                     <extraarg>-p</extraarg>
                     <extraarg>urn:riv:itintegration:registry:1=se.riv.itintegration.registry.v1</extraarg>
                     <extraarg>-p</extraarg>
-                    <extraarg>urn:riv:clinicalprocess:healthcond:1=se.riv.clinicalprocess.healthcond.v2</extraarg>
+                    <extraarg>urn:riv:ehr:patientsummary:2=se.riv.ehr.patientsummary.v2</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:ehr:patientsummary:enums:2=se.riv.ehr.enums.v2</extraarg>
                   </extraargs>
                 </wsdloption>
               </wsdlOptions>

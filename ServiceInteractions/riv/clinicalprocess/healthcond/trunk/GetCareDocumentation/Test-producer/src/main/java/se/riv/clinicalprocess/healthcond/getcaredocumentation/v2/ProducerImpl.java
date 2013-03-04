@@ -20,9 +20,11 @@
  */
 package se.riv.clinicalprocess.healthcond.getcaredocumentation.v2;
 
-import riv.ehr.patientsummary.getcaredocumentation._2.rivtabp21.GetCareDocumentationResponderInterface;
-import riv.ehr.patientsummary.getcaredocumentationresponder._2.GetCareDocumentationResponseType;
-import riv.ehr.patientsummary.getcaredocumentationresponder._2.GetCareDocumentationType;
+import se.riv.ehr.patientsummary.getcaredocumentation.v2.rivtabp21.GetCareDocumentationResponderInterface;
+import se.riv.ehr.patientsummary.getcaredocumentationresponder.v1.GetCareDocumentationResponseType;
+import se.riv.ehr.patientsummary.getcaredocumentationresponder.v1.GetCareDocumentationType;
+import se.riv.ehr.patientsummary.getcaredocumentationresponder.v1.ResultCodeType;
+import se.riv.ehr.patientsummary.getcaredocumentationresponder.v1.ResultType;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -30,14 +32,19 @@ import javax.jws.WebService;
 
 @WebService(
 		serviceName = "GetCareDocumentationResponderService",
-        endpointInterface= "se.riv.clinicalprocess.healthcond.getcaredocumentation.v2.rivtabp21.GetCareDocumentationResponderInterface",
+        endpointInterface= "se.riv.ehr.patientsummary.getcaredocumentation.v2.rivtabp21.GetCareDocumentationResponderInterface",
         portName = "GetCareDocumentationResponderPort",
-		targetNamespace = "urn:riv:clinicalprocess:healthcond:GetCareDocumentation:2:rivtabp21",
-		wsdlLocation = "schemas/interactions/GetCareDocumentationInteraction/GetCareDocumentationInteraction_2_RIVTABP21.wsdl")
+		targetNamespace = "urn:riv:ehr:patientsummary:GetCareDocumentation:2:rivtabp21",
+		wsdlLocation = "Schemas/schemas/interactions/GetCareDocumentationInteraction/GetCareDocumentationInteraction_2.0_RIVTABP21.wsdl")
 public class ProducerImpl implements GetCareDocumentationResponderInterface {
-	
+
     @Override
     public GetCareDocumentationResponseType getCareDocumentation(@WebParam(partName = "LogicalAddress", name = "LogicalAddress", targetNamespace = "urn:riv:itintegration:registry:1", header = true) String s, @WebParam(partName = "parameters", name = "GetCareDocumentation", targetNamespace = "urn:riv:ehr:patientsummary:GetCareDocumentationResponder:2") GetCareDocumentationType getCareDocumentationType) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        ResultType resultType = new ResultType();
+        resultType.setResultText("result");
+        resultType.setResultCode(ResultCodeType.OK);
+        GetCareDocumentationResponseType getCareDocumentationResponseType = new GetCareDocumentationResponseType();
+        getCareDocumentationResponseType.setResult(resultType);
+        return getCareDocumentationResponseType;
     }
 }

@@ -31,11 +31,10 @@
 	        http://cxf.apache.org/configuration/security  		       http://cxf.apache.org/schemas/configuration/security.xsd
             http://cxf.apache.org/transports/http/configuration        http://cxf.apache.org/schemas/configuration/http-conf.xsd
             http://cxf.apache.org/transports/http-jetty/configuration  http://cxf.apache.org/schemas/configuration/http-jetty.xsd
-            http://www.springframework.org/schema/context              http://www.springframework.org/schema/context/spring-context-2.5.xsd            
             http://www.springframework.org/schema/beans                http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<http:destination
-		name="{urn:riv:clinicalprocess:healthcond:GetCareDocumentation:2:rivtabp21}GetCareDocumentationResponderPort.http-destination">
+		name="{urn:riv:ehr:patientsummary:GetCareDocumentation:2:rivtabp21}GetCareDocumentationResponderPort.http-destination">
 	</http:destination>
 
 	<httpj:engine-factory>
@@ -43,11 +42,11 @@
 			<httpj:tlsServerParameters>
 				<sec:keyManagers keyPassword="password">
 					<sec:keyStore type="JKS" password="password"
-						file="../../certs/producer-localhost.jks" />
+						file="certs/producer-localhost.jks" />
 				</sec:keyManagers>
 				<sec:trustManagers>
 					<sec:keyStore type="JKS" password="password"
-						file="../../certs/truststore.jks" />
+						file="certs/truststore.jks" />
 				</sec:trustManagers>
 				<sec:cipherSuitesFilter>
 					<!--
