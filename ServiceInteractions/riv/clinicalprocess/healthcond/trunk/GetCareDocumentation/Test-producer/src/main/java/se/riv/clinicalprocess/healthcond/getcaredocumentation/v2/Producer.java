@@ -44,7 +44,7 @@ public class Producer {
         Endpoint.publish(address, implementor);
     }
 
-	public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
 		
         new Producer();
         System.out.println("Producer ready...");

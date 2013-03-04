@@ -34,10 +34,12 @@ import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 
-import riv.ehr.patientsummary.getcaredocumentation._2.rivtabp21.GetCareDocumentationResponderInterface;
-import riv.ehr.patientsummary.getcaredocumentation._2.rivtabp21.GetCareDocumentationResponderService;
-import riv.ehr.patientsummary.getcaredocumentationresponder._2.GetCareDocumentationResponseType;
-import riv.ehr.patientsummary.getcaredocumentationresponder._2.GetCareDocumentationType;
+import se.riv.ehr.patientsummary.getcaredocumentation.v2.rivtabp21.GetCareDocumentationResponderInterface;
+import se.riv.ehr.patientsummary.getcaredocumentation.v2.rivtabp21.GetCareDocumentationResponderService;
+import se.riv.ehr.patientsummary.getcaredocumentationresponder.v1.GetCareDocumentationResponseType;
+import se.riv.ehr.patientsummary.getcaredocumentationresponder.v1.GetCareDocumentationType;
+import se.riv.ehr.patientsummary.v2.DatePeriodType;
+import se.riv.ehr.patientsummary.v2.PatientIdType;
 
 public final class TestConsumer {
 
@@ -67,7 +69,7 @@ public final class TestConsumer {
 			// Get URL to wsdl file
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();
 			URL wsdlUrl = loader
-					.getResource("schemas/interactions/GetCareDocumentationInteraction/GetCareDocumentationInteraction_2_RIVTABP21.wsdl");
+					.getResource("Schemas/schemas/interactions/GetCareDocumentationInteraction/GetCareDocumentationInteraction_2.0_RIVTABP21.wsdl");
 
 
             GetCareDocumentationResponderService service = new GetCareDocumentationResponderService(wsdlUrl);
@@ -79,7 +81,16 @@ public final class TestConsumer {
 			provider.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceAddress);
 
             GetCareDocumentationType request = new GetCareDocumentationType();
-            //Todo: Fill request with dummy data
+            PatientIdType patientIdType = new PatientIdType();
+            patientIdType.setId("patientId");
+            patientIdType.setType("patientType");
+
+            request.setPatientId(patientIdType);
+
+            DatePeriodType datePeriodType = new DatePeriodType();
+            datePeriodType.setStart("2012-01-01");
+            datePeriodType.setEnd("2012-12-31");
+            request.setTimePeriod(datePeriodType);
 
 			Client client = ClientProxy.getClient(serviceInterface);
 			HTTPConduit http = (HTTPConduit) client.getConduit();
