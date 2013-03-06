@@ -19,14 +19,62 @@
  -->
 <xs:schema 
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    xmlns:tns="urn:riv:ehr:patientsummary:2" 
-    xmlns:codes="urn:riv:ehr:patientsummary:enums:2" 
-    targetNamespace="urn:riv:ehr:patientsummary:2" 
+    xmlns:tns="urn:riv:clinicalprocess:healthcond:description:2" 
+    xmlns:codes="urn:riv:clinicalprocess:healthcond:description:enums:2" 
+    targetNamespace="urn:riv:clinicalprocess:healthcond:description:2" 
     elementFormDefault="qualified" 
     attributeFormDefault="unqualified" 
     version="2.0">
 	
-    <xs:import schemaLocation="./ehr_patientsummary_enum_2.0.xsd" namespace="urn:riv:ehr:patientsummary:enums:2"/>
+    <xs:import schemaLocation="./clinicalprocess_healthcond_description_enum_2.0.xsd" namespace="urn:riv:clinicalprocess:healthcond:description:enums:2"/>
+
+  <xs:complexType name="CareDocumentationType">
+        <xs:sequence>
+            <xs:element name="careDocumentationHeader" type="tns:PatientSummaryHeaderType"/>
+            <xs:element name="careDocumentationBody" type="tns:CareDocumentationBodyType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="CareDocumentationBodyType">
+		<xs:annotation>
+			<xs:documentation>
+				clinicalDocumentNote: 
+					Dokument/anteckning
+				multimediaEntry:
+					Multimedia som finns i dokumentet, motsvaras av platshållare i careDocumentNoteText
+			</xs:documentation>
+		</xs:annotation>	
+		<xs:sequence>
+			<xs:element name="clinicalDocumentNote" type="tns:ClinicalDocumentNoteType"/>
+		    <xs:element name="multimediaEntry" type="tns:MultimediaType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+    <!-- @TODO better names for clinicalDocumentNoteCode -->
+    <xs:complexType name="ClinicalDocumentNoteType">
+        <xs:annotation>
+            <xs:documentation>
+                Dokument/anteckning
+
+                clinicalDocumentNoteCode: 
+                    Typ av vård- och omsorgsdokument. 
+                clinicalDocumentNoteTitle: 
+                    Titel på dokument
+                clinicalDocumentNoteText: 
+                    Själva dokumentet. 
+                    Formatet i textfältet ska följa HL7 CDA "Narrative Block". 
+                    Om dokumentet innehåller multimedia läggs en platshållare i texten enligt formatet <renderMultiMedia referencedObject="MM1"/>. 
+                    Innehåller dokumentet fler multimedia läggs ytterligare platshållare i texten, där referencesObject får namn "MM2", "MM3" osv
+            </xs:documentation>
+        </xs:annotation>
+
+        <xs:sequence>
+            <xs:element name="clinicalDocumentNoteCode" type="codes:ClinicalDocumentNoteCodeEnum"/>
+            <xs:element name="clinicalDocumentNoteTitle" type="xs:string" minOccurs="0"/>
+            <xs:element name="clinicalDocumentNoteText" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
 
     <xs:complexType name="PatientSummaryHeaderType">
         <xs:annotation>
@@ -35,6 +83,8 @@
                     Vårddokumentets unika identifierare.
                     OID kan sättas till 1.2.752.129.2.1.2.1 
                     (Icke-nationell identifierare Org+lokalt unikt id)
+				sourceSystem: 
+	                HSAid för det system som dokumentet är skapat i
                 documentTitle: 
                     Titel på dokumentet/anteckningen
                 documentTime: 
@@ -60,6 +110,7 @@
         </xs:annotation>
         <xs:sequence>
             <xs:element name="documentId" type="xs:string"/>
+			<xs:element name="sourceSystem" type="tns:HSAIdType" />
             <xs:element name="documentTitle" type="xs:string" minOccurs="0"/>
             <xs:element name="documentTime" type="tns:TimeStampType"/>
             <xs:element name="patientId" type="tns:PatientIdType"/>
@@ -99,9 +150,10 @@
 		    <xs:element name="authorHSAid" type="tns:HSAIdType"/>
 		    <xs:element name="authorRoleCode" type="xs:string" minOccurs="0"/>
 			<xs:element name="authorName" type="xs:string" minOccurs="0"/>
+		    <xs:element name="authorOrgUnitHSAid" type="tns:HSAIdType"/>
+		    <xs:element name="authorOrgUnitName" type="xs:string"/>
+		    <xs:element name="authorOrgUnitAddress" type="xs:string" minOccurs="0"/>		
 		    <xs:element name="careUnitHSAid" type="tns:HSAIdType"/>
-		    <xs:element name="careUnitName" type="xs:string" minOccurs="0"/>
-		    <xs:element name="careUnitAddress" type="xs:string" minOccurs="0"/>
 		    <xs:element name="careGiverHSAid" type="tns:HSAIdType"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -119,7 +171,7 @@
         </xs:annotation>
         <xs:sequence>
             <xs:element name="signatureTime" type="tns:TimeStampType"/>
-            <xs:element name="legalAuthenticatorHSAid" type="tns:HSAIdType" />
+            <xs:element name="legalAuthenticatorHSAid" type="tns:HSAIdType" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
 
