@@ -32,25 +32,25 @@
   <spring.version>3.1.1.RELEASE</spring.version>
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-	
+
   </properties>
 
   <!-- Modules to be created for each service -->
   <modules>
     <module>GetCareDocumentation</module>
   </modules>
-  
+
   <scm>
 		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/clinicalprocess/healthcond/trunk</connection>
 		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/clinicalprocess/healthcond/trunk</developerConnection>
 	</scm>
-	
+
 	<build>
 		<plugins>
 			  <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.2.1</version>
-            </plugin> 
+            </plugin>
             <!-- Use Java 1.6 for source and target files -->
   			<plugin>
   				<groupId>org.apache.maven.plugins</groupId>

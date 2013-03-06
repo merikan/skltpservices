@@ -28,7 +28,7 @@
 	<flow name="clinicalprocess-healthcond-description-GetCareDocumentation-virtualisering-2.0-flow" >
 
         <https:inbound-endpoint
-            address="https://${TP_HOST}:${TP_PORT}/${TP_BASE_URI}/GetCareDocumentation/2/rivtabp21"
+            address="https://${tp.host}:${tp.port}/${tp.baseUri}/GetCareDocumentation/2/rivtabp21"
             connector-ref="VPProducerConnector"
             exchange-pattern="request-response" 
             responseTransformer-refs="filterResponseHeaders">

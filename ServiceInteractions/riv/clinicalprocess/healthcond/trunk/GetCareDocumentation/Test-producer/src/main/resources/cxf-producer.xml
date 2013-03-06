@@ -34,7 +34,7 @@
             http://www.springframework.org/schema/beans                http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<http:destination
-		name="{urn:riv:ehr:patientsummary:GetCareDocumentation:2:rivtabp21}GetCareDocumentationResponderPort.http-destination">
+		name="{urn:riv:clinicalprocess:healthcond:description:GetCareDocumentation:2:rivtabp21}GetCareDocumentationResponderPort.http-destination">
 	</http:destination>
 
 	<httpj:engine-factory>
@@ -46,7 +46,7 @@
 				</sec:keyManagers>
 				<sec:trustManagers>
 					<sec:keyStore type="JKS" password="password"
-						file="certs/truststore.jks" />
+						file="certs/producer-truststore.jks" />
 				</sec:trustManagers>
 				<sec:cipherSuitesFilter>
 					<!--

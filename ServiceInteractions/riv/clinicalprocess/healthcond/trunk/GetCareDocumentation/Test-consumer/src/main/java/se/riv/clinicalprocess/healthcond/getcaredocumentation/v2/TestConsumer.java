@@ -35,12 +35,12 @@ import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 
-import se.riv.ehr.patientsummary.getcaredocumentation.v2.rivtabp21.GetCareDocumentationResponderInterface;
-import se.riv.ehr.patientsummary.getcaredocumentation.v2.rivtabp21.GetCareDocumentationResponderService;
-import se.riv.ehr.patientsummary.getcaredocumentationresponder.v1.GetCareDocumentationResponseType;
-import se.riv.ehr.patientsummary.getcaredocumentationresponder.v1.GetCareDocumentationType;
-import se.riv.ehr.patientsummary.v2.DatePeriodType;
-import se.riv.ehr.patientsummary.v2.PatientIdType;
+import se.riv.clinicalprocess.healthcond.description.getcaredocumentation.v2.rivtabp21.GetCareDocumentationResponderInterface;
+import se.riv.clinicalprocess.healthcond.description.getcaredocumentation.v2.rivtabp21.GetCareDocumentationResponderService;
+import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v1.GetCareDocumentationResponseType;
+import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v1.GetCareDocumentationType;
+import se.riv.clinicalprocess.healthcond.description.v2.DatePeriodType;
+import se.riv.clinicalprocess.healthcond.description.v2.PatientIdType;
 
 public final class TestConsumer {
 
@@ -83,14 +83,14 @@ public final class TestConsumer {
 
             GetCareDocumentationType request = new GetCareDocumentationType();
             PatientIdType patientIdType = new PatientIdType();
-            patientIdType.setId("patientId");
-            patientIdType.setType("patientType");
+            patientIdType.setId("1212121212");
+            patientIdType.setType("1.2.752.129.2.1.3.1");
 
             request.setPatientId(patientIdType);
 
             DatePeriodType datePeriodType = new DatePeriodType();
-            datePeriodType.setStart("2012-01-01");
-            datePeriodType.setEnd("2012-12-31");
+            datePeriodType.setStart("20130113");
+            datePeriodType.setEnd("20130213");
             request.setTimePeriod(datePeriodType);
 
 			Client client = ClientProxy.getClient(serviceInterface);
@@ -117,7 +117,7 @@ public final class TestConsumer {
 
 	private static TLSClientParameters setUpTlsClientParams() throws Exception {
         KeyStore trustStore = KeyStore.getInstance("JKS");
-		String trustStoreLoc = "certs/truststore.jks";
+		String trustStoreLoc = "certs/truststore-consumer.jks";
 		String trustPassword = "password";
 		trustStore.load(new FileInputStream(trustStoreLoc), trustPassword.toCharArray());
 
