@@ -20,6 +20,7 @@
  */
 package se.riv.clinicalprocess.healthcond.getcaredocumentation.v2;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
 import java.security.KeyStore;
@@ -49,7 +50,8 @@ public final class TestConsumer {
 
 	// private static String host = "192.168.25.40:20000/vp";
 
-	private static String host = "test1.esb.ntjp.se/vp";
+    //private static String host = "test1.esb.ntjp.se/vp";
+    private static String host = "localhost:20000/testproducer";
 
 	public static void main(String[] args) {
 
@@ -69,8 +71,7 @@ public final class TestConsumer {
 			// Get URL to wsdl file
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();
 			URL wsdlUrl = loader
-					.getResource("Schemas/schemas/interactions/GetCareDocumentationInteraction/GetCareDocumentationInteraction_2.0_RIVTABP21.wsdl");
-
+					.getResource("schemas/interactions/GetCareDocumentationInteraction/GetCareDocumentationInteraction_2.0_RIVTABP21.wsdl");
 
             GetCareDocumentationResponderService service = new GetCareDocumentationResponderService(wsdlUrl);
             GetCareDocumentationResponderInterface serviceInterface = service
@@ -115,15 +116,14 @@ public final class TestConsumer {
 	}
 
 	private static TLSClientParameters setUpTlsClientParams() throws Exception {
-
-		KeyStore trustStore = KeyStore.getInstance("JKS");
-		String trustStoreLoc = "../../certs/truststore_test.jks";
+        KeyStore trustStore = KeyStore.getInstance("JKS");
+		String trustStoreLoc = "certs/truststore.jks";
 		String trustPassword = "password";
 		trustStore.load(new FileInputStream(trustStoreLoc), trustPassword.toCharArray());
 
 		String keyPassword = "password";
-		KeyStore keyStore = KeyStore.getInstance("PKCS12");
-		String keyStoreLoc = "../../certs/consumer.p12";
+		KeyStore keyStore = KeyStore.getInstance("JKS");
+		String keyStoreLoc = "certs/consumer.jks";
 		keyStore.load(new FileInputStream(keyStoreLoc), keyPassword.toCharArray());
 
 		TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
