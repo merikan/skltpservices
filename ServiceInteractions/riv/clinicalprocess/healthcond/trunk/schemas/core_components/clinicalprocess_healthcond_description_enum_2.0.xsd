@@ -19,101 +19,13 @@
  -->
 <xs:schema 
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    xmlns:tns="urn:riv:ehr:patientsummary:enums:2" 
-    targetNamespace="urn:riv:ehr:patientsummary:enums:2" 
+    xmlns:tns="urn:riv:clinicalprocess:healthcond:description:enums:2" 
+    targetNamespace="urn:riv:clinicalprocess:healthcond:description:enums:2" 
     elementFormDefault="qualified" 
     attributeFormDefault="unqualified" 
     version="2.0">
 
-    <xs:simpleType name="CareContactCodeEnum">
-        <xs:restriction base="xs:int">
-            <xs:enumeration value="1">
-                <xs:annotation>
-                    <xs:documentation>Besök</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="2">
-                <xs:annotation>
-                    <xs:documentation>Telefon</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="3">
-                <xs:annotation>
-                    <xs:documentation>Vårdtillfälle</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="4">
-                <xs:annotation>
-                    <xs:documentation>Dagsjukvård</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="5">
-                <xs:annotation>
-                    <xs:documentation>Annan</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="CareContactStatusEnum">
-        <xs:restriction base="xs:int">
-            <xs:enumeration value="1">
-                <xs:annotation>
-                    <xs:documentation>initierad</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="2">
-                <xs:annotation>
-                    <xs:documentation>planerad (bevakad)</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="3">
-                <xs:annotation>
-                    <xs:documentation>tidbokad</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="4">
-                <xs:annotation>
-                    <xs:documentation>uppskjuten</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="5">
-                <xs:annotation>
-                    <xs:documentation>annullerad</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="6">
-                <xs:annotation>
-                    <xs:documentation>pågående</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="7">
-                <xs:annotation>
-                    <xs:documentation>avvakta</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="8">
-                <xs:annotation>
-                    <xs:documentation>avbruten</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="9">
-                <xs:annotation>
-                    <xs:documentation>avklarad</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="10">
-                <xs:annotation>
-                    <xs:documentation>inaktuell</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="11">
-                <xs:annotation>
-                    <xs:documentation>makulerad</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-        </xs:restriction>
-    </xs:simpleType>
+  
     
     <xs:simpleType name="ClinicalDocumentNoteCodeEnum">
         <xs:annotation>
@@ -228,21 +140,6 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="video/mpeg"/>
             <xs:enumeration value="video/x-avi"/>
-        </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="ReferralOutcomeTypeCodeEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="SS">
-                <xs:annotation>
-                    <xs:documentation>Slutsvar på remissfråga </xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="SR">
-                <xs:annotation>
-                    <xs:documentation>Svar på remissfråga</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
     
