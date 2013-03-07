@@ -19,11 +19,10 @@
 		http://www.mulesoft.org/schema/mule/jms     http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
 	">
 
-      <!--address="${GETSUBJECTOFCARE_TESTSTUB_INBOUND_URL}"-->
   <simple-service
       name="GetCareDocumentation-teststub-service"
-      address="https://localhost:21000/testproducer/GetCareDocumentation/2/rivtabp21"
-      component-class="se.riv.clinicalprocess.healthcond.description.getcaredocumentation.v2.ProducerImpl"
+      address="${GETCAREDOCUMENTATION_TESTSTUB_INBOUND_URL}"
+      component-class="se.riv.clinicalprocess.healthcond.getcaredocumentation.v2.ProducerImpl"
       type="jax-ws" />
 
 </mule>
