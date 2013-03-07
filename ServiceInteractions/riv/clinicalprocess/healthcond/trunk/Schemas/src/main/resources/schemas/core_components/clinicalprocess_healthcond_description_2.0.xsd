@@ -26,7 +26,7 @@
     attributeFormDefault="unqualified" 
     version="2.0">
 	
-    <xs:import schemaLocation="./clinicalprocess_healthcond_description_enum_2.0.xsd" namespace="urn:riv:clinicalprocess:healthcond:description:enums:2"/>
+    <xs:import schemaLocation="clinicalprocess_healthcond_description_enum_2.0.xsd" namespace="urn:riv:clinicalprocess:healthcond:description:enums:2"/>
 
   <xs:complexType name="CareDocumentationType">
         <xs:sequence>
