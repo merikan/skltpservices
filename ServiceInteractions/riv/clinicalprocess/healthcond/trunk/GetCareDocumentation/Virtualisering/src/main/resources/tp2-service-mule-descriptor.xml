@@ -38,7 +38,7 @@
             namespace="urn:riv:clinicalprocess:healthcond:description:GetCareDocumentation:2:rivtabp21"
             payload="envelope"
             service="GetCareDocumentationResponderService"
-            wsdlLocation="classpath:/schemas/interactions/GetCareDocumentationInteraction/GetCareDocumentationInteraction_2.0_RIVTABP21.wsdl" />
+            wsdlLocation="classpath:interactions/GetCareDocumentationInteraction/GetCareDocumentationInteraction_2.0_RIVTABP21.wsdl" />
 
         <flow-ref name="vagval-dynamic-routing-flow" />
     </flow>
