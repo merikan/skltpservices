@@ -8,26 +8,32 @@
 	License for more details. * * You should have received a copy of the GNU 
 	Lesser General Public * License along with this library; if not, write to 
 	the * Free Software Foundation, Inc., 59 Temple Place, Suite 330, * Boston, 
-	MA 02111-1307 USA --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-    	<artifactId>clinicalprocess-healthcond</artifactId>
-    	<groupId>se.skl.skltpservices.clinicalprocess.healthcond</groupId>
-    	<version>1.0-SNAPSHOT</version>
-  	</parent>
+	MA 02111-1307 USA -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>se.skl.skltpservices.clinicalprocess.healthcond</groupId>
+    <artifactId>clinicalprocess-healthcond</artifactId>
+    <version>2.0.RC1-SNAPSHOT</version>
+  </parent>
 
-	<groupId>se.skl.skltpservices.clinicalprocess.healthcond.description</groupId>
-	<artifactId>GetCareDocumentation</artifactId>
-	<packaging>pom</packaging>
-	<name>GetCareDocumentation service</name>
+  <groupId>se.skl.skltpservices.clinicalprocess.healthcond.description</groupId>
+  <artifactId>GetCareDocumentation</artifactId>
+  <packaging>pom</packaging>
+  <name>GetCareDocumentation service</name>
 
-	<properties>
-		<osorCertDirectory>http://skltpservices.googlecode.com/svn/ServiceInteractions/certs/</osorCertDirectory>
-		<osorSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/clinicalprocess/healthcond/trunk/schemas/interactions/GetCareDocumentationInteraction</osorSchemaDirectoryUrl>
-		<osorCoreSchemaDirectoryUrl>http://rivta.googlecode.com/svn/ServiceInteractions/riv/clinicalprocess/healthcond/trunk/schemas/core_components</osorCoreSchemaDirectoryUrl>
-	</properties>
+  <properties>
+    <osorCertDirectory>http://skltpservices.googlecode.com/svn/ServiceInteractions/certs/</osorCertDirectory>
+    <osorSchemaDirectoryUrl>
+      http://rivta.googlecode.com/svn/ServiceInteractions/riv/clinicalprocess/healthcond/trunk/schemas/interactions/GetCareDocumentationInteraction
+    </osorSchemaDirectoryUrl>
+    <osorCoreSchemaDirectoryUrl>
+      http://rivta.googlecode.com/svn/ServiceInteractions/riv/clinicalprocess/healthcond/trunk/schemas/core_components
+    </osorCoreSchemaDirectoryUrl>
+  </properties>
 
-	<!-- Modules to be created for each service -->
+  <!-- Modules to be created for each service -->
 
   <modules>
     <module>Virtualisering</module>

@@ -22,8 +22,8 @@ package se.riv.clinicalprocess.healthcond.getcaredocumentation.v2;
 
 import se.riv.clinicalprocess.healthcond.description.enums.v2.ClinicalDocumentNoteCodeEnum;
 import se.riv.clinicalprocess.healthcond.description.getcaredocumentation.v2.rivtabp21.GetCareDocumentationResponderInterface;
-import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v1.GetCareDocumentationResponseType;
-import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v1.GetCareDocumentationType;
+import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v2.GetCareDocumentationResponseType;
+import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v2.GetCareDocumentationType;
 import se.riv.clinicalprocess.healthcond.description.v2.*;
 
 import javax.jws.WebParam;
@@ -36,7 +36,7 @@ import java.util.List;
         endpointInterface= "se.riv.clinicalprocess.healthcond.description.getcaredocumentation.v2.rivtabp21.GetCareDocumentationResponderInterface",
         portName = "GetCareDocumentationResponderPort",
 		targetNamespace = "urn:riv:clinicalprocess:healthcond:description:GetCareDocumentation:2:rivtabp21",
-		wsdlLocation = "schemas/interactions/GetCareDocumentationInteraction/GetCareDocumentationInteraction_2.0_RIVTABP21.wsdl")
+		wsdlLocation = "interactions/GetCareDocumentationInteraction/GetCareDocumentationInteraction_2.0_RIVTABP21.wsdl")
 public class ProducerImpl implements GetCareDocumentationResponderInterface {
 
     @Override
@@ -99,4 +99,5 @@ public class ProducerImpl implements GetCareDocumentationResponderInterface {
 
         return responseType;
     }
+
 }
