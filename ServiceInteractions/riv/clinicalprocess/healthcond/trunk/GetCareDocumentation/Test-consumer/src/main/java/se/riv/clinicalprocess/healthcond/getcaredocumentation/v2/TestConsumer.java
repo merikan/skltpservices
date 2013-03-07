@@ -37,8 +37,8 @@ import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 
 import se.riv.clinicalprocess.healthcond.description.getcaredocumentation.v2.rivtabp21.GetCareDocumentationResponderInterface;
 import se.riv.clinicalprocess.healthcond.description.getcaredocumentation.v2.rivtabp21.GetCareDocumentationResponderService;
-import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v1.GetCareDocumentationResponseType;
-import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v1.GetCareDocumentationType;
+import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v2.GetCareDocumentationResponseType;
+import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v2.GetCareDocumentationType;
 import se.riv.clinicalprocess.healthcond.description.v2.DatePeriodType;
 import se.riv.clinicalprocess.healthcond.description.v2.PatientIdType;
 
