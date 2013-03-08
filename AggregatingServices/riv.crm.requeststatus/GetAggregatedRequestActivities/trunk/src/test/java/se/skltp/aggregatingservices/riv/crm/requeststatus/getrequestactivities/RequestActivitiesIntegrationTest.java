@@ -44,8 +44,9 @@ public class RequestActivitiesIntegrationTest extends AbstractAggregateIntegrati
 		return 
 			"soitoolkit-mule-jms-connector-activemq-embedded.xml," + 
 	  		"GetAggregatedRequestActivities-common.xml," +
-			"aggregating-services-common.xml," + 
-	        "aggregating-service.xml," +
+//          Only load GetAggregatedRequestActivities-common.xml, it will import the other config files since mule-deploy.properties can't load config-files from jar-files on the classpath, e.g. agp-core.jar
+//			"aggregating-services-common.xml," + 
+//	        "aggregating-service.xml," +
 			"teststub-services/engagemangsindex-teststub-service.xml," + 
 			"teststub-services/service-producer-teststub-service.xml";
     }
