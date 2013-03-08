@@ -20,6 +20,12 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
 		this.eiServiceDomain = eiServiceDomain;
 	}
 
+	@SuppressWarnings("unused")
+	private String eiCategorization;
+	public void setEiCategorization(String eiCategorization) {
+		this.eiCategorization = eiCategorization;
+	}
+
 	/**
 	 * Transformerar GetRequestActivities request till EI FindContent request enligt:
 	 * 
