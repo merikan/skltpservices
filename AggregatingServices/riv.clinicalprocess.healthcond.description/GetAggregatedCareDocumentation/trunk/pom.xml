@@ -373,6 +373,7 @@
               <projectFile>src/test/resources/GetCareDocumentation-soapui-project.xml</projectFile>
               <host>${hostname}</host>
               <outputFolder>target</outputFolder>
+              <settingsFile>${settingsFile}</settingsFile>
             </configuration>
           </plugin>
         </plugins>
