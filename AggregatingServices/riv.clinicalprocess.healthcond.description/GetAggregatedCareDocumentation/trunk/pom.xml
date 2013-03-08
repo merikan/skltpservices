@@ -28,6 +28,13 @@
     <cxf.version>2.5.1</cxf.version>
   </properties>
 
+  <pluginRepositories>
+    <pluginRepository>
+      <id>eviwarePluginRepository</id>
+      <url>http://www.eviware.com/repository/maven2/</url>
+    </pluginRepository>
+  </pluginRepositories>
+    
   <scm>
     <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
     <connection>scm:svn:https://my-subversion-server/svn/GetAggregatedCareDocumentation/trunk</connection>
