@@ -1,4 +1,4 @@
-package se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities;
+package se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.integrationtest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities;
+package se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.integrationtest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import se.riv.crm.requeststatus.getrequestactivitiesresponder.v1.GetRequestActivitiesResponseType;
 import se.riv.crm.requeststatus.v1.RequestActivityType;
+import se.skltp.aggregatingservices.riv.crm.requeststatus.RequestActivitiesMuleServer;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusRecordType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 import se.skltp.agp.test.consumer.AbstractAggregateIntegrationTest;

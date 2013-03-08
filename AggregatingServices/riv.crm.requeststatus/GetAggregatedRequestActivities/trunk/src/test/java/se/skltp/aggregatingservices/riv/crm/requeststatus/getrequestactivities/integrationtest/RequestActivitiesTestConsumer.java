@@ -1,4 +1,4 @@
-package se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities;
+package se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.integrationtest;
 
 import static se.skltp.agp.test.producer.TestProducerDb.TEST_RR_ID_ONE_HIT;
 
@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import se.riv.crm.requeststatus.getrequestactivities.v1.rivtabp21.GetRequestActivitiesResponderInterface;
 import se.riv.crm.requeststatus.getrequestactivitiesresponder.v1.GetRequestActivitiesResponseType;
 import se.riv.crm.requeststatus.getrequestactivitiesresponder.v1.GetRequestActivitiesType;
+import se.skltp.aggregatingservices.riv.crm.requeststatus.RequestActivitiesMuleServer;
 import se.skltp.agp.test.consumer.AbstractTestConsumer;
 import se.skltp.agp.test.consumer.SoapHeaderCxfInterceptor;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
