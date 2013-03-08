@@ -368,7 +368,7 @@
           <plugin>
             <groupId>eviware</groupId>
             <artifactId>maven-soapui-plugin</artifactId>
-            <version>4.0.0</version>
+            <version>4.5.1</version>
             <configuration>
               <projectFile>src/test/resources/GetCareDocumentation-soapui-project.xml</projectFile>
               <host>${hostname}</host>
