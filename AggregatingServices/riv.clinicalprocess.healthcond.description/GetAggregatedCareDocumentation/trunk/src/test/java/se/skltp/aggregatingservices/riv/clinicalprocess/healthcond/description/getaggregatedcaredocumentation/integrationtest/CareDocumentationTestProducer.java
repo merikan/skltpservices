@@ -1,4 +1,4 @@
-package se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description.getaggregatedcaredocumentation;
+package se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description.getaggregatedcaredocumentation.integrationtest;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;

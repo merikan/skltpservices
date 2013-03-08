@@ -4,9 +4,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,7 +62,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
         System.err.println("Got " +  inEngagements.size() + " hits in the engagement index");
         log.info("Got {} hits in the engagement index", inEngagements.size());
 
-        Map<String, List<String>> sourceSystem_pdlUnitList_map = new HashMap<String, List<String>>();
+        Map<String, Set<String>> sourceSystem_pdlUnitList_map = new HashMap<String, Set<String>>();
 
         for (EngagementType inEng : inEngagements) {
 
@@ -79,10 +81,11 @@ public class RequestListFactoryImpl implements RequestListFactory {
         // each payload built up as an object-array according to the JAX-WS signature for the method in the service interface
         List<Object[]> reqList = new ArrayList<Object[]>();
 
-        for (Entry<String, List<String>> entry : sourceSystem_pdlUnitList_map.entrySet()) {
+        for (Entry<String, Set<String>> entry : sourceSystem_pdlUnitList_map.entrySet()) {
 
             String sourceSystem = entry.getKey();
-            List<String> careUnitList = entry.getValue();
+            List<String> careUnitList = new ArrayList<String>(entry.getValue().size());
+            careUnitList.addAll(entry.getValue());
 
             System.err.println("Calling source system using logical address " + sourceSystem + " for subject of care id: " + originalRequest.getPatientId().getId());
             if (log.isInfoEnabled()) log.info("Calling source system using logical address {} for subject of care id {}", sourceSystem, originalRequest.getPatientId().getId());
@@ -102,7 +105,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
         return reqList;
     }
 
-    Date parseTs(String ts) {
+    protected Date parseTs(String ts) {
         try {
             if (ts == null || ts.length() == 0) {
                 return null;
@@ -114,7 +117,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
         }
     }
 
-    boolean isBetween(Date from, Date to, String tsStr) {
+    protected boolean isBetween(Date from, Date to, String tsStr) {
         try {
             System.err.println("Is " + tsStr + " between " + from + " and " + to);
             Date ts = df.parse(tsStr);
@@ -126,7 +129,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
         }
     }
 
-    boolean isPartOf(List<String> careUnitIdList, String careUnit) {
+    protected boolean isPartOf(List<String> careUnitIdList, String careUnit) {
 
         System.err.println("Check presence of " + careUnit + " in " + careUnitIdList);
 
@@ -135,12 +138,12 @@ public class RequestListFactoryImpl implements RequestListFactory {
         return careUnitIdList.contains(careUnit);
     }
 
-    void addPdlUnitToSourceSystem(Map<String, List<String>> sourceSystem_pdlUnitList_map, String sourceSystem, String pdlUnitId) {
-        List<String> careUnitList = sourceSystem_pdlUnitList_map.get(sourceSystem);
+    protected void addPdlUnitToSourceSystem(Map<String, Set<String>> sourceSystem_pdlUnitList_map, String sourceSystem, String pdlUnitId) {
+        Set<String> careUnitList = sourceSystem_pdlUnitList_map.get(sourceSystem);
         if (careUnitList == null) {
-            careUnitList = new ArrayList<String>();
+            careUnitList = new HashSet<String>();
             sourceSystem_pdlUnitList_map.put(sourceSystem, careUnitList);
-        }
+        } 
         careUnitList.add(pdlUnitId);
     }
 }
