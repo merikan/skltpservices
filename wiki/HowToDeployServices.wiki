@@ -14,9 +14,9 @@ Turn off any alarms that will trigger emails and warnings because any of the pro
 ==Deploy Steps VP 1.3.x==
   # Download jar/zip file/s containing services from [http://code.google.com/p/skltpservices/downloads/list downloads]
   # If download is a zip, unzip all the containing jars
-  # Copy jar files to *`/$VP_HOME/vp/services/`* directory
-  # Restart server (one node at the time in QA and Prod) according to TP 1.3.x instructions. Tail the log file: tail -555f `/<mule_home>/logs/vp.log` at the same time.
-  # Verify no error occurred during startup in logs, `/<mule_home>/logs/vp.log`
+  # Copy jar files to *`$VP_HOME/vp/services/`* directory
+  # Restart server (one node at the time in QA and Prod) according to TP 1.3.x instructions. Tail the log file: tail -555f `$MULE_HOME/logs/vp.log` at the same time.
+  # Verify no error occurred during startup in logs, `$MULE_HOME/logs/vp.log`
 
 ==Deploy Steps VP 2.x==
   # Download jar/zip file/s containing services from [http://code.google.com/p/skltpservices/downloads/list downloads]
