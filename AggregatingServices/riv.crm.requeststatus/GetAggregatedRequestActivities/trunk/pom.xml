@@ -34,25 +34,11 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     
     <scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->		
-        <connection>scm:svn:https://my-subversion-server/svn/GetAggregatedRequestActivities/trunk</connection>
-        <developerConnection>scm:svn:https://my-subversion-server/svn/GetAggregatedRequestActivities/trunk</developerConnection>
-        <url>https://my-subversion-server/svn/GetAggregatedRequestActivities/trunk</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities/trunk</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities/trunk</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities/trunk</url>
     </scm>
     
-    <distributionManagement>
-        <!-- TODO: Sample <distributionManagement>-tag, update to reflect you own environment! -->
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>Snapshot Repository</name>
-            <url>http://my-maven-repo-server/repositories/snapshots</url>
-        </snapshotRepository>  
-        <repository>
-            <id>releases</id>
-            <name>Release Repository</name>
-            <url>http://my-maven-repo-server/repositories/releases</url>
-        </repository>
-    </distributionManagement>
-
 	<dependencies>	
 
         <dependency>
