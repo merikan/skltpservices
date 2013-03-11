@@ -6,22 +6,19 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 [soi-toolkit.gen.createDate=2012-09-25T00:17:12.888+02:00]
 [soi-toolkit.gen.artifactId=GetAggregatedSubjectOfCareSchedule]
 -->
-<project 
-	xmlns="http://maven.apache.org/POM/4.0.0" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.soitoolkit.commons.poms</groupId>
         <artifactId>soitoolkit-default-parent</artifactId>
-        <version>0.6.1-SNAPSHOT</version>
+        <version>0.6.1-M1</version>
     </parent>
     
     <groupId>se.skltp.aggregatingservices.crm.scheduling</groupId>
     <artifactId>GetAggregatedSubjectOfCareSchedule-teststub</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-RC2</version>
     <packaging>mule</packaging>
     <name>GetAggregatedSubjectOfCareSchedule-teststub</name>
 
@@ -31,9 +28,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
     <scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.scheduling/GetAggregatedSubjectOfCareSchedule-teststub/trunk</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.scheduling/GetAggregatedSubjectOfCareSchedule-teststub/trunk</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.scheduling/GetAggregatedSubjectOfCareSchedule-teststub/trunk</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.scheduling/GetAggregatedSubjectOfCareSchedule-teststub/tags/GetAggregatedSubjectOfCareSchedule-teststub-1.0.0-RC2</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.scheduling/GetAggregatedSubjectOfCareSchedule-teststub/tags/GetAggregatedSubjectOfCareSchedule-teststub-1.0.0-RC2</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.scheduling/GetAggregatedSubjectOfCareSchedule-teststub/tags/GetAggregatedSubjectOfCareSchedule-teststub-1.0.0-RC2</url>
     </scm>
     
 	<dependencies>
@@ -41,13 +38,13 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <dependency>
     	<groupId>se.skltp.aggregatingservices.crm.scheduling</groupId>
     	<artifactId>GetAggregatedSubjectOfCareSchedule</artifactId>
-    	<version>1.0.0-SNAPSHOT</version>
+    	<version>1.0.0-RC2</version>
     	<type>test-jar</type>
     </dependency>
     <dependency>
     	<groupId>se.skltp.aggregatingservices.crm.scheduling</groupId>
     	<artifactId>GetAggregatedSubjectOfCareSchedule</artifactId>
-    	<version>1.0.0-SNAPSHOT</version>
+    	<version>1.0.0-RC2</version>
     	<classifier>core</classifier>    	
     </dependency>
         <dependency>
