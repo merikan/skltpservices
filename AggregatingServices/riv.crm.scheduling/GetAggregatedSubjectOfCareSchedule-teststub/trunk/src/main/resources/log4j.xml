@@ -64,7 +64,7 @@
 		<level value="INFO" />
 	</logger>
 	
-	<logger name="se.skl.tp.aggregatingservices.crm.scheduling.getaggregatedsubjectofcareschedule">
+	<logger name="se.skltp.aggregatingservices.crm.scheduling.getaggregatedsubjectofcareschedule">
 		<level value="INFO" />
 	</logger>
 

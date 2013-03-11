@@ -1,4 +1,4 @@
-package se.skl.tp.aggregatingservices.crm.scheduling.getaggregatedsubjectofcareschedule;
+package se.skltp.aggregatingservices.crm.scheduling.getaggregatedsubjectofcareschedule;
 
  
 import org.slf4j.Logger;
