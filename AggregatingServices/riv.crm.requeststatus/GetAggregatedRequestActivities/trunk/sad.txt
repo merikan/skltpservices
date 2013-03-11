@@ -1,12 +1,12 @@
-0. enligt sad för agp
+0. enligt sad f√∂r agp
 
-1. systemadressergin och dess konsevvkenser
+1. systemadressering och dess konsekvenser
 
-2. många pda-enheter per källsystem, samla pd-enheter per system från EI i anropet till producent system
+2. m√•nga pdl-enheter per k√§llsystem, samla pdl-enheter per system fr√•n EI i anropet till producent system
 
 3. orginal sender id hateirng
 
-4. sökning i tjäsnteproducenter filtreras dels av sökning i EI men oxå genom följande filtrering...
+4. s√∂kning i tj√§snteproducenter filtreras dels av s√∂kning i EI men ox√• genom f√∂ljande filtrering...
 
 
-TESTER + LOGGNING av ovanstående!!!
+TESTER + LOGGNING av ovanst√•ende!!!
