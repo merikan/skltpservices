@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="GetAggregatedSubjectOfCareSchedule-teststub-config">
+    <global-element type="http://www.springframework.org/schema/beans/import" name="Import" entity-id="Import#1">
+        <properties>
+            <property value="classpath:GetAggregatedSubjectOfCareSchedule-common.xml" name="resource"/>
+            <property value="2" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;wrapIn"/>
+            <property value="2" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;wrapIn"/>
+            <property value="2" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;wrapIn"/>
+        </properties>
+    </global-element>
+    <global-element type="http://www.springframework.org/schema/beans/import" name="Import" entity-id="Import#2">
+        <properties>
+            <property value="classpath:aggregating-services-common.xml" name="resource"/>
+            <property value="3" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;wrapIn"/>
+            <property value="3" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;wrapIn"/>
+            <property value="3" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;wrapIn"/>
+        </properties>
+    </global-element>
+    <global-element type="http://www.springframework.org/schema/beans/import" name="Import" entity-id="Import#3">
+        <properties>
+            <property value="classpath:teststub-services/*-teststub-service.xml" name="resource"/>
+            <property value="4" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;wrapIn"/>
+            <property value="4" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;wrapIn"/>
+            <property value="4" name="auxiliary;index"/>
+            <property value="1" name="auxiliary;wrapIn"/>
+        </properties>
+    </global-element>
+</mule-configuration>
