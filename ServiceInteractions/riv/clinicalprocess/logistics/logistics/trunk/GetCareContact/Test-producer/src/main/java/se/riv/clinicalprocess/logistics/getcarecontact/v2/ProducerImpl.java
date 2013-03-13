@@ -39,11 +39,11 @@ import se.riv.clinicalprocess.logistics.v2.PatientSummaryHeaderType;
 
 
 @WebService(
-		serviceName = "GetCareDocumentationResponderService",
-        endpointInterface= "se.riv.clinicalprocess.healthcond.description.getcaredocumentation.v2.rivtabp21.GetCareDocumentationResponderInterface",
-        portName = "GetCareDocumentationResponderPort",
-		targetNamespace = "urn:riv:clinicalprocess:healthcond:description:GetCareDocumentation:2:rivtabp21",
-		wsdlLocation = "interactions/GetCareDocumentationInteraction/GetCareDocumentationInteraction_2.0_RIVTABP21.wsdl")
+		serviceName = "GetCareContactResponderService",
+        endpointInterface= "se.riv.clinicalprocess.logistics.logistics.getcarecontact.v2.rivtabp21.GetCareContactResponderInterface",
+        portName = "GetCareContactResponderPort",
+		targetNamespace = "urn:riv:clinicalprocess:logistics:logistics:GetCareContact:2:rivtabp21",
+		wsdlLocation = "interactions/GetCareContactInteraction/GetCareContactInteraction_2.0_RIVTABP21.wsdl")
 public class ProducerImpl implements GetCareContactResponderInterface {
 
     @Override
