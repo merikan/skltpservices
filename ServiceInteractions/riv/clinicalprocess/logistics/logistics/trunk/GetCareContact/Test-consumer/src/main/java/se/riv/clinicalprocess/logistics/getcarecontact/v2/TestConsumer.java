@@ -106,7 +106,7 @@ public final class TestConsumer {
 
             GetCareContactResponseType response = serviceInterface.getCareContact(LOGICAL_ADDRESS, request);
 
-			return ("GetCareDocumentation response=" + response.getCareContact());
+			return ("GetCareContact response=" + response.getCareContact());
 
 		} catch (Throwable ex) {
 			System.out.println("Exception={}" + ex.getMessage());
