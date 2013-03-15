@@ -58,7 +58,6 @@ Script is based on the [http://rivta.googlecode.com/svn/wiki/specs/RIV_Tekniska_
                 schemas
                   core_components
                   interactions 
-                tp-virtuell-tjanst-config.xml
                 tp2-service-mule-descriptor.xml
   GetUpdates
   ProcessNotification
@@ -75,6 +74,8 @@ Script is based on the [http://rivta.googlecode.com/svn/wiki/specs/RIV_Tekniska_
 ===Script hangs on mvn archetype:generate ===
 
 Run the mvn archetype:generate command manually to download dependencies needed by the script. When dependencies are downloaded try running the script again.
+
+*Using 1.1*
 
 {{{
 mvn archetype:generate 
@@ -93,4 +94,26 @@ mvn archetype:generate
 		-DserviceRelativePath=FindContent/1/rivtabp21 
 		-DserviceWsdlFile=FindContentInteraction_1.0_RIVTABP21.wsdl 
 		-DserviceNamespace=urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21
+}}}
+
+*Using 1.2-SNAPSHOT*
+
+{{{
+mvn archetype:generate
+		-DinteractiveMode=false
+		-DarchetypeArtifactId=service-archetype
+		-DarchetypeGroupId=se.skl.tp.archetype
+		-DarchetypeVersion=1.2-SNAPSHOT
+		-Duser.dir=.
+		-DgroupId=se.skl.skltpservices.crm.scheduling
+		-DartifactId=GetSubjectOfCareSchedule
+		-Dversion=1.1
+		-DvirtualiseringArtifactId=crm-scheduling-GetSubjectOfCareSchedule-virtualisering
+		-DhttpsEndpointAdress=https://${TP_HOST}:${TP_PORT}/${TP_BASE_URI}/crm/scheduling/GetSubjectOfCareSchedule/1/rivtabp21
+		-DhttpEndpointAdress=http://${TP_HOST}:${TP_PORT_HTTP}/${TP_BASE_URI}/crm/scheduling/GetSubjectOfCareSchedule/1/rivtabp21
+		-DflowName=crm-scheduling-GetSubjectOfCareScheduleInteraction-virtualisering-flow
+		-DfeatureKeepalive=${feature.keepalive.urn.riv.crm.scheduling.GetSubjectOfCareScheduleResponder.1:${feature.keepalive}}
+		-DserviceMethod=GetSubjectOfCareSchedule
+		-DserviceWsdlFileDir=classpath:/schemas/interactions/GetSubjectOfCareScheduleInteraction/GetSubjectOfCareScheduleInteraction_1.1_RIVTABP21.wsdl
+		-DserviceNamespace=urn:riv:crm:scheduling:GetSubjectOfCareSchedule:1:rivtabp21
 }}}
