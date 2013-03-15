@@ -14,9 +14,9 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>${groupId}</groupId>
-	<artifactId>${domainName}-${domainSubNameFlow}-${parentArtifactId}-virtualisering</artifactId>
+	<artifactId>${virtualiseringArtifactId}</artifactId>
 	<version>${version}</version>
-	<name>${parentArtifactId} service virtualisering</name>
+	<name>${virtualiseringArtifactId}</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>

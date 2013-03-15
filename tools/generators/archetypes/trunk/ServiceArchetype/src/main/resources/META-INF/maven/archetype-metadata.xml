@@ -6,27 +6,19 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<requiredProperties>
-		<requiredProperty key="domainName" />
-		<requiredProperty key="domainSubName" />
-		<requiredProperty key="domainSubNameAdress" />
-		<requiredProperty key="domainSubNameFlow" />
+		<requiredProperty key="httpsEndpointAdress" />
+		<requiredProperty key="httpEndpointAdress" />
+		<requiredProperty key="flowName" />
+		<requiredProperty key="virtualiseringArtifactId" />
+		<requiredProperty key="featureKeepalive" />
 		<requiredProperty key="serviceMethod">
 			<defaultValue>${artifactId}</defaultValue>
 		</requiredProperty>
 		<requiredProperty key="serviceWsdlFileDir">
 			<defaultValue>${serviceWsdlFileDir}</defaultValue>
 		</requiredProperty>
-		<requiredProperty key="serviceInteraction">
-			<defaultValue>${serviceMethod}Interaction</defaultValue>
-		</requiredProperty>
-		<requiredProperty key="serviceRelativePath">
-			<defaultValue>${serviceMethod}/1/rivtabp20</defaultValue>
-		</requiredProperty>
-		<requiredProperty key="serviceWsdlFile">
-			<defaultValue>${serviceInteraction}_1.0_rivtabp20.wsdl</defaultValue>
-		</requiredProperty>
 		<requiredProperty key="serviceNamespace">
-			<defaultValue>urn:riv:${domainName}:${domainSubName}:${serviceMethod}:1:rivtabp20</defaultValue>
+			<defaultValue>${serviceNamespace}</defaultValue>
 		</requiredProperty>
 	</requiredProperties>
 
@@ -36,7 +28,6 @@
 				<fileSet filtered="true" encoding="UTF-8">
 					<directory>src/main/resources</directory>
 					<includes>
-						<include>tp-virtuell-tjanst-config.xml</include>
 						<include>tp2-service-mule-descriptor.xml</include>
 					</includes>
 				</fileSet>
