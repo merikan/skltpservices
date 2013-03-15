@@ -97,9 +97,10 @@ mvn archetype:generate
 }}}
 
 *Använda 1.2-SNAPSHOT*
-*  Lägger till en http och https ändpunkt
-*  Lägger till möjligheten att styra via keep-alive via feature
-* Ändpunkternas adress innehåller nu även domän och subdomän
+
+ *  Lägger till en http och https ändpunkt
+ *  Lägger till möjligheten att styra via keep-alive via feature
+ * Ändpunkternas adress innehåller nu även domän och subdomän
 
 {{{
 mvn archetype:generate
