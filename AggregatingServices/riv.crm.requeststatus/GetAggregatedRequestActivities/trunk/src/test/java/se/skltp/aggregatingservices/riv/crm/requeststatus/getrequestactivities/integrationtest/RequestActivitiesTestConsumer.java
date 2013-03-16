@@ -23,7 +23,7 @@ public class RequestActivitiesTestConsumer extends AbstractTestConsumer<GetReque
 		String serviceAddress = RequestActivitiesMuleServer.getAddress("SERVICE_INBOUND_URL");
 		String personnummer = TEST_RR_ID_ONE_HIT;
 
-		RequestActivitiesTestConsumer consumer = new RequestActivitiesTestConsumer(serviceAddress);
+		RequestActivitiesTestConsumer consumer = new RequestActivitiesTestConsumer(serviceAddress, SAMPLE_ORIGINAL_CONSUMER_HSAID);
 		Holder<GetRequestActivitiesResponseType> responseHolder = new Holder<GetRequestActivitiesResponseType>();
 		Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
 
@@ -31,10 +31,10 @@ public class RequestActivitiesTestConsumer extends AbstractTestConsumer<GetReque
 		log.info("Returned #timeslots = " + responseHolder.value.getRequestActivity().size());
 	}
 
-	public RequestActivitiesTestConsumer(String serviceAddress) {
+	public RequestActivitiesTestConsumer(String serviceAddress, String originalConsumerHsaId) {
 	    
 		// Setup a web service proxy for communication using HTTPS with Mutual Authentication
-		super(GetRequestActivitiesResponderInterface.class, serviceAddress);
+		super(GetRequestActivitiesResponderInterface.class, serviceAddress, originalConsumerHsaId);
 	}
 
 	public void callService(String logicalAddress, String registeredResidentId, Holder<ProcessingStatusType> processingStatusHolder, Holder<GetRequestActivitiesResponseType> responseHolder) {

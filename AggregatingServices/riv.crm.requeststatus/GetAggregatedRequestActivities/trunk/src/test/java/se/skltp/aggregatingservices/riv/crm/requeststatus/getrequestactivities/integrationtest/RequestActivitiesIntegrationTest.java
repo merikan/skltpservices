@@ -30,6 +30,7 @@ import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusRecordType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 import se.skltp.agp.test.consumer.AbstractAggregateIntegrationTest;
 import se.skltp.agp.test.consumer.ExpectedTestData;
+import se.skltp.agp.test.producer.TestProducerLogger;
 
 public class RequestActivitiesIntegrationTest extends AbstractAggregateIntegrationTest {
 
@@ -112,7 +113,7 @@ public class RequestActivitiesIntegrationTest extends AbstractAggregateIntegrati
 	private List<ProcessingStatusRecordType> doTest(String registeredResidentId, int expectedProcessingStatusSize, ExpectedTestData... testData) {
 
 		// Setup and perform the call to the web service
-		RequestActivitiesTestConsumer consumer = new RequestActivitiesTestConsumer(DEFAULT_SERVICE_ADDRESS);
+		RequestActivitiesTestConsumer consumer = new RequestActivitiesTestConsumer(DEFAULT_SERVICE_ADDRESS, RequestActivitiesTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID);
 		Holder<GetRequestActivitiesResponseType> responseHolder = new Holder<GetRequestActivitiesResponseType>();
 		Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
     	consumer.callService(LOGICAL_ADDRESS, registeredResidentId, processingStatusHolder, responseHolder);
@@ -133,6 +134,12 @@ public class RequestActivitiesIntegrationTest extends AbstractAggregateIntegrati
 		ProcessingStatusType statusList = processingStatusHolder.value;
 		assertEquals(expectedProcessingStatusSize, statusList.getProcessingStatusList().size());
 		
+		// Verify that correct "x-rivta-original-serviceconsumer-hsaid" http header was passed to the service producer,
+		// given that a service producer was called
+		if (expectedProcessingStatusSize > 0) {
+			assertEquals(RequestActivitiesTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID, TestProducerLogger.getLastOriginalConsumer());
+		}
+
 		return statusList.getProcessingStatusList();
 	}
 
