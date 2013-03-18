@@ -41,7 +41,7 @@
             	exchange-pattern="request-response" 
             	responseTransformer-refs="featureKeepAliveResponse filterResponseHeaders">
             	<properties>
-        			<spring:entry key="featureUseKeepAlive" value="${featureKeepalive}"/>
+        			<spring:entry key="featureUseKeepAlive" value="true"/>
         		</properties>
         	</http:inbound-endpoint>
          </composite-source>
