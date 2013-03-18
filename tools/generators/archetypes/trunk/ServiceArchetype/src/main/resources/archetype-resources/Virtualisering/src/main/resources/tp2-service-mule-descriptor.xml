@@ -39,10 +39,7 @@
         	<http:inbound-endpoint
         	    address="${httpEndpointAdress}"
             	exchange-pattern="request-response" 
-            	responseTransformer-refs="featureKeepAliveResponse filterResponseHeaders">
-            	<properties>
-        			<spring:entry key="featureUseKeepAlive" value="true"/>
-        		</properties>
+            	responseTransformer-refs="filterResponseHeaders">
         	</http:inbound-endpoint>
          </composite-source>
 
