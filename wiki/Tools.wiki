@@ -107,7 +107,7 @@ mvn archetype:generate
 		-DinteractiveMode=false
 		-DarchetypeArtifactId=service-archetype
 		-DarchetypeGroupId=se.skl.tp.archetype
-		-DarchetypeVersion=1.2-SNAPSHOT
+		-DarchetypeVersion=1.2
 		-Duser.dir=.
 		-DgroupId=se.skl.skltpservices.crm.scheduling
 		-DartifactId=GetSubjectOfCareSchedule
