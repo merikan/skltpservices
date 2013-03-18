@@ -49,4 +49,36 @@
 			<version>${cxf.version}</version>
 		</dependency>
 	</dependencies>
+	
+	<profiles>
+		<profile>
+			<id>localtest</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.2.1</version>
+						<executions>
+							<execution>
+								<phase>test</phase>
+								<goals>
+									<goal>java</goal>
+								</goals>
+								<configuration>
+									<mainClass>se.riv.itintegration.engagementindex.update.v1.Producer</mainClass>
+									 <arguments>
+                    					<argument>http://localhost:8090/teststub/Update/1/rivtabp21</argument>
+                					 </arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
