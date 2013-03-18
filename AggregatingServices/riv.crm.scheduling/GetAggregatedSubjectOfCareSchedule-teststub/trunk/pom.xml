@@ -13,7 +13,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <parent>
         <groupId>org.soitoolkit.commons.poms</groupId>
         <artifactId>soitoolkit-default-parent</artifactId>
-        <version>0.6.1-M1</version>
+        <version>0.6.1-M2</version>
     </parent>
     
     <groupId>se.skltp.aggregatingservices.crm.scheduling</groupId>
@@ -38,13 +38,13 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <dependency>
     	<groupId>se.skltp.aggregatingservices.crm.scheduling</groupId>
     	<artifactId>GetAggregatedSubjectOfCareSchedule</artifactId>
-    	<version>1.0.0-RC2</version>
+    	<version>1.0.0-RC3-SNAPSHOT</version>
     	<type>test-jar</type>
     </dependency>
     <dependency>
     	<groupId>se.skltp.aggregatingservices.crm.scheduling</groupId>
     	<artifactId>GetAggregatedSubjectOfCareSchedule</artifactId>
-    	<version>1.0.0-RC2</version>
+    	<version>1.0.0-RC3-SNAPSHOT</version>
     	<classifier>core</classifier>    	
     </dependency>
         <dependency>
