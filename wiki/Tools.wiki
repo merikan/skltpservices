@@ -96,7 +96,7 @@ mvn archetype:generate
 		-DserviceNamespace=urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21
 }}}
 
-*Använda 1.2-SNAPSHOT*
+*Använda 1.2*
  *  Endast Mule3 flow för virtualisering, mule2 service borttagen 
  *  Lägger till en http och https ändpunkt
  *  Lägger till möjligheten att styra via keep-alive via feature
@@ -121,3 +121,10 @@ mvn archetype:generate
 		-DserviceWsdlFileDir=classpath:/schemas/interactions/GetSubjectOfCareScheduleInteraction/GetSubjectOfCareScheduleInteraction_1.1_RIVTABP21.wsdl
 		-DserviceNamespace=urn:riv:crm:scheduling:GetSubjectOfCareSchedule:1:rivtabp21
 }}}
+
+
+*Använda 1.3-SNAPSHOT*
+
+}}}
+
+{{{
