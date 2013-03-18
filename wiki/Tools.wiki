@@ -97,7 +97,7 @@ mvn archetype:generate
 }}}
 
 *Använda 1.2-SNAPSHOT*
-
+ *  Endast Mule3 flow för virtualisering, mule2 service borttagen 
  *  Lägger till en http och https ändpunkt
  *  Lägger till möjligheten att styra via keep-alive via feature
  * Ändpunkternas adress innehåller nu även domän och subdomän
