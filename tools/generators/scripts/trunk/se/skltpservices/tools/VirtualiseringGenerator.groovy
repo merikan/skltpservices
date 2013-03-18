@@ -55,16 +55,31 @@ def getAllUniqueRivNameSpaces(wsdlFile){
 	return rivNameSpace
 }
 
+def getFeatureKeepAliveServiceContractNameSpace(xsdFile){
+	def featureKeepAliveServiceContractNameSpace = 'No servicecontract namespace found'
+	
+	//Build keep alive feature settings "feature.keepalive.servicecontractnamespace" using . (dots) instead of : (colons)
+	//Ignore minor version number when coming to feature settings
+	new SAXReader().read(xsdFile).getRootElement().declaredNamespaces().grep(~/.*urn:riv.*/).each{ namespace ->
+		if(namespace.text.contains('Responder') &! namespace.text.contains('.')){
+			featureKeepAliveServiceContractNameSpace = namespace.text.replaceAll(':', '.')
+		}
+	}
+	return featureKeepAliveServiceContractNameSpace
+}
+
 def buildVirtualServices(serviceInteractionDirectories, targetDir){
 
 	serviceInteractionDirectories.each { serviceInteractionDirectory ->
 
 		def (name, schemaDir) = serviceInteractionDirectory.parent.split("schemas")	
 		def artifactId = serviceInteractionDirectory.name - 'Interaction'
-		def schemasFiles = getAllFilesMatching(serviceInteractionDirectory, /.*\.wsdl/)
 		
-		def serviceNameSpace = getAllUniqueRivNameSpaces(schemasFiles[0])
-		def serviceNameSpaceArray = serviceNameSpace.split("\\:")
+		def wsdlFiles = getAllFilesMatching(serviceInteractionDirectory, /.*\.wsdl/)
+		def xsdFiles = getAllFilesMatching(serviceInteractionDirectory, /.*\.xsd/)
+		
+		def serviceInteractionNameSpace = getAllUniqueRivNameSpaces(wsdlFiles[0])
+		def serviceNameSpaceArray = serviceInteractionNameSpace.split("\\:")
 		
 		def namespacePrefix = serviceNameSpaceArray[0] + ":" + serviceNameSpaceArray[1]		
 		def maindomain = serviceNameSpaceArray[2]
@@ -83,28 +98,31 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 		def subdomainFlow = subdomain.replaceAll(':', '-')
 		def subdomainGroupId = subdomain.replaceAll(':', '.')
 		
-		def wsdlFileName = schemasFiles[0].name
+		def serviceRelativePath = "$artifactId/$serviceVersion/$rivtaVersion"
+		def wsdlFileName = wsdlFiles[0].name
 		
-		def version = '2.0'
+		//Version of the service contract e.g Tidbokning 1.1
+		def version = '1.0'
 		
+		def featureKeepAliveServiceContractNameSpace = getFeatureKeepAliveServiceContractNameSpace(xsdFiles[0])
+				
 		def mvnCommand = """mvn archetype:generate 
 		-DinteractiveMode=false 
 		-DarchetypeArtifactId=service-archetype 
 		-DarchetypeGroupId=se.skl.tp.archetype 
-		-DarchetypeVersion=1.2
+		-DarchetypeVersion=1.2-SNAPSHOT
 		-Duser.dir=${targetDir} 
 		-DgroupId=se.skl.skltpservices.${maindomain}.${subdomainGroupId}
 		-DartifactId=${artifactId} 
 		-Dversion=${version}
-		-DdomainName=${maindomain} 
-		-DdomainSubName=${subdomain}
-		-DdomainSubNameAdress=${subdomainAdress}
-		-DdomainSubNameFlow=${subdomainFlow} 
+		-DvirtualiseringArtifactId=${maindomain}-${subdomainFlow}-${artifactId}-virtualisering
+		-DhttpsEndpointAdress=https://\${TP_HOST}:\${TP_PORT}/\${TP_BASE_URI}/$maindomain/$subdomainAdress/$serviceRelativePath
+		-DhttpEndpointAdress=http://\${TP_HOST}:\${TP_PORT_HTTP}/\${TP_BASE_URI}/$maindomain/$subdomainAdress/$serviceRelativePath
+		-DflowName=${maindomain}-${subdomainFlow}-${artifactId}Interaction-virtualisering-flow
+		-DfeatureKeepalive=\${feature.keepalive.${featureKeepAliveServiceContractNameSpace}:\${feature.keepalive}}
 		-DserviceMethod=${artifactId} 
-		-DserviceWsdlFileDir=classpath:/schemas$schemaDir/${artifactId}Interaction/${wsdlFileName}
-		-DserviceInteraction=${artifactId}Interaction  
-		-DserviceRelativePath=${artifactId}/${serviceVersion}/${rivtaVersion} 
-		-DserviceNamespace=${serviceNameSpace}  
+		-DserviceWsdlFileDir=classpath:/schemas$schemaDir/${artifactId}Interaction/${wsdlFileName}  
+		-DserviceNamespace=${serviceInteractionNameSpace}  
 		"""
 		println "$mvnCommand"
 		
