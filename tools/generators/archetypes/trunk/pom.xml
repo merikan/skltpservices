@@ -21,9 +21,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     </modules>
        
 	<scm>
-    	<connection>http://skltpservices.googlecode.com/svn/skltpservices/tools/generators/archetypes/tags/archetype-1.2</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/skltpservices/tools/generators/archetypes/tags/archetype-1.2</developerConnection>
-        <url>http://skltpservices.googlecode.com/svn/skltpservices/tools/generators/archetypes/tags/archetype-1.2</url>
+    	<connection>http://skltpservices.googlecode.com/svn/tools/generators/archetypes/trunk</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/tools/generators/archetypes/trunk</developerConnection>
+        <url>http://skltpservices.googlecode.com/svn/tools/generators/archetypes/trunk</url>
     </scm>
 
 </project>
