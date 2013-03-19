@@ -49,6 +49,7 @@ public class CareContactTestProducerDb extends TestProducerDb {
         author.setCareUnitHSAid(logicalAddress);
         header.setAuthor(author);
         header.setDocumentId(businessObjectId);
+        header.setSourceSystem(logicalAddress);
         response.setCareContactHeader(header);
 
         CareContactBodyType body = new CareContactBodyType();
