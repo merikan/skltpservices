@@ -40,12 +40,13 @@ public class CareDocumentationTestProducerDb extends TestProducerDb {
         PatientSummaryHeaderType header = new PatientSummaryHeaderType();
         PatientIdType patientId = new PatientIdType();
         patientId.setId(registeredResidentId);
-        patientId.setType("type"); // TODO
+        patientId.setType("1.2.752.129.2.1.3.1"); 
         header.setPatientId(patientId);
         header.setApprovedForPatient(true);
         AuthorType author = new AuthorType();
         author.setCareUnitHSAid(logicalAddress);
         header.setAuthor(author);
+        header.setSourceSystem(logicalAddress);
         header.setDocumentId(businessObjectId);
         response.setCareDocumentationHeader(header);
 
