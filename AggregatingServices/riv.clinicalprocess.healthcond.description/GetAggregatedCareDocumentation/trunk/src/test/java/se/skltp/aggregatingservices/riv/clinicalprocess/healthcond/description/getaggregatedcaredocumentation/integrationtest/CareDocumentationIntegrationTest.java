@@ -23,6 +23,7 @@ import javax.xml.ws.Holder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
 import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v2.GetCareDocumentationResponseType;
 import se.riv.clinicalprocess.healthcond.description.v2.CareDocumentationType;
@@ -30,10 +31,15 @@ import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusRecordType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 import se.skltp.agp.test.consumer.AbstractAggregateIntegrationTest;
 import se.skltp.agp.test.consumer.ExpectedTestData;
+import se.skltp.agp.test.producer.EngagemangsindexTestProducerLogger;
+import se.skltp.agp.test.producer.TestProducerLogger;
 
 public class CareDocumentationIntegrationTest extends AbstractAggregateIntegrationTest {
 
     private static final Logger log = LoggerFactory.getLogger(CareDocumentationIntegrationTest.class);
+
+    private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("GetAggregatedCareDocumentation-config");
+    private static final String SKLTP_HSA_ID = rb.getString("SKLTP_HSA_ID");
 
     private static final String LOGICAL_ADDRESS = "logical-address";
     private static final String EXPECTED_ERR_TIMEOUT_MSG = "Read timed out";
@@ -132,7 +138,7 @@ public class CareDocumentationIntegrationTest extends AbstractAggregateIntegrati
     private List<ProcessingStatusRecordType> doTest(String registeredResidentId, int expectedProcessingStatusSize, ExpectedTestData... testData) {
 
         // Setup and perform the call to the web service
-        CareDocumentationTestConsumer consumer = new CareDocumentationTestConsumer(DEFAULT_SERVICE_ADDRESS);
+        CareDocumentationTestConsumer consumer = new CareDocumentationTestConsumer(DEFAULT_SERVICE_ADDRESS, CareDocumentationTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID);
         Holder<GetCareDocumentationResponseType> responseHolder = new Holder<GetCareDocumentationResponseType>();
         Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
         consumer.callService(LOGICAL_ADDRESS, registeredResidentId, processingStatusHolder, responseHolder);
@@ -151,10 +157,17 @@ public class CareDocumentationIntegrationTest extends AbstractAggregateIntegrati
 
         // Verify the size of the processing status and return it for further analysis
         ProcessingStatusType statusList = processingStatusHolder.value;
-
-        log.info("hej: " + statusList);
         assertEquals(expectedProcessingStatusSize, statusList.getProcessingStatusList().size());
-
+        
+        // Verify that correct "x-rivta-original-serviceconsumer-hsaid" http header was passed to the engagement index
+        assertEquals(SKLTP_HSA_ID, EngagemangsindexTestProducerLogger.getLastOriginalConsumer());
+        
+        // Verify that correct "x-rivta-original-serviceconsumer-hsaid" http header was passed to the service producer,
+        // given that a service producer was called
+        if (expectedProcessingStatusSize > 0) {
+                assertEquals(CareDocumentationTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID, TestProducerLogger.getLastOriginalConsumer());
+        }
+        
         return statusList.getProcessingStatusList();
     }
 
