@@ -25,7 +25,7 @@ public class CareContactTestConsumer extends AbstractTestConsumer<GetCareContact
         String serviceAddress = CareContactMuleServer.getAddress("SERVICE_INBOUND_URL");
         String personnummer = TEST_RR_ID_ONE_HIT;
 
-        CareContactTestConsumer consumer = new CareContactTestConsumer(serviceAddress);
+        CareContactTestConsumer consumer = new CareContactTestConsumer(serviceAddress, SAMPLE_ORIGINAL_CONSUMER_HSAID);
         Holder<GetCareContactResponseType> responseHolder = new Holder<GetCareContactResponseType>();
         Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
         long now = System.currentTimeMillis();
@@ -33,9 +33,9 @@ public class CareContactTestConsumer extends AbstractTestConsumer<GetCareContact
         log.info("Returned #care contact = " + responseHolder.value.getCareContact().size() + " in " + (System.currentTimeMillis() - now) + " ms.");	
     }
 
-    public CareContactTestConsumer(String serviceAddress) {
+    public CareContactTestConsumer(String serviceAddress, String originalConsumerHsaId) {
         // Setup a web service proxy for communication using HTTPS with Mutual Authentication
-        super(GetCareContactResponderInterface.class, serviceAddress); 
+        super(GetCareContactResponderInterface.class, serviceAddress, originalConsumerHsaId); 
     }
 
     public void callService(String logicalAddress, String id, Holder<ProcessingStatusType> processingStatusHolder, Holder<GetCareContactResponseType> responseHolder) {
