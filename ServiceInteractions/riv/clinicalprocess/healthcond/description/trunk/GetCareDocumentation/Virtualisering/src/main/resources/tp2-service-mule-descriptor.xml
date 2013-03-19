@@ -16,23 +16,39 @@
 <mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
     xmlns:https="http://www.mulesoft.org/schema/mule/https"
+    xmlns:http="http://www.mulesoft.org/schema/mule/http"
     xmlns="http://www.mulesoft.org/schema/mule/core"
+    xmlns:spring="http://www.springframework.org/schema/beans"
     xsi:schemaLocation="
                http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.3/mule.xsd
+               http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
                http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/https/3.3/mule-https.xsd
-               http://www.mulesoft.org/schema/mule/cxf  http://www.mulesoft.org/schema/mule/cxf/3.3/mule-cxf.xsd" >
+               http://www.mulesoft.org/schema/mule/cxf  http://www.mulesoft.org/schema/mule/cxf/3.3/mule-cxf.xsd
+               http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-current.xsd" >
 
     <!-- Name of this file is mandatory and may not be changed. -->
 
 
 	<flow name="clinicalprocess-healthcond-description-GetCareDocumentation-virtualisering-2.0-flow" >
-
-        <https:inbound-endpoint
-            address="https://${TP_HOST}:${TP_PORT}/${TP_BASE_URI}/GetCareDocumentation/2/rivtabp21"
-            connector-ref="VPProducerConnector"
-            exchange-pattern="request-response" 
-            responseTransformer-refs="filterResponseHeaders">
-        </https:inbound-endpoint>
+      <composite-source>
+              <https:inbound-endpoint
+              address="https://${TP_HOST}:${TP_PORT}/${TP_BASE_URI}/GetCareDocumentation/2/rivtabp21"
+                 connector-ref="VPProducerConnector"
+              exchange-pattern="request-response" 
+              responseTransformer-refs="featureKeepAliveResponse filterResponseHeaders">
+              <properties>
+                  <spring:entry key="featureUseKeepAlive" value="${feature.keepalive.urn.riv.clinicalprocess.healthcond.description.GetCareDocumentationResponder.2:${feature.keepalive}}"/>
+              </properties>
+          </https:inbound-endpoint>
+          <http:inbound-endpoint
+              address="http://${TP_HOST}:${TP_PORT_HTTP}/${TP_BASE_URI}/GetCareDocumentation/2/rivtabp21"
+              exchange-pattern="request-response" 
+              responseTransformer-refs="featureKeepAliveResponse filterResponseHeaders">
+              <properties>
+                  <spring:entry key="featureUseKeepAlive" value="true"/>
+              </properties>
+          </http:inbound-endpoint>
+       </composite-source>
 
         <cxf:proxy-service
             namespace="urn:riv:clinicalprocess:healthcond:description:GetCareDocumentation:2:rivtabp21"
