@@ -23,6 +23,7 @@ import javax.xml.ws.Holder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
 import se.riv.clinicalprocess.logistics.getcarecontactresponder.v2.GetCareContactResponseType;
 import se.riv.clinicalprocess.logistics.v2.CareContactType;
@@ -30,11 +31,16 @@ import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusRecordType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 import se.skltp.agp.test.consumer.AbstractAggregateIntegrationTest;
 import se.skltp.agp.test.consumer.ExpectedTestData;
+import se.skltp.agp.test.producer.EngagemangsindexTestProducerLogger;
+import se.skltp.agp.test.producer.TestProducerLogger;
 
 public class CareContactIntegrationTest extends AbstractAggregateIntegrationTest {
 
     private static final Logger log = LoggerFactory.getLogger(CareContactIntegrationTest.class);
-
+    
+    private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("GetAggregatedCareContact-config");
+    private static final String SKLTP_HSA_ID = rb.getString("SKLTP_HSA_ID");
+    
     private static final String LOGICAL_ADDRESS = "logical-address";
     private static final String EXPECTED_ERR_TIMEOUT_MSG = "Read timed out";
     private static final String EXPECTED_ERR_INVALID_ID_MSG = "Invalid Id: " + TEST_RR_ID_FAULT_INVALID_ID;;
@@ -132,7 +138,7 @@ public class CareContactIntegrationTest extends AbstractAggregateIntegrationTest
     private List<ProcessingStatusRecordType> doTest(String registeredResidentId, int expectedProcessingStatusSize, ExpectedTestData... testData) {
 
         // Setup and perform the call to the web service
-        CareContactTestConsumer consumer = new CareContactTestConsumer(DEFAULT_SERVICE_ADDRESS);
+        CareContactTestConsumer consumer = new CareContactTestConsumer(DEFAULT_SERVICE_ADDRESS, CareContactTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID);
         Holder<GetCareContactResponseType> responseHolder = new Holder<GetCareContactResponseType>();
         Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
         consumer.callService(LOGICAL_ADDRESS, registeredResidentId, processingStatusHolder, responseHolder);
@@ -149,12 +155,20 @@ public class CareContactIntegrationTest extends AbstractAggregateIntegrationTest
             assertEquals(testData[i].getExpectedLogicalAddress(), responseElement.getCareContactHeader().getAuthor().getCareUnitHSAid());
         }
 
+
         // Verify the size of the processing status and return it for further analysis
         ProcessingStatusType statusList = processingStatusHolder.value;
-
-        log.info("hej: " + statusList);
         assertEquals(expectedProcessingStatusSize, statusList.getProcessingStatusList().size());
-
+        
+        // Verify that correct "x-rivta-original-serviceconsumer-hsaid" http header was passed to the engagement index
+        assertEquals(SKLTP_HSA_ID, EngagemangsindexTestProducerLogger.getLastOriginalConsumer());
+        
+        // Verify that correct "x-rivta-original-serviceconsumer-hsaid" http header was passed to the service producer,
+        // given that a service producer was called
+        if (expectedProcessingStatusSize > 0) {
+                assertEquals(CareContactTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID, TestProducerLogger.getLastOriginalConsumer());
+        }
+        
         return statusList.getProcessingStatusList();
     }
 

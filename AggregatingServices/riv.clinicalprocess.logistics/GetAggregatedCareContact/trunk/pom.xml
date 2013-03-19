@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.soitoolkit.commons.poms</groupId>
         <artifactId>soitoolkit-default-parent</artifactId>
-        <version>0.6.1-M1</version>
+        <version>0.6.1-M2</version>
     </parent>
 
     <groupId>se.skl.tp.aggregatingservices.clinicalprocess.logistics</groupId>
@@ -16,15 +16,20 @@
     <name>GetCareContact</name>
 
     <properties>
-        <!-- TODO: FIX FOR INCORRECT PROPERTY IN ST 0.6.1-M1 -->
-        <soitoolkit.version>0.6.1-M1</soitoolkit.version>
-        <skltp.agp.version>1.0.0-RC1</skltp.agp.version>
+        <skltp.agp.version>1.0.0-RC2</skltp.agp.version>
 
         <!-- Properties for generating code from XML Schemas (JAX-WS) -->
         <schema.path>${basedir}/src/main/resources/schemas</schema.path>
         <cxf.version>2.5.1</cxf.version>
     </properties>
     
+    <pluginRepositories>
+      <pluginRepository>
+        <id>eviwarePluginRepository</id>
+        <url>http://www.eviware.com/repository/maven2/</url>
+      </pluginRepository>
+    </pluginRepositories>
+      
     <scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->		
         <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetCareContact/trunk</connection>
@@ -46,21 +51,29 @@
             <version>${soitoolkit.version}</version>
         </dependency>
 
+
 <!-- 
-		<dependency>
-		  <groupId>org.soitoolkit.commons.components</groupId>
-			<artifactId>soitoolkit-studio-components</artifactId>
-			<version>${soitoolkit.version}</version>
-		</dependency>
+        <dependency>
+          <groupId>org.soitoolkit.commons.components</groupId>
+                <artifactId>soitoolkit-studio-components</artifactId>
+                <version>${soitoolkit.version}</version>
+        </dependency>
+
+        TODO: Mule EE dependency
+        <dependency>
+            <groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
+            <artifactId>soitoolkit-mule-ee-3.3.1-dependencies</artifactId>
+            <version>${soitoolkit.version}</version>
+            <type>pom</type>
+        </dependency>
  -->
 
-		<dependency>
-			<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
-			<artifactId>soitoolkit-mule-ee-3.3.1-dependencies</artifactId>
-			<version>${soitoolkit.version}</version>
-			<type>pom</type>
-		</dependency>
-		
+        <dependency>
+          <groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
+          <artifactId>soitoolkit-mule-3.3.1-dependencies</artifactId>
+          <version>${soitoolkit.version}</version>
+          <type>pom</type>
+        </dependency>
         <!-- TEST DEPENDENCIES -->
 
         <dependency>
