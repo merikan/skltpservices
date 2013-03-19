@@ -2,8 +2,7 @@
 <!-- DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT 
   YOU ARE DOING! [soi-toolkit.gen.version=0.6.0] [soi-toolkit.gen.type=services] 
   [soi-toolkit.gen.createDate=2012-09-25T00:15:13.781+02:00] [soi-toolkit.gen.artifactId=GetAggregatedRequestActivities] -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -13,7 +12,7 @@
     <version>0.6.1-M2</version>
   </parent>
 
-  <groupId>se.skl.tp.aggregatingservices.clinicalprocess.healthcond.description</groupId>
+  <groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.description</groupId>
   <artifactId>GetAggregatedCareDocumentation</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>mule</packaging>
@@ -36,25 +35,10 @@
     
   <scm>
     <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
-    <connection>scm:svn:https://my-subversion-server/svn/GetAggregatedCareDocumentation/trunk</connection>
-    <developerConnection>scm:svn:https://my-subversion-server/svn/GetAggregatedCareDocumentation/trunk</developerConnection>
-    <url>https://my-subversion-server/svn/GetAggregatedCareDocumentation/trunk</url>
+    <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedCareDocumentation/tags/GetAggregatedCareDocumentation-1.0.0-RC1</connection>
+    <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedCareDocumentation/tags/GetAggregatedCareDocumentation-1.0.0-RC1</developerConnection>
+    <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedCareDocumentation/tags/GetAggregatedCareDocumentation-1.0.0-RC1</url>
   </scm>
-
-  <distributionManagement>
-    <!-- TODO: Sample <distributionManagement>-tag, update to reflect you 
-      own environment! -->
-    <snapshotRepository>
-      <id>snapshots</id>
-      <name>Snapshot Repository</name>
-      <url>http://my-maven-repo-server/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>releases</id>
-      <name>Release Repository</name>
-      <url>http://my-maven-repo-server/repositories/releases</url>
-    </repository>
-  </distributionManagement>
 
   <dependencies>
 
