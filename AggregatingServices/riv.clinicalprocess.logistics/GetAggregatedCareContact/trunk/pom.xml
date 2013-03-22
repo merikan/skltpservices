@@ -11,7 +11,7 @@
 
     <groupId>se.skltp.aggregatingservices.clinicalprocess.logistics</groupId>
     <artifactId>GetAggregatedCareContact</artifactId>
-    <version>1.0.0-RC1</version>
+    <version>1.0.0-RC2-SNAPSHOT</version>
     <packaging>mule</packaging>
     <name>GetAggregatedCareContact</name>
 
@@ -31,9 +31,9 @@
     </pluginRepositories>
       
     <scm>
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContact/tags/GetAggregatedCareContact-1.0.0-RC1</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContact/tags/GetAggregatedCareContact-1.0.0-RC1</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContact/tags/GetAggregatedCareContact-1.0.0-RC1</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContact/trunk</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContact//trunk</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContact/trunk</url>
     </scm>
     
 	<dependencies>	
