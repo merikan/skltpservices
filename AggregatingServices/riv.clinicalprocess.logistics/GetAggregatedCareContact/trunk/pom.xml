@@ -9,7 +9,7 @@
         <version>0.6.1-M2</version>
     </parent>
 
-    <groupId>se.skl.tp.aggregatingservices.clinicalprocess.logistics</groupId>
+    <groupId>se.skltp.aggregatingservices.clinicalprocess.logistics</groupId>
     <artifactId>GetAggregatedCareContact</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule</packaging>
@@ -272,7 +272,7 @@
               <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
               <wsdlOptions>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_LOGISTICS_LOGISTICS_2_0_RC1/interactions/GetCareContactInteraction/GetCareContactInteraction_2.0_RIVTABP21.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_LOGISTICS_LOGISTICS_2_0_RC2/interactions/GetCareContactInteraction/GetCareContactInteraction_2.0_RIVTABP21.wsdl</wsdl>
                     <extraargs>
                       <extraarg>-p</extraarg>
                     <extraarg>

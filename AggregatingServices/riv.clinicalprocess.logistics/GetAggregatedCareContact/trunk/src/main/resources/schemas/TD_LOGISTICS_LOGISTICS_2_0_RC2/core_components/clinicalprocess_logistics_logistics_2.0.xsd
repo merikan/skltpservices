@@ -17,18 +17,16 @@
  specific language governing permissions and limitations
  under the License.
  -->
-<xs:schema 
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    xmlns:tns="urn:riv:clinicalprocess:logistics:logistics:2" 
-    xmlns:codes="urn:riv:clinicalprocess:logistics:logistics:enums:2" 
-    targetNamespace="urn:riv:clinicalprocess:logistics:logistics:2" 
-    elementFormDefault="qualified" 
-    attributeFormDefault="unqualified" 
-    version="2.0">
-	
-    <xs:import schemaLocation="./clinicalprocess_logistics_logistics_enum_2.0.xsd" namespace="urn:riv:clinicalprocess:logistics:logistics:enums:2"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="urn:riv:clinicalprocess:logistics:logistics:2"
+    xmlns:codes="urn:riv:clinicalprocess:logistics:logistics:enums:2"
+    targetNamespace="urn:riv:clinicalprocess:logistics:logistics:2" elementFormDefault="qualified"
+    attributeFormDefault="unqualified" version="2.0">
 
- <xs:complexType name="CareContactType">
+    <xs:import schemaLocation="./clinicalprocess_logistics_logistics_enum_2.0.xsd"
+        namespace="urn:riv:clinicalprocess:logistics:logistics:enums:2"/>
+
+    <xs:complexType name="CareContactType">
         <xs:sequence>
             <xs:element name="careContactHeader" type="tns:PatientSummaryHeaderType"/>
             <xs:element name="careContactBody" type="tns:CareContactBodyType"/>
@@ -51,13 +49,15 @@
                 careContactStatus:
                     Tillåtna statusvärden (från KV aktivitetsmomentstatus)
             </xs:documentation>
-        </xs:annotation>	
+        </xs:annotation>
         <xs:sequence>
             <xs:element name="careContactCode" type="codes:CareContactCodeEnum"/>
             <xs:element name="careContactReason" type="xs:string" minOccurs="0"/>
             <xs:element name="careContactTime" type="tns:TimeStampType"/>
-            <xs:element name="careContactUnit" type="tns:CareContactUnitType" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="careContactStatus" type="codes:CareContactStatusEnum" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="careContactUnit" type="tns:CareContactUnitType" minOccurs="0"
+                maxOccurs="unbounded"/>
+            <xs:element name="careContactStatus" type="codes:CareContactStatusEnum" minOccurs="0"
+                maxOccurs="1"/>
             <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
@@ -73,11 +73,14 @@
                 careContactUnitAddress:
                     Adress till enhet
             </xs:documentation>
-        </xs:annotation>	
+        </xs:annotation>
         <xs:sequence>
             <xs:element name="careContactUnitId" type="tns:HSAIdType"/>
             <xs:element name="careContactUnitName" type="xs:string"/>
+            <xs:element minOccurs="0" name="careContactUnitTelecom" type="xs:string"/>
+            <xs:element minOccurs="0" name="careContactUnitEmail" type="xs:string"/>
             <xs:element name="careContactUnitAddress" type="xs:string" minOccurs="0"/>
+            <xs:element minOccurs="0" name="careContactUnitLocation" type="xs:string"/>
             <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
@@ -125,10 +128,10 @@
             <xs:element name="careContactId" type="xs:string" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
-    
-	<xs:complexType name="AuthorType">
-		<xs:annotation>
-			<xs:documentation>
+
+    <xs:complexType name="AuthorType">
+        <xs:annotation>
+            <xs:documentation>
 				Information om författare till dokumentet
 			
 				authorTime: 
@@ -149,19 +152,19 @@
 				careGiverHSAid:
 					HSA-id för vårdgivaren, som är vårdgivare för den enhet som författaren är uppdragstagare för
 			</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="authorTime" type="tns:TimeStampType"/>
-			<xs:element name="authorHSAid" type="tns:HSAIdType"/>
-			<xs:element name="authorRoleCode" type="xs:string" minOccurs="0"/>
-			<xs:element name="authorName" type="xs:string" minOccurs="0"/>
-			<xs:element name="authorOrgUnitHSAid" type="tns:HSAIdType"/>
-			<xs:element name="authorOrgUnitName" type="xs:string"/>
-			<xs:element name="authorOrgUnitAddress" type="xs:string" minOccurs="0"/>		
-			<xs:element name="careUnitHSAid" type="tns:HSAIdType"/>
-			<xs:element name="careGiverHSAid" type="tns:HSAIdType"/>
-		</xs:sequence>
-	</xs:complexType>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="authorTime" type="tns:TimeStampType"/>
+            <xs:element name="authorHSAid" type="tns:HSAIdType"/>
+            <xs:element name="authorRoleCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="authorName" type="xs:string" minOccurs="0"/>
+            <xs:element name="authorOrgUnitHSAid" type="tns:HSAIdType"/>
+            <xs:element name="authorOrgUnitName" type="xs:string"/>
+            <xs:element name="authorOrgUnitAddress" type="xs:string" minOccurs="0"/>
+            <xs:element name="careUnitHSAid" type="tns:HSAIdType"/>
+            <xs:element name="careGiverHSAid" type="tns:HSAIdType"/>
+        </xs:sequence>
+    </xs:complexType>
 
     <!-- 
         Below: only helper types allowed.
@@ -169,7 +172,7 @@
         A helper type is a type used in one ore more of the domain schema common types.
         It can also be a type used in two or more service schemas.
     -->
-    
+
     <xs:complexType name="DatePeriodType">
         <xs:annotation>
             <xs:documentation>
@@ -187,7 +190,7 @@
             <xs:element name="end" type="tns:DateType"/>
         </xs:sequence>
     </xs:complexType>
-    
+
     <!-- YYYYMMDD -->
     <xs:simpleType name="DateType">
         <xs:annotation>
@@ -196,20 +199,20 @@
         <xs:restriction base="xs:string">
             <xs:pattern value="(19|20)\d\d(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])"/>
         </xs:restriction>
-    </xs:simpleType>    
+    </xs:simpleType>
 
     <!-- @TODO Should we have maxlength 64? -->
     <xs:simpleType name="HSAIdType">
-        <xs:restriction base="xs:string"/> 
+        <xs:restriction base="xs:string"/>
     </xs:simpleType>
-    
+
     <xs:complexType name="PatientIdType">
         <xs:sequence>
             <xs:element name="id" type="xs:string"/>
             <xs:element name="type" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
-    
+
     <xs:complexType name="TimePeriodType">
         <xs:annotation>
             <xs:documentation>
@@ -227,7 +230,7 @@
             <xs:element name="end" type="tns:TimeStampType"/>
         </xs:sequence>
     </xs:complexType>
-    
+
     <xs:simpleType name="TimeStampType">
         <xs:annotation>
             <xs:documentation>
@@ -239,7 +242,9 @@
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:pattern value="(19|20)\d\d(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])(0[0-9]|1[0-9]|2[0123])([0-5])([0-9])([0-5])([0-9])"/>
+            <xs:pattern
+                value="(19|20)\d\d(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])(0[0-9]|1[0-9]|2[0123])([0-5])([0-9])([0-5])([0-9])"
+            />
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
