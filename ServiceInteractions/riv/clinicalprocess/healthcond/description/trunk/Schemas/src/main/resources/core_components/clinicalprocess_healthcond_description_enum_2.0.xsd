@@ -17,16 +17,13 @@
  specific language governing permissions and limitations
  under the License.
  -->
-<xs:schema 
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    xmlns:tns="urn:riv:clinicalprocess:healthcond:description:enums:2" 
-    targetNamespace="urn:riv:clinicalprocess:healthcond:description:enums:2" 
-    elementFormDefault="qualified" 
-    attributeFormDefault="unqualified" 
-    version="2.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="urn:riv:clinicalprocess:healthcond:description:enums:2"
+    targetNamespace="urn:riv:clinicalprocess:healthcond:description:enums:2"
+    elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
 
-  
-    
+
+
     <xs:simpleType name="ClinicalDocumentNoteCodeEnum">
         <xs:annotation>
             <xs:documentation>
@@ -82,11 +79,13 @@
             </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
-    
+
     <xs:simpleType name="MediaTypeEnum">
-        <xs:union memberTypes="tns:ApplicationMediaEnum tns:AudioMediaTypeEnum tns:ImageMediaTypeEnum tns:ModelMediaTypeEnum tns:MultipartMediaTypeEnum tns:TextMediaTypeEnum tns:VideoMediaTypeEnum"/>
+        <xs:union
+            memberTypes="tns:ApplicationMediaEnum tns:AudioMediaTypeEnum tns:ImageMediaTypeEnum tns:ModelMediaTypeEnum tns:MultipartMediaTypeEnum tns:TextMediaTypeEnum tns:VideoMediaTypeEnum"
+        />
     </xs:simpleType>
-    
+
     <xs:simpleType name="ApplicationMediaEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="application/dicom"/>
@@ -94,7 +93,7 @@
             <xs:enumeration value="application/pdf"/>
         </xs:restriction>
     </xs:simpleType>
-    
+
     <xs:simpleType name="AudioMediaTypeEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="audio/basic"/>
@@ -102,7 +101,7 @@
             <xs:enumeration value="audio/mpeg"/>
         </xs:restriction>
     </xs:simpleType>
-    
+
     <xs:simpleType name="ImageMediaTypeEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="image/g3fax"/>
@@ -112,19 +111,19 @@
             <xs:enumeration value="image/tiff"/>
         </xs:restriction>
     </xs:simpleType>
-    
+
     <xs:simpleType name="ModelMediaTypeEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="model/vrml"/>
         </xs:restriction>
     </xs:simpleType>
-    
+
     <xs:simpleType name="MultipartMediaTypeEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="multipart/x-hl7-cda-level1"/>
         </xs:restriction>
     </xs:simpleType>
-    
+
     <xs:simpleType name="TextMediaTypeEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="text/html"/>
@@ -135,12 +134,52 @@
             <xs:enumeration value="text/xml"/>
         </xs:restriction>
     </xs:simpleType>
-    
+
     <xs:simpleType name="VideoMediaTypeEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="video/mpeg"/>
             <xs:enumeration value="video/x-avi"/>
         </xs:restriction>
     </xs:simpleType>
-    
+
+    <xs:simpleType name="ClinicalDocumentTypeCodeEnum">
+        <xs:annotation>
+            <xs:documentation>
+                Kod för typ av anteckning.
+                Tillåtna värden från kodverk (?.?.?.?.?.?):
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="epi">
+                <xs:annotation>
+                    <xs:documentation>Epikris</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="int">
+                <xs:annotation>
+                    <xs:documentation>Intagninganteckning</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="dag">
+                <xs:annotation>
+                    <xs:documentation>Daganteckning</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ova">
+                <xs:annotation>
+                    <xs:documentation>Öppenvårdsanteckning</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ovs">
+                <xs:annotation>
+                    <xs:documentation>Öppenvårdssammanfattning</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ovr">
+                <xs:annotation>
+                    <xs:documentation>Övrigt dokument</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>

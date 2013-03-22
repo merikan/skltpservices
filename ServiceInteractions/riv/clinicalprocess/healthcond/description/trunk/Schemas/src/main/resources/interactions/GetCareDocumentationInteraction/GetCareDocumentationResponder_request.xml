@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GetCareDocumentation 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:core="urn:riv:clinicalprocess:healthcond:description:2"
-    xmlns:codes="urn:riv:clinicalprocess:healthcond:description:enums:2"
-    xmlns="urn:riv:clinicalprocess:healthcond:description:GetCareDocumentationResponder:2"
-    xsi:schemaLocation="urn:riv:clinicalprocess:healthcond:description:GetCareDocumentationResponder:2 file:/GetCareDocumentationResponder_2.0.xsd
+    xmlns:core="urn:riv:ehr:patientsummary:2"
+    xmlns:codes="urn:riv:ehr:patientsummary:enums:2"
+    xmlns="urn:riv:ehr:patientsummary:GetCareDocumentationResponder:2"
+    xsi:schemaLocation="urn:riv:ehr:patientsummary:GetCareDocumentationResponder:2 file:./GetCareDocumentationResponder_2.0.xsd
 ">
     <careUnitHSAid>careUnitHSAid</careUnitHSAid>
     <patientId>
