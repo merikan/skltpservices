@@ -9,46 +9,25 @@
     <parent>
         <groupId>org.soitoolkit.commons.poms</groupId>
         <artifactId>soitoolkit-default-parent</artifactId>
-        <version>0.6.1-M1</version>
+        <version>0.6.1-M2</version>
     </parent>
     
-    <groupId>se.skl.tp.aggregatingservices.clinicalprocess.logistics</groupId>
+    <groupId>se.skltp.aggregatingservices.clinicalprocess.logistics.logistics</groupId>
     <artifactId>GetAggregatedCareContact-teststub</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule</packaging>
     <name>GetAggregatedCareContact-teststub</name>
 
-    <scm>
-        <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
-        <connection>scm:svn:https://my-subversion-server/svn/GetAggregatedCareContact-teststub/trunk</connection>
-        <developerConnection>scm:svn:https://my-subversion-server/svn/GetAggregatedCareContact-teststub/trunk</developerConnection>
-        <url>https://my-subversion-server/svn/GetAggregatedCareContact-teststub/trunk</url>
-    </scm>
-    
-    <distributionManagement>
-        <!-- TODO: Sample <distributionManagement>-tag, update to reflect you own environment! -->
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>Snapshot Repository</name>
-            <url>http://my-maven-repo-server/repositories/snapshots</url>
-        </snapshotRepository>  
-        <repository>
-            <id>releases</id>
-            <name>Release Repository</name>
-            <url>http://my-maven-repo-server/repositories/releases</url>
-        </repository>
-    </distributionManagement>
-
 	<dependencies>
 	  <!-- dependencies to the integration component that contains the services to stub -->
 	    <dependency>
-	    	<groupId>se.skl.tp.aggregatingservices.clinicalprocess.logistics</groupId>
+	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.logistics.logistics</groupId>
 	    	<artifactId>GetAggregatedCareContact</artifactId>
 	    	<version>1.0.0-SNAPSHOT</version>
 	    	<type>test-jar</type>
 	    </dependency>
 	    <dependency>
-	    	<groupId>se.skl.tp.aggregatingservices.clinicalprocess.logistics</groupId>
+	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.logistics.logistics</groupId>
 	    	<artifactId>GetAggregatedCareContact</artifactId>
 	    	<version>1.0.0-SNAPSHOT</version>
 	    	<classifier>core</classifier>    	
@@ -56,7 +35,7 @@
         <dependency>
             <groupId>se.skltp.agp</groupId>
             <artifactId>agp-test-common</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0-RC2</version>
         </dependency>
 	</dependencies> 
 
