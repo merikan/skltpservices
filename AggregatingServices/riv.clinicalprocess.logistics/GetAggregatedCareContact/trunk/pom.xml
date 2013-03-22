@@ -9,7 +9,7 @@
         <version>0.6.1-M2</version>
     </parent>
 
-    <groupId>se.skltp.aggregatingservices.clinicalprocess.logistics</groupId>
+    <groupId>se.skltp.aggregatingservices.clinicalprocess.logistics.logistics</groupId>
     <artifactId>GetAggregatedCareContact</artifactId>
     <version>1.0.0-RC2-SNAPSHOT</version>
     <packaging>mule</packaging>
