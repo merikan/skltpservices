@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>se.rivta.tools</groupId>
-  <artifactId>clinicalprocess-healthcond-schemas</artifactId>
+  <artifactId>clinicalprocess-healthcond-description-schemas</artifactId>
   <packaging>jar</packaging>
-  <name>clinicalprocess-healthcond-schemas</name>
+  <name>clinicalprocess-healthcond-description-schemas</name>
   <url>http://maven.apache.org</url>
   <parent>
-    <artifactId>clinicalprocess-healthcond</artifactId>
-    <groupId>se.skl.skltpservices.clinicalprocess.healthcond</groupId>
+    <artifactId>clinicalprocess-healthcond-description</artifactId>
+    <groupId>se.skl.skltpservices.clinicalprocess.healthcond.description</groupId>
     <version>2.0.RC2</version>
   </parent>
   <dependencies/>
