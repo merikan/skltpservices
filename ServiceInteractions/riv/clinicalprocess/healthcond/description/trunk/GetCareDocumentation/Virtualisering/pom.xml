@@ -13,14 +13,14 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.skltpservices.clinicalprocess.healthcond</groupId>
-	<artifactId>GetCareDocumentation-virtualisering</artifactId>
+	<artifactId>clinicalprocess-healthcond-description-GetCareDocumentation-virtualisering</artifactId>
 	<name>GetCareDocumentation service virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>se.skl.skltpservices.clinicalprocess.healthcond.description</groupId>
 		<artifactId>GetCareDocumentation</artifactId>
-		<version>2.0.RC2-SNAPSHOT</version>
+		<version>2.0.RC2</version>
 	</parent>
 
 </project>
