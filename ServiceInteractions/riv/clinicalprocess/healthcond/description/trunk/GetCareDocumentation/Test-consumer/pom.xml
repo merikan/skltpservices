@@ -24,7 +24,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>se.skl.skltpservices.clinicalprocess.healthcond</groupId>
+  <groupId>se.skl.skltpservices.clinicalprocess.healthcond.description</groupId>
   <artifactId>GetCareDocumentation-testconsumer</artifactId>
   <name>GetCareDocumentation-testconsumer</name>
   <url>http://maven.apache.org</url>
@@ -39,7 +39,7 @@
     <!-- schema dependency -->
     <dependency>
       <groupId>se.rivta.tools</groupId>
-      <artifactId>clinicalprocess-healthcond-schemas</artifactId>
+      <artifactId>clinicalprocess-healthcond-description-schemas</artifactId>
       <version>${parent.version}</version>
     </dependency>
     <!-- cxf dependencies -->
