@@ -25,7 +25,7 @@
 
   <groupId>se.skl.skltpservices.clinicalprocess.healthcond.description</groupId>
   <artifactId>clinicalprocess-healthcond-description</artifactId>
-  <version>2.0.RC2</version>
+  <version>2.0.RC3-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>clinicalprocess-healthcond-description</name>
 
