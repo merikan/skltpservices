@@ -71,7 +71,7 @@
 	</appender>
 	
 	
-  <root level="INFO">
+  <root level="${console.logLevel}">
     <appender-ref ref="STDOUT" />
   </root>
 
@@ -81,11 +81,11 @@
   </logger>
 
   <logger name="org.springframework.core.env">
-    <level value="DEBUG" />
+    <level value="${console.logLevel}" />
   </logger>
 
   <logger name="se.skl.skltpservices">
-    <level value="DEBUG" />
+    <level value="${console.logLevel)" />
   </logger>
   	
 </configuration>
