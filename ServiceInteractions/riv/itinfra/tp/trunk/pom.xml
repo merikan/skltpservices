@@ -25,7 +25,7 @@
 	<groupId>se.skl.tp</groupId>
 	<artifactId>itinfra-tp</artifactId>
 	<packaging>pom</packaging>
-	<version>1.3-SNAPSHOT</version>
+	<version>1.3</version>
  <name>itinfra-tp</name>
 	<url>http://maven.apache.org</url>
 	
@@ -41,8 +41,8 @@
 	</modules>
 	
 	<scm>
-		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/itinfra/tp/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/itinfra/tp/trunk</developerConnection>
+		<connection>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv/itinfra/tp/tags/itinfra-tp-1.3</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv/itinfra/tp/tags/itinfra-tp-1.3</developerConnection>
 	</scm>
 	
 	<build>
