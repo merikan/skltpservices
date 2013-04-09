@@ -13,23 +13,23 @@
     </parent>
     
     <groupId>se.skltp.aggregatingservices.clinicalprocess.logistics.logistics</groupId>
-    <artifactId>GetAggregatedCareContact-teststub</artifactId>
+    <artifactId>GetAggregatedCareContacts-teststub</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule</packaging>
-    <name>GetAggregatedCareContact-teststub</name>
+    <name>GetAggregatedCareContacts-teststub</name>
 
 	<dependencies>
 	  <!-- dependencies to the integration component that contains the services to stub -->
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.logistics.logistics</groupId>
-	    	<artifactId>GetAggregatedCareContact</artifactId>
-	    	<version>1.0.0-SNAPSHOT</version>
+	    	<artifactId>GetAggregatedCareContacts</artifactId>
+	    	<version>1.0.0-RC3-SNAPSHOT</version>
 	    	<type>test-jar</type>
 	    </dependency>
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.logistics.logistics</groupId>
-	    	<artifactId>GetAggregatedCareContact</artifactId>
-	    	<version>1.0.0-SNAPSHOT</version>
+	    	<artifactId>GetAggregatedCareContacts</artifactId>
+	    	<version>1.0.0-RC3-SNAPSHOT</version>
 	    	<classifier>core</classifier>    	
 	    </dependency>
         <dependency>
