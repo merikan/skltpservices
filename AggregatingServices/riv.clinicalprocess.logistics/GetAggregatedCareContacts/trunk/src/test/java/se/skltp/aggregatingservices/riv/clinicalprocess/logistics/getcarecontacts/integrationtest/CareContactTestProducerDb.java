@@ -1,9 +1,9 @@
-package se.skltp.aggregatingservices.riv.clinicalprocess.logistics.getcarecontact.integrationtest;
+package se.skltp.aggregatingservices.riv.clinicalprocess.logistics.getcarecontacts.integrationtest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import se.riv.clinicalprocess.logistics.getcarecontactresponder.v2.GetCareContactResponseType;
+import se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2.GetCareContactsResponseType;
 import se.riv.clinicalprocess.logistics.v2.AuthorType;
 import se.riv.clinicalprocess.logistics.v2.CareContactBodyType;
 import se.riv.clinicalprocess.logistics.v2.CareContactType;
@@ -19,7 +19,7 @@ public class CareContactTestProducerDb extends TestProducerDb {
     @Override
     public Object createResponse(Object... responseItems) {
         log.debug("Creates a response with {} items", responseItems);
-        GetCareContactResponseType response = new GetCareContactResponseType();
+        GetCareContactsResponseType response = new GetCareContactsResponseType();
         for (int i = 0; i < responseItems.length; i++) {
             response.getCareContact().add((CareContactType)responseItems[i]);
         }
@@ -42,14 +42,14 @@ public class CareContactTestProducerDb extends TestProducerDb {
         patientId.setType("1.2.752.129.2.1.3.1");
         header.setPatientId(patientId);
         header.setApprovedForPatient(true);
-        header.setSourceSystem(logicalAddress);
+        header.setSourceSystemHSAid(logicalAddress);
         header.setDocumentTitle("dokumenttitel");
         header.setDocumentTime("20130302120101");
         AuthorType author = new AuthorType();
         author.setCareUnitHSAid(logicalAddress);
         header.setAuthor(author);
         header.setDocumentId(businessObjectId);
-        header.setSourceSystem(logicalAddress);
+        header.setSourceSystemHSAid(logicalAddress);
         response.setCareContactHeader(header);
 
         CareContactBodyType body = new CareContactBodyType();

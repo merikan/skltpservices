@@ -1,4 +1,4 @@
-package se.skltp.aggregatingservices.riv.clinicalprocess.logistics.getcarecontact;
+package se.skltp.aggregatingservices.riv.clinicalprocess.logistics.getcarecontacts;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -12,8 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
-import se.riv.clinicalprocess.logistics.getcarecontactresponder.v2.GetCareContactType;
-import se.riv.clinicalprocess.logistics.getcarecontactresponder.v2.ObjectFactory;
+import se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2.GetCareContactsType;
+import se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2.ObjectFactory;
 import se.riv.clinicalprocess.logistics.v2.PatientIdType;
 import se.skltp.agp.service.api.QueryObject;
 
@@ -34,7 +34,7 @@ public class QueryObjectFactoryImplTest {
     
     @Test
     public void createQueryObject() throws Exception{
-        GetCareContactType getCareDoc = new GetCareContactType();
+        GetCareContactsType getCareDoc = new GetCareContactsType();
         PatientIdType patientId = new PatientIdType();
         patientId.setId(RR_ID);
         getCareDoc.setPatientId(patientId);
@@ -51,11 +51,11 @@ public class QueryObjectFactoryImplTest {
     
     @Test
     public void createQueryObject_with_source_system() throws Exception{
-        GetCareContactType getCareDoc = new GetCareContactType();
+        GetCareContactsType getCareDoc = new GetCareContactsType();
         PatientIdType patientId = new PatientIdType();
         patientId.setId(RR_ID);
         getCareDoc.setPatientId(patientId);
-        getCareDoc.setSourceSystem(SOURCE_SYSTEM);
+        getCareDoc.setSourceSystemHSAid(SOURCE_SYSTEM);
         
         Document doc = createDocument(getCareDoc);
         QueryObject queryObj = objectFactory.createQueryObject(doc);
@@ -64,14 +64,14 @@ public class QueryObjectFactoryImplTest {
         assertEquals(SOURCE_SYSTEM, queryObj.getFindContent().getSourceSystem());   
     }
     
-    private Document createDocument(GetCareContactType getCareContact) throws Exception {
+    private Document createDocument(GetCareContactsType getCareContact) throws Exception {
         ObjectFactory of = new ObjectFactory();
-        JAXBContext jaxbContext = JAXBContext.newInstance(GetCareContactType.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(GetCareContactsType.class);
         Marshaller marshaller = jaxbContext.createMarshaller();
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setNamespaceAware(true);
         Document doc = dbf.newDocumentBuilder().newDocument();
-        marshaller.marshal(of.createGetCareContact(getCareContact), doc);
+        marshaller.marshal(of.createGetCareContacts(getCareContact), doc);
         return doc;
     }
    
