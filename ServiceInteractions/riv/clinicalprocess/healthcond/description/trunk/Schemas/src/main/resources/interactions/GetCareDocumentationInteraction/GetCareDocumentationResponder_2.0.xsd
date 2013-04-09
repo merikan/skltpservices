@@ -38,7 +38,7 @@
 	        <xs:element name="careUnitHSAid" type="core:HSAIdType" minOccurs="0" maxOccurs="unbounded"/>
 	        <xs:element name="patientId" type="core:PatientIdType"/>
 	        <xs:element name="timePeriod" type="core:DatePeriodType" minOccurs="0"/>
-	        <xs:element name="sourceSystem" type="core:HSAIdType" minOccurs="0"/>
+	        <xs:element name="sourceSystemHSAid" type="core:HSAIdType" minOccurs="0"/>
 		    <xs:element name="careContactId" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 	        <xs:any namespace='##other' processContents='lax' minOccurs='0' maxOccurs='unbounded' />
 	    </xs:sequence>
