@@ -19,14 +19,14 @@
   </parent>
 
   <groupId>se.skl.skltpservices.clinicalprocess.logistics.logistics</groupId>
-  <artifactId>GetCareContact</artifactId>
+  <artifactId>GetCareContacts</artifactId>
   <packaging>pom</packaging>
-  <name>GetCareContact service</name>
+  <name>GetCareContacts service</name>
 
   <properties>
     <osorCertDirectory>http://skltpservices.googlecode.com/svn/ServiceInteractions/certs/</osorCertDirectory>
     <osorSchemaDirectoryUrl>
-      http://rivta.googlecode.com/svn/ServiceInteractions/riv/clinicalprocess/logistics/trunk/schemas/interactions/GetCareContactInteraction
+      http://rivta.googlecode.com/svn/ServiceInteractions/riv/clinicalprocess/logistics/trunk/schemas/interactions/GetCareContactsInteraction
     </osorSchemaDirectoryUrl>
     <osorCoreSchemaDirectoryUrl>
       http://rivta.googlecode.com/svn/ServiceInteractions/riv/clinicalprocess/logistics/trunk/schemas/core_components

@@ -6,8 +6,8 @@
     xmlns="urn:riv:ehr:patientsummary:GetCareContactResponder:2"
     xsi:schemaLocation="urn:riv:ehr:patientsummary:GetCareContactResponder:2 file:./GetCareContactResponder_2.0.xsd
 ">
-    <careContact>
-        <careContactHeader>
+    <core:careContact>
+        <core:careContactHeader>
             <core:documentId>documentId</core:documentId>
             <core:documentTime>20130213121419</core:documentTime>
             <core:patientId>
@@ -29,21 +29,17 @@
                 <core:legalAuthenticatorHSAid>legalAuthenticatorHSAid</core:legalAuthenticatorHSAid>
             </core:legalAuthenticator>
             <core:approvedForPatient>false</core:approvedForPatient>
-        </careContactHeader>
-        <careContactBody>
-            <careContactCode>1</careContactCode>
-            <careContactReason>careContactReason6</careContactReason>
-            <careContactTime>20130213121419</careContactTime>
+        </core:careContactHeader>
+        <core:careContactBody>
+            <core:careContactCode>1</core:careContactCode>
+            <core:careContactReason>careContactReason6</core:careContactReason>
+            <core:careContactTime>20130213121419</core:careContactTime>
             <careContactUnit>
-                <careContactId>careContactId</careContactId>
-                <careContactName>careContactNamn</careContactName>
-                <careContactAddress>careContactAddress</careContactAddress>
+                <core:careContactId>careContactId</core:careContactId>
+                <core:careContactName>careContactNamn</core:careContactName>
+                <ccore:areContactAddress>careContactAddress</core:careContactAddress>
             </careContactUnit>
-            <careContactStatus>1</careContactStatus>
-        </careContactBody>
-    </careContact>
-    <result>
-        <resultCode>OK</resultCode>
-        <resultText>resultText</resultText>
-    </result>
+            <core:careContactStatus>1</core:careContactStatus>
+        </core:careContactBody>
+    </core:careContact>
 </GetCareContactResponse>

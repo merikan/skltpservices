@@ -47,20 +47,20 @@
               <wsdlOptions>
                 <wsdloption>
                   <wsdl>
-                    ${basedir}/src/main/resources/interactions/GetCareContactInteraction/GetCareContactInteraction_2.0_RIVTABP21.wsdl
+                    ${basedir}/src/main/resources/interactions/GetCareContactsInteraction/GetCareContactsInteraction_2.0_RIVTABP21.wsdl
                   </wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
                     <extraarg>-p</extraarg>
                     <extraarg>
-                      urn:riv:clinicalprocess:logistics:logistics:GetCareContactResponder:2=se.riv.clinicalprocess.logistics.getcarecontactresponder.v2
+                      urn:riv:clinicalprocess:logistics:logistics:GetCareContactsResponder:2=se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2
                     </extraarg>
                     <extraarg>-p</extraarg>
                     <extraarg>urn:riv:interoperability:headers:1=se.riv.interoperability.headers.v1</extraarg>
                     <extraarg>-p</extraarg>
                     <extraarg>
-                      urn:riv:clinicalprocess:logistics:logistics:GetCareContact:2:rivtabp21=se.riv.clinicalprocess.logistics.getcarecontact.v2.rivtabp21
+                      urn:riv:clinicalprocess:logistics:logistics:GetCareContacts:2:rivtabp21=se.riv.clinicalprocess.logistics.getcarecontacts.v2.rivtabp21
                     </extraarg>
                     <extraarg>-p</extraarg>
                     <extraarg>urn:riv:itintegration:registry:1=se.riv.itintegration.registry.v1</extraarg>

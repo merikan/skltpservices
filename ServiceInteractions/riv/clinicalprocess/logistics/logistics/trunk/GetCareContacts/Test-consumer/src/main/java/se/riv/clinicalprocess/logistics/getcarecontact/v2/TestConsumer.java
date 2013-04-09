@@ -34,10 +34,10 @@ import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 
-import se.riv.clinicalprocess.logistics.getcarecontact.v2.rivtabp21.GetCareContactResponderInterface;
-import se.riv.clinicalprocess.logistics.getcarecontact.v2.rivtabp21.GetCareContactResponderService;
-import se.riv.clinicalprocess.logistics.getcarecontactresponder.v2.GetCareContactResponseType;
-import se.riv.clinicalprocess.logistics.getcarecontactresponder.v2.GetCareContactType;
+import se.riv.clinicalprocess.logistics.getcarecontacts.v2.rivtabp21.GetCareContactsResponderInterface;
+import se.riv.clinicalprocess.logistics.getcarecontacts.v2.rivtabp21.GetCareContactsResponderService;
+import se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2.GetCareContactsResponseType;
+import se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2.GetCareContactsType;
 import se.riv.clinicalprocess.logistics.v2.DatePeriodType;
 import se.riv.clinicalprocess.logistics.v2.PatientIdType;
 
@@ -45,7 +45,7 @@ public final class TestConsumer {
 
     private static final String LOGICAL_ADDRESS = "Test";
 
-	private static final String LOGISK_ADDRESS = "/GetCareContact/2/rivtabp21";
+	private static final String LOGISK_ADDRESS = "/GetCareContacts/2/rivtabp21";
 
 	// private static String host = "192.168.25.40:20000/vp";
 
@@ -70,17 +70,17 @@ public final class TestConsumer {
 			// Get URL to wsdl file
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();
 			URL wsdlUrl = loader
-					.getResource("schemas/interactions/GetCareContactInteraction/GetCareContactInteraction_2.0_RIVTABP21.wsdl");
+					.getResource("schemas/interactions/GetCareContactsInteraction/GetCareContactsInteraction_2.0_RIVTABP21.wsdl");
 
-            GetCareContactResponderService service = new GetCareContactResponderService(wsdlUrl);
-            GetCareContactResponderInterface serviceInterface = service
-					.getGetCareContactResponderPort();
+            GetCareContactsResponderService service = new GetCareContactsResponderService(wsdlUrl);
+            GetCareContactsResponderInterface serviceInterface = service
+					.getGetCareContactsResponderPort();
 
 			// Set web service server url
 			BindingProvider provider = (BindingProvider) serviceInterface;
 			provider.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, serviceAddress);
 
-            GetCareContactType request = new GetCareContactType();
+            GetCareContactsType request = new GetCareContactsType();
             PatientIdType patientIdType = new PatientIdType();
             patientIdType.setId("1212121212");
             patientIdType.setType("1.2.752.129.2.1.3.1");
@@ -104,7 +104,7 @@ public final class TestConsumer {
 			TLSClientParameters tlsCP = setUpTlsClientParams();
 			http.setTlsClientParameters(tlsCP);
 
-            GetCareContactResponseType response = serviceInterface.getCareContact(LOGICAL_ADDRESS, request);
+            GetCareContactsResponseType response = serviceInterface.getCareContacts(LOGICAL_ADDRESS, request);
 
 			return ("GetCareContact response=" + response.getCareContact());
 
