@@ -67,7 +67,7 @@ public class ProducerImpl implements GetCareDocumentationResponderInterface {
 
         header.setDocumentId("documentId");
         header.setDocumentTitle("documentTitle");
-        header.setSourceSystem("sourceSystemHSAid");
+        header.setSourceSystemHSAid("sourceSystemHSAid");
         header.setDocumentTime("20130213121419");
         header.setApprovedForPatient(false);
         header.setCareContactId("careContactId");
