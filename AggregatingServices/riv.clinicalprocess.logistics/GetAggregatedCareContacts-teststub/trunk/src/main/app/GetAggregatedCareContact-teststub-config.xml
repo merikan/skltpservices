@@ -17,8 +17,8 @@
         <spring:property name="ignoreResourceNotFound" value="true"/>
         <spring:property name="locations">
           <spring:list>
-            <spring:value>classpath:GetAggregatedCareContact-config.properties</spring:value>
-            <spring:value>classpath:GetAggregatedCareContact-config-override.properties</spring:value>
+            <spring:value>classpath:GetAggregatedCareContacts-config.properties</spring:value>
+            <spring:value>classpath:GetAggregatedCareContacts-config-override.properties</spring:value>
           </spring:list>
         </spring:property>
       </spring:bean>
