@@ -1,4 +1,4 @@
-package se.skltp.aggregatingservices.riv.clinicalprocess.logistics.getcarecontact;
+package se.skltp.aggregatingservices.riv.clinicalprocess.logistics.getcarecontacts;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.util.ThreadSafeSimpleDateFormat;
 
-import se.riv.clinicalprocess.logistics.getcarecontactresponder.v2.GetCareContactType;
+import se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2.GetCareContactsType;
 import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentResponseType;
 import se.skltp.agp.riv.itintegration.engagementindex.v1.EngagementType;
 import se.skltp.agp.service.api.QueryObject;
@@ -45,7 +45,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
     @Override
     public List<Object[]> createRequestList(QueryObject qo, FindContentResponseType src) {
 
-        GetCareContactType originalRequest = (GetCareContactType)qo.getExtraArg();
+        GetCareContactsType originalRequest = (GetCareContactsType)qo.getExtraArg();
         Date reqFrom = null;
         Date reqTo = null;
 
@@ -90,7 +90,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
             System.err.println("Calling source system using logical address " + sourceSystem + " for subject of care id: " + originalRequest.getPatientId().getId());
             if (log.isInfoEnabled()) log.info("Calling source system using logical address {} for subject of care id {}", sourceSystem, originalRequest.getPatientId().getId());
 
-            GetCareContactType request = new GetCareContactType();
+            GetCareContactsType request = new GetCareContactsType();
             request.setPatientId(originalRequest.getPatientId());
             request.getCareUnitHSAid().addAll(careUnitList);
             request.setTimePeriod(originalRequest.getTimePeriod());

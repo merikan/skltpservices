@@ -1,4 +1,4 @@
-package se.skltp.aggregatingservices.riv.clinicalprocess.logistics.getcarecontact;
+package se.skltp.aggregatingservices.riv.clinicalprocess.logistics.getcarecontacts;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,8 +9,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import se.riv.clinicalprocess.logistics.getcarecontactresponder.v2.GetCareContactType;
+import se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2.GetCareContactsType;
 import se.riv.clinicalprocess.logistics.v2.PatientIdType;
+import se.skltp.aggregatingservices.riv.clinicalprocess.logistics.getcarecontacts.RequestListFactoryImpl;
 import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentResponseType;
 import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentType;
 import se.skltp.agp.riv.itintegration.engagementindex.v1.EngagementType;
@@ -30,20 +31,20 @@ public class RequestListFactoryImplTest {
     public void createRequestList(){
         RequestListFactoryImpl requestFactory = new RequestListFactoryImpl();
         FindContentType fc = createFindContent(RR_ID);       
-        GetCareContactType getCareDoc = createGetCareContact(RR_ID, Collections.<String> emptyList());
+        GetCareContactsType getCareDoc = createGetCareContacts(RR_ID, Collections.<String> emptyList());
         QueryObject queryObject = new QueryObject(fc, getCareDoc);
         FindContentResponseType findContentResponse = createFindContentResponse(TestProducerDb.TEST_LOGICAL_ADDRESS_1, TestProducerDb.TEST_LOGICAL_ADDRESS_2);
         List<Object[]> requestList =  requestFactory.createRequestList(queryObject, findContentResponse);
         assertEquals(2, requestList.size());
         
         assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_2, requestList.get(0)[0]);
-        GetCareContactType request1 = (GetCareContactType)requestList.get(0)[1];
+        GetCareContactsType request1 = (GetCareContactsType)requestList.get(0)[1];
         assertEquals(RR_ID, request1.getPatientId().getId());
         assertEquals(1, request1.getCareUnitHSAid().size());
         assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_2, request1.getCareUnitHSAid().get(0));
         
         assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, requestList.get(1)[0]);
-        GetCareContactType request2 = (GetCareContactType)requestList.get(1)[1];
+        GetCareContactsType request2 = (GetCareContactsType)requestList.get(1)[1];
         assertEquals(RR_ID, request2.getPatientId().getId());
         assertEquals(1, request2.getCareUnitHSAid().size());
         assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, request2.getCareUnitHSAid().get(0));
@@ -53,14 +54,14 @@ public class RequestListFactoryImplTest {
     public void createRequestList_one_careUnit(){
         RequestListFactoryImpl requestFactory = new RequestListFactoryImpl();
         FindContentType fc = createFindContent(RR_ID); 
-        GetCareContactType getCareDoc = createGetCareContact(RR_ID, Collections.singletonList(TestProducerDb.TEST_LOGICAL_ADDRESS_1));
+        GetCareContactsType getCareDoc = createGetCareContacts(RR_ID, Collections.singletonList(TestProducerDb.TEST_LOGICAL_ADDRESS_1));
         QueryObject queryObject = new QueryObject(fc, getCareDoc);
         FindContentResponseType findContentResponse = createFindContentResponse(TestProducerDb.TEST_LOGICAL_ADDRESS_1, TestProducerDb.TEST_LOGICAL_ADDRESS_2);
         List<Object[]> requestList =  requestFactory.createRequestList(queryObject, findContentResponse);
         assertEquals(1, requestList.size());
         assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, requestList.get(0)[0]);
         
-        GetCareContactType request = (GetCareContactType)requestList.get(0)[1];
+        GetCareContactsType request = (GetCareContactsType)requestList.get(0)[1];
         assertEquals(RR_ID, request.getPatientId().getId());
         assertEquals(1, request.getCareUnitHSAid().size());
         assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, request.getCareUnitHSAid().get(0));
@@ -70,7 +71,7 @@ public class RequestListFactoryImplTest {
     public void createRequestList_different_sourceSystems(){
         RequestListFactoryImpl requestFactory = new RequestListFactoryImpl();
         FindContentType fc = createFindContent(RR_ID); 
-        GetCareContactType getCareDoc = createGetCareContact(RR_ID, Collections.singletonList(TestProducerDb.TEST_LOGICAL_ADDRESS_1));
+        GetCareContactsType getCareDoc = createGetCareContacts(RR_ID, Collections.singletonList(TestProducerDb.TEST_LOGICAL_ADDRESS_1));
         QueryObject queryObject = new QueryObject(fc, getCareDoc);
         FindContentResponseType findContentResponse = createFindContentResponse(TestProducerDb.TEST_LOGICAL_ADDRESS_1, TestProducerDb.TEST_LOGICAL_ADDRESS_1);
         findContentResponse.getEngagement().get(0).setSourceSystem(SOURCE_SYSTEM_1);
@@ -80,13 +81,13 @@ public class RequestListFactoryImplTest {
         assertEquals(2, requestList.size());
 
         assertEquals(SOURCE_SYSTEM_2, requestList.get(0)[0]);
-        GetCareContactType request1 = (GetCareContactType)requestList.get(0)[1];
+        GetCareContactsType request1 = (GetCareContactsType)requestList.get(0)[1];
         assertEquals(RR_ID, request1.getPatientId().getId());
         assertEquals(1, request1.getCareUnitHSAid().size());
         assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, request1.getCareUnitHSAid().get(0));
         
         assertEquals(SOURCE_SYSTEM_1, requestList.get(1)[0]);
-        GetCareContactType request2 = (GetCareContactType)requestList.get(1)[1];
+        GetCareContactsType request2 = (GetCareContactsType)requestList.get(1)[1];
         assertEquals(RR_ID, request2.getPatientId().getId());
         assertEquals(1, request2.getCareUnitHSAid().size());
         assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, request2.getCareUnitHSAid().get(0));
@@ -96,7 +97,7 @@ public class RequestListFactoryImplTest {
     public void createRequestList_different_careUnits_one_sourceSystem(){
         RequestListFactoryImpl requestFactory = new RequestListFactoryImpl();
         FindContentType fc = createFindContent(RR_ID); 
-        GetCareContactType getCareDoc = createGetCareContact(RR_ID, Collections.<String> emptyList());
+        GetCareContactsType getCareDoc = createGetCareContacts(RR_ID, Collections.<String> emptyList());
         QueryObject queryObject = new QueryObject(fc, getCareDoc);
         FindContentResponseType findContentResponse = createFindContentResponse(TestProducerDb.TEST_LOGICAL_ADDRESS_1, TestProducerDb.TEST_LOGICAL_ADDRESS_2);
         findContentResponse.getEngagement().get(0).setSourceSystem(SOURCE_SYSTEM_1);
@@ -105,7 +106,7 @@ public class RequestListFactoryImplTest {
         assertEquals(1, requestList.size());
         assertEquals(SOURCE_SYSTEM_1, requestList.get(0)[0]);
         
-        GetCareContactType request = (GetCareContactType)requestList.get(0)[1];
+        GetCareContactsType request = (GetCareContactsType)requestList.get(0)[1];
         assertEquals(RR_ID, request.getPatientId().getId());
         assertEquals(2, request.getCareUnitHSAid().size()); 
         assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_2, request.getCareUnitHSAid().get(0));
@@ -116,7 +117,7 @@ public class RequestListFactoryImplTest {
     public void createRequestList_one_careUnit_one_sourceSystem(){
         RequestListFactoryImpl requestFactory = new RequestListFactoryImpl();
         FindContentType fc = createFindContent(RR_ID); 
-        GetCareContactType getCareDoc = createGetCareContact(RR_ID, Collections.<String> emptyList());
+        GetCareContactsType getCareDoc = createGetCareContacts(RR_ID, Collections.<String> emptyList());
         QueryObject queryObject = new QueryObject(fc, getCareDoc);
         FindContentResponseType findContentResponse = createFindContentResponse(TestProducerDb.TEST_LOGICAL_ADDRESS_1, TestProducerDb.TEST_LOGICAL_ADDRESS_1);
         findContentResponse.getEngagement().get(0).setSourceSystem(SOURCE_SYSTEM_1);
@@ -125,7 +126,7 @@ public class RequestListFactoryImplTest {
         assertEquals(1, requestList.size());
         assertEquals(SOURCE_SYSTEM_1, requestList.get(0)[0]);
         
-        GetCareContactType request = (GetCareContactType)requestList.get(0)[1];
+        GetCareContactsType request = (GetCareContactsType)requestList.get(0)[1];
         assertEquals(RR_ID, request.getPatientId().getId());
         assertEquals(1, request.getCareUnitHSAid().size()); 
         assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, request.getCareUnitHSAid().get(0));
@@ -147,8 +148,8 @@ public class RequestListFactoryImplTest {
         return fc;
     }
     
-    private GetCareContactType createGetCareContact(String id, List<String> careUnits){
-        GetCareContactType getCareContact = new GetCareContactType();
+    private GetCareContactsType createGetCareContacts(String id, List<String> careUnits){
+        GetCareContactsType getCareContact = new GetCareContactsType();
         PatientIdType patientId = new PatientIdType();
         patientId.setId(RR_ID);
         getCareContact.setPatientId(patientId);

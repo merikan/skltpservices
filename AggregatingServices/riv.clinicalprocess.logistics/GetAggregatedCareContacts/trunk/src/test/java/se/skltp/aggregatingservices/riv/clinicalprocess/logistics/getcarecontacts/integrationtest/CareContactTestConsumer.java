@@ -1,4 +1,4 @@
-package se.skltp.aggregatingservices.riv.clinicalprocess.logistics.getcarecontact.integrationtest;
+package se.skltp.aggregatingservices.riv.clinicalprocess.logistics.getcarecontacts.integrationtest;
 
 import static se.skltp.agp.test.producer.TestProducerDb.TEST_RR_ID_ONE_HIT;
 
@@ -7,16 +7,16 @@ import javax.xml.ws.Holder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import se.riv.clinicalprocess.logistics.getcarecontactrequest.v2.GetCareContactResponderInterface;
-import se.riv.clinicalprocess.logistics.getcarecontactresponder.v2.GetCareContactResponseType;
-import se.riv.clinicalprocess.logistics.getcarecontactresponder.v2.GetCareContactType;
+import se.riv.clinicalprocess.logistics.getcarecontactsrequest.v2.GetCareContactsResponderInterface;
+import se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2.GetCareContactsResponseType;
+import se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2.GetCareContactsType;
 import se.riv.clinicalprocess.logistics.v2.PatientIdType;
 import se.skltp.aggregatingservices.CareContactMuleServer;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 import se.skltp.agp.test.consumer.AbstractTestConsumer;
 import se.skltp.agp.test.consumer.SoapHeaderCxfInterceptor;
 
-public class CareContactTestConsumer extends AbstractTestConsumer<GetCareContactResponderInterface>{
+public class CareContactTestConsumer extends AbstractTestConsumer<GetCareContactsResponderInterface>{
 
     private static final Logger log = LoggerFactory.getLogger(CareContactTestConsumer.class);
 
@@ -26,7 +26,7 @@ public class CareContactTestConsumer extends AbstractTestConsumer<GetCareContact
         String personnummer = TEST_RR_ID_ONE_HIT;
 
         CareContactTestConsumer consumer = new CareContactTestConsumer(serviceAddress, SAMPLE_ORIGINAL_CONSUMER_HSAID);
-        Holder<GetCareContactResponseType> responseHolder = new Holder<GetCareContactResponseType>();
+        Holder<GetCareContactsResponseType> responseHolder = new Holder<GetCareContactsResponseType>();
         Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
         long now = System.currentTimeMillis();
         consumer.callService("logical-adress", personnummer, processingStatusHolder, responseHolder);
@@ -35,18 +35,18 @@ public class CareContactTestConsumer extends AbstractTestConsumer<GetCareContact
 
     public CareContactTestConsumer(String serviceAddress, String originalConsumerHsaId) {
         // Setup a web service proxy for communication using HTTPS with Mutual Authentication
-        super(GetCareContactResponderInterface.class, serviceAddress, originalConsumerHsaId); 
+        super(GetCareContactsResponderInterface.class, serviceAddress, originalConsumerHsaId); 
     }
 
-    public void callService(String logicalAddress, String id, Holder<ProcessingStatusType> processingStatusHolder, Holder<GetCareContactResponseType> responseHolder) {
+    public void callService(String logicalAddress, String id, Holder<ProcessingStatusType> processingStatusHolder, Holder<GetCareContactsResponseType> responseHolder) {
         log.debug("Calling GetCareContact-soap-service with id = {}", id);
 
-        GetCareContactType request = new GetCareContactType();
+        GetCareContactsType request = new GetCareContactsType();
         PatientIdType patientId = new PatientIdType();
         patientId.setId(id);
         request.setPatientId(patientId);
 
-        GetCareContactResponseType response = _service.getCareContact(logicalAddress, request);
+        GetCareContactsResponseType response = _service.getCareContacts(logicalAddress, request);
         responseHolder.value = response;
 
         processingStatusHolder.value = SoapHeaderCxfInterceptor.getLastFoundProcessingStatus();

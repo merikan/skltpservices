@@ -10,10 +10,10 @@
     </parent>
 
     <groupId>se.skltp.aggregatingservices.clinicalprocess.logistics.logistics</groupId>
-    <artifactId>GetAggregatedCareContact</artifactId>
+    <artifactId>GetAggregatedCareContacts</artifactId>
     <version>1.0.0-RC3-SNAPSHOT</version>
     <packaging>mule</packaging>
-    <name>GetAggregatedCareContact</name>
+    <name>GetAggregatedCareContacts</name>
 
     <properties>
         <skltp.agp.version>1.0.0-RC2</skltp.agp.version>
@@ -31,9 +31,9 @@
     </pluginRepositories>
       
     <scm>
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContact/trunk</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContact//trunk</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContact/trunk</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContacts/trunk</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContacts//trunk</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContacts/trunk</url>
     </scm>
     
 	<dependencies>	
@@ -271,15 +271,15 @@
               <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
               <wsdlOptions>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_LOGISTICS_LOGISTICS_2_0_RC2/interactions/GetCareContactInteraction/GetCareContactInteraction_2.0_RIVTABP21.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_LOGISTICS_LOGISTICS_2_0_RC3/interactions/GetCareContactsInteraction/GetCareContactsInteraction_2.0_RIVTABP21.wsdl</wsdl>
                     <extraargs>
                       <extraarg>-p</extraarg>
                     <extraarg>
-                      urn:riv:clinicalprocess:logistics:logistics:GetCareContact:2:rivtabp21=se.riv.clinicalprocess.logistics.getcarecontactrequest.v2
+                      urn:riv:clinicalprocess:logistics:logistics:GetCareContacts:2:rivtabp21=se.riv.clinicalprocess.logistics.getcarecontactsrequest.v2
                     </extraarg>
                     <extraarg>-p</extraarg>
                     <extraarg>
-                      urn:riv:clinicalprocess:logistics:logistics:GetCareContactResponder:2=se.riv.clinicalprocess.logistics.getcarecontactresponder.v2
+                      urn:riv:clinicalprocess:logistics:logistics:GetCareContactsResponder:2=se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2
                     </extraarg>
                     <extraarg>-p</extraarg>
                     <extraarg>

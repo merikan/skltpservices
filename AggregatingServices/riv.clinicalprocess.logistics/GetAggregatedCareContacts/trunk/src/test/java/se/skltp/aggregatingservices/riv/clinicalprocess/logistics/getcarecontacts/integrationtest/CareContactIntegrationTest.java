@@ -1,4 +1,4 @@
-package se.skltp.aggregatingservices.riv.clinicalprocess.logistics.getcarecontact.integrationtest;
+package se.skltp.aggregatingservices.riv.clinicalprocess.logistics.getcarecontacts.integrationtest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -25,7 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
-import se.riv.clinicalprocess.logistics.getcarecontactresponder.v2.GetCareContactResponseType;
+import se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2.GetCareContactsResponseType;
 import se.riv.clinicalprocess.logistics.v2.CareContactType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusRecordType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
@@ -38,7 +38,7 @@ public class CareContactIntegrationTest extends AbstractAggregateIntegrationTest
 
     private static final Logger log = LoggerFactory.getLogger(CareContactIntegrationTest.class);
     
-    private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("GetAggregatedCareContact-config");
+    private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("GetAggregatedCareContacts-config");
     private static final String SKLTP_HSA_ID = rb.getString("SKLTP_HSA_ID");
     
     private static final String LOGICAL_ADDRESS = "logical-address";
@@ -49,7 +49,7 @@ public class CareContactIntegrationTest extends AbstractAggregateIntegrationTest
     protected String getConfigResources() {
         return 
                 "soitoolkit-mule-jms-connector-activemq-embedded.xml," + 
-                "GetAggregatedCareContact-common.xml," +
+                "GetAggregatedCareContacts-common.xml," +
                 //			"aggregating-services-common.xml," + 
                 //			"aggregating-service.xml," +
                 "teststub-services/engagemangsindex-teststub-service.xml," + 
@@ -139,12 +139,12 @@ public class CareContactIntegrationTest extends AbstractAggregateIntegrationTest
 
         // Setup and perform the call to the web service
         CareContactTestConsumer consumer = new CareContactTestConsumer(DEFAULT_SERVICE_ADDRESS, CareContactTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID);
-        Holder<GetCareContactResponseType> responseHolder = new Holder<GetCareContactResponseType>();
+        Holder<GetCareContactsResponseType> responseHolder = new Holder<GetCareContactsResponseType>();
         Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
         consumer.callService(LOGICAL_ADDRESS, registeredResidentId, processingStatusHolder, responseHolder);
 
         // Verify the response size and content
-        GetCareContactResponseType response = responseHolder.value;
+        GetCareContactsResponseType response = responseHolder.value;
         int expextedResponseSize = testData.length;
         assertEquals(expextedResponseSize, response.getCareContact().size());
 
