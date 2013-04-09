@@ -20,16 +20,14 @@
  */
 package se.riv.clinicalprocess.logistics.getcarecontact.v2;
 
-import java.util.List;
-
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 
-import se.riv.clinicalprocess.logistics.getcarecontact.v2.rivtabp21.GetCareContactResponderInterface;
-import se.riv.clinicalprocess.logistics.getcarecontactresponder.v2.GetCareContactResponseType;
-import se.riv.clinicalprocess.logistics.getcarecontactresponder.v2.GetCareContactType;
+import se.riv.clinicalprocess.logistics.getcarecontacts.v2.rivtabp21.GetCareContactsResponderInterface;
+import se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2.GetCareContactsResponseType;
+import se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2.GetCareContactsType;
 import se.riv.clinicalprocess.logistics.v2.AuthorType;
 import se.riv.clinicalprocess.logistics.v2.CareContactBodyType;
 import se.riv.clinicalprocess.logistics.v2.CareContactType;
@@ -39,20 +37,20 @@ import se.riv.clinicalprocess.logistics.v2.PatientSummaryHeaderType;
 
 
 @WebService(
-		serviceName = "GetCareContactResponderService",
-        endpointInterface= "se.riv.clinicalprocess.logistics.logistics.getcarecontact.v2.rivtabp21.GetCareContactResponderInterface",
-        portName = "GetCareContactResponderPort",
-		targetNamespace = "urn:riv:clinicalprocess:logistics:logistics:GetCareContact:2:rivtabp21",
-		wsdlLocation = "interactions/GetCareContactInteraction/GetCareContactInteraction_2.0_RIVTABP21.wsdl")
-public class ProducerImpl implements GetCareContactResponderInterface {
+		serviceName = "GetCareContactsResponderService",
+        endpointInterface= "se.riv.clinicalprocess.logistics.logistics.getcarecontacts.v2.rivtabp21.GetCareContactsResponderInterface",
+        portName = "GetCareContactsResponderPort",
+		targetNamespace = "urn:riv:clinicalprocess:logistics:logistics:GetCareContacts:2:rivtabp21",
+		wsdlLocation = "interactions/GetCareContactInteraction/GetCareContactsInteraction_2.0_RIVTABP21.wsdl")
+public class ProducerImpl implements GetCareContactsResponderInterface {
 
     @Override
-    @WebResult(name = "GetCareContactResponse", targetNamespace = "urn:riv:clinicalprocess:logistics:logistics:GetCareContactResponder:2", partName = "parameters")
-    @WebMethod(operationName = "GetCareContact", action = "urn:riv:ehr:patientsummary:GetCareContactResponder:2:GetCareContact")
-    public GetCareContactResponseType getCareContact(
+    @WebResult(name = "GetCareContactResponse", targetNamespace = "urn:riv:clinicalprocess:logistics:logistics:GetCareContactsResponder:2", partName = "parameters")
+    @WebMethod(operationName = "GetCareContacts", action = "urn:riv:ehr:patientsummary:GetCareContactsResponder:2:GetCareContacts")
+    public GetCareContactsResponseType getCareContacts(
             @WebParam(partName = "LogicalAddress", name = "LogicalAddress", targetNamespace = "urn:riv:itintegration:registry:1", header = true) String logicalAddress,
-            @WebParam(partName = "parameters", name = "GetCareContact", targetNamespace = "urn:riv:clinicalprocess:logistics:logistics:GetCareContactResponder:2") GetCareContactType parameters) {
-        GetCareContactResponseType responseType = new GetCareContactResponseType();
+            @WebParam(partName = "parameters", name = "GetCareContacts", targetNamespace = "urn:riv:clinicalprocess:logistics:logistics:GetCareContactsResponder:2") GetCareContactsType parameters) {
+        GetCareContactsResponseType responseType = new GetCareContactsResponseType();
         CareContactType careContact = new CareContactType();
         
         CareContactBodyType body = new CareContactBodyType();
@@ -72,7 +70,7 @@ public class ProducerImpl implements GetCareContactResponderInterface {
         PatientSummaryHeaderType header = new PatientSummaryHeaderType();
         header.setDocumentId("documentId");
         header.setDocumentTitle("documentTitle");
-        header.setSourceSystem("sourceSystemHSAid");
+        header.setSourceSystemHSAid("sourceSystemHSAid");
         header.setDocumentTime("20130213121419");
         header.setApprovedForPatient(false);
         header.setCareContactId("careContactId");

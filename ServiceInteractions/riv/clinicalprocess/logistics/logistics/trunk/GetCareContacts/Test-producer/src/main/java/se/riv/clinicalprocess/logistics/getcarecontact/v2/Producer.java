@@ -40,7 +40,7 @@ public class Producer {
         SpringBusFactory.setDefaultBus(bus);
         
         final Object implementor = new ProducerImpl();
-        final String address = "https://localhost:21000/testproducer/GetCareContact/2/rivtabp21";
+        final String address = "https://localhost:21000/testproducer/GetCareContacts/2/rivtabp21";
         Endpoint.publish(address, implementor);
     }
 

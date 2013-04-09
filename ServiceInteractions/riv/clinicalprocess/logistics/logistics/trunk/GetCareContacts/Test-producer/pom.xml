@@ -15,13 +15,13 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.skltpservices.clinicalprocess.logistics.logistics</groupId>
-	<artifactId>GetCareContact-testproducer</artifactId>
-	<name>GetCareContact-testproducer</name>
+	<artifactId>GetCareContacts-testproducer</artifactId>
+	<name>GetCareContacts-testproducer</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>se.skl.skltpservices.clinicalprocess.logistics.logistics</groupId>
-		<artifactId>GetCareContact</artifactId>
+		<artifactId>GetCareContacts</artifactId>
 		<version>2.0.RC2-SNAPSHOT</version>
 	</parent>
 

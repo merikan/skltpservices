@@ -29,19 +29,19 @@
     <!-- Name of this file is mandatory and may not be changed. -->
 
 
-    <flow name="clinicalprocess-logistics-logistics-GetCareContact-virtualisering-2.0-flow" >
+    <flow name="clinicalprocess-logistics-logistics-GetCareContacts-virtualisering-2.0-flow" >
       <composite-source>
         <https:inbound-endpoint
-          address="https://${TP_HOST}:${TP_PORT}/${TP_BASE_URI}/GetCareContact/2/rivtabp21"
+          address="https://${TP_HOST}:${TP_PORT}/${TP_BASE_URI}/GetCareContacts/2/rivtabp21"
              connector-ref="VPProducerConnector"
           exchange-pattern="request-response" 
           responseTransformer-refs="featureKeepAliveResponse filterResponseHeaders">
           <properties>
-            <spring:entry key="featureUseKeepAlive" value="${feature.keepalive.urn.riv.clinicalprocess.healthcond.description.GetCareDocumentationResponder.2:${feature.keepalive}}"/>
+            <spring:entry key="featureUseKeepAlive" value="${feature.keepalive.urn.riv.clinicalprocess.healthcond.description.GetCareContactsResponder.2:${feature.keepalive}}"/>
           </properties>
         </https:inbound-endpoint>
         <http:inbound-endpoint
-          address="http://${TP_HOST}:${TP_PORT_HTTP}/${TP_BASE_URI}/GetCareContact/2/rivtabp21"
+          address="http://${TP_HOST}:${TP_PORT_HTTP}/${TP_BASE_URI}/GetCareContacts/2/rivtabp21"
           exchange-pattern="request-response" 
           responseTransformer-refs="featureKeepAliveResponse filterResponseHeaders">
           <properties>
@@ -51,10 +51,10 @@
       </composite-source>
 
       <cxf:proxy-service
-          namespace="urn:riv:clinicalprocess:logistics:logistics:GetCareContact:2:rivtabp21"
+          namespace="urn:riv:clinicalprocess:logistics:logistics:GetCareContacts:2:rivtabp21"
           payload="envelope"
-          service="GetCareContactResponderService"
-          wsdlLocation="classpath:interactions/GetCareContactInteraction/GetCareContactInteraction_2.0_RIVTABP21.wsdl" />
+          service="GetCareContactsResponderService"
+          wsdlLocation="classpath:interactions/GetCareContactsInteraction/GetCareContactsInteraction_2.0_RIVTABP21.wsdl" />
 
       <flow-ref name="vagval-dynamic-routing-flow" />
     </flow>
