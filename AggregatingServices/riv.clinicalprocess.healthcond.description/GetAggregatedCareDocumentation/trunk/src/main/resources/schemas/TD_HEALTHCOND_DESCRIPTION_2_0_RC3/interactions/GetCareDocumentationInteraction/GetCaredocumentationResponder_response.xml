@@ -47,8 +47,4 @@
             <core:/multimediaEntry>
         </core:careDocumentationBody>
     <careDocumentation>
-    <result>
-        <resultCode>OK</resultCode>
-        <resultText>resultText</resultText>
-    </result>
 </GetCareDocumentationResponse>
