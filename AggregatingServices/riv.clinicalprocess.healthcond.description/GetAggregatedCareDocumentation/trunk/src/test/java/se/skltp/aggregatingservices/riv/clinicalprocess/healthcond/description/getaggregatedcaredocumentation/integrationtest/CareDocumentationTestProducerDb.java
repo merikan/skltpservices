@@ -46,7 +46,7 @@ public class CareDocumentationTestProducerDb extends TestProducerDb {
         AuthorType author = new AuthorType();
         author.setCareUnitHSAid(logicalAddress);
         header.setAuthor(author);
-        header.setSourceSystem(logicalAddress);
+        header.setSourceSystemHSAid(logicalAddress);
         header.setDocumentId(businessObjectId);
         response.setCareDocumentationHeader(header);
 

@@ -85,7 +85,7 @@
                     Vårddokumentets unika identifierare.
                     OID kan sättas till 1.2.752.129.2.1.2.1 
                     (Icke-nationell identifierare Org+lokalt unikt id)
-				sourceSystem: 
+				sourceSystemHSAid: 
 	                HSAid för det system som dokumentet är skapat i
                 documentTitle: 
                     Titel på dokumentet/anteckningen
@@ -112,7 +112,7 @@
         </xs:annotation>
         <xs:sequence>
             <xs:element name="documentId" type="xs:string"/>
-            <xs:element name="sourceSystem" type="tns:HSAIdType"/>
+            <xs:element name="sourceSystemHSAid" type="tns:HSAIdType"/>
             <xs:element name="documentTitle" type="xs:string" minOccurs="0"/>
             <xs:element name="documentTime" type="tns:TimeStampType"/>
             <xs:element name="patientId" type="tns:PatientIdType"/>
@@ -151,6 +151,7 @@
             <xs:element name="authorTime" type="tns:TimeStampType"/>
             <xs:element name="authorHSAid" type="tns:HSAIdType"/>
             <xs:element name="authorRoleCode" type="xs:string" minOccurs="0"/>
+            <xs:element minOccurs="0" name="authorOtherRole" type="tns:AuthorOtherRoleType"/>
             <xs:element name="authorName" type="xs:string" minOccurs="0"/>
             <xs:element name="authorOrgUnitHSAid" type="tns:HSAIdType"/>
             <xs:element name="authorOrgUnitName" type="xs:string"/>
@@ -269,4 +270,14 @@
             />
         </xs:restriction>
     </xs:simpleType>
+
+    <xs:complexType name="AuthorOtherRoleType">
+        <xs:annotation>
+            <xs:documentation/>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="authorOtherRoleCode" type="xs:string"/>
+            <xs:element name="authorOtherRoleCodeOID" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>

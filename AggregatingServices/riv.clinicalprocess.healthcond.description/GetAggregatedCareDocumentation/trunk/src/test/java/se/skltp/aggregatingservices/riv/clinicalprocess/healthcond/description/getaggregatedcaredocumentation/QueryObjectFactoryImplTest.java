@@ -55,7 +55,7 @@ public class QueryObjectFactoryImplTest {
         PatientIdType patientId = new PatientIdType();
         patientId.setId(RR_ID);
         getCareDoc.setPatientId(patientId);
-        getCareDoc.setSourceSystem(SOURCE_SYSTEM);
+        getCareDoc.setSourceSystemHSAid(SOURCE_SYSTEM);
         
         Document doc = createDocument(getCareDoc);
         QueryObject queryObj = objectFactory.createQueryObject(doc);
