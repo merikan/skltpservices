@@ -12,9 +12,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>se.skl.tp</groupId>
 	<artifactId>druglogistics-dosedispensing-HamtaMeddelanden-virtualisering</artifactId>
-	<version>1.1-SNAPSHOT</version>
 	<name>druglogistics-dosedispensing-HamtaMeddelanden-virtualisering</name>
 	<url>http://maven.apache.org</url>
 
@@ -26,40 +24,6 @@
 
 	<build>
 		<plugins>
-			<!-- Checkout schemas and copy them to the classpath -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-scm-plugin</artifactId>
-				<version>1.5</version>
-				<executions>
-					<execution>
-						<id>checkout-service-schemas</id>
-						<goals>
-							<goal>checkout</goal>
-						</goals>
-						<phase>generate-sources</phase>
-						<configuration>
-							<basedir>${basedir}</basedir>
-							<checkoutDirectory>${project.build.directory}/schemas/interactions/HamtaMeddelandenInteraction</checkoutDirectory>
-							<skipCheckoutIfExists>true</skipCheckoutIfExists>
-							<connectionUrl>scm:svn:${osorSchemaDirectoryUrl}</connectionUrl>
-						</configuration>
-					</execution>
-					<execution>
-						<id>checkout-core-component-schemas</id>
-						<goals>
-							<goal>checkout</goal>
-						</goals>
-						<phase>generate-sources</phase>
-						<configuration>
-							<basedir>${basedir}</basedir>
-							<checkoutDirectory>${project.build.directory}/schemas/core_components</checkoutDirectory>
-							<skipCheckoutIfExists>true</skipCheckoutIfExists>
-							<connectionUrl>scm:svn:${osorCoreSchemaDirectoryUrl}</connectionUrl>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
