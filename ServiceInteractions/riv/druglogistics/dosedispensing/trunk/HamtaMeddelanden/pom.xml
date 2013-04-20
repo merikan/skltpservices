@@ -32,7 +32,7 @@
 	<modules>
 		<module>Virtualisering</module>
 		<module>Test-producer</module>
-		
+		<module>Test-consumer</module>
 	</modules>
 
 	<dependencies>
