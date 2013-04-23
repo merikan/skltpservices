@@ -60,5 +60,44 @@
             </exclusions>
         </dependency>
 	</dependencies>
+	
+	<profiles>
+		<profile>
+			<id>localtest</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.2.1</version>
+						<executions>
+							<execution>
+								<phase>test</phase>
+								<goals>
+									<goal>java</goal>
+								</goals>
+								<configuration>
+									<mainClass>se.riv.itinfra.tp.ping.PingConsumer</mainClass>
+									<arguments>
+										<!-- sleeptime -->
+										<argument>2000</argument>
+										<!-- endpoint
+										<argument>https://localhost:20000/vp/Ping/1/rivtabp20</argument>
+										-->
+										<argument>https://localhost:20000/vp/Ping/1/rivtabp20</argument> 
+										<!-- logical adress -->
+										<argument>Ping</argument>
+									</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
