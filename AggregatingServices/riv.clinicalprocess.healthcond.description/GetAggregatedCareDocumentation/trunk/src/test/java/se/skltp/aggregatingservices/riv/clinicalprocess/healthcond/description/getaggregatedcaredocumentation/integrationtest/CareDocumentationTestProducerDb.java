@@ -45,6 +45,15 @@ public class CareDocumentationTestProducerDb extends TestProducerDb {
         header.setApprovedForPatient(true);
         AuthorType author = new AuthorType();
         author.setCareUnitHSAid(logicalAddress);
+
+        if(TestProducerDb.TEST_LOGICAL_ADDRESS_1.equals(logicalAddress)){
+            author.setAuthorOrgUnitName("Vårdcentralen Kusten, Kärna");
+        } else if(TestProducerDb.TEST_LOGICAL_ADDRESS_2.equals(logicalAddress)){
+            author.setAuthorOrgUnitName("Vårdcentralen Molnet");
+        } else {
+            author.setAuthorOrgUnitName("Vårdcentralen Stacken");
+        }
+        
         header.setAuthor(author);
         header.setSourceSystemHSAid(logicalAddress);
         header.setDocumentId(businessObjectId);
