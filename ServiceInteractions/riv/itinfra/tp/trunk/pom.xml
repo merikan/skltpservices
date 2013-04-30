@@ -36,7 +36,7 @@
 	</properties>
 
 	<modules>
-		<module>Schema</module>
+		<module>itinfra-tp-schemas</module>
 	 <module>Ping</module>
 	</modules>
 	
