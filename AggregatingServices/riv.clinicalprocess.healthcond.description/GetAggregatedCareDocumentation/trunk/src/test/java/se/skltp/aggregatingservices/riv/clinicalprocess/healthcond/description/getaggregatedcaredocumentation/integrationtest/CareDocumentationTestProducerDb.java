@@ -31,7 +31,7 @@ public class CareDocumentationTestProducerDb extends TestProducerDb {
     public static final String TEST_REASON_UPDATED = "updated reason";
 
     @Override
-    public Object createResponseItem(String logicalAddress, String registeredResidentId, String businessObjectId) {
+    public Object createResponseItem(String logicalAddress, String registeredResidentId, String businessObjectId, String time) {
 
         log.debug("Created one response item for logical-address {}, registeredResidentId {} and businessObjectId {}",
                 new Object[] {logicalAddress, registeredResidentId, businessObjectId});
@@ -43,6 +43,7 @@ public class CareDocumentationTestProducerDb extends TestProducerDb {
         patientId.setType("1.2.752.129.2.1.3.1"); 
         header.setPatientId(patientId);
         header.setApprovedForPatient(true);
+        header.setDocumentTime(time);
         AuthorType author = new AuthorType();
         author.setCareUnitHSAid(logicalAddress);
 

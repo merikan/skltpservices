@@ -20,6 +20,7 @@ import java.util.List;
 
 import javax.xml.ws.Holder;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,7 @@ import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
 import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v2.GetCareDocumentationResponseType;
 import se.riv.clinicalprocess.healthcond.description.v2.CareDocumentationType;
+import se.riv.clinicalprocess.healthcond.description.v2.DatePeriodType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusRecordType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 import se.skltp.agp.test.consumer.AbstractAggregateIntegrationTest;
@@ -105,27 +107,74 @@ public class CareDocumentationIntegrationTest extends AbstractAggregateIntegrati
         assertProcessingStatusNoDataSynchFailed(statusList.get(0), TEST_LOGICAL_ADDRESS_1, VIRTUALIZATION_PLATFORM, EXPECTED_ERR_INVALID_ID_MSG);
     }
 
-    //	TODO: Mule EE dependency
-    //  @Test
+    @Ignore @Test
     public void test_ok_caching() {
-        String registeredResidentId   = TEST_RR_ID_ONE_HIT;
         long   expectedProcessingTime = getTestDb().getProcessingTime(TEST_LOGICAL_ADDRESS_1);
-        String expectedBookingId      = TEST_BO_ID_ONE_HIT;
-        String expectedLogicalAddress = TEST_LOGICAL_ADDRESS_1;
 
         long ts = System.currentTimeMillis();
-        List<ProcessingStatusRecordType> statusList = doTest(registeredResidentId, 1, new ExpectedTestData(expectedBookingId, expectedLogicalAddress));
+        
+        List<ProcessingStatusRecordType> statusList = doTest(TEST_RR_ID_ONE_HIT, 1, "consumer1", null, new ExpectedTestData(TEST_BO_ID_ONE_HIT, TEST_LOGICAL_ADDRESS_1));
         ts = System.currentTimeMillis() - ts;
-        assertProcessingStatusDataFromSource(statusList.get(0), expectedLogicalAddress);
+        assertProcessingStatusDataFromSource(statusList.get(0), TEST_LOGICAL_ADDRESS_1);
         assertTrue("Expected a long processing time (i.e. a non cached response)", ts > expectedProcessingTime);
-
+        
         ts = System.currentTimeMillis();
-        statusList = doTest(registeredResidentId, 1, new ExpectedTestData(expectedBookingId, expectedLogicalAddress));
+        statusList = doTest(TEST_RR_ID_ONE_HIT, 1, "consumer1", null, new ExpectedTestData(TEST_BO_ID_ONE_HIT, TEST_LOGICAL_ADDRESS_1));
         ts = System.currentTimeMillis() - ts;
-        assertProcessingStatusDataFromCache(statusList.get(0), expectedLogicalAddress);
+        assertProcessingStatusDataFromCache(statusList.get(0), TEST_LOGICAL_ADDRESS_1);
+        assertTrue("Expected a short processing time (i.e. a cached response)", ts < expectedProcessingTime);
+        
+        ts = System.currentTimeMillis();
+        statusList = doTest(TEST_RR_ID_ONE_HIT, 1, "consumer2", null, new ExpectedTestData(TEST_BO_ID_ONE_HIT, TEST_LOGICAL_ADDRESS_1));
+        ts = System.currentTimeMillis() - ts;
+        assertProcessingStatusDataFromSource(statusList.get(0), TEST_LOGICAL_ADDRESS_1);
+        assertTrue("Expected a long processing time (i.e. a non cached response)", ts > expectedProcessingTime);
+    }
+    
+
+    @Ignore @Test
+    public void test_ok_caching_many_hits() {
+        long   expectedProcessingTime = getTestDb().getProcessingTime(TEST_LOGICAL_ADDRESS_1);
+
+        long ts = System.currentTimeMillis();
+        
+        
+        List<ProcessingStatusRecordType> statusList = doTest(TEST_RR_ID_MANY_HITS, 3, 
+                new ExpectedTestData(TEST_BO_ID_MANY_HITS_1, TEST_LOGICAL_ADDRESS_1),
+                new ExpectedTestData(TEST_BO_ID_MANY_HITS_2, TEST_LOGICAL_ADDRESS_2),
+                new ExpectedTestData(TEST_BO_ID_MANY_HITS_3, TEST_LOGICAL_ADDRESS_2));
+
+        // Verify the Processing Status, expect ok from source system #1 and #2 but a timeout from #3
+        assertProcessingStatusDataFromSource(statusList.get(0), TEST_LOGICAL_ADDRESS_1);
+        assertProcessingStatusDataFromSource(statusList.get(1), TEST_LOGICAL_ADDRESS_2);
+        assertProcessingStatusNoDataSynchFailed(statusList.get(2), TEST_LOGICAL_ADDRESS_3, VIRTUALIZATION_PLATFORM, EXPECTED_ERR_TIMEOUT_MSG);
+        ts = System.currentTimeMillis() - ts;
+        assertTrue("Expected a long processing time (i.e. a non cached response)", ts > expectedProcessingTime);
+        
+        ts = System.currentTimeMillis();
+        statusList = doTest(TEST_RR_ID_MANY_HITS, 3, 
+                new ExpectedTestData(TEST_BO_ID_MANY_HITS_1, TEST_LOGICAL_ADDRESS_1),
+                new ExpectedTestData(TEST_BO_ID_MANY_HITS_2, TEST_LOGICAL_ADDRESS_2),
+                new ExpectedTestData(TEST_BO_ID_MANY_HITS_3, TEST_LOGICAL_ADDRESS_2));
+        ts = System.currentTimeMillis() - ts;
+        assertProcessingStatusDataFromCache(statusList.get(0), TEST_LOGICAL_ADDRESS_1);
+        assertProcessingStatusDataFromCache(statusList.get(1), TEST_LOGICAL_ADDRESS_2);
+        assertProcessingStatusNoDataSynchFailed(statusList.get(2), TEST_LOGICAL_ADDRESS_3, VIRTUALIZATION_PLATFORM, EXPECTED_ERR_TIMEOUT_MSG);
         assertTrue("Expected a short processing time (i.e. a cached response)", ts < expectedProcessingTime);
     }
 
+    @Ignore @Test
+    public void test_non_cachable() {
+        DatePeriodType datePeriod = new DatePeriodType();
+        datePeriod.setStart("20110101");
+        datePeriod.setEnd("20130201");
+        
+        List<ProcessingStatusRecordType> statusList = doTest(TEST_RR_ID_ONE_HIT, 1, "consumer1", datePeriod, new ExpectedTestData(TEST_BO_ID_ONE_HIT, TEST_LOGICAL_ADDRESS_1));
+        assertProcessingStatusDataFromSource(statusList.get(0), TEST_LOGICAL_ADDRESS_1);
+        
+        statusList = doTest(TEST_RR_ID_ONE_HIT, 1, "consumer1", datePeriod, new ExpectedTestData(TEST_BO_ID_ONE_HIT, TEST_LOGICAL_ADDRESS_1));
+        assertProcessingStatusDataFromSource(statusList.get(0), TEST_LOGICAL_ADDRESS_1);
+    }
 
     /**
      * Helper method for performing a call to the aggregating service and perform some common validations of the result
@@ -136,12 +185,24 @@ public class CareDocumentationIntegrationTest extends AbstractAggregateIntegrati
      * @return
      */
     private List<ProcessingStatusRecordType> doTest(String registeredResidentId, int expectedProcessingStatusSize, ExpectedTestData... testData) {
+        return doTest(registeredResidentId, expectedProcessingStatusSize, CareDocumentationTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID, null, testData);
+    }
+    
+    /**
+     * Helper method for performing a call to the aggregating service and perform some common validations of the result
+     * 
+     * @param registeredResidentId
+     * @param expectedProcessingStatusSize
+     * @param testData
+     * @return
+     */
+    private List<ProcessingStatusRecordType> doTest(String registeredResidentId, int expectedProcessingStatusSize, String serviceConsumer, DatePeriodType datePeriod, ExpectedTestData... testData) {
 
         // Setup and perform the call to the web service
-        CareDocumentationTestConsumer consumer = new CareDocumentationTestConsumer(DEFAULT_SERVICE_ADDRESS, CareDocumentationTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID);
+        CareDocumentationTestConsumer consumer = new CareDocumentationTestConsumer(DEFAULT_SERVICE_ADDRESS, serviceConsumer);
         Holder<GetCareDocumentationResponseType> responseHolder = new Holder<GetCareDocumentationResponseType>();
         Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
-        consumer.callService(LOGICAL_ADDRESS, registeredResidentId, processingStatusHolder, responseHolder);
+        consumer.callService(LOGICAL_ADDRESS, registeredResidentId, datePeriod, processingStatusHolder, responseHolder);
 
         // Verify the response size and content
         GetCareDocumentationResponseType response = responseHolder.value;
@@ -165,7 +226,7 @@ public class CareDocumentationIntegrationTest extends AbstractAggregateIntegrati
         // Verify that correct "x-rivta-original-serviceconsumer-hsaid" http header was passed to the service producer,
         // given that a service producer was called
         if (expectedProcessingStatusSize > 0) {
-                assertEquals(CareDocumentationTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID, TestProducerLogger.getLastOriginalConsumer());
+                assertEquals(serviceConsumer, TestProducerLogger.getLastOriginalConsumer());
         }
         
         return statusList.getProcessingStatusList();
