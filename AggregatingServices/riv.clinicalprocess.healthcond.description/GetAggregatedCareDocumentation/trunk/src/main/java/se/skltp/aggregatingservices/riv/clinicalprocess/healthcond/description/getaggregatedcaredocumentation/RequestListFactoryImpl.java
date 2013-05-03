@@ -23,7 +23,8 @@ import se.skltp.agp.service.api.RequestListFactory;
 public class RequestListFactoryImpl implements RequestListFactory {
 
     private static final Logger log = LoggerFactory.getLogger(RequestListFactoryImpl.class);
-    private static final ThreadSafeSimpleDateFormat df = new ThreadSafeSimpleDateFormat("yyyyMMddHHmmss");
+    private static final ThreadSafeSimpleDateFormat df = new ThreadSafeSimpleDateFormat("yyyyMMdd");
+    private static final ThreadSafeSimpleDateFormat dtf = new ThreadSafeSimpleDateFormat("yyyyMMddHHmmss");
 
     /**
      * Filtrera svarsposter från i EI (ei-engagement) baserat parametrar i GetCareDocumentation requestet (req).
@@ -120,7 +121,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
     protected boolean isBetween(Date from, Date to, String tsStr) {
         try {
             System.err.println("Is " + tsStr + " between " + from + " and " + to);
-            Date ts = df.parse(tsStr);
+            Date ts = dtf.parse(tsStr);
             if (from != null && from.after(ts)) return false;
             if (to != null && to.before(ts)) return false;
             return true;
