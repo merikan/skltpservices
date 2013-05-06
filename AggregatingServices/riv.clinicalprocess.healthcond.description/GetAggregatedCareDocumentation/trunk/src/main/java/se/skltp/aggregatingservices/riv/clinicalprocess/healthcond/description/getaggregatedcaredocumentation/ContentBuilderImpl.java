@@ -10,16 +10,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
+/* FIXME
 import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v2.GetCareDocumentationResponseType;
 import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v2.ObjectFactory;
 import se.riv.clinicalprocess.healthcond.description.v2.CareDocumentationType;
 import se.skltp.agp.cache.Content;
-import se.skltp.agp.cache.ContentBuilder;
+import se.skltp.agp.cache.ContentBuilder; */
 
-public class ContentBuilderImpl implements ContentBuilder {
+public class ContentBuilderImpl { //FIXME: implements ContentBuilder {
 
     private static final Logger log = LoggerFactory.getLogger(ContentBuilderImpl.class);
     
+    /*FIXME
     private static final JaxbUtil jaxbUtil = new JaxbUtil(GetCareDocumentationResponseType.class);
     
     private static final ObjectFactory objectFactory = new ObjectFactory();
@@ -60,5 +62,5 @@ public class ContentBuilderImpl implements ContentBuilder {
         }
         return splittedResponse;
     }
-
+     */
 }

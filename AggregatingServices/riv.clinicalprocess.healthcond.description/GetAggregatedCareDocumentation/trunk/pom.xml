@@ -19,7 +19,7 @@
   <name>GetAggregatedCareDocumentation</name>
 
   <properties>
-    <skltp.agp.version>1.0.0-RC2</skltp.agp.version>
+    <skltp.agp.version>1.0.0-RC4</skltp.agp.version>
 
     <!-- Properties for generating code from XML Schemas (JAX-WS) -->
     <schema.path>${basedir}/src/main/resources/schemas/TD_HEALTHCOND_DESCRIPTION_2_0_RC3</schema.path>
