@@ -28,12 +28,13 @@ import javax.jws.WebService;
 import se.riv.clinicalprocess.logistics.getcarecontacts.v2.rivtabp21.GetCareContactsResponderInterface;
 import se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2.GetCareContactsResponseType;
 import se.riv.clinicalprocess.logistics.getcarecontactsresponder.v2.GetCareContactsType;
-import se.riv.clinicalprocess.logistics.v2.AuthorType;
 import se.riv.clinicalprocess.logistics.v2.CareContactBodyType;
 import se.riv.clinicalprocess.logistics.v2.CareContactType;
 import se.riv.clinicalprocess.logistics.v2.CareContactUnitType;
+import se.riv.clinicalprocess.logistics.v2.HealthcareProfessionalType;
 import se.riv.clinicalprocess.logistics.v2.PatientIdType;
 import se.riv.clinicalprocess.logistics.v2.PatientSummaryHeaderType;
+import se.riv.clinicalprocess.logistics.v2.TimePeriodType;
 
 
 @WebService(
@@ -57,7 +58,11 @@ public class ProducerImpl implements GetCareContactsResponderInterface {
         body.setCareContactCode(0);
         body.setCareContactReason("reason");
         body.setCareContactStatus(0);
-        body.setCareContactTime("20130213121419");
+        
+        TimePeriodType timePeriod = new TimePeriodType();
+        timePeriod.setEnd("20130213121419");
+        timePeriod.setStart("20130113121419");
+        body.setCareContactTimePeriod(timePeriod);
         
         CareContactUnitType unit = new CareContactUnitType();
         unit.setCareContactUnitAddress("address");
@@ -68,24 +73,19 @@ public class ProducerImpl implements GetCareContactsResponderInterface {
         careContact.setCareContactBody(body);
         
         PatientSummaryHeaderType header = new PatientSummaryHeaderType();
-        header.setDocumentId("documentId");
-        header.setDocumentTitle("documentTitle");
+        header.setCareContactId("careContactId");
         header.setSourceSystemHSAid("sourceSystemHSAid");
         header.setDocumentTime("20130213121419");
         header.setApprovedForPatient(false);
         header.setCareContactId("careContactId");
 
-        AuthorType authorType = new AuthorType();
-        authorType.setAuthorTime("20130213121419");
-        authorType.setAuthorHSAid("authorHSAid");
-        authorType.setAuthorRoleCode("authorRoleCode");
-        authorType.setAuthorName("authorName");
-        authorType.setAuthorOrgUnitHSAid("authorOrgUnitHSAid");
-        authorType.setAuthorOrgUnitName("careUnitName");
-        authorType.setAuthorOrgUnitAddress("orgUnitAddress");
-        authorType.setCareUnitHSAid("careUnitHSAid");
-        authorType.setCareGiverHSAid("careGiverHSAid");
-        header.setAuthor(authorType);
+        HealthcareProfessionalType authorType = new HealthcareProfessionalType();
+        authorType.setHealthcareProfessionalHsaId("authorHSAid");
+        authorType.setHealthcareProfessionalRoleCode("authorRoleCode");
+        authorType.setHealthcareProfessionalName("authorName");
+        authorType.setHealthcareProfessionalCareUnitHSAid("careUnitHSAid");
+        authorType.setHealthcareProfessionalCareGiverHSAid("careGiverHSAid");
+        header.setAccountableHealthcareProfessional(authorType);
         
         PatientIdType patientIdType = new PatientIdType();
         patientIdType.setId("1212121212");

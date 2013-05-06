@@ -54,9 +54,8 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="careContactCode" type="codes:CareContactCodeEnum"/>
+            <xs:element name="careContactCode" type="codes:CareContactCodeEnum" minOccurs="0"/>
             <xs:element name="careContactReason" type="xs:string" minOccurs="0"/>
-            <xs:element name="careContactTime" type="tns:TimeStampType"/>
             <xs:element name="careContactUnit" type="tns:CareContactUnitType" minOccurs="0"
                 maxOccurs="unbounded"/>
 			<xs:element name="careContactTimePeriod" type="tns:TimePeriodType" />
