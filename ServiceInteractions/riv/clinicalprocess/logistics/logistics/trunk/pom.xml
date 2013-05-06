@@ -39,7 +39,7 @@
 
   <!-- Modules to be created for each service -->
   <modules>
-    <module>GetCareContact</module>
+    <module>GetCareContacts</module>
   </modules>
 
   <scm>
