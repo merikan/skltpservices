@@ -13,12 +13,12 @@
 	<parent>
     <artifactId>itintegration-registry</artifactId>
     <groupId>se.skl.tp</groupId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
   </parent>
 
 	<groupId>se.skl.skltpservices.itintegration.registry</groupId>
 	<artifactId>GetLogicalAddresseesByServiceContract</artifactId>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>GetLogicalAddresseesByServiceContract service</name>
 
