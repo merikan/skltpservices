@@ -4,11 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistoryresponder.v2.GetMaternityMedicalHistoryResponseType;
+import se.riv.clinicalprocess.healthcond.actoutcome.v2.AntenatalFollowUpRecordType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.AuthorType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.MaternityMedicalRecordBodyType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.MaternityMedicalRecordType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.PatientIdType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.PatientSummaryHeaderType;
+import se.riv.clinicalprocess.healthcond.actoutcome.v2.PostDeliveryRecordType;
+import se.riv.clinicalprocess.healthcond.actoutcome.v2.RegistrationRecordType;
 import se.skltp.agp.test.producer.TestProducerDb;
 
 public class MaternityMedicalHistoryTestProducerDb extends TestProducerDb {
@@ -48,7 +51,15 @@ public class MaternityMedicalHistoryTestProducerDb extends TestProducerDb {
         // TODO: Set stuff
 
         MaternityMedicalRecordBodyType body = new MaternityMedicalRecordBodyType();
+        AntenatalFollowUpRecordType followUp = new AntenatalFollowUpRecordType();
+        PostDeliveryRecordType postDelivery = new PostDeliveryRecordType();
+        RegistrationRecordType regRecord = new RegistrationRecordType();
+        
         // TODO: Set stuff
+        
+        body.setAntenatalFollowUpRecord(followUp);
+        body.setPostDeliveryRecord(postDelivery);
+        body.setRegistrationRecord(regRecord);
         
         AuthorType author = new AuthorType();
         author.setCareUnitHSAid(logicalAddress); // TODO ???
@@ -60,7 +71,6 @@ public class MaternityMedicalHistoryTestProducerDb extends TestProducerDb {
             author.setAuthorOrgUnitName("Vårdcentralen Stacken");
         }
         header.setAuthor(author);
-        
         response.setMaternityMedicalRecordHeader(header);
         response.setMaternityMedicalRecordBody(body);
         return response;

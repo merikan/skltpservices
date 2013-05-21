@@ -27,7 +27,7 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
 
 
     /**
-     * Transformerar GetCareContact request till EI FindContent request enligt:
+     * Transformerar GetAggregatedMaternityMedicalHistory request till EI FindContent request enligt:
      * 
      * 1. patientId/id --> registeredResidentIdentification
      * 2. "riv:ehr:patientsummary" --> serviceDomain

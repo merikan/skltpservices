@@ -27,7 +27,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
     private static final ThreadSafeSimpleDateFormat df = new ThreadSafeSimpleDateFormat("yyyyMMdd");
     
     /**
-     * Filtrera svarsposter från i EI (ei-engagement) baserat parametrar i GetCareContact requestet (req).
+     * Filtrera svarsposter från i EI (ei-engagement) baserat parametrar i GetAggregatedMaternityMedicalHistory requestet (req).
      * Följande villkor måste vara sanna för att en svarspost från EI skall tas med i svaret:
      * 
      * 1. req.timePeriod.start <= ei-engagement.mostRecentContent <= req.timePeriod.end
