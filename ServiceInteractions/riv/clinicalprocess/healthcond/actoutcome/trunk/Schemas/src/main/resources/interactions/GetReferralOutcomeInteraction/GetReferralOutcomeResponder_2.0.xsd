@@ -18,34 +18,37 @@
  under the License.
  -->		
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-     xmlns:tns="urn:riv:clinicalprocess:healthcond:actoutcome:GetReferralOutcomeResponder:2"
+    xmlns:tns="urn:riv:clinicalprocess:healthcond:actoutcome:GetReferralOutcomeResponder:2"
     xmlns:core="urn:riv:clinicalprocess:healthcond:actoutcome:2"
     xmlns:codes="urn:riv:clinicalprocess:healthcond:actoutcome:enums:2"
     targetNamespace="urn:riv:clinicalprocess:healthcond:actoutcome:GetReferralOutcomeResponder:2"
-    elementFormDefault="qualified" 
-    attributeFormDefault="unqualified" 
-    version="2.0">
+    elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
 
-    <xs:import schemaLocation="../../core_components/clinicalprocess_healthcond_actoutcome_2.0.xsd" namespace="urn:riv:clinicalprocess:healthcond:actoutcome:2"/>
-    <xs:import schemaLocation="../../core_components/clinicalprocess_healthcond_actoutcome_enum_2.0.xsd" namespace="urn:riv:clinicalprocess:healthcond:actoutcome:enums:2"/>
-    
+    <xs:import schemaLocation="../../core_components/clinicalprocess_healthcond_actoutcome_2.0.xsd"
+        namespace="urn:riv:clinicalprocess:healthcond:actoutcome:2"/>
+    <xs:import
+        schemaLocation="../../core_components/clinicalprocess_healthcond_actoutcome_enum_2.0.xsd"
+        namespace="urn:riv:clinicalprocess:healthcond:actoutcome:enums:2"/>
+
     <xs:element name="GetReferralOutcome" type="tns:GetReferralOutcomeType"/>
     <xs:element name="GetReferralOutcomeResponse" type="tns:GetReferralOutcomeResponseType"/>
-    
+
     <xs:complexType name="GetReferralOutcomeType">
         <xs:sequence>
-            <xs:element name="careUnitHSAid" type="core:HSAIdType"/>
+            <xs:element name="careUnitHSAid" type="core:HSAidType" maxOccurs="unbounded"
+                minOccurs="0"/>
             <xs:element name="patientId" type="core:PatientIdType"/>
             <xs:element name="timePeriod" type="core:DatePeriodType" minOccurs="0"/>
-            <xs:element name="sourceSystemHSAid" type="core:HSAIdType" minOccurs="0"/>
+            <xs:element name="sourceSystemHSAid" type="core:HSAidType" minOccurs="0"/>
             <xs:element name="careContactId" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:any namespace='##other' processContents='lax' minOccurs='0' maxOccurs='unbounded' />
+            <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
-    
-    <xs:complexType name="GetReferralOutcomeResponseType">	
+
+    <xs:complexType name="GetReferralOutcomeResponseType">
         <xs:sequence>
-            <xs:element name="referralOutcome" type="core:ReferralOutcomeType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="referralOutcome" type="core:ReferralOutcomeType" minOccurs="0"
+                maxOccurs="unbounded"/>
             <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>

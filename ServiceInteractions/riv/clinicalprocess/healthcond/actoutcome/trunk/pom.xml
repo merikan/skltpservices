@@ -39,6 +39,8 @@
 
   <!-- Modules to be created for each service -->
   <modules>
+    <module>Schemas</module>
+    <module>GetMaternityMedicalHistory</module>
     <module>GetReferralOutcome</module>
   </modules>
 
