@@ -18,46 +18,42 @@
 
  *   Boston, MA 02111-1307  USA
  */
-package se.riv.clinicalprocess.healthcond.actoutcome.getreferraloutcome.v2;
-
-import java.util.List;
+package se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistory.v2;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 
-import se.riv.clinicalprocess.healthcond.actoutcome.getreferraloutcome.v2.rivtabp21.GetReferralOutcomeResponderInterface;
-import se.riv.clinicalprocess.healthcond.actoutcome.getreferraloutcomeresponse.v2.GetReferralOutcomeResponseType;
-import se.riv.clinicalprocess.healthcond.actoutcome.getreferraloutcomeresponse.v2.GetReferralOutcomeType;
+import se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistory.v2.rivtabp21.GetMaternityMedicalHistoryResponderInterface;
+import se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistoryresponder.v2.GetMaternityMedicalHistoryResponseType;
+import se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistoryresponder.v2.GetMaternityMedicalHistoryType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.AuthorType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.LegalAuthenticatorType;
-import se.riv.clinicalprocess.healthcond.actoutcome.v2.MultimediaType;
+import se.riv.clinicalprocess.healthcond.actoutcome.v2.MaternityMedicalRecordBodyType;
+import se.riv.clinicalprocess.healthcond.actoutcome.v2.MaternityMedicalRecordType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.PatientIdType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.PatientSummaryHeaderType;
-import se.riv.clinicalprocess.healthcond.actoutcome.v2.ReferralOutcomeBodyType;
-import se.riv.clinicalprocess.healthcond.actoutcome.v2.ReferralOutcomeType;
 
 
 @WebService(
-		serviceName = "GetReferralOutcomeResponderService",
-        endpointInterface= "se.riv.clinicalprocess.healthcond.actoutcome.getreferraloutcome.v2.rivtabp21.GetReferralOutcomeResponderInterface",
-        portName = "GetReferralOutcomeResponderPort",
-		targetNamespace = "urn:riv:clinicalprocess:healthcond:actoutcome:GetReferralOutcome:2:rivtabp21",
-		wsdlLocation = "interactions/GetReferralOutcomeInteraction/GetReferralOutcomeInteraction_2.0_RIVTABP21.wsdl")
-public class ProducerImpl implements GetReferralOutcomeResponderInterface {
-
+		serviceName = "GetMaternityMedicalHistoryResponderService",
+        endpointInterface= "se.riv.clinicalprocess.healthcond.actoutcome.getreferraloutcome.v2.rivtabp21.GetMaternityMedicalHistoryResponderInterface",
+        portName = "GetMaternityMedicalHistoryResponderPort",
+		targetNamespace = "urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21",
+		wsdlLocation = "interactions/GetMaternityMedicalHistoryInteraction/GetMaternityMedicalHistoryInteraction_2.0_RIVTABP21.wsdl")
+public class ProducerImpl implements GetMaternityMedicalHistoryResponderInterface {
 
     @Override
-    @WebResult(name = "GetReferralOutcomeResponse", targetNamespace = "urn:riv:clinicalprocess:healthcond:actoutcome:GetReferralOutcomeResponder:2", partName = "parameters")
-    @WebMethod(operationName = "GetReferralOutcome", action = "urn:riv:clinicalprocess:healthcond:actoutcome:GetReferralOutcomeResponder:2:GetReferralOutcome")
-    public GetReferralOutcomeResponseType getReferralOutcome(
+    @WebResult(name = "GetMaternityMedicalHistoryResponse", targetNamespace = "urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2", partName = "parameters")
+    @WebMethod(operationName = "GetMaternityMedicalHistory", action = "urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2:GetMaternityMedicalHistory")
+    public GetMaternityMedicalHistoryResponseType getMaternityMedicalHistory(
             @WebParam(partName = "LogicalAddress", name = "LogicalAddress", targetNamespace = "urn:riv:itintegration:registry:1", header = true) String logicalAddress,
-            @WebParam(partName = "parameters", name = "GetReferralOutcome", targetNamespace = "urn:riv:clinicalprocess:healthcond:actoutcome:GetReferralOutcomeResponder:2") GetReferralOutcomeType parameters) {
-        GetReferralOutcomeResponseType responseType = new GetReferralOutcomeResponseType();
+            @WebParam(partName = "parameters", name = "GetMaternityMedicalHistory", targetNamespace = "urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2") GetMaternityMedicalHistoryType parameters) {
+        GetMaternityMedicalHistoryResponseType responseType = new GetMaternityMedicalHistoryResponseType();
         
-        ReferralOutcomeType documentationType = new ReferralOutcomeType();
-        ReferralOutcomeBodyType body = new ReferralOutcomeBodyType();
+        MaternityMedicalRecordType record = new MaternityMedicalRecordType();
+        MaternityMedicalRecordBodyType body = new MaternityMedicalRecordBodyType();
         
         // TODO: Fix body
 
@@ -92,10 +88,10 @@ public class ProducerImpl implements GetReferralOutcomeResponderInterface {
         patientIdType.setType("1.2.752.129.2.1.3.1");
         header.setPatientId(patientIdType);
 
-        documentationType.setReferralOutcomeBody(body);
-        documentationType.setReferralOutcomeHeader(header);
-        responseType.getReferralOutcome().add(documentationType);
-
+        record.setMaternityMedicalRecordHeader(header);
+        record.setMaternityMedicalRecordBody(body);
+        responseType.getMaternityMedicalRecord().add(record);
+        
         return responseType;
     }
 

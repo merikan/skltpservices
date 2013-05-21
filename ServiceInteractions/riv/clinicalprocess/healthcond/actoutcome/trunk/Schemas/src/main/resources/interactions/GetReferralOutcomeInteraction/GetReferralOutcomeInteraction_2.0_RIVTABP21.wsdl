@@ -43,7 +43,11 @@
   </wsdl:types>
   <wsdl:message name='GetReferralOutcomeRequest'>
     <wsdl:part name='LogicalAddress' element='itr:LogicalAddress'>
-      <wsdl:documentation>The organisation number of the receiving insurance institution</wsdl:documentation>
+	  	<wsdl:documentation>
+			National: The HSA-id of Inera AB ("national" aggregation service)
+			Regional: The HSA-id of Inera AB (regional aggregation service)
+			Specific Source system: The HSA-id of the source system
+		</wsdl:documentation>
     </wsdl:part>
     <wsdl:part name='parameters' element='tjsr:GetReferralOutcome' />
   </wsdl:message>

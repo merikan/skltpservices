@@ -44,6 +44,86 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="DeliveryCodeEnum">
+        <xs:restriction base="xs:integer">
+		 <xs:enumeration value="0">
+                <xs:annotation>
+                    <xs:documentation>Ej angivet</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>X-gravid</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>Spontan abort</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="4">
+                <xs:annotation>
+                    <xs:documentation>Dödfött</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+          <xs:enumeration value="5">
+                <xs:annotation>
+                    <xs:documentation>Levande fött</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="FetalPositionCodeEnum">
+        <xs:restriction base="xs:integer">
+		 <xs:enumeration value="0">
+                <xs:annotation>
+                    <xs:documentation>huvud</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>säte</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>snedläge</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation>tvärläge</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="FetalPresentationCodeEnum">
+        <xs:restriction base="xs:integer">
+		 <xs:enumeration value="0">
+                <xs:annotation>
+                    <xs:documentation>Huvud</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>Säte</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>snedläge</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation>tvärläge</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="ImageMediaTypeEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="image/g3fax"/>
@@ -54,7 +134,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="ModelMediaTypeEnum">
+ <xs:simpleType name="ModelMediaTypeEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="model/vrml"/>
         </xs:restriction>
@@ -63,24 +143,6 @@
     <xs:simpleType name="MultipartMediaTypeEnum">
         <xs:restriction base="xs:string">
             <xs:enumeration value="multipart/x-hl7-cda-level1"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="TextMediaTypeEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="text/html"/>
-            <xs:enumeration value="text/plain"/>
-            <xs:enumeration value="text/rtf"/>
-            <xs:enumeration value="text/sgml"/>
-            <xs:enumeration value="text/x-hl7-ft"/>
-            <xs:enumeration value="text/xml"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="VideoMediaTypeEnum">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="video/mpeg"/>
-            <xs:enumeration value="video/x-avi"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -99,4 +161,68 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="SexCodeEnum">
+        <xs:restriction base="xs:int">
+            <xs:enumeration value="0">
+                <xs:annotation>
+                    <xs:documentation>okänt</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>man</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>kvinna</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="9">
+                <xs:annotation>
+                    <xs:documentation>ej tillämpligt</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>      
+    </xs:simpleType>
+
+    <xs:simpleType name="TextMediaTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="text/html"/>
+            <xs:enumeration value="text/plain"/>
+            <xs:enumeration value="text/rtf"/>
+            <xs:enumeration value="text/sgml"/>
+            <xs:enumeration value="text/x-hl7-ft"/>
+            <xs:enumeration value="text/xml"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="TypeOfLeaveCodeEnum">
+        <xs:restriction base="xs:integer">
+		 <xs:enumeration value="0">
+               <xs:annotation>
+                   <xs:documentation>Sjukskrivning</xs:documentation>
+               </xs:annotation>
+           </xs:enumeration>
+           <xs:enumeration value="1">
+               <xs:annotation>
+                   <xs:documentation>Havandekapsledighet</xs:documentation>
+               </xs:annotation>
+           </xs:enumeration>
+           <xs:enumeration value="2">
+               <xs:annotation>
+                   <xs:documentation>Föräldrarledighet</xs:documentation>
+               </xs:annotation>
+           </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="VideoMediaTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="video/mpeg"/>
+            <xs:enumeration value="video/x-avi"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
 </xs:schema>

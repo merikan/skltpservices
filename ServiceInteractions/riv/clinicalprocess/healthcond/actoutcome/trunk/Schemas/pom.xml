@@ -46,12 +46,32 @@
               <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
               <wsdlOptions>
                 <wsdloption>
+                  <wsdl>${basedir}/src/main/resources/interactions/GetMaternityMedicalHistoryInteraction/GetMaternityMedicalHistoryInteraction_2.0_RIVTABP21.wsdl</wsdl>
+                  <extraargs>
+                    <extraarg>-p</extraarg>
+                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2=se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistoryresponder.v2</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryInitiator:2=se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistoryinitiator.v2</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21=se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistory.v2.rivtabp21</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:itintegration:registry:1=se.riv.itintegration.registry.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:clinicalprocess:healthcond:actoutcome:2=se.riv.clinicalprocess.healthcond.actoutcome.v2</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:clinicalprocess:healthcond:actoutcome:enums:2=se.riv.clinicalprocess.healthcond.actoutcome.enums.v2</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:ehr:patientsummary:caredocumentation=se.riv.ehr.patientsummary.caredocumentation</extraarg>
+                  </extraargs>
+                </wsdloption>
+                <wsdloption>
                   <wsdl>
                     ${basedir}/src/main/resources/interactions/GetReferralOutcomeInteraction/GetReferralOutcomeInteraction_2.0_RIVTABP21.wsdl
                   </wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
-                    Note: be careful when changing this - must be in sync for all schemas generations in this namespace!                     
                     <extraarg>
                       urn:riv:clinicalprocess:healthcond:actoutcome:GetReferralOutcome:2:rivtabp21=se.riv.clinicalprocess.healthcond.actoutcome.getreferraloutcome.v2.rivtabp21
                     </extraarg>
@@ -73,6 +93,7 @@
                     </extraarg>
                   </extraargs>
                 </wsdloption>
+                
               </wsdlOptions>
             </configuration>
             <goals>
