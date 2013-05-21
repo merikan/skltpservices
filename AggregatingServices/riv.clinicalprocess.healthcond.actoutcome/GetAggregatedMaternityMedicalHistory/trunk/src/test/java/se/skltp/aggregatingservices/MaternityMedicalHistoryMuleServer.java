@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.test.StandaloneMuleServer;
 import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
-public class CareContactMuleServer {
+public class MaternityMedicalHistoryMuleServer {
 
-    private static final Logger logger = LoggerFactory.getLogger(CareContactMuleServer.class);
+    private static final Logger logger = LoggerFactory.getLogger(MaternityMedicalHistoryMuleServer.class);
     private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("GetAggregatedMaternityMedicalHistory-config");
     public static final String MULE_SERVER_ID = rb.getString("MULE_SERVER_ID");
 

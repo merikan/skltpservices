@@ -2,7 +2,7 @@ package se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome.g
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static se.skltp.aggregatingservices.CareContactMuleServer.getAddress;
+import static se.skltp.aggregatingservices.MaternityMedicalHistoryMuleServer.getAddress;
 import static se.skltp.agp.riv.interoperability.headers.v1.CausingAgentEnum.VIRTUALIZATION_PLATFORM;
 import static se.skltp.agp.test.producer.TestProducerDb.TEST_BO_ID_MANY_HITS_1;
 import static se.skltp.agp.test.producer.TestProducerDb.TEST_BO_ID_MANY_HITS_2;

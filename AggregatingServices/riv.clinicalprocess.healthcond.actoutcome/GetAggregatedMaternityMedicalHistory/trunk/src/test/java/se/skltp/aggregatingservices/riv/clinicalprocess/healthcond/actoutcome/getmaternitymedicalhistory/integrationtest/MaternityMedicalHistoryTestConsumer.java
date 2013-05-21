@@ -11,7 +11,7 @@ import se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistory.v
 import se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistoryresponder.v2.GetMaternityMedicalHistoryResponseType;
 import se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistoryresponder.v2.GetMaternityMedicalHistoryType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.PatientIdType;
-import se.skltp.aggregatingservices.CareContactMuleServer;
+import se.skltp.aggregatingservices.MaternityMedicalHistoryMuleServer;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 import se.skltp.agp.test.consumer.AbstractTestConsumer;
 import se.skltp.agp.test.consumer.SoapHeaderCxfInterceptor;
@@ -21,8 +21,8 @@ public class MaternityMedicalHistoryTestConsumer extends AbstractTestConsumer<Ge
     private static final Logger log = LoggerFactory.getLogger(MaternityMedicalHistoryTestConsumer.class);
 
     public static void main(String[] args) {
-        log.info("URL: " + CareContactMuleServer.getAddress("SERVICE_INBOUND_URL"));
-        String serviceAddress = CareContactMuleServer.getAddress("SERVICE_INBOUND_URL");
+        log.info("URL: " + MaternityMedicalHistoryMuleServer.getAddress("SERVICE_INBOUND_URL"));
+        String serviceAddress = MaternityMedicalHistoryMuleServer.getAddress("SERVICE_INBOUND_URL");
         String personnummer = TEST_RR_ID_ONE_HIT;
 
         MaternityMedicalHistoryTestConsumer consumer = new MaternityMedicalHistoryTestConsumer(serviceAddress, SAMPLE_ORIGINAL_CONSUMER_HSAID);
@@ -39,7 +39,7 @@ public class MaternityMedicalHistoryTestConsumer extends AbstractTestConsumer<Ge
     }
 
     public void callService(String logicalAddress, String id, Holder<ProcessingStatusType> processingStatusHolder, Holder<GetMaternityMedicalHistoryResponseType> responseHolder) {
-        log.debug("Calling GetCareContact-soap-service with id = {}", id);
+        log.debug("Calling GetAggregatedMaternityMedicalHistory-soap-service with id = {}", id);
 
         GetMaternityMedicalHistoryType request = new GetMaternityMedicalHistoryType();
         PatientIdType patientId = new PatientIdType();
