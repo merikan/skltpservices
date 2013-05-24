@@ -13,7 +13,7 @@ import se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistoryre
 import se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistoryresponder.v2.GetMaternityMedicalHistoryType;
 import se.skltp.agp.test.producer.TestProducerDb;
 
-@WebService(serviceName = "GetMaternityMedicalHistoryResponderService", portName = "GetMaternityMedicalHistoryResponderPort", targetNamespace = "urn:riv:clinicalprocess.logistics.logistics:GetMaternityMedicalHistoryResponder:2:rivtabp21", name = "GetMaternityMedicalHistoryInteraction")
+@WebService(serviceName = "GetMaternityMedicalHistoryResponderService", portName = "GetMaternityMedicalHistoryResponderPort", targetNamespace = "urn:riv:clinicalprocess.healthcond.actoutcome:GetMaternityMedicalHistoryResponder:2:rivtabp21", name = "GetMaternityMedicalHistoryInteraction")
 public class MaternityMedicalHistoryTestProducer implements GetMaternityMedicalHistoryResponderInterface {
 
     private static final Logger log = LoggerFactory.getLogger(MaternityMedicalHistoryTestProducer.class);
