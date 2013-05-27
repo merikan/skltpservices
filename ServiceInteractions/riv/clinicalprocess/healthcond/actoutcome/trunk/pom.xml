@@ -25,7 +25,7 @@
 
   <groupId>se.skl.skltpservices.clinicalprocess.healthcond.actoutcome</groupId>
   <artifactId>clinicalprocess-healthcond-actoutcome</artifactId>
-  <version>2.0.RC1</version>
+  <version>2.0.RC2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>clinicalprocess-healthcond-actoutcome</name>
 
