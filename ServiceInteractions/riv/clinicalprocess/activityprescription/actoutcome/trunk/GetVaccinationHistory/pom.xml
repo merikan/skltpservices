@@ -15,7 +15,7 @@
   <parent>
     <groupId>se.skl.skltpservices.clinicalprocess.activityprescription.actoutcome</groupId>
     <artifactId>clinicalprocess-activityprescription-actoutcome</artifactId>
-    <version>1.0.RC1-SNAPSHOT</version>
+    <version>1.0.RC1</version>
   </parent>
 
   <groupId>se.skl.skltpservices.clinicalprocess.activityprescription.actoutcome</groupId>
