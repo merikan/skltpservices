@@ -25,7 +25,7 @@
 
   <groupId>se.skl.skltpservices.clinicalprocess.activityprescription.actoutcome</groupId>
   <artifactId>clinicalprocess-activityprescription-actoutcome</artifactId>
-  <version>1.0.RC1</version>
+  <version>1.0.RC2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>clinicalprocess-activityprescription-actoutcome</name>
 
