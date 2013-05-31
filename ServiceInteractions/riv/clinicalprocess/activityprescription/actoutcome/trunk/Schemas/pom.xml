@@ -10,7 +10,7 @@
   <parent>
     <artifactId>clinicalprocess-activityprescription-actoutcome</artifactId>
     <groupId>se.skl.skltpservices.clinicalprocess.activityprescription.actoutcome</groupId>
-    <version>1.0.RC1-SNAPSHOT</version>
+    <version>1.0.RC1</version>
   </parent>
   <dependencies/>
   <repositories>
