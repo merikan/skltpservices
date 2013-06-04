@@ -49,7 +49,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
         <dependency>
             <groupId>se.skltp.agp</groupId>
             <artifactId>agp-test-common</artifactId>
-            <version>1.0.0-RC4</version>
+            <version>1.0.0-RC5</version>
         </dependency>
 	</dependencies> 
 
