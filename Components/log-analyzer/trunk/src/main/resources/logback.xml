@@ -85,7 +85,7 @@
   </logger>
 
   <logger name="se.skl.skltpservices">
-    <level value="${console.logLevel)" />
+    <level value="${console.logLevel}" />
   </logger>
   	
 </configuration>
