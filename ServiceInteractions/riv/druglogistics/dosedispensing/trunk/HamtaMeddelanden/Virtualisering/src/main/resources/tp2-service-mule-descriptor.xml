@@ -16,16 +16,21 @@
     xmlns:http="http://www.mulesoft.org/schema/mule/http"
     xmlns="http://www.mulesoft.org/schema/mule/core"
     xmlns:spring="http://www.springframework.org/schema/beans"
+    xmlns:test="http://www.mulesoft.org/schema/mule/test"
     xsi:schemaLocation="
                http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
                http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
                http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
                http://www.mulesoft.org/schema/mule/cxf  http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
-               http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-current.xsd" >
+               http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-current.xsd
+               http://www.mulesoft.org/schema/mule/test http://www.mulesoft.org/schema/mule/test/current/mule-test.xsd" >
 
     <!-- Name of this file is mandatory and may not be changed. -->
 
 	<flow name="druglogistics-dosedispensing-HamtaMeddelandenInteraction-virtualisering-flow" >
+	
+		
+		
 		<composite-source>
       	  	<https:inbound-endpoint
         	    address="https://${TP_HOST}:${TP_PORT}/${TP_BASE_URI}/HamtaMeddelanden/1/rivtabp20"
@@ -48,9 +53,77 @@
             	payload="envelope"
             	service="HamtaMeddelandenResponderService"
             	wsdlLocation="classpath:/schemas/interactions/HamtaMeddelandenInteraction/HamtaMeddelandenInteraction_1.0_RIVTABP20.wsdl" />
+            	
+           
 
-         <flow-ref name="vagval-dynamic-routing-flow" />
+         <flow-ref name="hamtameddelanden-vagval-dynamic-routing-flow" />
        
+    </flow>
+    
+     <flow name="hamtameddelanden-vagval-dynamic-routing-flow" >
+
+		<logger message="Logpunkt0: - TEST" level="INFO"/>
+
+        <transformer ref="createCorrId" />
+        <transformer ref="XmlToXSR" />
+        <transformer ref="rivExtractor" />
+  		<transformer ref="logReqIn" />
+        <transformer ref="rivTransformer" />
+        
+        <cxf:proxy-client payload="envelope" />
+
+        <custom-processor class="se.skl.tp.vp.vagvalrouter.VagvalRouter" >
+
+            <spring:property
+                name="vagvalAgent"
+                ref="vagvalAgent" />
+
+            <spring:property
+                name="senderIdPropertyName"
+                value="${VAGVALROUTER_SENDERID}" />
+
+            <spring:property
+                name="responseTimeout"
+                value="${SERVICE_TIMEOUT_MS}" />
+
+            <spring:property
+                name="whiteList"
+                value="${IP_WHITE_LIST}" />
+        </custom-processor>
+        
+        <response>
+            <transformer ref="exceptionTransformer" />
+            <object-to-string-transformer /> 
+            <transformer ref="logRespOut" />
+        </response>
+        
+<!--         <custom-exception-strategy class="se.skl.tp.vp.util.VPExceptionStrategy" > -->
+<!-- 			<spring:property name="jaxbObjectToXml"  ref="objToXml"/> -->
+<!--         </custom-exception-strategy> -->
+        
+          <!-- A rollback-exception-strategy for handling INFRASTRUCTURE EXCEPTIONS, i.e. with retries  -->
+            <rollback-exception-strategy maxRedeliveryAttempts="3">
+        
+            
+                
+                <logger message="Logpunkt1: - REDELIVERY WARNING: #[groovy:payload.class.name]"/>
+
+                <test:component waitTime="3000"/>
+    
+    
+    
+                <on-redelivery-attempts-exceeded>
+        
+                    <!-- Set the correlation id for message tracking again when exceeded, otherwise we loose tracking of these log-events -->
+                    <set-variable variableName="soitoolkit_correlationId" value="#[xpath:/msg:Message/msg:Header/msg:correlationId/text()]"/>
+
+               
+         			<logger message="Logpunkt2: - REDELIVERY exhaused for : #[groovy:payload.class.name]"/>
+         
+                </on-redelivery-attempts-exceeded>
+        
+            </rollback-exception-strategy>
+        
     </flow>
 
 </mule>
