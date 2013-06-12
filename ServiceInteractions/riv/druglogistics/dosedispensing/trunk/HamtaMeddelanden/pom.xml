@@ -26,5 +26,15 @@
 
   <modules>
     <module>Virtualisering</module>
+     <module>Test-consumer</module>
+      <module>Test-producer</module>
   </modules>
+  
+  <dependencies>
+		<dependency>
+			<groupId>se.riv.druglogistics.dosedispensing</groupId>
+			<artifactId>druglogistics-dosedispensing-schemas</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
