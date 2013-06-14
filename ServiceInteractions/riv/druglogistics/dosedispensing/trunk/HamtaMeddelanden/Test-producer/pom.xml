@@ -74,7 +74,7 @@
 								<configuration>
 									<mainClass>se.riv.druglogistics.dosdispensing.hamtameddelanden.v1.Producer</mainClass>
 									<arguments>
-										<argument>https://localhost:21000/teststub/HamtaMeddelanden/1/rivtabp20</argument>
+										<argument>https://localhost:10001/teststub/HamtaMeddelanden/1/rivtabp20</argument>
 									</arguments>
 								</configuration>
 							</execution>

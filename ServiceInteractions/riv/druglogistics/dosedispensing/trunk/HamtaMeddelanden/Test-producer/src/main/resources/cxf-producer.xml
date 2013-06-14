@@ -40,7 +40,7 @@
 	</http:destination>
 
 	<httpj:engine-factory>
-		<httpj:engine port="21000">
+		<httpj:engine port="10001">
 			<httpj:tlsServerParameters>
 				<sec:keyManagers keyPassword="password">
 					<sec:keyStore type="JKS" password="password"
