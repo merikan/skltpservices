@@ -28,6 +28,8 @@ import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
 
 public class Producer implements Runnable{
+	
+	private static final String URL = "https://localhost:21000/teststub/HamtaMeddelanden/1/rivtabp20";
 
 	protected Producer(String address) throws Exception {
 		System.out.println("Starting HamtaMeddelanden testproducer");
@@ -48,7 +50,14 @@ public class Producer implements Runnable{
 	}
 
 	public static void main(String[] args) throws Exception {
-		(new Thread(new Producer(args[0]))).start();
+		
+		if(args.length < 1){
+			(new Thread(new Producer(URL))).start();
+		}else{
+			(new Thread(new Producer(args[0]))).start();
+		}
+		
+		
 		
 	}	
 }
