@@ -34,7 +34,7 @@ public class Producer implements Runnable{
 
 		// Loads a cxf configuration file to use
 		final SpringBusFactory bf = new SpringBusFactory();
-		final URL busFile = this.getClass().getClassLoader().getResource("cxf.xml");
+		final URL busFile = this.getClass().getClassLoader().getResource("cxf-producer.xml");
 		final Bus bus = bf.createBus(busFile.toString());
 
 		SpringBusFactory.setDefaultBus(bus);
