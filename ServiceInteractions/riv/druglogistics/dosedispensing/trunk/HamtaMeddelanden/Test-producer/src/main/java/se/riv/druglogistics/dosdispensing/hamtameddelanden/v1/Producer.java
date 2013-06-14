@@ -29,7 +29,7 @@ import org.apache.cxf.bus.spring.SpringBusFactory;
 
 public class Producer implements Runnable{
 	
-	private static final String URL = "https://localhost:21000/teststub/HamtaMeddelanden/1/rivtabp20";
+	private static final String URL = "https://localhost:10001/teststub/HamtaMeddelanden/1/rivtabp20";
 
 	protected Producer(String address) throws Exception {
 		System.out.println("Starting HamtaMeddelanden testproducer");
