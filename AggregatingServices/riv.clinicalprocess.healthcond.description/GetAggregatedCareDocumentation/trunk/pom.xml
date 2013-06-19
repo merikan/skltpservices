@@ -14,7 +14,7 @@
 
   <groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.description</groupId>
   <artifactId>GetAggregatedCareDocumentation</artifactId>
-  <version>1.0.0-RC6</version>
+  <version>1.0.0-RC7-SNAPSHOT</version>
   <packaging>mule</packaging>
   <name>GetAggregatedCareDocumentation</name>
 
@@ -34,9 +34,9 @@
   </pluginRepositories>
     
   <scm>
-    <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedCareDocumentation/tags/GetAggregatedCareDocumentation-1.0.0-RC6</connection>
-    <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedCareDocumentation/tags/GetAggregatedCareDocumentation-1.0.0-RC6</developerConnection>
-    <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedCareDocumentation/tags/GetAggregatedCareDocumentation-1.0.0-RC6</url>
+    <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedCareDocumentation/trunk</connection>
+    <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedCareDocumentation/trunk</developerConnection>
+    <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedCareDocumentation/trunk</url>
   </scm>
 
   <dependencies>
