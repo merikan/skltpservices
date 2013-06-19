@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v2.GetCareDocumentationType;
@@ -118,7 +119,7 @@ public class RequestListFactoryImplTest {
     }
 
 
-    @Test
+    @Ignore @Test // Not in use in this service domain
     public void createRequestList_timePeriod(){
         RequestListFactoryImpl requestFactory = new RequestListFactoryImpl();
         FindContentType fc = createFindContent(RR_ID);       
