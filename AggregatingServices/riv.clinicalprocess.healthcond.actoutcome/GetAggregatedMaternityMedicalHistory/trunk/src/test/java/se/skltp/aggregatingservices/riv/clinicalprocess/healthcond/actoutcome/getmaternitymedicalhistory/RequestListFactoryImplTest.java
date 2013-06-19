@@ -58,13 +58,12 @@ public class RequestListFactoryImplTest {
         QueryObject queryObject = new QueryObject(fc, getMaternityMedicalHistory);
         FindContentResponseType findContentResponse = createFindContentResponse(TestProducerDb.TEST_LOGICAL_ADDRESS_1, TestProducerDb.TEST_LOGICAL_ADDRESS_2);
         List<Object[]> requestList =  requestFactory.createRequestList(queryObject, findContentResponse);
-        assertEquals(1, requestList.size());
-        assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, requestList.get(0)[0]);
+        assertEquals(2, requestList.size());
         
         GetMaternityMedicalHistoryType request = (GetMaternityMedicalHistoryType)requestList.get(0)[1];
         assertEquals(RR_ID, request.getPatientId().getId());
-        //assertEquals(1, request.getCareUnitHSAid().size());
-        //assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, request.getCareUnitHSAid().get(0));
+        assertEquals(1, request.getCareUnitHSAid().size());
+        assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, request.getCareUnitHSAid().get(0));
     }
 
     @Test

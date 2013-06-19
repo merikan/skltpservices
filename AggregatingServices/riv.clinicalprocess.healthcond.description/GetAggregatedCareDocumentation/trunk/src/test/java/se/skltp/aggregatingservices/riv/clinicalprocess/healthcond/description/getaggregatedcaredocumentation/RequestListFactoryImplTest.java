@@ -40,14 +40,10 @@ public class RequestListFactoryImplTest {
         assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_2, requestList.get(0)[0]);
         GetCareDocumentationType request1 = (GetCareDocumentationType)requestList.get(0)[1];
         assertEquals(RR_ID, request1.getPatientId().getId());
-        //assertEquals(1, request1.getCareUnitHSAid().size());
-        //assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_2, request1.getCareUnitHSAid().get(0));
         
         assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, requestList.get(1)[0]);
         GetCareDocumentationType request2 = (GetCareDocumentationType)requestList.get(1)[1];
         assertEquals(RR_ID, request2.getPatientId().getId());
-        //assertEquals(1, request2.getCareUnitHSAid().size());
-        //assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, request2.getCareUnitHSAid().get(0));
     }
 
     @Test
@@ -56,15 +52,13 @@ public class RequestListFactoryImplTest {
         FindContentType fc = createFindContent(RR_ID); 
         GetCareDocumentationType getCareDoc = createGetCareDocumentation(RR_ID, Collections.singletonList(TestProducerDb.TEST_LOGICAL_ADDRESS_1));
         QueryObject queryObject = new QueryObject(fc, getCareDoc);
-        FindContentResponseType findContentResponse = createFindContentResponse(TestProducerDb.TEST_LOGICAL_ADDRESS_1, TestProducerDb.TEST_LOGICAL_ADDRESS_2);
+        FindContentResponseType findContentResponse = createFindContentResponse(TestProducerDb.TEST_LOGICAL_ADDRESS_1, TestProducerDb.TEST_LOGICAL_ADDRESS_1);
         List<Object[]> requestList =  requestFactory.createRequestList(queryObject, findContentResponse);
         assertEquals(1, requestList.size());
         assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, requestList.get(0)[0]);
         
         GetCareDocumentationType request = (GetCareDocumentationType)requestList.get(0)[1];
         assertEquals(RR_ID, request.getPatientId().getId());
-        //assertEquals(1, request.getCareUnitHSAid().size());
-        //assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, request.getCareUnitHSAid().get(0));
     }
 
     @Test
@@ -83,14 +77,10 @@ public class RequestListFactoryImplTest {
         assertEquals(SOURCE_SYSTEM_2, requestList.get(0)[0]);
         GetCareDocumentationType request1 = (GetCareDocumentationType)requestList.get(0)[1];
         assertEquals(RR_ID, request1.getPatientId().getId());
-        //assertEquals(1, request1.getCareUnitHSAid().size());
-        //assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, request1.getCareUnitHSAid().get(0));
         
         assertEquals(SOURCE_SYSTEM_1, requestList.get(1)[0]);
         GetCareDocumentationType request2 = (GetCareDocumentationType)requestList.get(1)[1];
         assertEquals(RR_ID, request2.getPatientId().getId());
-        //assertEquals(1, request2.getCareUnitHSAid().size());
-        //assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, request2.getCareUnitHSAid().get(0));
     }
     
     @Test
@@ -108,9 +98,6 @@ public class RequestListFactoryImplTest {
         
         GetCareDocumentationType request = (GetCareDocumentationType)requestList.get(0)[1];
         assertEquals(RR_ID, request.getPatientId().getId());
-        //assertEquals(2, request.getCareUnitHSAid().size()); 
-        //assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_2, request.getCareUnitHSAid().get(0));
-        //assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, request.getCareUnitHSAid().get(1));
     }
     
     @Test
@@ -128,8 +115,6 @@ public class RequestListFactoryImplTest {
         
         GetCareDocumentationType request = (GetCareDocumentationType)requestList.get(0)[1];
         assertEquals(RR_ID, request.getPatientId().getId());
-        //assertEquals(1, request.getCareUnitHSAid().size()); 
-        //assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, request.getCareUnitHSAid().get(0));
     }
 
 
@@ -153,8 +138,6 @@ public class RequestListFactoryImplTest {
         assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, requestList.get(0)[0]);
         GetCareDocumentationType request = (GetCareDocumentationType)requestList.get(0)[1];
         assertEquals(RR_ID, request.getPatientId().getId());
-        //assertEquals(1, request.getCareUnitHSAid().size());
-        //assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, request.getCareUnitHSAid().get(0));
     }
     
     private FindContentResponseType createFindContentResponse(String... logicalAddresses){
