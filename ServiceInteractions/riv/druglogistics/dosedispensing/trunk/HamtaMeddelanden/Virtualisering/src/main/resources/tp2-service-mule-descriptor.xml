@@ -27,6 +27,8 @@
 
     <!-- Name of this file is mandatory and may not be changed. -->
 
+	<spring:bean id="objectStore" class="org.mule.util.store.SimpleMemoryObjectStore"/>
+
 	<flow name="druglogistics-dosedispensing-HamtaMeddelandenInteraction-virtualisering-flow" >
 	
 		
@@ -55,14 +57,25 @@
             	wsdlLocation="classpath:/schemas/interactions/HamtaMeddelandenInteraction/HamtaMeddelandenInteraction_1.0_RIVTABP20.wsdl" />
             	
            
+         <transformer ref="objToStr"></transformer>
+         <logger message="Logpunkt-1: - BEFORE until-succesful #[groovy:payload]" level="WARN"/>
 
-         <flow-ref name="hamtameddelanden-vagval-dynamic-routing-flow" />
+	<until-successful objectStore-ref="objectStore"
+		maxRetries="3" secondsBetweenRetries="1">
+		<processor-chain>
+			<flow-ref name="hamtameddelanden-vagval-dynamic-routing-flow" />
+		</processor-chain>
+	</until-successful>  
+         
+         <logger message="Logpunkt-1: - AFTER until-succesful #[groovy:payload]" level="WARN"/>
+         
+
        
     </flow>
     
      <flow name="hamtameddelanden-vagval-dynamic-routing-flow" >
 
-		<logger message="Logpunkt0: - TEST" level="INFO"/>
+	    <logger message="Logpunkt0: - TEST #[groovy:payload] " level="INFO"/>
 
         <transformer ref="createCorrId" />
         <transformer ref="XmlToXSR" />
@@ -70,59 +83,63 @@
   		<transformer ref="logReqIn" />
         <transformer ref="rivTransformer" />
         
-        <cxf:proxy-client payload="envelope" />
-
-        <custom-processor class="se.skl.tp.vp.vagvalrouter.VagvalRouter" >
-
-            <spring:property
-                name="vagvalAgent"
-                ref="vagvalAgent" />
-
-            <spring:property
-                name="senderIdPropertyName"
-                value="${VAGVALROUTER_SENDERID}" />
-
-            <spring:property
-                name="responseTimeout"
-                value="${SERVICE_TIMEOUT_MS}" />
-
-            <spring:property
-                name="whiteList"
-                value="${IP_WHITE_LIST}" />
-        </custom-processor>
+         	<logger message="Logpunkt2: - BEFORE VagvalRouter: #[groovy:payload]" level="WARN"/>
+         	
+        	<cxf:proxy-client payload="envelope" />
+         	<custom-processor class="se.skl.tp.vp.vagvalrouter.VagvalRouter" >
+	
+	            <spring:property
+	                name="vagvalAgent"
+	                ref="vagvalAgent" />
+	
+	            <spring:property
+	                name="senderIdPropertyName"
+	                value="${VAGVALROUTER_SENDERID}" />
+	
+	            <spring:property
+	                name="responseTimeout"
+	                value="${SERVICE_TIMEOUT_MS}" />
+	
+	            <spring:property
+	                name="whiteList"
+	                value="${IP_WHITE_LIST}" />
+	        </custom-processor> 
         
+        
+        	<logger message="Logpunkt3: - AFTER Vagvalrouter #[groovy:payload]" level="WARN"/>
+        	
         <response>
             <transformer ref="exceptionTransformer" />
             <object-to-string-transformer /> 
             <transformer ref="logRespOut" />
         </response>
         
-<!--         <custom-exception-strategy class="se.skl.tp.vp.util.VPExceptionStrategy" > -->
-<!-- 			<spring:property name="jaxbObjectToXml"  ref="objToXml"/> -->
-<!--         </custom-exception-strategy> -->
+         <custom-exception-strategy class="se.skl.tp.vp.util.VPExceptionStrategy" >
+ 			<spring:property name="jaxbObjectToXml"  ref="objToXml"/> 
+         </custom-exception-strategy> 
         
           <!-- A rollback-exception-strategy for handling INFRASTRUCTURE EXCEPTIONS, i.e. with retries  -->
-            <rollback-exception-strategy maxRedeliveryAttempts="3">
+<!--             <rollback-exception-strategy maxRedeliveryAttempts="3">
         
-            
                 
-                <logger message="Logpunkt1: - REDELIVERY WARNING: #[groovy:payload.class.name]"/>
+                <logger message="Logpunkt1: - REDELIVERY WARNING: #[groovy:payload]" level="WARN"/>
+                
 
-                <test:component waitTime="3000"/>
+                <test:component waitTime="1000"/>
     
     
     
                 <on-redelivery-attempts-exceeded>
         
-                    <!-- Set the correlation id for message tracking again when exceeded, otherwise we loose tracking of these log-events -->
+                    Set the correlation id for message tracking again when exceeded, otherwise we loose tracking of these log-events
                     <set-variable variableName="soitoolkit_correlationId" value="#[xpath:/msg:Message/msg:Header/msg:correlationId/text()]"/>
 
                
-         			<logger message="Logpunkt2: - REDELIVERY exhaused for : #[groovy:payload.class.name]"/>
+         			<logger message="Logpunkt2: - REDELIVERY exhaused for : #[groovy:payload.class.name]" level="ERROR"/>
          
                 </on-redelivery-attempts-exceeded>
         
-            </rollback-exception-strategy>
+            </rollback-exception-strategy> -->
         
     </flow>
 
