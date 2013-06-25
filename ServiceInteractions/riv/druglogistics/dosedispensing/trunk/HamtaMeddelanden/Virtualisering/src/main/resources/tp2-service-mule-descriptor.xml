@@ -27,11 +27,8 @@
 
     <!-- Name of this file is mandatory and may not be changed. -->
 
-	<spring:bean id="objectStore" class="org.mule.util.store.SimpleMemoryObjectStore"/>
 
 	<flow name="druglogistics-dosedispensing-HamtaMeddelandenInteraction-virtualisering-flow" >
-	
-		
 		
 		<composite-source>
       	  	<https:inbound-endpoint
@@ -57,17 +54,8 @@
             	wsdlLocation="classpath:/schemas/interactions/HamtaMeddelandenInteraction/HamtaMeddelandenInteraction_1.0_RIVTABP20.wsdl" />
             	
            
-         <transformer ref="objToStr"></transformer>
-         <logger message="Logpunkt-1: - BEFORE until-succesful #[groovy:payload]" level="WARN"/>
-
-	<until-successful objectStore-ref="objectStore"
-		maxRetries="3" secondsBetweenRetries="1">
-		<processor-chain>
-			<flow-ref name="hamtameddelanden-vagval-dynamic-routing-flow" />
-		</processor-chain>
-	</until-successful>  
-         
-         <logger message="Logpunkt-1: - AFTER until-succesful #[groovy:payload]" level="WARN"/>
+<!--          <transformer ref="objToStr"></transformer> -->
+		 <flow-ref name="hamtameddelanden-vagval-dynamic-routing-flow" />
          
 
        
@@ -117,29 +105,6 @@
          <custom-exception-strategy class="se.skl.tp.vp.util.VPExceptionStrategy" >
  			<spring:property name="jaxbObjectToXml"  ref="objToXml"/> 
          </custom-exception-strategy> 
-        
-          <!-- A rollback-exception-strategy for handling INFRASTRUCTURE EXCEPTIONS, i.e. with retries  -->
-<!--             <rollback-exception-strategy maxRedeliveryAttempts="3">
-        
-                
-                <logger message="Logpunkt1: - REDELIVERY WARNING: #[groovy:payload]" level="WARN"/>
-                
-
-                <test:component waitTime="1000"/>
-    
-    
-    
-                <on-redelivery-attempts-exceeded>
-        
-                    Set the correlation id for message tracking again when exceeded, otherwise we loose tracking of these log-events
-                    <set-variable variableName="soitoolkit_correlationId" value="#[xpath:/msg:Message/msg:Header/msg:correlationId/text()]"/>
-
-               
-         			<logger message="Logpunkt2: - REDELIVERY exhaused for : #[groovy:payload.class.name]" level="ERROR"/>
-         
-                </on-redelivery-attempts-exceeded>
-        
-            </rollback-exception-strategy> -->
         
     </flow>
 
