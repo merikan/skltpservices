@@ -22,7 +22,7 @@ public class RequestActivitiesTestProducerDb extends TestProducerDb {
 	}
 	
 	@Override
-	public Object createResponseItem(String logicalAddress, String registeredResidentId, String businessObjectId) {
+	public Object createResponseItem(String logicalAddress, String registeredResidentId, String businessObjectId, String time) {
 		
 		if (log.isDebugEnabled()) {
 			log.debug("Created one response item for logical-address {}, registeredResidentId {} and businessObjectId {}",
@@ -46,5 +46,4 @@ public class RequestActivitiesTestProducerDb extends TestProducerDb {
 		
 		return response;
 	}
-
 }
