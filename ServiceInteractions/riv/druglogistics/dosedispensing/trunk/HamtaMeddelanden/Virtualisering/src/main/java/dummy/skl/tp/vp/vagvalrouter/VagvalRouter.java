@@ -73,7 +73,8 @@ public class VagvalRouter extends AbstractRecipientList {
 	 * 
 	 * @since VP-2.0
 	 */
-	public static final String X_VP_CONSUMER_ID = "x-rivta-original-serviceconsumer-hsaid";
+	// FIXME. ML: temporary  change "-" to "_" for jms compliance
+	public static final String X_VP_CONSUMER_ID = "x_rivta_original_serviceconsumer_hsaid";
 
 	/**
 	 * HTTP Header forwarded to consumer
