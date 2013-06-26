@@ -74,7 +74,7 @@
          	<logger message="Logpunkt2: - BEFORE VagvalRouter: #[groovy:payload]" level="WARN"/>
          	
         	<cxf:proxy-client payload="envelope" />
-         	<custom-processor class="se.skl.tp.vp.vagvalrouter.VagvalRouter" >
+         	<custom-processor class="dummy.skl.tp.vp.vagvalrouter.VagvalRouter" >
 	
 	            <spring:property
 	                name="vagvalAgent"
@@ -102,7 +102,7 @@
             <transformer ref="logRespOut" />
         </response>
         
-         <custom-exception-strategy class="se.skl.tp.vp.util.VPExceptionStrategy" >
+         <custom-exception-strategy class="dummy.skl.tp.vp.util.VPExceptionStrategy" >
  			<spring:property name="jaxbObjectToXml"  ref="objToXml"/> 
          </custom-exception-strategy> 
         
