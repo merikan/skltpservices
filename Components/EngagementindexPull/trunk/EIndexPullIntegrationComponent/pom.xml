@@ -11,7 +11,7 @@
 
 	<parent>
 		<groupId>se.skl.components</groupId>
-		<artifactId>engagementindexpull</artifactId>
+		<artifactId>EIndexpull-Parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
