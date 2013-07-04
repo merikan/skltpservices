@@ -99,26 +99,23 @@
 		</custom-processor> 		
 		
 		<request-reply  timeout="${SERVICE_TIMEOUT_MS}">
-			<jms:outbound-endpoint connector-ref="soitoolkit-jms-connector" queue="${SOAPHTTPTOJMSUSINGJAVA_REQUEST_QUEUE}" transformer-refs="objToStr strToJms logReqOut" />
-			<jms:inbound-endpoint  connector-ref="soitoolkit-jms-connector" queue="${SOAPHTTPTOJMSUSINGJAVA_RESPONSE_QUEUE}" transformer-refs="logRespIn jmsToStr"/>
+			<jms:outbound-endpoint connector-ref="soitoolkit-jms-connector" queue="${DRUGLOGISTICS_REQUEST_QUEUE}" transformer-refs="objToStr strToJms logReqOut" />
+			<jms:inbound-endpoint  connector-ref="soitoolkit-jms-connector" queue="${DRUGLOGISTICS_RESPONSE_QUEUE}" transformer-refs="logRespIn jmsToStr"/>
 		</request-reply>
 
 
 		<logger message="Logpunkt10 - After request-reply element" level="INFO" />
  
 		<custom-exception-strategy class="org.soitoolkit.commons.mule.error.ServiceExceptionStrategy"/>
- 
- 		<!-- Call the subflow -->
-<!--  	<flow-ref name="hamtameddelanden-vagval-dynamic-routing-flow" /> -->
     </flow>
   
   
-    <flow name="hamtameddelande-rollback-flow">
+    <flow name="druglogistics-dosedispensing-HamtaMeddelandenInteraction-virtualisering-rollback-flow">
 
         <jms:inbound-endpoint 
             name="soaphttpToJmsUsingJava-teststub-endpoint" 
             connector-ref="soitoolkit-jms-connector" 
-            queue="${SOAPHTTPTOJMSUSINGJAVA_REQUEST_QUEUE}" 
+            queue="${DRUGLOGISTICS_REQUEST_QUEUE}" 
             transformer-refs="jmsToStr"
             responseTransformer-refs="strToJms">
             <jms:transaction action="ALWAYS_BEGIN"/>
@@ -133,13 +130,24 @@
 	    <logger message="Logpunkt1.1 - session: #[groovy:message.getSessionPropertyNames()]" level="INFO"/>
         
                 
-		<flow-ref name="hamtameddelanden-vagval-dynamic-routing-flow">
+		<flow-ref name="druglogistics-dosedispensing-HamtaMeddelandenInteraction-virtualisering-vagval-dynamic-routing-flow">
 		</flow-ref>
  
 		<logger message="Logpunkt1.2 - After subflow" level="INFO" />        
         
         <rollback-exception-strategy maxRedeliveryAttempts="1" >
+            
+            <!-- Output logging -->
             <logger message="RETRY" level="ERROR" />
+            
+            <logger message="Outgoing payload: #[sessionVars['original_payload']]" level="WARN" />
+            <logger message="Payload: #[payload]" level="WARN" />
+            <logger message="Headers (inbound): #[headers:INBOUND:*]" level="WARN" />
+            <logger message="Headers (outbound): #[headers:OUTBOUND:*]" level="WARN" />
+            <logger message="Exception message: #[exception.summaryMessage]" level="WARN" />
+            <logger message="Exception cause: #[exception.causeException]" level="WARN" />
+            <logger message="End of RETRY output" level="WARN" />
+            
             <on-redelivery-attempts-exceeded >
                 <logger message="GIVE UP" level="ERROR" />
             </on-redelivery-attempts-exceeded>
@@ -148,7 +156,7 @@
     </flow>
     
     <!-- Flow with VagvalRouter -->
-     <flow name="hamtameddelanden-vagval-dynamic-routing-flow" >
+     <flow name="druglogistics-dosedispensing-HamtaMeddelandenInteraction-virtualisering-vagval-dynamic-routing-flow" >
 
 		<set-variable doc:name="Setting cxf_service as a flowvar" variableName="cxf_service" value="#[groovy:sessionVars.get('original_cxf_service')]"/>    
 		
@@ -156,6 +164,9 @@
 	    <logger message="Logpunkt2.1 - sessionVars: #[groovy:sessionVars.keySet()] " level="INFO"/>
 	    <logger message="Logpunkt2.1 - flowVars: #[groovy:flowVars.keySet()] " level="INFO"/>
 	    <logger message="Logpunkt2.1 - session: #[groovy:message.getSessionPropertyNames()]" level="INFO"/>
+
+        <!-- Stores the payload for logging if somethings breaks while sending it -->
+        <set-session-variable doc:name="Save original payload" variableName="original_payload" value="#[payload]"/>    
 
       
       	<transformer ref="createCorrId" />
@@ -165,7 +176,6 @@
   		
       	<logger message="Logpunkt2.2" level="INFO" />
       	
-<!--         <transformer ref="rivTransformer" />  -->
         <custom-transformer name="rivTransformer2" class="dummy.skl.tp.vp.vagvalrouter.RivTransformer" >
         	<spring:property
             	name="vagvalAgent"
@@ -179,11 +189,8 @@
   	 	</custom-transformer>
         
         
-        
        	<logger message="Logpunkt2.3 - BEFORE Vagvalrouter #[groovy:payload] " level="INFO"/>
         
-         	
-       	<cxf:proxy-client payload="envelope" />
         <custom-processor class="dummy.skl.tp.vp.vagvalrouter.VagvalRouter" >
 
             <spring:property
@@ -208,23 +215,6 @@
         
         
         <logger message="Logpunkt2.4: - AFTER Vagvalrouter #[groovy:payload]" level="INFO"/>
-
-
-
-        
-<!--         <response> -->
-<!--             <transformer ref="exceptionTransformer" /> -->
-<!--             <object-to-string-transformer />  -->
-<!--             <transformer ref="logRespOut" /> -->
-<!--         </response> -->
-<!--          <custom-exception-strategy class="dummy.skl.tp.vp.util.VPExceptionStrategy" > -->
-<!--  			<spring:property name="jaxbObjectToXml"  ref="objToXml"/>  -->
-<!--          </custom-exception-strategy>  -->
-
-	
-
     </flow>
-    
-  
 
 </mule>
