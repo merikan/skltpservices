@@ -49,7 +49,11 @@ public class HamtaMeddelandenImpl implements HamtaMeddelandenResponderInterface 
 	private static final String LARGE_RESPONSE = "9999999999";
 	private static final String ERROR_RESPONSE = "2222222222";
 	private static final String TIMEOUT_RESPONSE = "3333333333";
+	private static final String TIMEOUT_RESPONSE_ONCE = "4444444444";
 	private static int TIMEOUT_MILLIS = 40000;
+	private static int TIMEOUT_MILLIS_ONCE = 3000;
+	
+	private static boolean sleep = true;
 
 	@Override
 	@WebResult(name = "HamtaMeddelandenResponse", targetNamespace = "urn:riv:druglogistics:dosedispensing:HamtaMeddelandenResponder:1", partName = "parameters")
@@ -72,15 +76,27 @@ public class HamtaMeddelandenImpl implements HamtaMeddelandenResponderInterface 
 		} else if (ERROR_RESPONSE.equals(glnKod)) {
 			throw new RuntimeException("Error occured when trying to retrive information from using glnkod: " + glnKod);
 		} else if (TIMEOUT_RESPONSE.equals(glnKod)) {
-			timeOutResponse(responseType);
+			timeOutResponse(TIMEOUT_MILLIS, responseType);
+		} else if (TIMEOUT_RESPONSE_ONCE.equals(glnKod)) {
+		
+			System.err.println("Sleep: " + sleep);
+			
+			if (sleep) {
+				System.err.println("ZZZZZZZZZZZZZZZ");
+				timeOutResponse(TIMEOUT_MILLIS_ONCE, responseType);
+			} else {
+				responseType.getMeddelanden().add(createMeddelandeResponse());
+			}
+			sleep = !sleep;
+			
 		}
 
 		return responseType;
 	}
 
-	private void timeOutResponse(HamtaMeddelandenResponseType responseType) {
+	private void timeOutResponse(Integer timeout, HamtaMeddelandenResponseType responseType) {
 		try {
-			Thread.sleep(TIMEOUT_MILLIS);
+			Thread.sleep(timeout);
 		} catch (InterruptedException e) {
 		}
 		responseType.getMeddelanden().add(createMeddelandeResponse());
