@@ -47,6 +47,8 @@
 		<module>FindAllAnswers</module>
 		<module>DeleteQuestions</module>
 		<module>DeleteAnswers</module>
+		<module>SendMedicalCertificate</module>
+		<module>RevokeMedicalCertificate</module>		
 	</modules>
 	
 	<scm>
