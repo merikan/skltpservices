@@ -43,7 +43,13 @@
 					<xs:documentation>HSA-id, o.i.d för HSA-id är 1.2.752.129.2.1.4.1</xs:documentation>
 				</xs:annotation>			
 			</xs:element>
-			<xs:element name="fullstandigtNamn" type="xs:string"/>
+			<xs:element name="fullstandigtNamn" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Förnamn +  efternamn sammanslaget.
+					Är tomt om personen har en skyddad identitet.</xs:documentation>
+				</xs:annotation>							
+			</xs:element>
+			 <!-- Skyddad identitet -->
 			<xs:element name="forskrivarkod" type="xs:string" minOccurs="0"/>
 			<xs:element name="enhet" type="enhetType"/>
 			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
@@ -68,7 +74,7 @@
 			<xs:element name="postort" type="xs:string" minOccurs="0"/>
 			<xs:element name="telefonnummer" type="xs:string" minOccurs="0"/>
 			<xs:element name="epost" type="xs:string" minOccurs="0"/>
-			<xs:element name="vardgivare" type="vardgivareType" minOccurs="0" />
+			<xs:element name="vardgivare" type="vardgivareType" minOccurs="0" /> 
 			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
@@ -94,7 +100,12 @@
 						o.i.d för samordningsnummer är 1.2.752.129.2.1.3.3</xs:documentation>
 				</xs:annotation>							
 			</xs:element>
-			<xs:element name="fullstandigtNamn" type="xs:string"/>
+			<xs:element name="fullstandigtNamn" type="xs:string" minOccurs="0"> 
+				<xs:annotation>
+					<xs:documentation>Förnamn +  efternamn sammanslaget.
+					Är tomt om personen har en skyddad identitet.</xs:documentation>
+				</xs:annotation>							
+			</xs:element>
 			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>

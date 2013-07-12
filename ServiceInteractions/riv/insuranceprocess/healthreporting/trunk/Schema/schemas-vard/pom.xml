@@ -37,7 +37,7 @@
 
 	<properties>
 		<schema.path>interactions</schema.path>
-		<project.build.sourceEncoding />
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding />
 	</properties>
  
@@ -53,6 +53,20 @@
             <artifactId>cxf-rt-transports-http</artifactId>
             <version>${cxf.version}</version>
         </dependency>
+
+	    <!-- Added these to avoid problem with generation an newer JDK's -->
+        <dependency>
+        	<groupId>javax.xml.ws</groupId>
+        	<artifactId>jaxws-api</artifactId>
+        	<version>2.2.9</version>
+    	</dependency>
+    	<dependency>
+        	<groupId>javax.xml.bind</groupId>
+        	<artifactId>jaxb-api</artifactId>
+        	<version>2.2.7</version>
+    	</dependency>
+	    <!-- End fix -->
+
         <dependency>
              <groupId>org.apache.cxf</groupId>
              <artifactId>cxf-rt-transports-http-jetty</artifactId>
@@ -249,7 +263,7 @@
 											http://www.w3.org/2005/08/addressing=org.w3.wsaddressing10
 										</extraarg>
 									</extraargs>
-									<wsdl>${schema.path}/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl</wsdl>
+									<wsdl>${schema.path}/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.1_rivtabp20.wsdl</wsdl>
 								</wsdlOption>
 
 								<wsdlOption>
@@ -386,6 +400,70 @@
 										</extraarg>
 									</extraargs>
 									<wsdl>${schema.path}/DeleteQuestionsInteraction/DeleteQuestionsInteraction_1.0_rivtabp20.wsdl</wsdl>
+								</wsdlOption>
+								
+								<wsdlOption>
+									<extraargs>
+										<extraarg>-p</extraarg>
+										Note: be careful when changing this - must be in sync for all
+										schemas generations in this namespace!
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:SendMedicalCertificate:1:rivtabp20=se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificate.v1.rivtabp20
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:2=se.skl.riv.insuranceprocess.healthreporting.v2
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:medcertqa:1=se.skl.riv.insuranceprocess.healthreporting.qa.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:iso:21090:dt:1=iso.v21090.dt.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:SendMedicalCertificateResponder:1=se.skl.riv.insuranceprocess.healthreporting.sendmedicalcertificateresponder.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											http://www.w3.org/2005/08/addressing=org.w3.wsaddressing10
+										</extraarg>
+									</extraargs>
+									<wsdl>${schema.path}/SendMedicalCertificateInteraction/SendMedicalCertificateInteraction_1.0_rivtabp20.wsdl</wsdl>
+								</wsdlOption>
+								
+								<wsdlOption>
+									<extraargs>
+										<extraarg>-p</extraarg>
+										Note: be careful when changing this - must be in sync for all
+										schemas generations in this namespace!
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:RevokeMedicalCertificate:1:rivtabp20=se.skl.riv.insuranceprocess.healthreporting.revokemedicalcertificate.v1.rivtabp20
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:2=se.skl.riv.insuranceprocess.healthreporting.v2
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:medcertqa:1=se.skl.riv.insuranceprocess.healthreporting.qa.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:iso:21090:dt:1=iso.v21090.dt.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											urn:riv:insuranceprocess:healthreporting:RevokeMedicalCertificateResponder:1=se.skl.riv.insuranceprocess.healthreporting.revokemedicalcertificateresponder.v1
+										</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											http://www.w3.org/2005/08/addressing=org.w3.wsaddressing10
+										</extraarg>
+									</extraargs>
+									<wsdl>${schema.path}/RevokeMedicalCertificateInteraction/RevokeMedicalCertificateInteraction_1.0_rivtabp20.wsdl</wsdl>
 								</wsdlOption>
 								
 							</wsdlOptions>
