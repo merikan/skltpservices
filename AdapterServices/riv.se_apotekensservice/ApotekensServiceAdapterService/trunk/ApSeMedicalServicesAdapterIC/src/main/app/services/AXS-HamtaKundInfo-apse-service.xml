@@ -26,7 +26,7 @@
 			name="Bridged-ApotekenService-HamtaKundInfo-service">
 			<inbound>
 					<cxf:inbound-endpoint
-							address="${inbound.endpoint.apotekensservice.lf.HamtaKundInfo}"
+							address="${inbound.endpoint.apotekensservice.axs.HamtaKundInfo}"
 							wsdlLocation="classpath:/schemas/interactions/HamtaKundInfoInteraction/HamtaKundInfoInteraction_1.0_rivtabp20.wsdl"
 							serviceName="HamtaKundInfoResponderService" namespace="urn:riv:inera:se.apotekensservice:lf:HamtaKundInfo:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
@@ -34,7 +34,7 @@
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
-						address="${outbound.endpoint.apotekensservice.lf.HamtaKundInfo}"
+						address="${outbound.endpoint.apotekensservice.axs.HamtaKundInfo}"
 						synchronous="true" proxy="true" payload="envelope"
 						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
@@ -45,7 +45,7 @@
 			name="Bridged-ApotekenService-HamtaKundInfo-service-env2">
 			<inbound>
 				<cxf:inbound-endpoint
-						address="${inbound.endpoint.env2.apotekensservice.lf.HamtaKundInfo}"
+						address="${inbound.endpoint.env2.apotekensservice.axs.HamtaKundInfo}"
 						wsdlLocation="classpath:/schemas/interactions/HamtaKundInfoInteraction/HamtaKundInfoInteraction_1.0_rivtabp20.wsdl"
 						serviceName="HamtaKundInfoResponderService" namespace="urn:riv:inera:se.apotekensservice:lf:HamtaKundInfo:1:rivtabp20"
 						proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
@@ -53,7 +53,7 @@
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
-						address="${outbound.endpoint.env2.apotekensservice.lf.HamtaKundInfo}"
+						address="${outbound.endpoint.env2.apotekensservice.axs.HamtaKundInfo}"
 						synchronous="true" proxy="true" payload="envelope"
 						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>

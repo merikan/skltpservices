@@ -26,15 +26,15 @@
 			name="Bridged-ApotekenService-HamtaHkdbKonto-service">
 			<inbound>
 					<cxf:inbound-endpoint
-							address="${inbound.endpoint.apotekensservice.lf.HamtaHkdbKonto}"
+							address="${inbound.endpoint.apotekensservice.pris.HamtaHkdbKonto}"
 							wsdlLocation="classpath:/schemas/interactions/HamtaHkdbKontoInteraction/HamtaHkdbKontoInteraction_1.0_rivtabp20.wsdl"
-							serviceName="HamtaHkdbKontoResponderService" namespace="urn:riv:inera:se.apotekensservice:lf:HamtaHkdbKonto:1:rivtabp20"
+							serviceName="HamtaHkdbKontoResponderService" namespace="urn:riv:inera:se.apotekensservice:pris:HamtaHkdbKonto:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
-						address="${outbound.endpoint.apotekensservice.lf.HamtaHkdbKonto}"
+						address="${outbound.endpoint.apotekensservice.pris.HamtaHkdbKonto}"
 						synchronous="true" proxy="true" payload="envelope"
 						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
@@ -45,15 +45,15 @@
 			name="Bridged-ApotekenService-HamtaHkdbKonto-service-env2">
 			<inbound>
 				<cxf:inbound-endpoint
-						address="${inbound.endpoint.env2.apotekensservice.lf.HamtaHkdbKonto}"
+						address="${inbound.endpoint.env2.apotekensservice.pris.HamtaHkdbKonto}"
 						wsdlLocation="classpath:/schemas/interactions/HamtaHkdbKontoInteraction/HamtaHkdbKontoInteraction_1.0_rivtabp20.wsdl"
-						serviceName="HamtaHkdbKontoResponderService" namespace="urn:riv:inera:se.apotekensservice:lf:HamtaHkdbKonto:1:rivtabp20"
+						serviceName="HamtaHkdbKontoResponderService" namespace="urn:riv:inera:se.apotekensservice:pris:HamtaHkdbKonto:1:rivtabp20"
 						proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
-						address="${outbound.endpoint.env2.apotekensservice.lf.HamtaHkdbKonto}"
+						address="${outbound.endpoint.env2.apotekensservice.pris.HamtaHkdbKonto}"
 						synchronous="true" proxy="true" payload="envelope"
 						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
