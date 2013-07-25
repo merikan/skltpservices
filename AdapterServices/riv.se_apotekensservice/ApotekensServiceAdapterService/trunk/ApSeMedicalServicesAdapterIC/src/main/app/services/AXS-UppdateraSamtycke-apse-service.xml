@@ -28,7 +28,7 @@
 					<cxf:inbound-endpoint
 							address="${inbound.endpoint.apotekensservice.axs.UppdateraSamtycke}"
 							wsdlLocation="classpath:/schemas/interactions/UppdateraSamtyckeInteraction/UppdateraSamtyckeInteraction_1.0_rivtabp20.wsdl"
-							serviceName="UppdateraSamtyckeResponderService" namespace="urn:riv:inera:se.apotekensservice:lf:UppdateraSamtycke:1:rivtabp20"
+							serviceName="UppdateraSamtyckeResponderService" namespace="urn:riv:inera:se.apotekensservice:axs:UppdateraSamtycke:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
 			<outbound>
@@ -47,7 +47,7 @@
 				<cxf:inbound-endpoint
 						address="${inbound.endpoint.env2.apotekensservice.axs.UppdateraSamtycke}"
 						wsdlLocation="classpath:/schemas/interactions/UppdateraSamtyckeInteraction/UppdateraSamtyckeInteraction_1.0_rivtabp20.wsdl"
-						serviceName="UppdateraSamtyckeResponderService" namespace="urn:riv:inera:se.apotekensservice:lf:UppdateraSamtycke:1:rivtabp20"
+						serviceName="UppdateraSamtyckeResponderService" namespace="urn:riv:inera:se.apotekensservice:axs:UppdateraSamtycke:1:rivtabp20"
 						proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
 			<outbound>
