@@ -26,15 +26,15 @@
 			name="Bridged-ApotekenService-HamtaHkdbTransaktionerWebb-service">
 			<inbound>
 					<cxf:inbound-endpoint
-							address="${inbound.endpoint.apotekensservice.lf.HamtaHkdbTransaktionerWebb}"
+							address="${inbound.endpoint.apotekensservice.pris.HamtaHkdbTransaktionerWebb}"
 							wsdlLocation="classpath:/schemas/interactions/HamtaHkdbTransaktionerWebbInteraction/HamtaHkdbTransaktionerWebbInteraction_1.0_rivtabp20.wsdl"
-							serviceName="HamtaHkdbTransaktionerWebbResponderService" namespace="urn:riv:inera:se.apotekensservice:lf:HamtaHkdbTransaktionerWebb:1:rivtabp20"
+							serviceName="HamtaHkdbTransaktionerWebbResponderService" namespace="urn:riv:inera:se.apotekensservice:pris:HamtaHkdbTransaktionerWebb:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
-						address="${outbound.endpoint.apotekensservice.lf.HamtaHkdbTransaktionerWebb}"
+						address="${outbound.endpoint.apotekensservice.pris.HamtaHkdbTransaktionerWebb}"
 						synchronous="true" proxy="true" payload="envelope"
 						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
@@ -45,15 +45,15 @@
 			name="Bridged-ApotekenService-HamtaHkdbTransaktionerWebb-service-env2">
 			<inbound>
 				<cxf:inbound-endpoint
-						address="${inbound.endpoint.env2.apotekensservice.lf.HamtaHkdbTransaktionerWebb}"
+						address="${inbound.endpoint.env2.apotekensservice.pris.HamtaHkdbTransaktionerWebb}"
 						wsdlLocation="classpath:/schemas/interactions/HamtaHkdbTransaktionerWebbInteraction/HamtaHkdbTransaktionerWebbInteraction_1.0_rivtabp20.wsdl"
-						serviceName="HamtaHkdbTransaktionerWebbResponderService" namespace="urn:riv:inera:se.apotekensservice:lf:HamtaHkdbTransaktionerWebb:1:rivtabp20"
+						serviceName="HamtaHkdbTransaktionerWebbResponderService" namespace="urn:riv:inera:se.apotekensservice:pris:HamtaHkdbTransaktionerWebb:1:rivtabp20"
 						proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
-						address="${outbound.endpoint.env2.apotekensservice.lf.HamtaHkdbTransaktionerWebb}"
+						address="${outbound.endpoint.env2.apotekensservice.pris.HamtaHkdbTransaktionerWebb}"
 						synchronous="true" proxy="true" payload="envelope"
 						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
