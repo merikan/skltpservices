@@ -22,13 +22,12 @@ package se.skl.tp.insuranceprocess.healthreporting.regmedcert.producer;
 
 import javax.jws.WebService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3.wsaddressing10.AttributedURIType;
 
 import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v3.rivtabp20.RegisterMedicalCertificateResponderInterface;
 import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v3.RegisterMedicalCertificateResponseType;
 import se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificateresponder.v3.RegisterMedicalCertificateType;
+import se.skl.riv.insuranceprocess.healthreporting.v2.ErrorIdEnum;
 import se.skl.riv.insuranceprocess.healthreporting.v2.ResultCodeEnum;
 import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
 
@@ -38,16 +37,13 @@ import se.skl.riv.insuranceprocess.healthreporting.v2.ResultOfCall;
 		endpointInterface="se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v3.rivtabp20.RegisterMedicalCertificateResponderInterface", 
 		portName = "RegisterMedicalCertificateResponderPort", 
 		targetNamespace = "urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20",
-		wsdlLocation = "schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl")
+		wsdlLocation = "schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.1_rivtabp20.wsdl")
 public class RegisterMedCertImpl implements RegisterMedicalCertificateResponderInterface {
-
-	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	public RegisterMedicalCertificateResponseType registerMedicalCertificate(
 			AttributedURIType logicalAddress,
 			RegisterMedicalCertificateType parameters) {
 		try {
-			logger.debug("Received call not validating!");
 			RegisterMedicalCertificateResponseType response = new RegisterMedicalCertificateResponseType();
 						
 			String logiskAdress = logicalAddress.getValue();
@@ -64,13 +60,20 @@ public class RegisterMedCertImpl implements RegisterMedicalCertificateResponderI
 			if (name.equalsIgnoreCase("Error") || logiskAdress.contains("Error") ) {
 				ResultOfCall result = new ResultOfCall();
 				result.setResultCode(ResultCodeEnum.ERROR);
+				result.setErrorId(ErrorIdEnum.APPLICATION_ERROR);
 				response.setResult(result);
-				logger.debug("Returned Error for not validating!");
+				System.out.println("Returned Error for not validating!");
+			} else if (name.equalsIgnoreCase("AlreadyRegistered") || logiskAdress.contains("AlreadyRegistered")) {
+				ResultOfCall result = new ResultOfCall();
+				result.setResultCode(ResultCodeEnum.INFO);
+				result.setInfoText("Medical Certificate already registered");
+				response.setResult(result);
+				System.out.println("Returned Info for already registered certificate!");
 			} else if (name.equalsIgnoreCase("Exception") || logiskAdress.contains("Exception")) {
-				logger.debug("Returned Exception for not validating!");
+				System.out.println("Returned Exception for not validating!");
 				throw new RuntimeException("Exception called");
 			} else if (name.equalsIgnoreCase("Timeout") || logiskAdress.contains("Timeout")) {
-				logger.debug("Returned Timeout for not validating!");
+				System.out.println("Returned Timeout for not validating!");
 				Thread.currentThread();
 				try {
 					Thread.sleep(60000);
@@ -81,7 +84,7 @@ public class RegisterMedCertImpl implements RegisterMedicalCertificateResponderI
 				ResultOfCall resCall = new ResultOfCall();
 				resCall.setResultCode(ResultCodeEnum.OK);
 				response.setResult(resCall);				
-				logger.debug("Returned OK for not validating!");
+				System.out.println("Returned OK for not validating!");
 			}
 			
 			return response;

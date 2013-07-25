@@ -25,12 +25,9 @@ import iso.v21090.dt.v1.II;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import javax.jws.WebService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3.wsaddressing10.AttributedURIType;
 
 import se.skl.riv.insuranceprocess.healthreporting.mu7263.v3.AktivitetType;
@@ -69,12 +66,11 @@ import se.skl.riv.insuranceprocess.healthreporting.v2.VardgivareType;
 		endpointInterface="se.skl.riv.insuranceprocess.healthreporting.registermedicalcertificate.v3.rivtabp20.RegisterMedicalCertificateResponderInterface", 
 		portName = "RegisterMedicalCertificateResponderPort", 
 		targetNamespace = "urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificate:3:rivtabp20",
-		wsdlLocation = "schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.0_rivtabp20.wsdl")
+		wsdlLocation = "schemas/vard/interactions/RegisterMedicalCertificateInteraction/RegisterMedicalCertificateInteraction_3.1_rivtabp20.wsdl")
 public class RegisterMedCertValidateImpl implements RegisterMedicalCertificateResponderInterface {
-	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	public RegisterMedicalCertificateResponseType registerMedicalCertificate( AttributedURIType logicalAddress, RegisterMedicalCertificateType parameters) {
-		logger.debug("Received call to validating");
+		System.out.println("Received call to validating");
 
 		// List of validation errors
 		ArrayList<String> validationErrors = new ArrayList<String>();
@@ -585,11 +581,11 @@ public class RegisterMedCertValidateImpl implements RegisterMedicalCertificateRe
 			// No validation errors! Return OK!            
 			outResCall.setResultCode(ResultCodeEnum.OK);
 			outResponse.setResult(outResCall);
-			logger.debug("Returned OK for validating!");
+			System.out.println("Returned OK for validating!");
 
 			return outResponse;
 		} catch (Exception e) {
-			logger.debug("Exception for validating! Errors = " + getValidationErrors(validationErrors));
+			System.out.println("Exception for validating! Errors = " + getValidationErrors(validationErrors));
 			outResCall.setErrorText(getValidationErrors(validationErrors));
 			outResCall.setResultCode(ResultCodeEnum.ERROR);
 			return outResponse;
