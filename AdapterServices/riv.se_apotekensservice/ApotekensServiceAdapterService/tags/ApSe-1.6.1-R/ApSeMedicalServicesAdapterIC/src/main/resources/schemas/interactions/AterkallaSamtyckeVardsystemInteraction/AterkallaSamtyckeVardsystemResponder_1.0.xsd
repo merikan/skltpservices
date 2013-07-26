@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:lf="urn:riv:se.apotekensservice:lf:1" xmlns="urn:riv:se.apotekensservice:lf:AterkallaSamtyckeVardsystemResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:lf:AterkallaSamtyckeVardsystemResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_lf_1.0.xsd" namespace="urn:riv:se.apotekensservice:lf:1"/>
+  <xs:element name="AterkallaSamtyckeVardsystem" type="AterkallaSamtyckeVardsystemRequestType"/>
+  <xs:element name="AterkallaSamtyckeVardsystemResponse" type="AterkallaSamtyckeVardsystemResponseType"/>
+  <xs:element name="ApplicationException" type="lf:ApplicationException"/>
+  <xs:element name="SystemException" type="lf:SystemException"/>
+  <xs:complexType name="AterkallaSamtyckeVardsystemRequestType">
+    <xs:sequence>
+      <xs:element nillable="false" name="klientinformation" type="lf:KlientinformationRequest">
+        <xs:annotation>
+          <xs:documentation>Information om anropande system.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="samtyckesgivare" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Giltigt personnummer för patient vars samtycke ska återkallas.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="samtyckestagareForskrivarkod" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Förskrivarkod för förskrivare som vars samtycke ska återkallas, valideras
+mot FORS. Skall vara samma som användare i klientinformation.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AterkallaSamtyckeVardsystemResponseType">
+    <xs:sequence>
+      <xs:element name="aterkallandedatum" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Datum då tillsvidaresamtycke återkallades. Ej angiven om samtycke
+saknades.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="samtycke" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Anger status efter återkallande. Möjliga värden är:
+<itemizedlist>
+              <listitem>2 = Samtycke att läsa Läkemedelsförteckningen har återkallats</listitem>
+            </itemizedlist>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
