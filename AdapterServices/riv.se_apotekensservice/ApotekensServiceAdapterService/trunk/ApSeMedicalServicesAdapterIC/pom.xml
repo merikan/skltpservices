@@ -73,10 +73,17 @@
 		<dependency>
 			<groupId>org.soitoolkit.commons.components</groupId>
 			<artifactId>soitoolkit-commons-log</artifactId>
-		</dependency>
+		</dependency>		
+
+		<!-- Mule ESB Transports -->
 		<dependency>
-			<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
-			<artifactId>soitoolkit-mule-2.2.8-dependencies</artifactId>
+			<groupId>org.mule.transports</groupId>
+			<artifactId>mule-transport-cxf</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>serializer</artifactId>
 		</dependency>
 		
 		<!-- mule -->
@@ -84,9 +91,8 @@
 		<dependency>
 			<groupId>org.mule</groupId>
 			<artifactId>mule-core</artifactId>
-		</dependency>
+		</dependency>	
 		
-
 	</dependencies>
 
 	<build>
