@@ -28,8 +28,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<mule.version>2.2.8</mule.version>
-		<cxf.version>2.2.12</cxf.version>
-		<spring.version>2.5.6</spring.version>
 	</properties>
 
 	<modules>
@@ -97,14 +95,18 @@
 				<artifactId>soitoolkit-commons-log</artifactId>
 				<version>${soitoolkit.version}</version>
 			</dependency>
-
-			<!--This is a dependency to a artifact belonging in http://skltp.googlecode.com/svn/tp/tb/trunk/ (adapterplatform),
-				can not be correct. When moving to Mule3 handle this dependency by letting it have its own project
-				with soi-toolkit dependencies or by removing soi-toolkit dependencies if not needed.-->
+			
+			<!-- Mule ESB Transports -->
 			<dependency>
-				<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
-				<artifactId>soitoolkit-mule-2.2.8-dependencies</artifactId>
-				<version>1.5.0-SNAPSHOT</version>
+				<groupId>org.mule.transports</groupId>
+				<artifactId>mule-transport-cxf</artifactId>
+				<version>${mule.version}</version>
+			</dependency>
+		
+			<dependency>
+				<groupId>xalan</groupId>
+				<artifactId>serializer</artifactId>
+				<version>2.7.1</version>
 			</dependency>
 
 			<!-- Mule dependencies -->
@@ -114,6 +116,17 @@
 				<artifactId>mule-core</artifactId>
 				<version>${mule.version}</version>
 			</dependency>
+			
+			<dependency>
+			    <groupId>org.mule.tests</groupId>
+			    <artifactId>mule-tests-functional</artifactId>
+			    <version>${mule.version}</version>
+				<!--
+				Needs to be in the compile scope since commons-mule contains a base
+				class, AbstractTestCase, that depends on this module
+				-->
+			</dependency>			
+
 			
 			<!-- log4j -->
 
@@ -177,6 +190,14 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		<!-- Mule dependencies -->
+		
+		<dependency>
+			<groupId>org.mule.tests</groupId>
+			<artifactId>mule-tests-functional</artifactId>
+			<scope>compile</scope>
+		</dependency>	
 
 		<!-- TEST DEPENDENCIES -->
 		<dependency>
