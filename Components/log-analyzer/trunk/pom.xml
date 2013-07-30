@@ -5,7 +5,7 @@
   <groupId>se.skl.skltpservices.components</groupId>
   <artifactId>log-analyzer</artifactId>
   <packaging>war</packaging>
-  <version>0.1-SNAPSHOT</version>
+  <version>1.0.2-SNAPSHOT</version>
   <name>log-analyzer Maven Webapp</name>
 
   <properties>
@@ -16,6 +16,12 @@
     <activemq.version>5.7.0</activemq.version>
     <camel.version>2.10.2</camel.version>
   </properties>
+  
+   <scm>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/Components/log-analyzer/trunk/</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/Components/log-analyzer/trunk/</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/Components/log-analyzer/trunk/</url>
+    </scm>
 
   <dependencies>
     <!-- Evactor
@@ -414,6 +420,11 @@
 						</execution>
 					</executions>
 				</plugin>
+				<plugin>
+        			<groupId>org.apache.maven.plugins</groupId>
+        			<artifactId>maven-release-plugin</artifactId>
+        			<version>2.4.1</version>
+      			</plugin>
 	  </plugins>
 	</pluginManagement>
     <plugins>
