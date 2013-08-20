@@ -40,7 +40,7 @@
         ignore-unresolvable="true"
         location="classpath:default.properties,classpath:test.properties" />
 
-    <context:component-scan base-package="se.skl.skltpservices.components.analyzer,se.skl.skltpservices.log.services" />
+    <context:component-scan base-package="se.skl.skltpservices.components.analyzer" />
 
     <context:annotation-config />
 

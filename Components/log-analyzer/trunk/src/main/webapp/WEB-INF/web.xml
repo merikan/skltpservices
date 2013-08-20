@@ -29,6 +29,11 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>WEB-INF/applicationContext.xml</param-value>
   </context-param>
+  
+  <context-param>
+    <param-name>contextInitializerClasses</param-name>
+    <param-value>se.skl.skltpservices.components.analyzer.LogApplicationContextInitializer</param-value>
+  </context-param>
 	
   <listener>
     <listener-class>se.skl.skltpservices.components.analyzer.LogStoreContextLoaderListener</listener-class>
@@ -37,24 +42,6 @@
   <listener>
     <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
   </listener>
-
-  <!-- 
-  <listener>
-    <listener-class>se.skl.skltpservices.components.analyzer.EvactorContextLoaderListener</listener-class>
-  </listener>
-
-
-  <filter>
-    <filter-name>evactor</filter-name>
-    <filter-class>org.evactor.api.BasePlan</filter-class>
-  </filter>
-
-  <filter-mapping>
-    <filter-name>evactor</filter-name>
-    <url-pattern>/api/*</url-pattern>
-  </filter-mapping>
-
- -->
    
   <servlet>
     <servlet-name>jersey-serlvet</servlet-name>
@@ -107,16 +94,10 @@
     <servlet-name>jersey-serlvet</servlet-name>
     <url-pattern>/jersey/*</url-pattern>
   </servlet-mapping>
-  
-<!--   <resource-ref> -->
-<!--       <description>DB Connection</description> -->
-<!--       <res-ref-name>jdbc/PC</res-ref-name> -->
-<!--       <res-type>javax.sql.DataSource</res-type> -->
-<!--       <res-auth>Container</res-auth> -->
-<!--   </resource-ref> -->
-  
-  <context-param>
+
+  <!-- context-param>
     <param-name>spring.profiles.default</param-name>
     <param-value>production</param-value>
-  </context-param>
+  </context-param -->
+  
 </web-app>

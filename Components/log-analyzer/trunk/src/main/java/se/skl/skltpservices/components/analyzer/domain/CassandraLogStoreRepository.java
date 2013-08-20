@@ -60,6 +60,8 @@ import org.soitoolkit.commons.logentry.schema.v1.LogLevelType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import se.skl.skltpservices.components.analyzer.Real;
+
 
 /**
  * Stores events in an Apache Cassandra database. <p>
@@ -69,7 +71,7 @@ import org.springframework.stereotype.Component;
  * @author Peter
  *
  */
-@Component
+@Real @Component
 public class CassandraLogStoreRepository implements LogStoreRepository {
 
 	private static final String CONTRACT_PREFIX = "c-";

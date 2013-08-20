@@ -28,8 +28,8 @@ import javax.ws.rs.Produces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import se.skl.skltpservices.components.analyzer.LogServiceConfig;
 import se.skl.skltpservices.components.analyzer.domain.Counter;
-import se.skl.skltpservices.components.analyzer.domain.LogStoreRepository;
 
 
 @Controller
@@ -37,19 +37,19 @@ import se.skl.skltpservices.components.analyzer.domain.LogStoreRepository;
 @Produces({"application/json; charset=UTF-8"})
 public class DomainCounterResource {
 
-	@Autowired
-    private LogStoreRepository logStoreRepository;
+    @Autowired
+    private LogServiceConfig logServiceConfig;
    
     @GET
     @Path("/domains/{week}")
     public List<Counter> domains(@PathParam("week") int week) {
-        return logStoreRepository.getDomainCounters(week);
+        return logServiceConfig.getLogStoreRepository().getDomainCounters(week);
     }
 
     @GET
     @Path("/contracts/{week}")
     public List<Counter> contracts(@PathParam("week") int week) {
-        return logStoreRepository.getContractCounters(week);
+        return logServiceConfig.getLogStoreRepository().getContractCounters(week);
     }
 
 }
