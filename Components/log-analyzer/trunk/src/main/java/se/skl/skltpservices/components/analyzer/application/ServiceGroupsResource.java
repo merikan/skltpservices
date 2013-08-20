@@ -25,22 +25,18 @@ import javax.ws.rs.Produces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import se.skl.skltpservices.components.analyzer.services.LogAnalyzerService;
+import se.skl.skltpservices.components.analyzer.LogServiceConfig;
 
 @Controller
 @Path("/service-groups")
 @Produces({"application/xml; charset=UTF-8", "application/json; charset=UTF-8"})
 public class ServiceGroupsResource {
 
-    private LogAnalyzerService logAnalyzerService;
-    
     @Autowired
-    public ServiceGroupsResource(LogAnalyzerService logAnalyzerService) {
-        this.logAnalyzerService = logAnalyzerService;
-    }
+    private LogServiceConfig logServiceConfig;
 
     @GET
     public ServiceGroups findAll() {
-        return logAnalyzerService.getCurrentStatusFromAllProducers(); 
+        return logServiceConfig.getLogAnalyzerService().getCurrentStatusFromAllProducers(); 
     }
 }

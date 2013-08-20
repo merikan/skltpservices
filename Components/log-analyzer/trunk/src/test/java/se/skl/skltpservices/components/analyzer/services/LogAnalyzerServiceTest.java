@@ -44,6 +44,7 @@ import org.soitoolkit.commons.logentry.schema.v1.LogRuntimeInfoType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+import se.skl.skltpservices.components.analyzer.LogServiceConfig;
 import se.skl.skltpservices.components.analyzer.TestSupport;
 import se.skl.skltpservices.components.analyzer.application.RuntimeStatus;
 import se.skl.skltpservices.components.analyzer.application.Service;
@@ -55,8 +56,9 @@ public class LogAnalyzerServiceTest extends TestSupport {
     private static Event timedOutEvent;
     private static Event successEvent;
     @Autowired
-    private LogAnalyzerService analyzerService;
-	// config
+    private LogServiceConfig logServiceConfig;
+
+    // config
     @Value("${analyze.timeout}")
     private int timeout;
 
@@ -65,13 +67,13 @@ public class LogAnalyzerServiceTest extends TestSupport {
         timedOutEvent = new Event();
         timedOutEvent.setCorrelationId("Id1");
         timedOutEvent.setStatus(State.TIMEOUT);
-        
+
         successEvent = new Event();
         successEvent.setCorrelationId("Id2");
         successEvent.setStatus(State.SUCCESS);
-        
+
     }
-    
+
     @Test
     public void testBusinessLogicForRuntimeStatus() {
         List<Event> emptyTimeline = Collections.emptyList();
@@ -96,95 +98,96 @@ public class LogAnalyzerServiceTest extends TestSupport {
     private RuntimeStatus checkProducer(Event...events) {
         return ServiceProducer.calcRuntimeStatus(Arrays.asList(events));
     }
-    
+
     private ExtraInfo ci(String name, String value) {
-		ExtraInfo extraInfo = new ExtraInfo();
-		extraInfo.setName(name);
-		extraInfo.setValue(value);
-    	return extraInfo;
+        ExtraInfo extraInfo = new ExtraInfo();
+        extraInfo.setName(name);
+        extraInfo.setValue(value);
+        return extraInfo;
     }
-    
+
     private LogEvent createLogEvent(String logType) {
-		String key = UUID.randomUUID().toString();
-		LogEvent event = mock(LogEvent.class);
-		when(event.getLogEntry()).thenReturn(mock(LogEntryType.class));
-		when(event.getLogEntry().getMessageInfo()).thenReturn(mock(LogMessageType.class));
-		when(event.getLogEntry().getRuntimeInfo()).thenReturn(mock(LogRuntimeInfoType.class));
-		when(event.getLogEntry().getRuntimeInfo().getBusinessCorrelationId()).thenReturn(key);
-		when(event.getLogEntry().getPayload()).thenReturn("no special");
-		when(event.getLogEntry().getMessageInfo().getMessage()).thenReturn(logType);
+        String key = UUID.randomUUID().toString();
+        LogEvent event = mock(LogEvent.class);
+        when(event.getLogEntry()).thenReturn(mock(LogEntryType.class));
+        when(event.getLogEntry().getMessageInfo()).thenReturn(mock(LogMessageType.class));
+        when(event.getLogEntry().getRuntimeInfo()).thenReturn(mock(LogRuntimeInfoType.class));
+        when(event.getLogEntry().getRuntimeInfo().getBusinessCorrelationId()).thenReturn(key);
+        when(event.getLogEntry().getPayload()).thenReturn("no special");
+        when(event.getLogEntry().getMessageInfo().getMessage()).thenReturn(logType);
 
-		when(event.getLogEntry().getMetadataInfo()).thenReturn(mock(LogMetadataInfoType.class));
-		when(event.getLogEntry().getMetadataInfo().getEndpoint()).thenReturn("https://localhost:8080");
-		List<ExtraInfo> list = new LinkedList<ExtraInfo>();
-		list.add(ci("domain", "domain"));
-		list.add(ci("domain-description", "domain-description"));
-		list.add(ci("system-name", "system-name"));
-		
-		when(event.getLogEntry().getExtraInfo()).thenReturn(list);
-		
-		XMLGregorianCalendar cal = mock(XMLGregorianCalendar.class);
-		Calendar c = Calendar.getInstance();
+        when(event.getLogEntry().getMetadataInfo()).thenReturn(mock(LogMetadataInfoType.class));
+        when(event.getLogEntry().getMetadataInfo().getEndpoint()).thenReturn("https://localhost:8080");
+        List<ExtraInfo> list = new LinkedList<ExtraInfo>();
+        list.add(ci("domain", "domain"));
+        list.add(ci("domain-description", "domain-description"));
+        list.add(ci("system-name", "system-name"));
 
-		when(cal.getYear()).thenReturn(c.get(Calendar.YEAR));
-		when(cal.getMonth()).thenReturn(c.get(Calendar.MONTH));
-		when(cal.getDay()).thenReturn(c.get(Calendar.DAY_OF_MONTH));
-		when(cal.getHour()).thenReturn(c.get(Calendar.HOUR_OF_DAY));
-		when(cal.getMinute()).thenReturn(c.get(Calendar.MINUTE));
-		when(cal.getSecond()).thenReturn(c.get(Calendar.SECOND));
-		when(cal.getMillisecond()).thenReturn(c.get(Calendar.MILLISECOND));
-		
-		when(event.getLogEntry().getRuntimeInfo().getTimestamp()).thenReturn(cal);
-		
-		return event;
+        when(event.getLogEntry().getExtraInfo()).thenReturn(list);
+
+        XMLGregorianCalendar cal = mock(XMLGregorianCalendar.class);
+        Calendar c = Calendar.getInstance();
+
+        when(cal.getYear()).thenReturn(c.get(Calendar.YEAR));
+        when(cal.getMonth()).thenReturn(c.get(Calendar.MONTH));
+        when(cal.getDay()).thenReturn(c.get(Calendar.DAY_OF_MONTH));
+        when(cal.getHour()).thenReturn(c.get(Calendar.HOUR_OF_DAY));
+        when(cal.getMinute()).thenReturn(c.get(Calendar.MINUTE));
+        when(cal.getSecond()).thenReturn(c.get(Calendar.SECOND));
+        when(cal.getMillisecond()).thenReturn(c.get(Calendar.MILLISECOND));
+
+        when(event.getLogEntry().getRuntimeInfo().getTimestamp()).thenReturn(cal);
+
+        return event;
     }
-    
+
     private void validateService(RuntimeStatus expectedStatus) {
-		for (ServiceGroup sg : analyzerService.getCurrentStatusFromAllProducers().getGroups()) {
-			Assert.assertEquals("domain", sg.getName());
-			Assert.assertEquals("domain-description", sg.getDescription());
-			Collection<Service> services = sg.getServices();
-			Assert.assertEquals(1, services .size());
-			for (Service s : services) {
-				Assert.assertEquals(expectedStatus, s.getStatus());
-				Assert.assertEquals("https://localhost:8080", s.getEndpointUrl());
-				Assert.assertEquals("system-name", s.getSystemName());
-			}
-		}    	
+        for (ServiceGroup sg : logServiceConfig.getLogAnalyzerService().getCurrentStatusFromAllProducers().getGroups()) {
+            Assert.assertEquals("domain", sg.getName());
+            Assert.assertEquals("domain-description", sg.getDescription());
+            Collection<Service> services = sg.getServices();
+            Assert.assertEquals(1, services .size());
+            for (Service s : services) {
+                Assert.assertEquals(expectedStatus, s.getStatus());
+                Assert.assertEquals("https://localhost:8080", s.getEndpointUrl());
+                Assert.assertEquals("system-name", s.getSystemName());
+            }
+        }    	
     }
 
     @Test
-	public void analyzeNormal() {
-    	LogEvent event = createLogEvent("req-out");
-		
-		analyzerService.analyze(event);
-		
-		when(event.getLogEntry().getMessageInfo().getMessage()).thenReturn("resp-in");
-		
-		analyzerService.analyze(event);
-		
-		validateService(RuntimeStatus.UP);		
-	}
+    public void analyzeNormal() {
+        LogEvent event = createLogEvent("req-out");
+
+
+        logServiceConfig.getLogAnalyzerService().analyze(event);
+
+        when(event.getLogEntry().getMessageInfo().getMessage()).thenReturn("resp-in");
+
+        logServiceConfig.getLogAnalyzerService().analyze(event);
+
+        validateService(RuntimeStatus.UP);		
+    }
 
     @Test
- 	public void analyzeTimeout() {
-    	    	
-    	Assert.assertTrue(timeout > 0);
-     	LogEvent event = createLogEvent("req-out");
- 		
- 		analyzerService.analyze(event);
- 		
- 		// wait for timeout
- 		try {
-			Thread.sleep((timeout * 1000) + 100);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+    public void analyzeTimeout() {
 
- 		// too late...
- 		when(event.getLogEntry().getMessageInfo().getMessage()).thenReturn("resp-in");	
- 		analyzerService.analyze(event);
- 				
-		validateService(RuntimeStatus.DOWN);
+        Assert.assertTrue(timeout > 0);
+        LogEvent event = createLogEvent("req-out");
+
+        logServiceConfig.getLogAnalyzerService().analyze(event);
+
+        // wait for timeout
+        try {
+            Thread.sleep((timeout * 1000) + 100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // too late...
+        when(event.getLogEntry().getMessageInfo().getMessage()).thenReturn("resp-in");	
+        logServiceConfig.getLogAnalyzerService().analyze(event);
+
+        validateService(RuntimeStatus.DOWN);
     }
 }

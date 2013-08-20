@@ -62,12 +62,13 @@ import org.soitoolkit.commons.logentry.schema.v1.LogMessageType;
 import org.soitoolkit.commons.logentry.schema.v1.LogRuntimeInfoType;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import se.skl.skltpservices.components.analyzer.LogServiceConfig;
 import se.skl.skltpservices.components.analyzer.TestSupport;
 
 public class CassandraLogStoreRepositoryTest extends TestSupport {
 
 	@Autowired
-	private CassandraLogStoreRepository repo;
+	private LogServiceConfig logServiceConfig;
 
 	private static Cluster cluster;
 	private String key;
@@ -155,6 +156,7 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		when(cal.getMillisecond()).thenReturn(0);
 		
 		when(event.getLogEntry().getRuntimeInfo().getTimestamp()).thenReturn(cal);
+		final LogStoreRepository repo = logServiceConfig.getLogStoreRepository();
 		repo.storeEvent(event);
 		assertNotNull(queryEvent());
 		assertEquals(1, repo.getContracts().size());
@@ -166,6 +168,7 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 	@Test
 	public void counters() {
 		create();
+                final CassandraLogStoreRepository repo = (CassandraLogStoreRepository)logServiceConfig.getLogStoreRepository();
 		List<Counter> list = repo.getDomainCounters(repo.getCalendar().get(Calendar.WEEK_OF_YEAR));
 		assertEquals(1, list.size());
 		list = repo.getContractCounters(repo.getCalendar().get(Calendar.WEEK_OF_YEAR));
@@ -201,6 +204,7 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		
 		// scramble order
 		for (ReverseEvent r : map.values()) {
+	                final CassandraLogStoreRepository repo = (CassandraLogStoreRepository)logServiceConfig.getLogStoreRepository();
 			repo.updateReverseIndex(r, 3600);
 		}
 		
@@ -211,6 +215,7 @@ public class CassandraLogStoreRepositoryTest extends TestSupport {
 		r.add("sender", "sender-id");
 		r.add("receiver", "receiver-id-0");
 
+                final CassandraLogStoreRepository repo = (CassandraLogStoreRepository)logServiceConfig.getLogStoreRepository();
 		SliceQuery<Composite, UUID, Composite> query = HFactory.createSliceQuery(repo.getKeySpace(), CassandraLogStoreRepository.CS, CassandraLogStoreRepository.TS, CassandraLogStoreRepository.CS);
 		query.setColumnFamily(CassandraLogStoreRepository.CF_EVENT_TIMELINE).setKey(r.key());
 		ColumnIterator<UUID, Composite> iter = new ColumnIterator<UUID, Composite>(query);

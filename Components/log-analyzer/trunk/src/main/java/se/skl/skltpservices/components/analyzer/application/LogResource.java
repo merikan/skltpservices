@@ -31,16 +31,16 @@ import javax.ws.rs.Produces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import se.skl.skltpservices.components.analyzer.LogServiceConfig;
 import se.skl.skltpservices.components.analyzer.domain.EventSummary;
-import se.skl.skltpservices.components.analyzer.domain.LogStoreRepository;
 
 
 @Controller
 @Path("/log")
 @Produces({"application/json; charset=UTF-8"})
 public class LogResource {
-	@Autowired
-    private LogStoreRepository logStoreRepository;
+    @Autowired
+    private LogServiceConfig logServiceConfig;
 
 	@GET
 	@Path("/timeline/{contract}/{error}/{sender}/{receiver}/{time}")
@@ -49,13 +49,13 @@ public class LogResource {
 			@PathParam("sender") String sender,
 			@PathParam("receiver") String receiver,
 			@PathParam("time") long time) {
-		return logStoreRepository.getTimeLine(contract, error, sender, receiver, time);
+		return logServiceConfig.getLogStoreRepository().getTimeLine(contract, error, sender, receiver, time);
 	}
 	
 	@GET
 	@Path("/event/{id}")
 	public Map<String, String> event(@PathParam("id") String id) {
-		return logStoreRepository.getEventProperties(id);
+		return logServiceConfig.getLogStoreRepository().getEventProperties(id);
 	}
 	
 	@GET
@@ -71,19 +71,19 @@ public class LogResource {
 	@GET
 	@Path("/contracts")
 	public Collection<String> contracts() {
-		return logStoreRepository.getContracts();		
+		return logServiceConfig.getLogStoreRepository().getContracts();		
 	}
 
 	@GET
 	@Path("/senders")
 	public Collection<String> senders() {
-		return logStoreRepository.getSenders();		
+		return logServiceConfig.getLogStoreRepository().getSenders();		
 	}
 
 	@GET
 	@Path("/receivers")
 	public Collection<String> receivers() {
-		return logStoreRepository.getReceivers();		
+		return logServiceConfig.getLogStoreRepository().getReceivers();		
 	}
 
 }

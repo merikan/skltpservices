@@ -41,8 +41,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import se.skl.skltpservices.components.analyzer.domain.LogStoreRepository;
-import se.skl.skltpservices.components.analyzer.services.LogAnalyzerService;
+import se.skl.skltpservices.components.analyzer.LogServiceConfig;
 
 
 @Service
@@ -62,9 +61,7 @@ public class LogStoreService {
 	private List<Consumer> consumers;      
 
 	@Autowired
-	private LogStoreRepository repo;
-	@Autowired
-	private LogAnalyzerService analyzer;
+	private LogServiceConfig logServiceConfig;
 
 	private static JAXBContext initContext() {
 		try {
@@ -154,9 +151,9 @@ public class LogStoreService {
 					LogEvent le = unmarshal((String)exchange.getIn().getBody());
 					logToFile(le);
 					if (monitor) {
-						analyzer.analyze(le);
+						logServiceConfig.getLogAnalyzerService().analyze(le);
 					} else {
-						repo.storeEvent(le);
+						logServiceConfig.getLogStoreRepository().storeEvent(le);
 					}
 				} catch (Exception e) {
 					log.error("Unable to process log event", e);

@@ -10,10 +10,10 @@
   <properties>
 <!--     <evactor.version>0.2-SNAPSHOT</evactor.version>  -->
     <slf4j.version>1.6.0</slf4j.version>
-    <spring.version>3.1.2.RELEASE</spring.version>
+    <spring.version>3.2.3.RELEASE</spring.version>
     <jersey.version>1.12</jersey.version>
     <activemq.version>5.7.0</activemq.version>
-    <camel.version>2.10.2</camel.version>
+    <camel.version>2.10.6</camel.version>
   </properties>
   
    <scm>
@@ -173,6 +173,12 @@
         </exclusion>
       </exclusions>
     </dependency>
+    
+    <dependency>
+		<groupId>cglib</groupId>
+		<artifactId>cglib</artifactId>
+		<version>2.2.2</version>
+	</dependency>
 
     <!-- Rest dependencies -->
     <dependency>
@@ -461,12 +467,12 @@
         <artifactId>maven-jetty-plugin</artifactId>
         <version>6.1.25</version>
         <configuration>
-          <systemProperties>
+          <!-- systemProperties>
             <systemProperty>
               <name>spring.profiles.active</name>
-              <value>dev</value>
+              <value>production</value>
             </systemProperty>
-          </systemProperties>
+          </systemProperties-->
           <contextPath>/log-analyzer</contextPath>
           <scanIntervalSeconds>10</scanIntervalSeconds>
         </configuration>
