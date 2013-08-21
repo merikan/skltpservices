@@ -51,6 +51,11 @@
 			<groupId>se.rivta.tools</groupId>
 			<artifactId>se_apotekensservice-or-schemas</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>se.rivta.tools</groupId>
+			<artifactId>se_apotekensservice-pris-schemas</artifactId>
+		</dependency>
 
 		<!-- Pascals TicketMachine -->
 		<dependency>
