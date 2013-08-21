@@ -35,7 +35,7 @@ public class HamtaAktuellaOrdinationerIntegrationTest extends AbstractTestCase {
 		String to = "1234567";
 
 		HamtaAktuellaOrdinationerResponseType response = new HamtaAllaAktuellaOrdinationerTestConsumer(
-				"http://localhost:11000/tb/HamtaAktuellaOrdinationerResponder/V1")
+				"http://localhost:11000/tjanstebryggan/HamtaAktuellaOrdinationerResponder/V1")
 				.requestIncludingCompleteArgosInformation(ssn, to);
 
 		assertNotNull(response);
@@ -48,7 +48,7 @@ public class HamtaAktuellaOrdinationerIntegrationTest extends AbstractTestCase {
 		String to = "1234567";
 
 		HamtaAktuellaOrdinationerResponseType response = new HamtaAllaAktuellaOrdinationerTestConsumer(
-				"http://localhost:11000/tb/HamtaAktuellaOrdinationerResponder/V1")
+				"http://localhost:11000/tjanstebryggan/HamtaAktuellaOrdinationerResponder/V1")
 				.requestIncludingCompleteArgosInformation(ssn, to);
 
 		assertNotNull(response);
@@ -62,7 +62,7 @@ public class HamtaAktuellaOrdinationerIntegrationTest extends AbstractTestCase {
 
 		try {
 			new HamtaAllaAktuellaOrdinationerTestConsumer(
-					"http://localhost:11000/tb/HamtaAktuellaOrdinationerResponder/V1")
+					"http://localhost:11000/tjanstebryggan/HamtaAktuellaOrdinationerResponder/V1")
 					.requestIncludingCompleteArgosInformation(ssn, to);
 		} catch (javax.xml.ws.soap.SOAPFaultException e) {
 			String faultString = e.getFault().getFaultString();
@@ -79,7 +79,7 @@ public class HamtaAktuellaOrdinationerIntegrationTest extends AbstractTestCase {
 
 		try {
 			new HamtaAllaAktuellaOrdinationerTestConsumer(
-					"http://localhost:11000/tb/HamtaAktuellaOrdinationerResponder/V1")
+					"http://localhost:11000/tjanstebryggan/HamtaAktuellaOrdinationerResponder/V1")
 					.requestIncludingCompleteArgosInformation(ssn, to);
 		} catch (javax.xml.ws.soap.SOAPFaultException e) {
 			String faultString = e.getFault().getFaultString();
@@ -96,7 +96,7 @@ public class HamtaAktuellaOrdinationerIntegrationTest extends AbstractTestCase {
 
 		try {
 			new HamtaAllaAktuellaOrdinationerTestConsumer(
-					"http://localhost:11000/tb/HamtaAktuellaOrdinationerResponder/V1")
+					"http://localhost:11000/tjanstebryggan/HamtaAktuellaOrdinationerResponder/V1")
 					.requestIncludingCompleteArgosInformation(ssn, to);
 		} catch (javax.xml.ws.soap.SOAPFaultException e) {
 			String faultString = e.getFault().getFaultString();

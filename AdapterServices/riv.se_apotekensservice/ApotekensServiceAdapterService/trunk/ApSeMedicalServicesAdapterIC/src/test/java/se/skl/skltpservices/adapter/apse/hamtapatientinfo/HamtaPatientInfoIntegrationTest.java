@@ -31,7 +31,7 @@ public class HamtaPatientInfoIntegrationTest extends AbstractTestCase {
 	String ssn = "196308212817";
 	String to = "1234567";
 
-	HamtaPatientInfoResponseType response = new HamtaPatientInfoTestConsumer("http://localhost:11000/tb/HamtaPatientInfoResponder/V1")
+	HamtaPatientInfoResponseType response = new HamtaPatientInfoTestConsumer("http://localhost:11000/tjanstebryggan/HamtaPatientInfoResponder/V1")
 		.requestIncludingCompleteArgosInformation(ssn, to);
 
 	assertNotNull(response);
@@ -43,7 +43,7 @@ public class HamtaPatientInfoIntegrationTest extends AbstractTestCase {
 	String ssn = "ÅÄÖ";
 	String to = "1234567";
 
-	HamtaPatientInfoResponseType response = new HamtaPatientInfoTestConsumer("http://localhost:11000/tb/HamtaPatientInfoResponder/V1")
+	HamtaPatientInfoResponseType response = new HamtaPatientInfoTestConsumer("http://localhost:11000/tjanstebryggan/HamtaPatientInfoResponder/V1")
 		.requestIncludingCompleteArgosInformation(ssn, to);
 
 	assertNotNull(response);
