@@ -14,7 +14,7 @@
 
 	<groupId>se.skl.skltpservices.apse</groupId>
 	<artifactId>ApSeMedicalServicesAdapter</artifactId>
-	<version>1.6.2-SNAPSHOT</version>
+	<version>1.6.2</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 
