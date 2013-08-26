@@ -18,12 +18,12 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
     <groupId>se.skltp.aggregatingservices.crm.requeststatus</groupId>
     <artifactId>GetAggregatedRequestActivities</artifactId>
-    <version>1.0.0-RC6-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>mule</packaging>
     <name>GetAggregatedRequestActivities</name>
 
     <properties>
-        <skltp.agp.version>1.0.0-RC5</skltp.agp.version>
+        <skltp.agp.version>1.0.0</skltp.agp.version>
 
         <!-- Properties for generating code from XML Schemas (JAX-WS) -->
         <schema.path>${basedir}/src/main/resources/schemas</schema.path>
@@ -32,9 +32,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     
     <scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->		
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities/trunk</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities/trunk</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities/trunk</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities/tags/GetAggregatedRequestActivities-1.0.0</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities/tags/GetAggregatedRequestActivities-1.0.0</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities/tags/GetAggregatedRequestActivities-1.0.0</url>
     </scm>
     
 	<dependencies>	
