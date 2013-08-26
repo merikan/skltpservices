@@ -18,7 +18,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
     <groupId>se.skltp.aggregatingservices.crm.requeststatus</groupId>
     <artifactId>GetAggregatedRequestActivities</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-M1-SNAPSHOT</version>
     <packaging>mule</packaging>
     <name>GetAggregatedRequestActivities</name>
 
@@ -32,9 +32,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     
     <scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->		
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities/tags/GetAggregatedRequestActivities-1.0.0</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities/tags/GetAggregatedRequestActivities-1.0.0</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities/tags/GetAggregatedRequestActivities-1.0.0</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities/trunk</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities/trunk</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities/trunk</url>
     </scm>
     
 	<dependencies>	
