@@ -23,7 +23,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <name>GetAggregatedSubjectOfCareSchedule-teststub</name>
 
     <properties>
-        <skltp.agp.version>1.0.0-RC5</skltp.agp.version>
+        <skltp.agp.version>1.0.0</skltp.agp.version>
     </properties>
 
     <scm>
@@ -38,13 +38,13 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <dependency>
     	<groupId>se.skltp.aggregatingservices.crm.scheduling</groupId>
     	<artifactId>GetAggregatedSubjectOfCareSchedule</artifactId>
-    	<version>1.0.0-RC3</version>
+    	<version>1.0.0</version>
     	<type>test-jar</type>
     </dependency>
     <dependency>
     	<groupId>se.skltp.aggregatingservices.crm.scheduling</groupId>
     	<artifactId>GetAggregatedSubjectOfCareSchedule</artifactId>
-    	<version>1.0.0-RC3</version>
+    	<version>1.0.0</version>
     	<classifier>core</classifier>    	
     </dependency>
         <dependency>
