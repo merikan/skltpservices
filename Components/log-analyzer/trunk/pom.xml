@@ -105,7 +105,7 @@
      <dependency>
        <groupId>org.soitoolkit.commons.components</groupId>
        <artifactId>soitoolkit-commons-mule</artifactId>
-       <version>0.5.0</version>
+       <version>0.6.0</version>
        <exclusions>
          <exclusion>
            <groupId>commons-logging</groupId>
@@ -391,8 +391,8 @@
 						<skipExistingHeaders>true</skipExistingHeaders>
 						<strictCheck>true</strictCheck>
 						<properties>
-							<organization>Sjukvardsradgivningen</organization>
-							<year>2012</year>
+							<organization>CeHis</organization>
+							<year>2013</year>
 						</properties>
 						<excludes>
 							<exclude>target/**</exclude>
