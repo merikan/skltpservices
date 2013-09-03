@@ -16,6 +16,7 @@ SKL TP Services
     * [TransformationServicesInsuranceprocessHealthreporting insuranceprocess:healthreporting]
       * [TransformationServicesInsuranceprocessHealthreportingFK Försäkringskassan]
       * [Wiretap Wiretap]
+        *[Wiretap_Arkitektur Arkitekturbeskrivning]
     * [TransformationServicesSeApotekenService se_apotekensservice (AXS, etc)]
       * [TransformationServicesSeApotekenServiceApotekenService Apotekens Service]
     * [TransformationServicesEhrAccesscontrol ehr:accesscontrol]
