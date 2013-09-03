@@ -1,0 +1,52 @@
+create keyspace Log
+  with placement_strategy = 'NetworkTopologyStrategy'
+  and strategy_options = {datacenter1 : 1}
+  and durable_writes = true;
+
+use Log;
+
+create column family Event
+  with column_type = 'Standard'
+  and comparator = 'AsciiType'
+  and key_validation_class = 'AsciiType'
+  and default_validation_class = 'UTF8Type'
+  and comment = 'Log information events'
+  and column_metadata = [
+  { column_name : 'date',		validation_class : 'AsciiType' },
+  { column_name : 'contract',		validation_class : 'AsciiType' },
+  { column_name : 'sender',		validation_class : 'UTF8Type' },
+  { column_name : 'receiver',		validation_class : 'UTF8Type' },
+  { column_name : 'in_timestamp',	validation_class : 'DateType' },
+  { column_name : 'in_payload',		validation_class : 'UTF8Type' },
+  { column_name : 'in_riv_version',	validation_class : 'AsciiType' },
+  { column_name : 'out_timestamp',	validation_class : 'DateType' },
+  { column_name : 'out_payload',	validation_class : 'UTF8Type' },
+  { column_name : 'out_riv_version',	validation_class : 'AsciiType' },
+  { column_name : 'err_flag',		validation_class : 'AsciiType' },
+  { column_name : 'err_timestamp',	validation_class : 'DateType' },
+  { column_name : 'out_payload',	validation_class : 'UTF8Type' },
+  { column_name : 'err_message',	validation_class : 'UTF8Type' },
+  { column_name : 'err_descriptioon',	validation_class : 'UTF8Type' },
+  { column_name : 'err_detail',		validation_class : 'UTF8Type' },
+];
+
+
+create column family EventTimeLine
+  with column_type = 'Standard'
+  and comparator = 'TimeUUIDType'
+  and key_validation_class = 'CompositeType(AsciiType, AsciiType, AsciiType, AsciiType)'
+  and default_validation_class = 'CompositeType(AsciiType, UTF8Type)'
+  and comment = 'Log reverse index';
+  
+create column family MetaData
+  with column_type = 'Standard'
+  and comparator = 'AsciiType'
+  and key_validation_class = 'AsciiType'
+  and default_validation_class = 'UTF8Type'
+  and comment = 'Log meta data';
+
+
+create column family WeeklyStats
+with default_validation_class = 'CounterColumnType'
+and key_validation_class = 'AsciiType'
+and comparator = 'AsciiType';
