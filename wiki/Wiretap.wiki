@@ -9,6 +9,6 @@ Denna komponent är tänkt att ta en kopia på ett meddelande som förmedlas gen
 
 = Detaljer =
 
- * Arkitekturbeskrivning
+ * [Wiretap_Arkitekturbeskrivning Arkitekturbeskrivning]
  * Installationsanvisning samt konfiguration
  * Loggning och övervakning
