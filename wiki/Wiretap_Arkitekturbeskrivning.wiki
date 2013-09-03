@@ -1,0 +1,107 @@
+#summary Wiretap Arkitekturbeskrivning'
+
+=Inledning=
+Denna komponent är tänkt att ta en kopia på ett meddelande som förmedlas genom Tjänsteplattformen med minimal påverkan på befintlig funktion och konfiguration.
+Komponenten följer integrationsmönstret wiretap enligt:
+ 
+<<BILD>>
+
+Hela integrationen kan beskrivas i följande bild:
+
+ <<BILD>>
+
+
+Det kopierade meddelandet sparas på en kö. Därefter konsumeras meddelandet av en komponent som förmedlar meddelandet till en konfigurerbar mottagare t.ex. Intygstjänsten.
+Komponenterna skall implementeras som generella komponenter.
+
+=Exempel=
+Projektet Intygstjänster 2013 är första användare av denna funktion.
+
+=Arkitekturella krav=
+Egenskaper för en wiretap komponent är följande:
+
+Egenskap	Beskrivning
+||1. Ej synbar för befintliga integrationer	||En wiretap av en befintlig integration skall ej synas/märkas för inblandade tjänstekonsumenter och tjänsteproducenter annat än att man konfigurerar en annan endpoint i TAK:en för tjänsteproducenten.||
+||2. Minimal påverkan på exekveringstid	||En wiretap skall påverka en befintlig integration minimalt gällande ökande exekveringstid. Dvs logik för behandling av innehåll i ett meddelande och vidareförmedling av ett meddelande skall skötas asynkront av en separat komponent som ej belastar befintliga integrationer.|| 
+||3. Anpassad wiretap	||En wiretap görs av request meddelanden. Wiretap skall endast ske på där ett response kommer samt att detta inte är ett SoapFault.||
+||4. Driftsaspekter, felhantering, loggning, övervakning	||All funktionalitet i denna komponent skall hantera uppkomna fel på samma sätt som idag sker i t.ex. Virtualiseringsplattformen eller Aggregeringsplattformen. Det kan gälla loggar, övervakning av ködjup och liknande.||
+||5. Robusthet	||När ett meddelande ej kan levereras till ”wiretap” tjänsteproducenten skall omsändningsförsök göras med ett konfigurerbart stegrande tidsintervall.||
+||6. Driftskrav	||Komponenterna implementeras som egna Mule flöden i Mule 3. Dessa driftsätts som en egen Mule app i en Mule 3 instans i AnP.||
+||7. Dynamiskt konfigurerbar	||Ett bör krav är att det skall vara möjligt att kunna slå på/av wiretap funktionalitet för alla typer av integrationer. Denna kan då liknas vid loggning av meddelanden som görs när ett sådant behov uppstår.||
+
+=Systemsamverkan=
+Se exempel i inledningen.
+=Användningsfall=
+Följande användningsfall beskriver komponenten:
+ * Wiretap av en befintlig integration till en kö
+ * Förmedling av meddelande från kö till tjänsteproducent.
+==Wiretap av befintlig integration till en kö==
+
+ 
+Förmedling av meddelande från kö till sluttjänst
+
+ 
+=Logisk vy=
+Se inledningsbilden tillsvidare.
+
+=Deploymentvy=
+Konfiguration
+Följande parametrar skall vara konfigureras i en propertyfil för en wiretap komponent:
+ * Tjänstekontrakt, används av loggningen för spårbarhet till wiretap instans.
+* Kö, används som mellanlagring av meddelanden innan de skickas till wiretap-tjänsteproducenten (inklusive anslutningsinformation).
+* Inkommande endpoint, anslutningspunkt för wiretap komponenten.
+* Utgående endpoint, anslutningspunkt för den tjänsteproducent som skall motta det oförvanskade meddelandet.
+* Wiretap endpoint, anslutningspunkt för wiretap-tjänsteproducenten, dvs den tjänsteproducent som vill ”wiretappa” meddelanden.
+* Wiretap logisk adress, logisk adress som skall användas som adressering till wiretap-tjänsteproducenten via VP.
+* HSA-id AnP, används för att sätta ursprungsavsändare i meddelandeflödet motsvarande AnP’s certifikat när meddelande skickas till wiretap-tjänsteproducenten.
+Loggning
+Loggning skall ske med stegrad log-nivå. Nedan anges vad som skall loggas för olika lognivåer:
+* WARN, loggar att komponenten initierats korrekt och är funktionsduglig.
+* INFO, loggar att meddelanden passerar genom wiretap komponenten.
+* DEBUG, loggar meddelande inklusive payload.
+
+==Övervakning==
+Wiretap funktionaliteten skall exponera en PingForConfiguration endpoint som verifierar att alla wiretap instanser är funktionsdugliga.
+Intygsspecifik deployment
+Totalt kommer det att behövas deployas fem wiretap komponenter för att ta hand om de fem olika tjänstekontrakten.
+
+ 
+=Testvy=
+Nedanstående tabell visar den last som denna komponent behöver hantera samt medelstorlek på meddelande.
+
+Tjänstekontrakt	Anrop per minut	Beräknad topplast per minut	Meddelande storlek kB
+RegisterMedicalCertificate	10	60	7
+SendMedicalCertificateQuestion	0,1	1	4
+SendMedicalCertificateAnswer	0,1	1	6
+ReceiveMedicalCertificateQuestion	0,5	2	5
+ReceiveMedicalCertificateAnswer	0,1	1	6
+
+=Implementationsvy=
+Nedan beskrivs de tjänstekontrakt i domänen insuranceprocess:healthreporting som denna wiretap i första hand skall stödja.
+
+Här finns två olika scenarion beroende på om flödet initieras från vården eller ej som detaljeras nedan.
+Generella detaljer
+1.	All kommunikation inom Tjänsteplattformen sker via http och ej https.
+Detaljer flödet vård till FK
+I fallet där flödet initieras från vården beskriver följande skiss flödet. Inblandade tjänstekontrakt är RegisterMedicalCertificate, SendMedicalCertificateQuestion och SendMedicalCertificateAnswer. Flödet ser ut enligt följande: 
+
+ 
+
+1.	Wiretap komponenten konfigureras i egen propertyfil att förmedla anropet vidare direkt till transformeringskomponenten.
+2.	Först när ett response kommer från FK (via transformeringstjänsten) sänder Wiretap komponenten meddelandet till en kö. Om responset innehåller ett SoapFault skall inte meddelandet sändas till kön.
+3.	Wiretap skickar meddelandet (via notifierare som läser kön) via VP till Intygstjänsten med utbytt logisk adress. Ursprungsavsändare skall sättas till AnP’s HSA-Id (dess certifikat).
+Detaljer flödet FK till vård
+I det andra fallet initieras flödet från Försäkringskassan och inblandade tjänstekontrakt är SendMedicalCertificateQuestion och SendMedicalCertificateAnswer enligt nedanstående skiss.
+ 
+
+1.	Wiretap komponenten konfigureras i egen propertyfil att förmedla anropet vidare till virtualiseringsplattformen. Här skall ursprungsavsändare sättas till AnP’s HSA-Id (dess certifikat).
+2.	Först när ett response kommer från vården sänder Wiretap komponenten meddelandet till en kö. Om responset innehåller ett SoapFault skall inte meddelandet sändas till kön.
+3.	Wiretap skickar meddelandet (via notifierare som läser kön) via VP till Intygstjänsten med utbytt logisk adress. Ursprungsavsändare skall sättas till AnP’s HSA-Id (dess certifikat).
+Övrigt
+1.	De teststubbar som idag finns i AnP och avser tjänstedomänen insuranceprocess:healthreporting och är implementerade i Mule 2 behöver ”flyttas” till Mule 3.
+Påverkan på andra komponenter inom Tjänsteplattformen
+1.	Konfigurationen i virtualiseringen skall pekas om så att wiretap komponenten blir tjänsteproducent när kommunikationen initieras från VP för inblandade tjänstekontrakt. I dagsläget pekar konfigurationen på transformeringstjänsten.
+2.	Konfigurationen för transformeringskomponenten behöver ändras så att den kommunicerar med wiretap komponenten istället för VP.
+3.	Validering i den tjänst som finns i Intygstjänsten som tar emot wiretap meddelanden måste vara exakt densamma som i transformeringstjänsten. Detta för att ej få olika beteende i de tjänster wiretap komponenter anropar.
+=Referenser=
+Tjänstekontraktsbeskrivning insuranceprocess:healthreporting http://rivta.googlecode.com/files/Servicecontracts_insuranceprocess_healthreporting_3.1.0.zip
