@@ -1,12 +1,7 @@
 #summary Insuranceprocess healthreporting
 
-= Introduction =
 Inom denna domän finns följande anpassningstjänster:
- * [TransformationServicesInsuranceprocessHealthreportingFK]
+ * [TransformationServicesInsuranceprocessHealthreportingFK] Denna tjänst finns i två versioner, en för Mule 2.2.8 och en för Mule 3.x
+ * [Wiretap Wiretap] Denna finns endast för Mule 3.x
 
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Dessutom tillhandahåller vi teststubbar.  <Lägg in länk till var man hittar dessa och någon info om dem>
