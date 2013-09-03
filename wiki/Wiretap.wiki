@@ -1,5 +1,8 @@
 #summary Wiretap tar en kopia på ett meddelande som förmedlas genom Tjänsteplattformen
 
+<wiki:toc max_depth="3" />
+
+
 = Introduktion =
 
 Denna komponent är tänkt att ta en kopia på ett meddelande som förmedlas genom Tjänsteplattformen med minimal påverkan på befintlig funktion och konfiguration.
