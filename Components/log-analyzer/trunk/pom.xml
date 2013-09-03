@@ -4,7 +4,7 @@
   <groupId>se.skl.skltpservices.components</groupId>
   <artifactId>log-analyzer</artifactId>
   <packaging>war</packaging>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.3</version>
   <name>log-analyzer Maven Webapp</name>
 
   <properties>
@@ -17,9 +17,9 @@
   </properties>
   
    <scm>
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/Components/log-analyzer/trunk/</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/Components/log-analyzer/trunk/</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/Components/log-analyzer/trunk/</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/Components/log-analyzer/tags/log-analyzer-1.0.3</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/Components/log-analyzer/tags/log-analyzer-1.0.3</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/Components/log-analyzer/tags/log-analyzer-1.0.3</url>
     </scm>
 
   <dependencies>
