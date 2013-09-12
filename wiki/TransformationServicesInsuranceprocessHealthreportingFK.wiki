@@ -9,7 +9,7 @@
 ==Ladda ner applikationen==
 
 {{{
-wget <adress>
+wget https://skltpservices.googlecode.com/files/FkEintygAdapterIC-2.0.0.zip
 }}}
 
 ==Installera applikationen== 
