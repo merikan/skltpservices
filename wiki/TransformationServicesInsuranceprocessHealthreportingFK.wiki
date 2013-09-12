@@ -54,7 +54,7 @@ INFO  2013-08-28 08:50:27,837 [WrapperListener_start_runner] org.mule.module.lau
 Gör ett anrop till tjänsten monitor/ping och verifiera resultatet
 
 {{{
-curl -i http://localhost:8080/fk/Ping/1/rivtabp20
+curl -i http://localhost:11000/fk/Ping/1/rivtabp20
 
 HTTP/1.1 200 OK
 Content-Type: text/xml; charset=UTF-8
