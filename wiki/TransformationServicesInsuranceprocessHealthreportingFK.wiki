@@ -2,13 +2,54 @@
 
 <wiki:toc max_depth="3" />
 
-= Introduktio =
+= Introduktion =
 
 =Installationsanvisning=
 
 ==Ladda ner applikationen==
 
+{{{
+wget <adress>
+}}}
+
 ==Installera applikationen== 
+
+* Ta bort tidigare installation av applikationen
+
+{{{
+tail -f /usr/local/mule-standalone-3.3.1/logs/mule.log
+rm /usr/local/mule-standalone-3.3.1/apps/FkEintygAdapterIC-2.0.0-anchor.txt
+}}}
+
+* Driftsätt applikationen
+
+{{{
+tail -f /usr/local/mule-standalone-3.3.1/logs/mule.log
+cp FkEintygAdapterIC-2.0.0.zip /usr/local/mule-standalone-3.3.1/apps/
+}}}
+
+* Verifiera driftsättningen
+
+I /usr/local/mule-standalone-3.3.1/logs/mule.log skall följande dyka upp vid en lyckad driftsättning
+
+{{{
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ New app 'FkEintygAdapterIC-2.0.0'                              +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+INFO  2013-08-28 08:50:27,837 [WrapperListener_start_runner] org.mule.module.launcher.MuleApplicationClassLoader: [FkEintygAdapterIC-2.0.0] Loading the following jars:
+=============================
+-
+-
+-
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Started app 'FkEintygAdapterIC-2.0.0'                          +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+**********************************************************************
+*            - - + APPLICATION + - -            * - - + STATUS + - - *
+**********************************************************************
+* FkEintygAdapterIC-2.0.0                             * DEPLOYED           *
+**********************************************************************
+}}}
 
 ==Konfigurera applikationen==
 
