@@ -51,6 +51,24 @@ INFO  2013-08-28 08:50:27,837 [WrapperListener_start_runner] org.mule.module.lau
 **********************************************************************
 }}}
 
+Gör ett anrop till tjänsten monitor/ping och verifiera resultatet
+
+{{{
+curl -i http://localhost:8080/fk/Ping/1/rivtabp20
+
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=UTF-8
+Date: Thu, 12 Sep 2013 01:16:46 CEST
+Server: Mule Core/3.3.1
+X-MULE_ENCODING: UTF-8
+X-MULE_CORRELATION_ID: cf76bc4f-1b9c-11e3-a2ff-e1e20e3f2501
+X-MULE_CORRELATION_GROUP_SIZE: 1
+X-MULE_CORRELATION_SEQUENCE: -1
+Content-Length: 12
+
+Anslutningstjansten Forsakringskassan OK!
+}}}
+
 ==Konfigurera applikationen==
 
 ---
