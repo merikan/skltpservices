@@ -2,7 +2,17 @@
 
 <wiki:toc max_depth="3" />
 
-= Introduction =
+= Introduktio =
+
+=Installationsanvisning=
+
+==Ladda ner applikationen==
+
+==Installera applikationen== 
+
+==Konfigurera applikationen==
+
+---
 
 =Installation instructions mule 2.2.8=
 
