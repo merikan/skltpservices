@@ -12,14 +12,24 @@
 
 ==Checka ut koden ==
 
+Följ instruktionen på [https://code.google.com/p/skltpservices/source/checkout]
+
 ==Bygga från källkoden ==
+
+{{{
+cd ApotekensServiceAdapterService/trunk
+
+mvn clean install
+}}}
 
 ==Starta och verifiera  från källkoden ==
 
 Det finns möjlighet att testa tjänsten lokalt genom att starta den med följande kommando
 
 {{{
-  mvn -pmuleServer
+cd ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC
+
+ mvn -pmuleServer
 }}}
 
 Om allt startar upp korrekt finns följande i konsol-loggen
