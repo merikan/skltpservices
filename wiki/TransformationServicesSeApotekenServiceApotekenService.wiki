@@ -53,7 +53,7 @@ Om allt startar upp korrekt finns följande i konsol-loggen
 **********************************************************************
 }}}
 
-Och med hjälp av soapUI projekt köra test-anrop. Importera ApSeMedicalServicesAdapter-soapui-project.xml som återfinns i roten på det utcheckade projektet. 
+Och med hjälp av soapUI projekt köra test-anrop. Importera ApSeMedicalServicesAdapter-soapui-project.xml som återfinns i roten på det utcheckade projektet ApotekensServiceAdapterService. 
 
 =Installation instructions mule 2.2.8=
 
