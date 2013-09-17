@@ -26,7 +26,7 @@
 			<inbound>
 				<cxf:inbound-endpoint
 					address="${inbound.endpoint.apotekensservice.axs.HamtaPatientInfo.teststub}"
-					wsdlLocation="classpath:/schemas/interactions/axs/HamtaPatientInfoInteraction/HamtaPatientInfoInteraction_1.0_rivtabp20.wsdl"
+					wsdlLocation="classpath:/axs/schemas/interactions/HamtaPatientInfoInteraction/HamtaPatientInfoInteraction_1.0_rivtabp20.wsdl"
 					serviceName="HamtaPatientInfoResponderService" namespace="urn:riv:inera:se.apotekensservice:axs:HamtaPatientInfo:1:rivtabp20"/>
 			</inbound>
 
