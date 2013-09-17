@@ -29,9 +29,11 @@ Ladda ner intyg-wiretap applikationen och driftsätt i Mule
 {{{	
 	tail -f /home/mule/mule-standalone-3.3.1/logs/mule.log
 	
-	cp intyg-wiretap-1.0.0.zip /home/mule/mule-standalone-3.3.1/apps/ .
+	cp intyg-wiretap-1.0.0.zip /home/mule/mule-standalone-3.3.1/apps/
 }}}
-4.Verifiera installationen i Mule loggen att följande information finns som visar att applikationen är deployad och startad.	
+4.Om Mule körs i så kallad fixed mode så behöver startscriptet för Mule uppdateras enligt rubriken Uppstart nedan. Fixed mode betyder att man anger specifikt vilka applikationer som skall startas.
+
+5.Verifiera installationen i Mule loggen att följande information finns som visar att applikationen är deployad och startad.	
 {{{
 	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         + New app 'intyg-wiretap-1.0.0'                            +
@@ -54,7 +56,7 @@ Ladda ner intyg-wiretap applikationen och driftsätt i Mule
 }}}
 
 
-5.Verifiera installationen i applikationsloggen med ett testanrop
+6.Verifiera installationen i applikationsloggen med ett testanrop
 
 **Notera att för version 1.0.0 finns ingen möjlighet att göra ett testanrop för att verifiera om applikationen är operativ, typ att PingForCOnfiguration finns implementerat. Istället görs ett tomt anrop till en skarp tjänst och en verifiering i applikationsloggen** 
 {{{
