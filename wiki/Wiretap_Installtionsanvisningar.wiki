@@ -13,9 +13,9 @@ Detta anvisning förutsätter att:
 
 == Installationsanvisning intyg-wiretap ==
 
-Ladda ner intyg-wiretap applikationen och driftsätt i Mule
-
 0. Konfiguration intyg-wiretap enligt rubriken Konfiguration intyg-wiretap nedan.
+
+Ladda ner intyg-wiretap applikationen och driftsätt i Mule
 
 1.Ladda ner zip-fil för intyg-wiretap-1.0.0
 {{{
