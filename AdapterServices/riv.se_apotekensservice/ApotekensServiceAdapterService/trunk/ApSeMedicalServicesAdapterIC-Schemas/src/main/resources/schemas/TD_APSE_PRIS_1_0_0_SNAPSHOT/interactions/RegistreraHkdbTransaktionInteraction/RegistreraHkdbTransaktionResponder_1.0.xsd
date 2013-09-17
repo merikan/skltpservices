@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:pris="urn:riv:se.apotekensservice:pris:1" xmlns="urn:riv:se.apotekensservice:pris:RegistreraHkdbTransaktionResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:pris:RegistreraHkdbTransaktionResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_pris_1.0.xsd" namespace="urn:riv:se.apotekensservice:pris:1"/>
+  <xs:element name="RegistreraHkdbTransaktion" type="RegistreraHkdbTransaktionRequestType"/>
+  <xs:element name="RegistreraHkdbTransaktionResponse" type="RegistreraHkdbTransaktionResponseType"/>
+  <xs:element name="ApplicationException" type="pris:ApplicationException"/>
+  <xs:element name="SystemException" type="pris:SystemException"/>
+  <xs:complexType name="RegistreraHkdbTransaktionRequestType">
+    <xs:sequence>
+      <xs:element name="ackBrutto" type="xs:double" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Om transaktionen avser föregående period skall alltså ackBrutto
+innehålla FPbrutto i kronor. Om transaktionen avser kommande period skall ackBrutto 
+innehålla motsvarande KPbrutto. I normalfallet används alltså värdet från IPbrutto användas.
+
+ackBrutto och periodStart ersätter termerna IPbrutto från version 10.3.0.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="bruttobelopp" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Transaktionens högkostnadsgrundande bruttobelop i kronor och ören.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="expeditionsId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Expeditionens unika id för spårbarhet.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ipBrutto" type="xs:double" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Ackumulerat bruttobelopp i högkostnadstrappan för innevarande period i kronor och ören. 
+Används för att verifiera att ingen ny transaktion registrerats för
+personen efter att högkostnadsfrågan ställts.
+Skall inte används som indata från och version 10.3.0. Använd periodStart och ackBrutto i stället.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="klientinformation" type="pris:KlientinformationRequest">
+        <xs:annotation>
+          <xs:documentation>Objekt innehållande information om anropande klientsystem.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="kommentar" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Kommentar till kreditering.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="periodStart" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Startdatum för den högkostnadsperiod som transaktionen tillhör.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="persNr" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Personnummer som transaktionen ska registreras för.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="transId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Aktörens expeditions-ID.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="transTid" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Transaktionstidpunkt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ursprungligtApoteksaktorsExpeditionsId" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Apoteksaktörens ursprungliga expeditionsid, ska anges vid kreditering</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ursprungligtExpeditionsId" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Expeditionens ursprungliga expeditionsid, ska anges vid kreditering</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RegistreraHkdbTransaktionResponseType">
+    <xs:sequence>
+      <xs:element name="fpBalans" type="pris:BalansResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Nya ackumulerade brutto/netto belopp i kronor och ören
+för föregånde period.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ipBalans" type="pris:BalansResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Nya ackumulerade brutto/netto belopp i kronor och ören
+för innevarande period.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="kpBalans" type="pris:BalansResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Nya ackumulerade brutto/netto belopp i kronor och ören
+för kommande period.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="resultat" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Resultat av högkostnadsuppdatering.
+1 - Transaktionen accepterad och registrerad.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
