@@ -9,7 +9,7 @@ Detta anvisning förutsätter att:
 
 2.ActiveMQ är installerat enligt [https://skl-tp.atlassian.net/wiki/display/SKLTP/Installationsmanual+ActiveMQ följande anvisning]
 
-3, Säkerställ att intyg-wiretap har tillåtelse att anropa Anslutningsplattformen. Detta görs genom att lägga till det HSA-ID som intyg-wiretap har konfigurerat i parametern WIRETAP_ORIGINAL_HSA_ID, i konfigurationen för Anslutningsplattformen (tb-config.properties). 
+3, Säkerställ att intyg-wiretap har tillåtelse att anropa Anslutningsplattformen. Detta görs genom att lägga till det HSA-ID som intyg-wiretap har konfigurerat i parametern WIRETAP_ORIGINAL_HSA_ID, i konfigurationen för Anslutningsplattformen (WHITELIST i tb-config.properties). 
 
 == Installationsanvisning intyg-wiretap ==
 
