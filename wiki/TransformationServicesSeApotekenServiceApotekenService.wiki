@@ -8,6 +8,43 @@
 
  * Mule ESB 2.2.8 är installerad. Den här versionen är ej nedladningsbar från Mulesoft men kan byggas från källkod med hjälp av Maven. Källkoden för version 2.2.8 finns tillgänglig på [http://svn.codehaus.org/mule/tags/mule-2.2.8/ http://svn.codehaus.org/mule/tags/mule-2.2.8/]
 
+= Bygga källkoden =
+
+==Checka ut koden ==
+
+==Bygga från källkoden ==
+
+==Starta och verifiera  från källkoden ==
+
+Det finns möjlighet att testa tjänsten lokalt genom att starta den med följande kommando
+
+{{{
+  mvn -pmuleServer
+}}}
+
+Om allt startar upp korrekt finns följande i konsol-loggen
+
+{{{
+**********************************************************************
+* Mule ESB and Integration Platform                                  *
+* Version: 2.2.8 Build: 25325                                        *
+* MuleSoft, Inc.                                                     *
+* For more information go to http://www.mulesoft.org                 *
+*                                                                    *
+* Server started: 9/17/13 9:46 PM                                    *
+* Server ID: d778f043-1fd1-11e3-8cb9-01f7cb70d861                    *
+* JDK: 1.6.0_51 (mixed mode)                                         *
+* OS encoding: MacRoman, Mule encoding: UTF-8                        *
+* OS: Mac OS X (10.8.4, x86_64)                                      *
+* Host: xyz-abc.local (192.168.0.125)                          *
+*                                                                    *
+* Agents Running:                                                    *
+*   JMX Agent                                                        *
+**********************************************************************
+}}}
+
+Och med hjälp av soapUI projekt köra anrop
+
 =Installation instructions mule 2.2.8=
 
 ==Runtime environment==
