@@ -164,6 +164,10 @@ Flera av parametrarna nedan innehåller exempel från intern testmiljö och beh�
 == Uppstart ==
 Rekommenderat för SKLTP är att köra Mule i "fixed mode" för att kunna hantera vilken startordning applikationerna körs. Intyg-wiretap applikationen har inte några beroenden till andra SKLTP komponenter som behöver ta hänsyn till, vid tex uppstart, men den bör läggas sist i uppstarten. 
 
+{{{
+APPLICATIONS+='intyg-wiretap-1.0.0-RC3:'
+}}}
+
 Instruktion för hur startordningen konfiguereras finns att läsa på:
 
 [https://skl-tp.atlassian.net/wiki/display/SKLTP/Installationsmanual+Mule#InstallationsmanualMule-Säkerställattapplikationerstartasienvissordning]
