@@ -26,7 +26,7 @@
 			<inbound>
 				<cxf:inbound-endpoint
 							address="${inbound.endpoint.apotekensservice.lf.LasLFVardsystem}"
-							wsdlLocation="classpath:/schemas/interactions/LasLFVardsystemInteraction/LasLFVardsystemInteraction_1.0_rivtabp20.wsdl"
+							wsdlLocation="classpath:/lf/schemas/interactions/LasLFVardsystemInteraction/LasLFVardsystemInteraction_1.0_rivtabp20.wsdl"
 							serviceName="LasLFVardsystemResponderService" namespace="urn:riv:inera:se.apotekensservice:lf:LasLFVardsystem:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
@@ -45,7 +45,7 @@
 			<inbound>
 				<cxf:inbound-endpoint
 							address="${inbound.endpoint.env2.apotekensservice.lf.LasLFVardsystem}"
-							wsdlLocation="classpath:/schemas/interactions/LasLFVardsystemInteraction/LasLFVardsystemInteraction_1.0_rivtabp20.wsdl"
+							wsdlLocation="classpath:/lf/schemas/interactions/LasLFVardsystemInteraction/LasLFVardsystemInteraction_1.0_rivtabp20.wsdl"
 							serviceName="LasLFVardsystemResponderService" namespace="urn:riv:inera:se.apotekensservice:lf:LasLFVardsystem:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>

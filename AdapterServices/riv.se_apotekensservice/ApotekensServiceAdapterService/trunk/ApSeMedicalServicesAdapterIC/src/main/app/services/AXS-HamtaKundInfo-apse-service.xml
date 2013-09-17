@@ -27,7 +27,7 @@
 			<inbound>
 					<cxf:inbound-endpoint
 							address="${inbound.endpoint.apotekensservice.axs.HamtaKundInfo}"
-							wsdlLocation="classpath:/schemas/interactions/HamtaKundInfoInteraction/HamtaKundInfoInteraction_1.0_rivtabp20.wsdl"
+							wsdlLocation="classpath:/axs/schemas/interactions/HamtaKundInfoInteraction/HamtaKundInfoInteraction_1.0_rivtabp20.wsdl"
 							serviceName="HamtaKundInfoResponderService" namespace="urn:riv:inera:se.apotekensservice:axs:HamtaKundInfo:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
@@ -46,7 +46,7 @@
 			<inbound>
 				<cxf:inbound-endpoint
 						address="${inbound.endpoint.env2.apotekensservice.axs.HamtaKundInfo}"
-						wsdlLocation="classpath:/schemas/interactions/HamtaKundInfoInteraction/HamtaKundInfoInteraction_1.0_rivtabp20.wsdl"
+						wsdlLocation="classpath:/axs/schemas/interactions/HamtaKundInfoInteraction/HamtaKundInfoInteraction_1.0_rivtabp20.wsdl"
 						serviceName="HamtaKundInfoResponderService" namespace="urn:riv:inera:se.apotekensservice:axs:HamtaKundInfo:1:rivtabp20"
 						proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
