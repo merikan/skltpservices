@@ -63,7 +63,7 @@ Ladda ner intyg-wiretap applikationen och driftsätt i Mule
 
 *Steg 6.*Verifiera installationen i applikationsloggen med ett testanrop
 
-**Notera att för version 1.0.0 finns ingen möjlighet att göra ett testanrop för att verifiera om applikationen är operativ, typ att PingForCOnfiguration finns implementerat. Istället görs ett tomt anrop till en skarp tjänst och en verifiering i applikationsloggen** 
+**Notera att för version 1.0.0 finns ingen möjlighet att göra ett testanrop för att verifiera om applikationen är operativ, typ att PingForCOnfiguration finns implementerat. Istället görs ett tomt anrop till en skarp tjänst och en verifiering i applikationsloggen, mule-app-wiretap.log** 
 {{{
 	curl http://192.168.19.10:10081/intyg/wiretap/RegisterMedicalCertificate/v1
 
