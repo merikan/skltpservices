@@ -1,14 +1,3 @@
-
-<!-- * Copyright 2009 Sjukvardsradgivningen * * This library is free software; 
-	you can redistribute it and/or modify * it under the terms of version 2.1 
-	of the GNU Lesser General Public * License as published by the Free Software 
-	Foundation. * * This library is distributed in the hope that it will be useful, 
-	* but WITHOUT ANY WARRANTY; without even the implied warranty of * MERCHANTABILITY 
-	or FITNESS FOR A PARTICULAR PURPOSE. See the * GNU Lesser General Public 
-	License for more details. * * You should have received a copy of the GNU 
-	Lesser General Public * License along with this library; if not, write to 
-	the * Free Software Foundation, Inc., 59 Temple Place, Suite 330, * Boston, 
-	MA 02111-1307 USA -->
 <mule xmlns="http://www.mulesource.org/schema/mule/core/2.2"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:spring="http://www.springframework.org/schema/beans"
 	xmlns:cxf="http://www.mulesource.org/schema/mule/cxf/2.2" xmlns:https="http://www.mulesource.org/schema/mule/https/2.2"
@@ -27,7 +16,7 @@
 			<inbound>
 					<cxf:inbound-endpoint
 							address="${inbound.endpoint.apotekensservice.lf.LasLFForskrivare}"
-							wsdlLocation="classpath:/lf/schemas/interactions/LasLFForskrivareInteraction/LasLFForskrivareInteraction_1.0_rivtabp20.wsdl"
+							wsdlLocation="classpath:/TD_APSE_LF_1_0_0_R/interactions/LasLFForskrivareInteraction/LasLFForskrivareInteraction_1.0_rivtabp20.wsdl"
 							serviceName="LasLFForskrivareResponderService" namespace="urn:riv:inera:se.apotekensservice:lf:LasLFForskrivare:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
@@ -46,7 +35,7 @@
 			<inbound>
 				<cxf:inbound-endpoint
 						address="${inbound.endpoint.env2.apotekensservice.lf.LasLFForskrivare}"
-						wsdlLocation="classpath:/lf/schemas/interactions/LasLFForskrivareInteraction/LasLFForskrivareInteraction_1.0_rivtabp20.wsdl"
+						wsdlLocation="classpath:/TD_APSE_LF_1_0_0_R/interactions/LasLFForskrivareInteraction/LasLFForskrivareInteraction_1.0_rivtabp20.wsdl"
 						serviceName="LasLFForskrivareResponderService" namespace="urn:riv:inera:se.apotekensservice:lf:LasLFForskrivare:1:rivtabp20"
 						proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>

@@ -27,10 +27,14 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<compiler.target.version>1.6</compiler.target.version>
+    	<compiler.source.version>1.6</compiler.source.version>
+    	<cxf.version>2.5.1</cxf.version>
 		<mule.version>2.2.8</mule.version>
 	</properties>
 
 	<modules>
+		<module>ApSeMedicalServicesAdapterIC-Schemas</module>
 		<module>ApSeMedicalServicesAdapterIC</module>
 	</modules>
 
@@ -40,39 +44,9 @@
 			<!-- schema dependency -->
 
 			<dependency>
-				<groupId>se.rivta.tools</groupId>
-				<artifactId>se_apotekensservice-axs-schemas</artifactId>
-				<version>1</version>
-			</dependency>
-
-			<dependency>
-				<groupId>se.rivta.tools</groupId>
-				<artifactId>se_apotekensservice-expo-schemas</artifactId>
-				<version>1</version>
-			</dependency>
-
-			<dependency>
-				<groupId>se.rivta.tools</groupId>
-				<artifactId>se_apotekensservice-folk-schemas</artifactId>
-				<version>1</version>
-			</dependency>
-
-			<dependency>
-				<groupId>se.rivta.tools</groupId>
-				<artifactId>se_apotekensservice-lf-schemas</artifactId>
-				<version>1</version>
-			</dependency>
-
-			<dependency>
-				<groupId>se.rivta.tools</groupId>
-				<artifactId>se_apotekensservice-or-schemas</artifactId>
-				<version>1</version>
-			</dependency>
-
-			<dependency>
-				<groupId>se.rivta.tools</groupId>
-				<artifactId>se_apotekensservice-pris-schemas</artifactId>
-				<version>1</version>
+				<groupId>se.skl.skltpservices.apse</groupId>
+				<artifactId>ApSeMedicalServicesAdapterIC-Schemas</artifactId>
+				<version>${project.version}</version>
 			</dependency>
 			
 			<!-- Pascals TicketMachine -->
@@ -258,17 +232,79 @@
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>com.mycila.maven-license-plugin</groupId>
+					<artifactId>maven-license-plugin</artifactId>
+					<version>1.10.b1</version>
+					<configuration>
+						<properties>
+							<year>2013</year>
+							<copyright>Center for eHalsa i samverkan (CeHis). 
+							&lt;http://cehis.se/&gt;</copyright>
+							<product>SKLTP</product>
+						</properties>
+						<strictCheck>true</strictCheck>
+						<basedir>${basedir}</basedir>
+						<header>http://skltp.googlecode.com/svn/tp/license/lgpl/header.txt</header>
+						<encoding>UTF-8</encoding>
+						<includes>
+							<include>src/main/**</include>
+							<include>src/test/**</include>
+						</includes>
+						<excludes>
+							<exclude>**/*.xsd</exclude>
+							<exclude>**/*.wsdl</exclude>
+							<exclude>**/*.xml</exclude>
+							<exclude>**/*.dtd</exclude>
+							<exclude>**/*.jks</exclude>
+							<exclude>**/*.pem</exclude>
+						</excludes>
+						<useDefaultExcludes>true</useDefaultExcludes>
+						<mapping>
+							<tag>DYNASCRIPT_STYLE</tag>
+						</mapping>
+						<useDefaultMapping>true</useDefaultMapping>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		
 		<plugins>
 			<plugin>
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+			</plugin>
+			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.2.1</version>
 				<configuration>
 					<tagBase>https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/tags</tagBase>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>license</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.mycila.maven-license-plugin</groupId>
+						<artifactId>maven-license-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>check</id>
+								<phase>compile</phase>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
