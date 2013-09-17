@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:pris="urn:riv:se.apotekensservice:pris:1" xmlns="urn:riv:se.apotekensservice:pris:HamtaHkdbTransaktionerResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:pris:HamtaHkdbTransaktionerResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_pris_1.0.xsd" namespace="urn:riv:se.apotekensservice:pris:1"/>
+  <xs:element name="HamtaHkdbTransaktioner" type="HamtaHkdbTransaktionerRequestType"/>
+  <xs:element name="HamtaHkdbTransaktionerResponse" type="HamtaHkdbTransaktionerResponseType"/>
+  <xs:element name="ApplicationException" type="pris:ApplicationException"/>
+  <xs:element name="SystemException" type="pris:SystemException"/>
+  <xs:complexType name="HamtaHkdbTransaktionerRequestType">
+    <xs:sequence>
+      <xs:element nillable="false" name="klientinformation" type="pris:KlientinformationRequest">
+        <xs:annotation>
+          <xs:documentation>Objekt innehållande information om anropande klientsystem.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="maxantal" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Ställer in begränsning av maximala mängden returnerade transaktioner.
+T.ex innebär maxantal = 5, att endast de fem senaste transaktionerna hämtas.
+Om maxantal inte anges så är defaultvärde fem. Om man vill ha alla transaktioner
+sätts maxantal till -1.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="persNr" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Personnummer för den som sökningen gäller.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HamtaHkdbTransaktionerResponseType">
+    <xs:sequence>
+      <xs:element name="transaktionsLista" maxOccurs="unbounded" type="pris:TransaktionResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Lista med de senaste transaktionerna för personens högkostnadskonto.
+Antalet som returneras kan ställas in med maxantal, men default
+är fem. 
+Listan är tom om inga transaktioner existerar eller om personen 
+inte är registrerad i högkostnadstrappan.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
