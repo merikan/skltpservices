@@ -27,7 +27,7 @@
 			<inbound>
 				<cxf:inbound-endpoint
 							address="${inbound.endpoint.apotekensservice.or.HamtaAktuellaOrdinationer}"
-							wsdlLocation="classpath:/schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl"
+							wsdlLocation="classpath:/or/schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl"
 							serviceName="HamtaAktuellaOrdinationerResponderService" namespace="urn:riv:inera:se.apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
@@ -46,7 +46,7 @@
 			<inbound>
 				<cxf:inbound-endpoint
 							address="${inbound.endpoint.env2.apotekensservice.or.HamtaAktuellaOrdinationer}"
-							wsdlLocation="classpath:/schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl"
+							wsdlLocation="classpath:/or/schemas/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl"
 							serviceName="HamtaAktuellaOrdinationerResponderService" namespace="urn:riv:inera:se.apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>

@@ -26,7 +26,7 @@
 			<inbound>
 				<cxf:inbound-endpoint
 					address="${inbound.endpoint.apotekensservice.expo.SokDosmottagare}"
-					wsdlLocation="classpath:/schemas/interactions/SokDosmottagareInteraction/SokDosmottagareInteraction_1.0_rivtabp20.wsdl"
+					wsdlLocation="classpath:/expo/schemas/interactions/SokDosmottagareInteraction/SokDosmottagareInteraction_1.0_rivtabp20.wsdl"
 					serviceName="SokDosmottagareResponderService" namespace="urn:riv:inera:se.apotekensservice:expo:SokDosmottagare:1:rivtabp20"
 					proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
@@ -45,7 +45,7 @@
 			<inbound>
 				<cxf:inbound-endpoint
 					address="${inbound.endpoint.env2.apotekensservice.expo.SokDosmottagare}"
-					wsdlLocation="classpath:/schemas/interactions/SokDosmottagareInteraction/SokDosmottagareInteraction_1.0_rivtabp20.wsdl"
+					wsdlLocation="classpath:/expo/schemas/interactions/SokDosmottagareInteraction/SokDosmottagareInteraction_1.0_rivtabp20.wsdl"
 					serviceName="SokDosmottagareResponderService" namespace="urn:riv:inera:se.apotekensservice:expo:SokDosmottagare:1:rivtabp20"
 					proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>

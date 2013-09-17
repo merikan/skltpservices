@@ -26,7 +26,7 @@
 			<inbound>
 				<cxf:inbound-endpoint
 							address="${inbound.endpoint.apotekensservice.or.SkrivUtDosRecept}"
-							wsdlLocation="classpath:/schemas/interactions/SkrivUtDosReceptInteraction/SkrivUtDosReceptInteraction_1.0_rivtabp20.wsdl"
+							wsdlLocation="classpath:/or/schemas/interactions/SkrivUtDosReceptInteraction/SkrivUtDosReceptInteraction_1.0_rivtabp20.wsdl"
 							serviceName="SkrivUtDosReceptResponderService" namespace="urn:riv:inera:se.apotekensservice:or:SkrivUtDosRecept:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
@@ -45,7 +45,7 @@
 			<inbound>
 				<cxf:inbound-endpoint
 							address="${inbound.endpoint.env2.apotekensservice.or.SkrivUtDosRecept}"
-							wsdlLocation="classpath:/schemas/interactions/SkrivUtDosReceptInteraction/SkrivUtDosReceptInteraction_1.0_rivtabp20.wsdl"
+							wsdlLocation="classpath:/or/schemas/interactions/SkrivUtDosReceptInteraction/SkrivUtDosReceptInteraction_1.0_rivtabp20.wsdl"
 							serviceName="SkrivUtDosReceptResponderService" namespace="urn:riv:inera:se.apotekensservice:or:SkrivUtDosRecept:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
