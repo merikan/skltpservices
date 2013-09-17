@@ -2,7 +2,11 @@
 
 <wiki:toc max_depth="3" />
 
-= Introduction =
+= Förutsättningar =
+
+ * Java 1.6 eller senare är installerat. Se [http://www.oracle.com/technetwork/java/javase/index-137561.html http://www.oracle.com/technetwork/java/javase/index-137561.html] för nedladdning- och installationsanvisningar. Teknisk verifiering har dock endast gjorts med Java SE 6 Update 27.
+
+ * Mule ESB 2.2.8 är installerad. Den här versionen är ej nedladningsbar från Mulesoft men kan byggas från källkod med hjälp av Maven. Källkoden för version 2.2.8 finns tillgänglig på [http://svn.codehaus.org/mule/tags/mule-2.2.8/ http://svn.codehaus.org/mule/tags/mule-2.2.8/]
 
 =Installation instructions mule 2.2.8=
 
