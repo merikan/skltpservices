@@ -115,13 +115,13 @@ Flera av parametrarna nedan innehåller exempel från intern testmiljö och beh�
 	WIRETAP_ORIGINAL_HSA_ID=HSASERVICES-100S
  
 	# Exempelnställningar till certifikatfilerna för SITEST
-	SOITOOLKIT_HTTPS_TLS_KEYSTORE=/home/mule/TP-TEST/tp/mule-standalone-3.3.1/certs/test1.esb.ntjp.sjunet.org_auth.p12
-	SOITOOLKIT_HTTPS_TLS_KEY_TYPE=pkcs12
-	SOITOOLKIT_HTTPS_TLS_TRUSTSTORE=/home/mule/TP-TEST/tp/mule-standalone-3.3.1/certs/truststore_globalsign_test.jks
-	SOITOOLKIT_HTTPS_TLS_TRUSTSTORE_REQUIRE_CLIENT_AUTH=true
-	SOITOOLKIT_HTTPS_TLS_KEYSTORE_PASSWORD=password
-	SOITOOLKIT_HTTPS_TLS_KEY_PASSWORD=password
-	SOITOOLKIT_HTTPS_TLS_TRUSTSTORE_PASSWORD=password
+	#SOITOOLKIT_HTTPS_TLS_KEYSTORE=/home/mule/TP-TEST/tp/mule-standalone-3.3.1/certs/test1.esb.ntjp.sjunet.org_auth.p12
+	#SOITOOLKIT_HTTPS_TLS_KEY_TYPE=pkcs12
+	#SOITOOLKIT_HTTPS_TLS_TRUSTSTORE=/home/mule/TP-TEST/tp/mule-standalone-3.3.1/certs/truststore_globalsign_test.jks
+	#SOITOOLKIT_HTTPS_TLS_TRUSTSTORE_REQUIRE_CLIENT_AUTH=true
+	#SOITOOLKIT_HTTPS_TLS_KEYSTORE_PASSWORD=password
+	#SOITOOLKIT_HTTPS_TLS_KEY_PASSWORD=password
+	#SOITOOLKIT_HTTPS_TLS_TRUSTSTORE_PASSWORD=password
 	
 	# *** Alla fält i denna grupp behöver fyllas in för respektive miljö
 	SOITOOLKIT_HTTPS_TLS_KEYSTORE=
