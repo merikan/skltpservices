@@ -65,7 +65,7 @@ Ladda ner intyg-wiretap applikationen och driftsätt i Mule
 
 **Notera att för version 1.0.0 finns ingen möjlighet att göra ett testanrop för att verifiera om applikationen är operativ, typ att PingForCOnfiguration finns implementerat. Istället görs ett tomt anrop till en skarp tjänst och en verifiering i applikationsloggen, mule-app-wiretap.log** 
 {{{
-	curl http://192.168.19.10:10081/intyg/wiretap/RegisterMedicalCertificate/v1
+	curl http://192.168.16.210:10081/intyg/wiretap/RegisterMedicalCertificate/v1
 
 	2013-09-11 09:28:46,293 INFO  org.mule.module.logging.DispatchingLogger - soi-toolkit.log
 	** logEvent-info.start ***********************************************************
@@ -75,7 +75,7 @@ Ladda ner intyg-wiretap applikationen och driftsätt i Mule
 	ServiceImpl=wiretap-1-service
 	Host=tp-test01 (192.168.19.10)
 	ComponentId=intyg-wiretap-1.0.0-RC1
-	Endpoint=http://192.168.19.10:10081/intyg/wiretap/RegisterMedicalCertificate/v1 (GET on /intyg/wiretap/RegisterMedicalCertificate/v1)
+	Endpoint=http://192.168.16.210:10081/intyg/wiretap/RegisterMedicalCertificate/v1 (GET on /intyg/wiretap/RegisterMedicalCertificate/v1)
 	MessageId=cb41c4cc-1ab3-11e3-b999-1d88c7dd0f92
 	BusinessCorrelationId=
 	BusinessContextId=
@@ -148,7 +148,7 @@ Flera av parametrarna nedan innehåller exempel från intern testmiljö och beh�
 
 	# *** IP-addressen för WIRETAP_1_INBOUND_URL behöver ändras för varje host applikationen ska köra på
 	WIRETAP_1_INBOUND_URL=http://192.168.16.212:10081/intyg/wiretap/${WIRETAP_1_NAME}/v1
-	WIRETAP_1_OUTBOUND_URL=https://192.168.22.147:12000/tjanstebryggan/eintyg/testproducer/RegisterMedicalCertificate/3/rivtabp20/test
+        WIRETAP_1_OUTBOUND_URL=https://192.168.22.147:12000/tjanstebryggan/eintyg/fk/RegisterMedicalCertificate/3/rivtabp20
 	WIRETAP_1_NOTIFY_OUTBOUND_URL=https://qa.esb.ntjp.org:20000/vp/RegisterMedicalCertificate/3/rivtabp20
 
 	WIRETAP_1_QUEUE=wiretap-${WIRETAP_1_NAME}-queue
@@ -162,7 +162,7 @@ Flera av parametrarna nedan innehåller exempel från intern testmiljö och beh�
 
 	# *** IP-addressen för WIRETAP_2_INBOUND_URL behöver ändras för varje host applikationen ska köra på
 	WIRETAP_2_INBOUND_URL=http://192.168.16.212:10081/intyg/wiretap/${WIRETAP_2_NAME}/v1
-	WIRETAP_2_OUTBOUND_URL=https://192.168.22.147:12000/tjanstebryggan/eintyg/testproducer/SendMedicalCertificateQuestion/1/rivtabp20/test
+        WIRETAP_2_OUTBOUND_URL=https://192.168.22.147:12000/tjanstebryggan/eintyg/fk/SendMedicalCertificateQuestion/1/rivtabp20
 	WIRETAP_2_NOTIFY_OUTBOUND_URL=https://qa.esb.ntjp.org:20000/vp/SendMedicalCertificateQuestion/1/rivtabp20
 
 	WIRETAP_2_QUEUE=wiretap-${WIRETAP_2_NAME}-queue
