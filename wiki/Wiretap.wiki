@@ -11,4 +11,5 @@ Denna komponent är tänkt att ta en kopia på ett meddelande som förmedlas gen
 
  * [Wiretap_Arkitekturbeskrivning Arkitekturbeskrivning]
  * Installationsanvisning samt konfiguration
+ * [Wiretap_tester Tester]
  * Loggning och övervakning
