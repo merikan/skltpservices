@@ -1,6 +1,6 @@
 #summary Tester för wiretap.
 
-= Introduktion =
+= Tester för wiretap =
 För att genomföra testerna används 2 olika konfigurationer.
   * Konfiguration 1: Funktionella tester med teststubbar som ersätter alla externa system.
   * Konfiguration 2: Funktionella och icke-funktionella tester där externa system är inkopplade.
