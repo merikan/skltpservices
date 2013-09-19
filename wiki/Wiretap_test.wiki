@@ -4,6 +4,7 @@
 För att genomföra testerna används 2 olika konfigurationer.
   * Konfiguration 1: Funktionella tester med teststubbar som ersätter alla externa system.
   * Konfiguration 2: Funktionella och icke-funktionella tester där externa system är inkopplade.
+[http://code.google.com/p/skltpservices/images/Wiretap-testflode2.jpg]
 
 = Funktionella tester =
 Nedan en beskrivning av olika testfall för wiretap. Konfiguration 1 används.
