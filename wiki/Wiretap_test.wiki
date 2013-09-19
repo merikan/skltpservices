@@ -1,0 +1,53 @@
+#summary Tester för wiretap.
+
+= Introduktion =
+För att genomföra testerna används 2 olika konfigurationer.
+  * Konfiguration 1: Funktionella tester med teststubbar som ersätter alla externa system.
+  * Konfiguration 2: Funktionella och icke-funktionella tester där externa system är inkopplade.
+
+= Funktionella tester =
+Nedan en beskrivning av olika testfall för wiretap. Konfiguration 1 används.
+
+== WFT-1 ==
+Happy day test med ett läkarintyg (medel).
+
+== WFT-2 ==
+Happy day test med ett läkarintyg (maximal).
+
+== WFT-3 ==
+Fel fall med ett läkarintyg som innehåller ett valideringsfel.
+
+== WFT-4 ==
+Fel fall med ett läkarintyg som genererar ett SoapFault från Testproducenten (FK).
+
+== WFT-5 ==
+Fel fall med ett läkarintyg som genererar ett SoapFault från VP innan Intygstjänsten.
+
+= Icke-funktionella tester =
+Konfiguration 2 används.
+
+== WIFT-1 ==
+Test med en anropsfrekvens på 1 intyg/sekund under 5 minuter.
+
+== WIFT-2 ==
+Test med en anropsfrekvens på 5 intyg/sekund under 5 minuter.
+
+== WIFT-3 ==
+Test med en anropsfrekvens på 10 intyg/minut under 24 timmar.
+
+= Testprotokoll =
+
+== Testprotokoll 2013-09-16 ==
+
+||Testfall||Förväntat resultat||Faktiskt resultat||Kommentar||
+||WFT-1||Intyg i tjänsten||Intyg i tjänsten||||
+||WFT-2||Intyg i tjänsten||Intyg i tjänsten||||
+||WFT-3||Inget intyg lagras i tjänsten||Inget intyg lagras i tjänsten||||
+||WFT-4||Inget intyg lagras i tjänsten||Inget intyg lagras i tjänsten||||
+||WFT-5||Inget intyg lagras, fel sparas i loggen||Inget intyg lagras, fel sparas i loggen||Skall vi spara undan anropet?||
+
+== Testprotokoll 2013-09-05 ==
+||Testfall||Förväntat resultat||Faktiskt resultat||Kommentar||
+||WIFT-1||||||||
+||WIFT-2||||||||
+||WIFT-3||||||||
