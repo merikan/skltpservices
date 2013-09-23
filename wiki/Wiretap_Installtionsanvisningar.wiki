@@ -118,6 +118,9 @@ Flera av parametrarna nedan innehåller exempel från intern testmiljö och beh�
 	# Default timeout for synchronous services
 	SERVICE_TIMEOUT_MS=30000
 
+        # Should both request and response payload for notify be logged to error queue?
+       LOG_NOTIFY_PAYLOADS=true
+
 	# Properties for "wiretap" services
 	# HSASERVICES-100S in QA
 	# HSASERVICES-100R in production
