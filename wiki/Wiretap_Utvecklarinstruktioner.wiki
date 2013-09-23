@@ -1,4 +1,3 @@
-#summary Instruktioner för utvecklare
+#summary Instruktioner för utvecklare av Wiretap
 
 = Instruktioner för utvecklare =
-
