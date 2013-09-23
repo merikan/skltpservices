@@ -26,12 +26,9 @@ Därefter skall man kunna importera Eclipse projekten in i Mule Studio.
 
 Innan man commitar ändringar är det väldigt viktigt att man:
 
-# Gjort en svn update (eller svn synchronize i Eclipse pluginen) för att säkerställa att man har senaste koden hos sig.
-Gör man inte det så kan det leda till onödiga merge-problem när man väl commitar eller att commitade ändringar bryter tester i byggservern.
+# Gjort en svn update (eller svn synchronize i Eclipse pluginen) för att säkerställa att man har senaste koden hos sig. Gör man inte det så kan det leda till onödiga merge-problem när man väl commitar eller att commitade ändringar bryter tester i byggservern.
 
- # Gör en fullständig mvn clean install på trunk nivå för att försäkra sig om att allt fortfarande sitter ihop innan man commitar
-Se till att stänga alt restarta Mule Studio innan mvn clean startas annars upptäcker Mule Studio detta och börjar kompilera om klasser vilket kan förvilla maven och bygget går då fel...
+ # Gör en fullständig mvn clean install på trunk nivå för att försäkra sig om att allt fortfarande sitter ihop innan man commitar. Se till att stänga alt restarta Mule Studio innan mvn clean startas annars upptäcker Mule Studio detta och börjar kompilera om klasser vilket kan förvilla maven och bygget går då fel...
 
 # Commita med en relevant commit kommentar.
-Företrädesvis skall kod commitas mot ett JIRA-ärende och då skall dess id vara prefix i commit kommentaren.
-Jobbar man inte mot ett JIRA ärende få man prefixa sin commit kommentar med "WIRETAP, " för att skilja ut WIRETAP-ändringar mot ändraingar i svn för andra SKLTP komponenter.
+Företrädesvis skall kod commitas mot ett JIRA-ärende och då skall dess id vara prefix i commit kommentaren. Jobbar man inte mot ett JIRA ärende få man prefixa sin commit kommentar med "WIRETAP, " för att skilja ut WIRETAP-ändringar mot ändraingar i svn för andra SKLTP komponenter.
