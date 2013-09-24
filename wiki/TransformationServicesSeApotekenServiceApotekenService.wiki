@@ -29,7 +29,7 @@ Det finns möjlighet att testa tjänsten lokalt genom att starta den med följan
 {{{
 cd ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC
 
- mvn -pmuleServer
+ mvn -PmuleServer
 }}}
 
 Om allt startar upp korrekt finns följande i konsol-loggen
