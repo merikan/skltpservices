@@ -10,15 +10,6 @@
 		</layout>
 	</appender>
 
-	<appender name="ROLLINGFILE" class="org.apache.log4j.RollingFileAppender">
-		<param name="file" value="${mule.home}/logs/ApSeMedicalServicesAdapterIC.log" />
-		<param name="MaxFileSize" value="50MB" />
-		<param name="MaxBackupIndex" value="10" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d %-5p %-30C - %m%n" />
-		</layout>
-	</appender>
-
 	<!-- Loglevels: {OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE, ALL} See: 
 		http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/Level.html -->
 
@@ -56,25 +47,24 @@
 		<level value="INFO" />
 	</logger>
 	<logger name="org.mule.component.simple.LogComponent">
-		<level value="ERROR" />
+		<level value="INFO" />
 	</logger>
 
 	<logger name="org.soitoolkit.commons">
-		<level value="ERROR" />
+		<level value="INFO" />
 	</logger>
 
 	<!-- Message logging -->
 	<logger name="org.soitoolkit.commons.mule.messageLogger">
-		<level value="ERROR" />
+		<level value="INFO" />
 	</logger>
 
 	<logger name="se.skl.skltpservices">
-		<level value="ERROR" />
+		<level value="DEBUG" />
 	</logger>
 
 	<root>
-		<priority value="WARN" />
-		<appender-ref ref="ROLLINGFILE" />
-		<!-- <appender-ref ref="CONSOLE"/> -->
+		<priority value="INFO" />
+		<appender-ref ref="CONSOLE" />
 	</root>
 </log4j:configuration>
