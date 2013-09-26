@@ -51,7 +51,7 @@ INFO  2013-08-28 08:50:27,837 [WrapperListener_start_runner] org.mule.module.lau
 **********************************************************************
 }}}
 
-Gör ett anrop till tjänsten monitor/ping och verifiera resultatet. *Notera* att adressen för att kontrollera om tjänsten är operativ konfigureras i parametern FK_PINGSERVICE_INBOUND_URL i FkIntegrationComponent-config.properties.
+Gör ett anrop till tjänsten monitor/ping och verifiera resultatet. *Notera* att adressen för att kontrollera om tjänsten är operativ konfigureras i parametern FK_PINGSERVICE_INBOUND_URL i ´FkIntegrationComponent-config-override.properties´.
 
 {{{
 curl -i http://localhost:11000/fk/Ping/1/rivtabp20
