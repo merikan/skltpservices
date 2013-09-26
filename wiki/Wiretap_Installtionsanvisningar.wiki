@@ -151,7 +151,7 @@ Flera av parametrarna nedan innehåller exempel från intern testmiljö och beh�
 
 	# *** IP-addressen för WIRETAP_1_INBOUND_URL och WIRETAP_1_OUTBOUND_URL behöver ändras för varje host applikationen ska köra på
 	WIRETAP_1_INBOUND_URL=http://192.168.16.212:10081/intyg/wiretap/${WIRETAP_1_NAME}/v1
-        WIRETAP_1_OUTBOUND_URL=https://192.168.22.147:12000/tjanstebryggan/eintyg/fk/RegisterMedicalCertificate/3/rivtabp20
+        WIRETAP_1_OUTBOUND_URL=http://192.168.22.147:11000/tjanstebryggan/eintyg/fk/RegisterMedicalCertificate/3/rivtabp20
 	WIRETAP_1_NOTIFY_OUTBOUND_URL=https://qa.esb.ntjp.org:20000/vp/RegisterMedicalCertificate/3/rivtabp20
 
 	WIRETAP_1_QUEUE=wiretap-${WIRETAP_1_NAME}-queue
