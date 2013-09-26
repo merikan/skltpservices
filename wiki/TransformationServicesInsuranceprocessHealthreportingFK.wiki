@@ -18,14 +18,14 @@ wget https://skltpservices.googlecode.com/files/FkEintygAdapterIC-2.0.1.zip
 
 {{{
 tail -f /usr/local/mule-standalone-3.3.1/logs/mule.log
-rm /usr/local/mule-standalone-3.3.1/apps/FkEintygAdapterIC-2.0.0-anchor.txt
+rm /usr/local/mule-standalone-3.3.1/apps/FkEintygAdapterIC-2.0.1-anchor.txt
 }}}
 
 * Driftsätt applikationen
 
 {{{
 tail -f /usr/local/mule-standalone-3.3.1/logs/mule.log
-cp FkEintygAdapterIC-2.0.0.zip /usr/local/mule-standalone-3.3.1/apps/
+cp FkEintygAdapterIC-2.0.1.zip /usr/local/mule-standalone-3.3.1/apps/
 }}}
 
 * Verifiera driftsättningen
@@ -34,20 +34,20 @@ I /usr/local/mule-standalone-3.3.1/logs/mule.log skall följande dyka upp vid en
 
 {{{
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+ New app 'FkEintygAdapterIC-2.0.0'                              +
++ New app 'FkEintygAdapterIC-2.0.1'                              +
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-INFO  2013-08-28 08:50:27,837 [WrapperListener_start_runner] org.mule.module.launcher.MuleApplicationClassLoader: [FkEintygAdapterIC-2.0.0] Loading the following jars:
+INFO  2013-08-28 08:50:27,837 [WrapperListener_start_runner] org.mule.module.launcher.MuleApplicationClassLoader: [FkEintygAdapterIC-2.0.1] Loading the following jars:
 =============================
 -
 -
 -
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+ Started app 'FkEintygAdapterIC-2.0.0'                          +
++ Started app 'FkEintygAdapterIC-2.0.1'                          +
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 **********************************************************************
 *            - - + APPLICATION + - -            * - - + STATUS + - - *
 **********************************************************************
-* FkEintygAdapterIC-2.0.0                             * DEPLOYED           *
+* FkEintygAdapterIC-2.0.1                             * DEPLOYED           *
 **********************************************************************
 }}}
 
