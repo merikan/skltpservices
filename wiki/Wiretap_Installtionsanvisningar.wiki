@@ -19,7 +19,7 @@ Ladda ner intyg-wiretap applikationen och driftsätt i Mule
 
 *Steg 1.*Ladda ner zip-fil för intyg-wiretap-1.0.0
 {{{
-	wget https://skltpservices.googlecode.com/files/intyg-wiretap-1.0.0-RC5.zip
+	wget https://skltpservices.googlecode.com/files/intyg-wiretap-1.0.0-RC7.zip
 }}}
 
 *Steg 2.*Ta bort eventuell tidigare version av wiretap från Mule, verifiera i Mule loggen
@@ -177,7 +177,7 @@ Flera av parametrarna nedan innehåller exempel från intern testmiljö och beh�
 Rekommenderat för SKLTP är att köra Mule i "fixed mode" för att kunna hantera vilken startordning applikationerna körs. Intyg-wiretap applikationen har inte några beroenden till andra SKLTP komponenter som behöver ta hänsyn till, vid tex uppstart, men den bör läggas sist i uppstarten. 
 
 {{{
-APPLICATIONS+='intyg-wiretap-1.0.0-RC5:'
+APPLICATIONS+='intyg-wiretap-1.0.0-RC7:'
 }}}
 
 Instruktion för hur startordningen konfiguereras finns att läsa på:
