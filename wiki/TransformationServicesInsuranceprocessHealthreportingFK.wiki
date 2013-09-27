@@ -255,7 +255,7 @@ inbound.endpoint.eintyg.revokemedicalcertificate.teststub.validate=${INBOUND_HOS
 
 }}}
 
-=Installation instructions mule 2.2.8=
+=Installation instructions mule 2.2.8 (Deprecated)=
 
 ==Runtime environment==
 
