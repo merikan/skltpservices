@@ -75,7 +75,7 @@ Anslutningstjansten Forsakringskassan OK!
 
 ==Konfigurera applikationen==
 
-Nedan den kompletta konfiguration som medföljer default i anpassningstjänsten för Försäkringskassan. För att överlagra dessa parametrar skapa en fil med namnet FkIntegrationComponent-config-override.properties och lägg den tillgänglig på classpath för applikationen, rekommenderat under `<mule_home>/conf`. Typiska saker som man vi ändra i sin lokala miljö är inställningar för certifikat (sökvägar, lösenord mm), host och port o.dyl.
+Nedan den kompletta konfiguration som medföljer default i anpassningstjänsten för Försäkringskassan. För att överlagra dessa parametrar skapa en fil med namnet `FkIntegrationComponent-config-override.properties` och lägg den tillgänglig på classpath för applikationen, rekommenderat under `<mule_home>/conf`. Typiska saker som man vi ändra i sin lokala miljö är inställningar för certifikat (sökvägar, lösenord mm), host och port o.dyl.
 
 {{{
 #
