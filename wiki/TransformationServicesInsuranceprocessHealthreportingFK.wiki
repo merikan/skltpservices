@@ -12,10 +12,10 @@ Denna anpassningstjänst använda för att vården skall kunna kommunicera med F
 Mule 2
 
 ==2.0.0==
-Adapter uppgraderad för att kunne deploys på Mule 3
+Adapter uppgraderad för att kunna deploys på Mule 3
 
 ==2.0.1==
-Tilläg av tjänsten revoke transform
+Tillägg av tjänsten revoke transform
 
 ==2.0.2==
 Teststubbar skal kunna konfigureras både för http/https
