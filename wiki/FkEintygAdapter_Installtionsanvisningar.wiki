@@ -12,6 +12,15 @@ wget https://skltpservices.googlecode.com/files/FkEintygAdapterIC-2.0.2.zip
 
 ==Installera applikationen== 
 
+* Säkerställ att det finns en konfigurationsfil för adaptern att överlagra default parametrar i
+
+{{{
+touch /usr/local/mule-standalone-3.3.1/conf/FkIntegrationComponent-config-override.properties
+vi /usr/local/mule-standalone-3.3.1/conf/FkIntegrationComponent-config-override.properties
+}}}
+
+Ändra FkIntegrationComponent-config-override.properties efter era behov. Se rubriken *Konfigurera applikationen* nedan för default inställningar som kommer med i applikationen och kan överlagras i FkIntegrationComponent-config-override.properties.
+
 * Ta bort tidigare installation av applikationen
 
 {{{
