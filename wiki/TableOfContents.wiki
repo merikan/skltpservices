@@ -15,6 +15,7 @@ SKL TP Services
       * [TransformationServicesCrmSchedulingTakeCare TakeCare]
     * [TransformationServicesInsuranceprocessHealthreporting insuranceprocess:healthreporting]
       * [TransformationServicesInsuranceprocessHealthreportingFK Försäkringskassan]
+        * [FkEintygAdapter_Installtionsanvisningar Installationsanvisningar]
       * [Wiretap Wiretap]
         * [Wiretap_Arkitekturbeskrivning Arkitekturbeskrivning]
         * [Wiretap_Installtionsanvisningar Installationsanvisningar]
