@@ -8,34 +8,3 @@ Denna anpassningstjänst använda för att vården skall kunna kommunicera med F
 
 = Detaljer =
  * FkEintygAdapter_Installtionsanvisningar Installationsanvisning samt konfiguration
-
-
-=Installation instructions mule 2.2.8 (Deprecated)=
-
-==Runtime environment==
-
-See [http://code.google.com/p/skltp/wiki/InstallationServiceBridge Adapterplatform]
-
-==Download distribution==
-
-[http://skltpservices.googlecode.com/files/FkEintygAdapter_1_6_0.zip lastest distribution]
-
-==Build from source==
-
-[https://code.google.com/p/skltpservices/source/checkout Instructions how to checkout source]
-
-How to build `ForsakringskassanAdapterService` 1.6.0 release.
-{{{
-cd AdapterServices/riv.insuranceprocess.healthreporting/ForsakringskassanAdapterService/tags/fk-adapter-1.6.0-R/
-mvn clean install 
-}}}
-
-==Deploy/Undeploy distribution==
-
-Download distribution above.
-
- * Extract services to `<adapter platform>/services`
-
-==Configuration==
-
-[http://skltpservices.googlecode.com/svn/AdapterServices/riv.insuranceprocess.healthreporting/ForsakringskassanAdapterService/tags/fk-adapter-1.6.0-R/FkEintygAdapterIC/src/environment/ config files]
