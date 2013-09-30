@@ -171,6 +171,9 @@ inbound.endpoint.eintyg.receivemedicalcertificatequestion.autosvar=${INBOUND_HOS
 
 #FRÅN VÅRDEN TILL FÖRSÄKRINGSKASSAN
 
+# Används för att samla konfiguration av Försäkringskassans ändpunkt på ett ställe
+fk.outbound.host=
+
 ################################################################################
 # Vården till Försäkrinskassan: RegisterMedicalCertificate -> TaEmotLakarintyg #
 ################################################################################
