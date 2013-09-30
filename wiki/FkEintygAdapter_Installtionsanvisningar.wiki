@@ -132,7 +132,7 @@ SOITOOLKIT_HTTPS_TLS_TRUSTSTORE_PASSWORD=password
 # som Försäkringskassan använder i kommunikationen med adaptern och vidare in i vården.
 FK_CERT_SENDERID=OU
 CERTIFICATE_KEY=PEER_CERTIFICATES
-FK_WHITE_LIST=
+FK_WHITE_LIST=127.0.0.1
 
 
 # Standard properties for an external ActiveMQ broker, see soitoolkit-mule-jms-connector-activemq-external.xml.
@@ -255,6 +255,7 @@ inbound.endpoint.eintyg.sendmedicalcertificate.teststub.validate=${INBOUND_HOST_
 #####################################
 inbound.endpoint.eintyg.revokemedicalcertificate.teststub.test=${INBOUND_HOST_TESTSTUB_HTTP}/eintyg/testproducer/RevokeMedicalCertificate/1/rivtabp20/test
 inbound.endpoint.eintyg.revokemedicalcertificate.teststub.validate=${INBOUND_HOST_TESTSTUB_HTTP}/eintyg/testproducer/RevokeMedicalCertificate/1/rivtabp20/validate
+
 
 
 }}}
