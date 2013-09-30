@@ -1,5 +1,7 @@
 #summary INstallationsanvisning FkEintygAdapter
 
+<wiki:toc max_depth="3" />
+
 =Installationsanvisning=
 
 ==Ladda ner applikationen==
