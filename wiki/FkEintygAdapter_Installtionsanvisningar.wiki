@@ -115,6 +115,9 @@ FK_PINGSERVICE_RESPONSE=Anslutningstjansten Forsakringskassan OK!
 # Ange i millesekunder hur länge en ändpunkt skall vänta innan ett synkront anrop avbryts
 SERVICE_TIMEOUT_MS=5000
 
+# Adress till VP, används i de fall adaptern skall anropa en tjänst i VP iställer för en teststubbe
+TP_HOST_HTTPS=https://localhost:20000/vp
+
 # Ange i millesekunder hur länge adaptern skall vänta på att en klient har leveretat hela sitt svar
 SOITOOLKIT_HTTPS_CLIENT_SO_TIMEOUT=${SERVICE_TIMEOUT_MS}
 
@@ -255,7 +258,6 @@ inbound.endpoint.eintyg.sendmedicalcertificate.teststub.validate=${INBOUND_HOST_
 #####################################
 inbound.endpoint.eintyg.revokemedicalcertificate.teststub.test=${INBOUND_HOST_TESTSTUB_HTTP}/eintyg/testproducer/RevokeMedicalCertificate/1/rivtabp20/test
 inbound.endpoint.eintyg.revokemedicalcertificate.teststub.validate=${INBOUND_HOST_TESTSTUB_HTTP}/eintyg/testproducer/RevokeMedicalCertificate/1/rivtabp20/validate
-
 
 
 }}}
