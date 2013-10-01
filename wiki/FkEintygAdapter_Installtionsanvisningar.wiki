@@ -292,6 +292,30 @@ inbound.endpoint.eintyg.revokemedicalcertificate.teststub.validate=${INBOUND_HOS
 
 }}}
 
+==Installera teststubbar==
+
+{{{
+wget http://skltpservices.googlecode.com/files/FkEintygAdapterIC-teststub-2.0.2.zip
+}}}
+
+* Ta bort tidigare installation av teststubbar
+
+{{{
+tail -f /usr/local/mule-standalone-3.3.1/logs/mule.log
+rm /usr/local/mule-standalone-3.3.1/apps/FkEintygAdapterIC-teststub-2.0.2-anchor.txt
+}}}
+
+* Driftsätt teststubbar
+
+{{{
+tail -f /usr/local/mule-standalone-3.3.1/logs/mule.log
+cp FkEintygAdapterIC-teststub-2.0.2.zip /usr/local/mule-standalone-3.3.1/apps/
+}}}
+
+
+==Konfigurera teststubbar==
+
+Teststubbar konfigureras i FkIntegrationComponent-config-override.properties, se konfiguration ovan.
 
 =Installation instructions mule 2.2.8 (Deprecated)=
 
