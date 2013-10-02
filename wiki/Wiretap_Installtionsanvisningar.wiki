@@ -11,6 +11,8 @@ Detta anvisning förutsätter att:
 
 3, Säkerställ att intyg-wiretap har tillåtelse att anropa Anslutningsplattformen. Detta görs genom att lägga till det HSA-ID som intyg-wiretap har konfigurerat i parametern WIRETAP_ORIGINAL_HSA_ID, i konfigurationen för Anslutningsplattformen (WHITELIST i tb-config.properties). 
 
+4. Lastbalansering behöver göras på port 10081 som ska nå Wiretap i muleapplikationen.
+
 == Installationsanvisning intyg-wiretap ==
 
 *Steg 0.* Konfiguration intyg-wiretap enligt rubriken Konfiguration intyg-wiretap nedan.
