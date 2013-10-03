@@ -62,10 +62,10 @@ Gör ett anrop till tjänsten monitor/ping och verifiera resultatet.
 
 *Notera* att adressen för att kontrollera om tjänsten är operativ konfigureras i parametern FK_PINGSERVICE_INBOUND_URL i `FkIntegrationComponent-config-override.properties`. Exemplet nedan är konfigurerat:
 
-`FK_PINGSERVICE_INBOUND_URL=http://localhost:11000/fk/Ping/1/rivtabp20`
+`FK_PINGSERVICE_INBOUND_URL=${INBOUND_HOST_HTTP}/fk/Ping/1/rivtabp20` vilket sätts till `http://localhost:11000/tjanstebryggan/fk/Ping/1/rivtabp20"`
 
 {{{
-curl -i http://localhost:11000/fk/Ping/1/rivtabp20
+curl -i http://localhost:11000/tjanstebryggan/fk/Ping/1/rivtabp20
 
 HTTP/1.1 200 OK
 Content-Type: text/xml; charset=UTF-8
@@ -85,7 +85,7 @@ Anslutningstjansten Forsakringskassan OK!
 Adaptern exponerar en tjänst, default via http://localhost:11000/fk/Ping/1/rivtabp20. Denna tjänst kan användas för stt säkerställa att applikationen är igång. Exempelanrop med curl nedan och vad tjänsten svarar om den är uppe.
 
 {{{
-curl -i http://localhost:11000/fk/Ping/1/rivtabp20
+curl -i http://localhost:11000/tjanstebryggan/fk/Ping/1/rivtabp20
 
 HTTP/1.1 200 OK
 Content-Type: text/xml; charset=UTF-8
