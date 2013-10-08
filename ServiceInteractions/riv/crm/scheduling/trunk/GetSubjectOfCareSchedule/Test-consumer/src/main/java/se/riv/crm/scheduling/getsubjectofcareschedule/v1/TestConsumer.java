@@ -42,19 +42,29 @@ import se.riv.crm.scheduling.getsubjectofcarescheduleresponder.v1.GetSubjectOfCa
 public final class TestConsumer {
 
 	private static final String LOGICAL_ADDRESS = "Test";
-
-	private static final String LOGISK_ADDRESS = "/GetSubjectOfCareSchedule/1/rivtabp21";
-	private static String host = "localhost:20000/testproducer";
+	
+	private static String endpointAddress = "https://localhost:20001/teststub/GetSubjectOfCareSchedule/1/rivtabp21";
+	private static String keystorePath = "src/main/resources/test-certs/consumer.jks";
+	private static String keystoreType = "JKS";
+	private static String keystorePassword = "password";
+	private static String truststorePath = "src/main/resources/test-certs/truststore.jks";
+	private static String truststoreType = "JKS";
+	private static String truststorePassword = "password";
 
 	public static void main(String[] args) {
-
+		
 		if (args.length > 0) {
-			host = args[0];
+		      endpointAddress = args[0];
+		      keystorePath = args[1];
+		      keystoreType = args[2];
+		      keystorePassword = args[3];
+		      truststorePath = args[4];
+		      truststoreType = args[5];
+		      truststorePassword = args[6]; 
 		}
 
-		String endpointAddress = "http://" + host + LOGISK_ADDRESS;
 		System.out.println("Consumer connecting to " + endpointAddress);
-		String p = callService2(endpointAddress, "Test");
+		String p = callService2(endpointAddress, LOGICAL_ADDRESS);
 		System.out.println("Returned: " + p);
 	}
 
@@ -87,8 +97,8 @@ public final class TestConsumer {
 			httpClientPolicy.setReceiveTimeout(32000);
 			http.setClient(httpClientPolicy);
 
-			//TLSClientParameters tlsCP = setUpTlsClientParams();
-			//http.setTlsClientParameters(tlsCP);
+			TLSClientParameters tlsCP = setUpTlsClientParams();
+			http.setTlsClientParameters(tlsCP);
 
 			GetSubjectOfCareScheduleResponseType response = serviceInterface.getSubjectOfCareSchedule(LOGICAL_ADDRESS,
 					null, request);
@@ -103,21 +113,17 @@ public final class TestConsumer {
 
 	private static TLSClientParameters setUpTlsClientParams() throws Exception {
 
-		KeyStore trustStore = KeyStore.getInstance("JKS");
-		String trustStoreLoc = "../../certs/truststore_test.jks";
-		String trustPassword = "password";
-		trustStore.load(new FileInputStream(trustStoreLoc), trustPassword.toCharArray());
+		KeyStore trustStore = KeyStore.getInstance(truststoreType);
+		trustStore.load(new FileInputStream(truststorePath), truststorePassword.toCharArray());
 
-		String keyPassword = "password";
-		KeyStore keyStore = KeyStore.getInstance("PKCS12");
-		String keyStoreLoc = "../../certs/consumer.p12";
-		keyStore.load(new FileInputStream(keyStoreLoc), keyPassword.toCharArray());
+		KeyStore keyStore = KeyStore.getInstance(keystoreType);
+		keyStore.load(new FileInputStream(keystorePath), keystorePassword.toCharArray());
 
 		TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
 		tmf.init(trustStore);
 
 		KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-		kmf.init(keyStore, keyPassword.toCharArray());
+		kmf.init(keyStore, keystorePassword.toCharArray());
 
 		TLSClientParameters tlsCP = new TLSClientParameters();
 		tlsCP.setTrustManagers(tmf.getTrustManagers());
