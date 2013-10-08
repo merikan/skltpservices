@@ -30,7 +30,6 @@ import se.riv.crm.scheduling.getsubjectofcareschedule.v1.rivtabp21.GetSubjectOfC
 import se.riv.crm.scheduling.getsubjectofcarescheduleresponder.v1.GetSubjectOfCareScheduleResponseType;
 import se.riv.crm.scheduling.getsubjectofcarescheduleresponder.v1.GetSubjectOfCareScheduleType;
 import se.riv.crm.scheduling.v1.TimeslotType;
-import se.riv.interoperability.headers.v1.ActorType;
 
 
 @WebService(
@@ -39,19 +38,20 @@ import se.riv.interoperability.headers.v1.ActorType;
 		portName = "GetSubjectOfCareScheduleResponderPort", 
 		targetNamespace = "urn:riv:crm:scheduling:GetSubjectOfCareSchedule:1:rivtabp21",
 		wsdlLocation = "interactions/GetSubjectOfCareScheduleInteraction/GetSubjectOfCareScheduleInteraction_1.1_RIVTABP21.wsdl")
-public class ProducerImpl implements GetSubjectOfCareScheduleResponderInterface {
+public class GetSubjectOfCareScheduleResponderImpl implements GetSubjectOfCareScheduleResponderInterface {
 	
 	static final SimpleDateFormat timeFformat = new SimpleDateFormat("yyyyMMddHHmmss");
 
 	@Override
-	public GetSubjectOfCareScheduleResponseType getSubjectOfCareSchedule(String arg0, ActorType arg1,
-			GetSubjectOfCareScheduleType arg2) {
+	public GetSubjectOfCareScheduleResponseType getSubjectOfCareSchedule(
+			String logialAdress, riv.interoperability.headers._1.ActorType actor,
+			GetSubjectOfCareScheduleType request) {
 		GetSubjectOfCareScheduleResponseType careScheduleResponseType = new GetSubjectOfCareScheduleResponseType();
 		careScheduleResponseType.getTimeslotDetail().add(crateTimeslotType());
 		careScheduleResponseType.getTimeslotDetail().add(crateTimeslotType());
 		return careScheduleResponseType;
 	}
-
+	
 	private TimeslotType crateTimeslotType() {
 		TimeslotType timeslotType = new TimeslotType();
 		timeslotType.setBookingId(UUID.randomUUID().toString());
@@ -72,6 +72,4 @@ public class ProducerImpl implements GetSubjectOfCareScheduleResponderInterface 
 		timeslotType.setTimeTypeName("TimeTypeName");
 		return timeslotType;
 	}
-
-	
 }
