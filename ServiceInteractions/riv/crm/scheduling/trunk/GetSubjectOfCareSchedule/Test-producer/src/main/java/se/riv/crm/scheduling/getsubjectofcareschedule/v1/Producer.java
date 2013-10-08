@@ -27,30 +27,34 @@ import javax.xml.ws.Endpoint;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
 
-public class Producer {
+public class Producer implements Runnable{
+	
+	private static String ENDPOINT = "https://localhost:20001/testproducer/CheckConsent/1/rivtabp21";
+	
+	protected Producer(String address) throws Exception {
+		System.out.println("Starting GetSubjectOfCare testproducer with endpoint: " + address);
 
-    protected Producer() throws Exception {
-        System.out.println("Starting Producer");
+		// Loads a cxf configuration file to use
+		final SpringBusFactory bf = new SpringBusFactory();
+		final URL busFile = this.getClass().getClassLoader().getResource("cxf-producer.xml");
+		final Bus bus = bf.createBus(busFile.toString());
 
-        // Loads a cxf configuration file to use
-        final SpringBusFactory bf = new SpringBusFactory();
-        final URL busFile = this.getClass().getClassLoader().getResource("cxf-producer.xml");
-        final Bus bus = bf.createBus(busFile.toString());
-        
-        SpringBusFactory.setDefaultBus(bus);
-        
-        final Object implementor = new ProducerImpl();
-        final String address = "http://localhost:20000/testproducer/GetSubjectOfCareSchedule/1/rivtabp21";
-        Endpoint.publish(address, implementor);
-    }
+		SpringBusFactory.setDefaultBus(bus);
+		final Object implementor = new GetSubjectOfCareScheduleResponderImpl();
+		Endpoint.publish(address, implementor);
+	}
+	
+	@Override
+	public void run() {
+		System.out.println("GetSubjectOfCare testproducer ready...");
+	}
 
 	public static void main(String[] args) throws Exception {
+		if (args.length > 0) {
+			ENDPOINT = args[0];
+		}
+
+		new Thread(new Producer(ENDPOINT)).start();
 		
-        new Producer();
-        System.out.println("Producer ready...");
-        
-        Thread.sleep(5 * 60 * 1000);
-        System.out.println("Producer exiting");
-        System.exit(0);
-    }
+	}	
 }

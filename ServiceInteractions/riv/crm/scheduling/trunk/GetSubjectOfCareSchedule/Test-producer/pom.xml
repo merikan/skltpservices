@@ -26,13 +26,14 @@
 	</parent>
 
 	<properties>
-		<cxf.version>2.1.2</cxf.version>
+		<cxf.version>2.5.6</cxf.version>
 		<spring.version>3.0.5</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>se.rivta.tools</groupId>
   			<artifactId>ehr-scheduling-schemas</artifactId>
@@ -57,4 +58,36 @@
 			<version>${cxf.version}</version>
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>localtest</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.2.1</version>
+						<executions>
+							<execution>
+								<phase>test</phase>
+								<goals>
+									<goal>java</goal>
+								</goals>
+								<configuration>
+									<mainClass>se.riv.crm.scheduling.getsubjectofcareschedule.v1.Producer</mainClass>
+									 <arguments>
+                    					<argument>https://localhost:20001/teststub/GetSubjectOfCareSchedule/1/rivtabp21</argument>
+                					 </arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

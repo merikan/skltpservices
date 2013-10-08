@@ -20,7 +20,8 @@
  -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec="http://cxf.apache.org/configuration/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:sec="http://cxf.apache.org/configuration/security"
 	xmlns:http="http://cxf.apache.org/transports/http/configuration"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:cxf="http://cxf.apache.org/core"
@@ -31,23 +32,23 @@
 	        http://cxf.apache.org/configuration/security  		       http://cxf.apache.org/schemas/configuration/security.xsd
             http://cxf.apache.org/transports/http/configuration        http://cxf.apache.org/schemas/configuration/http-conf.xsd
             http://cxf.apache.org/transports/http-jetty/configuration  http://cxf.apache.org/schemas/configuration/http-jetty.xsd
-            http://www.springframework.org/schema/context              http://www.springframework.org/schema/context/spring-context-2.5.xsd            
-            http://www.springframework.org/schema/beans                http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-
+            http://www.springframework.org/schema/context              http://www.springframework.org/schema/context/spring-context-3.1.xsd            
+            http://www.springframework.org/schema/beans   			   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+            
 	<http:destination
 		name="{urn:riv:crm:scheduling:GetSubjectOfCareSchedule:1:rivtabp21}GetSubjectOfCareScheduleResponderPort.http-destination">
 	</http:destination>
 
 	<httpj:engine-factory>
-		<httpj:engine port="21000">
+		<httpj:engine port="20001">
 			<httpj:tlsServerParameters>
 				<sec:keyManagers keyPassword="password">
 					<sec:keyStore type="JKS" password="password"
-						file="../../certs/producer-localhost.jks" />
+						resource="classpath:test-certs/producer-localhost.jks" />
 				</sec:keyManagers>
 				<sec:trustManagers>
 					<sec:keyStore type="JKS" password="password"
-						file="../../certs/truststore.jks" />
+						resource="classpath:test-certs/truststore.jks" />
 				</sec:trustManagers>
 				<sec:cipherSuitesFilter>
 					<!--
@@ -57,12 +58,14 @@
 					-->
 					<sec:include>.*_EXPORT_.*</sec:include>
 					<sec:include>.*_EXPORT1024_.*</sec:include>
+					<sec:include>.*_WITH_AES_256_.*</sec:include>
+					<sec:include>.*_WITH_AES_128_.*</sec:include>
+					<sec:include>.*_WITH_3DES_.*</sec:include>
 					<sec:include>.*_WITH_DES_.*</sec:include>
 					<sec:include>.*_WITH_NULL_.*</sec:include>
 					<sec:exclude>.*_DH_anon_.*</sec:exclude>
-				</sec:cipherSuitesFilter>
-				<sec:clientAuthentication want="true"
-					required="true" />
+					</sec:cipherSuitesFilter>
+					<sec:clientAuthentication want="true" required="true" />
 			</httpj:tlsServerParameters>
 		</httpj:engine>
 	</httpj:engine-factory>
