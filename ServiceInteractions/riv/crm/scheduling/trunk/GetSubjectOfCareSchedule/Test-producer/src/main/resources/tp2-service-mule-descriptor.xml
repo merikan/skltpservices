@@ -19,10 +19,14 @@
 		http://www.mulesoft.org/schema/mule/jms     http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
 	">
 
-	<simple-service
-		name="GetSubjectOfCare-teststub-service"
-		address="${GETSUBJECTOFCARE_TESTSTUB_INBOUND_URL}"
-		component-class="se.riv.crm.scheduling.getsubjectofcareschedule.v1.ProducerImpl"
+	<simple-service name="GetSubjectOfCare-teststub-producer-1-service"
+	address="${GETSUBJECTOFCARE_TESTSTUB_PRODUCER1_INBOUND_URL}"
+	component-class="se.riv.crm.scheduling.getsubjectofcareschedule.v1.GetSubjectOfCareScheduleProducer1"
+	type="jax-ws" />
+
+	<simple-service name="GetSubjectOfCare-teststub-producer-2-service"
+		address="${GETSUBJECTOFCARE_TESTSTUB_PRODUCER2_INBOUND_URL}"
+		component-class="se.riv.crm.scheduling.getsubjectofcareschedule.v1.GetSubjectOfCareScheduleProducer2"
 		type="jax-ws" />
 
 

@@ -40,7 +40,6 @@
   			<version>1</version>
 		</dependency>
 		
-	
 		<!-- CXF -->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
@@ -57,8 +56,45 @@
 			<artifactId>cxf-rt-transports-http-jetty</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
+		
+		<dependency>
+    		<groupId>org.codehaus.groovy</groupId>
+    		<artifactId>groovy-all</artifactId>
+    		<version>2.1.1</version>
+  		</dependency>
 	</dependencies>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<compilerId>groovy-eclipse-compiler</compilerId>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.groovy</groupId>
+						<artifactId>groovy-eclipse-compiler</artifactId>
+						<version>2.7.0-01</version>
+						<exclusions>
+							<exclusion>
+								<groupId>org.codehaus.groovy</groupId>
+								<artifactId>groovy-eclipse-batch</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+					<dependency>
+						<groupId>org.codehaus.groovy</groupId>
+						<artifactId>groovy-eclipse-batch</artifactId>
+						<version>2.1.1-01</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+	
 	<profiles>
 		<profile>
 			<id>localtest</id>
@@ -80,7 +116,8 @@
 								<configuration>
 									<mainClass>se.riv.crm.scheduling.getsubjectofcareschedule.v1.Producer</mainClass>
 									 <arguments>
-                    					<argument>https://localhost:20001/teststub/GetSubjectOfCareSchedule/1/rivtabp21</argument>
+                    					<argument>http://localhost:20002/producer_1/teststub/GetSubjectOfCareSchedule/1/rivtabp21</argument>
+                    					<argument>http://localhost:20002/producer_2/teststub/GetSubjectOfCareSchedule/1/rivtabp21</argument>
                 					 </arguments>
 								</configuration>
 							</execution>
