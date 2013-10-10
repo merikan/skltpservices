@@ -29,9 +29,10 @@ import org.apache.cxf.bus.spring.SpringBusFactory;
 
 public class Producer implements Runnable{
 	
-	private static String ENDPOINT = "https://localhost:20001/testproducer/CheckConsent/1/rivtabp21";
+	private static String ENDPOINT_PRODUCER_1 = "http://localhost:20002/producer_1/teststub/GetSubjectOfCareSchedule/1/rivtabp21";
+	private static String ENDPOINT_PRODUCER_2 = "http://localhost:20002/producer_2/teststub/GetSubjectOfCareSchedule/1/rivtabp21";
 	
-	protected Producer(String address) throws Exception {
+	protected Producer(String address, final Object producer) throws Exception {
 		System.out.println("Starting GetSubjectOfCare testproducer with endpoint: " + address);
 
 		// Loads a cxf configuration file to use
@@ -40,8 +41,8 @@ public class Producer implements Runnable{
 		final Bus bus = bf.createBus(busFile.toString());
 
 		SpringBusFactory.setDefaultBus(bus);
-		final Object implementor = new GetSubjectOfCareScheduleResponderImpl();
-		Endpoint.publish(address, implementor);
+		
+		Endpoint.publish(address, producer);
 	}
 	
 	@Override
@@ -51,10 +52,12 @@ public class Producer implements Runnable{
 
 	public static void main(String[] args) throws Exception {
 		if (args.length > 0) {
-			ENDPOINT = args[0];
+			ENDPOINT_PRODUCER_1 = args[0];
+			ENDPOINT_PRODUCER_2 = args[1];
 		}
 
-		new Thread(new Producer(ENDPOINT)).start();
+		new Thread(new Producer(ENDPOINT_PRODUCER_1, new GetSubjectOfCareScheduleProducer1())).start();
+		new Thread(new Producer(ENDPOINT_PRODUCER_2, new GetSubjectOfCareScheduleProducer2())).start();
 		
 	}	
 }
