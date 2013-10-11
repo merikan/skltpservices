@@ -1,0 +1,3 @@
+<CancelBookingResponse xmlns="http://tempuri.org/">
+	<CancelBookingResult><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ProfdocHISMessage Method="Booking.MakeBooking" CareUnit="HSA-VKK123" CareUnitType="hsaid" User="ExtUsrMVK" Time="20120616154226" SystemInstance="0" System="ProfdocHIS" MsgType="Response"><BookingStatus><BookingId>1234567890</BookingId><Status>CANCELLED</Status></BookingStatus></ProfdocHISMessage>]]></CancelBookingResult>
+</CancelBookingResponse>
