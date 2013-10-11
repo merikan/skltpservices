@@ -38,4 +38,9 @@
 		address="${GETSUBJECTOFCARE_TESTSTUB_PRODUCER4_INBOUND_URL}"
 		component-class="se.riv.crm.scheduling.getsubjectofcareschedule.v1.GetSubjectOfCareScheduleProducer4"
 		type="jax-ws" />
+		
+	<simple-service name="GetSubjectOfCare-teststub-producer-5-service"
+		address="${GETSUBJECTOFCARE_TESTSTUB_PRODUCER5_INBOUND_URL}"
+		component-class="se.riv.crm.scheduling.getsubjectofcareschedule.v1.GetSubjectOfCareScheduleProducer5"
+		type="jax-ws" />
 </mule>

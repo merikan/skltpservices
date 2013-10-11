@@ -33,6 +33,7 @@ public class Producer implements Runnable{
 	private static String ENDPOINT_PRODUCER_2 = "http://localhost:20002/producer_2/teststub/GetSubjectOfCareSchedule/1/rivtabp21";
 	private static String ENDPOINT_PRODUCER_3 = "http://localhost:20002/producer_3/teststub/GetSubjectOfCareSchedule/1/rivtabp21";
 	private static String ENDPOINT_PRODUCER_4 = "http://localhost:20002/producer_4/teststub/GetSubjectOfCareSchedule/1/rivtabp21";
+	private static String ENDPOINT_PRODUCER_5 = "http://localhost:20002/producer_5/teststub/GetSubjectOfCareSchedule/1/rivtabp21";
 	
 	protected Producer(String address, final Object producer) throws Exception {
 		System.out.println("Starting GetSubjectOfCare testproducer with endpoint: " + address);
@@ -58,12 +59,13 @@ public class Producer implements Runnable{
 			ENDPOINT_PRODUCER_2 = args[1];
 			ENDPOINT_PRODUCER_3 = args[2];
 			ENDPOINT_PRODUCER_4 = args[3];
+			ENDPOINT_PRODUCER_5 = args[4];
 		}
 
 		new Thread(new Producer(ENDPOINT_PRODUCER_1, new GetSubjectOfCareScheduleProducer1())).start();
 		new Thread(new Producer(ENDPOINT_PRODUCER_2, new GetSubjectOfCareScheduleProducer2())).start();
 		new Thread(new Producer(ENDPOINT_PRODUCER_3, new GetSubjectOfCareScheduleProducer3())).start();
 		new Thread(new Producer(ENDPOINT_PRODUCER_4, new GetSubjectOfCareScheduleProducer4())).start();
-		
+		new Thread(new Producer(ENDPOINT_PRODUCER_5, new GetSubjectOfCareScheduleProducer5())).start();
 	}	
 }
