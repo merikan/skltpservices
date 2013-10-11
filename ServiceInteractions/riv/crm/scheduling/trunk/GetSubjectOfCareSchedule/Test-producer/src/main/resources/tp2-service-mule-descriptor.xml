@@ -29,5 +29,13 @@
 		component-class="se.riv.crm.scheduling.getsubjectofcareschedule.v1.GetSubjectOfCareScheduleProducer2"
 		type="jax-ws" />
 
-
+	<simple-service name="GetSubjectOfCare-teststub-producer-3-service"
+		address="${GETSUBJECTOFCARE_TESTSTUB_PRODUCER3_INBOUND_URL}"
+		component-class="se.riv.crm.scheduling.getsubjectofcareschedule.v1.GetSubjectOfCareScheduleProducer3"
+		type="jax-ws" />
+	
+	<simple-service name="GetSubjectOfCare-teststub-producer-4-service"
+		address="${GETSUBJECTOFCARE_TESTSTUB_PRODUCER4_INBOUND_URL}"
+		component-class="se.riv.crm.scheduling.getsubjectofcareschedule.v1.GetSubjectOfCareScheduleProducer4"
+		type="jax-ws" />
 </mule>
