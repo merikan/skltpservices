@@ -118,6 +118,8 @@
 									 <arguments>
                     					<argument>http://localhost:20002/producer_1/teststub/GetSubjectOfCareSchedule/1/rivtabp21</argument>
                     					<argument>http://localhost:20002/producer_2/teststub/GetSubjectOfCareSchedule/1/rivtabp21</argument>
+                    					<argument>http://localhost:20002/producer_3/teststub/GetSubjectOfCareSchedule/1/rivtabp21</argument>
+                    					<argument>http://localhost:20002/producer_4/teststub/GetSubjectOfCareSchedule/1/rivtabp21</argument>
                 					 </arguments>
 								</configuration>
 							</execution>

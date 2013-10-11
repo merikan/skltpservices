@@ -312,7 +312,7 @@
       <xs:enumeration value="subject_of_care_agent"/>
     </xs:restriction>
   </xs:simpleType>
-</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:20002/teststub/GetSubjectOfCareSchedule/1/rivtabp21</con:endpoint><con:endpoint>http://localhost:20002/producer_1/teststub/GetSubjectOfCareSchedule/1/rivtabp21</con:endpoint><con:endpoint>http://localhost:20002/producer_2/teststub/GetSubjectOfCareSchedule/1/rivtabp21</con:endpoint><con:endpoint>https://33.33.33.33:20000/vp/GetSubjectOfCareSchedule/1/rivtabp21</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:riv:crm:scheduling:GetSubjectOfCareScheduleResponder:1:GetSubjectOfCareSchedule" name="GetSubjectOfCareSchedule" bindingOperationName="GetSubjectOfCareSchedule" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Adam 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://33.33.33.33:20000/vp/GetSubjectOfCareSchedule/1/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:interoperability:headers:1" xmlns:urn1="urn:riv:itintegration:registry:1" xmlns:urn2="urn:riv:crm:scheduling:GetSubjectOfCareScheduleResponder:1">
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:20002/teststub/GetSubjectOfCareSchedule/1/rivtabp21</con:endpoint><con:endpoint>http://localhost:20002/producer_1/teststub/GetSubjectOfCareSchedule/1/rivtabp21</con:endpoint><con:endpoint>http://localhost:20002/producer_2/teststub/GetSubjectOfCareSchedule/1/rivtabp21</con:endpoint><con:endpoint>https://33.33.33.33:20000/vp/GetSubjectOfCareSchedule/1/rivtabp21</con:endpoint><con:endpoint>http://localhost:20002/producer_3/teststub/GetSubjectOfCareSchedule/1/rivtabp21</con:endpoint><con:endpoint>http://localhost:20002/producer_4/teststub/GetSubjectOfCareSchedule/1/rivtabp21</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:riv:crm:scheduling:GetSubjectOfCareScheduleResponder:1:GetSubjectOfCareSchedule" name="GetSubjectOfCareSchedule" bindingOperationName="GetSubjectOfCareSchedule" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Adam 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://33.33.33.33:20000/vp/GetSubjectOfCareSchedule/1/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:interoperability:headers:1" xmlns:urn1="urn:riv:itintegration:registry:1" xmlns:urn2="urn:riv:crm:scheduling:GetSubjectOfCareScheduleResponder:1">
    <soapenv:Header>
       <urn:Actor>
          <urn:actorId>?</urn:actorId>
@@ -341,6 +341,38 @@
       <urn2:GetSubjectOfCareSchedule>
          <urn2:healthcare_facility>?</urn2:healthcare_facility>
          <urn2:subject_of_care>195609230577</urn2:subject_of_care>
+         <!--You may enter ANY elements at this point-->
+      </urn2:GetSubjectOfCareSchedule>
+   </soapenv:Body>
+</soapenv:Envelope>	]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:crm:scheduling:GetSubjectOfCareScheduleResponder:1:GetSubjectOfCareSchedule"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Bertil"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:20002/producer_3/teststub/GetSubjectOfCareSchedule/1/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:interoperability:headers:1" xmlns:urn1="urn:riv:itintegration:registry:1" xmlns:urn2="urn:riv:crm:scheduling:GetSubjectOfCareScheduleResponder:1">
+   <soapenv:Header>
+      <urn:Actor>
+         <urn:actorId>?</urn:actorId>
+         <urn:actorType>?</urn:actorType>
+         <!--You may enter ANY elements at this point-->
+      </urn:Actor>
+      <urn1:LogicalAddress>?</urn1:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn2:GetSubjectOfCareSchedule>
+         <urn2:healthcare_facility>?</urn2:healthcare_facility>
+         <urn2:subject_of_care>191105308371</urn2:subject_of_care>
+         <!--You may enter ANY elements at this point-->
+      </urn2:GetSubjectOfCareSchedule>
+   </soapenv:Body>
+</soapenv:Envelope>	]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:crm:scheduling:GetSubjectOfCareScheduleResponder:1:GetSubjectOfCareSchedule"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Erik"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:20002/producer_4/teststub/GetSubjectOfCareSchedule/1/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:interoperability:headers:1" xmlns:urn1="urn:riv:itintegration:registry:1" xmlns:urn2="urn:riv:crm:scheduling:GetSubjectOfCareScheduleResponder:1">
+   <soapenv:Header>
+      <urn:Actor>
+         <urn:actorId>?</urn:actorId>
+         <urn:actorType>?</urn:actorType>
+         <!--You may enter ANY elements at this point-->
+      </urn:Actor>
+      <urn1:LogicalAddress>?</urn1:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn2:GetSubjectOfCareSchedule>
+         <urn2:healthcare_facility>?</urn2:healthcare_facility>
+         <urn2:subject_of_care>192506298112</urn2:subject_of_care>
          <!--You may enter ANY elements at this point-->
       </urn2:GetSubjectOfCareSchedule>
    </soapenv:Body>
