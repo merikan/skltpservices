@@ -17,6 +17,7 @@ public class GetSubjectOfCareScheduleProducer1 implements GetSubjectOfCareSchedu
 	
 	private final static String ADAM = "195609230577"
 	private final static String ERIK = "192506298112"
+	private final static String CESAR = "198111176239"
 	private final static String HSAPRODUCER1 = "HSAPRODUCER1"
 	
 	@Override
@@ -67,6 +68,27 @@ public class GetSubjectOfCareScheduleProducer1 implements GetSubjectOfCareSchedu
 					endTimeExclusive = "2013107150145"
 					healthcareFacility = HSAPRODUCER1
 					subjectOfCare = ERIK
+				}
+				response.timeslotDetail << timeslot
+		} else if(request.subjectOfCare == CESAR) {
+				//Create a Timeslot and it to the response timeslotDetail list
+				def timeslot = new TimeslotType()
+				timeslot.with {
+					bookingId = "PRODUCER1_BookingID_Cesar_1"
+					startTimeInclusive = "2013107140145"
+					endTimeExclusive = "2013107150145"
+					healthcareFacility = HSAPRODUCER1
+					subjectOfCare = CESAR
+				}
+				response.timeslotDetail << timeslot
+				
+				timeslot = new TimeslotType()
+				timeslot.with {
+					bookingId = "PRODUCER1_BookingID_Cesar_2"
+					startTimeInclusive = "2013107140145"
+					endTimeExclusive = "2013107150145"
+					healthcareFacility = HSAPRODUCER1
+					subjectOfCare = CESAR
 				}
 				response.timeslotDetail << timeslot
 		}
