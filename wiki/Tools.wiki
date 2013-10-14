@@ -23,6 +23,7 @@ Requires [http://maven.apache.org/ Maven] 3.0 or newer.
 
 You need to install Maven service archetype of correct version in order to run the script
 
+ # Check out skltpservices, follow instructions in [https://code.google.com/p/skltpservices/source/checkout]
  # cd `/skltpservices/tools/generators/archetypes/tags/1.1/ServiceArchetype`
  # mvn install
 
