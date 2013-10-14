@@ -1,5 +1,5 @@
 #summary Översikt över de 2 flöden wiretap hanterar
 
-= "RegisterMedicalCertificate" =
+= Register Medical Certificate =
 
-= "SendMedicalCertificateQuestion" =
+= Send Medical Certificate Question =
