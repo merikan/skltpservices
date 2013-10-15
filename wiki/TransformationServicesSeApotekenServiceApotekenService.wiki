@@ -15,13 +15,24 @@
 Följ instruktionen på [https://code.google.com/p/skltpservices/source/checkout]
 
 == Lägg till schema filer ==
-Lägg till eller uppdatera schema-filerna (wsdl, xsd från rivta) i skltpservices/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/src/main/resources/schemas/interactions
+Lägg till eller uppdatera schema-filerna (wsdl, xsd från rivta) i 
+{{{
+skltpservices/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/src/main/resources/schemas/interactions
+
+}}}
 
 == Lägg till tjänster ==
-Om nya tjänster läggs till skapa xml-fil för varje ny tjänst skltpservices/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/src/main/app/services
+Om nya tjänster läggs till skapa xml-fil för varje ny tjänst 
+{{{
+skltpservices/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/src/main/app/services
+
+}}}
 
 == Uppdatera endpoints för samtliga tjänster== 
+{{{
 /Users/jasminabadnjevic/workspace/svn-code/skltpservices/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/src/environment/ApSeIntegrationComponent-config.properties
+
+}}}
 
 ==Bygga från källkoden ==
 
