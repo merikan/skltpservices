@@ -8,21 +8,22 @@
                http://www.mulesource.org/schema/mule/cxf/2.2  http://www.mulesource.org/schema/mule/cxf/2.2/mule-cxf.xsd">
 
 	<!-- Name of this file is mandatory and may not be changed. -->
-<model name="Bridged-ApotekenService-MakuleraOrdinationVard-model">
+
+	<model name="Bridged-ApotekenService-HamtaProduktionsunderlag-model">
 
 		<service
-			name="Bridged-ApotekenService-MakuleraOrdinationVard-service">
+			name="Bridged-ApotekenService-HamtaProduktionsunderlag-service">
 			<inbound>
 				<cxf:inbound-endpoint
-							address="${inbound.endpoint.apotekensservice.or.MakuleraOrdinationVard}"
-							wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/MakuleraOrdinationVardInteraction/MakuleraOrdinationVardInteraction_1.0_rivtabp20.wsdl"
-							serviceName="MakuleraOrdinationVardResponderService" namespace="urn:riv:inera:se.apotekensservice:or:MakuleraOrdinationVard:1:rivtabp20"
+							address="${inbound.endpoint.apotekensservice.or.HamtaProduktionsunderlag}"
+							wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/HamtaProduktionsunderlagInteraction/HamtaProduktionsunderlagInteraction_1.0_rivtabp20.wsdl"
+							serviceName="HamtaProduktionsunderlagResponderService" namespace="urn:riv:inera:se.apotekensservice:or:HamtaProduktionsunderlag:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
-						address="${outbound.endpoint.apotekensservice.or.MakuleraOrdinationVard}"
+						address="${outbound.endpoint.apotekensservice.or.HamtaProduktionsunderlag}"
 						synchronous="true" proxy="true" payload="envelope"
 						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
@@ -30,22 +31,24 @@
 		</service>
 		
 		<service
-			name="Bridged-ApotekenService-MakuleraOrdinationVard-service-env2">
+			name="Bridged-ApotekenService-HamtaProduktionsunderlag-service-env2">
 			<inbound>
 				<cxf:inbound-endpoint
-							address="${inbound.endpoint.env2.apotekensservice.or.MakuleraOrdinationVard}"
-							wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/MakuleraOrdinationVardInteraction/MakuleraOrdinationVardInteraction_1.0_rivtabp20.wsdl"
-							serviceName="MakuleraOrdinationVardResponderService" namespace="urn:riv:inera:se.apotekensservice:or:MakuleraOrdinationVard:1:rivtabp20"
+							address="${inbound.endpoint.env2.apotekensservice.or.HamtaProduktionsunderlag}"
+							wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/HamtaProduktionsunderlagInteraction/HamtaProduktionsunderlagInteraction_1.0_rivtabp20.wsdl"
+							serviceName="HamtaProduktionsunderlagResponderService" namespace="urn:riv:inera:se.apotekensservice:or:HamtaProduktionsunderlag:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
-						address="${outbound.endpoint.env2.apotekensservice.or.MakuleraOrdinationVard}"
+						address="${outbound.endpoint.env2.apotekensservice.or.HamtaProduktionsunderlag}"
 						synchronous="true" proxy="true" payload="envelope"
 						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
 			</outbound>
 		</service>
+
 	</model>
+
 </mule>
