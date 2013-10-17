@@ -658,7 +658,7 @@
               <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
               <wsdlOptions>
 	              <wsdloption>
-	                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/SkrivUtMinaSparadeReceptInteraction/SkrivUtMinaSparadeReceptInteraction_1.0_rivtabp21.wsdl</wsdl>
+	                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/SkrivUtMinaSparadeReceptInteraction/SkrivUtMinaSparadeReceptInteraction_1.0_rivtabp21.wsdl</wsdl>
 	                  <extraargs>
 	                    <extraarg>-p</extraarg>
 	                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -677,7 +677,7 @@
 	                  </extraargs>
 	                </wsdloption>	
 	                <wsdloption>
-	                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/AvregistreraEpsosSamtyckeInteraction/AvregistreraEpsosSamtyckeInteraction_4.0_rivtabp21.wsdl</wsdl>
+	                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/AvregistreraEpsosSamtyckeInteraction/AvregistreraEpsosSamtyckeInteraction_4.0_rivtabp21.wsdl</wsdl>
 	                  <extraargs>
 	                    <extraarg>-p</extraarg>
 	                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -696,7 +696,7 @@
 	                  </extraargs>
 	                </wsdloption>
 	                <wsdloption>
-	                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/HamtaEpsosSamtyckeInteraction/HamtaEpsosSamtyckeInteraction_4.0_rivtabp21.wsdl</wsdl>
+	                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/HamtaEpsosSamtyckeInteraction/HamtaEpsosSamtyckeInteraction_4.0_rivtabp21.wsdl</wsdl>
 	                  <extraargs>
 	                    <extraarg>-p</extraarg>
 	                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -715,7 +715,7 @@
 	                  </extraargs>
 	                </wsdloption>
 	                <wsdloption>
-	                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/HamtaOrdinationerPrivatpersonInteraction/HamtaOrdinationerPrivatpersonInteraction_4.0_rivtabp21.wsdl</wsdl>
+	                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/HamtaOrdinationerPrivatpersonInteraction/HamtaOrdinationerPrivatpersonInteraction_4.0_rivtabp21.wsdl</wsdl>
 	                  <extraargs>
 	                    <extraarg>-p</extraarg>
 	                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -734,7 +734,7 @@
 	                  </extraargs>
 	                </wsdloption>
 	                <wsdloption>
-	                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/RegistreraEpsosSamtyckeInteraction/RegistreraEpsosSamtyckeInteraction_4.0_rivtabp21.wsdl</wsdl>
+	                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/RegistreraEpsosSamtyckeInteraction/RegistreraEpsosSamtyckeInteraction_4.0_rivtabp21.wsdl</wsdl>
 	                  <extraargs>
 	                    <extraarg>-p</extraarg>
 	                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -753,7 +753,7 @@
 	                  </extraargs>
 	                </wsdloption>	
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/AvregistreraDosunderlagInteraction/AvregistreraDosunderlagInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/AvregistreraDosunderlagInteraction/AvregistreraDosunderlagInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -768,7 +768,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/BackaKrediteraUttagInteraction/BackaKrediteraUttagInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/BackaKrediteraUttagInteraction/BackaKrediteraUttagInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -783,7 +783,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/ForlangOrdinationVardInteraction/ForlangOrdinationVardInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/ForlangOrdinationVardInteraction/ForlangOrdinationVardInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -798,7 +798,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/GodkannDosunderlagInteraction/GodkannDosunderlagInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/GodkannDosunderlagInteraction/GodkannDosunderlagInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -813,7 +813,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/GodkannUttagInteraction/GodkannUttagInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/GodkannUttagInteraction/GodkannUttagInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -828,7 +828,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/HamtaAktuellaOrdinationerFoddatumInteraction/HamtaAktuellaOrdinationerFoddatumInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/HamtaAktuellaOrdinationerFoddatumInteraction/HamtaAktuellaOrdinationerFoddatumInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -843,7 +843,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -858,7 +858,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/HamtaEjGodkandaDosunderlagInteraction/HamtaEjGodkandaDosunderlagInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/HamtaEjGodkandaDosunderlagInteraction/HamtaEjGodkandaDosunderlagInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -873,7 +873,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/HamtaGallandeOrdinationsversionInteraction/HamtaGallandeOrdinationsversionInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/HamtaGallandeOrdinationsversionInteraction/HamtaGallandeOrdinationsversionInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -888,7 +888,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/HamtaIckeAktuellaOrdinationerFoddatumInteraction/HamtaIckeAktuellaOrdinationerFoddatumInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/HamtaIckeAktuellaOrdinationerFoddatumInteraction/HamtaIckeAktuellaOrdinationerFoddatumInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -901,9 +901,26 @@
                     <extraarg>-p</extraarg>
                     <extraarg>urn:riv:se.apotekensservice:or:1=se.riv.se.apotekensservice.or.v1</extraarg>
                   </extraargs>
-                </wsdloption>
+                </wsdloption>        
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/HamtaIckeAktuellaOrdinationerInteraction/HamtaIckeAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/HamtaIckeAktuellaOrdinationerInteraction/HamtaIckeAktuellaOrdinationerInteraction_4.0_rivtabp21.wsdl</wsdl>
+                  <extraargs>
+                    <extraarg>-p</extraarg>
+                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:inera.se.apotekensservice:argos:1=se.riv.inera.se.apotekensservice.argos.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:se.apotekensservice:or:HamtaIckeAktuellaOrdinationerResponder:4=se.riv.se.apotekensservice.or.hamtaickeaktuellaordinationerresponder.v4</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:inera:se.apotekensservice:or:HamtaIckeAktuellaOrdinationer:4:rivtabp21=se.riv.inera.se.apotekensservice.or.hamtaickeaktuellaordinationer.v4.rivtabp21</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:se.apotekensservice:or:1=se.riv.se.apotekensservice.or.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:se.apotekensservice:or:4=se.riv.se.apotekensservice.or.v4</extraarg>
+                  </extraargs>
+                </wsdloption>
+				<wsdloption>
+                  <wsdl>${schema.path}/TD_APSE_OR_1_0_0_R/interactions/HamtaIckeAktuellaOrdinationerInteraction/HamtaIckeAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -916,9 +933,9 @@
                     <extraarg>-p</extraarg>
                     <extraarg>urn:riv:se.apotekensservice:or:1=se.riv.se.apotekensservice.or.v1</extraarg>
                   </extraargs>
-                </wsdloption>
+                </wsdloption>                
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/HamtaOrdinationFoddatumInteraction/HamtaOrdinationFoddatumInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/HamtaOrdinationFoddatumInteraction/HamtaOrdinationFoddatumInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -933,7 +950,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/HamtaOrdinationshistorikInteraction/HamtaOrdinationshistorikInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/HamtaOrdinationshistorikInteraction/HamtaOrdinationshistorikInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -948,7 +965,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/HamtaProduktionsunderlagInteraction/HamtaProduktionsunderlagInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/HamtaProduktionsunderlagInteraction/HamtaProduktionsunderlagInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -963,7 +980,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/KontrolleraUttagInteraction/KontrolleraUttagInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/KontrolleraUttagInteraction/KontrolleraUttagInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -978,7 +995,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/KorrigeraOrdinationApotekInteraction/KorrigeraOrdinationApotekInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/KorrigeraOrdinationApotekInteraction/KorrigeraOrdinationApotekInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -991,9 +1008,26 @@
                     <extraarg>-p</extraarg>
                     <extraarg>urn:riv:se.apotekensservice:or:1=se.riv.se.apotekensservice.or.v1</extraarg>
                   </extraargs>
+                </wsdloption>                
+                <wsdloption>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/KorrigeraOrdinationVardInteraction/KorrigeraOrdinationVardInteraction_4.0_rivtabp21.wsdl</wsdl>
+                  <extraargs>
+                    <extraarg>-p</extraarg>
+                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:inera.se.apotekensservice:argos:1=se.riv.inera.se.apotekensservice.argos.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:se.apotekensservice:or:KorrigeraOrdinationVardResponder:4=se.riv.se.apotekensservice.or.korrigeraordinationvardresponder.v4</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:inera:se.apotekensservice:or:KorrigeraOrdinationVard:4:rivtabp21=se.riv.inera.se.apotekensservice.or.korrigeraordinationvard.v4.rivtabp21</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:se.apotekensservice:or:1=se.riv.se.apotekensservice.or.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:se.apotekensservice:or:4=se.riv.se.apotekensservice.or.v4</extraarg>                    
+                  </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/KorrigeraOrdinationVardInteraction/KorrigeraOrdinationVardInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_1_0_0_R/interactions/KorrigeraOrdinationVardInteraction/KorrigeraOrdinationVardInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -1006,9 +1040,9 @@
                     <extraarg>-p</extraarg>
                     <extraarg>urn:riv:se.apotekensservice:or:1=se.riv.se.apotekensservice.or.v1</extraarg>
                   </extraargs>
-                </wsdloption>
+                </wsdloption>                
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/MakuleraOrdinationApotekInteraction/MakuleraOrdinationApotekInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/MakuleraOrdinationApotekInteraction/MakuleraOrdinationApotekInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -1023,7 +1057,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/MakuleraOrdinationVardInteraction/MakuleraOrdinationVardInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/MakuleraOrdinationVardInteraction/MakuleraOrdinationVardInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -1038,7 +1072,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/NotifieringsTestInteraction/NotifieringsTestInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/NotifieringsTestInteraction/NotifieringsTestInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -1053,7 +1087,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/SattUtOrdinationApotekInteraction/SattUtOrdinationApotekInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/SattUtOrdinationApotekInteraction/SattUtOrdinationApotekInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -1068,7 +1102,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/SattUtOrdinationVardInteraction/SattUtOrdinationVardInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/SattUtOrdinationVardInteraction/SattUtOrdinationVardInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -1083,7 +1117,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/SkapaDosunderlagApotekInteraction/SkapaDosunderlagApotekInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/SkapaDosunderlagApotekInteraction/SkapaDosunderlagApotekInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -1098,7 +1132,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/SkapaDosunderlagVardInteraction/SkapaDosunderlagVardInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/SkapaDosunderlagVardInteraction/SkapaDosunderlagVardInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -1113,7 +1147,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/SkapaOrdinationApotekInteraction/SkapaOrdinationApotekInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/SkapaOrdinationApotekInteraction/SkapaOrdinationApotekInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -1128,7 +1162,24 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/SkapaOrdinationVardInteraction/SkapaOrdinationVardInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/SkapaOrdinationVardInteraction/SkapaOrdinationVardInteraction_4.0_rivtabp21.wsdl</wsdl>
+                  <extraargs>
+                    <extraarg>-p</extraarg>
+                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:inera.se.apotekensservice:argos:1=se.riv.inera.se.apotekensservice.argos.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:se.apotekensservice:or:SkapaOrdinationVardResponder:4=se.riv.se.apotekensservice.or.skapaordinationvardresponder.v4</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:inera:se.apotekensservice:or:SkapaOrdinationVard:4:rivtabp21=se.riv.inera.se.apotekensservice.or.skapaordinationvard.v4.rivtabp21</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:se.apotekensservice:or:1=se.riv.se.apotekensservice.or.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:se.apotekensservice:or:1=se.riv.se.apotekensservice.or.v4</extraarg>                    
+                  </extraargs>
+                </wsdloption>
+                <wsdloption>
+                  <wsdl>${schema.path}/TD_APSE_OR_1_0_0:R/interactions/SkapaOrdinationVardInteraction/SkapaOrdinationVardInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -1141,9 +1192,9 @@
                     <extraarg>-p</extraarg>
                     <extraarg>urn:riv:se.apotekensservice:or:1=se.riv.se.apotekensservice.or.v1</extraarg>
                   </extraargs>
-                </wsdloption>
+                </wsdloption>                
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/SkrivUtDosReceptInteraction/SkrivUtDosReceptInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/SkrivUtDosReceptInteraction/SkrivUtDosReceptInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -1158,7 +1209,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/UppdateraDostillhorighetInteraction/UppdateraDostillhorighetInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/UppdateraDostillhorighetInteraction/UppdateraDostillhorighetInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
@@ -1173,7 +1224,7 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC2/interactions/UppdateraDosunderlagAvlidenInteraction/UppdateraDosunderlagAvlidenInteraction_1.0_rivtabp20.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_APSE_OR_4_0_RC3/interactions/UppdateraDosunderlagAvlidenInteraction/UppdateraDosunderlagAvlidenInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
