@@ -8,21 +8,22 @@
                http://www.mulesource.org/schema/mule/cxf/2.2  http://www.mulesource.org/schema/mule/cxf/2.2/mule-cxf.xsd">
 
 	<!-- Name of this file is mandatory and may not be changed. -->
-<model name="Bridged-ApotekenService-MakuleraOrdinationVard-model">
+
+	<model name="Bridged-ApotekenService-SattUtOrdinationApotek-model">
 
 		<service
-			name="Bridged-ApotekenService-MakuleraOrdinationVard-service">
+			name="Bridged-ApotekenService-SattUtOrdinationApotek-service">
 			<inbound>
 				<cxf:inbound-endpoint
-							address="${inbound.endpoint.apotekensservice.or.MakuleraOrdinationVard}"
-							wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/MakuleraOrdinationVardInteraction/MakuleraOrdinationVardInteraction_1.0_rivtabp20.wsdl"
-							serviceName="MakuleraOrdinationVardResponderService" namespace="urn:riv:inera:se.apotekensservice:or:MakuleraOrdinationVard:1:rivtabp20"
+							address="${inbound.endpoint.apotekensservice.or.SattUtOrdinationApotek}"
+							wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/SattUtOrdinationApotekInteraction/SattUtOrdinationApotekInteraction_1.0_rivtabp20.wsdl"
+							serviceName="SattUtOrdinationApotekResponderService" namespace="urn:riv:inera:se.apotekensservice:or:SattUtOrdinationApotek:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
-						address="${outbound.endpoint.apotekensservice.or.MakuleraOrdinationVard}"
+						address="${outbound.endpoint.apotekensservice.or.SattUtOrdinationApotek}"
 						synchronous="true" proxy="true" payload="envelope"
 						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
@@ -30,22 +31,24 @@
 		</service>
 		
 		<service
-			name="Bridged-ApotekenService-MakuleraOrdinationVard-service-env2">
+			name="Bridged-ApotekenService-SattUtOrdinationApotek-service-env2">
 			<inbound>
 				<cxf:inbound-endpoint
-							address="${inbound.endpoint.env2.apotekensservice.or.MakuleraOrdinationVard}"
-							wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/MakuleraOrdinationVardInteraction/MakuleraOrdinationVardInteraction_1.0_rivtabp20.wsdl"
-							serviceName="MakuleraOrdinationVardResponderService" namespace="urn:riv:inera:se.apotekensservice:or:MakuleraOrdinationVard:1:rivtabp20"
+							address="${inbound.endpoint.env2.apotekensservice.or.SattUtOrdinationApotek}"
+							wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/SattUtOrdinationApotekInteraction/SattUtOrdinationApotekInteraction_1.0_rivtabp20.wsdl"
+							serviceName="SattUtOrdinationApotekResponderService" namespace="urn:riv:inera:se.apotekensservice:or:SattUtOrdinationApotek:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
 			<outbound>
 				<pass-through-router>
 					<cxf:outbound-endpoint
-						address="${outbound.endpoint.env2.apotekensservice.or.MakuleraOrdinationVard}"
+						address="${outbound.endpoint.env2.apotekensservice.or.SattUtOrdinationApotek}"
 						synchronous="true" proxy="true" payload="envelope"
 						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
 				</pass-through-router>
 			</outbound>
 		</service>
+
 	</model>
+
 </mule>

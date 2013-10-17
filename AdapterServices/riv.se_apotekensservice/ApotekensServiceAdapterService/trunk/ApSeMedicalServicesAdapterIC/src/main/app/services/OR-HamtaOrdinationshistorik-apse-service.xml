@@ -15,7 +15,7 @@
 			<inbound>
 				<cxf:inbound-endpoint
 							address="${inbound.endpoint.apotekensservice.or.HamtaOrdinationshistorik}"
-							wsdlLocation="classpath:/TD_APSE_OR_4_0_RC2/interactions/HamtaOrdinationshistorikInteraction/HamtaOrdinationshistorikInteraction_1.0_rivtabp20.wsdl"
+							wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/HamtaOrdinationshistorikInteraction/HamtaOrdinationshistorikInteraction_1.0_rivtabp20.wsdl"
 							serviceName="HamtaOrdinationshistorikResponderService" namespace="urn:riv:inera:se.apotekensservice:or:HamtaOrdinationshistorik:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
@@ -34,7 +34,7 @@
 			<inbound>
 				<cxf:inbound-endpoint
 							address="${inbound.endpoint.env2.apotekensservice.or.HamtaOrdinationshistorik}"
-							wsdlLocation="classpath:/TD_APSE_OR_4_0_RC2/interactions/HamtaOrdinationshistorikInteraction/HamtaOrdinationshistorikInteraction_1.0_rivtabp20.wsdl"
+							wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/HamtaOrdinationshistorikInteraction/HamtaOrdinationshistorikInteraction_1.0_rivtabp20.wsdl"
 							serviceName="HamtaOrdinationshistorikResponderService" namespace="urn:riv:inera:se.apotekensservice:or:HamtaOrdinationshistorik:1:rivtabp20"
 							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
 			</inbound>
