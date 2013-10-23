@@ -83,6 +83,22 @@ Om allt startar upp korrekt finns följande i konsol-loggen
 
 Och med hjälp av soapUI projekt köra test-anrop. Importera ApSeMedicalServicesAdapter-soapui-project.xml som återfinns i roten på det utcheckade projektet ApotekensServiceAdapterService. 
 
+== Deploy ==
+
+De filer som behöver deployas är:
+
+QA
+/skltpservices/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/target/ApSeMedicalServicesAdapterIC-<version>-tests.jar
+
+/skltpservices/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/target/ApSeMedicalServicesAdapterIC-<version>.jar
+	
+/skltpservices/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/target/ApSeMedicalServicesAdapterIC-Schemas-<version>.jar 
+
+PROD
+/skltpservices/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/target/ApSeMedicalServicesAdapterIC-<version>.jar
+
+/skltpservices/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/target/ApSeMedicalServicesAdapterIC-Schemas-<version>.jar
+
 =Installation instructions mule 2.2.8=
 
 ==Runtime environment==
