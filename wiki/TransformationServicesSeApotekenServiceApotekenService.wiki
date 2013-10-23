@@ -34,6 +34,14 @@ Om nya tjänster läggs till skapa xml-fil för varje ny tjänst
 
 }}}
 
+== Uppdatera pom.xml för schemafiler==
+ {{{
+/skltpservices/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/pom.xml
+
+Uppdatera pom.xml så att den innehåller korrekta sökvägar till schema-filer och rätt versioner av kontrakt.
+
+}}} 
+
 ==Bygga från källkoden ==
 
 {{{
