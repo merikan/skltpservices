@@ -72,6 +72,19 @@
                     <extraarg>urn:riv:inera:se.apotekensservice:axs:HamtaKundInfo:1:rivtabp20=se.riv.inera.se.apotekensservice.axs.hamtakundinfo.v1.rivtabp20</extraarg>
                   </extraargs>
                 </wsdloption>
+           		<wsdloption>
+                  <wsdl>${schema.path}/TD_APSE_AXS_4_0_RC1/interactions/HamtaKundInfoInteraction/HamtaKundInfoInteraction_4.0_rivtabp21.wsdl</wsdl>
+                  <extraargs>
+                    <extraarg>-p</extraarg>
+                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:inera.se.apotekensservice:argos:1=se.riv.inera.se.apotekensservice.argos.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:se.apotekensservice:axs:HamtaKundInfoResponder:4=se.riv.se.apotekensservice.axs.hamtakundinforesponder.v4</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:inera:se.apotekensservice:axs:HamtaKundInfo:4:rivtabp21=se.riv.inera.se.apotekensservice.axs.hamtakundinfo.v4.rivtabp21</extraarg>
+                  </extraargs>
+                </wsdloption>                
                 <wsdloption>
                   <wsdl>${schema.path}/TD_APSE_AXS_1_0_0_R/interactions/HamtaPatientInfoInteraction/HamtaPatientInfoInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
@@ -86,6 +99,19 @@
                   </extraargs>
                 </wsdloption>
                 <wsdloption>
+                  <wsdl>${schema.path}/TD_APSE_AXS_4_0_RC1/interactions/HamtaPatientInfoInteraction/HamtaPatientInfoInteraction_4.0_rivtabp21.wsdl</wsdl>
+                  <extraargs>
+                    <extraarg>-p</extraarg>
+                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:inera.se.apotekensservice:argos:1=se.riv.inera.se.apotekensservice.argos.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:se.apotekensservice:axs:HamtaPatientInfoResponder:4=se.riv.se.apotekensservice.axs.hamtapatientinforesponder.v4</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:inera:se.apotekensservice:axs:HamtaPatientInfo:4:rivtabp21=se.riv.inera.se.apotekensservice.axs.hamtapatientinfo.v4.rivtabp21</extraarg>
+                  </extraargs>
+                </wsdloption>                
+                <wsdloption>
                   <wsdl>${schema.path}/TD_APSE_AXS_1_0_0_R/interactions/UppdateraSamtyckeInteraction/UppdateraSamtyckeInteraction_1.0_rivtabp20.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
@@ -98,6 +124,20 @@
                     <extraarg>urn:riv:inera:se.apotekensservice:axs:UppdateraSamtycke:1:rivtabp20=se.riv.inera.se.apotekensservice.axs.uppdaterasamtycke.v1.rivtabp20</extraarg>
                   </extraargs>
                 </wsdloption>
+                <wsdloption>
+                  <wsdl>${schema.path}/TD_APSE_AXS_4_0_RC1/interactions/UppdateraSamtyckeInteraction/UppdateraSamtyckeInteraction_4.0_rivtabp21.wsdl</wsdl>
+                  <extraargs>
+                    <extraarg>-p</extraarg>
+                    <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:inera.se.apotekensservice:argos:1=se.riv.inera.se.apotekensservice.argos.v4</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:se.apotekensservice:axs:UppdateraSamtyckeResponder:4=se.riv.se.apotekensservice.axs.uppdaterasamtyckeresponder.v4</extraarg>
+                    <extraarg>-p</extraarg>
+                    <extraarg>urn:riv:inera:se.apotekensservice:axs:UppdateraSamtycke:4:rivtabp21=se.riv.inera.se.apotekensservice.axs.uppdaterasamtycke.v4.rivtabp21</extraarg>
+                  </extraargs>
+                </wsdloption>
+                
               </wsdlOptions>
             </configuration>
             <goals>
