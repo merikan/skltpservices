@@ -43,7 +43,7 @@ public class HamtaPatientInfoIntegrationTest extends AbstractTestCase {
 
     @Override
     protected String getConfigResources() {
-		return "ApSeIntegrationComponent-common.xml,services/AXS-HamtaPatintInfo-apse-service.xml,ApSeIntegrationComponent-teststubs-and-services-config.xml";
+		return "ApSeIntegrationComponent-common.xml,services/AXS-HamtaPatientInfo-v1-apse-service.xml,ApSeIntegrationComponent-teststubs-and-services-config.xml";
     }
 
     @Test
