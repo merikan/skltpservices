@@ -17,26 +17,26 @@ Följ instruktionen på [https://code.google.com/p/skltpservices/source/checkout
 == Lägg till schema filer ==
 Lägg till eller uppdatera schema-filerna (wsdl, xsd från rivta) i 
 {{{
-/skltpservices/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/src/main/resources/schemas/interactions
+/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/src/main/resources/schemas/interactions
 
 }}}
 
 == Lägg till tjänster ==
 Om nya tjänster läggs till skapa xml-fil för varje ny tjänst 
 {{{
-/skltpservices/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/src/main/app/services
+/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/src/main/app/services
 
 }}}
 
 == Uppdatera endpoints för samtliga tjänster== 
 {{{
-/skltpservices/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/src/environment/ApSeIntegrationComponent-config.properties
+/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/src/environment/ApSeIntegrationComponent-config.properties
 
 }}}
 
 == Uppdatera pom.xml för schemafiler==
  {{{
-/skltpservices/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/pom.xml
+/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/pom.xml
 
 Uppdatera pom.xml så att den innehåller korrekta sökvägar till schema-filer och rätt versioner av kontrakt.
 
