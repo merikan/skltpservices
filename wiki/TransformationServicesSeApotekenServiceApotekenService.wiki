@@ -17,7 +17,7 @@ Följ instruktionen på [https://code.google.com/p/skltpservices/source/checkout
 == Lägg till schema filer ==
 Lägg till eller uppdatera schema-filerna (wsdl, xsd från rivta) i 
 {{{
-/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/src/main/resources/schemas/interactions
+/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/src/main/resources/schemas
 
 }}}
 
