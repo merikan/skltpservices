@@ -37,13 +37,13 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.description</groupId>
 	    	<artifactId>GetAggregatedCareDocumentation</artifactId>
-	    	<version>1.0.0-RC4-SNAPSHOT</version>
+	    	<version>1.0.0-RC7-SNAPSHOT</version>
 	    	<type>test-jar</type>
 	    </dependency>
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.description</groupId>
 	    	<artifactId>GetAggregatedCareDocumentation</artifactId>
-	    	<version>1.0.0-RC4-SNAPSHOT</version>
+	    	<version>1.0.0-RC7-SNAPSHOT</version>
 	    	<classifier>core</classifier>    	
 	    </dependency>
         <dependency>
