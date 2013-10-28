@@ -5,12 +5,14 @@ import org.slf4j.LoggerFactory;
 
 import se.riv.clinicalprocess.healthcond.description.enums.v2.ClinicalDocumentNoteCodeEnum;
 import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v2.GetCareDocumentationResponseType;
-import se.riv.clinicalprocess.healthcond.description.v2.AuthorType;
 import se.riv.clinicalprocess.healthcond.description.v2.CareDocumentationBodyType;
 import se.riv.clinicalprocess.healthcond.description.v2.CareDocumentationType;
 import se.riv.clinicalprocess.healthcond.description.v2.ClinicalDocumentNoteType;
-import se.riv.clinicalprocess.healthcond.description.v2.PatientIdType;
+import se.riv.clinicalprocess.healthcond.description.v2.HealthcareProfessionalType;
+import se.riv.clinicalprocess.healthcond.description.v2.LegalAuthenticatorType;
+import se.riv.clinicalprocess.healthcond.description.v2.OrgUnitType;
 import se.riv.clinicalprocess.healthcond.description.v2.PatientSummaryHeaderType;
+import se.riv.clinicalprocess.healthcond.description.v2.PersonIdType;
 import se.skltp.agp.test.producer.TestProducerDb;
 
 public class CareDocumentationTestProducerDb extends TestProducerDb {
@@ -38,26 +40,30 @@ public class CareDocumentationTestProducerDb extends TestProducerDb {
 
         CareDocumentationType response = new CareDocumentationType();
         PatientSummaryHeaderType header = new PatientSummaryHeaderType();
-        PatientIdType patientId = new PatientIdType();
+        PersonIdType patientId = new PersonIdType();
         patientId.setId(registeredResidentId);
         patientId.setType("1.2.752.129.2.1.3.1"); 
         header.setPatientId(patientId);
         header.setApprovedForPatient(true);
         header.setDocumentTime(time);
-        AuthorType author = new AuthorType();
-        author.setCareUnitHSAid(logicalAddress);
+        HealthcareProfessionalType author = new HealthcareProfessionalType();
+        author.setHealthcareProfessionalCareUnitHSAId(logicalAddress);
 
+        OrgUnitType orgUnit = new OrgUnitType();
         if(TestProducerDb.TEST_LOGICAL_ADDRESS_1.equals(logicalAddress)){
-            author.setAuthorOrgUnitName("Vårdcentralen Kusten, Kärna");
+        	orgUnit.setOrgUnitName("Vårdcentralen Kusten, Kärna");
         } else if(TestProducerDb.TEST_LOGICAL_ADDRESS_2.equals(logicalAddress)){
-            author.setAuthorOrgUnitName("Vårdcentralen Molnet");
+        	orgUnit.setOrgUnitName("Vårdcentralen Molnet");
         } else {
-            author.setAuthorOrgUnitName("Vårdcentralen Stacken");
+        	orgUnit.setOrgUnitName("Vårdcentralen Stacken");
         }
         
-        header.setAuthor(author);
+        header.setAccountableHealthcareProfessional(author);
         header.setSourceSystemHSAid(logicalAddress);
         header.setDocumentId(businessObjectId);
+        LegalAuthenticatorType legalAuthenticator = new LegalAuthenticatorType();
+        legalAuthenticator.setSignatureTime("20130707070707");
+        header.setLegalAuthenticator(legalAuthenticator);
         response.setCareDocumentationHeader(header);
 
         CareDocumentationBodyType body = new CareDocumentationBodyType();

@@ -11,7 +11,7 @@ import se.riv.clinicalprocess.healthcond.description.getcaredocumentationrequest
 import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v2.GetCareDocumentationResponseType;
 import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v2.GetCareDocumentationType;
 import se.riv.clinicalprocess.healthcond.description.v2.DatePeriodType;
-import se.riv.clinicalprocess.healthcond.description.v2.PatientIdType;
+import se.riv.clinicalprocess.healthcond.description.v2.PersonIdType;
 import se.skltp.aggregatingservices.CareDocumentationMuleServer;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 import se.skltp.agp.test.consumer.AbstractTestConsumer;
@@ -43,7 +43,7 @@ public class CareDocumentationTestConsumer extends AbstractTestConsumer<GetCareD
         log.debug("Calling GetRequestActivities-soap-service with id = {}", id);
 
         GetCareDocumentationType request = new GetCareDocumentationType();
-        PatientIdType patientId = new PatientIdType();
+        PersonIdType patientId = new PersonIdType();
         patientId.setId(id);
         request.setPatientId(patientId);
         request.setTimePeriod(datePeriod);

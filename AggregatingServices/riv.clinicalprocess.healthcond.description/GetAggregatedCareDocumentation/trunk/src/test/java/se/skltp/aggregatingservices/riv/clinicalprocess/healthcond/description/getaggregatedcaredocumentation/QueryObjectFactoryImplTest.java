@@ -14,7 +14,7 @@ import org.w3c.dom.Document;
 
 import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v2.GetCareDocumentationType;
 import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v2.ObjectFactory;
-import se.riv.clinicalprocess.healthcond.description.v2.PatientIdType;
+import se.riv.clinicalprocess.healthcond.description.v2.PersonIdType;
 import se.skltp.agp.service.api.QueryObject;
 
 public class QueryObjectFactoryImplTest {
@@ -35,7 +35,7 @@ public class QueryObjectFactoryImplTest {
     @Test
     public void createQueryObject() throws Exception{
         GetCareDocumentationType getCareDoc = new GetCareDocumentationType();
-        PatientIdType patientId = new PatientIdType();
+        PersonIdType patientId = new PersonIdType();
         patientId.setId(RR_ID);
         getCareDoc.setPatientId(patientId);
         
@@ -52,7 +52,7 @@ public class QueryObjectFactoryImplTest {
     @Test
     public void createQueryObject_with_source_system() throws Exception{
         GetCareDocumentationType getCareDoc = new GetCareDocumentationType();
-        PatientIdType patientId = new PatientIdType();
+        PersonIdType patientId = new PersonIdType();
         patientId.setId(RR_ID);
         getCareDoc.setPatientId(patientId);
         getCareDoc.setSourceSystemHSAid(SOURCE_SYSTEM);

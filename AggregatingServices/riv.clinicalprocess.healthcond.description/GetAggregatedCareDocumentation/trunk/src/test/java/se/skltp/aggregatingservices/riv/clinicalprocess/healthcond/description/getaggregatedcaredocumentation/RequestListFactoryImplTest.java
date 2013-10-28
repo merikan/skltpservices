@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import se.riv.clinicalprocess.healthcond.description.getcaredocumentationresponder.v2.GetCareDocumentationType;
 import se.riv.clinicalprocess.healthcond.description.v2.DatePeriodType;
-import se.riv.clinicalprocess.healthcond.description.v2.PatientIdType;
+import se.riv.clinicalprocess.healthcond.description.v2.PersonIdType;
 import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentResponseType;
 import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentType;
 import se.skltp.agp.riv.itintegration.engagementindex.v1.EngagementType;
@@ -159,7 +159,7 @@ public class RequestListFactoryImplTest {
     
     private GetCareDocumentationType createGetCareDocumentation(String id, List<String> careUnits){
         GetCareDocumentationType getCareDoc = new GetCareDocumentationType();
-        PatientIdType patientId = new PatientIdType();
+        PersonIdType patientId = new PersonIdType();
         patientId.setId(RR_ID);
         getCareDoc.setPatientId(patientId);
         getCareDoc.getCareUnitHSAid().addAll(careUnits);

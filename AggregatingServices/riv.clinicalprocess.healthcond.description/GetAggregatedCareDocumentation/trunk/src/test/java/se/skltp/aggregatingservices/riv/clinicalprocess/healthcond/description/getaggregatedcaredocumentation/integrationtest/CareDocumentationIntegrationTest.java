@@ -213,7 +213,7 @@ public class CareDocumentationIntegrationTest extends AbstractAggregateIntegrati
             CareDocumentationType responseElement = response.getCareDocumentation().get(i);
             assertEquals(registeredResidentId, responseElement.getCareDocumentationHeader().getPatientId().getId());		
             assertEquals(testData[i].getExpectedBusinessObjectId(), responseElement.getCareDocumentationHeader().getDocumentId());		
-            assertEquals(testData[i].getExpectedLogicalAddress(), responseElement.getCareDocumentationHeader().getAuthor().getCareUnitHSAid());
+            assertEquals(testData[i].getExpectedLogicalAddress(), responseElement.getCareDocumentationHeader().getAccountableHealthcareProfessional().getHealthcareProfessionalCareUnitHSAId());
         }
 
         // Verify the size of the processing status and return it for further analysis
