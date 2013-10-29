@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:pris="urn:riv:se.apotekensservice:pris:1" xmlns="urn:riv:se.apotekensservice:pris:KopplaBarnKontoResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:pris:KopplaBarnKontoResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_pris_1.0.xsd" namespace="urn:riv:se.apotekensservice:pris:1"/>
+  <xs:element name="KopplaBarnKonto" type="KopplaBarnKontoRequestType"/>
+  <xs:element name="KopplaBarnKontoResponse" type="KopplaBarnKontoResponseType"/>
+  <xs:element name="ApplicationException" type="pris:ApplicationException"/>
+  <xs:element name="SystemException" type="pris:SystemException"/>
+  <xs:complexType name="KopplaBarnKontoRequestType">
+    <xs:sequence>
+      <xs:element name="huvudPersNr" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Personnummer för huvudperson (Förmånsmottagare).
+Anges ej om barnkontot ska kopplas bort från samlingskontot.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="klientinformation" type="pris:KlientinformationRequest">
+        <xs:annotation>
+          <xs:documentation>Objekt innehållande information om anropande klientsystem.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="persNr" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Personnummer för den vars konto ska uppdateras.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KopplaBarnKontoResponseType">
+    <xs:sequence>
+      <xs:element nillable="false" name="status" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Status för koppling av barnkonto
+Möjliga värden är:
+1 - Anslutning OK.
+2 - Omkoppling OK.
+3 - Frikoppling OK.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
