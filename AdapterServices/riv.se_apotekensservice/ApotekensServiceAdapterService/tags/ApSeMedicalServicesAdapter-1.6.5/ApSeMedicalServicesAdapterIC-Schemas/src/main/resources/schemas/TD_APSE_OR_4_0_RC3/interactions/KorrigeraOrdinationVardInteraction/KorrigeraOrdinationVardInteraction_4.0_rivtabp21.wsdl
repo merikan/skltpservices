@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:argos="urn:riv:inera.se.apotekensservice:argos:1" xmlns:spdr="urn:riv:se.apotekensservice:or:KorrigeraOrdinationVardResponder:4" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:reg="urn:riv:itintegration:registry:1" xmlns="urn:riv:se.apotekensservice:or:KorrigeraOrdinationVard:4:rivtabp21" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="urn:riv:se.apotekensservice:or:KorrigeraOrdinationVard:4:rivtabp21" name="KorrigeraOrdinationVardInteraction">
+  <xs:annotation>
+    <xs:documentation>
+            Beskrivning: Tjänstekontraktet som avser att konkretisera tillämpningen av RIV.
+            Revisioner: 2012-11-08 Version 4.0
+            Tjänstedomän: se.apotekensservice:or.
+            Tjänsteinteraktionens namn: KorrigeraOrdinationVard.
+            Tjänsteinteraktionstyp: Fråga-Svar.
+            RIV Tekniska Anvisning: Basic Profile 2.1
+        </xs:documentation>
+  </xs:annotation>
+  <wsdl:types>
+    <xs:schema targetNamespace="urn:riv:se.apotekensservice:or:KorrigeraOrdinationVard:4:rivtabp21">
+      <xs:import schemaLocation="KorrigeraOrdinationVardResponder_4.0.xsd" namespace="urn:riv:se.apotekensservice:or:KorrigeraOrdinationVardResponder:4"/>
+      <xs:import schemaLocation="../../core_components/itintegration_registry_1.0.xsd" namespace="urn:riv:itintegration:registry:1"/>
+      <xs:import schemaLocation="../../core_components/ArgosHeader_1.0.xsd" namespace="urn:riv:inera.se.apotekensservice:argos:1"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="KorrigeraOrdinationVardRequest">
+    <wsdl:part element="spdr:KorrigeraOrdinationVard" name="parameters"/>
+    <wsdl:part name="LogicalAddress" element="reg:LogicalAddress">
+      <wsdl:documentation>Orgnr of Apotekens Service AB</wsdl:documentation>
+    </wsdl:part>
+    <wsdl:part name="ArgosHeader" element="argos:ArgosHeader">
+      <wsdl:documentation>Argos header of Apotekens Service AB. Check documentation regarding mandatory fields for this specific service interaction</wsdl:documentation>
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="KorrigeraOrdinationVardResponse">
+    <wsdl:part element="spdr:KorrigeraOrdinationVardResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="ApplicationException">
+    <wsdl:part element="spdr:ApplicationException" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="SystemException">
+    <wsdl:part element="spdr:SystemException" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="KorrigeraOrdinationVardResponderInterface">
+    <wsdl:operation name="KorrigeraOrdinationVard">
+      <wsdl:input message="KorrigeraOrdinationVardRequest"/>
+      <wsdl:output message="KorrigeraOrdinationVardResponse"/>
+      <wsdl:fault message="ApplicationException" name="ApplicationException"/>
+      <wsdl:fault message="SystemException" name="SystemException"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="KorrigeraOrdinationVardResponderBinding" type="KorrigeraOrdinationVardResponderInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="KorrigeraOrdinationVard">
+      <soap:operation soapAction="urn:riv:se.apotekensservice:or:KorrigeraOrdinationVardResponder:4:KorrigeraOrdinationVard"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="parameters"/>
+        <soap:header use="literal" message="KorrigeraOrdinationVardRequest" part="LogicalAddress"/>
+        <soap:header use="literal" message="KorrigeraOrdinationVardRequest" part="ArgosHeader"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ApplicationException">
+        <soap:fault name="ApplicationException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SystemException">
+        <soap:fault name="SystemException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="KorrigeraOrdinationVardResponderService">
+    <wsdl:port name="KorrigeraOrdinationVardResponderPort" binding="KorrigeraOrdinationVardResponderBinding">
+      <soap:address location="http://temp.uri/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
