@@ -13,12 +13,12 @@
 	<parent>
     <artifactId>druglogistics-dosdispensing</artifactId>
     <groupId>se.skl.skltpservices</groupId>
-    <version>1.1.0-2</version>
+    <version>1.1.0-3-SNAPSHOT</version>
   </parent>
 
 	<groupId>se.skl.skltpservices.druglogistics.dosedispensing</groupId>
 	<artifactId>BestallOrginalforpackning</artifactId>
-	<version>1.1.0-2</version>
+	<version>1.1.0-3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>BestallOrginalforpackning service</name>
 

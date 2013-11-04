@@ -15,14 +15,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.skltpservices.druglogistics.dosedispensing</groupId>
 	<artifactId>druglogistics-dosedispensing-HamtaOrginalforpackning-virtualisering</artifactId>
-	<version>1.1.0-2</version>
+	<version>1.1.0-3-SNAPSHOT</version>
 	<name>druglogistics-dosedispensing-HamtaOrginalforpackning-virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>se.skl.skltpservices.druglogistics.dosedispensing</groupId>
 		<artifactId>HamtaOrginalforpackning</artifactId>
-		<version>1.1.0-2</version>
+		<version>1.1.0-3-SNAPSHOT</version>
 	</parent>
 
 	<build>

@@ -15,14 +15,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.skltpservices.druglogistics.dosedispensing</groupId>
 	<artifactId>druglogistics-dosedispensing-UppdateraVardtagareinformation-virtualisering</artifactId>
-	<version>1.1.0-2</version>
+	<version>1.1.0-3-SNAPSHOT</version>
 	<name>druglogistics-dosedispensing-UppdateraVardtagareinformation-virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>se.skl.skltpservices.druglogistics.dosedispensing</groupId>
 		<artifactId>UppdateraVardtagareinformation</artifactId>
-		<version>1.1.0-2</version>
+		<version>1.1.0-3-SNAPSHOT</version>
 	</parent>
 
 	<build>
