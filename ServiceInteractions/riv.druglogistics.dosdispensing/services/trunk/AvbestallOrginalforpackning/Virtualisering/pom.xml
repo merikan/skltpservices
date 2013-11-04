@@ -15,14 +15,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skl.skltpservices.druglogistics.dosedispensing</groupId>
 	<artifactId>druglogistics-dosedispensing-AvbestallOrginalforpackning-virtualisering</artifactId>
-	<version>1.1.0-1</version>
+	<version>1.1.0-2</version>
 	<name>druglogistics-dosedispensing-AvbestallOrginalforpackning-virtualisering</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>se.skl.skltpservices.druglogistics.dosedispensing</groupId>
 		<artifactId>AvbestallOrginalforpackning</artifactId>
-		<version>1.1.0-1</version>
+		<version>1.1.0-2</version>
 	</parent>
 
 	<build>
