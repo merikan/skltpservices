@@ -25,7 +25,7 @@
 
     <!-- Name of this file is mandatory and may not be changed. -->
 
-	<flow name="druglogistics-dosedispensing-HamtaLokaltProduktsortimentInteraction-virtualisering-flow" >
+	<flow name="druglogistics-dosedispensing-HamtaLokaltProduktsortiment-1.1.0-2-Interaction-virtualisering-flow" >
 		<composite-source>
       	  	<https:inbound-endpoint
         	    address="https://${TP_HOST}:${TP_PORT}/${TP_BASE_URI}/HamtaLokaltProduktsortiment/1/rivtabp20"
@@ -34,12 +34,16 @@
             	responseTransformer-refs="featureKeepAliveResponse filterResponseHeaders">
             	<properties>
         			<spring:entry key="featureUseKeepAlive" value="${feature.keepalive.urn.riv.druglogistics.dosedispensing.HamtaLokaltProduktsortimentResponder.1:${feature.keepalive}}"/>
+              <spring:entry key="featureResponseTimeout" value="${feature.featureresponsetimeout.druglogistics.dosedispensing:${SERVICE_TIMEOUT_MS}}"/>
         		</properties>
         	</https:inbound-endpoint>
         	<http:inbound-endpoint
         	    address="http://${TP_HOST}:${TP_PORT_HTTP}/${TP_BASE_URI}/HamtaLokaltProduktsortiment/1/rivtabp20"
             	exchange-pattern="request-response" 
             	responseTransformer-refs="filterResponseHeaders">
+              <properties>
+              <spring:entry key="featureResponseTimeout" value="${feature.featureresponsetimeout.druglogistics.dosedispensing:${SERVICE_TIMEOUT_MS}}"/>
+            </properties>
         	</http:inbound-endpoint>
          </composite-source>
 
