@@ -21,5 +21,8 @@ Tillägg av tjänsten revoke transform
 Teststubbar skal kunna konfigureras både för http/https
 Omstrukturering och förtydligande i FkIntegrationComponent-config.properties för att förenkla förvaltning och förståelse
 
+==2.0.3==
+https://code.google.com/p/skltpservices/source/detail?r=2776
+
 = Detaljer =
  * FkEintygAdapter_Installtionsanvisningar Installationsanvisning samt konfiguration
