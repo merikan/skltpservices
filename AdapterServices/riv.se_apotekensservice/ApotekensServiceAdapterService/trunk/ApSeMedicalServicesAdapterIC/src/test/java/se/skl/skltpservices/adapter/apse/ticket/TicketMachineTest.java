@@ -21,10 +21,13 @@
 package se.skl.skltpservices.adapter.apse.ticket;
 
 import static org.junit.matchers.JUnitMatchers.containsString;
+import static org.junit.Assert.*;
 
-import org.junit.Assert;
 import org.junit.Test;
+import static org.mockito.Mockito.*;
+import static se.skl.skltpservices.adapter.apse.ticket.TicketMachine.*;
 
+import se.inera.pascal.ticket.ArgosTicket;
 import se.skl.skltpservices.adapter.apse.argos.ArgosHeader;
 import se.skl.skltpservices.adapter.apse.exception.TicketMachineException;
 import se.skl.skltpservices.adapter.apse.ticket.TicketMachine;
@@ -64,8 +67,8 @@ public class TicketMachineTest {
 	String ticket = new TicketMachine().produceSamlTicket(argosHeader);
 	
 
-	Assert.assertThat(ticket, containsString("<saml2:Issuer>pascalonline</saml2:Issuer>"));
-	Assert.assertThat(ticket, containsString("Lakare"));
+	assertThat(ticket, containsString("<saml2:Issuer>pascalonline</saml2:Issuer>"));
+	assertThat(ticket, containsString("Lakare"));
 
     }
 
@@ -83,13 +86,13 @@ public class TicketMachineTest {
 
 	String ticket = new TicketMachine().applyWsSecurityToSamlTicket(samlTicket);
 
-	Assert.assertNotNull(ticket);
+	assertNotNull(ticket);
 
-	Assert.assertThat(
+	assertThat(
 		ticket,
 		containsString("<wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">"));
 
-	Assert.assertThat(ticket, containsString("</wsse:Security>"));
+	assertThat(ticket, containsString("</wsse:Security>"));
     }
 
     @Test
@@ -97,8 +100,106 @@ public class TicketMachineTest {
 	String samlTicket = null;
 	String samlTicketWithWsSecurity = new TicketMachine().applyWsSecurityToSamlTicket(samlTicket);
 
-	Assert.assertThat(
+	assertThat(
 		samlTicketWithWsSecurity,
 		containsString("<wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\"></wsse:Security>"));
     }
+    
+    @Test
+    public void validCitizenTicketRequest(){
+    	ArgosHeader argosHeader = new ArgosHeader();
+    	argosHeader.setRollnamn("PRIVATPERSON");
+    	assertTrue(TicketMachine.isTicketForCitizen(argosHeader));
+    }
+    
+    @Test
+    public void whenRollnamnIsEmptyNotValidForCitizenTicket(){
+    	ArgosHeader argosHeader = new ArgosHeader();
+    	argosHeader.setRollnamn("");
+    	assertFalse(TicketMachine.isTicketForCitizen(argosHeader));
+    }
+    
+    @Test
+    public void whenRollnamnIsNullNotValidForCitizenTicket(){
+    	ArgosHeader argosHeader = new ArgosHeader();
+    	argosHeader.setRollnamn(null);
+    	assertFalse(TicketMachine.isTicketForCitizen(argosHeader));
+    }
+    
+    @Test
+    public void whenRollnamnIsNotPrivatPersonNotValidForCitizenTicket(){
+    	ArgosHeader argosHeader = new ArgosHeader();
+    	argosHeader.setRollnamn("OTHER");
+    	assertFalse(TicketMachine.isTicketForCitizen(argosHeader));
+    }
+    
+	@Test
+	public void whenPrivatPersonCitizenTicketIsCalled() throws Exception{
+		
+		ArgosTicket argosTicket = mockArgosTicket();
+
+		//Do the call
+		ArgosHeader argosHeader = new ArgosHeader();
+		argosHeader.setRollnamn(PRIVATPERSON);
+		TicketMachine ticketMachine = new TicketMachine();
+		ticketMachine.setArgosTicketMachine(argosTicket);
+		ticketMachine.produceSamlTicket(argosHeader);
+		
+		//Verify
+		verify(argosTicket, times(0)).getTicketForOrganization(anyString(), anyString(), anyString(), anyString(),
+				anyString(), anyString(), anyString(), anyString(),
+				anyString(), anyString(), anyString(), anyString(),
+				anyString(), anyString(), anyString(), anyString(),
+				anyString(), anyString(), anyString(), anyString());
+		
+		verify(argosTicket, times(1)).getTicketForCitizen(anyString(),
+				anyString(), anyString(), anyString(), anyString(),
+				anyString(), anyString(), anyString(), anyString());
+
+	}
+	
+    
+	@Test
+	public void whenNotPrivatPersonOrganizationTicketIsCalled() throws Exception{
+		
+		ArgosTicket argosTicket = mockArgosTicket();
+
+		//Do the call
+		ArgosHeader argosHeader = new ArgosHeader();
+		argosHeader.setRollnamn("FORSKRIVARE");
+		TicketMachine ticketMachine = new TicketMachine();
+		ticketMachine.setArgosTicketMachine(argosTicket);
+		ticketMachine.produceSamlTicket(argosHeader);
+		
+		//Verify
+		verify(argosTicket, times(1)).getTicketForOrganization(anyString(), anyString(), anyString(), anyString(),
+				anyString(), anyString(), anyString(), anyString(),
+				anyString(), anyString(), anyString(), anyString(),
+				anyString(), anyString(), anyString(), anyString(),
+				anyString(), anyString(), anyString(), anyString());
+		
+		verify(argosTicket, times(0)).getTicketForCitizen(anyString(),
+				anyString(), anyString(), anyString(), anyString(),
+				anyString(), anyString(), anyString(), anyString());
+
+	}
+
+	private ArgosTicket mockArgosTicket() {
+		
+		ArgosTicket argosTicket = mock(ArgosTicket.class);
+		when(argosTicket
+				.getTicketForOrganization(anyString(), anyString(), anyString(), anyString(),
+						anyString(), anyString(), anyString(), anyString(),
+						anyString(), anyString(), anyString(), anyString(),
+						anyString(), anyString(), anyString(), anyString(),
+						anyString(), anyString(), anyString(), anyString())).thenReturn("an organization ticket");
+		when(argosTicket
+				.getTicketForCitizen(anyString(),
+						anyString(), anyString(), anyString(), anyString(),
+						anyString(), anyString(), anyString(), anyString())).thenReturn("a citicen ticket");
+		return argosTicket;
+	}
+    
+    
+    
 }
