@@ -34,6 +34,8 @@ import se.skl.skltpservices.adapter.apse.exception.TicketMachineException;
  */
 public class TicketMachine {
 
+	public static final String PRIVATPERSON = "PRIVATPERSON";
+	
 	private static final String WSSE_STARTTAG = "<wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">";
 	private static final String WSSE_ENDTAG = "</wsse:Security>";
 	private static Logger log = LoggerFactory.getLogger(TicketMachine.class);
@@ -64,26 +66,63 @@ public class TicketMachine {
 	 * @throws TicketMachineException
 	 */
 	public String produceSamlTicket(ArgosHeader argosHeader) throws TicketMachineException {
-
-		log.info("Entering produce saml ticket");
-		log.debug("Argos header " + argosHeader);
 		try {
-			String samlTicket = getArgosTicketMachine().getTicket(argosHeader.getForskrivarkod(),
-					argosHeader.getLegitimationskod(), argosHeader.getFornamn(), argosHeader.getEfternamn(),
-					argosHeader.getYrkesgrupp(), argosHeader.getBefattningskod(), argosHeader.getArbetsplatskod(),
-					argosHeader.getArbetsplatsnamn(), argosHeader.getPostort(), argosHeader.getPostadress(),
-					argosHeader.getPostnummer(), argosHeader.getTelefonnummer(), argosHeader.getRequestId(),
-					argosHeader.getRollnamn(), argosHeader.getHsaID(), argosHeader.getKatalog(),
-					argosHeader.getOrganisationsnummer(), argosHeader.getSystemnamn(), argosHeader.getSystemversion(),
-					argosHeader.getSystemIp());
-
+			String samlTicket = null;
+			if(isTicketForCitizen(argosHeader)){
+				log.info("Entering produce saml ticket for citizen request");
+				log.debug("Argos header for citizen request {}", argosHeader);
+				samlTicket = createCitizenTicket(argosHeader);
+			}else{
+				log.info("Entering produce saml ticket for organization request");
+				log.debug("Argos header for organization request {}", argosHeader);
+				samlTicket = createOrganizationTicket(argosHeader);
+			}
 			return applyWsSecurityToSamlTicket(samlTicket);
 		} catch (Exception e) {
 			throw new TicketMachineException("Exception generating saml ticket from ticket machine", e);
 		} finally {
 			log.info("Exiting produce saml ticket");
 		}
+	}
 
+	/**
+	 * Only when rollnamn contains exact string PRIVATPERSON the argosheader
+	 * should be used for creating a citizen ticket. Described in Jira https://skl-tp.atlassian.net/browse/SKLTP-341.
+	 * 
+	 * @param argosHeader
+	 * @return true if valid for citizen ticket
+	 */
+	static boolean isTicketForCitizen(final ArgosHeader argosHeader) {
+		return argosHeader != null && argosHeader.getRollnamn() != null
+				&& argosHeader.getRollnamn().contains(PRIVATPERSON);
+	}
+
+	private String createOrganizationTicket(ArgosHeader argosHeader) {
+		return getArgosTicketMachine().getTicketForOrganization(argosHeader.getForskrivarkod(),
+				argosHeader.getLegitimationskod(), argosHeader.getFornamn(), argosHeader.getEfternamn(),
+				argosHeader.getYrkesgrupp(), argosHeader.getBefattningskod(), argosHeader.getArbetsplatskod(),
+				argosHeader.getArbetsplatsnamn(), argosHeader.getPostort(), argosHeader.getPostadress(),
+				argosHeader.getPostnummer(), argosHeader.getTelefonnummer(), argosHeader.getRequestId(),
+				argosHeader.getRollnamn(), argosHeader.getHsaID(), argosHeader.getKatalog(),
+				argosHeader.getOrganisationsnummer(), argosHeader.getSystemnamn(), argosHeader.getSystemversion(),
+				argosHeader.getSystemIp());
+	}
+
+	private String createCitizenTicket(ArgosHeader argosHeader) {
+		/*
+		 * The construction of ssn = hsaid is described in Jira
+		 * https://skl-tp.atlassian.net/browse/SKLTP-341. Short version is that
+		 * there is no placeholder for ssn in ArgosHeader, therefore the field
+		 * hsaid is used for carrying ssn for citizen services.
+		 */
+		String ssn = argosHeader.getHsaID();
+
+		return getArgosTicketMachine().getTicketForCitizen(
+				argosHeader.getFornamn(), argosHeader.getEfternamn(), ssn,
+				argosHeader.getRollnamn(),
+				argosHeader.getOrganisationsnummer(),
+				argosHeader.getRequestId(), argosHeader.getSystemIp(),
+				argosHeader.getSystemnamn(), argosHeader.getSystemversion());
 	}
 
 	/**

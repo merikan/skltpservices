@@ -484,8 +484,8 @@
           </execution>
           
           <execution>
-            <id>generate-sources</id>
-            <phase>generate-sources-td-lf-apotekensservice</phase>
+            <id>generate-sources-td-lf-apotekensservice</id>
+            <phase>generate-sources</phase>
             <configuration>
               <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
               <wsdlOptions>
