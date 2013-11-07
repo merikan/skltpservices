@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:or="urn:riv:se.apotekensservice:or:1" xmlns="urn:riv:se.apotekensservice:or:KorrigeraOrdinationVardResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:or:KorrigeraOrdinationVardResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_or_1.0.xsd" namespace="urn:riv:se.apotekensservice:or:1"/>
+  <xs:element name="KorrigeraOrdinationVard" type="KorrigeraOrdinationVardRequestType"/>
+  <xs:element name="KorrigeraOrdinationVardResponse" type="KorrigeraOrdinationVardResponseType"/>
+  <xs:element name="ApplicationException" type="or:ApplicationException"/>
+  <xs:element name="SystemException" type="or:SystemException"/>
+  <xs:complexType name="KorrigeraOrdinationVardRequestType">
+    <xs:sequence>
+      <xs:element name="adress1" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Patientens adress 1.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="adress2" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Patientens adress 2</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="akut" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Markering att ordinationen är akut. Gäller endast för dispenserad ordination.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="andamalKlartext" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Ändamål i klartext</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="behandlingsslut" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Datum om tidpunkt då behandlingen avslutas.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="behandlingsstart" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Datum om och tidpunkt då behandlingen påbörjas.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="doseringsschema" type="or:DoseringsschemaRequest" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Information om intag. Obligatorisk för stående och dispenserad ordination.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="doseringstext1" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Doseringstext från förskrivare eller korrigerad av farmaceut</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="doseringstext2" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Kompletterande doseringstext för exempelvis extempore och licensläkemedel.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ejTillatenSubstitution" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Markering om förskriven vara ej får bytas ut enligt förskrivare.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="forandring" type="or:ForandringRequest" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Objekt innehållande alla parametrar från Förändring (och Historikskapande). Obligatorisk som inparameter.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="forman" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Förskrivarens uppgift om ordinationen
+ska innefattas i förmånen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="forskrivarensKommentar" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Förskrivarens kommentar till apoteket.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="forstaUttagFore" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Datum inom vilket första uttag av läkemedel måste göras.
+	Sker inte någon expedition på receptet innan detta datum sätts hela ordinationen till utgången.
+Gäller endast för helförpackningsordination.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ingenDygnsdos" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Markering att dygnsdos inte kan anges. Exempelvis vid ordination av kräm. Gäller endast för helförpackningsordination.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="insattningstidpunkt" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Datum när patienten skall påbörja intag.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="intervall" type="or:IntervallRequest" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Absolut expeditionsintervall. Gäller endast för helförpackningsordination.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="maxDygnsdos" type="xs:double" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Maximal mängd läkemedel som får förbrukas per dygn enligt doseringsschema eller doseringsanvisning. Gäller endast för helförpackningsordination.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="maxVeckodos" type="xs:double" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Maximal mängd läkemedel som får förbrukas per vecka enligt doseringsschema eller doseringsanvisning. Gäller endast för helförpackningsordination.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="notatOrdination" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Ordinatörens notat angående ordinationen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="ordinationsid" type="xs:long">
+        <xs:annotation>
+          <xs:documentation>Id för den ordination som korrigeras.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="postnummer" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Patientens postnummer 1</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="postort" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Patientens postort.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="sprakkod" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Främmande språk för doseringstext enligt ISO-639-1</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="startforpackning" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Anger om startförpackning ska expedieras vid första uttag. Obligatorisk för helförpackningsordination.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="telefonnummer1" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Patientens telefonnummer 1.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="telefonnummer2" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Patientens telefonnummer 2.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="underlagsversion" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Ordinationslistans underlagsversion.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KorrigeraOrdinationVardResponseType">
+    <xs:sequence>
+      <xs:element nillable="false" name="affResultat" type="or:AFFResultatResponse">
+        <xs:annotation>
+          <xs:documentation>AFF-resultat från korrigeringen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="forandring" type="or:ForandringResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Objekt innehållande alla parametrar från Förändring (och Historikskapande). Obligatorisk som inparameter.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="ordinationsid" type="xs:long">
+        <xs:annotation>
+          <xs:documentation>Id för den ordination som korrigeras.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ordinationsstatus" type="or:OrdinationsstatusResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Ordinationens förändrade tillstånsstatus.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="underlagsversion" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Ordinationslistans underlagsversion.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

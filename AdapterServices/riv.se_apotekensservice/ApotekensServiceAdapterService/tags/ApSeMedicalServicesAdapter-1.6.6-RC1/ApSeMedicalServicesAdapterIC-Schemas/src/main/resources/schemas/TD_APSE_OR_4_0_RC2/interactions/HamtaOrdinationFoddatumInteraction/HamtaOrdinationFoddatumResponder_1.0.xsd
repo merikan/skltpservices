@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:or="urn:riv:se.apotekensservice:or:1" xmlns="urn:riv:se.apotekensservice:or:HamtaOrdinationFoddatumResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:or:HamtaOrdinationFoddatumResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_or_1.0.xsd" namespace="urn:riv:se.apotekensservice:or:1"/>
+  <xs:element name="HamtaOrdinationFoddatum" type="HamtaOrdinationFoddatumRequestType"/>
+  <xs:element name="HamtaOrdinationFoddatumResponse" type="HamtaOrdinationFoddatumResponseType"/>
+  <xs:element name="ApplicationException" type="or:ApplicationException"/>
+  <xs:element name="SystemException" type="or:SystemException"/>
+  <xs:complexType name="HamtaOrdinationFoddatumRequestType">
+    <xs:sequence>
+      <xs:element nillable="false" name="ordinationsId" maxOccurs="unbounded" type="xs:long">
+        <xs:annotation>
+          <xs:documentation>Lista med ordination(er) som tillhör patienten enligt farmaceuts bedömning.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HamtaOrdinationFoddatumResponseType">
+    <xs:sequence>
+      <xs:element name="apoteksInfoLista" maxOccurs="unbounded" type="or:ApoteksinformationResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Lista med apotek därifrån förändringar eller skapande utförts på/av ordinationerna.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="arbetsplatsInfoLista" maxOccurs="unbounded" type="or:ArbetsplatsInfoResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Lista med arbetsplatser därifrån förändringar utförts på ordinationerna.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="artikelLista" maxOccurs="unbounded" type="or:ArtikelResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Lista med artikelinformation för de varor som ingår i ordinationerna.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="forskrivarInfoLista" maxOccurs="unbounded" type="or:ForskrivarinfoResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Lista med förskrivare som gjort förändringar i ordinationerna.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="ordinationslista" type="or:OrdinationslistaKortInfoResponse">
+        <xs:annotation>
+          <xs:documentation>Ordinationslista</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

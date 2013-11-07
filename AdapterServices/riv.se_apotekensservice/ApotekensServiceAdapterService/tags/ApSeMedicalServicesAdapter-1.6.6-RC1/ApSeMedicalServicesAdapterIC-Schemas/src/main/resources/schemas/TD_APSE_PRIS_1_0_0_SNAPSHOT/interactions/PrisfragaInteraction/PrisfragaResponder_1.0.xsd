@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:pris="urn:riv:se.apotekensservice:pris:1" xmlns="urn:riv:se.apotekensservice:pris:PrisfragaResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:pris:PrisfragaResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_pris_1.0.xsd" namespace="urn:riv:se.apotekensservice:pris:1"/>
+  <xs:element name="Prisfraga" type="PrisfragaRequestType"/>
+  <xs:element name="PrisfragaResponse" type="PrisfragaResponseType"/>
+  <xs:element name="ApplicationException" type="pris:ApplicationException"/>
+  <xs:element name="SystemException" type="pris:SystemException"/>
+  <xs:complexType name="PrisfragaRequestType">
+    <xs:sequence>
+      <xs:element name="ackEgenavgift" type="xs:double" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Position i högkostnadstrappan för den period som expeditionen avser.
+Antingen anges personnummer eller ackEgenavgift.
+Personnummer är mera korrekt och därför att föredra.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="klientinformation" type="pris:KlientinformationRequest">
+        <xs:annotation>
+          <xs:documentation>Objekt innehållande information om anropande klientsystem.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="periodStart" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Start av period. 
+Om periodStart anges så avses normalt annan period än innevarande period. 
+Innehållet är en periodstart och kan avse föregående period, 
+innevarande period eller kommande period.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="personnummer" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Personnummer för person som prisfrågan gäller.
+Antingen anges personnummer eller ackEgenavgift. 
+Personnummer är mera korrekt och därför att föredra.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="rader" maxOccurs="unbounded" type="pris:PrisfragaRadRequest">
+        <xs:annotation>
+          <xs:documentation>Rader</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PrisfragaResponseType">
+    <xs:sequence>
+      <xs:element name="bruttoBeloppHogkostnad" type="xs:double" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Förmånsgrundande bruttobelopp kopplat till högkostnadsskyddet.
+Bruttobelopp inkl. ev. moms, att tillgodoräkna i högkostnadsskyddet. Gäller förmånskod = R.
+
+Vid kreditering blir detta värde negativt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="bruttoPris" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Summa apoteksaktörs utpris inkl. ev. moms för receptexpeditionen.
+
+Vid kreditering blir detta värde negativt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="egenAvgiftHogkostnad" type="xs:double" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Summa kundens egenavgift kopplat till högkostnadsskyddet.
+Egenavgift inkl. ev. moms, att tillgodoräkna i högkostnadsskyddet. Gäller förmånskod = R.
+
+Vid kreditering blir detta värde negativt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="egenAvgiftLivsmedel" type="xs:double" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Summa kundens egenavgift inkl. moms för livsmedel till barn under 16 år.
+Gäller förmånskod = L. Max 120 kr.
+
+Vid kreditering blir detta värde negativt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="kundKostnad" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Kostnad kunden skall betala. 
+Egenavgift, pristillägg samt pris inkl. ev . moms för varor utan förmån.
+
+Vid kreditering blir detta värde negativt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="landstingetsFormanskostnad" type="xs:double" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Summa förmån inkl. ev. moms för receptexpeditionen.
+Gäller förmånskod = R, F och L.
+
+Vid kreditering blir detta värde negativt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="personnummer" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Personnummer för person som prisfrågan gäller.
+Antingen anges personnummer eller ackEgenavgift. 
+Personnummer är mera korrekt och därför att föredra.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="prisTillagg" type="xs:double" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Summa pristillägg inom läkemdelsförmånen.
+Gäller förmånskod = R.
+
+Vid kreditering blir detta värde negativt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="rader" maxOccurs="unbounded" type="pris:PrisfragaRadResponse">
+        <xs:annotation>
+          <xs:documentation>Rader</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
