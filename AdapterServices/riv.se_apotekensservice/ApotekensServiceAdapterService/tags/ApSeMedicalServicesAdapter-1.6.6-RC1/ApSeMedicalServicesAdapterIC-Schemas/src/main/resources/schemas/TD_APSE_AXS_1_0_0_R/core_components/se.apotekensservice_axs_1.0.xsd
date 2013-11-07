@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="urn:riv:se.apotekensservice:axs:1"
+           targetNamespace="urn:riv:se.apotekensservice:axs:1"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           version="1.0">
+
+            
+    <xs:annotation>
+        <xs:documentation>
+            Beskrivning: Meddelandetyper som är gemensamma för axs.
+            Revisioner: 2011-04-05, version 1.0
+        </xs:documentation>
+    </xs:annotation>
+
+    
+        
+                
+        <xs:complexType name="ApoteksinformationResponse">
+            <xs:sequence>                
+                <xs:element name="aktorsnamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Aktörsnamn</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="aktorsorgnr" type="xs:long" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Aktörens organisationsnummer.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="allmantelefon" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>allmäntelefon</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="besoksadress" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets besöksadress</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="eReceptDjur" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Anger om apoteket finns expedierar erecept för djur</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="fax" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>fax</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="glnKod" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>GLN-kod</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="huvudtypkod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Kod som beskriver huvudverksamheten för expeditionsstället</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="namn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Apotekets Namn</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="ort" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets besöksort</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="registrerad" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Anger om apoteket finns registrerat i EXPO. Om false så saknar alla fält
+utom glnKod värden.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="slutdatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Datum för stängning av verksamhet</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="startdatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Datum för start av verksamhet</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+                
+        <xs:complexType name="BalansRequest">
+            <xs:sequence>                
+                <xs:element name="brutto" type="xs:double" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Bruttobelopp i kronor och ören</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="netto" type="xs:double" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Nettobelopp i kronor och ören</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+                
+        <xs:complexType name="BalansResponse">
+            <xs:sequence>                
+                <xs:element name="brutto" type="xs:double" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Bruttobelopp i kronor och ören</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="netto" type="xs:double" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Nettobelopp i kronor och ören</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+                
+        <xs:complexType name="EesStatusRequest">
+            <xs:sequence>                
+                <xs:element name="personnummer" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Kundens personnummer.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+                
+        <xs:complexType name="EesStatusResponse">
+            <xs:sequence>                
+                <xs:element name="aktuellaSignaler" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Flagga som indikerar om kunden har aktuella signaler som inte tagits hand om.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="jobbPagar" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Flagga som indikerar om annan handläggare jobbar med kunden.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="kundHittad" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Flagga som indikerar om kunden hittades i EES.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="personnummer" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Kundens personnummer.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+                
+        <xs:complexType name="KlientinformationRequest">
+            <xs:sequence>                
+                <xs:element name="anvandare" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Unikt användarid i anropande system.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="session" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Sessionens id i anropande system.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="system" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>GLN-kod för anropande system.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+        
+    
+                
+        <xs:complexType name="KontoinformationRequest">
+            <xs:sequence>                
+                <xs:element name="persNr" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Personnummer för den som sökningen gäller.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+                
+        <xs:complexType name="KontoinformationResponse">
+            <xs:sequence>                
+                <xs:element name="anslutStatus" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Personens högkostnadsstatus.
+False - Ej ansluten
+True - Ansluten</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="barnkonton" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation>OBS! Sätts inte längre av underliggande tjänst!
+Eventuell lista med personnummer för alla barn knutna till ett och samma samlingskonto. Saknar värde om
+personen ej är ansluten till högkostnadstrappan (status är false) eller om kontot ej är ett samlingskonto
+alternativt ej heller är kopplat till ett samlingskonto.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="foregPeriod" type="PeriodResponse" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Föregående högkostnadsperiods startdatum. 
+Saknar värde om personen ej är ansluten till högkostnadstrappan (status är false)
+eller om ingen föregående period existerar.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="formansniva" type="xs:int" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Kundens aktuella förmånsnivå i procent.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="huvudPersNr" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Personnummer för eventuell huvudperson (förmånsmottagare). Saknar värde om huvudperson saknas.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="innevPeriod" type="PeriodResponse" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Innevarande högkostnadsperiod. 
+Saknar värde om personen ej är ansluten till högkostnadstrappan (status är false).
+Om personen är ansluten men saknar aktiv period kommer startdatum lämnas tomt och beloppen sättas till 0.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="kvarTillFrikort" type="BalansResponse" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Brutto och Netto i kronor/ören som återstår innan kunden får frikort.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+        
+                
+        <xs:complexType name="KundinformationResponse">
+            <xs:sequence>                
+                <xs:element name="lkfKod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Län-, kommun- och församling där personen är folkbokförd.
+Även kallad församlingskod
+
+Har formatet LLKKFF
+LL - Län, 2 tecken
+KK - Kommun, 2 tecken
+FF - Församling, 2 tecken</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="omradeskod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Det område där personen är folkbokförd</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="redNamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Redigerat namn</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="samtycke" type="SamtyckeResponse" nillable="false" />
+                            
+                <xs:element name="statusKod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>StatusKod - status på personen i FOLK.
+Mappat från träffkoder i FOLK.
+ 
+0=Person finns i FOLK.
+1=Person finns ej i FOLK, underliggande system är ej tillgängligt.
+2=Person finns ej.
+3=Person sekretesskyddad.
+4=Person är avliden.
+5=Träffkod okänd.
+6=Testperson.
+
+<para>Vissa av dessa statuskoder innebär att det inte finns någon personinformation i svaret.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="traffkod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Träffkod - status på personen i FOLK.
+Kommer att utgå och ersättas av statusKod.
+ 
+<para>92 - ok, träff i Spar</para>
+<para>93 - Felaktigt personnummer eller personen finns inte i Spar</para>
+<para>20 - Nyupplagd person</para>
+<para>23 - Teknisk insättning</para>
+<para>24 - Personnummerändring</para>
+<para>26 - Upphävd sekretess</para>
+<para>40 - Omregistrering/utbyte av befintlig personpost</para>
+<para>50 - Ändring av befintlig personpost</para>
+<para>71 - Avliden</para>
+<para>72 - Avregistrerad</para>
+<para>73 - Teknisk avregistrering</para>
+<para>74 - Personnummerändring</para>
+<para>76 - Sekretesskyddad</para>
+<para>81 - Ändring av dödsdatum</para>
+<para>03 - Personen finns inte i FOLK. Spar är inte tillgängligt.</para>
+<para>01 - Apotekens Service påhittade träffkod för testperson.</para>
+
+<para>Vissa av dessa träffkoder innebär att det inte finns någon personinformation i svaret.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+        
+                
+        <xs:complexType name="PatientInformationResponse">
+            <xs:sequence>                
+                <xs:element name="lkfKod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Län-, kommun- och församling där personen är folkbokförd.
+Även kallad församlingskod
+
+Har formatet LLKKFF
+<para>LL - Län, 2 tecken</para>
+<para>KK - Kommun, 2 tecken</para>
+<para>FF - Församling, 2 tecken</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="omradeskod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Det område där personen är folkbokförd</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="redNamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Redigerat namn</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="samtycke" type="SamtyckeResponse" nillable="false" />
+                            
+                <xs:element name="statusKod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>StatusKod - status på personen i FOLK.
+Mappat från träffkoder i FOLK.
+ 
+<para>0=Person finns i FOLK.</para>
+<para>1=Person finns ej i FOLK, underliggande system är ej tillgängligt.</para>
+<para>2=Person finns ej.</para>
+<para>3=Person sekretesskyddad.</para>
+<para>4=Person är avliden.</para>
+<para>5=Träffkod okänd.</para>
+<para>6=Testperson.</para>
+
+<para>Vissa av dessa statuskoder innebär att det inte finns någon personinformation i svaret.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+        
+                
+        <xs:complexType name="PeriodResponse">
+            <xs:sequence>                
+                <xs:element name="balans" type="BalansResponse" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Ackumulerad balans.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="start" type="xs:dateTime" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Periodens startdatum.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+                
+        <xs:complexType name="SamtyckeRequest">
+            <xs:sequence>                
+                <xs:element name="ees" type="xs:boolean" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Flagga för registrerat eessamtycke.
+<para>False - Om kunden sagt nej till att vara med i EES.</para> 
+<para>True  - Kunden har samtyckt till att vara med i EES.</para>
+<para>Null  - kunden har inte tillfrågats/tagit ställning.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="hkdb" type="xs:boolean" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Flagga för registrerat samtycke.
+I indata är det endast möjligt att ange false och endast om inget värde finns registrerat.
+Samtycke uppdateras genom att skapa eller ta bort konto i HKDB.
+<para>False - Om kunden sagt nej till att vara med i HKDB.</para> 
+<para>True  - Kunden har samtyckt till att vara med i HKDB.</para>
+<para>Null  - kunden har inte tillfrågats/tagit ställning.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="rr" type="xs:boolean" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation><para>false - Om kunden inte lämnat samtycke till att spara sina recept i RR.</para>
+<para>true - Kunden har samtyckt till att vara med i RR.</para>
+<para>Null - kunden har inte tillfrågats/tagit ställning. Detta är enbart vid utdata.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="rrd" type="xs:boolean" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation><para>false - Kunden (privatpersonen) samtycker inte till att spara djurrecept på sitt personnummer i RR för djur.</para>
+<para>true - Kunden (privatpersonen) samtycker till att spara djurrecept på sitt personnummer i RR för djur.</para>
+<para>Null - kunden (privatpersonen) har inte tillfrågats/tagit ställning. Detta är enbart vid utdata.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+                
+        <xs:complexType name="SamtyckeResponse">
+            <xs:sequence>                
+                <xs:element name="dosSamtycke" type="xs:boolean" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation><para>false - Kunden (privatpersonen) samtycker inte till att spara recept på sitt personnummer för dosapotek.</para>
+<para>true - Kunden (privatpersonen) samtycker till att spara recept på sitt personnummer för dosapotek.</para>
+<para>Null - kunden (privatpersonen) har inte tillfrågats/tagit ställning. Detta är enbart vid utdata.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="dosSamtyckeDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Datum för senaste ändring av dos-samtycke</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="ees" type="xs:boolean" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Flagga för registrerat eessamtycke.
+<para>False - Om kunden sagt nej till att vara med i EES.</para> 
+<para>True  - Kunden har samtyckt till att vara med i EES.</para>
+<para>Null  - kunden har inte tillfrågats/tagit ställning.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="eesSamtyckeDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Datum för senaste ändring av EES-samtycke</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="hkdb" type="xs:boolean" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Flagga för registrerat samtycke.
+I indata är det endast möjligt att ange false och endast om inget värde finns registrerat.
+Samtycke uppdateras genom att skapa eller ta bort konto i HKDB.
+<para>False - Om kunden sagt nej till att vara med i HKDB.</para> 
+<para>True  - Kunden har samtyckt till att vara med i HKDB.</para>
+<para>Null  - kunden har inte tillfrågats/tagit ställning.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="hkdbSamtyckeDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Datum för senaste ändring av HKDB-samtycke</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="rr" type="xs:boolean" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation><para>false - Om kunden inte lämnat samtycke till att spara sina recept i RR.</para>
+<para>true - Kunden har samtyckt till att vara med i RR.</para>
+<para>Null - kunden har inte tillfrågats/tagit ställning. Detta är enbart vid utdata.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="rrSamtyckeDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Datum för senaste ändring av RR-samtycke</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="rrd" type="xs:boolean" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation><para>false - Kunden (privatpersonen) samtycker inte till att spara djurrecept på sitt personnummer i RR för djur.</para>
+<para>true - Kunden (privatpersonen) samtycker till att spara djurrecept på sitt personnummer i RR för djur.</para>
+<para>Null - kunden (privatpersonen) har inte tillfrågats/tagit ställning. Detta är enbart vid utdata.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="rrdSamtyckeDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Datum för senaste ändring av RRD-samtycke</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+    <xs:complexType name="ApplicationException">
+        <xs:annotation>
+            <xs:documentation>Applikationsfel</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="description" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SystemException">
+        <xs:annotation>
+            <xs:documentation>Systemfel</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="code" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="char">
+        <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

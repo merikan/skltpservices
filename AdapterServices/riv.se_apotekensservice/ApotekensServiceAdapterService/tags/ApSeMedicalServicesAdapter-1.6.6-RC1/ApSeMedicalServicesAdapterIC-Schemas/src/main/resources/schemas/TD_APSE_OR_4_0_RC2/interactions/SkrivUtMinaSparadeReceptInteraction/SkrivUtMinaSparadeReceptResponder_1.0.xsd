@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:or="urn:riv:se.apotekensservice:or:1" xmlns="urn:riv:se.apotekensservice:or:SkrivUtMinaSparadeReceptResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:or:SkrivUtMinaSparadeReceptResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_or_1.0.xsd" namespace="urn:riv:se.apotekensservice:or:1"/>
+  <xs:element name="SkrivUtMinaSparadeRecept" type="SkrivUtMinaSparadeReceptRequestType"/>
+  <xs:element name="SkrivUtMinaSparadeReceptResponse" type="SkrivUtMinaSparadeReceptResponseType"/>
+  <xs:element name="ApplicationException" type="or:ApplicationException"/>
+  <xs:element name="SystemException" type="or:SystemException"/>
+  <xs:complexType name="SkrivUtMinaSparadeReceptRequestType">
+    <xs:sequence>
+      <xs:element nillable="false" name="personnummer" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Giltigt personnummer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="sorteringsordning" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Sorteringsordning.
+A : Stigande efter artikelbenämning, stigande efter ordinationstidpunkt
+D : Fallande efter ordinationstidpunkt, stigande efter artikelbenämning</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SkrivUtMinaSparadeReceptResponseType">
+    <xs:sequence>
+      <xs:element nillable="false" name="dosSamtycke" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Markering om kunden har dossamtycke enligt FOLK</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="hkdbSamtycke" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Markering om kunden har samtyckt till HKDB enligt FOLK</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="rrSamtycke" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Markering om kunden har samtyckt till RR enligt FOLK</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="sparadeRecept" type="xs:base64Binary" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>En byte array innehållande pdf-dokumentet.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="statuskod" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Kundens statuskod enligt FOLK</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

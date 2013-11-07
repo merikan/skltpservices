@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:pris="urn:riv:se.apotekensservice:pris:1" xmlns="urn:riv:se.apotekensservice:pris:TaBortHkdbKontoResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:pris:TaBortHkdbKontoResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_pris_1.0.xsd" namespace="urn:riv:se.apotekensservice:pris:1"/>
+  <xs:element name="TaBortHkdbKonto" type="TaBortHkdbKontoRequestType"/>
+  <xs:element name="TaBortHkdbKontoResponse" type="TaBortHkdbKontoResponseType"/>
+  <xs:element name="ApplicationException" type="pris:ApplicationException"/>
+  <xs:element name="SystemException" type="pris:SystemException"/>
+  <xs:complexType name="TaBortHkdbKontoRequestType">
+    <xs:sequence>
+      <xs:element nillable="false" name="klientinformation" type="pris:KlientinformationRequest">
+        <xs:annotation>
+          <xs:documentation>Objekt innehållande information om anropande klientsystem.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="persNr" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Personnummer för den som ska tas bort.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TaBortHkdbKontoResponseType">
+    <xs:sequence>
+      <xs:element name="innevPeriod" type="pris:PeriodResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Innevarande högkostnadsperiod.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="kommandePeriod" type="pris:PeriodResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Kommande högkostnadsperiod.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="resultat" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Resultat av kontouppdatering i HKDB.
+True - Konto borttaget.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="samlingBort" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Anger om samlingskonto tagits bort i samband med anropet.
+True - Samlingskonto borttaget.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
