@@ -109,17 +109,42 @@ PROD
 /AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/target/ApSeMedicalServicesAdapterIC-Schemas-<version>.jar
 }}}
 
-=Installation instructions mule 2.2.8=
+=Installationsanvisning mule 2.2.8=
 
 ==Runtime environment==
 
 See [http://code.google.com/p/skltp/wiki/InstallationServiceBridge Adapterplatform]
 
-==Download distribution==
+==Ladda ner applikationen==
 
-[http://skltpservices.googlecode.com/files/ApSeMedicalServicesAdapter1_6_0.zip Download latest release]
+Ladda ner applikationen och dess beroenden
+{{{
+wget https://skltpservices.googlecode.com/files/ApSeMedicalServicesAdapterIC-1.6.6.jar
+wget https://skltpservices.googlecode.com/files/ApSeMedicalServicesAdapterIC-Schemas-1.6.6.jar
+}}}
 
-==Build from source==
+Om teststubbar skall installeras, ladda ner dem
+{{{
+wget https://skltpservices.googlecode.com/files/ApSeMedicalServicesAdapterIC-1.6.6-tests.jar
+}}}
+
+==Installera applikationen== 
+
+{{{
+tail -f /home/mule/vp/mule-standalone-2.2.8/logs/anslutning.log
+cp /usr/local/mule-standalone-3.3.1/apps/FkEintygAdapterIC-2.0.3-anchor.txt
+}}}
+
+ * Extract services to `<adapter platform>/services`
+ * Extract user to `<MULE_HOME>lib/user`
+
+==Configuration==
+
+[http://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/src/environment/ Config files]
+
+
+
+=Build from source=
 
 [https://code.google.com/p/skltpservices/source/checkout Instructions how to checkout source]
 
@@ -138,14 +163,3 @@ How to build `ApotekensServiceAdapterService` in trunk
 cd AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk
 mvn clean install 
 }}}
-
-==Deploy/Undeploy distribution==
-
-Download distribution above.
-
- * Extract services to `<adapter platform>/services`
- * Extract user to `<MULE_HOME>lib/user`
-
-==Configuration==
-
-[http://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/src/environment/ Config files]
