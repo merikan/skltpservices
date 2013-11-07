@@ -62,6 +62,18 @@
 	<logger name="se.skl.skltpservices">
 		<level value="DEBUG" />
 	</logger>
+	
+	<logger name="org.apache.commons.httpclient">
+    	<level value="fatal"/>
+	</logger>
+
+	<logger name="httpclient.wire.header">
+    	<level value="debug"/>
+	</logger>
+
+	<logger name="httpclient.wire.content">
+    	<level value="debug"/>
+	</logger>
 
 	<root>
 		<priority value="INFO" />
