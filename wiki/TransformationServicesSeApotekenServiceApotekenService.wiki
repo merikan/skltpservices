@@ -130,13 +130,40 @@ wget https://skltpservices.googlecode.com/files/ApSeMedicalServicesAdapterIC-1.6
 
 ==Installera applikationen== 
 
+Kopera applikationen och dess beroenden till /services
 {{{
-tail -f /home/mule/vp/mule-standalone-2.2.8/logs/anslutning.log
-cp /usr/local/mule-standalone-3.3.1/apps/FkEintygAdapterIC-2.0.3-anchor.txt
+cp ApSeMedicalServicesAdapterIC-1.6.6.jar /home/mule/vp/vp-home/tjanstebryggan/services
+cp ApSeMedicalServicesAdapterIC-Schemas-1.6.6.jar /home/mule/vp/vp-home/tjanstebryggan/services
 }}}
 
- * Extract services to `<adapter platform>/services`
- * Extract user to `<MULE_HOME>lib/user`
+==Starta upp Mule 2.2.8 och verifiera i logfil==
+
+{{{
+tail -f /home/mule/vp/mule-standalone-2.2.8/logs/anslutning.log
+/home/mule/vp/mule-standalone-2.2.8/mule start -config tb-config.xml
+}}}
+
+Om allt startar upp ok ser man följande i loggen
+
+{{{
+**********************************************************************
+* Mule ESB and Integration Platform                                  *
+* Version: 2.2.8 Build: 25325                                        *
+* MuleSoft, Inc.                                                     *
+* For more information go to http://www.mulesoft.org                 *
+*                                                                    *
+* Server started: 9/17/13 9:46 PM                                    *
+* Server ID: d778f043-1fd1-11e3-8cb9-01f7cb70d861                    *
+* JDK: 1.6.0_51 (mixed mode)                                         *
+* OS encoding: MacRoman, Mule encoding: UTF-8                        *
+* OS: Mac OS X (10.8.4, x86_64)                                      *
+* Host: xyz-abc.local (192.168.0.125)                          *
+*                                                                    *
+* Agents Running:                                                    *
+*   JMX Agent                                                        *
+**********************************************************************
+}}}
+
 
 ==Configuration==
 
