@@ -55,7 +55,7 @@ def getAllUniqueRivNameSpaces(wsdlFile){
 	return rivNameSpace
 }
 
-def getFeatureKeepAliveServiceContractNameSpace(xsdFile){
+def getServiceContractNameSpace(xsdFile){
 	def featureKeepAliveServiceContractNameSpace = 'No servicecontract namespace found'
 	
 	//Build keep alive feature settings "feature.keepalive.servicecontractnamespace" using . (dots) instead of : (colons)
@@ -101,16 +101,25 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 		def serviceRelativePath = "$artifactId/$serviceVersion/$rivtaVersion"
 		def wsdlFileName = wsdlFiles[0].name
 		
-		//Version of the service contract e.g Tidbokning 1.1
-		def version = '1.0'
+		//Version of the service contract e.g Tidbokning 1.1.0
+		def version = '<TODO: tex 1.1.0>'
 		
-		def featureKeepAliveServiceContractNameSpace = getFeatureKeepAliveServiceContractNameSpace(xsdFiles[0])
-				
+		def serviceContractNameSpace = getServiceContractNameSpace(xsdFiles[0])
+		
+		//För tjänster som skall ha subdomän i ändpunktens adressen eller inte
+		//-DhttpsEndpointAdress=https://\${TP_HOST}:\${TP_PORT}/\${TP_BASE_URI}/$maindomain/$subdomainAdress/$serviceRelativePath
+		//-DhttpEndpointAdress=http://\${TP_HOST}:\${TP_PORT_HTTP}/\${TP_BASE_URI}/$maindomain/$subdomainAdress/$serviceRelativePath
+		//-DhttpsEndpointAdress=https://\${TP_HOST}:\${TP_PORT}/\${TP_BASE_URI}/$serviceRelativePath
+		//-DhttpEndpointAdress=http://\${TP_HOST}:\${TP_PORT_HTTP}/\${TP_BASE_URI}/$serviceRelativePath
+
+		//För tjänster som skall ha möjlighet att ställa in response timeout per tjänstedomän
+		//-DfeatureResponseTimeoutValue=\${feature.featureresponsetimeout.${maindomain}.${subdomain}:\${SERVICE_TIMEOUT_MS}}
+		
 		def mvnCommand = """mvn archetype:generate 
 		-DinteractiveMode=false 
 		-DarchetypeArtifactId=service-archetype 
 		-DarchetypeGroupId=se.skl.tp.archetype 
-		-DarchetypeVersion=1.2-SNAPSHOT
+		-DarchetypeVersion=1.3
 		-Duser.dir=${targetDir} 
 		-DgroupId=se.skl.skltpservices.${maindomain}.${subdomainGroupId}
 		-DartifactId=${artifactId} 
@@ -118,8 +127,9 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 		-DvirtualiseringArtifactId=${maindomain}-${subdomainFlow}-${artifactId}-virtualisering
 		-DhttpsEndpointAdress=https://\${TP_HOST}:\${TP_PORT}/\${TP_BASE_URI}/$maindomain/$subdomainAdress/$serviceRelativePath
 		-DhttpEndpointAdress=http://\${TP_HOST}:\${TP_PORT_HTTP}/\${TP_BASE_URI}/$maindomain/$subdomainAdress/$serviceRelativePath
-		-DflowName=${maindomain}-${subdomainFlow}-${artifactId}Interaction-virtualisering-flow
-		-DfeatureKeepalive=\${feature.keepalive.${featureKeepAliveServiceContractNameSpace}:\${feature.keepalive}}
+		-DflowName=${maindomain}-${subdomainFlow}-${artifactId}-${version}-Interaction-virtualisering-flow
+		-DfeatureKeepaliveValue=\${feature.keepalive.${serviceContractNameSpace}:\${feature.keepalive}}
+		-DfeatureResponseTimeoutValue=\${feature.featureresponsetimeout.${maindomain}.${subdomain}:\${SERVICE_TIMEOUT_MS}}
 		-DserviceMethod=${artifactId} 
 		-DserviceWsdlFileDir=classpath:/schemas$schemaDir/${artifactId}Interaction/${wsdlFileName}  
 		-DserviceNamespace=${serviceInteractionNameSpace}  
