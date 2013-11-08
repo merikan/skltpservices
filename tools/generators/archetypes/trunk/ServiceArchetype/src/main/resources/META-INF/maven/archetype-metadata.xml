@@ -10,7 +10,8 @@
 		<requiredProperty key="httpEndpointAdress" />
 		<requiredProperty key="flowName" />
 		<requiredProperty key="virtualiseringArtifactId" />
-		<requiredProperty key="featureKeepalive" />
+		<requiredProperty key="featureKeepaliveValue" />
+		<requiredProperty key="featureResponseTimeoutValue" />
 		<requiredProperty key="serviceMethod">
 			<defaultValue>${artifactId}</defaultValue>
 		</requiredProperty>
