@@ -12,7 +12,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     
     <groupId>se.skl.tp</groupId>
     <artifactId>archetype</artifactId>
-    <version>1.3</version>
+    <version>1.4-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>service-archetype</name>
 
@@ -21,9 +21,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     </modules>
        
 	<scm>
-    	<connection>http://skltpservices.googlecode.com/svn/tools/generators/archetypes/tags/archetype-1.3</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/tools/generators/archetypes/tags/archetype-1.3</developerConnection>
-        <url>http://skltpservices.googlecode.com/svn/tools/generators/archetypes/tags/archetype-1.3</url>
+    	<connection>http://skltpservices.googlecode.com/svn/tools/generators/archetypes/trunk</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/tools/generators/archetypes/trunk</developerConnection>
+        <url>http://skltpservices.googlecode.com/svn/tools/generators/archetypes/trunk</url>
     </scm>
 
 </project>
