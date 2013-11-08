@@ -33,13 +33,17 @@
             	exchange-pattern="request-response" 
             	responseTransformer-refs="featureKeepAliveResponse filterResponseHeaders">
             	<properties>
-        			<spring:entry key="featureUseKeepAlive" value="${featureKeepalive}"/>
+        			<spring:entry key="featureUseKeepAlive" value="${featureKeepaliveValue}"/>
+              <spring:entry key="featureResponseTimeout" value="${featureResponseTimeoutValue}"/>
         		</properties>
         	</https:inbound-endpoint>
         	<http:inbound-endpoint
         	    address="${httpEndpointAdress}"
             	exchange-pattern="request-response" 
             	responseTransformer-refs="filterResponseHeaders">
+              <properties>
+              <spring:entry key="featureResponseTimeout" value="${featureResponseTimeoutValue}"/>
+            </properties>
         	</http:inbound-endpoint>
          </composite-source>
 
