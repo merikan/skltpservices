@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>se.skl.skltpservices.apse</groupId>
 		<artifactId>ApSeMedicalServicesAdapter</artifactId>
-		<version>1.6.6-RC2-SNAPSHOT</version>
+		<version>1.6.6-RC2</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
