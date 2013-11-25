@@ -18,7 +18,7 @@ In this instruction `<MULE_HOME>` refers to the place where Mule is installed.
 
 ==Download distribution==
 
-Download the latest distribution from [http://build.callistasoftware.org:8080/jenkins/job/TransformationServicesCrmSchedulingTakeCare/ws/TakeCareIntegrationComponent/target/TakeCareIntegrationComponent-1.0.2-SNAPSHOT.zip TakeCareIntegrationComponent-1.0.2-SNAPSHOT.zip]
+Download the latest distribution from [http://build.callistasoftware.org:8080/jenkins/job/TransformationServicesCrmSchedulingTakeCare-1.0.2/ws/TakeCareIntegrationComponent/target/TakeCareIntegrationComponent-1.0.2-RELEASE.zip TakeCareIntegrationComponent-1.0.2-RELEASE.zip]
 
 ==Build from source==
 
