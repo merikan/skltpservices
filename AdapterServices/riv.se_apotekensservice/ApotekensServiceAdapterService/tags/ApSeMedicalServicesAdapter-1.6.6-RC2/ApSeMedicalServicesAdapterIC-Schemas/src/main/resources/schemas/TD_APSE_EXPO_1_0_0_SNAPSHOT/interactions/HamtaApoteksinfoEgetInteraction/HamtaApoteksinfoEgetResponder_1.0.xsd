@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="urn:riv:se.apotekensservice:expo:HamtaApoteksinfoEgetResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:expo="urn:riv:se.apotekensservice:expo:1" targetNamespace="urn:riv:se.apotekensservice:expo:HamtaApoteksinfoEgetResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_expo_1.0.xsd" namespace="urn:riv:se.apotekensservice:expo:1"/>
+  <xs:element name="HamtaApoteksinfoEget" type="HamtaApoteksinfoEgetRequestType"/>
+  <xs:element name="HamtaApoteksinfoEgetResponse" type="HamtaApoteksinfoEgetResponseType"/>
+  <xs:element name="ApplicationException" type="expo:ApplicationException"/>
+  <xs:element name="SystemException" type="expo:SystemException"/>
+  <xs:complexType name="HamtaApoteksinfoEgetRequestType">
+    <xs:sequence>
+      <xs:element name="apoteksId" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>GLN-kod för unik identifiering av apotek. 
+Obligatorisk parameter om org-nr saknas som indata.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="orgNr" type="xs:long" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Organisationsnummer.
+Obligatorisk parameter om Apoteks-id saknas som indata.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="username" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Anropandes stp username.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HamtaApoteksinfoEgetResponseType">
+    <xs:sequence>
+      <xs:element nillable="false" name="expeditionsstalleLista" maxOccurs="unbounded" type="expo:ExpeditionsstalleEgetResponse">
+        <xs:annotation>
+          <xs:documentation>Lista innehållande en eller flera expeditionsstallen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:or="urn:riv:se.apotekensservice:or:4" xmlns="urn:riv:se.apotekensservice:or:AvregistreraEpsosSamtyckeResponder:4" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:or:AvregistreraEpsosSamtyckeResponder:4" attributeFormDefault="unqualified" elementFormDefault="qualified" version="4.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_or_4.0.xsd" namespace="urn:riv:se.apotekensservice:or:4"/>
+  <xs:element name="AvregistreraEpsosSamtycke" type="AvregistreraEpsosSamtyckeRequestType"/>
+  <xs:element name="AvregistreraEpsosSamtyckeResponse" type="AvregistreraEpsosSamtyckeResponseType"/>
+  <xs:element name="ApplicationException" type="or:ApplicationException"/>
+  <xs:element name="SystemException" type="or:SystemException"/>
+  <xs:complexType name="AvregistreraEpsosSamtyckeRequestType">
+    <xs:sequence>
+      <xs:element nillable="false" name="personnummer" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Giltigt personnummer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AvregistreraEpsosSamtyckeResponseType">
+    <xs:sequence>
+      <xs:element nillable="false" name="personnummer" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Giltigt personnummer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
