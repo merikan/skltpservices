@@ -13,14 +13,14 @@
 
 	<groupId>se.skl.skltpservices.apse</groupId>
 	<artifactId>ApSeMedicalServicesAdapter</artifactId>
-	<version>1.6.6-RC2-SNAPSHOT</version>
+	<version>1.6.6-RC2</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 
 	<scm>
-		<connection>http://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk</developerConnection>
-		<url>http://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk</url>
+		<connection>http://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/tags/ApSeMedicalServicesAdapter-1.6.6-RC2</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/tags/ApSeMedicalServicesAdapter-1.6.6-RC2</developerConnection>
+		<url>http://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/tags/ApSeMedicalServicesAdapter-1.6.6-RC2</url>
 	</scm>
 
 	<properties>
