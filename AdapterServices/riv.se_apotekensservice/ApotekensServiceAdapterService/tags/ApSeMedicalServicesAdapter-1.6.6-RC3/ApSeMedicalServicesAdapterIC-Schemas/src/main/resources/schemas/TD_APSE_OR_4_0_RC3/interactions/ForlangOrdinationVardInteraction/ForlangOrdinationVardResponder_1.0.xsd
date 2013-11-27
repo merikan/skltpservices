@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:or="urn:riv:se.apotekensservice:or:1" xmlns="urn:riv:se.apotekensservice:or:ForlangOrdinationVardResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:or:ForlangOrdinationVardResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_or_1.0.xsd" namespace="urn:riv:se.apotekensservice:or:1"/>
+  <xs:element name="ForlangOrdinationVard" type="ForlangOrdinationVardRequestType"/>
+  <xs:element name="ForlangOrdinationVardResponse" type="ForlangOrdinationVardResponseType"/>
+  <xs:element name="ApplicationException" type="or:ApplicationException"/>
+  <xs:element name="SystemException" type="or:SystemException"/>
+  <xs:complexType name="ForlangOrdinationVardRequestType">
+    <xs:sequence>
+      <xs:element nillable="false" name="ordinationsId" type="xs:long">
+        <xs:annotation>
+          <xs:documentation>Unikt id för en ordination</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="ordinationstidpunkt" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum och eventuell tid då ordinationen förlängs.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="ordinatorsKontaktuppgift" type="or:KontaktuppgiftRequest">
+        <xs:annotation>
+          <xs:documentation>Ordinatörens kontaktinformation.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="originalOrdinationsId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Unikt id för ordinationens original</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="underlagsversion" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Ordinationslistans underlagsversion.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="sistaGiltighetsdag" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Ordinationens sista giltighetsdag.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ForlangOrdinationVardResponseType">
+    <xs:sequence>
+      <xs:element nillable="false" name="affResultat" type="or:AFFResultatResponse">
+        <xs:annotation>
+          <xs:documentation>AffResultat</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="ordinationsId" type="xs:long">
+        <xs:annotation>
+          <xs:documentation>Unikt id för en ordination</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ordinationsstatus" type="or:OrdinationsstatusResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Objekt innehållande alla parametrar från Ordinationsstatus (och Tillståndsstatus)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="underlagsversion" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Ordinationslistans underlagsversion.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

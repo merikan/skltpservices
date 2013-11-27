@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:or="urn:riv:se.apotekensservice:or:1" xmlns="urn:riv:se.apotekensservice:or:SkapaOrdinationVardResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:or:SkapaOrdinationVardResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_or_1.0.xsd" namespace="urn:riv:se.apotekensservice:or:1"/>
+  <xs:element name="SkapaOrdinationVard" type="SkapaOrdinationVardRequestType"/>
+  <xs:element name="SkapaOrdinationVardResponse" type="SkapaOrdinationVardResponseType"/>
+  <xs:element name="ApplicationException" type="or:ApplicationException"/>
+  <xs:element name="SystemException" type="or:SystemException"/>
+  <xs:complexType name="SkapaOrdinationVardRequestType">
+    <xs:sequence>
+      <xs:element name="dispenseradOrdination" type="or:DispenseradOrdinationRequest" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Dispenserad ordination.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="helforpackningsordination" type="or:HelforpackningsordinationRequest" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Helforpackningsordination</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="ordinatorsKontaktuppgift" type="or:KontaktuppgiftRequest">
+        <xs:annotation>
+          <xs:documentation>Ordinatörens kontaktinformation.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="underlagsversion" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Version på Ordinationslista. Används för att verifiera att klientsystemet har rätt underlag vid uppdateringar. 
+Obligatorisk parameter om ordinationen tillhör patient med personnummer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SkapaOrdinationVardResponseType">
+    <xs:sequence>
+      <xs:element nillable="false" name="affResultat" type="or:AFFResultatResponse">
+        <xs:annotation>
+          <xs:documentation>AFF-resultat för skapandet av ordinationen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ordinationsstatus" type="or:OrdinationsstatusResponse" minOccurs="0"/>
+      <xs:element name="skapatOrdinationsId" type="xs:long" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Om ordination skapats, returneras ordinationsid.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="underlagsversion" type="xs:int" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Version på Ordinationslista. Används för att verifiera att klientsystemet har rätt underlag vid uppdateringar. 
+Obligatorisk parameter om ordinationen tillhör patient med personnummer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
