@@ -52,7 +52,7 @@
 			<dependency>
 				<groupId>se.inera.pascal.ticket</groupId>
 				<artifactId>TicketMachine</artifactId>
-				<version>1.1.0-RC2</version>
+				<version>1.1.0-RC3</version>
 			</dependency>
 
 			<!-- soi toolkit dependencies -->
