@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:folk="urn:riv:se.apotekensservice:folk:1" xmlns="urn:riv:se.apotekensservice:folk:RegistreraFullmaktResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:folk:RegistreraFullmaktResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_folk_1.0.xsd" namespace="urn:riv:se.apotekensservice:folk:1"/>
+  <xs:element name="RegistreraFullmakt" type="RegistreraFullmaktRequestType"/>
+  <xs:element name="RegistreraFullmaktResponse" type="RegistreraFullmaktResponseType"/>
+  <xs:element name="ApplicationException" type="folk:ApplicationException"/>
+  <xs:element name="SystemException" type="folk:SystemException"/>
+  <xs:complexType name="RegistreraFullmaktRequestType">
+    <xs:sequence>
+      <xs:element nillable="false" name="apoteksidReg" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>GLN-kod för apotek som registrerar fullmakt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="eKanal" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Markerar om fullmakten endast skapats via elektronisk kanal (t.ex. webbtjänst) 
+och ej via manuell blankett.
+
+<para>true = web</para>
+            <para>false = manuell blankett</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="enhetId" type="xs:long" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Enhets-id.
+Giltigt enhets-id för fullmaktstagare.
+Obligatorisk parameter om fullmaktstagare är en vårdenhet.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="giltigTom" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Datum då fullmakten slutar gälla enligt avtal.
+Anges inte något datum gäller fullmakten tills den avslutas.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="givarePersNr" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Giltigt personnummer för fullmaktsgivare.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="klientinformation" type="folk:KlientinformationRequest">
+        <xs:annotation>
+          <xs:documentation>KlientInformation - innehåller information om anropande klient.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="legPersNr" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Legitimerat personnummer.
+Personnummer på person som lämnat in blankett och legitimerats av apotekspersonalen.
+Kan vara fullmaktsgivare eller fullmaktstagare.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="orgId" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Organisations-id.
+Giltigt organisations-id för fullmaktstagare.
+Obligatorisk parameter om fullmaktstagare är en vårdenhet.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="tagarePersNr" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Giltigt personnummer för fullmaktstagare.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="vhavPersNr" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Giltigt personnummer för vårdnadshavare som registrerade fullmakten
+Obligatorisk parameter om fullmaktsgivaren är under 18 år.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RegistreraFullmaktResponseType">
+    <xs:sequence>
+      <xs:element nillable="false" name="status" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Återkoppling om registreringen lyckades
+<para>0 = OK - Registeringen genomförd.</para>
+            <para>1 = NOK - Fullmaktstagare saknas i FOLK.</para>
+            <para>2 = NOK - Fullmaktsgivare saknas i FOLK.</para>
+            <para>3 = NOK - Legitimerad person saknas i FOLK.</para>
+            <para>4 = NOK - Vårdnadshavare saknas i FOLK.</para>
+            <para>5 = NOK - Ingen vårdnadshavare relation till fullmaktsgivaren finns enligt FOLK.</para>
+            <para>6 = NOK - Det finns redan en aktiv fullmakt registrerad.</para>
+            <para>7 = NOK - Vårdenheten finns inte registrerad.</para>
+            <para>8 = NOK - Kombinationen av organisations-id och enhets-id stämmer inte överrens och vårdenheten kan inte identifieras.</para>
+            <para>9 = NOK - Vårdenheten är avregistrerad.</para>
+            <para>10 = NOK - Angiven gln-kod för anropande system ogiltig.</para>
+            <para>11 = NOK - Angiven gln-kod för apotekId ogiltig.</para>
+            <para>12 = NOK - Fullmaktsgivare är sekretesskyddad.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
