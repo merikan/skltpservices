@@ -1,0 +1,55 @@
+<mule xmlns="http://www.mulesource.org/schema/mule/core/2.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:cxf="http://www.mulesource.org/schema/mule/cxf/2.2" xmlns:https="http://www.mulesource.org/schema/mule/https/2.2"
+	xsi:schemaLocation="
+               http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+               http://www.mulesource.org/schema/mule/core/2.2 http://www.mulesource.org/schema/mule/core/2.2/mule.xsd
+               http://www.mulesource.org/schema/mule/https/2.2 http://www.mulesource.org/schema/mule/https/2.2/mule-https.xsd
+               http://www.mulesource.org/schema/mule/cxf/2.2  http://www.mulesource.org/schema/mule/cxf/2.2/mule-cxf.xsd">
+
+	<!-- Name of this file is mandatory and may not be changed. -->
+
+	<model name="Bridged-ApotekenService-HamtaPatientInfo.v4-model">
+
+		<service
+			name="Bridged-Bridged-ApotekenService-HamtaPatientInfo.v4-service">
+			<inbound>
+				<cxf:inbound-endpoint
+					address="${inbound.endpoint.apotekensservice.axs.HamtaPatientInfo.v4}"
+					wsdlLocation="classpath:/TD_APSE_AXS_4_0_RC1/interactions/HamtaPatientInfoInteraction/HamtaPatientInfoInteraction_4.0_rivtabp21.wsdl"
+					serviceName="HamtaPatientInfoResponderService" namespace="urn:riv:se.apotekensservice:axs:HamtaPatientInfo:4:rivtabp21"
+					proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
+					
+			</inbound>
+			<outbound>
+				<pass-through-router>
+					<cxf:outbound-endpoint
+						address="${outbound.endpoint.apotekensservice.axs.HamtaPatientInfo.v4}"
+						synchronous="true" proxy="true" payload="envelope"
+						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
+				</pass-through-router>
+			</outbound>
+		</service>
+		
+		<service
+			name="Bridged-ApotekenService-HamtaPatientInfo.v4-service-env2">
+			<inbound>
+				<cxf:inbound-endpoint
+					address="${inbound.endpoint.env2.apotekensservice.axs.HamtaPatientInfo.v4}"
+					wsdlLocation="classpath:/TD_APSE_AXS_4_0_RC1/interactions/HamtaPatientInfoInteraction/HamtaPatientInfoInteraction_4.0_rivtabp21.wsdl"
+					serviceName="HamtaPatientInfoResponderService" namespace="urn:riv:se.apotekensservice:axs:HamtaPatientInfo:4:rivtabp21"
+					proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
+			</inbound>
+			<outbound>
+				<pass-through-router>
+					<cxf:outbound-endpoint
+						address="${outbound.endpoint.env2.apotekensservice.axs.HamtaPatientInfo.v4}"
+						synchronous="true" proxy="true" payload="envelope"
+						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
+				</pass-through-router>
+			</outbound>
+		</service>
+		
+	</model>
+
+</mule>
