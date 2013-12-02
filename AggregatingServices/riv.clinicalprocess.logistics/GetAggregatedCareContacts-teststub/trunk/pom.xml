@@ -23,13 +23,13 @@
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.logistics.logistics</groupId>
 	    	<artifactId>GetAggregatedCareContacts</artifactId>
-	    	<version>1.0.0-RC7-SNAPSHOT</version>
+	    	<version>1.0.0-RC8</version>
 	    	<type>test-jar</type>
 	    </dependency>
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.logistics.logistics</groupId>
 	    	<artifactId>GetAggregatedCareContacts</artifactId>
-	    	<version>1.0.0-RC7-SNAPSHOT</version>
+	    	<version>1.0.0-RC8</version>
 	    	<classifier>core</classifier>    	
 	    </dependency>
       <dependency>
