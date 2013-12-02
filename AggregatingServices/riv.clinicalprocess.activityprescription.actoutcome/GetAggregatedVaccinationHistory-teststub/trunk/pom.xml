@@ -23,14 +23,14 @@
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.activityprescription.actoutcome</groupId>
 	    	<artifactId>GetAggregatedVaccinationHistory</artifactId>
-	    	<version>1.0.0-RC5-SNAPSHOT</version>
+	    	<version>1.0.0-RC5</version>
 	    	<type>test-jar</type>
 	    </dependency>
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.activityprescription.actoutcome</groupId>
 	    	<artifactId>GetAggregatedVaccinationHistory</artifactId>
-	    	<version>1.0.0-RC5-SNAPSHOT</version>
-	    	<classifier>core</classifier>    	
+	    	<version>1.0.0-RC5</version>
+	    	<classifier>core</classifier>
 	    </dependency>
       <dependency>
           <groupId>se.skltp.agp</groupId>
