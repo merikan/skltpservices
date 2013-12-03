@@ -174,7 +174,7 @@ Flera av parametrarna nedan innehåller exempel från intern testmiljö och beh�
 	WIRETAP_2_NOTIFY_OUTBOUND_LOGICAL_ADDRESS=5565594230-wiretap
 }}}
 
-=== Konfigurera loggning av LogEvents till ActiveMQ i log4j.xml ===
+=== Konfigurera loggning av ´LogEvents´ till ActiveMQ i log4j.xml ===
 
 I wiretap används en standardkomponet för hantering av asynkron loggning till kö. Denna komponent kan konfigureras i <wiretap_app>/classes/log4j.xml, se nedan. Default skall wiretap logga enbart ERROR, men vid behov kunna logga även INFO meddelanden.
 
