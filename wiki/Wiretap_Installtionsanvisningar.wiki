@@ -176,7 +176,7 @@ Flera av parametrarna nedan innehåller exempel från intern testmiljö och beh�
 
 === Konfigurera loggning av `LogEvents` till ActiveMQ i log4j.xml ===
 
-I wiretap används en standardkomponet för hantering av asynkron loggning till kö. Denna komponent kan konfigureras i <wiretap_app>/classes/log4j.xml, se nedan. Default skall wiretap logga enbart ERROR, men vid behov kunna logga även INFO meddelanden.
+I wiretap används en standardkomponet för hantering av asynkron loggning till kö. Denna komponent kan konfigureras i `<wiretap_app>/classes/log4j.xml`, se nedan. Default skall wiretap logga enbart ERROR, men vid behov kunna logga även INFO meddelanden.
 
 {{{
 <!--     
