@@ -1,5 +1,6 @@
 #summary Installationsanvisningar Wiretap
 
+<wiki:toc max_depth="3" />
 
 == Förutsättningar ==
 
