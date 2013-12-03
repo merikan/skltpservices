@@ -190,6 +190,14 @@ I wiretap används en standardkomponet för hantering av asynkron loggning till 
  </logger>
 }}}
 
+I wiretap-config-override.properties konfigureras vart dessa meddelanden skall hamna, default enligt nedan.
+
+{{{
+       # Default queue names for info end error log-events
+        SOITOOLKIT_LOG_INFO_QUEUE=SOITOOLKIT.LOG.INFO
+        SOITOOLKIT_LOG_ERROR_QUEUE=SOITOOLKIT.LOG.ERROR
+}}}
+
 == Uppstart ==
 Rekommenderat för SKLTP är att köra Mule i "fixed mode" för att kunna hantera vilken startordning applikationerna körs. Intyg-wiretap applikationen har inte några beroenden till andra SKLTP komponenter som behöver ta hänsyn till, vid tex uppstart, men den bör läggas sist i uppstarten. 
 
