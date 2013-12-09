@@ -31,6 +31,7 @@ When running in adapter platform on Mule 2 the properties in DominoHttp10Adapter
 
 == Adding endpoints to the adapter ==
 To extend DominoHttp10Adapter with more endpoints you need to add more services to the file: 
+
 /AdapterServices/riv.ehr.accesscontrol/DominoHttp10Adapter/trunk/src/main/app/services/AssertCareEngagement-domino-service.xml
 
 Copy a service element and replace the existing number with a new one:
