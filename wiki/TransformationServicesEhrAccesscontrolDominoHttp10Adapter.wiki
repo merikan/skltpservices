@@ -21,6 +21,7 @@ To extend DominoHttp10Adapter with more endpoints you need to add more services 
 /AdapterServices/riv.ehr.accesscontrol/DominoHttp10Adapter/trunk/src/main/app/services/AssertCareEngagement-domino-service.xml
 
 Copy a service element and replace the existing number with a new one:
+{{{
 		<service name="AssertCareEngagement-domino-http-adapter-30">
 			<inbound>
 				<https:inbound-endpoint address="${inbound.endpoint.dominohttpadapter.30}" synchronous="true" />
@@ -31,7 +32,7 @@ Copy a service element and replace the existing number with a new one:
 				</pass-through-router>
 			</outbound>
 		</service>	 
-
+}}}
 
 
 
