@@ -16,6 +16,19 @@ Checkout code and run mvn clean install or mvn clean package.
 https://code.google.com/p/skltpservices/source/browse/AdapterServices/riv.ehr.accesscontrol/DominoHttp10Adapter
 }}}
 
+
+==Deploy/Undeploy distribution==
+
+Deploy the adapter by 
+ # copying the ehr-accescontrol-schemas found in RIV TA into the folder `<vp-home>/tjanstebryggan/services`.
+ # copying the DominoHttp10Adapter-1.0.1.jar into the folder `<vp-home>/tjanstebryggan/services`.
+ # Configure as described below in Configuration
+ # Restart Mule 2
+
+==Configuration==
+
+When running in adapter platform on Mule 2 the properties in DominoHttp10Adapter-config.properties needs to be added to the adapter platform config file tb-config.properties.
+
 == Adding endpoints to the adapter ==
 To extend DominoHttp10Adapter with more endpoints you need to add more services to the file: 
 /AdapterServices/riv.ehr.accesscontrol/DominoHttp10Adapter/trunk/src/main/app/services/AssertCareEngagement-domino-service.xml
@@ -34,16 +47,4 @@ Copy a service element and replace the existing number with a new one:
 		</service>	 
 }}}
 
-
-
-==Deploy/Undeploy distribution==
-
-Deploy the adapter by 
- # copying the ehr-accescontrol-schemas found in RIV TA into the folder `<vp-home>/tjanstebryggan/services`.
- # copying the DominoHttp10Adapter-1.0.1.jar into the folder `<vp-home>/tjanstebryggan/services`.
- # Configure as described below in Configuration
- # Restart Mule 2
-
-==Configuration==
-
-When running in adapter platform on Mule 2 the properties in DominoHttp10Adapter-config.properties needs to be added to the adapter platform config file tb-config.properties.
+A new version of DominoHttp10Adapter needs to be deployed after this change.
