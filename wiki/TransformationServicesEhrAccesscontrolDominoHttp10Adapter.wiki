@@ -16,11 +16,30 @@ Checkout code and run mvn clean install or mvn clean package.
 https://code.google.com/p/skltpservices/source/browse/AdapterServices/riv.ehr.accesscontrol/DominoHttp10Adapter
 }}}
 
+== Adding endpoints to the adapter ==
+To extend DominoHttp10Adapter with more endpoints you need to add more services to the file: 
+/AdapterServices/riv.ehr.accesscontrol/DominoHttp10Adapter/trunk/src/main/app/services/AssertCareEngagement-domino-service.xml
+
+Copy a service element and replace the existing number with a new one:
+		<service name="AssertCareEngagement-domino-http-adapter-30">
+			<inbound>
+				<https:inbound-endpoint address="${inbound.endpoint.dominohttpadapter.30}" synchronous="true" />
+			</inbound>
+			<outbound>
+				<pass-through-router>
+					<https:outbound-endpoint synchronous="true" address="${outbound.endpoint.dominohttpadapter.30}" transformer-refs="httpVersionTransformer"/>
+				</pass-through-router>
+			</outbound>
+		</service>	 
+
+
+
+
 ==Deploy/Undeploy distribution==
 
 Deploy the adapter by 
  # copying the ehr-accescontrol-schemas found in RIV TA into the folder `<vp-home>/tjanstebryggan/services`.
- # copying the DominoHttp10Adapter-1.0.0.jar into the folder `<vp-home>/tjanstebryggan/services`.
+ # copying the DominoHttp10Adapter-1.0.1.jar into the folder `<vp-home>/tjanstebryggan/services`.
  # Configure as described below in Configuration
  # Restart Mule 2
 
