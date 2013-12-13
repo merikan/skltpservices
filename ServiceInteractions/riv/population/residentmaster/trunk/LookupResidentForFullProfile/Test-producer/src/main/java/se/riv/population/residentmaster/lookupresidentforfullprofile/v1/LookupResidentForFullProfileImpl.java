@@ -3,6 +3,7 @@ package se.riv.population.residentmaster.lookupresidentforfullprofile.v1;
 import javax.jws.WebService;
 
 import se.riv.population.residentmaster.lookupresidentforfullprofile.v1.rivtabp21.LookupResidentForFullProfileResponderInterface;
+import se.riv.population.residentmaster.lookupresidentforfullprofileresponder.v1.LookUpSpecificationType;
 import se.riv.population.residentmaster.lookupresidentforfullprofileresponder.v1.LookupResidentForFullProfileResponseType;
 import se.riv.population.residentmaster.lookupresidentforfullprofileresponder.v1.LookupResidentForFullProfileType;
 import se.riv.population.residentmaster.v1.*;
@@ -25,8 +26,8 @@ public class LookupResidentForFullProfileImpl implements LookupResidentForFullPr
     public static final Map<String, List<Map<Attribut, String>>> RELATIONS = new HashMap<String, List<Map<Attribut, String>>>();
     static {
         Map<Attribut, String> ullaRelation_1 = new HashMap<Attribut, String>();
-        ullaRelation_1.put(Attribut.PNR, "200601010105");
-        ullaRelation_1.put(Attribut.FNAME, "Anna");
+        ullaRelation_1.put(Attribut.PNR, "201111111115");
+        ullaRelation_1.put(Attribut.FNAME, "Axel");
         ullaRelation_1.put(Attribut.ENAME, "Alm");
 
         Map<Attribut, String> ullaRelation_2 = new HashMap<Attribut, String>();
@@ -34,12 +35,17 @@ public class LookupResidentForFullProfileImpl implements LookupResidentForFullPr
         ullaRelation_2.put(Attribut.FNAME, "Alva");
         ullaRelation_2.put(Attribut.ENAME, "Alm");
 
+        Map<Attribut, String> ullaRelation_3 = new HashMap<Attribut, String>();
+        ullaRelation_3.put(Attribut.PNR, "200001010101");
+        ullaRelation_3.put(Attribut.FNAME, "Anna");
+        ullaRelation_3.put(Attribut.ENAME, "Alm");
+
         Map<Attribut, String> fridaRelation_1 = new HashMap<Attribut, String>();
         fridaRelation_1.put(Attribut.PNR, "201010101019");
         fridaRelation_1.put(Attribut.FNAME, "Frans");
         fridaRelation_1.put(Attribut.ENAME, "Kranstege");
 
-        RELATIONS.put("198611062384", Arrays.asList(ullaRelation_1, ullaRelation_2));
+        RELATIONS.put("198611062384", Arrays.asList(ullaRelation_1, ullaRelation_2, ullaRelation_3));
         RELATIONS.put("197705232382", Arrays.asList(fridaRelation_1));
     }
 
