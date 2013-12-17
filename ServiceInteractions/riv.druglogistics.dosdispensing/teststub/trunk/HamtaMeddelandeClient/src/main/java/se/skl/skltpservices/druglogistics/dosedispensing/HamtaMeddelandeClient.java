@@ -47,6 +47,8 @@ public class HamtaMeddelandeClient {
 	private static String truststoreType = "JKS";
 	private static String truststorePassword = "password";
 	
+	private static int maxRetries = 3;
+	
 	/**
 	 * @param args
 	 */
@@ -67,14 +69,31 @@ public class HamtaMeddelandeClient {
         final HttpEntity requestEntity = createRequest();
         final String expectedResponse = createExpectedResponse();
         
-//		while (true) {
-//			Thread.sleep(sleepTime);
-//			new Thread(new Runnable() {public void run() {new HamtaMeddelandeClient().performHttpsPost(requestEntity, expectedResponse);}}).start();
-//		}
         
-        new HamtaMeddelandeClient().performHttpsPost(requestEntity, expectedResponse);
+        int requests = 0;
+        
+		while (true) {
+			Thread.sleep(sleepTime);
+			new Thread(new Runnable() {public void run() {new HamtaMeddelandeClient().performHttpsPost(requestEntity, expectedResponse,0);}}).start();
+			requests++;
+			
+			if(requests % 100 == 0) {
+				System.out.println("Anrop: " + requests);
+			}
+		}
+		
+        
+//        new HamtaMeddelandeClient().performHttpsPost(requestEntity, expectedResponse, 0);
+        
+        
+//        for(int i = 0; i < 5; i++) {
+//        	new Thread(new Runnable() {public void run() {new HamtaMeddelandeClient().performHttpsPost(requestEntity, expectedResponse);}}).start();
+//        	Thread.sleep(500);
+//        }
 	}
 
+	
+	
 	private static String createExpectedResponse() throws IOException {
 //	InputStream expectedResponseStream = HamtaMeddelandeClient.class.getClassLoader().getResourceAsStream("expectedResponse.xml");
 		InputStream expectedResponseStream = HamtaMeddelandeClient.class.getClassLoader().getResourceAsStream("expectedResponse2.xml");
@@ -91,7 +110,7 @@ public class HamtaMeddelandeClient {
 		return requestEntity;
 	}
 
-	public void performHttpsPost(HttpEntity requestEntity, String expectedContent) {
+	public void performHttpsPost(HttpEntity requestEntity, String expectedContent, int retries) {
 		long ts = System.currentTimeMillis();
 		long id = Thread.currentThread().getId();
 
@@ -113,14 +132,11 @@ public class HamtaMeddelandeClient {
 			        .setRetryHandler(new DefaultHttpRequestRetryHandler(0, false))
 			        .build();
 	
-			RequestConfig requestConfig = RequestConfig.custom()
-	    		.setConnectTimeout(60000)
-	    		.setSocketTimeout(60000)
-	            .build();
 	
 	        HttpPost httpPost = new HttpPost(endpointAddress);
-	        httpPost.setConfig(requestConfig);
 	        httpPost.setEntity(requestEntity);
+	        httpPost.setHeader("Content-Type", "text/xml;Charset='UTF-8'");
+	        httpPost.setHeader("SOAPAction", "urn:riv:druglogistics:dosedispensing:HamtaMeddelandenResponder:1:HamtaMeddelanden");
 	
 	        HttpResponse response = httpclient.execute(httpPost, context);
 	
@@ -128,17 +144,36 @@ public class HamtaMeddelandeClient {
             int retCode = response.getStatusLine().getStatusCode();
             String content = getContent(responseEntity);
 
-            if (!content.contains(expectedContent)) {
-            	System.err.println("Expected response: [" + expectedContent + "]");
-            	throw new RuntimeException("Unexpected response: [" + content + "]");
-            } else {
-            	System.err.println(content);
+            
+            if (retCode >= 400) {
+            	throw new RuntimeException("Bad status code: [" + retCode + "] with response [" + content + "]");
+            	
             }
+            
+//            if (!content.contains(expectedContent)) {
+//            	//System.err.println("Expected response: [" + expectedContent + "]");
+//            	throw new RuntimeException("Unexpected response: [" + content + "]");
+//            } 
+            
             
             logOkRequest(ts, id, "Status = " + retCode);
         } catch (Exception e) {
+        	
 			logErrorRequest(ts, id, e);
 			e.printStackTrace();
+			
+			if (retries == 0) {
+				System.err.println("First request failed. Retrying...");
+				performHttpsPost(requestEntity, expectedContent, ++retries);
+				
+			} else if (retries < maxRetries) {
+				System.err.println("Retry " + retries + " failed. Retrying...");
+				performHttpsPost(requestEntity, expectedContent, ++retries);
+				
+			} else {
+				System.out.println("Request failed. Giving up....");
+			}
+			
 		}		
 	}
 
@@ -206,7 +241,7 @@ public class HamtaMeddelandeClient {
 		}
 
 		int threadCnt = Thread.activeCount();
-		System.out.println(new Date() + ": (" + threadCnt + "/" + okCnt + "/" + errorCnt + ") " + getTs(ts) + ": " + msg);
+		System.out.println("\n\n" + new Date() + ": (" + threadCnt + "/" + okCnt + "/" + errorCnt + ") " + getTs(ts) + ": " + msg);
 	}
 
 	private static long getTs(long ts) {
