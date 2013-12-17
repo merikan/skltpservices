@@ -1,0 +1,13 @@
+#!/bin/bash
+
+SLEEPTIME="2000"
+ENDPOINT="https://localhost:20000/vp/GetSubjectOfCareSchedule/1/rivtabp21"
+KEYSTOREPATH="/path/to/keystore.jks"
+KEYSTORETYPE="jks"
+KEYSTOREPASSWORD="password"
+TRUSTSTOREPATH="/path/to/truststore.jks"
+TRUSTSTORETYPE="JKS"
+TRUSSTOREPASSWORD="password"
+
+#java -jar target/client-getsubjectofcareschedule-1.0.0-SNAPSHOT-jar-with-dependencies.jar $SLEEPTIME $ENDPOINT $KEYSTOREPATH $KEYSTORETYPE $KEYSTOREPASSWORD $TRUSTSTOREPATH $TRUSTSTORETYPE $TRUSSTOREPASSWORD
+java -jar target/client-HamtaMeddelanden-1.0.0-SNAPSHOT-jar-with-dependencies.jar $SLEEPTIME $ENDPOINT $KEYSTOREPATH $KEYSTORETYPE $KEYSTOREPASSWORD $TRUSTSTOREPATH $TRUSTSTORETYPE $TRUSSTOREPASSWORD
