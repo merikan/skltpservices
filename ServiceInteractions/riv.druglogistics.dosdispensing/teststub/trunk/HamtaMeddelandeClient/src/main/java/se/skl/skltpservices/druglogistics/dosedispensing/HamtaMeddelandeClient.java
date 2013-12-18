@@ -46,6 +46,7 @@ public class HamtaMeddelandeClient {
 	private static String truststorePath = "src/truststore.jks";
 	private static String truststoreType = "JKS";
 	private static String truststorePassword = "password";
+	private static int errors = 0;
 	
 	private static int maxRetries = 3;
 	
@@ -74,22 +75,18 @@ public class HamtaMeddelandeClient {
         
 		while (true) {
 			Thread.sleep(sleepTime);
-			new Thread(new Runnable() {public void run() {new HamtaMeddelandeClient().performHttpsPost(requestEntity, expectedResponse,0);}}).start();
+			new Thread(new Runnable() {public void run() {new HamtaMeddelandeClient().performPost(requestEntity, expectedResponse,0);}}).start();
 			requests++;
 			
 			if(requests % 100 == 0) {
-				System.out.println("Anrop: " + requests);
+				System.out.println("Anrop: " + requests + " Errors: " + errors);
 			}
 		}
 		
+        // Do a single request
+//        new HamtaMeddelandeClient().performPost(requestEntity, expectedResponse, 0);
         
-//        new HamtaMeddelandeClient().performHttpsPost(requestEntity, expectedResponse, 0);
-        
-        
-//        for(int i = 0; i < 5; i++) {
-//        	new Thread(new Runnable() {public void run() {new HamtaMeddelandeClient().performHttpsPost(requestEntity, expectedResponse);}}).start();
-//        	Thread.sleep(500);
-//        }
+
 	}
 
 	
@@ -109,25 +106,31 @@ public class HamtaMeddelandeClient {
         final HttpEntity requestEntity = new StringEntity(request);
 		return requestEntity;
 	}
+	
+	public void performPost(HttpEntity requestEntity, String expectedContent, int retries) {
+		if (endpointAddress.startsWith("https")) {
+			performHttpsPost(requestEntity, expectedContent, retries);
+		} else {
+			performHttpPost(requestEntity, expectedContent, retries);
+		}
+	}
 
-	public void performHttpsPost(HttpEntity requestEntity, String expectedContent, int retries) {
+	/**
+	 * Make a http-request
+	 * 
+	 * @param requestEntity
+	 * @param expectedContent
+	 * @param retries
+	 */
+	public void performHttpPost(HttpEntity requestEntity, String expectedContent, int retries) {
 		long ts = System.currentTimeMillis();
 		long id = Thread.currentThread().getId();
 
         try {
         	
-//        	Registry<ConnectionSocketFactory> socketFactoryRegistry = setupSSLSocketFactory();
-        	
-//            HttpClientConnectionManager connManager = new BasicHttpClientConnectionManager(
-//                    socketFactoryRegistry);
 
 	        HttpClientContext context = HttpClientContext.create();
 
-//	        HttpClient httpclient = HttpClients.custom()
-//		        .setRetryHandler(new DefaultHttpRequestRetryHandler(0, false))
-//		        .setConnectionManager(connManager)
-//		        .build();
-	        
 	        HttpClient httpclient = HttpClients.custom()
 			        .setRetryHandler(new DefaultHttpRequestRetryHandler(0, false))
 			        .build();
@@ -163,12 +166,88 @@ public class HamtaMeddelandeClient {
 			e.printStackTrace();
 			
 			if (retries == 0) {
+				
+				errors++;
+				
 				System.err.println("First request failed. Retrying...");
-				performHttpsPost(requestEntity, expectedContent, ++retries);
+				performPost(requestEntity, expectedContent, ++retries);
 				
 			} else if (retries < maxRetries) {
 				System.err.println("Retry " + retries + " failed. Retrying...");
-				performHttpsPost(requestEntity, expectedContent, ++retries);
+				performPost(requestEntity, expectedContent, ++retries);
+				
+			} else {
+				System.out.println("Request failed. Giving up....");
+			}
+			
+		}		
+	}
+	
+	/**
+	 * Make a https-request
+	 * 
+	 * @param requestEntity
+	 * @param expectedContent
+	 * @param retries
+	 */
+	public void performHttpsPost(HttpEntity requestEntity, String expectedContent, int retries) {
+		long ts = System.currentTimeMillis();
+		long id = Thread.currentThread().getId();
+
+        try {
+        	
+        	Registry<ConnectionSocketFactory> socketFactoryRegistry = setupSSLSocketFactory();
+        	
+            HttpClientConnectionManager connManager = new BasicHttpClientConnectionManager(
+                    socketFactoryRegistry);
+
+	        HttpClientContext context = HttpClientContext.create();
+
+	        HttpClient httpclient = HttpClients.custom()
+		        .setRetryHandler(new DefaultHttpRequestRetryHandler(0, false))
+		        .setConnectionManager(connManager)
+		        .build();
+	        
+	
+	        HttpPost httpPost = new HttpPost(endpointAddress);
+	        httpPost.setEntity(requestEntity);
+	        httpPost.setHeader("Content-Type", "text/xml;Charset='UTF-8'");
+	        httpPost.setHeader("SOAPAction", "urn:riv:druglogistics:dosedispensing:HamtaMeddelandenResponder:1:HamtaMeddelanden");
+	
+	        HttpResponse response = httpclient.execute(httpPost, context);
+	
+	        HttpEntity responseEntity = response.getEntity();
+            int retCode = response.getStatusLine().getStatusCode();
+            String content = getContent(responseEntity);
+
+            
+            if (retCode >= 400) {
+            	throw new RuntimeException("Bad status code: [" + retCode + "] with response [" + content + "]");
+            	
+            }
+            
+//            if (!content.contains(expectedContent)) {
+//            	//System.err.println("Expected response: [" + expectedContent + "]");
+//            	throw new RuntimeException("Unexpected response: [" + content + "]");
+//            } 
+            
+            
+            logOkRequest(ts, id, "Status = " + retCode);
+        } catch (Exception e) {
+        	
+			logErrorRequest(ts, id, e);
+			e.printStackTrace();
+			
+			if (retries == 0) {
+				
+				errors++;
+				
+				System.err.println("First request failed. Retrying...");
+				performPost(requestEntity, expectedContent, ++retries);
+				
+			} else if (retries < maxRetries) {
+				System.err.println("Retry " + retries + " failed. Retrying...");
+				performPost(requestEntity, expectedContent, ++retries);
 				
 			} else {
 				System.out.println("Request failed. Giving up....");
@@ -193,16 +272,6 @@ public class HamtaMeddelandeClient {
 		    .register("https", new SSLConnectionSocketFactory(sslContext,SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER))
 		    .build();
 		
-//		  HttpParams params = new BasicHttpParams();
-//		    SchemeRegistry registry = new SchemeRegistry();
-//		    registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-//		    ClientConnectionManager cm = new ThreadSafeClientConnManager(params, registry);
-		  
-		
-//		Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
-//	    .register("http", new SingleConnectionManager())
-//	    .build();
-
 		
 		return socketFactoryRegistry;
 	}
