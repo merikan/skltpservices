@@ -16,6 +16,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>se.skl.skltpservices.population.residentmaster</groupId>
   <artifactId>population-residentmaster-LookupResidentForFullProfile-testproducer</artifactId>
+  <packaging>war</packaging>
   <name>LookupResidentForFullProfile service testproducer</name>
   <url>http://maven.apache.org</url>
 
@@ -25,6 +26,24 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
+  <build>
+      <finalName>${project.artifactId}</finalName>
+      <plugins>
+          <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>tomcat-maven-plugin</artifactId>
+              <configuration>
+                  <url>${TOMCAT_MANAGER_URL}</url>
+                  <addContextWarDependencies>true</addContextWarDependencies>
+                  <update>true</update>
+                  <mode>war</mode>
+                  <username>${TOMCAT_USERNAME}</username>
+                  <password>${TOMCAT_PASSWORD}</password>
+              </configuration>
+          </plugin>
+      </plugins>
+  </build>
+
   <dependencies>
     <!-- Schemas -->
     <dependency>
@@ -33,25 +52,69 @@
       <version>1</version>
     </dependency>
 
+	<!-- Logging -->
+    <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>${slf4j.version}</version>
+    </dependency>
+
+	<!-- Spring -->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <exclusions>
+            <!-- Exclude Commons Logging in favor of SLF4j -->
+            <exclusion>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+            </exclusion>
+        </exclusions>
+		<version>${spring.fw.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+		<version>${spring.fw.version}</version>		
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+		<version>${spring.fw.version}</version>		
+    </dependency>
 
     <!-- CXF -->
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-frontend-jaxws</artifactId>
-      <version>${cxf.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-transports-http</artifactId>
-      <version>${cxf.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-transports-http-jetty</artifactId>
-      <version>${cxf.version}</version>
-    </dependency>
+	<dependency>
+		<groupId>org.apache.cxf</groupId>
+		<artifactId>cxf-rt-frontend-jaxws</artifactId>
+		<version>${cxf.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.cxf</groupId>
+		<artifactId>cxf-rt-transports-http</artifactId>
+		<version>${cxf.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.cxf</groupId>
+		<artifactId>cxf-rt-transports-http</artifactId>
+		<version>${cxf.version}</version>
+	</dependency>
   </dependencies>
-
   <profiles>
     <profile>
       <id>localtest</id>
@@ -81,6 +144,13 @@
           </plugin>
         </plugins>
       </build>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http-jetty</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+	</dependencies>	  
     </profile>
   </profiles>
 
