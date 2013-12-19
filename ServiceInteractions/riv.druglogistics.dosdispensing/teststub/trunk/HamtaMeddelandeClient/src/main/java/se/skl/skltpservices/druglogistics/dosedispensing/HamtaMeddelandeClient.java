@@ -13,6 +13,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.util.Date;
 
+import javax.management.RuntimeErrorException;
 import javax.net.ssl.SSLContext;
 
 import org.apache.http.HttpEntity;
@@ -38,7 +39,7 @@ public class HamtaMeddelandeClient {
 	
 	private static long sleepTime = 1000L;
 	//private static String endpointAddress = "https://localhost:20001/loadtest/testproducer/GetSubjectOfCareSchedule/1/rivtabp21";
-	private static String endpointAddress = "http://localhost:8088/mockHamtaMeddelandenResponderBinding";
+	private static String endpointAddress = "https://localhost:8088/mockHamtaMeddelandenResponderBinding";
 //	private static String endpointAddress = "https://192.168.19.10:20000/vp/HamtaMeddelanden/1/rivtabp20";
 	private static String keystorePath = "src/consumer.jks";
 	private static String keystoreType = "JKS";
@@ -66,25 +67,25 @@ public class HamtaMeddelandeClient {
 		      truststorePassword = args[7]; 
 		}
 				
-//		System.setProperty("javax.net.debug", "ssl");
+		System.setProperty("javax.net.debug", "ssl");
         final HttpEntity requestEntity = createRequest();
         final String expectedResponse = createExpectedResponse();
         
         
-        int requests = 0;
-        
-		while (true) {
-			Thread.sleep(sleepTime);
-			new Thread(new Runnable() {public void run() {new HamtaMeddelandeClient().performPost(requestEntity, expectedResponse,0);}}).start();
-			requests++;
-			
-			if(requests % 100 == 0) {
-				System.out.println("Anrop: " + requests + " Errors: " + errors);
-			}
-		}
+//        int requests = 0;
+//        
+//		while (true) {
+//			Thread.sleep(sleepTime);
+//			new Thread(new Runnable() {public void run() {new HamtaMeddelandeClient().performPost(requestEntity, expectedResponse,0);}}).start();
+//			requests++;
+//			
+//			if(requests % 100 == 0) {
+//				System.out.println("Anrop: " + requests + " Errors: " + errors);
+//			}
+//		}
 		
         // Do a single request
-//        new HamtaMeddelandeClient().performPost(requestEntity, expectedResponse, 0);
+        new HamtaMeddelandeClient().performPost(requestEntity, expectedResponse, 0);
         
 
 	}
@@ -148,15 +149,8 @@ public class HamtaMeddelandeClient {
             String content = getContent(responseEntity);
 
             
-            if (retCode >= 400) {
-            	throw new RuntimeException("Bad status code: [" + retCode + "] with response [" + content + "]");
-            	
-            }
-            
-//            if (!content.contains(expectedContent)) {
-//            	//System.err.println("Expected response: [" + expectedContent + "]");
-//            	throw new RuntimeException("Unexpected response: [" + content + "]");
-//            } 
+            // Check for errors
+            validate(retCode, content);
             
             
             logOkRequest(ts, id, "Status = " + retCode);
@@ -221,16 +215,9 @@ public class HamtaMeddelandeClient {
             String content = getContent(responseEntity);
 
             
-            if (retCode >= 400) {
-            	throw new RuntimeException("Bad status code: [" + retCode + "] with response [" + content + "]");
-            	
-            }
-            
-//            if (!content.contains(expectedContent)) {
-//            	//System.err.println("Expected response: [" + expectedContent + "]");
-//            	throw new RuntimeException("Unexpected response: [" + content + "]");
-//            } 
-            
+            // Check for errors
+            validate(retCode, content);
+
             
             logOkRequest(ts, id, "Status = " + retCode);
         } catch (Exception e) {
@@ -335,5 +322,22 @@ public class HamtaMeddelandeClient {
 		} finally {
 			if (in != null) try {in.close();} catch (IOException e) {}
 		}
+	}
+	
+	public void validate(int retCode, String content) {
+		
+//      if (!content.contains(expectedContent)) {
+//    	//System.err.println("Expected response: [" + expectedContent + "]");
+//    	throw new RuntimeException("Unexpected response: [" + content + "]");
+//    } 
+	
+        if (retCode >= 400) {
+        	throw new RuntimeException("Bad status code: [" + retCode + "] with response [" + content + "]");
+        }
+
+        // Error checking for soapfault. Apoteket responds 200 OK , even for soapfaults!
+        if (content.contains("faultcode")) {
+        	throw new RuntimeException("We got a SoapFault: [" + content + "] with status code [" + retCode + "]");
+        }
 	}
 }
