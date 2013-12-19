@@ -67,25 +67,25 @@ public class HamtaMeddelandeClient {
 		      truststorePassword = args[7]; 
 		}
 				
-		System.setProperty("javax.net.debug", "ssl");
+//		System.setProperty("javax.net.debug", "ssl");
         final HttpEntity requestEntity = createRequest();
         final String expectedResponse = createExpectedResponse();
         
         
-//        int requests = 0;
-//        
-//		while (true) {
-//			Thread.sleep(sleepTime);
-//			new Thread(new Runnable() {public void run() {new HamtaMeddelandeClient().performPost(requestEntity, expectedResponse,0);}}).start();
-//			requests++;
-//			
-//			if(requests % 100 == 0) {
-//				System.out.println("Anrop: " + requests + " Errors: " + errors);
-//			}
-//		}
+        int requests = 0;
+        
+		while (true) {
+			Thread.sleep(sleepTime);
+			new Thread(new Runnable() {public void run() {new HamtaMeddelandeClient().performPost(requestEntity, expectedResponse,0);}}).start();
+			requests++;
+			
+			if(requests % 100 == 0) {
+				System.out.println("Anrop: " + requests + " Errors: " + errors);
+			}
+		}
 		
         // Do a single request
-        new HamtaMeddelandeClient().performPost(requestEntity, expectedResponse, 0);
+//        new HamtaMeddelandeClient().performPost(requestEntity, expectedResponse, 0);
         
 
 	}
