@@ -1,3 +1,4 @@
+
 <?xml version="1.0"?>
 <!-- This is the System-level Maven POM. Usage: Define all truly common things 
 	for the system here. For example: versions of third-party dependencies used 
@@ -52,7 +53,7 @@
 			<dependency>
 				<groupId>se.inera.pascal.ticket</groupId>
 				<artifactId>TicketMachine</artifactId>
-				<version>1.1.1-RC1</version>
+				<version>1.1.1</version>
 			</dependency>
 
 			<!-- soi toolkit dependencies -->
