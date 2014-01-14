@@ -13,14 +13,14 @@
 
 	<groupId>se.skl.skltpservices.apse</groupId>
 	<artifactId>ApSeMedicalServicesAdapter</artifactId>
-	<version>1.6.7-RC3-SNAPSHOT</version>
+	<version>1.6.7</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 
 	<scm>
-		<connection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/tags/1.6.7-RB</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/branches/1.6.7-RB</developerConnection>
-		<url>https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/tags/1.6.7-RB</url>
+		<connection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/tags/ApSeMedicalServicesAdapter-1.6.7</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/tags/ApSeMedicalServicesAdapter-1.6.7</developerConnection>
+		<url>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/tags/ApSeMedicalServicesAdapter-1.6.7</url>
 	</scm>
 
 	<properties>
@@ -52,7 +52,7 @@
 			<dependency>
 				<groupId>se.inera.pascal.ticket</groupId>
 				<artifactId>TicketMachine</artifactId>
-				<version>1.1.1-RC1</version>
+				<version>1.1.1</version>
 			</dependency>
 
 			<!-- soi toolkit dependencies -->
