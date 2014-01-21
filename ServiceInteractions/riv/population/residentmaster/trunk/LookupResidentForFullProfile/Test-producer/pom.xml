@@ -31,11 +31,47 @@
     <spring.fw.version>3.2.5.RELEASE</spring.fw.version>
     <slf4j.version>1.7.5</slf4j.version>
     <log4j.version>1.2.17</log4j.version>
+    <schema.path>${basedir}/src/main/resources/schemas</schema.path>
   </properties>
+
   <build>
       <finalName>${project.artifactId}</finalName>
       <plugins>
-          <plugin>
+        <plugin>
+          <groupId>org.apache.cxf</groupId>
+          <artifactId>cxf-codegen-plugin</artifactId>
+          <version>${cxf.version}</version>
+          <executions>
+            <execution>
+              <id>generate-sources</id>
+              <phase>generate-sources</phase>
+              <configuration>
+                <sourceRoot>${basedir}/target/generated-sources</sourceRoot>
+                <wsdlOptions>
+                  <wsdloption>
+                    <wsdl>${schema.path}/./interactions/LookupResidentForFullProfileInteraction/LookupResidentForFullProfileInteraction_1.1_RIVTABP21.wsdl</wsdl>
+                    <extraargs>
+                      <extraarg>-p</extraarg>
+                      <extraarg>urn:riv:population:residentmaster:LookupResidentForFullProfileResponder:1=se.riv.population.residentmaster.lookupresidentforfullprofileresponder.v1</extraarg>
+                      <extraarg>-p</extraarg>
+                      <extraarg>urn:riv:population:residentmaster:LookupResidentForFullProfile:1:rivtabp21=se.riv.population.residentmaster.lookupresidentforfullprofile.v1.rivtabp21</extraarg>
+                      <extraarg>-p</extraarg>
+                      <extraarg>urn:riv:itintegration:registry:1=se.riv.itintegration.registry.v1</extraarg>
+                      <extraarg>-p</extraarg>
+                      <extraarg>urn:riv:population:residentmaster:1=se.riv.population.residentmaster.v1</extraarg>
+                      <extraarg>-p</extraarg>
+                      <extraarg>urn:riv:population:residentmaster:1.1=se.riv.population.residentmaster.v11</extraarg>
+                    </extraargs>
+                  </wsdloption>
+                </wsdlOptions>
+              </configuration>
+              <goals>
+                <goal>wsdl2java</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>tomcat-maven-plugin</artifactId>
               <configuration>
@@ -52,11 +88,11 @@
 
   <dependencies>
     <!-- Schemas -->
-    <dependency>
-      <groupId>se.rivta.tools</groupId>
-      <artifactId>population-residentmaster-schemas</artifactId>
-      <version>1</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>se.rivta.tools</groupId>-->
+      <!--<artifactId>population-residentmaster-schemas</artifactId>-->
+      <!--<version>1</version>-->
+    <!--</dependency>-->
 
 	<!-- Logging -->
     <dependency>
