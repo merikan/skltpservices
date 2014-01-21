@@ -9,10 +9,7 @@ import se.riv.population.residentmaster.lookupresidentforfullprofileresponder.v1
 import se.riv.population.residentmaster.v1.*;
 import se.riv.population.residentmaster.v1.RelationerTYPE.Relation;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @WebService(
 		serviceName = "LookupResidentForFullProfileResponderService",
@@ -30,10 +27,10 @@ public class LookupResidentForFullProfileImpl implements LookupResidentForFullPr
         ullaRelation_1.put(Attribut.FNAME, "Axel");
         ullaRelation_1.put(Attribut.ENAME, "Alm");
 
-        Map<Attribut, String> ullaRelation_2 = new HashMap<Attribut, String>();
-        ullaRelation_2.put(Attribut.PNR, "200802020200");
-        ullaRelation_2.put(Attribut.FNAME, "Alva");
-        ullaRelation_2.put(Attribut.ENAME, "Alm");
+        Map<Attribut, String> ullaAndFridaRelation = new HashMap<Attribut, String>();
+        ullaAndFridaRelation.put(Attribut.PNR, "200802020200");
+        ullaAndFridaRelation.put(Attribut.FNAME, "Alva");
+        ullaAndFridaRelation.put(Attribut.ENAME, "Alm");
 
         Map<Attribut, String> ullaRelation_3 = new HashMap<Attribut, String>();
         ullaRelation_3.put(Attribut.PNR, "200001010101");
@@ -45,8 +42,8 @@ public class LookupResidentForFullProfileImpl implements LookupResidentForFullPr
         fridaRelation_1.put(Attribut.FNAME, "Frans");
         fridaRelation_1.put(Attribut.ENAME, "Kranstege");
 
-        RELATIONS.put("198611062384", Arrays.asList(ullaRelation_1, ullaRelation_2, ullaRelation_3));
-        RELATIONS.put("197705232382", Arrays.asList(fridaRelation_1));
+        RELATIONS.put("198611062384", Arrays.asList(ullaRelation_1, ullaAndFridaRelation, ullaRelation_3));
+        RELATIONS.put("197705232382", Arrays.asList(fridaRelation_1, ullaAndFridaRelation));
     }
 
 	@Override
