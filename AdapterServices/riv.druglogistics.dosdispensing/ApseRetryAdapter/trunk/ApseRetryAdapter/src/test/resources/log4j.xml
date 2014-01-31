@@ -63,8 +63,8 @@
 		<level value="INFO" />
 	</logger>
 	
-	<logger name="se.skltp.adapterservices.apseretryadapter">
-		<level value="INFO" />
+	<logger name="se.skltp.adapterservices.druglogistics.dosdispensing">
+		<level value="DEBUG" />
 	</logger>
 
     <!-- Message logging using soi-toolkit LogTransformer class -->

@@ -35,6 +35,8 @@ import org.slf4j.LoggerFactory;
 
 public class ApseRetryComponent {
 	
+	private static final String CONTENT_TYPE = "text/xml;charset=utf-8";
+
 	private static final Logger log = LoggerFactory.getLogger(ApseRetryComponent.class);
 
 	private static long sleepTime = 1000L;
@@ -53,9 +55,9 @@ public class ApseRetryComponent {
 
 	private static int maxRetries = 3;
 	
-	public void performPost(String request){
+	public String performPost(String request) throws Exception{
 		
-		log.debug("Request:",request);
+		log.debug("Request: [{}]", request);
 		
 		HttpEntity requestEntity;
 		try {
@@ -63,15 +65,15 @@ public class ApseRetryComponent {
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException("Error creating HttpEntity from request", e);
 		}
-		performPost(requestEntity, 0);
+		return performPost(requestEntity, 0);
 	}
 
-	private void performPost(HttpEntity requestEntity, int retries){
+	private String performPost(HttpEntity requestEntity, int retries) throws Exception{
 		
 		if (endpointAddress.startsWith("https")) {
-			performHttpsPost(requestEntity, retries);
+			return performHttpsPost(requestEntity, retries);
 		} else {
-			performHttpPost(requestEntity, retries);
+			return performHttpPost(requestEntity, retries);
 		}
 	}
 
@@ -81,7 +83,7 @@ public class ApseRetryComponent {
 	 * @param requestEntity
 	 * @param retries
 	 */
-	private void performHttpPost(HttpEntity requestEntity, int retries) {
+	private String performHttpPost(HttpEntity requestEntity, int retries) throws Exception {
 		long ts = System.currentTimeMillis();
 		long id = Thread.currentThread().getId();
 
@@ -94,7 +96,7 @@ public class ApseRetryComponent {
 
 			HttpPost httpPost = new HttpPost(endpointAddress);
 			httpPost.setEntity(requestEntity);
-			httpPost.setHeader("Content-Type", "text/xml;Charset='UTF-8'");
+			httpPost.setHeader("Content-Type", CONTENT_TYPE);
 			httpPost.setHeader("SOAPAction",
 					"urn:riv:druglogistics:dosedispensing:HamtaMeddelandenResponder:1:HamtaMeddelanden");
 
@@ -108,6 +110,9 @@ public class ApseRetryComponent {
 			validate(retCode, content);
 
 			logOkRequest(ts, id, "Status = " + retCode);
+			
+			return content;
+			
 		} catch (Exception e) {
 
 			logErrorRequest(ts, id, e);
@@ -118,14 +123,15 @@ public class ApseRetryComponent {
 				errors++;
 
 				System.err.println("First request failed. Retrying...");
-				performPost(requestEntity, ++retries);
+				return performPost(requestEntity, ++retries);
 
 			} else if (retries < maxRetries) {
 				System.err.println("Retry " + retries + " failed. Retrying...");
-				performPost(requestEntity, ++retries);
+				return performPost(requestEntity, ++retries);
 
 			} else {
 				System.out.println("Request failed. Giving up....");
+				throw e;
 			}
 
 		}
@@ -137,7 +143,7 @@ public class ApseRetryComponent {
 	 * @param requestEntity
 	 * @param retries
 	 */
-	private void performHttpsPost(HttpEntity requestEntity, int retries) {
+	private String performHttpsPost(HttpEntity requestEntity, int retries) throws Exception {
 		
 		
 		long ts = System.currentTimeMillis();
@@ -156,7 +162,7 @@ public class ApseRetryComponent {
 
 			HttpPost httpPost = new HttpPost(endpointAddress);
 			httpPost.setEntity(requestEntity);
-			httpPost.setHeader("Content-Type", "text/xml;Charset='UTF-8'");
+			httpPost.setHeader("Content-Type", CONTENT_TYPE);
 			httpPost.setHeader("SOAPAction",
 					"urn:riv:druglogistics:dosedispensing:HamtaMeddelandenResponder:1:HamtaMeddelanden");
 
@@ -170,6 +176,9 @@ public class ApseRetryComponent {
 			validate(retCode, content);
 
 			logOkRequest(ts, id, "Status = " + retCode);
+			
+			return content;
+			
 		} catch (Exception e) {
 
 			logErrorRequest(ts, id, e);
@@ -180,14 +189,15 @@ public class ApseRetryComponent {
 				errors++;
 
 				System.err.println("First request failed. Retrying...");
-				performPost(requestEntity, ++retries);
+				return performPost(requestEntity, ++retries);
 
 			} else if (retries < maxRetries) {
 				System.err.println("Retry " + retries + " failed. Retrying...");
-				performPost(requestEntity, ++retries);
+				return performPost(requestEntity, ++retries);
 
 			} else {
 				System.out.println("Request failed. Giving up....");
+				throw e;
 			}
 
 		}
