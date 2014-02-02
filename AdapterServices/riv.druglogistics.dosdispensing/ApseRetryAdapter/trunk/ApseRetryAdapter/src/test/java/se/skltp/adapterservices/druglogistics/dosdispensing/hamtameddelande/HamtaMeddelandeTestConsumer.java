@@ -19,6 +19,7 @@ public class HamtaMeddelandeTestConsumer {
 
 	private static final Logger log = LoggerFactory.getLogger(HamtaMeddelandeTestConsumer.class);
 
+	@SuppressWarnings("unused")
 	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("ApseRetryAdapter-config");
 
 	private HamtaMeddelandenResponderInterface _service = null;

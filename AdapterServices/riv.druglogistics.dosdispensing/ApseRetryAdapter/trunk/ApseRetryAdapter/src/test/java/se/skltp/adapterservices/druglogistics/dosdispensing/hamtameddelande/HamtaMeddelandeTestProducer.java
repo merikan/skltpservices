@@ -29,8 +29,8 @@ import se.riv.druglogistics.dosedispensing_1.YrkesKodEnum;
 public class HamtaMeddelandeTestProducer implements HamtaMeddelandenResponderInterface {
 	
 	private static final Logger log = LoggerFactory.getLogger(HamtaMeddelandeTestProducer.class);
-    private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("ApseRetryAdapter-config");
-	private static final long SERVICE_TIMOUT_MS = Long.parseLong(rb.getString("SERVICE_TIMEOUT_MS"));
+    private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("ApseRetryAdapter-config-override", "ApseRetryAdapter-config");
+	private static final long SERVICE_TIMEOUT_MS = Long.parseLong(rb.getString("SERVICE_TIMEOUT_MS"));
 
 	//OK responses
 	public static final String ONE_OK_RESPONSE = "1111111111";
@@ -41,6 +41,7 @@ public class HamtaMeddelandeTestProducer implements HamtaMeddelandenResponderInt
 	public static final String TWO_ERROR_RESPONSE = "9999999991";
 	public static final String ALWAYS_ERROR_RESPONSE = "9999999999";
 			
+	private static int numberOfPermanentErrors = 0;
 	private static int numberOfErrors = 0;
 
 	@Override
@@ -59,9 +60,15 @@ public class HamtaMeddelandeTestProducer implements HamtaMeddelandenResponderInt
 		responseType.setResultatkod("Resultatkod");
 
 		if (HUNDRED_MESSAGES_OK_RESPONSE.equals(glnKod)) {
-			createResponse(responseType, glnKod, 100);
+			int numberOfResponses = 100;
+			log.info("Create OK response with " + numberOfResponses + " meddelanden.");
+			createResponse(responseType, glnKod, numberOfResponses);
+
 		} else if (ONE_OK_RESPONSE.equals(glnKod)) {
-			createResponse(responseType, glnKod, 1);
+			int numberOfResponses = 1;
+			log.info("Create OK response with " + numberOfResponses + " meddelanden.");
+			createResponse(responseType, glnKod, numberOfResponses);
+		
 		} else if (TWO_ERROR_RESPONSE.equals(glnKod)) {
 			
 			/*
@@ -69,15 +76,19 @@ public class HamtaMeddelandeTestProducer implements HamtaMeddelandenResponderInt
 			 * the third time the response is ok. This is needed to test retry handling. 
 			 */
 			if(numberOfErrors > 1){
+				log.info("Create OK response after " + numberOfErrors + " of failures.");
 				responseType.getMeddelanden().add(createMeddelandeResponse(glnKod));
 				numberOfErrors = 0;
 			}else{
 				numberOfErrors++;
+				log.info("Create Error #" + numberOfErrors);
 				throw new RuntimeException("Error occured when trying to retrive information from using glnkod: " + glnKod);
 			}
 		} else if(ALWAYS_ERROR_RESPONSE.equals(glnKod)){
+			log.info("Create Permanent Error ({} errors)", ++numberOfPermanentErrors);
 			throw new RuntimeException("Error occured when trying to retrive information from using glnkod: " + glnKod);
 		}else if (TIMEOUT_RESPONSE.equals(glnKod)) {
+			log.info("Create Timeout Error");
 			timeOutResponse(responseType, glnKod);
 		} 
 
@@ -86,8 +97,10 @@ public class HamtaMeddelandeTestProducer implements HamtaMeddelandenResponderInt
 
 	private void timeOutResponse(HamtaMeddelandenResponseType responseType, String glnKod) {
 		try {
-			System.err.println("ZZZleeeping");
-			Thread.sleep(SERVICE_TIMOUT_MS + 3000);
+			long millis = SERVICE_TIMEOUT_MS + 3000;
+			log.info("ZZZleeeping for " + millis + " ms...");
+			Thread.sleep(millis);
+			log.info("ZZZleeeping done");
 		} catch (InterruptedException e) {
 		}
 		responseType.getMeddelanden().add(createMeddelandeResponse(glnKod));
