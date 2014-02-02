@@ -18,6 +18,7 @@ import javax.net.ssl.SSLContext;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.config.Registry;
@@ -39,7 +40,6 @@ public class ApseRetryComponent {
 
 	private static final Logger log = LoggerFactory.getLogger(ApseRetryComponent.class);
 
-	private static long sleepTime = 1000L;
 	// private static String endpointAddress =
 	// "https://localhost:20001/loadtest/testproducer/GetSubjectOfCareSchedule/1/rivtabp21";
 	private static String endpointAddress = "https://localhost:8082/ApseRetryAdapter/services/hamtaMeddelande-soap-teststub/v1";
@@ -51,21 +51,38 @@ public class ApseRetryComponent {
 	private static String truststorePath = "src/truststore.jks";
 	private static String truststoreType = "JKS";
 	private static String truststorePassword = "password";
+
+	@SuppressWarnings("unused")
 	private static int errors = 0;
 
-	private static int maxRetries = 3;
+	private int maxRetries = -1;
+	public void setMaxRetries(int maxRetries) {
+		log.debug("Setting MaxRetries: [{}]", maxRetries);
+		this.maxRetries = maxRetries;
+	}
+
+	private int timeout = -1;
+	public void setTimeout(int timeout) {
+		log.debug("Setting Timeout: [{}]", timeout);
+		this.timeout = timeout;
+	}
+	
 	
 	public String performPost(String request) throws Exception{
 		
-		log.debug("Request: [{}]", request);
-		
-		HttpEntity requestEntity;
 		try {
-			requestEntity = new StringEntity(request, "UTF-8");
+			log.debug("### Request: [{}]", request);
+			String result = performPost(new StringEntity(request, "UTF-8"), 0);
+			log.debug("### Response: [{}]", result);
+			return result;
+		} catch (RuntimeException e) {
+			log.debug("### Runtime Error: [{}]", e.toString());
+			throw e;
 		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException("Error creating HttpEntity from request", e);
+			RuntimeException error = new RuntimeException("Error creating HttpEntity from request", e);
+			log.debug("### Error: [{}]", error.toString());
+			throw error;
 		}
-		return performPost(requestEntity, 0);
 	}
 
 	private String performPost(HttpEntity requestEntity, int retries) throws Exception{
@@ -95,6 +112,16 @@ public class ApseRetryComponent {
 					.build();
 
 			HttpPost httpPost = new HttpPost(endpointAddress);
+
+			if (timeout > 0) {
+				log.debug("Setup connect and request timeout to {} ms.", timeout);
+				RequestConfig requestConfig = RequestConfig.custom()
+			    		.setConnectTimeout(timeout)
+			    		.setSocketTimeout(timeout)
+			            .build();
+				httpPost.setConfig(requestConfig);
+			}
+			
 			httpPost.setEntity(requestEntity);
 			httpPost.setHeader("Content-Type", CONTENT_TYPE);
 			httpPost.setHeader("SOAPAction",
@@ -119,18 +146,17 @@ public class ApseRetryComponent {
 			e.printStackTrace();
 
 			if (retries == 0) {
-
 				errors++;
 
-				System.err.println("First request failed. Retrying...");
+				log.warn("First request failed. Retrying...");
 				return performPost(requestEntity, ++retries);
 
 			} else if (retries < maxRetries) {
-				System.err.println("Retry " + retries + " failed. Retrying...");
+				log.warn("Retry " + retries + " failed. Retrying...");
 				return performPost(requestEntity, ++retries);
 
 			} else {
-				System.out.println("Request failed. Giving up....");
+				log.error("Request failed. Giving up....");
 				throw e;
 			}
 
@@ -161,6 +187,16 @@ public class ApseRetryComponent {
 					.setConnectionManager(connManager).build();
 
 			HttpPost httpPost = new HttpPost(endpointAddress);
+
+			if (timeout > 0) {
+				log.debug("Setup connect and request timeout to {} ms.", timeout);
+				RequestConfig requestConfig = RequestConfig.custom()
+			    		.setConnectTimeout(timeout)
+			    		.setSocketTimeout(timeout)
+			            .build();
+				httpPost.setConfig(requestConfig);
+			}
+			
 			httpPost.setEntity(requestEntity);
 			httpPost.setHeader("Content-Type", CONTENT_TYPE);
 			httpPost.setHeader("SOAPAction",
@@ -185,21 +221,19 @@ public class ApseRetryComponent {
 			e.printStackTrace();
 
 			if (retries == 0) {
-
 				errors++;
 
-				System.err.println("First request failed. Retrying...");
+				log.warn("First request failed. Retrying...");
 				return performPost(requestEntity, ++retries);
 
 			} else if (retries < maxRetries) {
-				System.err.println("Retry " + retries + " failed. Retrying...");
+				log.warn("Retry " + retries + " failed. Retrying...");
 				return performPost(requestEntity, ++retries);
 
 			} else {
-				System.out.println("Request failed. Giving up....");
+				log.error("Request failed. Giving up....");
 				throw e;
 			}
-
 		}
 	}
 
@@ -228,6 +262,7 @@ public class ApseRetryComponent {
 		return keystore;
 	}
 
+	@SuppressWarnings("unused")
 	static private String streamToString(InputStream in) throws IOException {
 		StringBuilder out = new StringBuilder();
 		BufferedReader br = new BufferedReader(new InputStreamReader(in));
