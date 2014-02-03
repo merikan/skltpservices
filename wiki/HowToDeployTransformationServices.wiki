@@ -1,5 +1,7 @@
 #summary How to deploy transformation services in Service bridge
 
+<font color="red">*Note:* Deprecated - see [https://skl-tp.atlassian.net/wiki/display/SKLTP/AnP+-+Anslutningsplattform SKLTP Wiki] for new instructions</font>
+----
 <wiki:toc max_depth="3" />
 
 = Introduction =
