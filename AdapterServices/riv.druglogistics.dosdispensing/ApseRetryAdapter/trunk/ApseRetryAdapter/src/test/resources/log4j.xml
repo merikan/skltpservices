@@ -72,6 +72,10 @@
 		<level value="DEBUG" />
 	</logger>
 	
+	<logger name="org.soitoolkit.commons.mule.soap">
+		<level value="DEBUG" />
+	</logger>
+	
 	<!-- Level DEBUG: Log http headers transfered during a request/response -->
     <logger name="httpclient.wire.header">
         <level value="FATAL"/>

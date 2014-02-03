@@ -15,6 +15,16 @@
     <spring:bean name="retry-bean" class="se.skltp.adapterservices.druglogistics.dosdispensing.ApseRetryComponent">
         <spring:property name="maxRetries" value="${MAX_RETRIES}" />
         <spring:property name="timeout" value="${SERVICE_TIMEOUT_MS}" />
+
+        <spring:property name="endpointAddress" value="${HAMTAMEDDELANDE_OUTBOUND_URL}" />
+        <spring:property name="soapAction" value="${SOAP_ACTION}" />
+
+        <spring:property name="keystorePath" value="${KEYSTORE_PATH}" />
+        <spring:property name="keystoreType" value="${KEYSTORE_TYPE}" />
+        <spring:property name="keystorePassword" value="${kEYSTORE_PASSWORD}" />
+        <spring:property name="truststorePath" value="${TRUSTSTORE_PATH}" />
+        <spring:property name="truststoreType" value="${TRUSTSTORE_TYPE}" />
+        <spring:property name="truststorePassword" value="${TRUSTSTORE_PASSWORD}" />
     </spring:bean>
 
 	<flow name="hamtaMeddelanden-service-inbound" doc:name="hamtaMeddelanden-service-inbound">
