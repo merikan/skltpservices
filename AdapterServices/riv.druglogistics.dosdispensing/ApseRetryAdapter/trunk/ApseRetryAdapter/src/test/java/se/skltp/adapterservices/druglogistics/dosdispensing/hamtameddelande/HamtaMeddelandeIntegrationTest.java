@@ -78,7 +78,6 @@ public class HamtaMeddelandeIntegrationTest extends AbstractTestCase {
 	}
 
     /**
-     * TODO: FIXA FELHANTERING!
      * @throws Exception
      */
     @Test
@@ -89,8 +88,7 @@ public class HamtaMeddelandeIntegrationTest extends AbstractTestCase {
 			Object response = consumer.callService(id);
 	        fail("expected fault, but got a response of type: " + ((response == null) ? "NULL" : response.getClass().getName()));
 	    } catch (SOAPFaultException e) {
-	    	assertEquals("Error reading XMLStreamReader.", e.getMessage());
-// FIXME   	assertEquals("Error occured when trying to retrive information from using glnkod: " + id, e.getMessage());
+	    	assertEquals("Error occured when trying to retrive information from using glnkod: " + id, e.getMessage());
 	    }
 	}
     
@@ -103,7 +101,6 @@ public class HamtaMeddelandeIntegrationTest extends AbstractTestCase {
 	}
 
     /**
-     * TODO: FIXA TIMEOUT + EV. FELHANTERING!
      * @throws Exception
      */
     @Test
@@ -114,8 +111,7 @@ public class HamtaMeddelandeIntegrationTest extends AbstractTestCase {
 			Object response = consumer.callService(id);
 	        fail("expected fault, but got a response of type: " + ((response == null) ? "NULL" : response.getClass().getName()));
         } catch (SOAPFaultException e) {
-	    	assertEquals("Error reading XMLStreamReader.", e.getMessage());
-// FIXME  	assertTrue("Unexpected error message: " + e.getMessage(), e.getMessage().startsWith(EXPECTED_ERR_TIMEOUT_MSG));
+	    	assertEquals("Read timed out", e.getMessage());
         }
 
 		// Sleep for a short time period  to allow the JMS response message to be delivered, otherwise ActiveMQ data store seems to be corrupt afterwards...
