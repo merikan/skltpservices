@@ -12,6 +12,7 @@ import javax.net.ssl.SSLContext;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
@@ -27,10 +28,20 @@ import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.BasicHttpClientConnectionManager;
+import org.mule.api.MuleContext;
+import org.mule.api.MuleEventContext;
+import org.mule.api.MuleMessage;
+import org.mule.api.context.MuleContextAware;
+import org.mule.api.lifecycle.Callable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soitoolkit.commons.logentry.schema.v1.LogLevelType;
+import org.soitoolkit.commons.mule.api.log.EventLogMessage;
+import org.soitoolkit.commons.mule.api.log.EventLogger;
+import org.soitoolkit.commons.mule.log.DefaultEventLogger;
+import org.soitoolkit.commons.mule.log.EventLoggerFactory;
 
-public class ApseRetryComponent {
+public class ApseRetryComponent implements Callable, MuleContextAware {
 	
 	private static final String CONTENT_TYPE = "text/xml;charset=utf-8";
 
@@ -38,6 +49,14 @@ public class ApseRetryComponent {
 
 	@SuppressWarnings("unused")
 	private static int errors = 0;
+
+	private MuleContext context = null;
+	private EventLogger eventLogger = null;
+		
+	@Override
+	public void setMuleContext(MuleContext context) {
+		this.context = context;
+	}
 
 	/*
 	 * Configurable properties
@@ -52,6 +71,12 @@ public class ApseRetryComponent {
 	public void setMaxRetries(int maxRetries) {
 		log.debug("Setting MaxRetries: [{}]", maxRetries);
 		this.maxRetries = maxRetries;
+	}
+
+	private int retryWait = 0;
+	public void setRetryWait(int retryWait) {
+		log.debug("Setting RetryWait: [{}]", retryWait);
+		this.retryWait = retryWait;
 	}
 
 	private int timeout = -1;
@@ -97,31 +122,30 @@ public class ApseRetryComponent {
 
 
 	/**
-	 * Main method of the component. Make a http(s) post-request.
+	 * Main method of the component. Make a http(s) post-request and retries a number of times before giving up. If the request casue a soap-fault it is sent back as the response (but with no handling of http-status, e.g. setting it to 500)
 	 * 
-	 * @param request
+	 * @param eventContext
 	 */
-	public String performPost(String request) {
-		
-		try {
-			log.debug("Request: [{}]", request);
+	@Override
+	public Object onCall(MuleEventContext eventContext) throws Exception {
 
-			HttpClientContext context    = HttpClientContext.create();
-			HttpClient        httpClient = setupHttpClient();
-			HttpPost          httpPost   = setupHttpPost(setupHttpRequestEntity(request));
-			String            result     = performPostWithRetries(context, httpClient, httpPost);
-			
-			log.debug("Response: [{}]", result);
-			return result;
-			
-		} catch (RuntimeException e) {
-			if (e.getCause() == null) {
-				log.debug("Call failed on runtime error: [{}]", e.toString());
-			} else {
-				log.debug("Call failed on runtime cause error: [{}]", e.getCause().toString());
-			}
-			throw e;
-		}
+		// Get the request from the mule message
+		MuleMessage muleMessage = eventContext.getMessage();
+		String      request     = muleMessage.getPayload().toString();
+		
+		// Setup HTTP stuff
+		HttpClientContext context    = HttpClientContext.create();
+		HttpClient        httpClient = setupHttpClient();
+		HttpPost          httpPost   = setupHttpPost(setupHttpRequestEntity(request));
+
+		// Perform the processing including retries
+		log.debug("Request: [{}]", request);
+		String response = performPostWithRetries(muleMessage, context, httpClient, httpPost);
+		log.debug("Response: [{}]", response);
+		
+		// Set response and bail out
+		muleMessage.setPayload(response);
+		return muleMessage;
 	}
 
 	/**
@@ -132,7 +156,7 @@ public class ApseRetryComponent {
 	 * @param httpPost
 	 * @return
 	 */
-	private String performPostWithRetries(HttpClientContext context, HttpClient httpclient, HttpPost httpPost)  {
+	private String performPostWithRetries(MuleMessage muleMessage, HttpClientContext context, HttpClient httpclient, HttpPost httpPost)  {
 
 		boolean ok = false;
 		int retries = 0;
@@ -141,37 +165,56 @@ public class ApseRetryComponent {
 		// Repeat until ok or maxRetries is passed and an exception is thrown
 		do {
 			try {
-				System.err.println("Attempt: " + retries);
+				log.debug("Attempt #{}", retries);
 				response = attemptOnePostRequest(context, httpclient, httpPost);
-				System.err.println("Attempt: " + retries + " OK!");
+				log.debug("Attempt #{} OK!", retries);
 				ok = true;
 
 			} catch (RuntimeException e) {
-				System.err.println("Attempt: " + retries + " failed!");
+				log.debug("Attempt #{} failed!", retries);
 
-				String errMsg = (e.getCause() == null) ? e.toString() : e.getCause().toString();
-					
+				// First call failed
 				if (retries == 0) {
 					errors++;
 					retries++;
-					log.warn("First request failed, retrying... Error Message: {}", errMsg);
+					logWarning(e, "First request failed, retrying...", muleMessage);
+					if (retryWait > 0) waitBeforeNextRetry();
 
+				// A retry call failed
 				} else if (retries < maxRetries) {
 					retries++;
-					log.warn("Retry " + retries + " failed, retrying... Error Message: {}", errMsg);
+					logWarning(e, "Retry " + retries + " failed, retrying...", muleMessage);
+					if (retryWait > 0) waitBeforeNextRetry();
 
+				// The last retry call failed, time to give up
 				} else {
-					log.error("Request failed after {} retries. Giving up! Error Message: {}", retries, errMsg);
-					throw e;
+					
+					if (e instanceof SoapFaultInPayload) {
+						SoapFaultInPayload sfe = (SoapFaultInPayload)e;
+						logError(e, "Request failed after " + retries + " retries. Giving up! SOAP Fault from producer passed back to consumer", muleMessage);
+						muleMessage.setOutboundProperty("http.status", 500); // FIXME Not so nice but here is a good place to set the http  return code for the soap fault 
+						return sfe.getSoapFault();
+
+					} else {
+						log.error("Request failed after " + retries + " retries. Giving up!");
+						throw e;
+					}
 				}
-			} finally {
-				System.err.println("Attempt: " + retries + " pass finally");
 			}
 			
 		} while (!ok);
 		
 		return response;
 	}
+
+	private void waitBeforeNextRetry() {
+		log.warn("Sleep for a short while before retrying: {} ms", retryWait);
+		try {
+			Thread.sleep(retryWait);
+		} catch (InterruptedException e) {}
+		log.warn("Sleep is over, let's give it a new try...");
+	}
+
 
 	/**
 	 * Try one http post request...
@@ -180,13 +223,17 @@ public class ApseRetryComponent {
 	 * @param httpclient
 	 * @param httpPost
 	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
 	 */
 	private String attemptOnePostRequest(HttpClientContext context, HttpClient httpclient, HttpPost httpPost) {
 		try {
 			HttpResponse response = httpclient.execute(httpPost, context);
 			String result = validateAndGetContent(response);
 			return result; 
-		} catch (Exception e) {
+		} catch (ClientProtocolException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -205,7 +252,6 @@ public class ApseRetryComponent {
 		// Check for errors
 		validate(retCode, content);
 
-		logOkRequest("Status = " + retCode);
 		return content;
 	}
 
@@ -235,17 +281,28 @@ public class ApseRetryComponent {
 
 	private void validate(int retCode, String content) {
 
+		// First check for soapfaults
+		//
+		// Error checking for soapfault. Apoteket responds 200 OK , even for soapfaults!
+		if (isPayloadSoapFault(content)) {
+			log.debug("SOAP Fault detected in response, throw error");
+			SoapFaultInPayload sfe = new SoapFaultInPayload("We got a SoapFault: [" + content + "] with status code [" + retCode + "]");
+			sfe.setSoapFault(content);
+			throw sfe;
+		}
+
+		// Then check for other errors
 		if (retCode >= 400) {
-			System.err.println("### HTTP ERROR CODE DETECTED, THROW ERROR");
+			log.debug("HTTP error code detected in response, throw error");
 			throw new RuntimeException("Bad status code: [" + retCode + "] with response [" + content + "]");
 		}
 
-		// Error checking for soapfault. Apoteket responds 200 OK , even for
-		// soapfaults!
-		if (content.contains("faultcode")) {
-			System.err.println("### SOAP FAULT DETECTED IN OK RESPONSE, THROW ERROR");
-			throw new RuntimeException("We got a SoapFault: [" + content + "] with status code [" + retCode + "]");
-		}
+	}
+
+
+	private boolean isPayloadSoapFault(String content) {
+		// FIXME: Make a better assert of soap-fault, e.g. check for valid xml and expected elements including namespace...
+		return content.contains("faultcode");
 	}
 
 	/*
@@ -329,28 +386,26 @@ public class ApseRetryComponent {
 	 */
 	// TODO: Cleanup the methods below, we don't need most of it!
 	
-	private static int okCnt = 0;
-
-	private void logOkRequest(String msg) {
-		okCnt++;
-		log("OK: " + msg);
+	public EventLogger getEventLogger() {
+		if (eventLogger == null) {
+			CustomEventLogger cel = new CustomEventLogger();
+			cel.setMuleContext(context);
+			eventLogger = cel;
+		}
+		return eventLogger;
 	}
 
-	private static int errorCnt = 0;
-
-	private void logErrorRequest(Exception e) {
-		errorCnt++;
-		log("ERROR: " + e.getMessage());
+	private void logWarning(Exception e, String logMessage, MuleMessage mm) {
+		EventLogMessage elm = new EventLogMessage();
+		elm.setMuleMessage(mm);
+		elm.setLogMessage(logMessage);
+		getEventLogger().logErrorEvent(LogLevelType.WARNING, e, elm);                
 	}
-
-	private void log(String msg) {
-
-		int threadCnt = Thread.activeCount();
-		System.out.println("\n\n" + new Date() + ": (" + threadCnt + "/" + okCnt + "/" + errorCnt + "): " + msg);
-	}
-
-	private static long getTs(long ts) {
-		return System.currentTimeMillis() - ts;
+	private void logError(Exception e, String logMessage, MuleMessage mm) {
+		EventLogMessage elm = new EventLogMessage();
+		elm.setMuleMessage(mm);
+		elm.setLogMessage(logMessage);
+		getEventLogger().logErrorEvent(e, elm);                
 	}
 
 }
