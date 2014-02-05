@@ -225,7 +225,11 @@ public class CustomEventLogger implements EventLogger, MuleContextAware {
 		if (logLevel == LogLevelType.WARNING) logEventName = LOG_EVENT_WARN;
 		
 		String logMsg = formatLogMessage(logEventName, logEvent);
-		messageLogger.error(logMsg);
+		if ((logLevel == LogLevelType.WARNING)) {
+			messageLogger.warn(logMsg);
+		} else {
+			messageLogger.error(logMsg);
+		}
 
 		// TODO: Move JAXB processing into the dispatch method
 		String xmlString = JAXB_UTIL.marshal(logEvent);

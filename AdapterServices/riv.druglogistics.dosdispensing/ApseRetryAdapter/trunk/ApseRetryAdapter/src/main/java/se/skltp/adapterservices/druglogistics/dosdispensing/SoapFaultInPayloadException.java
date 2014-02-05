@@ -1,24 +1,24 @@
 package se.skltp.adapterservices.druglogistics.dosdispensing;
 
-public class SoapFaultInPayload extends RuntimeException {
+public class SoapFaultInPayloadException extends RuntimeException {
 
-	public SoapFaultInPayload() {
+	public SoapFaultInPayloadException() {
 		super();
 	}
 
-	public SoapFaultInPayload(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	public SoapFaultInPayloadException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 
-	public SoapFaultInPayload(String message, Throwable cause) {
+	public SoapFaultInPayloadException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
-	public SoapFaultInPayload(String message) {
+	public SoapFaultInPayloadException(String message) {
 		super(message);
 	}
 
-	public SoapFaultInPayload(Throwable cause) {
+	public SoapFaultInPayloadException(Throwable cause) {
 		super(cause);
 	}
 

@@ -87,7 +87,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="hamtaMeddelanden-service-inbound" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="ad9a8cf8-3e58-4d4f-a7cf-18f15b55183d">
+    <flow SubFlow="false" name="hamtaMeddelanden-service-inbound" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="75293288-cd27-4083-a4a0-ea362e8d625d">
         <properties>
             <property name="initialState"/>
             <property name="processingStrategy2"/>
@@ -157,6 +157,13 @@
 <property name="class" value="se.skltp.adapterservices.druglogistics.dosdispensing.CreateSoapFaultIfExceptionTransformer"/>
 <property name="auxiliary;index" value="18"/>
 <property name="mimeType"/>
+                            </properties>
+                        </pattern>
+                        <pattern name="Transformer Reference" type="org.mule.tooling.ui.modules.core.pattern.globalXformRef" entity-id="Transformer Reference#1">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="ref" value="logRespOut"/>
+<property name="auxiliary;index" value="19"/>
                             </properties>
                         </pattern>
                     </lane>

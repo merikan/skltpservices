@@ -39,7 +39,6 @@ public class CreateSoapFaultIfExceptionTransformer extends AbstractMessageTransf
     
     @Override
     public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
-
     	logger.debug("transform() called");
     		
 		// Take care of any error message and send it back as a SOAP Fault!
@@ -53,8 +52,9 @@ public class CreateSoapFaultIfExceptionTransformer extends AbstractMessageTransf
         }
 
 		logger.debug("ExceptionPayload detected as well, let's create a SOAP-FAULT!");
+		EventLoggerWrapper eventLog = new EventLoggerWrapper(muleContext, message);
 
-    	String soapFault = createSoapFaultFromExceptionPayload(ep);
+    	String soapFault = createSoapFaultFromExceptionPayload(eventLog, ep);
     	logger.debug("Created soapFault: {}", soapFault);
 
         // Now the exception payload is transformed to a SOAP-Fault, remove the ExceptionPayload!
@@ -62,11 +62,12 @@ public class CreateSoapFaultIfExceptionTransformer extends AbstractMessageTransf
         message.setExceptionPayload(null);
         message.setProperty("http.status", 500, PropertyScope.OUTBOUND);
         message.setPayload(soapFault);
+        
         return message;
 	        
 	}
 
-    protected String createSoapFaultFromExceptionPayload(ExceptionPayload ep) {
+    protected String createSoapFaultFromExceptionPayload(EventLoggerWrapper eventLog, ExceptionPayload ep) {
     	
     	// Use the root exception if any otherwise the exception
 		logger.debug("Exception: "     + ep.getException()     + ", " + ep.getException().getClass().getName());
@@ -78,6 +79,9 @@ public class CreateSoapFaultIfExceptionTransformer extends AbstractMessageTransf
         String errMsg   = e.getMessage();
         String endpoint = getEndpointAddress();
         String detail   = e.getMessage();
+        
+		eventLog.logError(e, "Processing failed, return SOAP Fault");
+        
         return createSoapFault(errMsg, endpoint, detail);
 	}
 

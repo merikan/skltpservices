@@ -45,6 +45,7 @@
         
         <catch-exception-strategy doc:name="Catch Exception Strategy">
         	<custom-transformer class="se.skltp.adapterservices.druglogistics.dosdispensing.CreateSoapFaultIfExceptionTransformer" />
+        	<transformer ref="logRespOut" />
         </catch-exception-strategy>
 		
 	</flow>
