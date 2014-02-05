@@ -97,7 +97,7 @@ public class HamtaMeddelandeTestProducer implements HamtaMeddelandenResponderInt
 
 	private void timeOutResponse(HamtaMeddelandenResponseType responseType, String glnKod) {
 		try {
-			long millis = SERVICE_TIMEOUT_MS + 3000;
+			long millis = SERVICE_TIMEOUT_MS + 30000;
 			log.info("ZZZleeeping for " + millis + " ms...");
 			Thread.sleep(millis);
 			log.info("ZZZleeeping done");

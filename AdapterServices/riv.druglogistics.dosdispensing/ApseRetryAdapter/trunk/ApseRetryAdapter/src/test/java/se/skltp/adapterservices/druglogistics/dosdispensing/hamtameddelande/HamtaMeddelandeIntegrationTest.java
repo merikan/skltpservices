@@ -116,7 +116,7 @@ public class HamtaMeddelandeIntegrationTest extends AbstractTestCase {
 
 		// Sleep for a short time period  to allow the JMS response message to be delivered, otherwise ActiveMQ data store seems to be corrupt afterwards...
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {}
     }
  

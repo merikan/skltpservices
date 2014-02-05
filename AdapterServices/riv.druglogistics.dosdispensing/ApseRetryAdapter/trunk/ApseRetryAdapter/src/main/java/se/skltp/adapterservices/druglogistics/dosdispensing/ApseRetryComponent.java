@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.security.KeyStore;
-import java.util.Date;
 
 import javax.net.ssl.SSLContext;
 
@@ -35,11 +34,6 @@ import org.mule.api.context.MuleContextAware;
 import org.mule.api.lifecycle.Callable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soitoolkit.commons.logentry.schema.v1.LogLevelType;
-import org.soitoolkit.commons.mule.api.log.EventLogMessage;
-import org.soitoolkit.commons.mule.api.log.EventLogger;
-import org.soitoolkit.commons.mule.log.DefaultEventLogger;
-import org.soitoolkit.commons.mule.log.EventLoggerFactory;
 
 public class ApseRetryComponent implements Callable, MuleContextAware {
 	
@@ -47,11 +41,7 @@ public class ApseRetryComponent implements Callable, MuleContextAware {
 
 	private static final Logger log = LoggerFactory.getLogger(ApseRetryComponent.class);
 
-	@SuppressWarnings("unused")
-	private static int errors = 0;
-
 	private MuleContext context = null;
-	private EventLogger eventLogger = null;
 		
 	@Override
 	public void setMuleContext(MuleContext context) {
@@ -127,25 +117,35 @@ public class ApseRetryComponent implements Callable, MuleContextAware {
 	 * @param eventContext
 	 */
 	@Override
-	public Object onCall(MuleEventContext eventContext) throws Exception {
+	public Object onCall(MuleEventContext eventContext) {
 
 		// Get the request from the mule message
-		MuleMessage muleMessage = eventContext.getMessage();
-		String      request     = muleMessage.getPayload().toString();
-		
-		// Setup HTTP stuff
-		HttpClientContext context    = HttpClientContext.create();
-		HttpClient        httpClient = setupHttpClient();
-		HttpPost          httpPost   = setupHttpPost(setupHttpRequestEntity(request));
+		MuleMessage        message  = eventContext.getMessage();
+		String             request  = message.getPayload().toString();
+		EventLoggerWrapper eventLog = new EventLoggerWrapper(context, message);
+			
+		try {
+			// Setup HTTP stuff
+			HttpClientContext context    = HttpClientContext.create();
+			HttpClient        httpClient = setupHttpClient();
+			HttpPost          httpPost   = setupHttpPost(setupHttpRequestEntity(request));
 
-		// Perform the processing including retries
-		log.debug("Request: [{}]", request);
-		String response = performPostWithRetries(muleMessage, context, httpClient, httpPost);
-		log.debug("Response: [{}]", response);
-		
-		// Set response and bail out
-		muleMessage.setPayload(response);
-		return muleMessage;
+			// Perform the processing including retries
+			log.debug("Request: [{}]", request);
+			String response = performPostWithRetries(eventLog, context, httpClient, httpPost);
+			log.debug("Response: [{}]", response);
+			
+			// Set response and bail out
+			message.setPayload(response);
+			return message;
+
+		} catch (SoapFaultInPayloadException sfipe) {
+			
+			// We got a soap fault from the service producer, set http.status according to RIV-TA 2.x (actually WS-I BP 1.1) and return the soap-fault as the response again according to RIV-TA 2.x (WS-I BP 1.1)
+			eventLog.logError(sfipe, "Request still failed after max retries (" + maxRetries + "), giving up! SOAP Fault from producer passed back to consumer");
+			message.setOutboundProperty("http.status", 500); 
+			return sfipe.getSoapFault();
+		}
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class ApseRetryComponent implements Callable, MuleContextAware {
 	 * @param httpPost
 	 * @return
 	 */
-	private String performPostWithRetries(MuleMessage muleMessage, HttpClientContext context, HttpClient httpclient, HttpPost httpPost)  {
+	private String performPostWithRetries(EventLoggerWrapper eventLog, HttpClientContext context, HttpClient httpclient, HttpPost httpPost)  {
 
 		boolean ok = false;
 		int retries = 0;
@@ -175,30 +175,20 @@ public class ApseRetryComponent implements Callable, MuleContextAware {
 
 				// First call failed
 				if (retries == 0) {
-					errors++;
 					retries++;
-					logWarning(e, "First request failed, retrying...", muleMessage);
+					eventLog.logWarning(e, "First request failed, retrying...");
 					if (retryWait > 0) waitBeforeNextRetry();
 
 				// A retry call failed
-				} else if (retries < maxRetries) {
+				} else if (retries <= maxRetries) {
+					eventLog.logWarning(e, "Retry " + retries + " failed, retrying...");
 					retries++;
-					logWarning(e, "Retry " + retries + " failed, retrying...", muleMessage);
 					if (retryWait > 0) waitBeforeNextRetry();
 
 				// The last retry call failed, time to give up
 				} else {
-					
-					if (e instanceof SoapFaultInPayload) {
-						SoapFaultInPayload sfe = (SoapFaultInPayload)e;
-						logError(e, "Request failed after " + retries + " retries. Giving up! SOAP Fault from producer passed back to consumer", muleMessage);
-						muleMessage.setOutboundProperty("http.status", 500); // FIXME Not so nice but here is a good place to set the http  return code for the soap fault 
-						return sfe.getSoapFault();
-
-					} else {
-						log.error("Request failed after " + retries + " retries. Giving up!");
-						throw e;
-					}
+					log.error("Request failed after " + retries + " retries. Giving up!");
+					throw e;
 				}
 			}
 			
@@ -286,7 +276,7 @@ public class ApseRetryComponent implements Callable, MuleContextAware {
 		// Error checking for soapfault. Apoteket responds 200 OK , even for soapfaults!
 		if (isPayloadSoapFault(content)) {
 			log.debug("SOAP Fault detected in response, throw error");
-			SoapFaultInPayload sfe = new SoapFaultInPayload("We got a SoapFault: [" + content + "] with status code [" + retCode + "]");
+			SoapFaultInPayloadException sfe = new SoapFaultInPayloadException("We got a SoapFault: [" + content + "] with status code [" + retCode + "]");
 			sfe.setSoapFault(content);
 			throw sfe;
 		}
@@ -296,9 +286,7 @@ public class ApseRetryComponent implements Callable, MuleContextAware {
 			log.debug("HTTP error code detected in response, throw error");
 			throw new RuntimeException("Bad status code: [" + retCode + "] with response [" + content + "]");
 		}
-
 	}
-
 
 	private boolean isPayloadSoapFault(String content) {
 		// FIXME: Make a better assert of soap-fault, e.g. check for valid xml and expected elements including namespace...
@@ -380,32 +368,4 @@ public class ApseRetryComponent implements Callable, MuleContextAware {
 			throw new RuntimeException(e);
 		}
 	}
-
-	/*
-	 * Logger methods
-	 */
-	// TODO: Cleanup the methods below, we don't need most of it!
-	
-	public EventLogger getEventLogger() {
-		if (eventLogger == null) {
-			CustomEventLogger cel = new CustomEventLogger();
-			cel.setMuleContext(context);
-			eventLogger = cel;
-		}
-		return eventLogger;
-	}
-
-	private void logWarning(Exception e, String logMessage, MuleMessage mm) {
-		EventLogMessage elm = new EventLogMessage();
-		elm.setMuleMessage(mm);
-		elm.setLogMessage(logMessage);
-		getEventLogger().logErrorEvent(LogLevelType.WARNING, e, elm);                
-	}
-	private void logError(Exception e, String logMessage, MuleMessage mm) {
-		EventLogMessage elm = new EventLogMessage();
-		elm.setMuleMessage(mm);
-		elm.setLogMessage(logMessage);
-		getEventLogger().logErrorEvent(e, elm);                
-	}
-
 }
