@@ -72,15 +72,11 @@
 		<level value="INFO" />
 	</logger>
 	
-	<logger name="se.skltp.adapterservices.retryadapter">
-		<level value="INFO" />
-	</logger>
-
     <!-- Message logging using soi-toolkit LogTransformer class -->
 	<logger name="org.soitoolkit.commons.mule.messageLogger">
-		<level value="INFO" />
+		<level value="WARN" />
 	</logger>
-	
+		
 	<!-- Level DEBUG: Log http headers transfered during a request/response -->
     <logger name="httpclient.wire.header">
         <level value="FATAL"/>
@@ -94,10 +90,9 @@
 	<root>
 		<priority value="WARN" />
 
+		<appender-ref ref="ROLLINGFILE" />
+		<!-- 
 		<appender-ref ref="CONSOLE" />
-		<!--
-		<appender-ref ref="ROLLINGFILE"/>
-		-->
-		
+		 -->	
 	</root>
 </log4j:configuration>
