@@ -224,5 +224,5 @@
             <xs:enumeration value="video/x-avi"/>
         </xs:restriction>
     </xs:simpleType>
-    
+        
 </xs:schema>
