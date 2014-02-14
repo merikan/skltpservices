@@ -152,7 +152,7 @@ public class MaternityMedicalHistoryIntegrationTest extends AbstractAggregateInt
             MaternityMedicalRecordType responseElement = response.getMaternityMedicalRecord().get(i);
             assertEquals(registeredResidentId, responseElement.getMaternityMedicalRecordHeader().getPatientId().getId());		
             assertEquals(testData[i].getExpectedBusinessObjectId(), responseElement.getMaternityMedicalRecordHeader().getCareContactId());
-            assertEquals(testData[i].getExpectedLogicalAddress(), responseElement.getMaternityMedicalRecordHeader().getAuthor().getCareUnitHSAid());
+            assertEquals(testData[i].getExpectedLogicalAddress(), responseElement.getMaternityMedicalRecordHeader().getAccountableHealthcareProfessional().getHealthcareProfessionalCareUnitHSAId());
         }
 
 
