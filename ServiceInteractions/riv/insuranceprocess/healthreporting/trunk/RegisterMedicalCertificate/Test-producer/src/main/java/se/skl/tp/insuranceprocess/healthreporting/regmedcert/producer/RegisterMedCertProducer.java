@@ -40,7 +40,7 @@ public class RegisterMedCertProducer {
         Bus bus = bf.createBus(busFile.toString());
         SpringBusFactory.setDefaultBus(bus);
         
-        Object implementor = new RegisterMedCertValidateImpl();
+        Object implementor = new RegisterMedCertImpl();
         String address = "https://" + hostname + "/vard/RegisterMedicalCertificate/3/rivtabp20";
         Endpoint.publish(address, implementor);
     }
