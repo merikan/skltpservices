@@ -23,13 +23,13 @@
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.actoutcome</groupId>
 	    	<artifactId>GetAggregatedMaternityMedicalHistory</artifactId>
-	    	<version>1.0.0-RC1-SNAPSHOT</version>
+	    	<version>1.0.0-RC4</version>
 	    	<type>test-jar</type>
 	    </dependency>
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.actoutcome</groupId>
 	    	<artifactId>GetAggregatedMaternityMedicalHistory</artifactId>
-	    	<version>1.0.0-RC1-SNAPSHOT</version>
+	    	<version>1.0.0-RC4</version>
 	    	<classifier>core</classifier>    	
 	    </dependency>
       <dependency>
