@@ -3,11 +3,8 @@ package se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome.g
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -34,7 +31,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
      * 
      * Ett anrop görs per funnet sourceSystem med följande värden i anropet:
      * 
-     * 1. logicalAddress = sourceSystem (systemadressering)
+     * 1. logicalAddress = logicalAddress (sourceSystem kan fungera vid systemadressering men bättre att alltid använda logiaclAddress)
      * 2. subjectOfCareId = orginal-request.subjectOfCareId
      * 3. careUnitId = orginal-request.careUnitId
      * 4. fromDate = orginal-request.fromDate
@@ -64,8 +61,8 @@ public class RequestListFactoryImpl implements RequestListFactory {
             // Filter
             if (isBetween(reqFrom, reqTo, inEng.getMostRecentContent())) {
 
-                log.info("Add SS: {}", inEng.getSourceSystem());
-                sourceSystems.add(inEng.getSourceSystem());
+                log.info("Add SS: {}", inEng.getLogicalAddress());
+                sourceSystems.add(inEng.getLogicalAddress());
             }
         }
 

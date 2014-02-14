@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistoryresponder.v2.GetMaternityMedicalHistoryType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.DatePeriodType;
-import se.riv.clinicalprocess.healthcond.actoutcome.v2.PatientIdType;
+import se.riv.clinicalprocess.healthcond.actoutcome.v2.PersonIdType;
 import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentResponseType;
 import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentType;
 import se.skltp.agp.riv.itintegration.engagementindex.v1.EngagementType;
@@ -75,7 +75,9 @@ public class RequestListFactoryImplTest {
         QueryObject queryObject = new QueryObject(fc, getMaternityMedicalHistory);
         FindContentResponseType findContentResponse = createFindContentResponse(TestProducerDb.TEST_LOGICAL_ADDRESS_1, TestProducerDb.TEST_LOGICAL_ADDRESS_1);
         findContentResponse.getEngagement().get(0).setSourceSystem(SOURCE_SYSTEM_1);
+        findContentResponse.getEngagement().get(0).setLogicalAddress(SOURCE_SYSTEM_1);
         findContentResponse.getEngagement().get(1).setSourceSystem(SOURCE_SYSTEM_2);
+        findContentResponse.getEngagement().get(1).setLogicalAddress(SOURCE_SYSTEM_2);
         
         List<Object[]> requestList =  requestFactory.createRequestList(queryObject, findContentResponse);
         assertEquals(2, requestList.size());
@@ -101,7 +103,9 @@ public class RequestListFactoryImplTest {
         QueryObject queryObject = new QueryObject(fc, getMaternityMedicalHistory);
         FindContentResponseType findContentResponse = createFindContentResponse(TestProducerDb.TEST_LOGICAL_ADDRESS_1, TestProducerDb.TEST_LOGICAL_ADDRESS_2);
         findContentResponse.getEngagement().get(0).setSourceSystem(SOURCE_SYSTEM_1);
+        findContentResponse.getEngagement().get(0).setLogicalAddress(SOURCE_SYSTEM_1);
         findContentResponse.getEngagement().get(1).setSourceSystem(SOURCE_SYSTEM_1);
+        findContentResponse.getEngagement().get(1).setLogicalAddress(SOURCE_SYSTEM_1);
         List<Object[]> requestList =  requestFactory.createRequestList(queryObject, findContentResponse);
         assertEquals(1, requestList.size());
         assertEquals(SOURCE_SYSTEM_1, requestList.get(0)[0]);
@@ -121,7 +125,9 @@ public class RequestListFactoryImplTest {
         QueryObject queryObject = new QueryObject(fc, getMaternityMedicalHistory);
         FindContentResponseType findContentResponse = createFindContentResponse(TestProducerDb.TEST_LOGICAL_ADDRESS_1, TestProducerDb.TEST_LOGICAL_ADDRESS_1);
         findContentResponse.getEngagement().get(0).setSourceSystem(SOURCE_SYSTEM_1);
+        findContentResponse.getEngagement().get(0).setLogicalAddress(SOURCE_SYSTEM_1);
         findContentResponse.getEngagement().get(1).setSourceSystem(SOURCE_SYSTEM_1);
+        findContentResponse.getEngagement().get(1).setLogicalAddress(SOURCE_SYSTEM_1);
         List<Object[]> requestList =  requestFactory.createRequestList(queryObject, findContentResponse);
         assertEquals(1, requestList.size());
         assertEquals(SOURCE_SYSTEM_1, requestList.get(0)[0]);
@@ -174,7 +180,7 @@ public class RequestListFactoryImplTest {
     
     private GetMaternityMedicalHistoryType createGetMaternityMedicalHistory(String id, List<String> careUnits){
         GetMaternityMedicalHistoryType getCareContact = new GetMaternityMedicalHistoryType();
-        PatientIdType patientId = new PatientIdType();
+        PersonIdType patientId = new PersonIdType();
         patientId.setId(RR_ID);
         getCareContact.setPatientId(patientId);
         getCareContact.getCareUnitHSAid().addAll(careUnits);

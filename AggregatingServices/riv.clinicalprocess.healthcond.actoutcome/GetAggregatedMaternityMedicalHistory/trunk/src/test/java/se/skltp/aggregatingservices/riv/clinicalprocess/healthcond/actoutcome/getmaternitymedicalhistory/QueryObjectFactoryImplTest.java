@@ -14,7 +14,7 @@ import org.w3c.dom.Document;
 
 import se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistoryresponder.v2.GetMaternityMedicalHistoryType;
 import se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistoryresponder.v2.ObjectFactory;
-import se.riv.clinicalprocess.healthcond.actoutcome.v2.PatientIdType;
+import se.riv.clinicalprocess.healthcond.actoutcome.v2.PersonIdType;
 import se.skltp.agp.service.api.QueryObject;
 
 public class QueryObjectFactoryImplTest {
@@ -35,7 +35,7 @@ public class QueryObjectFactoryImplTest {
     @Test
     public void createQueryObject() throws Exception{
         GetMaternityMedicalHistoryType getMaternityMedicalHistory = new GetMaternityMedicalHistoryType();
-        PatientIdType patientId = new PatientIdType();
+        PersonIdType patientId = new PersonIdType();
         patientId.setId(RR_ID);
         getMaternityMedicalHistory.setPatientId(patientId);
         
@@ -52,10 +52,10 @@ public class QueryObjectFactoryImplTest {
     @Test
     public void createQueryObject_with_source_system() throws Exception{
         GetMaternityMedicalHistoryType getMaternityMedicalHistory = new GetMaternityMedicalHistoryType();
-        PatientIdType patientId = new PatientIdType();
+        PersonIdType patientId = new PersonIdType();
         patientId.setId(RR_ID);
         getMaternityMedicalHistory.setPatientId(patientId);
-        getMaternityMedicalHistory.setSourceSystemHSAid(SOURCE_SYSTEM);
+        getMaternityMedicalHistory.setSourceSystemHSAId(SOURCE_SYSTEM);
         
         Document doc = createDocument(getMaternityMedicalHistory);
         QueryObject queryObj = objectFactory.createQueryObject(doc);

@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistory.v2.rivtabp21.GetMaternityMedicalHistoryResponderInterface;
 import se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistoryresponder.v2.GetMaternityMedicalHistoryResponseType;
 import se.riv.clinicalprocess.healthcond.actoutcome.getmaternitymedicalhistoryresponder.v2.GetMaternityMedicalHistoryType;
-import se.riv.clinicalprocess.healthcond.actoutcome.v2.PatientIdType;
+import se.riv.clinicalprocess.healthcond.actoutcome.v2.PersonIdType;
 import se.skltp.aggregatingservices.MaternityMedicalHistoryMuleServer;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 import se.skltp.agp.test.consumer.AbstractTestConsumer;
@@ -42,7 +42,7 @@ public class MaternityMedicalHistoryTestConsumer extends AbstractTestConsumer<Ge
         log.debug("Calling GetAggregatedMaternityMedicalHistory-soap-service with id = {}", id);
 
         GetMaternityMedicalHistoryType request = new GetMaternityMedicalHistoryType();
-        PatientIdType patientId = new PatientIdType();
+        PersonIdType patientId = new PersonIdType();
         patientId.setId(id);
         request.setPatientId(patientId);
 
