@@ -18,12 +18,11 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 [soi-toolkit.gen.createDate=2014-01-23T15:59:21.274+01:00]
 [soi-toolkit.gen.artifactId=Hval24Adapter]
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.skltp.adapterservices.crm.carelisting</groupId>
     <artifactId>Hval24Adapter</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>2.0.0-RC1</version>
     <packaging>mule</packaging>
     <name>${project.artifactId}</name>
 
@@ -39,9 +38,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 	</properties>
 
 	<scm>
-		<connection>http://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/trunk</developerConnection>
-		<url>http://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/trunk</url>
+		<connection>http://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/tags/Hval24Adapter-2.0.0-RC1</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/tags/Hval24Adapter-2.0.0-RC1</developerConnection>
+		<url>http://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/tags/Hval24Adapter-2.0.0-RC1</url>
 	</scm>
 
 	<!-- soi toolkit dependencies -->
