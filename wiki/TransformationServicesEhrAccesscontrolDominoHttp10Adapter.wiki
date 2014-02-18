@@ -6,8 +6,10 @@
 
 Domino HTTP 1.0 adapter is used to handle the case when a producer is running an application that does not support HTTP 1.1 and therefore can not handle the case that Mule 2.2.8 sends transferencoding chunked. The adapter only forces the outgoing http request to use http 1.0.
 
+
+
 ----
-DEPRECATED from tag version 2.0.0 (built for Mule 3.3.1) see general developer guidelines in SKLTP wiki.
+*DEPRECATED* from tag version 2.0.0 (built for Mule 3.3.1) see general developer guidelines in SKLTP wiki.
  
 =Installation instructions mule 2.2.8=
 
