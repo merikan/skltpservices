@@ -116,12 +116,12 @@ public class MaternityMedicalHistoryTestProducerDb extends TestProducerDb {
 	    	{
 	    		author.setAuthorTime("20130707010203");
 	    		author.setHealthcareProfessionalCareGiverHSAId("HSA-SLL-01");
-	    		author.setHealthcareProfessionalCareUnitHSAId(logicalAddress);
+	    		author.setHealthcareProfessionalCareUnitHSAId(logicalAddress + "-careUnit");
 	    		author.setHealthcareProfessionalHSAId("HSA-BMOR-1");
 	    		author.setHealthcareProfessionalName("Ulla Bandage");
 	    		OrgUnitType orgUnit = new OrgUnitType();
 	    		orgUnit.setOrgUnitAddress("Bättringsvägen 1");
-	    		orgUnit.setOrgUnitHSAId(logicalAddress);
+	    		orgUnit.setOrgUnitHSAId(logicalAddress + "-orgUnit");
 		        if(TestProducerDb.TEST_LOGICAL_ADDRESS_1.equals(logicalAddress)){
 		            orgUnit.setOrgUnitName("Vårdcentralen Kusten, Kärna");
 		        } else if(TestProducerDb.TEST_LOGICAL_ADDRESS_2.equals(logicalAddress)){
@@ -157,8 +157,8 @@ public class MaternityMedicalHistoryTestProducerDb extends TestProducerDb {
 				patientId.setType("1.2.752.129.2.1.3.1");
 	    	}
 			header.setPatientId(patientId);
-	    	header.setSourceSystemHSAId("HSA-MOCKSYS-01");
-	        //header.setSourceSystemHSAId(logicalAddress);
+	    	
+	    	header.setSourceSystemHSAId(logicalAddress);
 			
     	}
     	return header;
