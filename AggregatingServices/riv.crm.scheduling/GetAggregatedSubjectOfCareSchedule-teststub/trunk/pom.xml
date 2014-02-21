@@ -18,12 +18,12 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     
     <groupId>se.skltp.aggregatingservices.crm.scheduling</groupId>
     <artifactId>GetAggregatedSubjectOfCareSchedule-teststub</artifactId>
-    <version>1.0.1-M1-SNAPSHOT</version>
+    <version>1.1.0-RC3-SNAPSHOT</version>
     <packaging>mule</packaging>
     <name>GetAggregatedSubjectOfCareSchedule-teststub</name>
 
     <properties>
-        <skltp.agp.version>1.0.0</skltp.agp.version>
+      <skltp.agp.version>1.1.0-RC3-SNAPSHOT</skltp.agp.version>
     </properties>
 
     <scm>
@@ -38,20 +38,20 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <dependency>
     	<groupId>se.skltp.aggregatingservices.crm.scheduling</groupId>
     	<artifactId>GetAggregatedSubjectOfCareSchedule</artifactId>
-    	<version>1.0.0</version>
+    	<version>${project.version}</version>
     	<type>test-jar</type>
     </dependency>
     <dependency>
     	<groupId>se.skltp.aggregatingservices.crm.scheduling</groupId>
     	<artifactId>GetAggregatedSubjectOfCareSchedule</artifactId>
-    	<version>1.0.0</version>
+    	<version>${project.version}</version>
     	<classifier>core</classifier>    	
     </dependency>
-        <dependency>
-            <groupId>se.skltp.agp</groupId>
-            <artifactId>agp-test-common</artifactId>
-            <version>${skltp.agp.version}</version>
-        </dependency>
+    <dependency>
+      <groupId>se.skltp.agp</groupId>
+      <artifactId>agp-test-common</artifactId>
+      <version>${skltp.agp.version}</version>
+    </dependency>
 	</dependencies> 
 
     <build>
