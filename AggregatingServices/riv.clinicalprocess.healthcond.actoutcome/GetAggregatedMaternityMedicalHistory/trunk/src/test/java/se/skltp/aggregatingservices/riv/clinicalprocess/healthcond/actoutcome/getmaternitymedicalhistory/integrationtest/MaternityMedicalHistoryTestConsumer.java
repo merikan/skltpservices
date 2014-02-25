@@ -25,7 +25,7 @@ public class MaternityMedicalHistoryTestConsumer extends AbstractTestConsumer<Ge
         String serviceAddress = MaternityMedicalHistoryMuleServer.getAddress("SERVICE_INBOUND_URL");
         String personnummer = TEST_RR_ID_ONE_HIT;
 
-        MaternityMedicalHistoryTestConsumer consumer = new MaternityMedicalHistoryTestConsumer(serviceAddress, SAMPLE_ORIGINAL_CONSUMER_HSAID);
+        MaternityMedicalHistoryTestConsumer consumer = new MaternityMedicalHistoryTestConsumer(serviceAddress, SAMPLE_SENDER_ID, SAMPLE_ORIGINAL_CONSUMER_HSAID);
         Holder<GetMaternityMedicalHistoryResponseType> responseHolder = new Holder<GetMaternityMedicalHistoryResponseType>();
         Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
         long now = System.currentTimeMillis();
@@ -33,9 +33,9 @@ public class MaternityMedicalHistoryTestConsumer extends AbstractTestConsumer<Ge
         log.info("Returned #maternity medical record= " + responseHolder.value.getMaternityMedicalRecord().size() + " in " + (System.currentTimeMillis() - now) + " ms.");	
     }
 
-    public MaternityMedicalHistoryTestConsumer(String serviceAddress, String originalConsumerHsaId) {
+    public MaternityMedicalHistoryTestConsumer(String serviceAddress, String senderId, String originalConsumerHsaId) {
         // Setup a web service proxy for communication using HTTPS with Mutual Authentication
-        super(GetMaternityMedicalHistoryResponderInterface.class, serviceAddress, originalConsumerHsaId); 
+        super(GetMaternityMedicalHistoryResponderInterface.class, serviceAddress, senderId, originalConsumerHsaId); 
     }
 
     public void callService(String logicalAddress, String id, Holder<ProcessingStatusType> processingStatusHolder, Holder<GetMaternityMedicalHistoryResponseType> responseHolder) {
