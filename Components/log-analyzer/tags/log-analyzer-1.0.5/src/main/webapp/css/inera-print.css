@@ -1,0 +1,1031 @@
+/**
+ * Copyright (c) 2012, Sjukvardsradgivningen. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301  USA
+ */
+﻿/* HTML */
+html
+{
+	height:100%;    
+}
+
+body 
+{
+	font-size: 75%;
+	font-family: Arial, Verdana, Sans-Serif;
+	height:100%;
+	width:100%;
+	margin:0;
+}
+
+a
+{
+	color: #009492;
+	text-decoration: none;
+}
+
+img
+{
+	border: none;
+}
+
+h1
+{
+	color: #009492;
+	font-size: 1.7em;
+	font-family: Arial, Verdana, Sans-Serif;
+	font-weight: bold;
+	line-height: 1.1em;
+	margin-bottom: 0.3em;
+}
+
+h2, .panelmenuheader
+{
+	color: #009492;
+	font-size: 1.2em;
+	font-family: Arial, Verdana, Sans-Serif;
+	font-weight: bold;
+	line-height: 1.1em;
+	margin-bottom: 0.2em;
+	margin-top: 1px;
+}
+
+h3
+{
+	color: #009492;
+	font-size: 1em;
+	font-family: Arial, Verdana, Sans-Serif;
+	font-weight: bold;
+	line-height: 1em;
+	margin-bottom: 0.2em;
+	padding-bottom: 0;
+}
+
+ul
+{
+	list-style: none;
+}
+
+li
+{
+	list-style: none;
+}
+
+table caption
+{
+	color: #009492;
+	font-size: 1em;
+	font-weight: bold;
+	line-height: 1em;
+	margin-bottom: 0.1em;
+	padding-bottom: 0;
+	text-align: left;
+}
+
+table
+{
+	margin-bottom: 20px;
+	width: 100%;
+}
+
+table tbody tr th, table tbody tr
+{
+	text-align: left;
+	border-bottom: solid 1px #A2A2A2;
+	margin: 0;
+	padding: 0;
+}
+
+.bodytext
+{
+	width: 66%;
+}
+
+
+div#mainwrapper
+{
+	margin: 0 auto 20px;
+	max-width: 100%; /*1000px*/
+	/*min-width: 800px;
+	min-height: 500px;*/
+}
+
+div#mainwrapper div#top
+{
+    display:none;    
+}
+
+div#top-print
+{
+    display:block;
+    height:50px;
+    width:100%;
+}
+div#top-print img
+{
+  float:right;  
+  margin-right:30px;
+  display:block;
+}
+
+/* standard */
+div#leftcol
+{
+	margin-right: 233px;
+}
+
+div#leftcol.wide
+{
+	margin: 0;
+}
+
+div#leftmenu
+{
+    display:none;
+}
+
+div#contentarea
+{
+	float: left;	
+	width: 100%; /* 66% */	
+}
+
+div#contentarea-inner
+{
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+div#rightcol
+{
+	display: none;
+}
+
+/* Leftmenu */
+div#leftmenu
+{
+	padding: 9px 0 0 0;
+	background: url(../Images/Design/menu/background.gif) no-repeat 0 0;
+	font-size: 13px;
+}
+
+div#leftmenu ul
+{
+	list-style: none;
+	margin: 0;
+}
+
+div#leftmenu ul li
+{
+	list-style: none;
+}
+
+div#leftmenu ul li a
+{
+	text-decoration: none;
+}
+
+div#leftmenu ul li a:active {
+	font-weight: normal;
+}
+
+div#leftmenu ul.level1 li
+{
+	padding: 7px 15px 6px 15px;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+div#leftmenu ul.level1 li li {
+	padding: 0 0 2px 0;
+	border: none;
+}
+
+div#leftmenu ul.level1 ul
+{
+	font-size: 12px;
+	margin-left: 12px;
+	margin-top: 5px;
+}
+
+div#leftmenu ul li span.selectedchildren a,
+div#leftmenu ul li span.selected a
+{
+	color: #009492;
+	font-weight: bold;
+}
+
+div#leftmenu ul li span.expanded a
+{
+	color: #009492;
+}
+
+/* Breadcrumb */
+div#breadcrumbs
+{
+    display:none;
+}
+
+/* TopMenu */
+div#topmenu-outer
+{
+    display:none;
+}
+
+/* Search */
+div#searcharea_left
+{
+	display:none;
+}
+
+/* Personligsida */
+div#photo
+{
+	float: right;
+}
+
+div#personalinfo
+{
+	float: left;
+}
+
+/* Ordlista */
+div.synonym
+{
+}
+
+div.shortdescription
+{
+}
+
+div.longdescription
+{
+}
+
+ul#letterindex
+{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: inline;
+}
+
+ul#letterindex li
+{
+	list-style: none;
+	display: inline;
+	padding: 0 3px 0 5px;
+}
+
+/* Search result list */
+div#search-result ol li
+{
+	margin-left: 3em;
+	list-style-type: decimal;
+}
+
+
+div#leftarea
+{
+
+}
+
+
+div#leftarea div.top
+{
+	margin: 0px 10px 10px 0px;
+}
+
+div#leftarea div.bottomleft
+{
+	width: 50%;
+}
+
+div#leftarea div.bottomleft-inner
+{
+	margin: 0px 10px 0px 0px;
+}
+
+
+div#leftarea div.bottomright
+{
+	width: 50%;
+}
+
+div#leftarea div.bottomright-inner
+{
+	margin: 0px 0px 0px 0px;
+}
+
+div#leftarea div.bottomright class.bottomright-inner
+{
+	border-bottom: dotted;
+	margin: 0px 0px 0px 10px;
+}
+
+div#rightarea
+{
+
+}
+
+div#rightarea div.newsarea
+{
+}
+
+div#rightarea div.newsarea-inner
+{
+	margin-right: 20px;
+	margin-left: 10px;
+}
+
+div#rightarea div.newsarea div.newsarea
+{
+	margin: 0px 0px 0px 10px;
+}
+
+
+/* 
+    Newslist 
+*/
+
+#z #morenews-inner
+{
+	margin: 10px 5px 10px 5px;
+}
+
+#morenews-inner .newsimagearea
+{
+	margin: 10px 5px 10px 5px;
+}
+
+div#rightarea .newsarea .newsarea-inner #mainnewslist
+{
+	background-color: #57B2D9;
+	color: #000000;
+	padding: 10px 5px 15px 10px;
+	overflow: auto;
+}
+
+div.newslist h2
+{
+	color: #ffffff;
+}
+
+div.newslist a
+{
+	color: #000000;
+}
+
+.newsimage
+{
+	float: left;
+	padding: 0 5px 10px 0;
+}
+
+
+div.newslist div.newstext h3
+{
+	margin-top: 0;
+	line-height: 1.2em;
+}
+
+div.newsitem
+{
+	margin: 10px 0px 15px;
+	clear: both;
+}
+
+div.newsitem
+{
+	margin: 10px 0px 15px;
+	padding: 25px 0 0 0;
+	border-top: 1px solid #a2a2a2;
+	position: relative;
+}
+
+div.newsitem div.newstext
+{
+	padding-bottom: 5px;
+}
+
+div.newsitem div.itemdate
+{
+	color: #A2A2A2;
+	position: absolute;
+	top: 2px;
+	left: 0;
+}    
+    
+.newsarea ul
+{
+	list-style: none;
+	margin: 0 10px 10px 0;
+	padding: 0;
+}
+
+.newsarea ul li
+{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.newsarea ul li a
+{
+	color: #000000;
+}
+
+div.newsitem .rightarrow 
+{
+	display: none;
+}
+
+
+
+div#rightarea div#puffarea
+{
+	background-image: url(../Images/Design/menu/background.gif);
+	background-repeat: repeat-y;
+	margin-top: 10px;	
+	min-height:100%;
+	
+}
+
+div#mainwrapper div#rightarea div#puffarea div#puffarea-inner
+{
+	
+}
+
+div#rightarea div.puffarea div#puffarea-inner div.puffimageinpufflist
+{
+}
+
+
+
+div#footer
+{
+	clear: both;
+	margin-top: 50px;
+}
+
+/* Classes */
+.auraltext
+{
+	color: #FFFFFF;
+	font-size: 1px;
+	left: -900px;
+	overflow: hidden;
+	position: absolute;
+	width: 0pt;
+}
+
+.ingress
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-weight: bold;
+	width: 66%;
+}
+
+table .header
+{
+	text-align: left;
+	font-weight: bold;
+}
+
+
+div#mainwrapper div#footerarea
+{
+	border-top: 1px solid #a2a2a2;
+	clear: both;
+	margin-top: 20px;
+	padding: 8px 0 0 1px;
+	overflow: hidden;
+	color: #a2a2a2;
+}
+
+div#mainwrapper div#footerarea div
+{
+	float: left;
+	background: url(../Images/Design/footer_divider.gif) no-repeat 0 3px;
+	padding: 0 8px 0 10px;
+	display: none;
+}
+
+div#mainwrapper div#footerarea div:first-child
+{
+	background: none;
+	padding-left: 0;
+}
+
+div#mainimagearea div#mainimagearea-inner
+{
+	margin-top: 10px;
+}
+
+.mainbodytextclass
+{
+	float: left;
+}
+
+a.rightarrow 
+{
+	background: url(../Images/Design/buttons/rightarrow.png) top left no-repeat;
+	display: inline-block;
+	width: 29px;
+	height: 29px;
+	text-decoration: none;
+}
+
+#filelisting-list ul
+{
+	background-color: Maroon;
+	list-style: none;
+	display: inline;
+}
+
+.filelisting-list ul
+{
+	list-style: none;
+}
+
+.documentrow
+{
+	clear: both;
+}
+
+.documentrow .fileicon
+{
+	float: left;
+	margin-right: 5px;
+}
+
+.documentrow .displaylabel
+{
+	float: left;
+	width:400px;
+	margin-right: 10px;
+	text-decoration: underline;
+	overflow:hidden;
+}
+
+.displaylabel h2
+{
+	clear: left;
+	padding-top: 20px;
+	margin-right: 10px;
+}
+
+.documentrow .filelength
+{
+	float: left;
+	width: 80px;
+	margin-right: 10px;
+	display:none;
+}
+
+
+div#mainbody select
+{
+	margin-left: 10px;
+}
+
+/* WidePage */
+div#leftcol div#contentarea.wide
+{
+	width: 100%; /* 66% */
+}
+
+.newsarea .newsheading
+{
+	text-align: center;
+}
+
+/* Anslagstavla */
+div.noticeitem
+{
+	margin: 20px 0 20px 0;
+}
+
+/* Medarbetarlista */
+
+
+
+.imagebutton
+{
+	visibility: hidden;
+}
+#resultlist
+{
+	width:100%;
+	padding-top:40px;
+}
+
+#mailpicshow
+{
+	display: none;
+}
+
+#contentwrapperwide
+{
+	width:100%;
+}
+
+td
+{
+	white-space:nowrap;
+	padding-right: 10px;
+	text-align: left;
+	border-bottom: solid 1px #A2A2A2;
+	margin: 0;
+	height: 50px;
+	
+}
+
+tr
+{
+	white-space:nowrap;
+}
+
+
+td a.Asc
+{
+	background-image: url(../Images/Design/uparrow.gif);
+	background-repeat: no-repeat;
+	background-position: left;
+	padding-left: 75px;
+}
+
+td a.Desc
+{
+	background-image: url(../Images/Design/downarrow.gif);
+	background-repeat: no-repeat;
+	background-position: left;
+	padding-left: 75px;
+}
+
+
+
+a.emaillink
+{
+	/*width: 50px;*/
+	display: block;
+	background-image: url(../Images/Design/mail.gif);
+	background-repeat: no-repeat;
+}
+
+/* Personlig sida */
+.wrapper
+{
+	overflow: hidden;
+	padding-bottom: 5px;
+}
+
+.fcap
+{
+	padding-top: 5px;
+	float: left;
+	width: 5em;
+}
+
+.ffield
+{
+	float: left;
+	color: #666;
+	overflow: visible;
+}
+
+.tfield
+{
+	padding-top: 5px;
+	float: left;
+	color: #666;
+}
+
+.date
+{
+	color: #a2a2a2;
+}
+
+.searchitem
+{
+	border-bottom: solid 1px #a2a2a2;
+	padding-bottom: 3px;
+	margin: 5px 0 0 0;
+}
+
+.bottomborder
+{
+	border-bottom: solid 1px #A2A2A2;
+	margin-bottom:5px;
+}
+
+div.userinfo
+{
+	display: none;
+}
+
+div#search-result a.bmp
+{
+	background-image: url(../Images/extensions/bmp.gif);
+	background-repeat: no-repeat;
+	padding-left: 25px;
+}
+
+div#search-result a.doc, div#search-result a.docx
+{
+	background-image: url(../Images/extensions/doc.gif);
+	background-repeat: no-repeat;
+	padding-left: 25px;
+}
+
+div#search-result a.htm, div#search-result a.html
+{
+	background-image: url(../Images/extensions/htm.gif);
+	background-repeat: no-repeat;
+	padding-left: 25px;
+}
+div#search-result a.xls, div#search-result a.xlsx
+{
+	background-image: url(../Images/extensions/xls.gif);
+	background-repeat: no-repeat;
+	padding-left: 25px;
+}
+
+div#search-result a.txt
+{
+	background-image: url(../Images/extensions/txt.gif);
+	background-repeat: no-repeat;
+	padding-left: 25px;
+}
+div#search-result a.pdf
+{
+	background-image: url(../Images/extensions/pdf.gif);
+	background-repeat: no-repeat;
+	padding-left: 25px;
+}
+div#search-result a.ppt, div#search-result a.pptx
+{
+	background-image: url(../Images/extensions/ppt.gif);
+	background-repeat: no-repeat;
+	padding-left: 25px;
+}
+
+div#subscriberinfo
+{
+    float:left;
+}
+
+div#subscriberegisterinput
+{
+    float:left;
+    width:70%;
+}
+
+div#subscriberegisterinput div#emailsection
+{
+    float:left;
+    width:97%;
+    margin-bottom:5px;
+}
+
+div#subscriberegisterinput div#emailsection .tbxEmail
+{
+    float:left;
+    width:100%;
+}
+
+div#subscriberegisterinput div#emailsection .emaillabel
+{
+    float:left;
+}
+    
+div#subscriberegisterinput div#subscribebuttons
+{
+      float:right;
+}
+
+div#subscribecurrentusermail
+{
+    margin-bottom:5px;
+}
+ 
+div#subscriberinfo #currentusermail
+{
+    margin-bottom:5px;
+}
+
+div#subscriberinfo #updateinterval
+{
+    float:left;
+    margin-top:15px;
+    margin-bottom:10px;
+    width:500px;
+}
+
+#updateinterval
+{
+    float:left;
+}    
+
+#subscriberinfo fieldset
+{
+    float:left;
+    width:480px;
+}
+
+.subscriptionListArea table
+{
+    float:left;
+}
+
+.subscriptionListArea table tbody tr
+{
+    float:left;
+    width:210px;
+    margin-right: 10px;
+}
+
+.toplabel
+{
+    display:block;
+}
+
+
+div#subscriberinfo .subscriptionListArea
+{
+    margin-bottom:10px;    
+    float:left;
+}
+
+label.listlabel 
+{
+	font-size: 1.3em;
+	font-weight: bold;
+	margin: 10px 0 0 0;
+	display: block;
+}
+
+div#puffarea-inner .topborder
+{
+	border-top: solid 2px White; 
+}
+
+div#puffarea-inner .topborder .puffarea-item
+{
+	margin: 10px 5px 0px 10px;
+	padding-bottom:10px;
+}
+
+
+.username
+{
+	color: #a2a2a2;
+}
+
+.editable
+{
+	background-image: url(../Images/Design/buttons/penn2.png);
+	background-position: right;
+	background-repeat: no-repeat;
+	padding-right: 25px;
+}
+
+.rightbutton
+{
+	float: right;
+}
+
+.right
+{
+	float: right;
+}
+
+div#addnotice label
+{
+	display: block;
+}
+
+div#addnotice div
+{
+	margin-bottom: 10px;
+}
+
+/* Sitemap */
+#sitemap .level_1 .liclass
+{
+	background-image: url(../Images/design/menu/arrowright.gif);
+	background-repeat: no-repeat;
+	background-position: left 0em;
+	margin: 5px 0 0 0;
+	padding: 0 0 0 25px;
+}
+
+#sitemap .level_2 .liclass
+{
+	background-image: url(../Images/design/menu/arrowright.gif);
+	background-repeat: no-repeat;
+	background-position: 20px 0em;
+	margin: 0 0 0 0;
+	padding: 0 0 0 45px;
+}
+#sitemap .level_3 .liclass
+{
+	background-image: url(../Images/design/menu/arrowright.gif);
+	background-repeat: no-repeat;
+	background-position: 45px 0em;
+	margin: 0 0 0 0;
+	padding: 0 0 0 65px;
+}
+
+input.imagebutton
+{
+	vertical-align: bottom;
+	margin-bottom: -1px;
+}
+
+	    
+#newscontent div ul li
+{
+	margin-left: 3em;
+	list-style-type: disc;
+}
+
+#newscontent div ol li
+{
+	margin-left: 3em;
+	list-style-type: decimal;
+}
+
+
+.ingress div ul li
+{
+	margin-left: 3em;
+	list-style-type: disc;
+}
+
+.ingress div ol li
+{
+	margin-left: 3em;
+	list-style-type: decimal;
+} 
+
+.bodytext div ul li
+{
+	margin-left: 3em;
+	list-style-type: disc;
+}
+
+.bodytext div ol li
+{
+	margin-left: 3em;
+	list-style-type: decimal;
+}
+.bold
+{
+	font-weight: bold;
+}
+
+.watermarkon 
+{
+    color: #CCCCCC !important;
+}
+
+.greenarrow
+{
+	padding-right: 20px;
+	background-image: url(../Images/Design/greenarrow_small.gif);
+	background-repeat: no-repeat;
+	background-position: right;
+}
+
+.greenbackgound
+{
+	background-color: #8A8E36;
+	color: #ffffff;
+	line-height: 2em;
+	padding-left: 30px;
+	position: relative;
+	left: -30px;
+	width: 100%;
+}
+
+/* Coworker */
+img.listimage
+{
+	height: 50px;
+}
+
+
