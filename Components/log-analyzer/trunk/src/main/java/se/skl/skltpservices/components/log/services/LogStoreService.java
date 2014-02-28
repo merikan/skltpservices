@@ -46,20 +46,23 @@ import se.skl.skltpservices.components.analyzer.LogServiceConfig;
 
 @Service
 public class LogStoreService {
-
-	private static final String SOITOOLKIT_LOG_STORE_SUFFIX = ":SOITOOLKIT.LOG.STORE";
-	private static final String SOITOOLKIT_LOG_ERROR_SUFFIX = ":SOITOOLKIT.LOG.ERROR";
+	
 	private static final String SOITOOLKIT_LOG_PING_SUFFIX  = ":SOITOOLKIT.LOG.PING";
+
 	private static final Logger log = LoggerFactory.getLogger(LogStoreService.class);
 	private static final Logger storeLog = LoggerFactory.getLogger("se.skl.skltpservices.components.log.services.StoreLog");
 
 	private static final JAXBContext context = initContext();
 	private static final ObjectMapper mapper = new ObjectMapper();
 
-	@Value("${log.mq.instances}")
-	private String logInstances;
-	private List<Consumer> consumers;      
-
+	@Value("#{'${log.mq.instances}'.split(',')}")
+	private List<String> logInstances;
+	
+	private List<Consumer> consumers;    
+	
+	@Value("#{'${soitoolkit.log.queues}'.split(',')}") 
+	private List<String> logQueues;
+	
 	@Autowired
 	private LogServiceConfig logServiceConfig;
 
@@ -113,15 +116,15 @@ public class LogStoreService {
 
 		int seqNo = 0;
 		this.consumers = new LinkedList<Consumer>();
-		for (String instance : logInstances.split(",")) {
-			if (instance.length() > 0) {
-				ActiveMQComponent mq = ActiveMQComponent.activeMQComponent(instance.trim());
-				String compName = "activemq-" + seqNo++;
-				log.info("Listen on { instance: {}, name: {} }", instance, compName);  
-				camel.addComponent(compName, mq);
-				consumers.add(createConsumer(camel, compName + SOITOOLKIT_LOG_STORE_SUFFIX));
-				consumers.add(createConsumer(camel, compName + SOITOOLKIT_LOG_ERROR_SUFFIX));			
-				consumers.add(createConsumer(camel, compName + SOITOOLKIT_LOG_PING_SUFFIX));
+		
+		for (String logInstance : logInstances) {
+			ActiveMQComponent mq = ActiveMQComponent.activeMQComponent(logInstance.trim());
+			String compName = "activemq-" + seqNo++;
+			log.info("Listen on { instance: {}, name: {} }", logInstance, compName);  
+			camel.addComponent(compName, mq);
+			
+			for (String logQueue : logQueues) {
+				consumers.add(createConsumer(camel, compName + ":" + logQueue));
 			}
 		}
 	}

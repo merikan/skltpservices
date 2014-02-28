@@ -71,11 +71,12 @@
 	</appender>
 	
 	
-  <root level="${console.logLevel}">
+  <root level="${console.logLevel}" >
     <appender-ref ref="STDOUT" />
   </root>
 
-  <logger name="se.skl.skltpservices.components.log.services.StoreLog" level="INFO">
+  <!-- Appender to log in tp-event.log or tp-error.log -->
+  <logger name="se.skl.skltpservices.components.log.services.StoreLog" level="INFO" additivity="false">
    	<appender-ref ref="FILE" />
    	<appender-ref ref="ERROR" />
   </logger>
