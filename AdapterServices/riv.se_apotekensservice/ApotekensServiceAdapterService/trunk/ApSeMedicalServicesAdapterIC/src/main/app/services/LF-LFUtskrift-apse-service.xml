@@ -19,7 +19,7 @@ http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/ht
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn" doc:name="HTTP">
+			transformer-refs="XmlToXSR ArgosHeaderToSamlTicket logReqIn" doc:name="HTTP">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service

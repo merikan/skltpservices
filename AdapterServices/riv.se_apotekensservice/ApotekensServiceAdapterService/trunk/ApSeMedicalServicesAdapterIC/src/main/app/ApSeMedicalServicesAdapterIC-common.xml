@@ -109,6 +109,10 @@
      <mulexml:jaxb-context name="jaxbContext" packageNames="org.soitoolkit.commons.logentry.schema.v1"/>
 	
 	<custom-transformer class="org.soitoolkit.commons.mule.core.ObjectToStringTransformer" name="objToStr"/>
+	
+	<custom-transformer name="XmlToXSR" class="org.mule.module.xml.transformer.XmlToXMLStreamReader">
+   		<spring:property name="reversible" value="true"/>
+	</custom-transformer>
 
 	<custom-transformer class="org.soitoolkit.commons.mule.log.correlationid.CreateCorrelationIdTransformer" name="createCorrId"/>
  	<custom-transformer class="org.soitoolkit.commons.mule.log.correlationid.SaveCorrelationIdTransformer" name="saveCorrId"/>
