@@ -1,53 +1,71 @@
-<mule xmlns="http://www.mulesource.org/schema/mule/core/2.2"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:spring="http://www.springframework.org/schema/beans"
-	xmlns:cxf="http://www.mulesource.org/schema/mule/cxf/2.2" xmlns:https="http://www.mulesource.org/schema/mule/https/2.2"
+<?xml version="1.0" encoding="utf-8"?>
+<mule 
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:https="http://www.mulesoft.org/schema/mule/https"
 	xsi:schemaLocation="
-               http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-               http://www.mulesource.org/schema/mule/core/2.2 http://www.mulesource.org/schema/mule/core/2.2/mule.xsd
-               http://www.mulesource.org/schema/mule/https/2.2 http://www.mulesource.org/schema/mule/https/2.2/mule-https.xsd
-               http://www.mulesource.org/schema/mule/cxf/2.2  http://www.mulesource.org/schema/mule/cxf/2.2/mule-cxf.xsd">
-
+		http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-current.xsd
+		http://www.mulesoft.org/schema/mule/core      http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/cxf       http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+		http://www.mulesoft.org/schema/mule/http      http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+		http://www.mulesoft.org/schema/mule/https     http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
+	">
+	
 	<!-- Name of this file is mandatory and may not be changed. -->
 
-	<model name="Bridged-ApotekenService-HamtaAktuellaOrdinationer-model">
+	<flow name="Bridged-ApotekenService-HamtaAktuellaOrdinationer">
 
-		<service
-			name="Bridged-ApotekenService-HamtaAktuellaOrdinationer-service">
-			<inbound>
-				<cxf:inbound-endpoint
-							address="${inbound.endpoint.apotekensservice.or.HamtaAktuellaOrdinationer}"
-							wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl"
-							serviceName="HamtaAktuellaOrdinationerResponderService" namespace="urn:riv:inera:se.apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20"
-							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
-			</inbound>
-			<outbound>
-				<pass-through-router>
-					<cxf:outbound-endpoint
-						address="${outbound.endpoint.apotekensservice.or.HamtaAktuellaOrdinationer}"
-						synchronous="true" proxy="true" payload="envelope"
-						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
-				</pass-through-router>
-			</outbound>
-		</service>
+		<http:inbound-endpoint address="${inbound.endpoint.apotekensservice.or.HamtaAktuellaOrdinationer}"
+			connector-ref="soitoolkit-http-connector" 
+			exchange-pattern="request-response"
+			responseTransformer-refs="logRespOut"
+			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+		</http:inbound-endpoint>
+
+		<cxf:proxy-service
+			namespace="urn:riv:inera:se.apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20"
+			payload="envelope" 
+			service="HamtaAktuellaOrdinationerResponderService"
+			wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl" />
+			
+		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
+			address="${outbound.endpoint.apotekensservice.or.HamtaAktuellaOrdinationer}"
+			exchange-pattern="request-response" 
+			responseTimeout="${SERVICE_TIMEOUT_MS}"
+			transformer-refs="addContentTypeXmlUtf8 logReqOut" 
+			responseTransformer-refs="IgnoreExceptionPayloads logRespIn">
+		</https:outbound-endpoint>
 		
-		<service
-			name="Bridged-ApotekenService-HamtaAktuellaOrdinationer-service-env2">
-			<inbound>
-				<cxf:inbound-endpoint
-							address="${inbound.endpoint.env2.apotekensservice.or.HamtaAktuellaOrdinationer}"
-							wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl"
-							serviceName="HamtaAktuellaOrdinationerResponderService" namespace="urn:riv:inera:se.apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20"
-							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
-			</inbound>
-			<outbound>
-				<pass-through-router>
-					<cxf:outbound-endpoint
-						address="${outbound.endpoint.env2.apotekensservice.or.HamtaAktuellaOrdinationer}"
-						synchronous="true" proxy="true" payload="envelope"
-						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
-				</pass-through-router>
-			</outbound>
-		</service>
-	</model>
+	</flow>
+	
+	<flow name="Bridged-ApotekenService-HamtaAktuellaOrdinationer-env2">
+
+		<http:inbound-endpoint address="${inbound.endpoint.env2.apotekensservice.or.HamtaAktuellaOrdinationer}"
+			connector-ref="soitoolkit-http-connector" 
+			exchange-pattern="request-response"
+			responseTransformer-refs="logRespOut"
+			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+		</http:inbound-endpoint>
+
+		<cxf:proxy-service
+			namespace="urn:riv:inera:se.apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20"
+			payload="envelope" 
+			service="HamtaAktuellaOrdinationerResponderService"
+			wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl" />
+			
+		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
+			address="${outbound.endpoint.env2.apotekensservice.or.HamtaAktuellaOrdinationer}"
+			exchange-pattern="request-response" 
+			responseTimeout="${SERVICE_TIMEOUT_MS}"
+			transformer-refs="addContentTypeXmlUtf8 logReqOut" 
+			responseTransformer-refs="IgnoreExceptionPayloads logRespIn">
+		</https:outbound-endpoint>
+		
+	</flow>
 
 </mule>
+

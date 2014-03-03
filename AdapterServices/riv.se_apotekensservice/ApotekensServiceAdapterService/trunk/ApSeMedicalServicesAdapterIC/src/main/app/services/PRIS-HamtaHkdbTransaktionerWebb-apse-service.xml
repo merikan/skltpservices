@@ -1,54 +1,89 @@
-<mule xmlns="http://www.mulesource.org/schema/mule/core/2.2"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:spring="http://www.springframework.org/schema/beans"
-	xmlns:cxf="http://www.mulesource.org/schema/mule/cxf/2.2" xmlns:https="http://www.mulesource.org/schema/mule/https/2.2"
+<?xml version="1.0" encoding="utf-8"?>
+<mule 
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns:jdbc="http://www.mulesoft.org/schema/mule/jdbc"
+	xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
+	xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:https="http://www.mulesoft.org/schema/mule/https"
+	xmlns:mule-xml="http://www.mulesoft.org/schema/mule/xml"
+	xmlns:smooks="http://www.muleforge.org/smooks/schema/mule-module-smooks"
+	xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+	xmlns:rest="http://www.mulesoft.org/schema/mule/rest"
+	xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml"
 	xsi:schemaLocation="
-               http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-               http://www.mulesource.org/schema/mule/core/2.2 http://www.mulesource.org/schema/mule/core/2.2/mule.xsd
-               http://www.mulesource.org/schema/mule/https/2.2 http://www.mulesource.org/schema/mule/https/2.2/mule-https.xsd
-               http://www.mulesource.org/schema/mule/cxf/2.2  http://www.mulesource.org/schema/mule/cxf/2.2/mule-cxf.xsd">
+		http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-current.xsd
+		http://www.mulesoft.org/schema/mule/core      http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/vm        http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+		http://www.mulesoft.org/schema/mule/jdbc      http://www.mulesoft.org/schema/mule/jdbc/current/mule-jdbc.xsd
+		http://www.mulesoft.org/schema/mule/cxf       http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+		http://www.mulesoft.org/schema/mule/jms       http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+		http://www.mulesoft.org/schema/mule/http      http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+		http://www.mulesoft.org/schema/mule/https     http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
+		http://www.mulesoft.org/schema/mule/xml       http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+		http://www.muleforge.org/smooks/schema/mule-module-smooks http://dist.muleforge.org/smooks/schema/mule-module-smooks/current/mule-module-smooks.xsd
+		http://www.mulesoft.org/schema/mule/json      http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+		http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+		http://www.mulesoft.org/schema/mule/rest      http://www.mulesoft.org/schema/mule/rest/current/mule-rest.xsd
+		http://www.mulesoft.org/schema/mule/xml       http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+	">
 
 	<!-- Name of this file is mandatory and may not be changed. -->
 
-	<model name="Bridged-ApotekenService-HamtaHkdbTransaktionerWebb-model">
 
-		<service
-			name="Bridged-ApotekenService-HamtaHkdbTransaktionerWebb-service">
-			<inbound>
-					<cxf:inbound-endpoint
-							address="${inbound.endpoint.apotekensservice.pris.HamtaHkdbTransaktionerWebb}"
-							wsdlLocation="classpath:/TD_APSE_PRIS_1_0_0_SNAPSHOT/interactions/HamtaHkdbTransaktionerWebbInteraction/HamtaHkdbTransaktionerWebbInteraction_1.0_rivtabp20.wsdl"
-							serviceName="HamtaHkdbTransaktionerWebbResponderService" namespace="urn:riv:inera:se.apotekensservice:pris:HamtaHkdbTransaktionerWebb:1:rivtabp20"
-							proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
-			</inbound>
-			<outbound>
-				<pass-through-router>
-					<cxf:outbound-endpoint
-						address="${outbound.endpoint.apotekensservice.pris.HamtaHkdbTransaktionerWebb}"
-						synchronous="true" proxy="true" payload="envelope"
-						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
-				</pass-through-router>
-			</outbound>
-		</service>
+	<flow name="Bridged-ApotekenService-HamtaHkdbTransaktionerWebb">
+
+		<http:inbound-endpoint address="${inbound.endpoint.apotekensservice.pris.HamtaHkdbTransaktionerWebb}"
+			connector-ref="soitoolkit-http-connector" 
+			exchange-pattern="request-response"
+			responseTransformer-refs="logRespOut"
+			transformer-refs="logReqIn ArgosHeaderToSamlTicket">
+		</http:inbound-endpoint>
+
+		<cxf:proxy-service
+			namespace="urn:riv:inera:se.apotekensservice:pris:HamtaHkdbTransaktionerWebb:1:rivtabp20"
+			payload="envelope" 
+			service="HamtaHkdbTransaktionerWebbResponderService"
+			wsdlLocation="classpath:/TD_APSE_PRIS_1_0_0_SNAPSHOT/interactions/HamtaHkdbTransaktionerWebbInteraction/HamtaHkdbTransaktionerWebbInteraction_1.0_rivtabp20.wsdl" />
+			
+		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
+			address="${outbound.endpoint.apotekensservice.pris.HamtaHkdbTransaktionerWebb}"
+			exchange-pattern="request-response" 
+			responseTimeout="${SERVICE_TIMEOUT_MS}"
+			transformer-refs="addContentTypeXmlUtf8 logReqOut" 
+			responseTransformer-refs="logRespIn IgnoreExceptionPayloads">
+		</https:outbound-endpoint>
 		
-		<service
-			name="Bridged-ApotekenService-HamtaHkdbTransaktionerWebb-service-env2">
-			<inbound>
-				<cxf:inbound-endpoint
-						address="${inbound.endpoint.env2.apotekensservice.pris.HamtaHkdbTransaktionerWebb}"
-						wsdlLocation="classpath:/TD_APSE_PRIS_1_0_0_SNAPSHOT/interactions/HamtaHkdbTransaktionerWebbInteraction/HamtaHkdbTransaktionerWebbInteraction_1.0_rivtabp20.wsdl"
-						serviceName="HamtaHkdbTransaktionerWebbResponderService" namespace="urn:riv:inera:se.apotekensservice:pris:HamtaHkdbTransaktionerWebb:1:rivtabp20"
-						proxy="true" payload="envelope" synchronous="true" transformer-refs="ArgosHeaderToSamlTicket" applyTransformersToProtocol="false"/>
-			</inbound>
-			<outbound>
-				<pass-through-router>
-					<cxf:outbound-endpoint
-						address="${outbound.endpoint.env2.apotekensservice.pris.HamtaHkdbTransaktionerWebb}"
-						synchronous="true" proxy="true" payload="envelope"
-						transformer-refs="addContentTypeXmlUtf8" responseTransformer-refs="IgnoreExceptionPayloads"/>
-				</pass-through-router>
-			</outbound>
-		</service>
+	</flow>
 
-	</model>
+	<flow name="Bridged-ApotekenService-HamtaHkdbTransaktionerWebb-env2">
+
+		<http:inbound-endpoint address="${inbound.endpoint.env2.apotekensservice.pris.HamtaHkdbTransaktionerWebb}"
+			connector-ref="soitoolkit-http-connector" 
+			exchange-pattern="request-response"
+			responseTransformer-refs="logRespOut"
+			transformer-refs="logReqIn ArgosHeaderToSamlTicket">
+		</http:inbound-endpoint>
+
+		<cxf:proxy-service
+			namespace="urn:riv:inera:se.apotekensservice:pris:HamtaHkdbTransaktionerWebb:1:rivtabp20"
+			payload="envelope" 
+			service="HamtaHkdbTransaktionerWebbResponderService"
+			wsdlLocation="classpath:/TD_APSE_PRIS_1_0_0_SNAPSHOT/interactions/HamtaHkdbTransaktionerWebbInteraction/HamtaHkdbTransaktionerWebbInteraction_1.0_rivtabp20.wsdl" />
+			
+		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
+			address="${outbound.endpoint.env2.apotekensservice.pris.HamtaHkdbTransaktionerWebb}"
+			exchange-pattern="request-response" 
+			responseTimeout="${SERVICE_TIMEOUT_MS}"
+			transformer-refs="addContentTypeXmlUtf8 logReqOut" 
+			responseTransformer-refs="logRespIn IgnoreExceptionPayloads">
+		</https:outbound-endpoint>
+		
+	</flow>
 
 </mule>
