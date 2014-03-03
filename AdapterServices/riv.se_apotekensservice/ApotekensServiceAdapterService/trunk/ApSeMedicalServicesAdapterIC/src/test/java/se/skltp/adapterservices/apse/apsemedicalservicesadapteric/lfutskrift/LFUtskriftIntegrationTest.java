@@ -20,14 +20,19 @@
  */
 package se.skltp.adapterservices.apse.apsemedicalservicesadapteric.lfutskrift;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static se.skltp.adapterservices.apse.apsemedicalservicesadapteric.ApSeMedicalServicesAdapterICMuleServer.getAddress;
+import static se.skltp.adapterservices.apse.apsemedicalservicesadapteric.lfutskrift.LFUtskriftTestProducer.CITIZENREQUEST;
+import static se.skltp.adapterservices.apse.apsemedicalservicesadapteric.lfutskrift.LFUtskriftTestProducer.ORGANIZATIONREQUEST;
+
 import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.soitoolkit.commons.mule.test.AbstractJmsTestUtil;
+import org.soitoolkit.commons.mule.test.ActiveMqJmsTestUtil;
 import org.soitoolkit.commons.mule.test.junit4.AbstractTestCase;
-
-import static org.junit.Assert.*;
-import static se.skltp.adapterservices.apse.apsemedicalservicesadapteric.lfutskrift.LFUtskriftTestProducer.*;
 
 import se.riv.inera.se.apotekensservice.argos.v1.ArgosHeaderType;
 import se.riv.se.apotekensservice.lf.lfutskriftresponder.v1.LFUtskriftRequestType;
@@ -35,24 +40,47 @@ import se.riv.se.apotekensservice.lf.lfutskriftresponder.v1.LFUtskriftResponseTy
 
 public class LFUtskriftIntegrationTest extends AbstractTestCase {
 
-//	@BeforeClass
-//	public void beforeClass() {
-//		setDisposeManagerPerSuite(true);
-//		setTestTimeoutSecs(120);
-//	}
+	@SuppressWarnings("unused")
+	private static final Logger log = LoggerFactory.getLogger(LFUtskriftIntegrationTest.class);
 
-//	@Before
-//	public void doSetUp() throws Exception {
-//		super.doSetUp();
-//		setDisposeManagerPerSuite(true);
-//	}
+	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("inbound.endpoint.apotekensservice.lf.LFUtskrift");
+ 
+ 
+	private static final String ERROR_LOG_QUEUE = "SOITOOLKIT.LOG.ERROR";
+	private AbstractJmsTestUtil jmsUtil = null;
+ 
 
+    public LFUtskriftIntegrationTest() {
+    
+ 
+        // Only start up Mule once to make the tests run faster...
+        // Set to false if tests interfere with each other when Mule is started only once.
+        setDisposeContextPerClass(true);
+    }
+
+    @Override
+	protected void doSetUp() throws Exception {
+		super.doSetUp();
+	
+		doSetUpJms();  
+     }
+
+	private void doSetUpJms() {
+		// TODO: Fix lazy init of JMS connection et al so that we can create jmsutil in the declaration
+		// (The embedded ActiveMQ queue manager is not yet started by Mule when jmsutil is delcared...)
+		if (jmsUtil == null) jmsUtil = new ActiveMqJmsTestUtil();
+		
+ 
+		// Clear queues used for error handling
+		jmsUtil.clearQueues(ERROR_LOG_QUEUE);
+    }
+	
 	@Override
 	protected String getConfigResources() {
-		return "ApSeMedicalServicesAdapterIC-config.xml,services/LF-LFUtskrift-apse-service.xml,ApSeIntegrationComponent-teststubs-and-services-config.xml";
+		return 	"ApSeMedicalServicesAdapterIC-config.xml," +
+				"ApSeIntegrationComponent-teststubs-and-services-config.xml";
 	}
 
-	@Ignore
 	@Test
 	public void testCitizenServiceRequest_happydays() throws Exception {
 		String to = "logicaladdress";
@@ -64,7 +92,7 @@ public class LFUtskriftIntegrationTest extends AbstractTestCase {
 		request.setAnvandarNamn(argosHeader.getFornamn());
 
 		LFUtskriftResponseType response = new LFUtskriftTestConsumer(
-				"http://localhost:11000/tjanstebryggan/LFUtskriftResponder/V1")
+				DEFAULT_SERVICE_ADDRESS)
 				.citicenRequest(request, to, argosHeader);
 
 		assertNotNull(response);
@@ -83,7 +111,7 @@ public class LFUtskriftIntegrationTest extends AbstractTestCase {
 		request.setAnvandarNamn(argosHeader.getFornamn());
 
 		LFUtskriftResponseType response = new LFUtskriftTestConsumer(
-				"http://localhost:11000/tjanstebryggan/LFUtskriftResponder/V1")
+				DEFAULT_SERVICE_ADDRESS)
 				.organizationRequest(request, to, argosHeader);
 
 		assertNotNull(response);
