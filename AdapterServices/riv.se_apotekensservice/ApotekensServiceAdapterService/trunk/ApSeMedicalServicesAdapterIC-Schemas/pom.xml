@@ -2,17 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	
-	<parent>
-		<groupId>se.skl.skltpservices.apse</groupId>
-		<artifactId>ApSeMedicalServicesAdapter</artifactId>
-		<version>1.6.8-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
 
+	<groupId>se.skltp.adapterservices.apse</groupId>
 	<artifactId>ApSeMedicalServicesAdapterIC-Schemas</artifactId>
 	<packaging>jar</packaging>
-	<name>ApSeMedicalServicesAdapterIC-Schemas</name>
+	<version>2.0.0-SNAPSHOT</version>
+	<name>${project.artifactId}</name>
+	
+	<parent>
+		<groupId>se.skltp.adapterservices.apse</groupId>
+		<artifactId>ApSeMedicalServicesAdapter</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
+	</parent>
 
 	<properties>
 		<!-- Properties for generating code from XML Schemas (JAXB) -->
@@ -21,12 +22,12 @@
 
 	<build>
 		<plugins>
-
 			<plugin>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-codegen-plugin</artifactId>
 				<version>${cxf.version}</version>
 				<executions>
+				
 		<execution>
             <id>generate-sources-td-axs-apotekensservice</id>
             <phase>generate-sources</phase>
@@ -1427,10 +1428,16 @@
               <goal>wsdl2java</goal>
             </goals>
           </execution>
-					
-					
-				</executions>
-			</plugin>
+		</executions>
+		</plugin>
+		
+		<plugin>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<configuration>
+				<source>1.6</source>
+				<target>1.6</target>
+			</configuration>
+		</plugin> 
 
 		</plugins>
 		<resources>

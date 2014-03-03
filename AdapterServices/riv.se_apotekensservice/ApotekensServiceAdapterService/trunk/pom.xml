@@ -1,36 +1,41 @@
-
 <?xml version="1.0"?>
+<!-- 
+DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOING!
+[soi-toolkit.gen.version=0.6.1-M4]
+[soi-toolkit.gen.type=services]
+[soi-toolkit.gen.createDate=2014-02-12T18:42:23.242+01:00]
+[soi-toolkit.gen.artifactId=ApSeMedicalServicesAdapterIC]
+-->	
 <!-- This is the System-level Maven POM. Usage: Define all truly common things 
 	for the system here. For example: versions of third-party dependencies used 
 	throughout the system. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.soitoolkit.commons.poms</groupId>
-		<artifactId>soitoolkit-default-parent</artifactId>
-		<version>0.3.1</version>
-	</parent>
+    <parent>
+        <groupId>org.soitoolkit.commons.poms</groupId>
+        <artifactId>soitoolkit-default-parent</artifactId>
+		<version>0.6.1-M4</version>
+    </parent>
 
-	<groupId>se.skl.skltpservices.apse</groupId>
-	<artifactId>ApSeMedicalServicesAdapter</artifactId>
-	<version>1.6.8-SNAPSHOT</version>
+	<groupId>se.skltp.adapterservices.apse</groupId>
+    <artifactId>ApSeMedicalServicesAdapter</artifactId>
+	<version>2.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 
 	<scm>
-		<connection>http://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk</connection>
+		<connection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk</connection>
 		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk</developerConnection>
-		<url>http://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk</url>
+		<url>https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk</url>
 	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<compiler.target.version>1.6</compiler.target.version>
-    	<compiler.source.version>1.6</compiler.source.version>
+        <compiler.source.version>1.6</compiler.source.version>
     	<cxf.version>2.5.1</cxf.version>
-		<mule.version>2.2.8</mule.version>
 	</properties>
 
 	<modules>
@@ -38,200 +43,9 @@
 		<module>ApSeMedicalServicesAdapterIC</module>
 	</modules>
 
-	<dependencyManagement>
-		<dependencies>
-
-			<!-- schema dependency -->
-
-			<dependency>
-				<groupId>se.skl.skltpservices.apse</groupId>
-				<artifactId>ApSeMedicalServicesAdapterIC-Schemas</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			
-			<!-- Pascals TicketMachine -->
-			<dependency>
-				<groupId>se.inera.pascal.ticket</groupId>
-				<artifactId>TicketMachine</artifactId>
-				<version>1.1.1</version>
-			</dependency>
-
-			<!-- soi toolkit dependencies -->
-
-			<dependency>
-				<groupId>org.soitoolkit.commons.components</groupId>
-				<artifactId>soitoolkit-commons-mule</artifactId>
-				<version>${soitoolkit.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.soitoolkit.commons.components</groupId>
-				<artifactId>soitoolkit-commons-log</artifactId>
-				<version>${soitoolkit.version}</version>
-			</dependency>
-			
-			<!-- Mule ESB Transports -->
-			<dependency>
-				<groupId>org.mule.transports</groupId>
-				<artifactId>mule-transport-cxf</artifactId>
-				<version>${mule.version}</version>
-			</dependency>
-		
-			<dependency>
-				<groupId>xalan</groupId>
-				<artifactId>serializer</artifactId>
-				<version>2.7.1</version>
-			</dependency>
-
-			<!-- Mule dependencies -->
-
-			<dependency>
-				<groupId>org.mule</groupId>
-				<artifactId>mule-core</artifactId>
-				<version>${mule.version}</version>
-			</dependency>
-			
-			<dependency>
-			    <groupId>org.mule.tests</groupId>
-			    <artifactId>mule-tests-functional</artifactId>
-			    <version>${mule.version}</version>
-				<!--
-				Needs to be in the compile scope since commons-mule contains a base
-				class, AbstractTestCase, that depends on this module
-				-->
-			</dependency>			
-
-			
-			<!-- log4j -->
-
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>${log4j.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>com.sun.jdmk</groupId>
-						<artifactId>jmxtools</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>com.sun.jmx</groupId>
-						<artifactId>jmxri</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>javax.jms</groupId>
-						<artifactId>jms</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
-		</dependencies>
-	</dependencyManagement>
-	
-	<dependencies>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>com.sun.jdmk</groupId>
-					<artifactId>jmxtools</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jmx</groupId>
-					<artifactId>jmxri</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.jms</groupId>
-					<artifactId>jms</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
-		<!-- Mule dependencies -->
-		
-		<dependency>
-			<groupId>org.mule.tests</groupId>
-			<artifactId>mule-tests-functional</artifactId>
-			<scope>compile</scope>
-		</dependency>	
-
-		<!-- TEST DEPENDENCIES -->
-		<dependency>
-			<groupId>org.jmock</groupId>
-			<artifactId>jmock-junit4</artifactId>
-			<version>2.5.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.9</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.8.5</version>
-			<scope>test</scope>
-		</dependency>
-
-	</dependencies>
-
 	<build>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.codehaus.mojo
-										</groupId>
-										<artifactId>
-											properties-maven-plugin
-										</artifactId>
-										<versionRange>
-											[1.0-alpha-2,)
-										</versionRange>
-										<goals>
-											<goal>
-												write-project-properties
-											</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
 				<plugin>
 					<groupId>com.mycila.maven-license-plugin</groupId>
 					<artifactId>maven-license-plugin</artifactId>
@@ -266,6 +80,7 @@
 						<useDefaultMapping>true</useDefaultMapping>
 					</configuration>
 				</plugin>
+			
 			</plugins>
 		</pluginManagement>
 		
@@ -274,19 +89,14 @@
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<artifactId>maven-release-plugin</artifactId>
-				<configuration>
-					<tagBase>https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/tags</tagBase>
-				</configuration>
-			</plugin>
 		</plugins>
+	
 	</build>
 	<profiles>
 		<profile>
 			<id>license</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<build>
 				<plugins>

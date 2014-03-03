@@ -10,17 +10,19 @@
 		</layout>
 	</appender>
 
-	<appender name="ROLLINGFILE" class="org.apache.log4j.RollingFileAppender">
-		<param name="file" value="${mule.home}/logs/ApSeMedicalServicesAdapterIC.log" />
-		<param name="MaxFileSize" value="50MB" />
-		<param name="MaxBackupIndex" value="10" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d %-5p %-30C - %m%n" />
-		</layout>
-	</appender>
+    <appender name="ROLLINGFILE" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="${mule.home}/logs/mule-app-ApSeMedicalServicesAdapterIC.log" />
+        <param name="MaxFileSize" value="1000KB" />
+        <param name="MaxBackupIndex" value="3" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %-30C - %m%n" />
+        </layout> 
+    </appender>
 
-	<!-- Loglevels: {OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE, ALL} See: 
-		http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/Level.html -->
+	<!--
+		Loglevels: {OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE, ALL} See:
+		http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/Level.html
+	-->
 
 	<logger name="org.mockftpserver">
 		<level value="ERROR" />
@@ -33,8 +35,8 @@
     <logger name="org.apache.activemq.transport.failover.FailoverTransport">
         <level value="DEBUG" />
     </logger>
-	<logger
-		name="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    
+	<logger name="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<level value="TRACE" />
 	</logger>
 
@@ -55,26 +57,37 @@
 	<logger name="org.mule.DefaultMuleContext">
 		<level value="INFO" />
 	</logger>
-	<logger name="org.mule.component.simple.LogComponent">
-		<level value="ERROR" />
-	</logger>
+
+    <!-- Message logging using the old Mule <logger/> - element -->
+    <logger name="org.mule.api.processor.LoggerMessageProcessor">
+        <level value="INFO" />
+    </logger>
+
+    <!-- Message logging using the old Mule <log-component/> - element -->
+    <logger name="org.mule.component.simple.LogComponent">
+        <level value="INFO" />
+    </logger>
 
 	<logger name="org.soitoolkit.commons">
-		<level value="ERROR" />
+		<level value="INFO" />
+	</logger>
+	
+	<logger name="se.skltp.adapterservices.apse.apsemedicalservicesadapteric">
+		<level value="INFO" />
 	</logger>
 
-	<!-- Message logging -->
+    <!-- Message logging using soi-toolkit LogTransformer class -->
 	<logger name="org.soitoolkit.commons.mule.messageLogger">
-		<level value="ERROR" />
+		<level value="INFO" />
 	</logger>
-
-	<logger name="se.skl.skltpservices">
-		<level value="ERROR" />
-	</logger>
-
+	
 	<root>
 		<priority value="WARN" />
-		<appender-ref ref="ROLLINGFILE" />
-		<!-- <appender-ref ref="CONSOLE"/> -->
+		<!--
+		<appender-ref ref="CONSOLE" />
+		-->
+		<appender-ref ref="ROLLINGFILE"/>
+		
+		
 	</root>
 </log4j:configuration>
