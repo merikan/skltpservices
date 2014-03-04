@@ -77,7 +77,8 @@ public class LFUtskriftIntegrationTest extends AbstractTestCase {
 	
 	@Override
 	protected String getConfigResources() {
-		return 	"ApSeMedicalServicesAdapterIC-common.xml," +
+		return 	"soitoolkit-mule-jms-connector-activemq-embedded.xml," + 
+				"ApSeMedicalServicesAdapterIC-common.xml," +
 				"services/LF-LFUtskrift-apse-service.xml," +
 				"teststub-services/LF-LFUtskrift-apse-teststub-service.xml";
 		
