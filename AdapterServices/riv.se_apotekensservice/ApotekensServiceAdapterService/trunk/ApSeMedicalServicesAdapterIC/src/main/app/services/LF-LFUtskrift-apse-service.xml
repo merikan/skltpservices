@@ -24,15 +24,15 @@ http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/ht
 		
 <!-- 		<logger message="Current payload is #[message.payload]" doc:name="Logger"/> -->
 		
-		<transformer ref="XmlToXSR" />
-		<transformer ref="ArgosHeaderToSamlTicket" />
-
 		<cxf:proxy-service
 			namespace="urn:riv:inera:se.apotekensservice:lf:LFUtskrift:1:rivtabp20"
 			payload="envelope" 
 			service="LFUtskriftResponderService"
 			wsdlLocation="classpath:/TD_APSE_LF_1_0_0_R/interactions/LFUtskriftInteraction/LFUtskriftInteraction_1.0_rivtabp20.wsdl" doc:name="SOAP"/>
 			
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
+
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.apotekensservice.lf.LFUtskrift}"
 			exchange-pattern="request-response" 
