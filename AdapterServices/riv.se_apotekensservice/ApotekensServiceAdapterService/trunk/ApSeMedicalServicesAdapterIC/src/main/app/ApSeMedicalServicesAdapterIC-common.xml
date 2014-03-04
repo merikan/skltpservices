@@ -83,8 +83,8 @@
     <spring:beans profile="soitoolkit-teststubs">
         <!-- Load all teststub services -->
         <spring:import resource="classpath:teststub-services/*-teststub-service.xml"/>
-		<spring:import resource="classpath:soitoolkit-mule-https-connector.xml"/>
-		<spring:import resource="classpath:soitoolkit-mule-http-connector.xml"/>
+<!-- 		<spring:import resource="classpath:soitoolkit-mule-https-connector.xml"/> -->
+<!-- 		<spring:import resource="classpath:soitoolkit-mule-http-connector.xml"/> -->
     </spring:beans>
 
     <!-- Common connectors and endpoints, i.e. that not needs to be changed for different config-files (local unit-test, integration-test or production environments) -->
