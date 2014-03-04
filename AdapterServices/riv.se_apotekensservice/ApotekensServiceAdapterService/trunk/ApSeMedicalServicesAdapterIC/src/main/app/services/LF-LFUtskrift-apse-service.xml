@@ -19,8 +19,13 @@ http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/ht
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="XmlToXSR ArgosHeaderToSamlTicket logReqIn" doc:name="HTTP">
+			transformer-refs="logReqIn" doc:name="HTTP">
 		</http:inbound-endpoint>
+		
+<!-- 		<logger message="Current payload is #[message.payload]" doc:name="Logger"/> -->
+		
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
 
 		<cxf:proxy-service
 			namespace="urn:riv:inera:se.apotekensservice:lf:LFUtskrift:1:rivtabp20"

@@ -80,7 +80,12 @@
 	<logger name="org.soitoolkit.commons.mule.messageLogger">
 		<level value="INFO" />
 	</logger>
+
+	<logger name="org.soitoolkit.commons.mule.log.LogTransformer">
+		<level value="WARN" />
+	</logger>
 	
+		
 	<root>
 		<priority value="WARN" />
 

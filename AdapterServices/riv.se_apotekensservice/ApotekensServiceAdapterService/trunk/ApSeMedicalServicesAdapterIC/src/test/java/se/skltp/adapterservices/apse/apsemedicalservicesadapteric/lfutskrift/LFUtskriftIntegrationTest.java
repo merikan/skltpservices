@@ -77,8 +77,20 @@ public class LFUtskriftIntegrationTest extends AbstractTestCase {
 	
 	@Override
 	protected String getConfigResources() {
-		return 	"ApSeMedicalServicesAdapterIC-config.xml," +
-				"ApSeIntegrationComponent-teststubs-and-services-config.xml";
+		return 	"ApSeMedicalServicesAdapterIC-common.xml," +
+				"services/LF-LFUtskrift-apse-service.xml," +
+				"teststub-services/LF-LFUtskrift-apse-teststub-service.xml";
+		
+//	    <spring:beans>
+//	    <!-- Connectors and endpoints that that are specific for different config-files (local unit-test, integration-test or production environments) -->
+//    	<!-- TODO: Add import of connector specific configuration files here as required -->
+//        <spring:import resource="classpath:ApSeMedicalServicesAdapterIC-common.xml"/>
+//         
+//     	<!-- Import services -->
+//        <spring:import resource="classpath:services/*-apse-service.xml"/>
+//        
+//    </spring:beans>
+
 	}
 
 	@Test
