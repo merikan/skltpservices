@@ -43,7 +43,7 @@
 					serviceName="GetListingResponderService"
 					namespace="urn:riv:crm:carelisting:GetListing:1:rivtabp20"
 					proxy="true" 
-					synchronous="true">
+					synchronous="true" payload="envelope">
 				</cxf:inbound-endpoint>					
 			</inbound>
 			

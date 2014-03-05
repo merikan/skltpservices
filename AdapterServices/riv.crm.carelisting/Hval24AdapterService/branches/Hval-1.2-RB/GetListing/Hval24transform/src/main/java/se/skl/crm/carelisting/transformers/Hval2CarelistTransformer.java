@@ -41,8 +41,11 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 		setReturnClass(Object.class);
 	}
 
-	public Object transform(MuleMessage message, String outputEncoding)
-			throws TransformerException {
+	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
+		return createSoapEnvelope(transformToBodyElement(message, outputEncoding));
+	}
+
+	private String transformToBodyElement(MuleMessage message, String outputEncoding) throws TransformerException {
 		try {
 			// Convert response from hval to a string
 			String payload = convertStreamToString((InputStream) message.getPayload());
@@ -50,57 +53,65 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 			// Extract the information from the response string
 			HvalCarelistResponse hvalResponse = HvalCarelistResponse.extract(payload);
 
-			logger.debug("Transformed data: " + hvalResponse.toString(),hvalResponse.toString());
-
-			// Check returkod indicates any error
-//			if (hvalResponse.retCode == null || hvalResponse.retCode.intValue() > 0) {
-//				// If return code == 2 return PersonNotFound, for all other
-//				// codes return TechnicalException
-//				if (hvalResponse.retCode.intValue() == 2) {
-//					return createPersonNotFoundException(message);
-//				} else {
-//					return createTechnicalException("HVAL24 Error",
-//							"Return code " + hvalResponse.retCode.intValue(),
-//							message);
-//				}
-//			}
+			logger.debug("Transformed data: " + hvalResponse.toString(), hvalResponse.toString());
 
 			// Check if error code > 4. SQL error etc
 			if (hvalResponse.retCode == null || hvalResponse.retCode.intValue() > 4) {
 				logger.error("Hval2CarelistTransformer: Error code:" + hvalResponse.retCode);
-				return createTechnicalException("HVAL24 Error",	"Return code " + hvalResponse.retCode.intValue(), message);
+				return createTechnicalException("HVAL24 Error", "Return code " + hvalResponse.retCode.intValue(),
+						message);
 			}
-			
+
 			// Check that mandatory personnummer was returned
 			if (hvalResponse.personId == null || hvalResponse.personId.length() != 12) {
 				logger.error("Hval2CarelistTransformer: Error personummer!");
 				return createPersonNotFoundException(message);
 			}
-			
+
 			// Create a JAXB object that represents the riv-response
 			GetListingResponseType response = createResponse(hvalResponse);
 
 			// Transform the JAXB object into a XML payload
 			StringWriter writer = new StringWriter();
-			Marshaller marshaller = JAXBContext.newInstance(
-					GetListingResponseType.class).createMarshaller();
-			marshaller.marshal(new JAXBElement(new QName(
-					"urn:riv:crm:carelisting:GetListingResponder:1",
-					"getListingResponse"), GetListingResponseType.class,
-					response), writer);
-			logger.debug("Extracted information: {}", writer.toString());
+			Marshaller marshaller = JAXBContext.newInstance(GetListingResponseType.class).createMarshaller();
 
-			return writer.toString();
+			/*
+			 * Solves the problem that we dont want an extra xml element in
+			 * paylaod. <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+			 */
+			marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+
+			marshaller.marshal(new JAXBElement(new QName("urn:riv:crm:carelisting:GetListingResponder:1",
+					"getListingResponse"), GetListingResponseType.class, response), writer);
+
+			String result = writer.toString();
+			logger.debug("Extracted information: {}", result);
+			return result;
 
 		} catch (Exception e) {
 			logger.error("Hval2CarelistTransformer:" + e.getMessage());
-			return createTechnicalException("Transformer Error",
-					"Exception message: " + e.getMessage(), message);
+			return createTechnicalException("Transformer Error", "Exception message: " + e.getMessage(), message);
 		}
 	}
 
+	/*
+	 * This is needed to make sure a soap envelope is returned to the client, because the transformer only works on the complete soap envelope
+	 * and not only on the body.
+	 */
+	private String createSoapEnvelope(String result) {
+		StringBuffer envelope = new StringBuffer();
+		envelope.append("<?xml version='1.0' encoding='UTF-8'?>");
+		envelope.append("<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">");
+		envelope.append("<soap:Body>");
+		envelope.append(result);
+		envelope.append("</soap:Body>");
+		envelope.append("</soap:Envelope>");
+		return envelope.toString();
+	}
+
 	private GetListingResponseType createResponse(HvalCarelistResponse hvalResponse) throws Exception {
-		// Create return objects, don't set resource as it may not be valid depending on returned data!
+		// Create return objects, don't set resource as it may not be valid
+		// depending on returned data!
 		GetListingResponseType response = new GetListingResponseType();
 		SubjectOfCare soc = new SubjectOfCare();
 		response.setSubjectOfCare(soc);
@@ -116,19 +127,20 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 		if (listgroup1 != null) {
 			soc.getListing().add(listgroup1);
 		}
-		
+
 		// Extract listinginformation from group 3
 		Listing listgroup3 = getGroup3Listing(hvalResponse);
 		if (listgroup3 != null) {
 			soc.getListing().add(listgroup3);
 		}
-		
+
 		return response;
 	}
 
-	
 	/**
-	 * Extract listing information from group 1. If error return null listing object
+	 * Extract listing information from group 1. If error return null listing
+	 * object
+	 * 
 	 * @return
 	 */
 	private Listing getGroup1Listing(HvalCarelistResponse hvalResponse) {
@@ -137,7 +149,7 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 		try {
 			// Get listingtype. Will throw exception if no correct is found!
 			String listingType = translateTypeGroup1(hvalResponse.valTypGrp1);
-			
+
 			// Check that we have a facility id
 			if (hvalResponse.listningEnhetskodGrp1 == null || hvalResponse.listningEnhetskodGrp1.length() == 0) {
 				throw new Exception("No listingfacility code!");
@@ -147,7 +159,7 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 			if (hvalResponse.listningEnhetsnamnGrp1 == null || hvalResponse.listningEnhetsnamnGrp1.length() == 0) {
 				throw new Exception("No listingfacility name!");
 			}
-		
+
 			// Create the listing response
 			listing = new Listing();
 			listing.setListingType(listingType);
@@ -155,35 +167,37 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 			listing.setHealthcareFacility(facility);
 			facility.setFacilityId(hvalResponse.listningEnhetskodGrp1);
 			facility.setFacilityName(hvalResponse.listningEnhetsnamnGrp1);
-		
-			if ((hvalResponse.listningVardgivareKodGrp1 != null && hvalResponse.listningVardgivareKodGrp1.length() > 0) &&
-				(hvalResponse.listningVardgivareNamnGrp1 != null && hvalResponse.listningVardgivareNamnGrp1.length() > 0)) {
+
+			if ((hvalResponse.listningVardgivareKodGrp1 != null && hvalResponse.listningVardgivareKodGrp1.length() > 0)
+					&& (hvalResponse.listningVardgivareNamnGrp1 != null && hvalResponse.listningVardgivareNamnGrp1
+							.length() > 0)) {
 				Resource resource = new Resource();
 				resource.setResourceId(hvalResponse.listningVardgivareKodGrp1);
-				resource.setResourceName(hvalResponse.listningVardgivareNamnGrp1);					
-				listing.setResource(resource);	
+				resource.setResourceName(hvalResponse.listningVardgivareNamnGrp1);
+				listing.setResource(resource);
 			}
-			
+
 			if (getDate(hvalResponse.listningDatumGrp1) != null) {
-				listing.setValidFromDate( getDate(hvalResponse.listningDatumGrp1));
+				listing.setValidFromDate(getDate(hvalResponse.listningDatumGrp1));
 			}
-		
+
 		} catch (Exception ex) {
-			logger.warn("Hval2CarelistTransformer: Group1 listing error: " + ex.getMessage() +"." + getMetaInformation(hvalResponse));
+			logger.warn("Hval2CarelistTransformer: Group1 listing error: " + ex.getMessage() + "."
+					+ getMetaInformation(hvalResponse));
 		}
-		return listing;		
+		return listing;
 	}
-	
+
 	private Listing getGroup3Listing(HvalCarelistResponse hvalResponse) {
 		Listing listing = null;
 		boolean bvcListingFound = false;
 
 		try {
-			// Check if we got a listingtype. Needed to log consistent warnings. 
+			// Check if we got a listingtype. Needed to log consistent warnings.
 			if (hvalResponse.valTypGrp3 != null && hvalResponse.valTypGrp3.intValue() == 4) {
 				bvcListingFound = true;
 			}
-			
+
 			// Check that we have a facility id
 			if (hvalResponse.listningEnhetskodGrp3 == null || hvalResponse.listningEnhetskodGrp3.length() == 0) {
 				throw new Exception("No listingfacility code!");
@@ -193,7 +207,7 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 			if (hvalResponse.listningEnhetsnamnGrp3 == null || hvalResponse.listningEnhetsnamnGrp3.length() == 0) {
 				throw new Exception("No listingfacility name!");
 			}
-		
+
 			// Create the listing response
 			listing = new Listing();
 			listing.setListingType("BVC");
@@ -202,26 +216,26 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 			facility.setFacilityId(hvalResponse.listningEnhetskodGrp3);
 			facility.setFacilityName(hvalResponse.listningEnhetsnamnGrp3);
 			if (getDate(hvalResponse.listningDatumGrp3) != null) {
-				listing.setValidFromDate( getDate(hvalResponse.listningDatumGrp3));
-			}		
+				listing.setValidFromDate(getDate(hvalResponse.listningDatumGrp3));
+			}
 		} catch (Exception ex) {
 			if (bvcListingFound) {
-				logger.warn("Hval2CarelistTransformer: Group3 listing error: " + ex.getMessage() +"." + getMetaInformation(hvalResponse));
+				logger.warn("Hval2CarelistTransformer: Group3 listing error: " + ex.getMessage() + "."
+						+ getMetaInformation(hvalResponse));
 			}
 		}
 		return listing;
 	}
-	
+
 	// Translates between HVAL24 format and GetListing format
-	private String translateTypeGroup1(Integer hval24Type)
-			throws Exception {
+	private String translateTypeGroup1(Integer hval24Type) throws Exception {
 		if (hval24Type == null) {
 			throw new Exception("No listing type from HVAL24!");
 		} else if (hval24Type.intValue() == 1) {
 			return "HLT";
 		} else if (hval24Type.intValue() == 2) {
 			return "HL";
-		} else if (hval24Type.intValue() == 5 ) {
+		} else if (hval24Type.intValue() == 5) {
 			return "HLM";
 		} else {
 			throw new Exception("Wrong listing type from HVAL24");
@@ -237,8 +251,7 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 			DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = dfm.parse(stringDate);
 			fromDate.setTime(date);
-			return DatatypeFactory.newInstance().newXMLGregorianCalendar(
-					fromDate);
+			return DatatypeFactory.newInstance().newXMLGregorianCalendar(fromDate);
 		} catch (DatatypeConfigurationException e) {
 			throw new Exception(e.getMessage());
 		} catch (ParseException pe) {
@@ -250,9 +263,9 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 		String personId = hvalResponse.personId;
 		String lansKod = hvalResponse.lansKod;
 		Integer returKod = hvalResponse.retCode;
-		return "Returkod=" + returKod +  ", Personid=" + personId + ", Lanskod=" + lansKod + ".";
+		return "Returkod=" + returKod + ", Personid=" + personId + ", Lanskod=" + lansKod + ".";
 	}
-	
+
 	private String convertStreamToString(InputStream is) throws Exception {
 		try {
 			StringBuilder sb = new StringBuilder();
@@ -286,8 +299,7 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 		return result.toString();
 	}
 
-	private String createTechnicalException(String faulDetailCode,
-			String faultDetailDescription, MuleMessage message) {
+	private String createTechnicalException(String faulDetailCode, String faultDetailDescription, MuleMessage message) {
 		// Create the fault, Soap envelope will be created for us
 		StringBuffer result = new StringBuffer();
 
