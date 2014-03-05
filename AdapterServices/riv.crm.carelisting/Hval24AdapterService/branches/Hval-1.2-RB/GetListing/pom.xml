@@ -36,7 +36,7 @@
 	<parent>
   		<groupId>se.skl.skltpservices</groupId>
 		<artifactId>hval24-adapter</artifactId>
-  		<version>1.2.1-RC1</version>
+  		<version>1.2-RB-SNAPSHOT</version>
    	</parent>
    	
    	<dependencies>
@@ -44,7 +44,7 @@
  		<dependency>
 			<groupId>se.riv.crm.carelisting</groupId>
 			<artifactId>crm-carelisting-schemas</artifactId>
-			<version>1.1</version>
+			<version>1.2-RB-SNAPSHOT</version>
 		</dependency>
 	
 	</dependencies>
