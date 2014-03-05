@@ -32,8 +32,8 @@
 	</modules>
 
 	<scm>
-		<connection>http://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/trunk</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/trunk</developerConnection>
+		<connection>http://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/branches/Hval-1.2-RB/</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/branches/Hval-1.2-RB/</developerConnection>
 	</scm>
 	
 	<repositories>
