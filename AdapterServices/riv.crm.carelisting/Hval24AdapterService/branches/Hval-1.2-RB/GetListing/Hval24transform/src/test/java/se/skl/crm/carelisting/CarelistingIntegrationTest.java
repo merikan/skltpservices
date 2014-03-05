@@ -35,8 +35,9 @@ public class CarelistingIntegrationTest extends FunctionalTestCase
     public void testNationelVirtualService() throws Exception
     {
     	String personId = "19621008-3611";
+    	String logicalAddress = "01";
 		Consumer consumer = new Consumer(urlCarelist);
-		GetListingResponseType reply = consumer.callService(personId);
+		GetListingResponseType reply = consumer.callService(logicalAddress, personId);
 		assertEquals(personId, reply.getSubjectOfCare().getPersonId());
 	}
 	
@@ -46,6 +47,20 @@ public class CarelistingIntegrationTest extends FunctionalTestCase
     	MuleClient client = new MuleClient();
     	Map<String, Object> props = new HashMap<String, Object>();
         props.put(HttpConnector.HTTP_METHOD_PROPERTY, "GET");
+        MuleMessage result = client.send(urlHval + "/" + personId, "", props);
+        String res = convertStreamToString((InputStream)result.getPayload());
+        assertTrue(res.indexOf(personId) != -1);
+        assertTrue(res.indexOf("Kalle") != -1);
+        assertTrue(res.indexOf("LAN X") != -1);
+    }
+    
+    public void testReceiverIdNullProvided() throws Exception
+    {
+    	String personId = "196210083611";
+    	MuleClient client = new MuleClient();
+    	Map<String, Object> props = new HashMap<String, Object>();
+        props.put(HttpConnector.HTTP_METHOD_PROPERTY, "GET");
+        props.put("receiverid", null);
         MuleMessage result = client.send(urlHval + "/" + personId, "", props);
         String res = convertStreamToString((InputStream)result.getPayload());
         assertTrue(res.indexOf(personId) != -1);
