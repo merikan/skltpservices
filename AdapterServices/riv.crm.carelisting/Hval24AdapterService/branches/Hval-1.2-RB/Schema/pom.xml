@@ -25,7 +25,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>se.riv.crm.carelisting</groupId>
 	<artifactId>crm-carelisting-schemas</artifactId>
-	<version>1.2-RB-SNAPSHOT</version>
 	<name>crm-carelisting-schemas</name>
 	<url>http://maven.apache.org</url>
 	
