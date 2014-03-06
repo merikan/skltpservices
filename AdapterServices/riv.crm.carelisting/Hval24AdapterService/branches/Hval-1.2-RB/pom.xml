@@ -15,7 +15,7 @@
 	<groupId>se.skl.skltpservices</groupId>
 	<artifactId>hval24-adapter</artifactId>
 	<packaging>pom</packaging>
-	<version>1.2.1-RC2-SNAPSHOT</version>
+	<version>1.2.1</version>
 	<name>${project.artifactId}</name>
 	<url>http://maven.apache.org</url>
 
@@ -32,8 +32,8 @@
 	</modules>
 
 	<scm>
-		<connection>http://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/branches/Hval-1.2-RB/</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/branches/Hval-1.2-RB/</developerConnection>
+		<connection>http://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/tags/hval24-adapter-1.2.1</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/tags/hval24-adapter-1.2.1</developerConnection>
 	</scm>
 	
 	<repositories>
