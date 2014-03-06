@@ -31,7 +31,7 @@
 	<parent>
   		<groupId>se.skl.skltpservices</groupId>
 		<artifactId>hval24-adapter</artifactId>
-		<version>1.2.1-RC2-SNAPSHOT</version>
+		<version>1.2.1</version>
    	</parent>
 
 	<properties>
