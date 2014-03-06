@@ -151,15 +151,6 @@
 		<spring:property name="logType" value="resp-out"/>
         <spring:property name="jaxbContext" ref="jaxbContext"/>
     </custom-transformer>  
-
-
-    <!-- TODO: Add global definitions here -->
-     	<!-- Https connector -->
-   	<https:connector name="ApSeIntegrationComponent-https-connector" clientSoTimeout="${APSE_HTTPS_CLIENT_TIMEOUT}" cookieSpec="netscape" doc:name="HTTP\HTTPS" receiveBacklog="0" receiveBufferSize="0" sendBufferSize="0" serverSoTimeout="10000" socketSoLinger="0" validateConnections="true">
-		<https:tls-key-store class="${APSE_TLS_STORE_PRODUCER_TYPE}"     path="${APSE_TLS_STORE_LOCATION}/${APSE_TLS_STORE_PRODUCER_FILE}" storePassword="${APSE_TLS_STORE_PRODUCER_PASSWORD}" keyPassword="${APSE_TLS_STORE_PRODUCER_KEY_PASSWORD}" /> 
-		<https:tls-server    class="${APSE_TLS_STORE_TRUSTSTORE_TYPE}" path="${APSE_TLS_STORE_LOCATION}/${APSE_TLS_STORE_TRUSTSTORE_FILE}" storePassword="${APSE_TLS_STORE_TRUSTSTORE_PASSWORD}" />
-	</https:connector>
-   
   
     <configuration doc:name="Configuration">
 		<default-dispatcher-threading-profile maxThreadsActive="${APSE_DISPATCH_MAX_THREADS_ACTIVE}" maxThreadsIdle="${APSE_DISPATCH_MAX_THREADS_IDLE}" threadTTL="${APSE_DISPATCH_MAX_THREADS_TTL}"/>

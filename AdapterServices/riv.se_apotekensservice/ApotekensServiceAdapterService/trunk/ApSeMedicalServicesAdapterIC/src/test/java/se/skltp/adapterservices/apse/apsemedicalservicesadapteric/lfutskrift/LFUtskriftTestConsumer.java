@@ -20,43 +20,62 @@
  */
 package se.skltp.adapterservices.apse.apsemedicalservicesadapteric.lfutskrift;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.cxf.bus.spring.SpringBusFactory;
+import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 import org.w3c.addressing.v1.AttributedURIType;
 
-import se.riv.inera.se.apotekensservice.argos.v1.ArgosHeaderType;
-import se.riv.inera.se.apotekensservice.lf.lfutskrift.v1.rivtabp20.ApplicationException;
 import se.riv.inera.se.apotekensservice.lf.lfutskrift.v1.rivtabp20.LFUtskriftResponderInterface;
-import se.riv.inera.se.apotekensservice.lf.lfutskrift.v1.rivtabp20.LFUtskriftResponderService;
-import se.riv.inera.se.apotekensservice.lf.lfutskrift.v1.rivtabp20.SystemException;
 import se.riv.se.apotekensservice.lf.lfutskriftresponder.v1.LFUtskriftRequestType;
 import se.riv.se.apotekensservice.lf.lfutskriftresponder.v1.LFUtskriftResponseType;
+import se.riv.inera.se.apotekensservice.lf.lfutskrift.v1.rivtabp20.SystemException;
+import se.riv.inera.se.apotekensservice.argos.v1.ArgosHeaderType;
+import se.riv.inera.se.apotekensservice.lf.lfutskrift.v1.rivtabp20.ApplicationException;
+
+import static se.skltp.adapterservices.apse.apsemedicalservicesadapteric.ApSeMedicalServicesAdapterICMuleServer.getAddress;
 
 public class LFUtskriftTestConsumer {
 
-	private LFUtskriftResponderInterface service;
+	private static final Logger log = LoggerFactory.getLogger(LFUtskriftTestConsumer.class);
 
-	public LFUtskriftTestConsumer(String endpointAdress) {
+	@SuppressWarnings("unused")
+	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("ApoteketRetryAdapter-config");
 
-		URL url = createEndpointUrlFromServiceAddress(endpointAdress);
-		service = new LFUtskriftResponderService(url)
-				.getLFUtskriftResponderPort();
+	private LFUtskriftResponderInterface _service = null;
+
+	public LFUtskriftTestConsumer(String serviceAddress) {
+		JaxWsProxyFactoryBean proxyFactory = new JaxWsProxyFactoryBean();
+		proxyFactory.setServiceClass(LFUtskriftResponderInterface.class);
+		proxyFactory.setAddress(serviceAddress);
+
+		// Used for HTTPS
+		SpringBusFactory bf = new SpringBusFactory();
+		URL cxfConfig = LFUtskriftTestConsumer.class.getClassLoader().getResource("cxf-test-consumer-config.xml");
+		if (cxfConfig != null) {
+			proxyFactory.setBus(bf.createBus(cxfConfig));
+		}
+
+		_service = (LFUtskriftResponderInterface) proxyFactory.create();
 	}
 
-	public LFUtskriftResponseType citicenRequest(LFUtskriftRequestType request,
-			String to, ArgosHeaderType argosHeader) throws SystemException, ApplicationException {
+	
+
+	public LFUtskriftResponseType citicenRequest(LFUtskriftRequestType request, String to, ArgosHeaderType argosHeader)
+			throws SystemException, ApplicationException {
 
 		AttributedURIType logicalAddress = createLogicalAddress(to);
-		return service.lfUtskrift(request, logicalAddress, argosHeader);
+		return _service.lfUtskrift(request, logicalAddress, argosHeader);
 	}
 
-	public LFUtskriftResponseType organizationRequest(
-			LFUtskriftRequestType request, String to, ArgosHeaderType argosHeader) throws SystemException,
-			ApplicationException {
+	public LFUtskriftResponseType organizationRequest(LFUtskriftRequestType request, String to,
+			ArgosHeaderType argosHeader) throws SystemException, ApplicationException {
 
 		AttributedURIType logicalAddress = createLogicalAddress(to);
-		return service.lfUtskrift(request, logicalAddress, argosHeader);
+		return _service.lfUtskrift(request, logicalAddress, argosHeader);
 	}
 
 	private AttributedURIType createLogicalAddress(String logicalAddress) {
@@ -64,14 +83,21 @@ public class LFUtskriftTestConsumer {
 		logicalAddressType.setValue(logicalAddress);
 		return logicalAddressType;
 	}
+	
+	public static void main(String[] args) throws Exception {
+		String serviceAddress = getAddress("inbound.endpoint.apotekensservice.lf.LFUtskrift");
+		String glnkod = "1234567890";
 
-	private static URL createEndpointUrlFromServiceAddress(String serviceAddress) {
-		try {
-			return new URL(serviceAddress + "?wsdl");
-		} catch (MalformedURLException e) {
-			throw new RuntimeException("Malformed URL Exception: "
-					+ e.getMessage());
-		}
+		LFUtskriftTestConsumer consumer = new LFUtskriftTestConsumer(serviceAddress);
+		LFUtskriftResponseType response = consumer.callService(glnkod);
+		log.info("Returned value = " + response.getPatient().getPersonnummer());
+	}
+
+	public LFUtskriftResponseType callService(String id) throws Exception {
+		log.debug("Calling sample-soap-service with id = {}", id);
+		LFUtskriftRequestType request = new LFUtskriftRequestType();
+		request.setForskrivarkod(id);
+		return _service.lfUtskrift(request, createLogicalAddress("TEST"), null);
 	}
 
 }
