@@ -7,11 +7,14 @@
 	xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http"
 	xmlns:https="http://www.mulesoft.org/schema/mule/https"
+	xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd" version="EE-3.4.1">
+http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd" 
+version="EE-3.4.1">
 
 	<flow name="Bridged-ApotekenService-LFUtskrift" doc:name="Bridged-ApotekenService-LFUtskrift">
 
@@ -19,53 +22,66 @@ http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/ht
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="logReqIn" doc:name="HTTP">
+			transformer-refs="XmlToXSR logReqIn" doc:name="HTTP">
 		</http:inbound-endpoint>
 		
-<!-- 		<logger message="Current payload is #[message.payload]" doc:name="Logger"/> -->
-		
+			
+		<scripting:component doc:name="Groovy">
+            <scripting:script engine="Groovy">
+	            <![CDATA[
+		            println "#1 Payload received from HTTP request: " + payload
+			    ]]>
+	    	</scripting:script>
+        </scripting:component>
+        	
 		<cxf:proxy-service
 			namespace="urn:riv:inera:se.apotekensservice:lf:LFUtskrift:1:rivtabp20"
-			payload="envelope" 
 			service="LFUtskriftResponderService"
+			payload="envelope"
 			wsdlLocation="classpath:/TD_APSE_LF_1_0_0_R/interactions/LFUtskriftInteraction/LFUtskriftInteraction_1.0_rivtabp20.wsdl" doc:name="SOAP"/>
-			
-		<transformer ref="XmlToXSR" />
+		
+		<!--         <static-component> -->
+		<!--             <return-data>&lt;echoResponse -->
+		<!--                 xmlns="http://www.muleumo.org"&gt;&lt;echo&gt;test&lt;/echo&gt;&lt;/echoResponse&gt; -->
+		<!--             </return-data> -->
+		<!--         </static-component> -->
+	
 		<transformer ref="ArgosHeaderToSamlTicket" />
-
+		
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.apotekensservice.lf.LFUtskrift}"
 			exchange-pattern="request-response" 
 			responseTimeout="${SERVICE_TIMEOUT_MS}"
-			transformer-refs="addContentTypeXmlUtf8 logReqOut" 
-			responseTransformer-refs="IgnoreExceptionPayloads logRespIn" doc:name="HTTP">
+			transformer-refs="logReqOut" 
+			responseTransformer-refs="logRespIn" doc:name="HTTP">
+                
 		</https:outbound-endpoint>
 		
 	</flow>
 	
-	<flow name="Bridged-ApotekenService-LFUtskrift-service-env2" doc:name="Bridged-ApotekenService-LFUtskrift-service-env2">
-
-		<http:inbound-endpoint address="${inbound.endpoint.env2.apotekensservice.lf.LFUtskrift}"
+	 <flow name="test-something-minimal">
+   
+        <http:inbound-endpoint address="http://localhost:8080/services/testsomething"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn" doc:name="HTTP">
+			transformer-refs="logReqIn" doc:name="HTTP">
 		</http:inbound-endpoint>
-
-		<cxf:proxy-service
+        
+        <cxf:proxy-service
 			namespace="urn:riv:inera:se.apotekensservice:lf:LFUtskrift:1:rivtabp20"
-			payload="envelope" 
 			service="LFUtskriftResponderService"
+			payload="envelope"
 			wsdlLocation="classpath:/TD_APSE_LF_1_0_0_R/interactions/LFUtskriftInteraction/LFUtskriftInteraction_1.0_rivtabp20.wsdl" doc:name="SOAP"/>
-			
-		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
-			address="${outbound.endpoint.env2.apotekensservice.lf.LFUtskrift}"
+        
+        <https:outbound-endpoint connector-ref="soitoolkit-https-connector"
+			address="${outbound.endpoint.apotekensservice.lf.LFUtskrift}"
 			exchange-pattern="request-response" 
 			responseTimeout="${SERVICE_TIMEOUT_MS}"
-			transformer-refs="addContentTypeXmlUtf8 logReqOut" 
-			responseTransformer-refs="IgnoreExceptionPayloads logRespIn" doc:name="HTTP">
+			transformer-refs="logReqOut" 
+			responseTransformer-refs="logRespIn" doc:name="HTTP">
+                
 		</https:outbound-endpoint>
-		
-	</flow>
+    </flow>
 
 </mule>

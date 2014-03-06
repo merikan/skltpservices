@@ -31,18 +31,15 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import org.apache.axis.Message;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleMessage;
-import org.mule.api.transport.PropertyScope;
 import org.mule.module.xml.stax.ReversibleXMLStreamReader;
 import org.soitoolkit.commons.mule.util.XmlUtil;
 
 import se.skltp.adapterservices.apse.apsemedicalservicesadapteric.argos.ArgosHeader;
-import se.skltp.adapterservices.apse.apsemedicalservicesadapteric.saml.SamlTicketTransformer;
 
 public class SamlTicketTransformerTest {
 
