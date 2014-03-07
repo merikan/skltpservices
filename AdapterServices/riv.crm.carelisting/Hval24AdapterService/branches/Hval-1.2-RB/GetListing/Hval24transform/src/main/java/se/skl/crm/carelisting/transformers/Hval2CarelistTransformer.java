@@ -47,13 +47,18 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 
 	private String transformToBodyElement(MuleMessage message, String outputEncoding) throws TransformerException {
 		try {
+			
+			logger.debug("Trying to transform incoming HVAL response to soap response");
+			
 			// Convert response from hval to a string
 			String payload = convertStreamToString((InputStream) message.getPayload());
+			
+			logger.debug("Response from HVAL: {}", payload);
 
 			// Extract the information from the response string
 			HvalCarelistResponse hvalResponse = HvalCarelistResponse.extract(payload);
 
-			logger.debug("Transformed data: " + hvalResponse.toString(), hvalResponse.toString());
+			logger.debug("Transformed data: {} ", hvalResponse.toString());
 
 			// Check if error code > 4. SQL error etc
 			if (hvalResponse.retCode == null || hvalResponse.retCode.intValue() > 4) {
@@ -67,6 +72,8 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 				logger.error("Hval2CarelistTransformer: Error personummer!");
 				return createPersonNotFoundException(message);
 			}
+			
+			logger.debug("Trying to marshal to a GetListingResponseType");
 
 			// Create a JAXB object that represents the riv-response
 			GetListingResponseType response = createResponse(hvalResponse);
@@ -106,7 +113,12 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 		envelope.append(result);
 		envelope.append("</soap:Body>");
 		envelope.append("</soap:Envelope>");
-		return envelope.toString();
+		
+		String soapResponse = envelope.toString();
+		
+		logger.debug("After soap envelope added around result: {}", soapResponse);
+		
+		return soapResponse;
 	}
 
 	private GetListingResponseType createResponse(HvalCarelistResponse hvalResponse) throws Exception {

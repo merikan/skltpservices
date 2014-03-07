@@ -50,7 +50,7 @@
             <outbound>
                 <pass-through-router>
                         <https:outbound-endpoint 
-                        	address="${outbound.endpoint.hval24.getlisting}#[payload]"
+                        	address="${outbound.endpoint.hval24.getlisting}#[groovy:message.payload]"
     	                	transformer-refs="carelist2Hval" 
 	    	        		responseTransformer-refs="hval2Carelist"
             	        	synchronous="true"
