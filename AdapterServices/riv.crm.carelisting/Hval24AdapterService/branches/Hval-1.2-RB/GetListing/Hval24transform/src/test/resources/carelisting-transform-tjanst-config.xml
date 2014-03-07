@@ -52,7 +52,7 @@
             <outbound>
                 <pass-through-router>
                         <http:outbound-endpoint 
-                        	address="${hvalriks.url}#[payload]"
+                        	address="${hvalriks.url}#[groovy:message.payload]"
     	                	transformer-refs="carelist2Hval" 
 	    	        		responseTransformer-refs="hval2Carelist"
             	        	synchronous="true"
