@@ -22,17 +22,17 @@ version="EE-3.4.1">
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="XmlToXSR logReqIn" doc:name="HTTP">
+			transformer-refs="logReqIn" doc:name="HTTP">
 		</http:inbound-endpoint>
 		
 			
-		<scripting:component doc:name="Groovy">
-            <scripting:script engine="Groovy">
-	            <![CDATA[
-		            println "#1 Payload received from HTTP request: " + payload
-			    ]]>
-	    	</scripting:script>
-        </scripting:component>
+<!-- 		<scripting:component doc:name="Groovy"> -->
+<!--             <scripting:script engine="Groovy"> -->
+<!-- 	            <![CDATA[ -->
+<!-- 		            println "#1 Payload received from HTTP request: " + payload -->
+<!-- 			    ]]> -->
+<!-- 	    	</scripting:script> -->
+<!--         </scripting:component> -->
         	
 		<cxf:proxy-service
 			namespace="urn:riv:inera:se.apotekensservice:lf:LFUtskrift:1:rivtabp20"
@@ -46,6 +46,8 @@ version="EE-3.4.1">
 		<!--             </return-data> -->
 		<!--         </static-component> -->
 	
+		 
+		<transformer ref="XmlToXSR" />
 		<transformer ref="ArgosHeaderToSamlTicket" />
 		
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
