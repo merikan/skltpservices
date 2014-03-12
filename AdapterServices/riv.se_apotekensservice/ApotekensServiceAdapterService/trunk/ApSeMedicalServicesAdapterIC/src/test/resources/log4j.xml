@@ -73,7 +73,7 @@
 	</logger>
 	
 	<logger name="se.skltp.adapterservices.apse.apsemedicalservicesadapteric">
-		<level value="DEBUG" />
+		<level value="INFO" />
 	</logger>
 
     <!-- Message logging using soi-toolkit LogTransformer class -->
@@ -94,6 +94,15 @@
     <logger name="httpclient.wire.content">
         <level value="DEBUG"/>
     </logger>
+    
+	<!-- If you need to debug the ArgosHeaderHelper and/or the SamlTicketTransformer...
+    <logger name="se.skltp.adapterservices.apse.apsemedicalservicesadapteric.argos.ArgosHeaderHelper">
+        <level value="DEBUG"/>
+    </logger>
+    <logger name="se.skltp.adapterservices.apse.apsemedicalservicesadapteric.saml.SamlTicketTransformer">
+        <level value="DEBUG"/>
+    </logger>
+	 -->
 		
 	<root>
 		<priority value="WARN" />

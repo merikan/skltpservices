@@ -20,6 +20,7 @@
  */
 package se.skltp.adapterservices.apse.apsemedicalservicesadapteric.argos;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
@@ -35,6 +37,7 @@ import org.mule.api.MuleMessage;
 import org.mule.module.xml.stax.ReversibleXMLStreamReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soitoolkit.commons.mule.util.XmlUtil;
 
 public class ArgosHeaderHelper {
 
@@ -107,35 +110,38 @@ public class ArgosHeaderHelper {
      *             in case of any exceptions
      */
     public ArgosHeader extractArgosHeader(MuleMessage msg) throws IllegalStateException {
-	log.info("Argos header extractor executing");
-	try {
-	    final XMLEventReader argosRequestEvents = getXmlReaderWithTrackingEnabled(msg);
+		log.info("Argos header extractor executing");
+	
+		try {
+			// Convert to String and then to a new XMLEventReader to avoid problems with Mule2 --> Mule3 usage of ReversibleXMLStreamReader
+			// TODO Simplify this xml processing...
+			String xml = XmlUtil.convertReversibleXMLStreamReaderToString((ReversibleXMLStreamReader) msg.getPayload(), "UTF-8");
+	    	XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(new StringReader(xml));
+		    XMLEventReader argosRequestEvents = xmlInputFactory.createXMLEventReader(xmlStreamReader);
+			
+		    return extractArgosHeaderFromXMLEventReader(argosRequestEvents);
+		} catch (Exception e) {
+		    log.error("Could not extract argos header information", e);
+		    throw new IllegalStateException("Could not extract argos header information", e);
+		}
+    }
+
+    /**
+     * Package private helper method that only takes a XMLEventReader to make it testble
+     * 
+     * @param argosRequestEvents
+     * @return
+     * @throws XMLStreamException
+     */
+    ArgosHeader extractArgosHeaderFromXMLEventReader(XMLEventReader argosRequestEvents) throws XMLStreamException {
 	    ArgosHeader argosHeader = new ArgosHeader();
 	    while (argosRequestEvents.hasNext()) {
-		final XMLEvent nextEvent = argosRequestEvents.nextEvent();
-		if (isArgosStartElement(nextEvent)) {
-		    extractNextValue(nextEvent, argosRequestEvents, argosHeader);
-		}
+			final XMLEvent nextEvent = argosRequestEvents.nextEvent();
+			if (isArgosStartElement(nextEvent)) {
+			    extractNextValue(nextEvent, argosRequestEvents, argosHeader);
+			}
 	    }
 	    return argosHeader;
-	} catch (Exception e) {
-	    log.error("Could not extract argos header information", e);
-	    throw new IllegalStateException("Could not extract argos header information", e);
-	} finally {
-	    setCursorAtBeginningOfXML(msg);
-	}
-    }
-
-    private XMLEventReader getXmlReaderWithTrackingEnabled(MuleMessage msg) throws XMLStreamException {
-	final ReversibleXMLStreamReader argosRequestReader = (ReversibleXMLStreamReader) msg.getPayload();
-	argosRequestReader.setTracking(true);
-	final XMLEventReader argosRequestXmlEvents = xmlInputFactory.createXMLEventReader(argosRequestReader);
-	return argosRequestXmlEvents;
-    }
-
-    private void setCursorAtBeginningOfXML(MuleMessage msg) {
-	final ReversibleXMLStreamReader argosRequestReader = (ReversibleXMLStreamReader) msg.getPayload();
-	argosRequestReader.reset();
     }
 
     private boolean isArgosStartElement(final XMLEvent nextEvent) {
@@ -162,7 +168,12 @@ public class ArgosHeaderHelper {
     }
 
     private void setValueInArgosHeader(ArgosHeader argosHeader, String xmlElement, String xmlValue) {
-	if (FORSKRIVAR_KOD.equals(xmlElement)) {
+
+    if (log.isDebugEnabled()) {
+    	log.debug("Found Argos header: {} = {}", xmlElement, xmlValue);
+    }
+    
+    if (FORSKRIVAR_KOD.equals(xmlElement)) {
 	    argosHeader.setForskrivarkod(xmlValue);
 	}
 	if (LEGITIMATIONS_KOD.equals(xmlElement)) {
