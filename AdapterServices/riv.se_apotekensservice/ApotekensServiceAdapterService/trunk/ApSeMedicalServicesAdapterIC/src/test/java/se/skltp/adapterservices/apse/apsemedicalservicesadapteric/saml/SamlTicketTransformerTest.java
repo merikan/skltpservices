@@ -22,18 +22,25 @@ package se.skltp.adapterservices.apse.apsemedicalservicesadapteric.saml;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Matchers.anyObject;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 
+import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleMessage;
 import org.mule.module.xml.stax.ReversibleXMLStreamReader;
@@ -43,31 +50,20 @@ import se.skltp.adapterservices.apse.apsemedicalservicesadapteric.argos.ArgosHea
 
 public class SamlTicketTransformerTest {
 
-    private static final String UTF8 = "UTF-8";
+	static class Holder {
+		private Object value = null; 
+		public void setValue(Object value) {
+			this.value = value;
+		}
+		public Object getValue() {
+			return value;
+		}
+	}
+	static final Holder mockPayloadHolder = new Holder();
 
-    @Ignore
-    @Test
-    public void testSamlTicketReplacesArgosHeader() throws Exception {
+	static final XMLInputFactory xmlInputFactory  = XMLInputFactory.newInstance();
 
-	MuleMessage msgIncludingArgos = createCompleteMockedMuleMessage();
-	MuleMessage msgIncludingSaml = (MuleMessage) new SamlTicketTransformer().doTransform(msgIncludingArgos, UTF8);
-	String xml = payloadAsString(msgIncludingSaml);
-	
-	Assert.assertThat(
-		xml,
-		containsString("<wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">"));
-	Assert.assertThat(xml, not(containsString("<urn:ArgosHeader />")));
-    }
-
-    private String payloadAsString(MuleMessage msgIncludingSaml) {
-	final ReversibleXMLStreamReader payload = (ReversibleXMLStreamReader) msgIncludingSaml.getPayload();
-	String xml = XmlUtil.convertReversibleXMLStreamReaderToString(payload, UTF8);
-	return xml;
-    }
-
-    private MuleMessage createCompleteMockedMuleMessage() throws UnsupportedEncodingException, XMLStreamException {
-
-	String muleMessage = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:riv:inera.se.apotekensservice:argos:1\" xmlns:add=\"http://www.w3.org/2005/08/addressing\" xmlns:urn1=\"urn:riv:se.apotekensservice:or:HamtaAktuellaOrdinationerResponder:1\">"
+	private static final String PAYLOAD = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:riv:inera.se.apotekensservice:argos:1\" xmlns:add=\"http://www.w3.org/2005/08/addressing\" xmlns:urn1=\"urn:riv:se.apotekensservice:or:HamtaAktuellaOrdinationerResponder:1\">"
 		+ "<soapenv:Header>"
 		+ "<urn:ArgosHeader>"
 		+ "<urn:forskrivarkod>1111129</urn:forskrivarkod>"
@@ -98,17 +94,69 @@ public class SamlTicketTransformerTest {
 		+ "<urn1:HamtaAktuellaOrdinationer>"
 		+ "<urn1:personnummer>196308212817</urn1:personnummer>"
 		+ "</urn1:HamtaAktuellaOrdinationer>" + "</soapenv:Body>" + "</soapenv:Envelope>";
+	private static final String UTF8 = "UTF-8";
 
-	InputStream is = new ByteArrayInputStream(muleMessage.getBytes("UTF-8"));
-	XMLInputFactory factory = XMLInputFactory.newInstance();
-	XMLStreamReader parser = factory.createXMLStreamReader(is, "UTF-8");
-	ReversibleXMLStreamReader reversibleXMLStreamReader = new ReversibleXMLStreamReader(parser);
-	MuleMessage msg = new DefaultMuleMessage((MuleMessage)reversibleXMLStreamReader);
-	msg.setProperty("ArgosHeader", getArgosHeader());
-//	MuleMessage msg = new DefaultMuleMessage((Object)reversibleXMLStreamReader, muleContext);
-//	msg.setProperty("ArgosHeader", getArgosHeader(), PropertyScope.OUTBOUND);
+    @Test
+    public void testAddSamlTicketToOriginalRequest() throws Exception {
 
-	return msg;
+    	SamlTicketTransformer samlTicketTransformer = new SamlTicketTransformer();
+
+    	XMLEventReader samlTicket = samlTicketTransformer.createSamlTicketFromArgosHeader(getArgosHeader());
+    	XMLStreamReader payload = xmlInputFactory.createXMLStreamReader(new StringReader(PAYLOAD));
+    	
+    	ByteArrayOutputStream result = samlTicketTransformer.addSamlTicketToOriginalRequest(payload, samlTicket);
+    	String xml = result.toString("UTF-8");
+
+    	Assert.assertThat(
+    			xml,
+    			containsString("<wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">"));
+    		Assert.assertThat(xml, not(containsString("<urn:ArgosHeader")));
+
+    }
+    
+    
+    @Test
+    public void testSamlTicketReplacesArgosHeader() throws Exception {
+
+		MuleMessage msgIncludingArgos = createCompleteMockedMuleMessage();
+		MuleMessage msgIncludingSaml = (MuleMessage) new SamlTicketTransformer().transform(msgIncludingArgos, UTF8);
+		String xml = payloadAsString(msgIncludingSaml);
+		
+		Assert.assertThat(
+			xml,
+			containsString("<wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">"));
+		Assert.assertThat(xml, not(containsString("<urn:ArgosHeader")));
+	    }
+	
+	    private String payloadAsString(MuleMessage msgIncludingSaml) {
+	    	// TODO Problem with using the Mockito stub of the getPayload() method, using the payload-holder direct instead for the time being.
+			// final ReversibleXMLStreamReader payload = (ReversibleXMLStreamReader) msgIncludingSaml.getPayload();
+			final ReversibleXMLStreamReader payload = (ReversibleXMLStreamReader) mockPayloadHolder.getValue();
+		return XmlUtil.convertReversibleXMLStreamReaderToString(payload, UTF8);
+    }
+
+    @SuppressWarnings("deprecation")
+	private MuleMessage createCompleteMockedMuleMessage() throws UnsupportedEncodingException, XMLStreamException {
+
+		InputStream is = new ByteArrayInputStream(PAYLOAD.getBytes("UTF-8"));
+		XMLInputFactory factory = XMLInputFactory.newInstance();
+		XMLStreamReader parser = factory.createXMLStreamReader(is, "UTF-8");
+		ReversibleXMLStreamReader reversibleXMLStreamReader = new ReversibleXMLStreamReader(parser);
+
+		mockPayloadHolder.setValue(reversibleXMLStreamReader);
+		MuleMessage msg = Mockito.mock(DefaultMuleMessage.class);
+	    Mockito.when(msg.getPayload()).thenReturn(mockPayloadHolder.getValue());
+	    doAnswer(new Answer<Object>() {
+	        public Object answer(InvocationOnMock invocation) {
+	            Object[] args = invocation.getArguments();
+	            mockPayloadHolder.setValue(args[0]);
+	            return null;
+	        }
+	    }).when(msg).setPayload(anyObject());
+	    
+		msg.setProperty("ArgosHeader", getArgosHeader());
+	
+		return msg;
     }
 
     private ArgosHeader getArgosHeader() {

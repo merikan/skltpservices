@@ -20,17 +20,19 @@
  */
 package se.skltp.adapterservices.apse.apsemedicalservicesadapteric.argos;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 
+import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import org.junit.Ignore;
 import org.junit.Test;
-import org.mule.DefaultMuleMessage;
+import org.mockito.Mockito;
 import org.mule.api.MuleMessage;
 import org.mule.module.xml.stax.ReversibleXMLStreamReader;
 
@@ -39,78 +41,107 @@ import se.skltp.adapterservices.apse.apsemedicalservicesadapteric.argos.ArgosHea
 
 public class ArgosHeaderHelperTest {
 
-	@Ignore
-    @Test
-    public void testEmptyArgosHeaderIsCreatedWhenNoInfoIsProvided() throws UnsupportedEncodingException,
-	    XMLStreamException {
-	ArgosHeader expectedArgosHeader = null;
-	String personnummer = "196308212817";
-	MuleMessage muleMessageBasedOnArgosHeader = createMockedMuleMessage(expectedArgosHeader, personnummer);
-	ArgosHeader actualArgosHeader = new ArgosHeaderHelper().extractArgosHeader(muleMessageBasedOnArgosHeader);
+	static final XMLInputFactory xmlInputFactory  = XMLInputFactory.newInstance();
 
-	assertArgosHeaderIsEmpty(actualArgosHeader);
+	@Test
+    public void testExtractArgosHeaderWithAllInformationFromXMLEventReader() throws Exception {
+    	ArgosHeader expectedArgosHeader = createExpectedArgosHeader();
+    	String personnummer = "196308212817";
+    	
+        String xml = getXmlPayload(expectedArgosHeader, personnummer);
+    	XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(new StringReader(xml));
+	    XMLEventReader xmlEventReader = xmlInputFactory.createXMLEventReader(xmlStreamReader);
+	    ArgosHeader actualArgosHeader = new ArgosHeaderHelper().extractArgosHeaderFromXMLEventReader(xmlEventReader);
+	    
+		assertCompleteArgosHeader(expectedArgosHeader, actualArgosHeader);
     }
 
-	@Ignore
+	@Test
+    public void testEmptyArgosHeaderIsCreatedWhenNoInfoIsProvidedFromXMLEventReader() throws Exception {
+    	ArgosHeader expectedArgosHeader = null;
+    	String personnummer = "196308212817";
+    	
+        String xml = getXmlPayload(expectedArgosHeader, personnummer);
+    	XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(new StringReader(xml));
+	    XMLEventReader xmlEventReader = xmlInputFactory.createXMLEventReader(xmlStreamReader);
+	    ArgosHeader actualArgosHeader = new ArgosHeaderHelper().extractArgosHeaderFromXMLEventReader(xmlEventReader);
+	    
+	    assertArgosHeaderIsEmpty(actualArgosHeader);
+    }
+
+    @Test
+    public void testEmptyArgosHeaderIsCreatedWhenNoInfoIsProvided() throws UnsupportedEncodingException, XMLStreamException {
+		ArgosHeader expectedArgosHeader = null;
+		String personnummer = "196308212817";
+
+		MuleMessage muleMessageBasedOnArgosHeader = createMockedMuleMessage(expectedArgosHeader, personnummer);
+		ArgosHeader actualArgosHeader = new ArgosHeaderHelper().extractArgosHeader(muleMessageBasedOnArgosHeader);
+	
+		assertArgosHeaderIsEmpty(actualArgosHeader);
+    }
+
     @Test
     public void testExtractArgosHeaderWithAllInformation() throws UnsupportedEncodingException, XMLStreamException {
-	ArgosHeader expectedArgosHeader = createExpectedArgosHeader();
-	String personnummer = "196308212817";
-	MuleMessage muleMessageBasedOnArgosHeader = createMockedMuleMessage(expectedArgosHeader, personnummer);
-	ArgosHeader actualArgosHeader = new ArgosHeaderHelper().extractArgosHeader(muleMessageBasedOnArgosHeader);
+		ArgosHeader expectedArgosHeader = createExpectedArgosHeader();
+		String personnummer = "196308212817";
 
-	assertCompleteArgosHeader(expectedArgosHeader, actualArgosHeader);
+		MuleMessage muleMessageBasedOnArgosHeader = createMockedMuleMessage(expectedArgosHeader, personnummer);
+		ArgosHeader actualArgosHeader = new ArgosHeaderHelper().extractArgosHeader(muleMessageBasedOnArgosHeader);
+	
+		assertCompleteArgosHeader(expectedArgosHeader, actualArgosHeader);
     }
 
     private void assertArgosHeaderIsEmpty(ArgosHeader argosHeader) {
-	assert argosHeader != null;
-	assert argosHeader.getArbetsplatskod() == null;
-	assert argosHeader.getArbetsplatsnamn() == null;
-	assert argosHeader.getBefattningskod() == null;
-	assert argosHeader.getDirectoryID() == null;
-	assert argosHeader.getEfternamn() == null;
-	assert argosHeader.getFornamn() == null;
-	assert argosHeader.getForskrivarkod() == null;
-	assert argosHeader.getHsaID() == null;
-	assert argosHeader.getKatalog() == null;
-	assert argosHeader.getLegitimationskod() == null;
-	assert argosHeader.getOrganisationsnummer() == null;
-	assert argosHeader.getPostadress() == null;
-	assert argosHeader.getPostnummer() == null;
-	assert argosHeader.getPostort() == null;
-	assert argosHeader.getRequestId() == null;
-	assert argosHeader.getRollnamn() == null;
-	assert argosHeader.getSystemIp() == null;
-	assert argosHeader.getSystemnamn() == null;
-	assert argosHeader.getSystemversion() == null;
-	assert argosHeader.getTelefonnummer() == null;
-	assert argosHeader.getYrkesgrupp() == null;
+	    assertNotNull(argosHeader);
+
+	    assertNull(argosHeader.getArbetsplatskod());
+		assertNull(argosHeader.getArbetsplatsnamn());
+		assertNull(argosHeader.getBefattningskod());
+		assertNull(argosHeader.getDirectoryID());
+		assertNull(argosHeader.getEfternamn());
+		assertNull(argosHeader.getFornamn());
+		assertNull(argosHeader.getForskrivarkod());
+		assertNull(argosHeader.getHsaID());
+		assertNull(argosHeader.getKatalog());
+		assertNull(argosHeader.getLegitimationskod());
+		assertNull(argosHeader.getOrganisationsnummer());
+		assertNull(argosHeader.getPostadress());
+		assertNull(argosHeader.getPostnummer());
+		assertNull(argosHeader.getPostort());
+		assertNull(argosHeader.getRequestId());
+		assertNull(argosHeader.getRollnamn());
+		assertNull(argosHeader.getSystemIp());
+		assertNull(argosHeader.getSystemnamn());
+		assertNull(argosHeader.getSystemversion());
+		assertNull(argosHeader.getTelefonnummer());
+		assertNull(argosHeader.getYrkesgrupp());
     }
 
     private void assertCompleteArgosHeader(ArgosHeader expectedArgosHeader, ArgosHeader actualArgosHeader) {
-
-	assert actualArgosHeader != null;
-	assert actualArgosHeader.getArbetsplatskod() == actualArgosHeader.getArbetsplatskod();
-	assert actualArgosHeader.getArbetsplatsnamn() == actualArgosHeader.getArbetsplatsnamn();
-	assert actualArgosHeader.getBefattningskod() == actualArgosHeader.getBefattningskod();
-	assert actualArgosHeader.getDirectoryID() == actualArgosHeader.getDirectoryID();
-	assert actualArgosHeader.getEfternamn() == actualArgosHeader.getEfternamn();
-	assert actualArgosHeader.getFornamn() == actualArgosHeader.getFornamn();
-	assert actualArgosHeader.getForskrivarkod() == actualArgosHeader.getForskrivarkod();
-	assert actualArgosHeader.getHsaID() == actualArgosHeader.getHsaID();
-	assert actualArgosHeader.getKatalog() == actualArgosHeader.getKatalog();
-	assert actualArgosHeader.getLegitimationskod() == actualArgosHeader.getLegitimationskod();
-	assert actualArgosHeader.getOrganisationsnummer() == actualArgosHeader.getOrganisationsnummer();
-	assert actualArgosHeader.getPostadress() == actualArgosHeader.getPostadress();
-	assert actualArgosHeader.getPostnummer() == actualArgosHeader.getPostnummer();
-	assert actualArgosHeader.getPostort() == actualArgosHeader.getPostort();
-	assert actualArgosHeader.getRequestId() == actualArgosHeader.getRequestId();
-	assert actualArgosHeader.getRollnamn() == actualArgosHeader.getRollnamn();
-	assert actualArgosHeader.getSystemIp() == actualArgosHeader.getSystemIp();
-	assert actualArgosHeader.getSystemnamn() == actualArgosHeader.getSystemnamn();
-	assert actualArgosHeader.getSystemversion() == actualArgosHeader.getSystemversion();
-	assert actualArgosHeader.getTelefonnummer() == actualArgosHeader.getTelefonnummer();
-	assert actualArgosHeader.getYrkesgrupp() == actualArgosHeader.getYrkesgrupp();
+	    assertNotNull(actualArgosHeader);
+	    assertNotNull(expectedArgosHeader);
+	
+	    assertEquals(expectedArgosHeader.getArbetsplatskod(), actualArgosHeader.getArbetsplatskod());
+		assertEquals(expectedArgosHeader.getArbetsplatsnamn(), actualArgosHeader.getArbetsplatsnamn());
+		assertEquals(expectedArgosHeader.getBefattningskod(), actualArgosHeader.getBefattningskod());
+		assertEquals(expectedArgosHeader.getDirectoryID(), actualArgosHeader.getDirectoryID());
+		assertEquals(expectedArgosHeader.getEfternamn(), actualArgosHeader.getEfternamn());
+		assertEquals(expectedArgosHeader.getFornamn(), actualArgosHeader.getFornamn());
+		assertEquals(expectedArgosHeader.getForskrivarkod(), actualArgosHeader.getForskrivarkod());
+		assertEquals(expectedArgosHeader.getHsaID(), actualArgosHeader.getHsaID());
+		assertEquals(expectedArgosHeader.getKatalog(), actualArgosHeader.getKatalog());
+		assertEquals(expectedArgosHeader.getLegitimationskod(), actualArgosHeader.getLegitimationskod());
+		assertEquals(expectedArgosHeader.getOrganisationsnummer(), actualArgosHeader.getOrganisationsnummer());
+		assertEquals(expectedArgosHeader.getPostadress(), actualArgosHeader.getPostadress());
+		assertEquals(expectedArgosHeader.getPostnummer(), actualArgosHeader.getPostnummer());
+		assertEquals(expectedArgosHeader.getPostort(), actualArgosHeader.getPostort());
+		assertEquals(expectedArgosHeader.getRequestId(), actualArgosHeader.getRequestId());
+		assertEquals(expectedArgosHeader.getRollnamn(), actualArgosHeader.getRollnamn());
+		assertEquals(expectedArgosHeader.getSystemIp(), actualArgosHeader.getSystemIp());
+		assertEquals(expectedArgosHeader.getSystemnamn(), actualArgosHeader.getSystemnamn());
+		assertEquals(expectedArgosHeader.getSystemversion(), actualArgosHeader.getSystemversion());
+		assertEquals(expectedArgosHeader.getTelefonnummer(), actualArgosHeader.getTelefonnummer());
+		assertEquals(expectedArgosHeader.getYrkesgrupp(), actualArgosHeader.getYrkesgrupp());
     }
 
     private ArgosHeader createExpectedArgosHeader() {
@@ -148,48 +179,54 @@ public class ArgosHeaderHelperTest {
     private MuleMessage createMockedMuleMessage(ArgosHeader expectedArgosHeader, String personnummer)
 	    throws XMLStreamException, UnsupportedEncodingException {
 
-	String muleMessage = "<?xml version='1.0' encoding='UTF-8'?>"
-		+ "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:riv:inera.se.apotekensservice:argos:1\" xmlns:add=\"http://www.w3.org/2005/08/addressing\" xmlns:urn1=\"urn:riv:se.apotekensservice:or:HamtaAktuellaOrdinationerResponder:1\">"
-		+ "<soapenv:Header>" + "<add:To>1234567</add:To>" + "</soapenv:Header>" + "<soapenv:Body>"
-		+ "<urn1:HamtaAktuellaOrdinationer>" + "<urn1:personnummer>" + personnummer + "</urn1:personnummer>"
-		+ "</urn1:HamtaAktuellaOrdinationer>" + "</soapenv:Body>" + "</soapenv:Envelope>";
+	String xml = getXmlPayload(expectedArgosHeader, personnummer);
 
-	if (expectedArgosHeader != null) {
-	    muleMessage = "<?xml version='1.0' encoding='UTF-8'?>"
-		    + "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:riv:inera.se.apotekensservice:argos:1\" xmlns:add=\"http://www.w3.org/2005/08/addressing\" xmlns:urn1=\"urn:riv:se.apotekensservice:or:HamtaAktuellaOrdinationerResponder:1\">"
-		    + "<soapenv:Header>" + "<urn:ArgosHeader>"
-		    + "<urn:yrkesgrupp>${expectedArgosHeader.yrkesgrupp}</urn:yrkesgrupp>"
-		    + "<urn:forskrivarkod>${expectedArgosHeader.forskrivarkod}</urn:forskrivarkod>"
-		    + "<urn:legitimationskod>${expectedArgosHeader.legitimationskod}</urn:legitimationskod>"
-		    + "<urn:fornamn>${expectedArgosHeader.fornamn}</urn:fornamn>"
-		    + "<urn:efternamn>${expectedArgosHeader.efternamn}</urn:efternamn>"
-		    + "<urn:befattningskod>${expectedArgosHeader.befattningskod}</urn:befattningskod>"
-		    + "<urn:arbetsplatskod>${expectedArgosHeader.arbetsplatskod}</urn:arbetsplatskod>"
-		    + "<urn:arbetsplatsnamn>${expectedArgosHeader.arbetsplatsnamn}</urn:arbetsplatsnamn>"
-		    + "<urn:postort>${expectedArgosHeader.postort}</urn:postort>"
-		    + "<urn:postadress>${expectedArgosHeader.postadress}</urn:postadress>"
-		    + "<urn:postnummer>${expectedArgosHeader.postnummer}</urn:postnummer>"
-		    + "<urn:telefonnummer>${expectedArgosHeader.telefonnummer}</urn:telefonnummer>"
-		    + "<urn:requestId>${expectedArgosHeader.requestId}</urn:requestId>"
-		    + "<urn:rollnamn>${expectedArgosHeader.rollnamn}</urn:rollnamn>"
-		    + "<urn:directoryID>${expectedArgosHeader.directoryID}</urn:directoryID>"
-		    + "<urn:hsaID>${expectedArgosHeader.hsaID}</urn:hsaID>"
-		    + "<urn:katalog>${expectedArgosHeader.katalog}</urn:katalog>"
-		    + "<urn:organisationsnummer>${expectedArgosHeader.organisationsnummer}</urn:organisationsnummer>"
-		    + "<urn:systemnamn>${expectedArgosHeader.systemnamn}</urn:systemnamn>"
-		    + "<urn:systemversion>${expectedArgosHeader.systemversion}</urn:systemversion>"
-		    + "<urn:systemIp>${expectedArgosHeader.systemIp}</urn:systemIp>" + "</urn:ArgosHeader>"
-		    + "<add:To>1234567</add:To>" + "</soapenv:Header>" + "<soapenv:Body>"
-		    + "<urn1:HamtaAktuellaOrdinationer>" + "<urn1:personnummer>${personnummer}</urn1:personnummer>"
-		    + "</urn1:HamtaAktuellaOrdinationer>" + "</soapenv:Body>" + "</soapenv:Envelope>";
-	}
+	XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(new StringReader(xml));
 
-	InputStream is = new ByteArrayInputStream(muleMessage.getBytes("UTF-8"));
-	XMLInputFactory factory = XMLInputFactory.newInstance();
-	XMLStreamReader parser = factory.createXMLStreamReader(is, "UTF-8");
-	ReversibleXMLStreamReader reversibleXMLStreamReader = new ReversibleXMLStreamReader(parser);
-//	MuleMessage msg = new DefaultMuleMessage((Object) reversibleXMLStreamReader);
-	MuleMessage msg = new DefaultMuleMessage((MuleMessage) reversibleXMLStreamReader);	
+	ReversibleXMLStreamReader reversibleXMLStreamReader = new ReversibleXMLStreamReader(xmlStreamReader);
+
+	MuleMessage msg = Mockito.mock(MuleMessage.class);
+    Mockito.when(msg.getPayload()).thenReturn(reversibleXMLStreamReader);
+	
 	return msg;
     }
+
+	private String getXmlPayload(ArgosHeader expectedArgosHeader, String personnummer) {
+		String muleMessage = "<?xml version='1.0' encoding='UTF-8'?>"
+			+ "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:riv:inera.se.apotekensservice:argos:1\" xmlns:add=\"http://www.w3.org/2005/08/addressing\" xmlns:urn1=\"urn:riv:se.apotekensservice:or:HamtaAktuellaOrdinationerResponder:1\">"
+			+ "<soapenv:Header>" + "<add:To>1234567</add:To>" + "</soapenv:Header>" + "<soapenv:Body>"
+			+ "<urn1:HamtaAktuellaOrdinationer>" + "<urn1:personnummer>" + personnummer + "</urn1:personnummer>"
+			+ "</urn1:HamtaAktuellaOrdinationer>" + "</soapenv:Body>" + "</soapenv:Envelope>";
+
+		if (expectedArgosHeader != null) {
+		    muleMessage = "<?xml version='1.0' encoding='UTF-8'?>"
+			    + "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:riv:inera.se.apotekensservice:argos:1\" xmlns:add=\"http://www.w3.org/2005/08/addressing\" xmlns:urn1=\"urn:riv:se.apotekensservice:or:HamtaAktuellaOrdinationerResponder:1\">"
+			    + "<soapenv:Header>" + "<urn:ArgosHeader>"
+			    + "<urn:yrkesgrupp>" + expectedArgosHeader.getYrkesgrupp() + "</urn:yrkesgrupp>"
+			    + "<urn:forskrivarkod>" + expectedArgosHeader.getForskrivarkod() + "</urn:forskrivarkod>"
+			    + "<urn:legitimationskod>" + expectedArgosHeader.getLegitimationskod() + "</urn:legitimationskod>"
+			    + "<urn:fornamn>" + expectedArgosHeader.getFornamn() + "</urn:fornamn>"
+			    + "<urn:efternamn>" + expectedArgosHeader.getEfternamn() + "</urn:efternamn>"
+			    + "<urn:befattningskod>" + expectedArgosHeader.getBefattningskod() + "</urn:befattningskod>"
+			    + "<urn:arbetsplatskod>" + expectedArgosHeader.getArbetsplatskod() + "</urn:arbetsplatskod>"
+			    + "<urn:arbetsplatsnamn>" + expectedArgosHeader.getArbetsplatsnamn() + "</urn:arbetsplatsnamn>"
+			    + "<urn:postort>" + expectedArgosHeader.getPostort() + "</urn:postort>"
+			    + "<urn:postadress>" + expectedArgosHeader.getPostadress() + "</urn:postadress>"
+			    + "<urn:postnummer>" + expectedArgosHeader.getPostnummer() + "</urn:postnummer>"
+			    + "<urn:telefonnummer>" + expectedArgosHeader.getTelefonnummer() + "</urn:telefonnummer>"
+			    + "<urn:requestId>" + expectedArgosHeader.getRequestId() + "</urn:requestId>"
+			    + "<urn:rollnamn>" + expectedArgosHeader.getRollnamn() + "</urn:rollnamn>"
+			    + "<urn:directoryID>" + expectedArgosHeader.getDirectoryID() + "</urn:directoryID>"
+			    + "<urn:hsaID>" + expectedArgosHeader.getHsaID() + "</urn:hsaID>"
+			    + "<urn:katalog>" + expectedArgosHeader.getKatalog() + "</urn:katalog>"
+			    + "<urn:organisationsnummer>" + expectedArgosHeader.getOrganisationsnummer() + "</urn:organisationsnummer>"
+			    + "<urn:systemnamn>" + expectedArgosHeader.getSystemnamn() + "</urn:systemnamn>"
+			    + "<urn:systemversion>" + expectedArgosHeader.getSystemversion() + "</urn:systemversion>"
+			    + "<urn:systemIp>" + expectedArgosHeader.getSystemIp() + "</urn:systemIp>" + "</urn:ArgosHeader>"
+			    + "<add:To>1234567</add:To>" + "</soapenv:Header>" + "<soapenv:Body>"
+			    + "<urn1:HamtaAktuellaOrdinationer>" + "<urn1:personnummer>" + personnummer + "</urn1:personnummer>"
+			    + "</urn1:HamtaAktuellaOrdinationer>" + "</soapenv:Body>" + "</soapenv:Envelope>";
+		}
+		return muleMessage;
+	}
 }

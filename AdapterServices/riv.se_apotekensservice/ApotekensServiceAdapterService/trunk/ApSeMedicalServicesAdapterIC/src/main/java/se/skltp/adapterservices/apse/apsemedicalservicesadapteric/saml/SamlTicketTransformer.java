@@ -41,6 +41,7 @@ import org.mule.module.xml.stax.ReversibleXMLStreamReader;
 import org.mule.transformer.AbstractMessageAwareTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soitoolkit.commons.mule.util.XmlUtil;
 
 import se.skltp.adapterservices.apse.apsemedicalservicesadapteric.argos.ArgosHeader;
 import se.skltp.adapterservices.apse.apsemedicalservicesadapteric.argos.ArgosHeaderHelper;
@@ -52,6 +53,7 @@ import se.skltp.adapterservices.apse.apsemedicalservicesadapteric.ticket.TicketM
  * based on Argos header information.
  * 
  */
+@SuppressWarnings("deprecation")
 public class SamlTicketTransformer extends AbstractMessageAwareTransformer {
 
     private static Logger log = LoggerFactory.getLogger(SamlTicketTransformer.class);
@@ -70,22 +72,42 @@ public class SamlTicketTransformer extends AbstractMessageAwareTransformer {
 	try {
 	    XMLEventReader samlTicket = extractSamlTicket(msg);
 	    final ReversibleXMLStreamReader originalRequest = (ReversibleXMLStreamReader) msg.getPayload();
-	    ByteArrayOutputStream updatedRequest = addSamlTicketToOriginalRequest(originalRequest, samlTicket);
-	    return updatePayload(msg, updatedRequest);
+	    
+		// Convert to String and then to a new XMLEStreamReader to avoid problems with Mule2 --> Mule3 usage of ReversibleXMLStreamReader
+		// TODO Simplify this xml processing...
+    	String xml = XmlUtil.convertReversibleXMLStreamReaderToString(originalRequest, "UTF-8");
+		log.debug("XML before replacing argos header with saml ticket: \n" + xml);
+
+    	XMLStreamReader xmlStreamReader = xmlInputFactory.createXMLStreamReader(new StringReader(xml));
+
+	    ByteArrayOutputStream updatedRequest = addSamlTicketToOriginalRequest(xmlStreamReader, samlTicket);
+	    MuleMessage updatedMuleMessage = updatePayload(msg, updatedRequest);
+
+	    if (log.isDebugEnabled()) {
+	    	String xmlAfter = XmlUtil.convertReversibleXMLStreamReaderToString((ReversibleXMLStreamReader) updatedMuleMessage.getPayload(), "UTF-8");
+			log.debug("XML after replacing argos header with saml ticket: \n" + xmlAfter);
+	    }
+	    
+		return updatedMuleMessage;
 	} catch (Exception e) {
 	    log.error("Could not transform/apply saml ticket to message", e);
 	    throw new IllegalStateException("Could not transform/apply saml ticket to message");
 	}
     }
 
-    XMLEventReader extractSamlTicket(MuleMessage msg) throws XMLStreamException, FactoryConfigurationError,
-	    TicketMachineException {
-	ArgosHeader argosHeader = new ArgosHeaderHelper().extractArgosHeader(msg);
-	String samlTicketStr = new TicketMachine().produceSamlTicket(argosHeader);
-	StringReader stringReader = new StringReader(samlTicketStr);
-	XMLEventReader samlTicket = XMLInputFactory.newInstance().createXMLEventReader(stringReader);
-	return samlTicket;
+    XMLEventReader extractSamlTicket(MuleMessage msg) throws XMLStreamException, FactoryConfigurationError, TicketMachineException {
+		ArgosHeader argosHeader = new ArgosHeaderHelper().extractArgosHeader(msg);
+		return createSamlTicketFromArgosHeader(argosHeader);
     }
+
+	XMLEventReader createSamlTicketFromArgosHeader(ArgosHeader argosHeader) throws TicketMachineException, XMLStreamException, FactoryConfigurationError {
+		String samlTicketStr = new TicketMachine().produceSamlTicket(argosHeader);
+		log.debug("Created saml ticket: \n" + samlTicketStr);
+
+		StringReader stringReader = new StringReader(samlTicketStr);
+		XMLEventReader samlTicket = XMLInputFactory.newInstance().createXMLEventReader(stringReader);
+		return samlTicket;
+	}
 
     private MuleMessage updatePayload(MuleMessage msg, ByteArrayOutputStream updatedRequest) throws XMLStreamException {
 	ByteArrayInputStream bis = new ByteArrayInputStream(updatedRequest.toByteArray());
@@ -108,10 +130,12 @@ public class SamlTicketTransformer extends AbstractMessageAwareTransformer {
 	    if (isNextEventArgusStartHeader(event)) {
 		addSamlTicketToHeader(outgoingMessageWriter, samlTicket);
 		insideArgosHeader = true;
+		log.debug("Inside argos header, replaced it with SAML ticket");
 	    }
 
 	    if (isNextEventArgusEndHeader(event)) {
 		insideArgosHeader = false;
+		log.debug("Exit argos header");
 		continue;
 	    }
 
