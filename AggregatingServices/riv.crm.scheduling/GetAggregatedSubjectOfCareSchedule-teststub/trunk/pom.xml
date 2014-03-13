@@ -24,6 +24,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
     <properties>
       <skltp.agp.version>1.2.0-RC1</skltp.agp.version>
+      <GetAggregatedSubjectOfCareSchedule.version>1.2.0-RC1</GetAggregatedSubjectOfCareSchedule.version>
     </properties>
 
     <scm>
@@ -38,13 +39,13 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <dependency>
     	<groupId>se.skltp.aggregatingservices.crm.scheduling</groupId>
     	<artifactId>GetAggregatedSubjectOfCareSchedule</artifactId>
-    	<version>${project.version}</version>
+    	<version>${GetAggregatedSubjectOfCareSchedule.version}</version>
     	<type>test-jar</type>
     </dependency>
     <dependency>
     	<groupId>se.skltp.aggregatingservices.crm.scheduling</groupId>
     	<artifactId>GetAggregatedSubjectOfCareSchedule</artifactId>
-    	<version>${project.version}</version>
+    	<version>${GetAggregatedSubjectOfCareSchedule.version}</version>
     	<classifier>core</classifier>    	
     </dependency>
     <dependency>
