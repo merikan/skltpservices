@@ -23,7 +23,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <name>GetAggregatedSubjectOfCareSchedule-teststub</name>
 
     <properties>
-      <skltp.agp.version>1.1.0-RC3-SNAPSHOT</skltp.agp.version>
+      <skltp.agp.version>1.2.0-RC1</skltp.agp.version>
     </properties>
 
     <scm>
@@ -46,6 +46,11 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     	<artifactId>GetAggregatedSubjectOfCareSchedule</artifactId>
     	<version>${project.version}</version>
     	<classifier>core</classifier>    	
+    </dependency>
+    <dependency>
+      <groupId>se.skltp.agp</groupId>
+      <artifactId>agp-core</artifactId>
+      <version>${skltp.agp.version}</version>
     </dependency>
     <dependency>
       <groupId>se.skltp.agp</groupId>
