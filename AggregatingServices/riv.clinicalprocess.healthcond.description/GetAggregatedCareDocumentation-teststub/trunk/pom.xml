@@ -25,11 +25,16 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <packaging>mule</packaging>
     <name>GetAggregatedCareDocumentation-teststub</name>
 
+    
+    <properties>
+        <skltp.agp.version>1.2.0-RC1</skltp.agp.version>
+        <GetAggregatedCareDocumentation.version>1.1.0-RC1</GetAggregatedCareDocumentation.version>
+    </properties>
+
     <scm>
-        <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
-        <connection>scm:svn:https://my-subversion-server/svn/GetAggregatedCareDocumentation-teststub/trunk</connection>
-        <developerConnection>scm:svn:https://my-subversion-server/svn/GetAggregatedCareDocumentation-teststub/trunk</developerConnection>
-        <url>https://my-subversion-server/svn/GetAggregatedCareDocumentation-teststub/trunk</url>
+      <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedCareDocumentation-teststub/trunk</connection>
+      <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedCareDocumentation-teststub/trunk</developerConnection>
+      <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedCareDocumentation-teststub/trunk</url>
     </scm>
     
 	<dependencies>
@@ -37,19 +42,24 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.description</groupId>
 	    	<artifactId>GetAggregatedCareDocumentation</artifactId>
-	    	<version>1.0.0-RC7</version>
+	    	<version>${GetAggregatedCareDocumentation.version}</version>
 	    	<type>test-jar</type>
 	    </dependency>
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.description</groupId>
 	    	<artifactId>GetAggregatedCareDocumentation</artifactId>
-	    	<version>1.0.0-RC7</version>
+	    	<version>${GetAggregatedCareDocumentation.version}</version>
 	    	<classifier>core</classifier>    	
 	    </dependency>
+      <dependency>
+        <groupId>se.skltp.agp</groupId>
+        <artifactId>agp-core</artifactId>
+        <version>${skltp.agp.version}</version>
+      </dependency>
         <dependency>
             <groupId>se.skltp.agp</groupId>
             <artifactId>agp-test-common</artifactId>
-            <version>1.0.0-RC5</version>
+            <version>${skltp.agp.version}</version>
         </dependency>
 	</dependencies> 
 
