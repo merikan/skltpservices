@@ -14,28 +14,45 @@
     
     <groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.actoutcome</groupId>
     <artifactId>GetAggregatedMaternityMedicalHistory-teststub</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-RC7-SNAPSHOT</version>
     <packaging>mule</packaging>
     <name>GetAggregatedMaternityMedicalHistory-teststub</name>
+
+    <properties>
+        <skltp.agp.version>1.2.0-RC1</skltp.agp.version>
+        <GetAggregatedMaternityMedicalHistory.version>1.0.0-RC7</GetAggregatedMaternityMedicalHistory.version>
+    </properties>
+
+    <scm>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedMaternityMedicalHistory-teststub/trunk</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedMaternityMedicalHistory-teststub/trunk</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healhtcond.actoutcome/GetAggregatedMaternityMedicalHistory-teststub/trunk</url>
+    </scm>
+  
 
 	<dependencies>
 	  <!-- dependencies to the integration component that contains the services to stub -->
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.actoutcome</groupId>
 	    	<artifactId>GetAggregatedMaternityMedicalHistory</artifactId>
-	    	<version>1.0.0-RC4</version>
+	    	<version>${GetAggregatedMaternityMedicalHistory.version}</version>
 	    	<type>test-jar</type>
 	    </dependency>
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.actoutcome</groupId>
 	    	<artifactId>GetAggregatedMaternityMedicalHistory</artifactId>
-	    	<version>1.0.0-RC4</version>
+	    	<version>${GetAggregatedMaternityMedicalHistory.version}</version>
 	    	<classifier>core</classifier>    	
 	    </dependency>
       <dependency>
+        <groupId>se.skltp.agp</groupId>
+        <artifactId>agp-core</artifactId>
+        <version>${skltp.agp.version}</version>
+      </dependency>
+      <dependency>
           <groupId>se.skltp.agp</groupId>
           <artifactId>agp-test-common</artifactId>
-          <version>1.0.0-RC5</version>
+          <version>${skltp.agp.version}</version>
       </dependency>
 	</dependencies> 
 
