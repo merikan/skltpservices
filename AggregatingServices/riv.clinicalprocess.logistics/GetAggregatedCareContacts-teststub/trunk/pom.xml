@@ -18,24 +18,41 @@
     <packaging>mule</packaging>
     <name>GetAggregatedCareContacts-teststub</name>
 
+     <properties>
+        <skltp.agp.version>1.2.0-RC1</skltp.agp.version>
+        <GetAggregatedCareContacts.version>1.1.0-RC1</GetAggregatedCareContacts.version>
+    </properties>
+
+    <scm>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContacts-teststub/trunk</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContacts-teststub/trunk</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContacts-teststub/trunk</url>
+    </scm>
+
+
 	<dependencies>
 	  <!-- dependencies to the integration component that contains the services to stub -->
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.logistics.logistics</groupId>
 	    	<artifactId>GetAggregatedCareContacts</artifactId>
-	    	<version>1.0.0-RC8</version>
+	    	<version>${GetAggregatedCareContacts.version}</version>
 	    	<type>test-jar</type>
 	    </dependency>
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.logistics.logistics</groupId>
 	    	<artifactId>GetAggregatedCareContacts</artifactId>
-	    	<version>1.0.0-RC8</version>
+	    	<version>${GetAggregatedCareContacts.version}</version>
 	    	<classifier>core</classifier>    	
 	    </dependency>
+       <dependency>
+        <groupId>se.skltp.agp</groupId>
+        <artifactId>agp-core</artifactId>
+        <version>${skltp.agp.version}</version>
+      </dependency>
       <dependency>
           <groupId>se.skltp.agp</groupId>
           <artifactId>agp-test-common</artifactId>
-          <version>1.0.0-RC5</version>
+          <version>${skltp.agp.version}</version>
       </dependency>
 	</dependencies> 
 
