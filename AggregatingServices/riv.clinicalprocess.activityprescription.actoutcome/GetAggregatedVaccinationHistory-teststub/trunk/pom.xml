@@ -185,9 +185,10 @@
         </profile>
     </profiles>
 
-  <scm>
-    <connection>scm:svn:http://svn.sonatype.org/spice/tags/GetAggregatedVaccinationHistory-teststub-1.1.0-RC1</connection>
-    <developerConnection>scm:svn:https://svn.sonatype.org/spice/tags/GetAggregatedVaccinationHistory-teststub-1.1.0-RC1</developerConnection>
-    <url>http://svn.sonatype.org/spice/tags/GetAggregatedVaccinationHistory-teststub-1.1.0-RC1</url>
-  </scm>
+   <scm>
+        <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.activityprescription.actoutcome/GetAggregatedVaccinationHistory-teststub/trunk</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.activityprescription.actoutcome/GetAggregatedVaccinationHistory-teststub/trunk</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.activityprescription.actoutcome/GetAggregatedVaccinationHistory-teststub/trunk</url>
+    </scm>
 </project>
