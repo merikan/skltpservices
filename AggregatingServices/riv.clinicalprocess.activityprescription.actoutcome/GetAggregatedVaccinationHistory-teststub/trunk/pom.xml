@@ -18,7 +18,11 @@
     <packaging>mule</packaging>
     <name>GetAggregatedVaccinationHistory-teststub</name>
 
-	<dependencies>
+    <properties>
+        <skltp.agp.version>1.2.0-RC1</skltp.agp.version>
+    </properties>
+	
+    <dependencies>
 	  <!-- dependencies to the integration component that contains the services to stub -->
 	    <dependency>
 	    	<groupId>se.skltp.aggregatingservices.clinicalprocess.activityprescription.actoutcome</groupId>
@@ -33,9 +37,14 @@
 	    	<classifier>core</classifier>
 	    </dependency>
       <dependency>
+        <groupId>se.skltp.agp</groupId>
+        <artifactId>agp-core</artifactId>
+        <version>${skltp.agp.version}</version>
+      </dependency>
+      <dependency>
           <groupId>se.skltp.agp</groupId>
           <artifactId>agp-test-common</artifactId>
-          <version>1.0.0-RC5</version>
+          <version>${skltp.agp.version}</version>
       </dependency>
 	</dependencies> 
 
