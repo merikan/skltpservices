@@ -42,28 +42,25 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 	}
 
 	public Object transform(MuleMessage message, String outputEncoding)
-			throws TransformerException {
+			 throws TransformerException {
+		
+		return createSoapEnvelope(transformToBodyElement(message, outputEncoding));
+	}
+
+	private String transformToBodyElement(MuleMessage message, String outputEncoding) throws TransformerException {
 		try {
+			
+			logger.debug("Trying to transform incoming HVAL response to soap response");
+			
 			// Convert response from hval to a string
 			String payload = convertStreamToString((InputStream) message.getPayload());
+			
+			logger.debug("Response from HVAL: {}", payload);
 
 			// Extract the information from the response string
 			HvalCarelistResponse hvalResponse = HvalCarelistResponse.extract(payload);
 
-			logger.debug("Transformed data: " + hvalResponse.toString(),hvalResponse.toString());
-
-			// Check returkod indicates any error
-//			if (hvalResponse.retCode == null || hvalResponse.retCode.intValue() > 0) {
-//				// If return code == 2 return PersonNotFound, for all other
-//				// codes return TechnicalException
-//				if (hvalResponse.retCode.intValue() == 2) {
-//					return createPersonNotFoundException(message);
-//				} else {
-//					return createTechnicalException("HVAL24 Error",
-//							"Return code " + hvalResponse.retCode.intValue(),
-//							message);
-//				}
-//			}
+			logger.debug("Transformed data: {} ", hvalResponse.toString());
 
 			// Check if error code > 4. SQL error etc
 			if (hvalResponse.retCode == null || hvalResponse.retCode.intValue() > 4) {
@@ -77,6 +74,8 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 				return createPersonNotFoundException(message);
 			}
 			
+			logger.debug("Trying to marshal to a GetListingResponseType");
+			
 			// Create a JAXB object that represents the riv-response
 			GetListingResponseType response = createResponse(hvalResponse);
 
@@ -84,19 +83,45 @@ public class Hval2CarelistTransformer extends AbstractMessageAwareTransformer {
 			StringWriter writer = new StringWriter();
 			Marshaller marshaller = JAXBContext.newInstance(
 					GetListingResponseType.class).createMarshaller();
-			marshaller.marshal(new JAXBElement(new QName(
-					"urn:riv:crm:carelisting:GetListingResponder:1",
-					"getListingResponse"), GetListingResponseType.class,
-					response), writer);
-			logger.debug("Extracted information: {}", writer.toString());
+			
+			/*
+			 * Solves the problem that we dont want an extra xml element in
+			 * paylaod. <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+			 */
+			marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
 
-			return writer.toString();
+			marshaller.marshal(new JAXBElement(new QName("urn:riv:crm:carelisting:GetListingResponder:1",
+					"getListingResponse"), GetListingResponseType.class, response), writer);
+
+			String result = writer.toString();
+			logger.debug("Extracted information: {}", result);
+			return result;
 
 		} catch (Exception e) {
 			logger.error("Hval2CarelistTransformer:" + e.getMessage());
 			return createTechnicalException("Transformer Error",
 					"Exception message: " + e.getMessage(), message);
 		}
+	}
+	
+	/*
+	 * This is needed to make sure a soap envelope is returned to the client, because the transformer only works on the complete soap envelope
+	 * and not only on the body.
+	 */
+	private String createSoapEnvelope(String result) {
+		StringBuffer envelope = new StringBuffer();
+		envelope.append("<?xml version='1.0' encoding='UTF-8'?>");
+		envelope.append("<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">");
+		envelope.append("<soap:Body>");
+		envelope.append(result);
+		envelope.append("</soap:Body>");
+		envelope.append("</soap:Envelope>");
+		
+		String soapResponse = envelope.toString();
+		
+		logger.debug("After soap envelope added around result: {}", soapResponse);
+		
+		return soapResponse;
 	}
 
 	private GetListingResponseType createResponse(HvalCarelistResponse hvalResponse) throws Exception {
