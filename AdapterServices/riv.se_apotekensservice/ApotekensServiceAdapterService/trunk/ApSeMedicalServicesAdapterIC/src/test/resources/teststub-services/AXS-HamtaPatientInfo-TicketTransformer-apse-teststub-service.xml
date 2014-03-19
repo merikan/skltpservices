@@ -34,23 +34,14 @@
 	">
 
 	<!-- Name of this file is mandatory and may not be changed. -->
-
-	<flow name="ApotekenService-HamtaPatientInfo-TicketTransformer-teststub" >
-
-		<https:inbound-endpoint address="${inbound.endpoint.apotekensservice.axs.HamtaPatientInfo.teststub}"
-			connector-ref="soitoolkit-https-connector" 
-			exchange-pattern="request-response">
-		</https:inbound-endpoint>
-
-		<cxf:proxy-service
-			namespace="urn:riv:inera:se.apotekensservice:axs:HamtaPatientInfo:1:rivtabp20"
-			service="HamtaPatientInfoResponderService"
-			wsdlLocation="classpath:/TD_APSE_AXS_1_0_0_R/interactions/HamtaPatientInfoInteraction/HamtaPatientInfoInteraction_1.0_rivtabp20.wsdl" />
-			
-			<component>
-				<singleton-object class="se.skltp.adapterservices.apse.apsemedicalservicesadapteric.hamtapatientinfo.HamtaPatientInfoTestProducer" />
-			</component>
-
-	</flow>	
+	
+	<simple-service 
+		name="ApotekenService-HamtaPatientInfo-TicketTransformer-teststub"
+        address="${inbound.endpoint.apotekensservice.axs.HamtaPatientInfo.teststub}" 
+        transformer-refs="logReqIn"
+        responseTransformer-refs="logRespOut"
+        type="jax-ws"
+        component-class="se.skltp.adapterservices.apse.apsemedicalservicesadapteric.hamtapatientinfo.HamtaPatientInfoTestProducer">
+    </simple-service>
 
 </mule>

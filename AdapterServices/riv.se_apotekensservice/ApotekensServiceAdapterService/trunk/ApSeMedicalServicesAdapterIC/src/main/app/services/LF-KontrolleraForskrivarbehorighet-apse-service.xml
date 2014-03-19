@@ -17,11 +17,11 @@
 
 	<flow name="Bridged-ApotekenService-KontrolleraForskrivarbehorighet">
 
-		<http:inbound-endpoint address="${inbound.endpoint.apotekensservice.lf.KontrolleraForskrivarbehorighet}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.apotekensservice.lf.KontrolleraForskrivarbehorighet}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -29,6 +29,10 @@
 			payload="envelope" 
 			service="KontrolleraForskrivarbehorighetResponderService"
 			wsdlLocation="classpath:/TD_APSE_LF_1_0_0_R/interactions/KontrolleraForskrivarbehorighetInteraction/KontrolleraForskrivarbehorighetInteraction_1.0_rivtabp20.wsdl" />
+			
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
+		
 			
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.apotekensservice.lf.KontrolleraForskrivarbehorighet}"
@@ -42,11 +46,11 @@
 
 	<flow name="Bridged-ApotekenService-KontrolleraForskrivarbehorighet-env2">
 
-		<http:inbound-endpoint address="${inbound.endpoint.env2.apotekensservice.lf.KontrolleraForskrivarbehorighet}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.env2.apotekensservice.lf.KontrolleraForskrivarbehorighet}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -54,6 +58,10 @@
 			payload="envelope" 
 			service="KontrolleraForskrivarbehorighetResponderService"
 			wsdlLocation="classpath:/TD_APSE_LF_1_0_0_R/interactions/KontrolleraForskrivarbehorighetInteraction/KontrolleraForskrivarbehorighetInteraction_1.0_rivtabp20.wsdl" />
+			
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
+		
 			
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.env2.apotekensservice.lf.KontrolleraForskrivarbehorighet}"

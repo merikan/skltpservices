@@ -17,11 +17,11 @@
 
 	<flow name="Bridged-ApotekenService-SattUtOrdinationVard">
 
-		<http:inbound-endpoint address="${inbound.endpoint.apotekensservice.or.SattUtOrdinationVard}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.apotekensservice.or.SattUtOrdinationVard}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -29,7 +29,10 @@
 			payload="envelope" 
 			service="SattUtOrdinationVardResponderService"
 			wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/SattUtOrdinationVardInteraction/SattUtOrdinationVardInteraction_1.0_rivtabp20.wsdl" />
-			
+		
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
+		
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.apotekensservice.or.SattUtOrdinationVard}"
 			exchange-pattern="request-response" 
@@ -42,11 +45,11 @@
 	
 	<flow name="Bridged-ApotekenService-SattUtOrdinationVard-env2">
 
-		<http:inbound-endpoint address="${inbound.endpoint.env2.apotekensservice.or.SattUtOrdinationVard}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.env2.apotekensservice.or.SattUtOrdinationVard}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -54,7 +57,10 @@
 			payload="envelope" 
 			service="SattUtOrdinationVardResponderService"
 			wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/SattUtOrdinationVardInteraction/SattUtOrdinationVardInteraction_1.0_rivtabp20.wsdl" />
-			
+		
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
+		
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.env2.apotekensservice.or.SattUtOrdinationVard}"
 			exchange-pattern="request-response" 

@@ -33,7 +33,10 @@ import se.riv.inera.se.apotekensservice.axs.hamtapatientinfo.v1.rivtabp20.System
 import se.riv.se.apotekensservice.axs.hamtapatientinforesponder.v1.HamtaPatientInfoRequestType;
 import se.riv.se.apotekensservice.axs.hamtapatientinforesponder.v1.HamtaPatientInfoResponseType;
 
-@WebService(serviceName = "HamtaPatientInfoResponderService", endpointInterface = "se.riv.inera.se.apotekensservice.axs.hamtapatientinfo.v1.rivtabp20.HamtaPatientInfoResponderInterface", portName = "HamtaPatientInfoResponderPort", targetNamespace = "urn:riv:inera:se.apotekensservice:axs:HamtaPatientInfo:1:rivtabp20", wsdlLocation = "schemas/interactions/HamtaPatientInfoInteraction/HamtaPatientInfoInteraction_1.0_rivtabp20.wsdl")
+@WebService(serviceName = "HamtaPatientInfoResponderService", 
+			endpointInterface = "se.riv.inera.se.apotekensservice.axs.hamtapatientinfo.v1.rivtabp20.HamtaPatientInfoResponderInterface", 
+			portName = "HamtaPatientInfoResponderPort", targetNamespace = "urn:riv:inera:se.apotekensservice:axs:HamtaPatientInfo:1:rivtabp20", 
+			wsdlLocation = "TD_APSE_AXS_1_0_0_R/interactions/HamtaPatientInfoInteraction/HamtaPatientInfoInteraction_1.0_rivtabp20.wsdl")
 public class HamtaPatientInfoTestProducer implements HamtaPatientInfoResponderInterface {
 
     public HamtaPatientInfoResponseType hamtaPatientInfo(HamtaPatientInfoRequestType arg0, AttributedURIType arg1,

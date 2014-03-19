@@ -17,11 +17,11 @@
 
 	<flow name="Bridged-ApotekenService-HamtaIckeAktuellaOrdinationer.v4">
 
-		<http:inbound-endpoint address="${inbound.endpoint.apotekensservice.or.HamtaIckeAktuellaOrdinationer.v4}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.apotekensservice.or.HamtaIckeAktuellaOrdinationer.v4}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -29,7 +29,10 @@
 			payload="envelope" 
 			service="HamtaIckeAktuellaOrdinationerResponderService"
 			wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/HamtaIckeAktuellaOrdinationerInteraction/HamtaIckeAktuellaOrdinationerInteraction_4.0_rivtabp21.wsdl" />
-			
+		
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
+		
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.apotekensservice.or.HamtaIckeAktuellaOrdinationer.v4}"
 			exchange-pattern="request-response" 
@@ -42,11 +45,11 @@
 	
 	<flow name="Bridged-ApotekenService-HamtaIckeAktuellaOrdinationer.v4-env2">
 
-		<http:inbound-endpoint address="${inbound.endpoint.env2.apotekensservice.or.HamtaIckeAktuellaOrdinationer.v4}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.env2.apotekensservice.or.HamtaIckeAktuellaOrdinationer.v4}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -54,7 +57,10 @@
 			payload="envelope" 
 			service="HamtaIckeAktuellaOrdinationerResponderService"
 			wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/HamtaIckeAktuellaOrdinationerInteraction/HamtaIckeAktuellaOrdinationerInteraction_4.0_rivtabp21.wsdl" />
-			
+		
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
+		
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.env2.apotekensservice.or.HamtaIckeAktuellaOrdinationer.v4}"
 			exchange-pattern="request-response" 

@@ -17,11 +17,11 @@
 
 	<flow name="Bridged-ApotekenService-KontrolleraUttag">
 
-		<http:inbound-endpoint address="${inbound.endpoint.apotekensservice.or.KontrolleraUttag}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.apotekensservice.or.KontrolleraUttag}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -29,7 +29,10 @@
 			payload="envelope" 
 			service="KontrolleraUttagResponderService"
 			wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/KontrolleraUttagInteraction/KontrolleraUttagInteraction_1.0_rivtabp20.wsdl" />
-			
+		
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
+		
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.apotekensservice.or.KontrolleraUttag}"
 			exchange-pattern="request-response" 
@@ -42,11 +45,11 @@
 	
 	<flow name="Bridged-ApotekenService-KontrolleraUttag-env2">
 
-		<http:inbound-endpoint address="${inbound.endpoint.env2.apotekensservice.or.KontrolleraUttag}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.env2.apotekensservice.or.KontrolleraUttag}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -54,7 +57,10 @@
 			payload="envelope" 
 			service="KontrolleraUttagResponderService"
 			wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/KontrolleraUttagInteraction/KontrolleraUttagInteraction_1.0_rivtabp20.wsdl" />
-			
+		
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
+		
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.env2.apotekensservice.or.KontrolleraUttag}"
 			exchange-pattern="request-response" 

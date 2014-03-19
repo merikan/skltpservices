@@ -17,11 +17,11 @@
 
 	<flow name="Bridged-ApotekenService-AterkallaSamtyckeVardsystem">
 
-		<http:inbound-endpoint address="${inbound.endpoint.apotekensservice.lf.AterkallaSamtyckeVardsystem}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.apotekensservice.lf.AterkallaSamtyckeVardsystem}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -29,6 +29,9 @@
 			payload="envelope" 
 			service="AterkallaSamtyckeVardsystemResponderService"
 			wsdlLocation="classpath:/TD_APSE_LF_1_0_0_R/interactions/AterkallaSamtyckeVardsystemInteraction/AterkallaSamtyckeVardsystemInteraction_1.0_rivtabp20.wsdl" />
+			
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
 			
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.apotekensservice.lf.AterkallaSamtyckeVardsystem}"
@@ -42,11 +45,11 @@
 
 	<flow name="Bridged-ApotekenService-AterkallaSamtyckeVardsystem-env2">
 
-		<http:inbound-endpoint address="${inbound.endpoint.env2.apotekensservice.lf.AterkallaSamtyckeVardsystem}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.env2.apotekensservice.lf.AterkallaSamtyckeVardsystem}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -54,6 +57,9 @@
 			payload="envelope" 
 			service="AterkallaSamtyckeVardsystemResponderService"
 			wsdlLocation="classpath:/TD_APSE_LF_1_0_0_R/interactions/AterkallaSamtyckeVardsystemInteraction/AterkallaSamtyckeVardsystemInteraction_1.0_rivtabp20.wsdl" />
+			
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
 			
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.env2.apotekensservice.lf.AterkallaSamtyckeVardsystem}"

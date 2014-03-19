@@ -20,11 +20,11 @@
 
 	<flow name="Bridged-ApotekenService-HamtaPatientInfo.v1">
 
-		<http:inbound-endpoint address="${inbound.endpoint.apotekensservice.axs.HamtaPatientInfo.v1}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.apotekensservice.axs.HamtaPatientInfo.v1}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -32,6 +32,9 @@
 			payload="envelope" 
 			service="HamtaPatientInfoResponderService"
 			wsdlLocation="classpath:/TD_APSE_AXS_1_0_0_R/interactions/HamtaPatientInfoInteraction/HamtaPatientInfoInteraction_1.0_rivtabp20.wsdl" />
+			
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
 			
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.apotekensservice.axs.HamtaPatientInfo.v1}"
@@ -45,11 +48,11 @@
 
 	<flow name="Bridged-ApotekenService-HamtaPatientInfo.v1-env2">
 
-		<http:inbound-endpoint address="${inbound.endpoint.env2.apotekensservice.axs.HamtaPatientInfo.v1}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.env2.apotekensservice.axs.HamtaPatientInfo.v1}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -57,6 +60,10 @@
 			payload="envelope" 
 			service="HamtaPatientInfoResponderService"
 			wsdlLocation="classpath:/TD_APSE_AXS_1_0_0_R/interactions/HamtaPatientInfoInteraction/HamtaPatientInfoInteraction_1.0_rivtabp20.wsdl" />
+		
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
+		
 			
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.env2.apotekensservice.axs.HamtaPatientInfo.v1}"
