@@ -14,7 +14,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>se.skltp.adapterservices.apse</groupId>
+		<groupId>se.skltp.adapterservices.se.apotekensservice</groupId>
 		<artifactId>ApSeMedicalServicesAdapter</artifactId>
 		<version>2.0.0-SNAPSHOT</version>
 	</parent>
@@ -25,23 +25,11 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
 	<dependencies>
 
-		<!-- Pascals TicketMachine -->
+		<!-- SKLTP Apse TicketMachine -->
 		<dependency>
-			<groupId>se.inera.pascal.ticket</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>TicketMachine</artifactId>
 			<version>1.1.2-SNAPSHOT</version>
-			<exclusions>
-				<!-- Exclude commons-lang exposed by Ticketmachine -->
-				<exclusion>
-					<artifactId>commons-lang</artifactId>
-					<groupId>commons-lang</groupId>
-				</exclusion>
-				<!-- Exclude commons-collections exposed by Ticketmachine -->
-				<exclusion>
-          			<groupId>commons-collections</groupId>
-          			<artifactId>commons-collections</artifactId>
-        		</exclusion>
-			</exclusions>
 		</dependency>
 			
 		<!-- schema dependency -->

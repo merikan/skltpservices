@@ -60,12 +60,12 @@
 
     <!-- Message logging using the old Mule <logger/> - element -->
     <logger name="org.mule.api.processor.LoggerMessageProcessor">
-        <level value="DEBUG" />
+        <level value="INFO" />
     </logger>
 
     <!-- Message logging using the old Mule <log-component/> - element -->
     <logger name="org.mule.component.simple.LogComponent">
-        <level value="DEBUG" />
+        <level value="INFO" />
     </logger>
 
 	<logger name="org.soitoolkit.commons">
@@ -87,12 +87,12 @@
 	
 	 <!-- Level DEBUG: Log http headers transfered during a request/response -->
     <logger name="httpclient.wire.header">
-        <level value="DEBUG"/>
+        <level value="FATAL"/>
     </logger>
 
 	 <!-- Level DEBUG: Log the http content transfered during a request/response -->
     <logger name="httpclient.wire.content">
-        <level value="DEBUG"/>
+        <level value="FATAL"/>
     </logger>
     
 	<!-- If you need to debug the ArgosHeaderHelper and/or the SamlTicketTransformer...
