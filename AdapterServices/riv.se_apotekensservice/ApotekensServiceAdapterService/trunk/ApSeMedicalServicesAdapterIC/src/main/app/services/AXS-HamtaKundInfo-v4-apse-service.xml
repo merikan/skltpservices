@@ -17,18 +17,33 @@
 
 	<flow name="Bridged-ApotekenService-HamtaKundInfo.v4">
 
-		<http:inbound-endpoint address="${inbound.endpoint.apotekensservice.axs.HamtaKundInfo.v4}"
-			connector-ref="soitoolkit-http-connector" 
-			exchange-pattern="request-response"
-			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
-		</http:inbound-endpoint>
+		<composite-source>
+		
+			<http:inbound-endpoint address="${inbound.endpoint.http.apotekensservice.axs.HamtaKundInfo.v4}"
+				connector-ref="soitoolkit-http-connector" 
+				exchange-pattern="request-response"
+				responseTransformer-refs="logRespOut"
+				transformer-refs="logReqIn">
+			</http:inbound-endpoint>
+			
+			<https:inbound-endpoint address="${inbound.endpoint.https.apotekensservice.axs.HamtaKundInfo.v4}"
+				connector-ref="soitoolkit-https-connector" 
+				exchange-pattern="request-response"
+				responseTransformer-refs="logRespOut"
+				transformer-refs="logReqIn">
+			</https:inbound-endpoint>
+		
+		</composite-source>
+		
 
 		<cxf:proxy-service
 			namespace="urn:riv:se.apotekensservice:axs:HamtaKundInfo:4:rivtabp21"
 			payload="envelope" 
 			service="HamtaKundInfoResponderService"
 			wsdlLocation="classpath:/TD_APSE_AXS_4_0_RC1/interactions/HamtaKundInfoInteraction/HamtaKundInfoInteraction_4.0_rivtabp21.wsdl" />
+		
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
 			
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.apotekensservice.axs.HamtaKundInfo.v4}"
@@ -41,19 +56,34 @@
 	</flow>
 	
 		<flow name="Bridged-ApotekenService-HamtaKundInfo.v4-env2">
+		
+		<composite-source>
+		
+			<http:inbound-endpoint address="${inbound.endpoint.http.env2.apotekensservice.axs.HamtaKundInfo.v4}"
+				connector-ref="soitoolkit-http-connector" 
+				exchange-pattern="request-response"
+				responseTransformer-refs="logRespOut"
+				transformer-refs="logReqIn">
+			</http:inbound-endpoint>
+	
+			<https:inbound-endpoint address="${inbound.endpoint.https.env2.apotekensservice.axs.HamtaKundInfo.v4}"
+				connector-ref="soitoolkit-https-connector" 
+				exchange-pattern="request-response"
+				responseTransformer-refs="logRespOut"
+				transformer-refs="logReqIn">
+			</https:inbound-endpoint>
 
-		<http:inbound-endpoint address="${inbound.endpoint.env2.apotekensservice.axs.HamtaKundInfo.v4}"
-			connector-ref="soitoolkit-http-connector" 
-			exchange-pattern="request-response"
-			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
-		</http:inbound-endpoint>
-
+		</composite-source>
+		
+		
 		<cxf:proxy-service
 			namespace="urn:riv:se.apotekensservice:axs:HamtaKundInfo:4:rivtabp21"
 			payload="envelope" 
 			service="HamtaKundInfoResponderService"
 			wsdlLocation="classpath:/TD_APSE_AXS_4_0_RC1/interactions/HamtaKundInfoInteraction/HamtaKundInfoInteraction_4.0_rivtabp21.wsdl" />
+			
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
 			
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.env2.apotekensservice.axs.HamtaKundInfo.v4}"

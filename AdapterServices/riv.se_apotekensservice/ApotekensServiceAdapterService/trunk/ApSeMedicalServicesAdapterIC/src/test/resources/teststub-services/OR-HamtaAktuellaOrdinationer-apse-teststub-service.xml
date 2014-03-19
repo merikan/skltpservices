@@ -33,23 +33,14 @@
 	">
 	
 	<!-- Name of this file is mandatory and may not be changed. -->
-
-	<flow name="ApotekenService-HamtaAktuellaOrdinationer-TicketTransformer-teststub" >
-
-		<https:inbound-endpoint address="${inbound.endpoint.apotekensservice.or.HamtaAktuellaOrdinationer.teststub}"
-			connector-ref="soitoolkit-https-connector" 
-			exchange-pattern="request-response">
-		</https:inbound-endpoint>
-
-		<cxf:proxy-service
-			namespace="urn:riv:inera:se.apotekensservice:or:HamtaAktuellaOrdinationer:1:rivtabp20"
-			service="HamtaAktuellaOrdinationerResponderService"
-			wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/HamtaAktuellaOrdinationerInteraction/HamtaAktuellaOrdinationerInteraction_1.0_rivtabp20.wsdl" />
-			
-			<component>
-				<singleton-object class="se.skltp.adapterservices.apse.apsemedicalservicesadapteric.hamtaaktuellaordinationer.HamtaAllaAktuellaOrdinationerTestProducer" />
-			</component>
-
-	</flow>	
 	
+	<simple-service 
+		name="ApotekenService-HamtaAktuellaOrdinationer-TicketTransformer-teststub"
+        address="${inbound.endpoint.apotekensservice.or.HamtaAktuellaOrdinationer.teststub}" 
+        transformer-refs="logReqIn"
+        responseTransformer-refs="logRespOut"
+        type="jax-ws"
+        component-class="se.skltp.adapterservices.apse.apsemedicalservicesadapteric.hamtaaktuellaordinationer.HamtaAllaAktuellaOrdinationerTestProducer">
+    </simple-service>
+
 </mule>

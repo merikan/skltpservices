@@ -17,11 +17,11 @@
 
 	<flow name="Bridged-ApotekenService-SokDosmottagare">
 
-		<http:inbound-endpoint address="${inbound.endpoint.apotekensservice.expo.SokDosmottagare}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.apotekensservice.expo.SokDosmottagare}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -29,6 +29,9 @@
 			payload="envelope" 
 			service="SokDosmottagareResponderService"
 			wsdlLocation="classpath:/TD_APSE_EXPO_1_0_0_SNAPSHOT/interactions/SokDosmottagareInteraction/SokDosmottagareInteraction_1.0_rivtabp20.wsdl" />
+			
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
 			
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.apotekensservice.expo.SokDosmottagare}"
@@ -42,11 +45,11 @@
 	
 	<flow name="Bridged-ApotekenService-SokDosmottagare-env2">
 
-		<http:inbound-endpoint address="${inbound.endpoint.env2.apotekensservice.expo.SokDosmottagare}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.env2.apotekensservice.expo.SokDosmottagare}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -54,7 +57,10 @@
 			payload="envelope" 
 			service="SokDosmottagareResponderService"
 			wsdlLocation="classpath:/TD_APSE_EXPO_1_0_0_SNAPSHOT/interactions/SokDosmottagareInteraction/SokDosmottagareInteraction_1.0_rivtabp20.wsdl" />
-			
+		
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
+
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.env2.apotekensservice.expo.SokDosmottagare}"
 			exchange-pattern="request-response" 

@@ -17,11 +17,11 @@
 
 	<flow name="Bridged-ApotekenService-AvregistreraDosunderlag">
 
-		<http:inbound-endpoint address="${inbound.endpoint.apotekensservice.or.AvregistreraDosunderlag}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.apotekensservice.or.AvregistreraDosunderlag}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -29,7 +29,11 @@
 			payload="envelope" 
 			service="AvregistreraDosunderlagResponderService"
 			wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/AvregistreraDosunderlagInteraction/AvregistreraDosunderlagInteraction_1.0_rivtabp20.wsdl" />
-			
+		
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
+		
+		
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.apotekensservice.or.AvregistreraDosunderlag}"
 			exchange-pattern="request-response" 
@@ -42,11 +46,11 @@
 
 	<flow name="Bridged-ApotekenService-AvregistreraDosunderlag-env2">
 
-		<http:inbound-endpoint address="${inbound.endpoint.env2.apotekensservice.or.AvregistreraDosunderlag}"
+		<http:inbound-endpoint address="${inbound.endpoint.http.env2.apotekensservice.or.AvregistreraDosunderlag}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
+			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
 
 		<cxf:proxy-service
@@ -55,6 +59,10 @@
 			service="AvregistreraDosunderlagResponderService"
 			wsdlLocation="classpath:/TD_APSE_OR_4_0_RC3/interactions/AvregistreraDosunderlagInteraction/AvregistreraDosunderlagInteraction_1.0_rivtabp20.wsdl" />
 			
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
+		
+		
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.env2.apotekensservice.or.AvregistreraDosunderlag}"
 			exchange-pattern="request-response" 

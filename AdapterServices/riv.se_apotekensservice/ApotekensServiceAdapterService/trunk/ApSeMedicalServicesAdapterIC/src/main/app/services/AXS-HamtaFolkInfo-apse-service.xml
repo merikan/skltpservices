@@ -16,19 +16,35 @@
 	">
 
 	<flow name="Bridged-ApotekenService-HamtaFolkInfo">
+	
+		<composite-source>
+	
+			<http:inbound-endpoint address="${inbound.endpoint.http.apotekensservice.axs.HamtaFolkInfo}"
+				connector-ref="soitoolkit-http-connector" 
+				exchange-pattern="request-response"
+				responseTransformer-refs="logRespOut"
+				transformer-refs="logReqIn">
+			</http:inbound-endpoint>
+			
+			<https:inbound-endpoint address="${inbound.endpoint.https.apotekensservice.axs.HamtaFolkInfo}"
+				connector-ref="soitoolkit-https-connector" 
+				exchange-pattern="request-response"
+				responseTransformer-refs="logRespOut"
+				transformer-refs="logReqIn">
+			</https:inbound-endpoint>
 
-		<http:inbound-endpoint address="${inbound.endpoint.apotekensservice.axs.HamtaFolkInfo}"
-			connector-ref="soitoolkit-http-connector" 
-			exchange-pattern="request-response"
-			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
-		</http:inbound-endpoint>
-
+		</composite-source>
+		
+	
 		<cxf:proxy-service
 			namespace="urn:riv:inera:se.apotekensservice:axs:HamtaFolkInfo:1:rivtabp20"
 			payload="envelope" 
 			service="HamtaFolkInfoResponderService"
 			wsdlLocation="classpath:/TD_APSE_AXS_1_0_0_R/interactions/HamtaFolkInfoInteraction/HamtaFolkInfoInteraction_1.0_rivtabp20.wsdl" />
+			
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
+	
 			
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.apotekensservice.axs.HamtaFolkInfo}"
@@ -41,20 +57,35 @@
 	</flow>
 	
 		<flow name="Bridged-ApotekenService-HamtaFolkInfo-env2">
+		
+		<composite-source>
+		
 
-		<http:inbound-endpoint address="${inbound.endpoint.env2.apotekensservice.axs.HamtaFolkInfo}"
-			connector-ref="soitoolkit-http-connector" 
-			exchange-pattern="request-response"
-			responseTransformer-refs="logRespOut"
-			transformer-refs="ArgosHeaderToSamlTicket logReqIn">
-		</http:inbound-endpoint>
+			<http:inbound-endpoint address="${inbound.endpoint.http.env2.apotekensservice.axs.HamtaFolkInfo}"
+				connector-ref="soitoolkit-http-connector" 
+				exchange-pattern="request-response"
+				responseTransformer-refs="logRespOut"
+				transformer-refs="logReqIn">
+			</http:inbound-endpoint>
+			
+			<https:inbound-endpoint address="${inbound.endpoint.https.env2.apotekensservice.axs.HamtaFolkInfo}"
+				connector-ref="soitoolkit-https-connector" 
+				exchange-pattern="request-response"
+				responseTransformer-refs="logRespOut"
+				transformer-refs="logReqIn">
+			</https:inbound-endpoint>
+			
+		</composite-source>
 
 		<cxf:proxy-service
 			namespace="urn:riv:inera:se.apotekensservice:axs:HamtaFolkInfo:1:rivtabp20"
 			payload="envelope" 
 			service="HamtaFolkInfoResponderService"
 			wsdlLocation="classpath:/TD_APSE_AXS_1_0_0_R/interactions/HamtaFolkInfoInteraction/HamtaFolkInfoInteraction_1.0_rivtabp20.wsdl" />
-			
+		
+		<transformer ref="XmlToXSR" />
+		<transformer ref="ArgosHeaderToSamlTicket" />
+		
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
 			address="${outbound.endpoint.env2.apotekensservice.axs.HamtaFolkInfo}"
 			exchange-pattern="request-response" 
