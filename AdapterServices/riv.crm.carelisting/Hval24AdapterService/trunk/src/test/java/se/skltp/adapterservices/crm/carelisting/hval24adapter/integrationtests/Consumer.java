@@ -23,6 +23,7 @@ public class Consumer {
 		ResourceBundle rb     = ResourceBundle.getBundle("hval");
 		String serviceAddress = rb.getString("carelisting.url");
     	String personId       = "196210083611";
+    	String logicalAddress = "01";
 
 		if (args.length > 0) {
 			serviceAddress = args[0];
@@ -32,16 +33,16 @@ public class Consumer {
 			personId = args[1];
 		}
 
-		executeTestCall(personId, serviceAddress);
+		executeTestCall(logicalAddress, personId, serviceAddress);
 	}
 
-	private static void executeTestCall(String personId, String serviceAddress) throws PersonNotFound, TechnicalException {
+	private static void executeTestCall(String logicalAddress, String personId, String serviceAddress) throws PersonNotFound, TechnicalException {
 		System.out.println("Consumer connecting to "  + serviceAddress);
 		Consumer consumer = new Consumer(serviceAddress);
-		GetListingResponseType response = consumer.callService(personId);
+		GetListingResponseType response = consumer.callService(logicalAddress, personId);
 
 		long ts = System.currentTimeMillis();
-		response = consumer.callService(personId);
+		response = consumer.callService(logicalAddress, personId);
 		ts = System.currentTimeMillis() - ts;
 		printResult(response, ts);
 	}
@@ -59,14 +60,15 @@ public class Consumer {
 			createEndpointUrlFromServiceAddress(serviceAddress)).getGetListingResponderPort();
 	}
 	
-	public GetListingResponseType callService(String personId) throws PersonNotFound, TechnicalException {
+	public GetListingResponseType callService(String logicalAddress, String personId) throws PersonNotFound, TechnicalException {
 
 		GetListingRequestType request = new GetListingRequestType();
 		request.setPersonId(personId);
 			
-		AttributedURIType logicalAddress = new AttributedURIType();
+		AttributedURIType logicalAddressType = new AttributedURIType();
+		logicalAddressType.setValue(logicalAddress);
 
-		GetListingResponseType reply = _service.getListing(logicalAddress, request);
+		GetListingResponseType reply = _service.getListing(logicalAddressType, request);
 
 		return reply;
 	}

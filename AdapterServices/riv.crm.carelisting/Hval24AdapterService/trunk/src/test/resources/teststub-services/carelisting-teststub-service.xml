@@ -33,6 +33,9 @@
 			<scripting:component>
 				<scripting:script engine="groovy">
 					<![CDATA[
+					
+						println "Payload recived by producer: " + payload
+					
 	                	String personId = payload.substring(payload.length() - 12); // Assume personId is the last 12 characters in the payload (format yyyymmddxxxx) 
 						String s = 
 							"1750" +  			                                                  // Length of return string
