@@ -75,7 +75,7 @@ public class HamtaPatientInfoIntegrationTest extends AbstractTestCase {
 	protected String getConfigResources() {
 		return "soitoolkit-mule-jms-connector-activemq-embedded.xml," + "ApSeMedicalServicesAdapterIC-common.xml,"
 				+ "services/AXS-HamtaPatientInfo-v1-apse-service.xml,"
-				+ "teststub-services/AXS-HamtaPatientInfo-TicketTransformer-apse-teststub-service.xml";
+				+ "teststub-services/AXS-HamtaPatientInfo-apse-teststub-service.xml";
 	}
 
 	@Test

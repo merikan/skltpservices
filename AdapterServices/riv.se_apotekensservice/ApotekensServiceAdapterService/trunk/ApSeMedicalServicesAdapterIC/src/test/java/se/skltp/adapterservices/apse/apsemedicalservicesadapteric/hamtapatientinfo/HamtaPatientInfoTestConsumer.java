@@ -20,6 +20,8 @@
  */
 package se.skltp.adapterservices.apse.apsemedicalservicesadapteric.hamtapatientinfo;
 
+import static se.skltp.adapterservices.apse.apsemedicalservicesadapteric.ArgosHeaderTestUtil.createOrganizationArgosHeader;
+
 import java.net.URL;
 
 import org.apache.cxf.bus.spring.SpringBusFactory;
@@ -61,7 +63,7 @@ public class HamtaPatientInfoTestConsumer {
 	public HamtaPatientInfoResponseType requestIncludingCompleteArgosInformation(String socialSecurityNumber, String to)
 			throws se.riv.inera.se.apotekensservice.axs.hamtapatientinfo.v1.rivtabp20.ApplicationException,
 			se.riv.inera.se.apotekensservice.axs.hamtapatientinfo.v1.rivtabp20.SystemException {
-		ArgosHeaderType argosHeader = createCompleteArgosHeader();
+		ArgosHeaderType argosHeader = createOrganizationArgosHeader();
 		AttributedURIType logicalAddress = createLogicalAddress(to);
 		HamtaPatientInfoRequestType requestSocialSecurityNumber = createSocialSecurityNumberRequest(socialSecurityNumber);
 		return _service.hamtaPatientInfo(requestSocialSecurityNumber, logicalAddress, argosHeader);
@@ -77,30 +79,5 @@ public class HamtaPatientInfoTestConsumer {
 		AttributedURIType logicalAddressType = new AttributedURIType();
 		logicalAddressType.setValue(logicalAddress);
 		return logicalAddressType;
-	}
-
-	private ArgosHeaderType createCompleteArgosHeader() {
-		ArgosHeaderType argosHeader = new ArgosHeaderType();
-		argosHeader.setArbetsplatskod("1234567890");
-		argosHeader.setArbetsplatsnamn("Sjukhuset");
-		argosHeader.setBefattningskod("123456");
-		argosHeader.setEfternamn("Läkare");
-		argosHeader.setFornamn("Lars");
-		argosHeader.setForskrivarkod("1111129");
-		argosHeader.setHsaID("TSE6565656565-1003");
-		argosHeader.setKatalog("HSA");
-		argosHeader.setLegitimationskod("1");
-		argosHeader.setOrganisationsnummer("1234567890");
-		argosHeader.setPostadress("Vägen 1");
-		argosHeader.setPostnummer("11111");
-		argosHeader.setPostort("Staden");
-		argosHeader.setRequestId("123456");
-		argosHeader.setRollnamn("FORSKRIVARE");
-		argosHeader.setSystemIp("192.0.0.1");
-		argosHeader.setSystemnamn("Melior");
-		argosHeader.setSystemversion("1.0");
-		argosHeader.setTelefonnummer("08-1234567");
-		argosHeader.setYrkesgrupp("Läkare");
-		return argosHeader;
 	}
 }
