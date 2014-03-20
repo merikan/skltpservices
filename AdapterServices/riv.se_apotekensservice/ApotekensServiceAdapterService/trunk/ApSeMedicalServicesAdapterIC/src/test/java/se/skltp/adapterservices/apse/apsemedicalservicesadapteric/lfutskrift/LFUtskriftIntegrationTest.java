@@ -23,6 +23,8 @@ package se.skltp.adapterservices.apse.apsemedicalservicesadapteric.lfutskrift;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static se.skltp.adapterservices.apse.apsemedicalservicesadapteric.ApSeMedicalServicesAdapterICMuleServer.getAddress;
+import static se.skltp.adapterservices.apse.apsemedicalservicesadapteric.ArgosHeaderTestUtil.createCompleteCitizenArgosHeader;
+import static se.skltp.adapterservices.apse.apsemedicalservicesadapteric.ArgosHeaderTestUtil.createOrganizationArgosHeader;
 import static se.skltp.adapterservices.apse.apsemedicalservicesadapteric.lfutskrift.LFUtskriftTestProducer.CITIZENREQUEST;
 import static se.skltp.adapterservices.apse.apsemedicalservicesadapteric.lfutskrift.LFUtskriftTestProducer.ORGANIZATIONREQUEST;
 
@@ -102,7 +104,7 @@ public class LFUtskriftIntegrationTest extends AbstractTestCase {
 	public void testOrganizationRequestRequest_happydays() throws Exception {
 		String to = "logicaladdress";
 
-		ArgosHeaderType argosHeader = createCompleteOrganizationArgosHeader();
+		ArgosHeaderType argosHeader = createOrganizationArgosHeader();
 		
 		LFUtskriftRequestType request = new LFUtskriftRequestType();
 		request.setPersonnummer(ORGANIZATIONREQUEST);
@@ -114,44 +116,5 @@ public class LFUtskriftIntegrationTest extends AbstractTestCase {
 
 		assertNotNull(response);
 		assertEquals(ORGANIZATIONREQUEST, response.getPatient().getPersonnummer());
-	}
-
-	private ArgosHeaderType createCompleteCitizenArgosHeader() {
-		ArgosHeaderType argosHeader = new ArgosHeaderType();
-		argosHeader.setFornamn("Agda");
-		argosHeader.setEfternamn("Andersson");
-		argosHeader.setHsaID("188803099368");
-		argosHeader.setRollnamn("PRIVATPERSON");
-		argosHeader.setOrganisationsnummer("1234567890");
-		argosHeader.setRequestId("123456");
-		argosHeader.setSystemIp("192.0.0.1");
-		argosHeader.setSystemnamn("Melior");
-		argosHeader.setSystemversion("1.0");
-		return argosHeader;
-	}
-
-	private ArgosHeaderType createCompleteOrganizationArgosHeader() {
-		ArgosHeaderType argosHeader = new ArgosHeaderType();
-		argosHeader.setArbetsplatskod("1234567890");
-		argosHeader.setArbetsplatsnamn("Sjukhuset");
-		argosHeader.setBefattningskod("123456");
-		argosHeader.setEfternamn("Jansson");
-		argosHeader.setFornamn("Ake");
-		argosHeader.setForskrivarkod("1111129");
-		argosHeader.setHsaID("TSE6565656565-1003");
-		argosHeader.setKatalog("HSA");
-		argosHeader.setLegitimationskod("1");
-		argosHeader.setOrganisationsnummer("1234567890");
-		argosHeader.setPostadress("Vagen 1");
-		argosHeader.setPostnummer("11111");
-		argosHeader.setPostort("Staden");
-		argosHeader.setRequestId("123456");
-		argosHeader.setRollnamn("FORSKRIVARE");
-		argosHeader.setSystemIp("192.0.0.1");
-		argosHeader.setSystemnamn("Melior");
-		argosHeader.setSystemversion("1.0");
-		argosHeader.setTelefonnummer("08-1234567");
-		argosHeader.setYrkesgrupp("Lakare");
-		return argosHeader;
 	}
 }
