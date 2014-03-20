@@ -53,6 +53,8 @@
 			responseTransformer-refs="IgnoreExceptionPayloads logRespIn">
 		</https:outbound-endpoint>
 		
+		<custom-exception-strategy class="org.soitoolkit.commons.mule.error.ServiceExceptionStrategy"/>
+		
 	</flow>
 	
 		<flow name="Bridged-ApotekenService-HamtaKundInfo.v4-env2">
@@ -92,6 +94,8 @@
 			transformer-refs="addContentTypeXmlUtf8 logReqOut" 
 			responseTransformer-refs="IgnoreExceptionPayloads logRespIn">
 		</https:outbound-endpoint>
+		
+		<custom-exception-strategy class="org.soitoolkit.commons.mule.error.ServiceExceptionStrategy"/>
 		
 	</flow>
 
