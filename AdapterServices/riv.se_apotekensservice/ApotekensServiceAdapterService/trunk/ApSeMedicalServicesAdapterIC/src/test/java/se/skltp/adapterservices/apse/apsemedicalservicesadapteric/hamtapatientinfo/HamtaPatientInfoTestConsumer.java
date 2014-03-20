@@ -20,25 +20,42 @@
  */
 package se.skltp.adapterservices.apse.apsemedicalservicesadapteric.hamtapatientinfo;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.cxf.bus.spring.SpringBusFactory;
+import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 import org.w3c.addressing.v1.AttributedURIType;
 
 import se.riv.inera.se.apotekensservice.argos.v1.ArgosHeaderType;
 import se.riv.inera.se.apotekensservice.axs.hamtapatientinfo.v1.rivtabp20.HamtaPatientInfoResponderInterface;
-import se.riv.inera.se.apotekensservice.axs.hamtapatientinfo.v1.rivtabp20.HamtaPatientInfoResponderService;
 import se.riv.se.apotekensservice.axs.hamtapatientinforesponder.v1.HamtaPatientInfoRequestType;
 import se.riv.se.apotekensservice.axs.hamtapatientinforesponder.v1.HamtaPatientInfoResponseType;
 
 public class HamtaPatientInfoTestConsumer {
 
-	private HamtaPatientInfoResponderInterface service;
+	private static final Logger log = LoggerFactory.getLogger(HamtaPatientInfoTestConsumer.class);
 
-	public HamtaPatientInfoTestConsumer(String endpointAdress) {
+	@SuppressWarnings("unused")
+	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("ApoteketRetryAdapter-config");
 
-		URL url = createEndpointUrlFromServiceAddress(endpointAdress);
-		service = new HamtaPatientInfoResponderService(url).getHamtaPatientInfoResponderPort();
+	private HamtaPatientInfoResponderInterface _service = null;
+
+	public HamtaPatientInfoTestConsumer(String serviceAddress) {
+		JaxWsProxyFactoryBean proxyFactory = new JaxWsProxyFactoryBean();
+		proxyFactory.setServiceClass(HamtaPatientInfoResponderInterface.class);
+		proxyFactory.setAddress(serviceAddress);
+
+		// Used for HTTPS
+		SpringBusFactory bf = new SpringBusFactory();
+		URL cxfConfig = HamtaPatientInfoTestConsumer.class.getClassLoader().getResource("cxf-test-consumer-config.xml");
+		if (cxfConfig != null) {
+			proxyFactory.setBus(bf.createBus(cxfConfig));
+		}
+
+		_service = (HamtaPatientInfoResponderInterface) proxyFactory.create();
 	}
 
 	public HamtaPatientInfoResponseType requestIncludingCompleteArgosInformation(String socialSecurityNumber, String to)
@@ -47,7 +64,7 @@ public class HamtaPatientInfoTestConsumer {
 		ArgosHeaderType argosHeader = createCompleteArgosHeader();
 		AttributedURIType logicalAddress = createLogicalAddress(to);
 		HamtaPatientInfoRequestType requestSocialSecurityNumber = createSocialSecurityNumberRequest(socialSecurityNumber);
-		return service.hamtaPatientInfo(requestSocialSecurityNumber, logicalAddress, argosHeader);
+		return _service.hamtaPatientInfo(requestSocialSecurityNumber, logicalAddress, argosHeader);
 	}
 
 	private HamtaPatientInfoRequestType createSocialSecurityNumberRequest(String socialSecurityNumber) {
@@ -86,13 +103,4 @@ public class HamtaPatientInfoTestConsumer {
 		argosHeader.setYrkesgrupp("Läkare");
 		return argosHeader;
 	}
-
-	private static URL createEndpointUrlFromServiceAddress(String serviceAddress) {
-		try {
-			return new URL(serviceAddress + "?wsdl");
-		} catch (MalformedURLException e) {
-			throw new RuntimeException("Malformed URL Exception: " + e.getMessage());
-		}
-	}
-
 }

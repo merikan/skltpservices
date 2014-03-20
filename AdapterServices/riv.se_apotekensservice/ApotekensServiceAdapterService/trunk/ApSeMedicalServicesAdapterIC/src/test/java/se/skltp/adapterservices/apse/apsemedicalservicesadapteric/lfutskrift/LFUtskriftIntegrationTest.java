@@ -26,7 +26,6 @@ import static se.skltp.adapterservices.apse.apsemedicalservicesadapteric.ApSeMed
 import static se.skltp.adapterservices.apse.apsemedicalservicesadapteric.lfutskrift.LFUtskriftTestProducer.CITIZENREQUEST;
 import static se.skltp.adapterservices.apse.apsemedicalservicesadapteric.lfutskrift.LFUtskriftTestProducer.ORGANIZATIONREQUEST;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,17 +78,6 @@ public class LFUtskriftIntegrationTest extends AbstractTestCase {
 				"ApSeMedicalServicesAdapterIC-common.xml," +
 				"services/LF-LFUtskrift-apse-service.xml," +
 				"teststub-services/LF-LFUtskrift-apse-teststub-service.xml";
-		
-//	    <spring:beans>
-//	    <!-- Connectors and endpoints that that are specific for different config-files (local unit-test, integration-test or production environments) -->
-//    	<!-- TODO: Add import of connector specific configuration files here as required -->
-//        <spring:import resource="classpath:ApSeMedicalServicesAdapterIC-common.xml"/>
-//         
-//     	<!-- Import services -->
-//        <spring:import resource="classpath:services/*-apse-service.xml"/>
-//        
-//    </spring:beans>
-
 	}
 
 	@Test

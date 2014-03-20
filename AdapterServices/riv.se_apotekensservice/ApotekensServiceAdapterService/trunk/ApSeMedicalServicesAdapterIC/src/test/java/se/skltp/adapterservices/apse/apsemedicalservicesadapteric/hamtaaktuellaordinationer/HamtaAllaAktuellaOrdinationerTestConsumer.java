@@ -20,28 +20,45 @@
  */
 package se.skltp.adapterservices.apse.apsemedicalservicesadapteric.hamtaaktuellaordinationer;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.cxf.bus.spring.SpringBusFactory;
+import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 import org.w3c.addressing.v1.AttributedURIType;
 
 import se.riv.inera.se.apotekensservice.argos.v1.ArgosHeaderType;
 import se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.ApplicationException;
 import se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.HamtaAktuellaOrdinationerResponderInterface;
-import se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.HamtaAktuellaOrdinationerResponderService;
 import se.riv.inera.se.apotekensservice.or.hamtaaktuellaordinationer.v1.rivtabp20.SystemException;
 import se.riv.se.apotekensservice.or.hamtaaktuellaordinationerresponder.v1.HamtaAktuellaOrdinationerRequestType;
 import se.riv.se.apotekensservice.or.hamtaaktuellaordinationerresponder.v1.HamtaAktuellaOrdinationerResponseType;
+import se.skltp.adapterservices.apse.apsemedicalservicesadapteric.lfutskrift.LFUtskriftTestConsumer;
 
 public class HamtaAllaAktuellaOrdinationerTestConsumer {
 
-	private HamtaAktuellaOrdinationerResponderInterface service;
+	private static final Logger log = LoggerFactory.getLogger(LFUtskriftTestConsumer.class);
 
-	public HamtaAllaAktuellaOrdinationerTestConsumer(String endpointAdress) {
+	@SuppressWarnings("unused")
+	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("ApoteketRetryAdapter-config");
+		
+	private HamtaAktuellaOrdinationerResponderInterface _service;
+	
+	public HamtaAllaAktuellaOrdinationerTestConsumer(String serviceAddress) {
+		JaxWsProxyFactoryBean proxyFactory = new JaxWsProxyFactoryBean();
+		proxyFactory.setServiceClass(HamtaAktuellaOrdinationerResponderInterface.class);
+		proxyFactory.setAddress(serviceAddress);
 
-		URL url = createEndpointUrlFromServiceAddress(endpointAdress);
-		service = new HamtaAktuellaOrdinationerResponderService(url).getHamtaAktuellaOrdinationerResponderPort();
+		// Used for HTTPS
+		SpringBusFactory bf = new SpringBusFactory();
+		URL cxfConfig = HamtaAllaAktuellaOrdinationerTestConsumer.class.getClassLoader().getResource("cxf-test-consumer-config.xml");
+		if (cxfConfig != null) {
+			proxyFactory.setBus(bf.createBus(cxfConfig));
+		}
 
+		_service = (HamtaAktuellaOrdinationerResponderInterface) proxyFactory.create();
 	}
 
 	public HamtaAktuellaOrdinationerResponseType requestIncludingCompleteArgosInformation(String socialSecurityNumber,
@@ -49,7 +66,7 @@ public class HamtaAllaAktuellaOrdinationerTestConsumer {
 		ArgosHeaderType argosHeader = createCompleteArgosHeader();
 		AttributedURIType logicalAddress = createLogicalAddress(to);
 		HamtaAktuellaOrdinationerRequestType requestSocialSecurityNumber = createSocialSecurityNumberRequest(socialSecurityNumber);
-		return service.hamtaAktuellaOrdinationer(requestSocialSecurityNumber, logicalAddress, argosHeader);
+		return _service.hamtaAktuellaOrdinationer(requestSocialSecurityNumber, logicalAddress, argosHeader);
 	}
 
 	private HamtaAktuellaOrdinationerRequestType createSocialSecurityNumberRequest(String socialSecurityNumber) {
@@ -69,7 +86,7 @@ public class HamtaAllaAktuellaOrdinationerTestConsumer {
 		argosHeader.setArbetsplatskod("1234567890");
 		argosHeader.setArbetsplatsnamn("Sjukhuset");
 		argosHeader.setBefattningskod("123456");
-		argosHeader.setEfternamn("L�kare");
+		argosHeader.setEfternamn("Läkare");
 		argosHeader.setFornamn("Lars");
 		argosHeader.setForskrivarkod("1111129");
 		argosHeader.setHsaID("TSE6565656565-1003");
@@ -88,13 +105,4 @@ public class HamtaAllaAktuellaOrdinationerTestConsumer {
 		argosHeader.setYrkesgrupp("LK");
 		return argosHeader;
 	}
-
-	private static URL createEndpointUrlFromServiceAddress(String serviceAddress) {
-		try {
-			return new URL(serviceAddress + "?wsdl");
-		} catch (MalformedURLException e) {
-			throw new RuntimeException("Malformed URL Exception: " + e.getMessage());
-		}
-	}
-
 }

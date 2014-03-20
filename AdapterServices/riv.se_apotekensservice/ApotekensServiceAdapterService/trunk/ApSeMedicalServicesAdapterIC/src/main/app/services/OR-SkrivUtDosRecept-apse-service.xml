@@ -17,12 +17,21 @@
 
 	<flow name="Bridged-ApotekenService-SkrivUtDosRecept">
 
+		<composite-source>
 		<http:inbound-endpoint address="${inbound.endpoint.http.apotekensservice.or.SkrivUtDosRecept}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
 			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
+		<https:inbound-endpoint address="${inbound.endpoint.https.apotekensservice.or.SkrivUtDosRecept}"
+			connector-ref="soitoolkit-https-connector" 
+			exchange-pattern="request-response"
+			responseTransformer-refs="logRespOut"
+			transformer-refs="logReqIn">
+		</https:inbound-endpoint>
+
+		</composite-source>
 
 		<cxf:proxy-service
 			namespace="urn:riv:inera:se.apotekensservice:or:SkrivUtDosRecept:1:rivtabp20"
@@ -41,16 +50,27 @@
 			responseTransformer-refs="IgnoreExceptionPayloads logRespIn">
 		</https:outbound-endpoint>
 		
+		<custom-exception-strategy class="org.soitoolkit.commons.mule.error.ServiceExceptionStrategy"/>
+		
 	</flow>
 	
 	<flow name="Bridged-ApotekenService-SkrivUtDosRecept-env2">
 
+		<composite-source>
 		<http:inbound-endpoint address="${inbound.endpoint.http.env2.apotekensservice.or.SkrivUtDosRecept}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
 			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
+		<https:inbound-endpoint address="${inbound.endpoint.https.env2.apotekensservice.or.SkrivUtDosRecept}"
+			connector-ref="soitoolkit-https-connector" 
+			exchange-pattern="request-response"
+			responseTransformer-refs="logRespOut"
+			transformer-refs="logReqIn">
+		</https:inbound-endpoint>
+
+		</composite-source>
 
 		<cxf:proxy-service
 			namespace="urn:riv:inera:se.apotekensservice:or:SkrivUtDosRecept:1:rivtabp20"
@@ -68,6 +88,8 @@
 			transformer-refs="addContentTypeXmlUtf8 logReqOut" 
 			responseTransformer-refs="IgnoreExceptionPayloads logRespIn">
 		</https:outbound-endpoint>
+		
+		<custom-exception-strategy class="org.soitoolkit.commons.mule.error.ServiceExceptionStrategy"/>
 		
 	</flow>
 

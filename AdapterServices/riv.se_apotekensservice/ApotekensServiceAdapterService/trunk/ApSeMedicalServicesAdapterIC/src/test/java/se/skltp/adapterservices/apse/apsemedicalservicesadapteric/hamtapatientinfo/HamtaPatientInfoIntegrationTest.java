@@ -20,59 +20,87 @@
  */
 package se.skltp.adapterservices.apse.apsemedicalservicesadapteric.hamtapatientinfo;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static se.skltp.adapterservices.apse.apsemedicalservicesadapteric.ApSeMedicalServicesAdapterICMuleServer.getAddress;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.soitoolkit.commons.mule.test.AbstractJmsTestUtil;
+import org.soitoolkit.commons.mule.test.ActiveMqJmsTestUtil;
 import org.soitoolkit.commons.mule.test.junit4.AbstractTestCase;
 
 import se.riv.se.apotekensservice.axs.hamtapatientinforesponder.v1.HamtaPatientInfoResponseType;
+import se.skltp.adapterservices.apse.apsemedicalservicesadapteric.lfutskrift.LFUtskriftIntegrationTest;
 
 public class HamtaPatientInfoIntegrationTest extends AbstractTestCase {
 
-//    @BeforeClass
-//    public void beforeClass() {
-//	setDisposeManagerPerSuite(true);
-//	setTestTimeoutSecs(120);
-//    }
+	@SuppressWarnings("unused")
+	private static final Logger log = LoggerFactory.getLogger(LFUtskriftIntegrationTest.class);
 
-//    @Before
-//    public void doSetUp() throws Exception {
-//	super.doSetUp();
-//	setDisposeManagerPerSuite(true);
-//    }
+	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("inbound.endpoint.http.apotekensservice.axs.HamtaPatientInfo.v1");
+	private static final String ERROR_LOG_QUEUE = "SOITOOLKIT.LOG.ERROR";
+	private AbstractJmsTestUtil jmsUtil = null;
 
-    @Override
-    protected String getConfigResources() {
-		return "ApSeMedicalServicesAdapterIC-config.xml,services/AXS-HamtaPatientInfo-v1-apse-service.xml,ApSeIntegrationComponent-teststubs-and-services-config.xml";
-    }
+	public HamtaPatientInfoIntegrationTest() {
 
-	@Ignore
-    @Test
-    public void testRequestSsnWithCompleteArgosHeader() throws Exception {
-	String ssn = "196308212817";
-	String to = "1234567";
+		// Only start up Mule once to make the tests run faster...
+		// Set to false if tests interfere with each other when Mule is started
+		// only once.
+		setDisposeContextPerClass(true);
+	}
 
-	HamtaPatientInfoResponseType response = new HamtaPatientInfoTestConsumer("http://localhost:11000/tjanstebryggan/HamtaPatientInfoResponder/V1")
-		.requestIncludingCompleteArgosInformation(ssn, to);
+	@Override
+	protected void doSetUp() throws Exception {
+		super.doSetUp();
 
-	assertNotNull(response);
-	assertTrue(response.isFinnsOrdination());
-    }
+		doSetUpJms();
+	}
 
-	@Ignore
-    @Test
-    public void testEncodingIsProperThroughIntegration() throws Exception {
-	String ssn = "ÅÄÖ";
-	String to = "1234567";
+	private void doSetUpJms() {
+		// TODO: Fix lazy init of JMS connection et al so that we can create
+		// jmsutil in the declaration
+		// (The embedded ActiveMQ queue manager is not yet started by Mule when
+		// jmsutil is delcared...)
+		if (jmsUtil == null)
+			jmsUtil = new ActiveMqJmsTestUtil();
 
-	HamtaPatientInfoResponseType response = new HamtaPatientInfoTestConsumer("http://localhost:11000/tjanstebryggan/HamtaPatientInfoResponder/V1")
-		.requestIncludingCompleteArgosInformation(ssn, to);
+		// Clear queues used for error handling
+		jmsUtil.clearQueues(ERROR_LOG_QUEUE);
+	}
 
-	assertNotNull(response);
-	assertEquals("ÅÄÖ", response.getDosproducent());
-    }
+	@Override
+	protected String getConfigResources() {
+		return "soitoolkit-mule-jms-connector-activemq-embedded.xml," + "ApSeMedicalServicesAdapterIC-common.xml,"
+				+ "services/AXS-HamtaPatientInfo-v1-apse-service.xml,"
+				+ "teststub-services/AXS-HamtaPatientInfo-TicketTransformer-apse-teststub-service.xml";
+	}
+
+	@Test
+	public void testRequestSsnWithCompleteArgosHeader() throws Exception {
+		String ssn = "196308212817";
+		String to = "1234567";
+
+		HamtaPatientInfoResponseType response = new HamtaPatientInfoTestConsumer(DEFAULT_SERVICE_ADDRESS)
+				.requestIncludingCompleteArgosInformation(ssn, to);
+
+		assertNotNull(response);
+		assertTrue(response.isFinnsOrdination());
+	}
+
+	
+	@Test
+	public void testEncodingIsProperThroughIntegration() throws Exception {
+		String ssn = "ÅÄÖ";
+		String to = "1234567";
+
+		HamtaPatientInfoResponseType response = new HamtaPatientInfoTestConsumer(DEFAULT_SERVICE_ADDRESS)
+				.requestIncludingCompleteArgosInformation(ssn, to);
+
+		assertNotNull(response);
+		assertEquals("ÅÄÖ", response.getDosproducent());
+	}
 
 }

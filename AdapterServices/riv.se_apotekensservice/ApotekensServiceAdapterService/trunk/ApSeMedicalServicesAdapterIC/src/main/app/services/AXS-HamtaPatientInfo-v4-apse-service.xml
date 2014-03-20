@@ -16,6 +16,8 @@
 	">
 
 	<flow name="Bridged-ApotekenService-HamtaPatientInfo.v4">
+	
+		<composite-source>
 
 		<http:inbound-endpoint address="${inbound.endpoint.http.apotekensservice.axs.HamtaPatientInfo.v4}"
 			connector-ref="soitoolkit-http-connector" 
@@ -23,6 +25,15 @@
 			responseTransformer-refs="logRespOut"
 			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
+		<https:inbound-endpoint address="${inbound.endpoint.https.apotekensservice.axs.HamtaPatientInfo.v4}"
+			connector-ref="soitoolkit-https-connector" 
+			exchange-pattern="request-response"
+			responseTransformer-refs="logRespOut"
+			transformer-refs="logReqIn">
+		</https:inbound-endpoint>
+		
+		</composite-source>
+
 
 		<cxf:proxy-service
 			namespace="urn:riv:se.apotekensservice:axs:HamtaPatientInfo:4:rivtabp21"
@@ -42,16 +53,28 @@
 			responseTransformer-refs="IgnoreExceptionPayloads logRespIn">
 		</https:outbound-endpoint>
 		
+		<custom-exception-strategy class="org.soitoolkit.commons.mule.error.ServiceExceptionStrategy"/>
+		
 	</flow>
 	
 		<flow name="Bridged-ApotekenService-HamtaPatientInfo.v4-env2">
 
+		<composite-source>
 		<http:inbound-endpoint address="${inbound.endpoint.http.env2.apotekensservice.axs.HamtaPatientInfo.v4}"
 			connector-ref="soitoolkit-http-connector" 
 			exchange-pattern="request-response"
 			responseTransformer-refs="logRespOut"
 			transformer-refs="logReqIn">
 		</http:inbound-endpoint>
+		<https:inbound-endpoint address="${inbound.endpoint.https.env2.apotekensservice.axs.HamtaPatientInfo.v4}"
+			connector-ref="soitoolkit-https-connector" 
+			exchange-pattern="request-response"
+			responseTransformer-refs="logRespOut"
+			transformer-refs="logReqIn">
+		</https:inbound-endpoint>
+		</composite-source>
+
+
 
 		<cxf:proxy-service
 			namespace="urn:riv:se.apotekensservice:axs:HamtaPatientInfo:4:rivtabp21"
@@ -69,6 +92,8 @@
 			transformer-refs="addContentTypeXmlUtf8 logReqOut" 
 			responseTransformer-refs="IgnoreExceptionPayloads logRespIn">
 		</https:outbound-endpoint>
+		
+		<custom-exception-strategy class="org.soitoolkit.commons.mule.error.ServiceExceptionStrategy"/>
 		
 	</flow>
 
