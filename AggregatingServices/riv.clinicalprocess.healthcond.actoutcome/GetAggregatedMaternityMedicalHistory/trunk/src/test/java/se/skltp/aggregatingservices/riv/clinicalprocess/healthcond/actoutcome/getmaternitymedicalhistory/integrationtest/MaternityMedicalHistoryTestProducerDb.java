@@ -12,7 +12,6 @@ import se.riv.clinicalprocess.healthcond.actoutcome.v2.HealthcareProfessionalTyp
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.LegalAuthenticatorType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.MaternityMedicalRecordBodyType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.MaternityMedicalRecordType;
-import se.riv.clinicalprocess.healthcond.actoutcome.v2.MeasurementType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.OrgUnitType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.PQType;
 import se.riv.clinicalprocess.healthcond.actoutcome.v2.PatientSummaryHeaderType;
@@ -63,16 +62,6 @@ public class MaternityMedicalHistoryTestProducerDb extends TestProducerDb {
     	PregnancyCheckupRecordType pregnancyCheckUpRecord = new PregnancyCheckupRecordType();
     	{
     		pregnancyCheckUpRecord.setProteinuria(buildPQ("mg/dL", 30.0));
-    		MeasurementType mType = new MeasurementType();
-    		mType.setValue(buildPQ("mmol/L", 7.2));
-    		CVType cvType = new CVType();
-    		cvType.setCode("NPU02192");
-    		cvType.setCodeSystem("NPU");
-    		cvType.setCodeSystemName("Nomenclature of properties and units");
-    		cvType.setCodeSystemVersion("2011-06-15");
-    		cvType.setDisplayName("P--Glukos");
-    		cvType.setOriginalText("P--Glukos;subst konc");
-    		mType.setCode(cvType);    		
     		pregnancyCheckUpRecord.setBloodPressureDiastolic(buildPQ("mm Hg", 83.7));
     		pregnancyCheckUpRecord.setBloodPressureSystolic(buildPQ("mm Hg", 135.2));
     		pregnancyCheckUpRecord.setCompleteWeeksOfGestation(22);
@@ -81,7 +70,6 @@ public class MaternityMedicalHistoryTestProducerDb extends TestProducerDb {
     		pregnancyCheckUpRecord.getFetalPresentation().add(new BigInteger("1"));
     		pregnancyCheckUpRecord.setGlycosuria(buildPQ("mg/dL", 250.0));
     		pregnancyCheckUpRecord.setHaemoglobin(buildPQ("g/dL", 14.3));
-    		pregnancyCheckUpRecord.setPlasmaGlucose(mType);    		
     		pregnancyCheckUpRecord.setSymphysisFundalHeight(buildPQ("cm", 20.0));
     		pregnancyCheckUpRecord.getTypeOfLeave().add(new BigInteger("0"));
     		pregnancyCheckUpRecord.setWeight(buildPQ("g", 301.0));

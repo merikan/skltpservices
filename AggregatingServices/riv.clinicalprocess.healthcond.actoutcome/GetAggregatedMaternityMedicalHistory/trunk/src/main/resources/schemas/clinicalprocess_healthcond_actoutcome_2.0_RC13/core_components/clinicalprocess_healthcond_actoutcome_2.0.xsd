@@ -371,7 +371,6 @@
             <xs:element name="haemoglobin" type="tns:PQType" minOccurs="0"/>
             <xs:element name="bloodPressureSystolic" type="tns:PQType" minOccurs="0"/>
             <xs:element name="bloodPressureDiastolic" type="tns:PQType" minOccurs="0"/>
-            <xs:element minOccurs="0" name="plasmaGlucose" type="tns:MeasurementType"/>
             <xs:element minOccurs="0" name="proteinuria" type="tns:PQType"/>
             <xs:element minOccurs="0" name="glycosuria" type="tns:PQType"/>
             <xs:element name="fetalPosition" type="codes:FetalPositionCodeEnum" minOccurs="0"
@@ -387,14 +386,6 @@
 
         </xs:sequence>
     </xs:complexType>
-    
-    <xs:complexType name="MeasurementType">
-        <xs:sequence>
-            <xs:element name="code" type="tns:CVType"/>
-            <xs:element name="value" type="tns:PQType"/>
-            <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
 
     <xs:complexType name="PostDeliveryRecordType">
         <xs:sequence>
@@ -402,6 +393,7 @@
             <xs:element name="childPostDeliveryRecord" type="tns:ChildPostDeliveryRecordType"
                 minOccurs="1" maxOccurs="unbounded"/>
             <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+
         </xs:sequence>
     </xs:complexType>
 
