@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:or="urn:riv:se.apotekensservice:or:1" xmlns="urn:riv:se.apotekensservice:or:NotifieringsTestResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:or:NotifieringsTestResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_or_1.0.xsd" namespace="urn:riv:se.apotekensservice:or:1"/>
+  <xs:element name="NotifieringsTest" type="NotifieringsTestRequestType"/>
+  <xs:element name="NotifieringsTestResponse" type="NotifieringsTestResponseType"/>
+  <xs:element name="ApplicationException" type="or:ApplicationException"/>
+  <xs:element name="SystemException" type="or:SystemException"/>
+  <xs:complexType name="NotifieringsTestRequestType">
+    <xs:sequence>
+      <xs:element nillable="false" name="meddelande" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Meddelande</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="personnummer" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Giltigt personnummer för patient.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="typ" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Typ av notifiering</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NotifieringsTestResponseType">
+    <xs:sequence>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
