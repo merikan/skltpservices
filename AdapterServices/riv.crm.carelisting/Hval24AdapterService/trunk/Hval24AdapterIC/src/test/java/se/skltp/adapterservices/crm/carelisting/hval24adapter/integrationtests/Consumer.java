@@ -50,9 +50,9 @@ public class Consumer {
 	private static void printResult(GetListingResponseType repsonse, long ts) {		
 		System.out.println("Returned ( in " + ts + " ms.): " + 
 				"\n PersonId: "      + repsonse.getSubjectOfCare().getPersonId() + 
-				"\n Facility-Enhetskod: "      + ((Listing)repsonse.getSubjectOfCare().getListing().get(0)).getHealthcareFacility().getFacilityId() + 
-				"\n Listningstyp: "      + ((Listing)repsonse.getSubjectOfCare().getListing().get(0)).getListingType() + 
-				"\n Listningsdatum: "      + ((Listing)repsonse.getSubjectOfCare().getListing().get(0)).getValidFromDate() ); 
+				"\n Facility-Enhetskod: "      + repsonse.getSubjectOfCare().getListing().get(0).getHealthcareFacility().getFacilityId() + 
+				"\n Listningstyp: "      + repsonse.getSubjectOfCare().getListing().get(0).getListingType() + 
+				"\n Listningsdatum: "      + repsonse.getSubjectOfCare().getListing().get(0).getValidFromDate() ); 
 	}
 	
 	public Consumer(String serviceAddress) {
