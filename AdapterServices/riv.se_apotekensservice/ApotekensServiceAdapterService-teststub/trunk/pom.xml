@@ -6,10 +6,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 [soi-toolkit.gen.createDate=2014-03-20T11:12:25.330+01:00]
 [soi-toolkit.gen.artifactId=ApSeMedicalServicesAdapterIC-teststub]
 -->
-<project 
-	xmlns="http://maven.apache.org/POM/4.0.0" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -21,14 +18,14 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     
     <groupId>se.skltp.adapterservices.se.apotekensservice</groupId>
     <artifactId>ApotekensServiceAdapterService-teststub</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-RC1</version>
     <packaging>mule</packaging>
     <name>ApotekensServiceAdapterService-teststub</name>
 
   <scm>
-    <connection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService-teststub/trunk</connection>
-    <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService-teststub/trunk</developerConnection>
-    <url>https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService-teststub/trunk</url>
+    <connection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService-teststub/tags/ApotekensServiceAdapterService-teststub-1.0.0-RC1</connection>
+    <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService-teststub/tags/ApotekensServiceAdapterService-teststub-1.0.0-RC1</developerConnection>
+    <url>https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService-teststub/tags/ApotekensServiceAdapterService-teststub-1.0.0-RC1</url>
   </scm>
 
 	<dependencies>
