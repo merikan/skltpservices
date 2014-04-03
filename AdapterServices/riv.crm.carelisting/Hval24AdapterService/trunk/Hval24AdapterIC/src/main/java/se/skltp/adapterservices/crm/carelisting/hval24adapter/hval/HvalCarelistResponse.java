@@ -104,6 +104,7 @@ public class HvalCarelistResponse {
 		return response;
 	}
 	
+	@Override
 	public String toString() {
 		return MessageFormat.format("hval-carelist-response: length={0}, retur code={1}, personId={2}, fornamn={3}, efternamn={4}, valtyp1={5}, vardgivarekod1={6}, vardgivarenamn1={7}, listningsdatum1={8}, enhetskod1={9}, enhetsnamn1={10}, valtyp2={11}, vardgivarekod2={12}, vardgivarenamn2={13}, listningsdatum2={14}, enhetskod2={15}, enhetsnamn2={16}, valtyp3={17}, listningsdatum3={18}, enhetskod3={19}, enhetsnamn3={20}", length, retCode, personId,fornamn, efternamn, valTypGrp1, listningVardgivareKodGrp1, listningVardgivareNamnGrp1, listningDatumGrp1, listningEnhetskodGrp1,listningEnhetsnamnGrp1, valTypGrp2, listningVardgivareKodGrp2, listningVardgivareNamnGrp2, listningDatumGrp2, listningEnhetskodGrp2,listningEnhetsnamnGrp2, valTypGrp3, listningDatumGrp3, listningEnhetskodGrp3,listningEnhetsnamnGrp3);
 	}

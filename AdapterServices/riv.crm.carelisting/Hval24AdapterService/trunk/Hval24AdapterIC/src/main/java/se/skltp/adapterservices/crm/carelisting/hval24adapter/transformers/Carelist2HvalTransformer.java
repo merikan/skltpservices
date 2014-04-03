@@ -3,8 +3,6 @@ package se.skltp.adapterservices.crm.carelisting.hval24adapter.transformers;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.stream.XMLStreamReader;
-
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.module.xml.stax.ReversibleXMLStreamReader;
@@ -27,6 +25,7 @@ public class Carelist2HvalTransformer extends AbstractMessageAwareTransformer
         
     }
     
+	@Override
 	public Object transform(MuleMessage message, String outputEncoding) throws TransformerException {
 		try {
 			// Get receiver to adress from SOAP Header
