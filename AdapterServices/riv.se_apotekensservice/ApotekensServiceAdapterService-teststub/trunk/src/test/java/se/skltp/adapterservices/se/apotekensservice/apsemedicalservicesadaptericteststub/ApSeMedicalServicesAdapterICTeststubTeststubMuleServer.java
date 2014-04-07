@@ -16,7 +16,7 @@ public class ApSeMedicalServicesAdapterICTeststubTeststubMuleServer {
  
 
 	private static final Logger logger = LoggerFactory.getLogger(ApSeMedicalServicesAdapterICTeststubTeststubMuleServer.class);
-    private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("ApSeMedicalServicesAdapterIC-teststub-config");
+	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("ApSeMedicalServicesAdapterIC-config");
 
 	public static void main(String[] args) throws Exception {
 
