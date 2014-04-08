@@ -18,14 +18,14 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     
     <groupId>se.skltp.adapterservices.se.apotekensservice</groupId>
     <artifactId>ApotekensServiceAdapterService-teststub</artifactId>
-    <version>1.0.0-RC2-SNAPSHOT</version>
+    <version>1.0.0-RC2</version>
     <packaging>mule</packaging>
     <name>ApotekensServiceAdapterService-teststub</name>
 
   <scm>
-    <connection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService-teststub/trunk</connection>
-    <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService-teststub/trunk</developerConnection>
-    <url>https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService-teststub/trunk</url>
+    <connection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService-teststub/tags/ApotekensServiceAdapterService-teststub-1.0.0-RC2</connection>
+    <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService-teststub/tags/ApotekensServiceAdapterService-teststub-1.0.0-RC2</developerConnection>
+    <url>https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService-teststub/tags/ApotekensServiceAdapterService-teststub-1.0.0-RC2</url>
   </scm>
 
 	<dependencies>
