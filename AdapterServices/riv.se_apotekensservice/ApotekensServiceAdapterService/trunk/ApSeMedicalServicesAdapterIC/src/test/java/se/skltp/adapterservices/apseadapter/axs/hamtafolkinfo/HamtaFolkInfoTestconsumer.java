@@ -18,9 +18,6 @@ public class HamtaFolkInfoTestconsumer {
 
 	private static final Logger log = LoggerFactory.getLogger(HamtaFolkInfoTestconsumer.class);
 
-	@SuppressWarnings("unused")
-	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("ApoteketRetryAdapter-config");
-
 	private HamtaFolkInfoResponderInterface _service = null;
 
 	public HamtaFolkInfoTestconsumer(String serviceAddress) {

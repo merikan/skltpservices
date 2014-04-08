@@ -40,9 +40,6 @@ public class HamtaPatientInfoTestConsumer {
 
 	private static final Logger log = LoggerFactory.getLogger(HamtaPatientInfoTestConsumer.class);
 
-	@SuppressWarnings("unused")
-	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("ApoteketRetryAdapter-config");
-
 	private HamtaPatientInfoResponderInterface _service = null;
 
 	public HamtaPatientInfoTestConsumer(String serviceAddress) {
