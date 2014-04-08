@@ -41,9 +41,6 @@ public class HamtaAllaAktuellaOrdinationerTestConsumer {
 
 	private static final Logger log = LoggerFactory.getLogger(LFUtskriftTestConsumer.class);
 
-	@SuppressWarnings("unused")
-	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("ApoteketRetryAdapter-config");
-		
 	private HamtaAktuellaOrdinationerResponderInterface _service;
 	
 	public HamtaAllaAktuellaOrdinationerTestConsumer(String serviceAddress) {
