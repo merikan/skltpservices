@@ -36,6 +36,8 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 		<compiler.target.version>1.6</compiler.target.version>
         <compiler.source.version>1.6</compiler.source.version>
     	<cxf.version>2.5.1</cxf.version>
+    	<commons-lang.version>2.4</commons-lang.version>
+		<commons-collection.version>3.2.1</commons-collection.version>
 	</properties>
 
 	<modules>

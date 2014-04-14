@@ -17,8 +17,10 @@ http://www.mulesoft.org/schema/mule/https http://www.mulesoft.org/schema/mule/ht
         <http:inbound-endpoint 
         	address="${APSE_PINGSERVICE_INBOUND_URL}"
         	exchange-pattern="request-response" doc:name="HTTP"/>
-        <expression-transformer doc:name="Expression" expression="${APSE_PINGSERVICE_RESPONSE}"/>
-
+        	
+        <expression-transformer>
+            <return-argument evaluator="string" expression="${APSE_PINGSERVICE_RESPONSE}" />
+        </expression-transformer>
 
 	</flow>
 <!-- 	

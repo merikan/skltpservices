@@ -19,6 +19,23 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <artifactId>ApSeMedicalServicesAdapterIC</artifactId>
     <packaging>mule</packaging>
     <name>${project.artifactId}</name>
+      
+    <dependencyManagement>
+    
+    	<dependencies>
+    		<!-- Keep in sync with Mule 3.3.1 dependencies  -->
+    		<dependency>
+    			<groupId>commons-lang</groupId>
+          		<artifactId>commons-lang</artifactId>
+          		<version>${commons-lang.version}</version>
+    		</dependency>
+    		<dependency>
+    			<groupId>commons-collections</groupId>
+          		<artifactId>commons-collections</artifactId>
+          		<version>${commons-collection.version}</version>
+    		</dependency>
+    	</dependencies>
+    </dependencyManagement>
 
 	<dependencies>
 
@@ -26,7 +43,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>TicketMachine</artifactId>
-			<version>1.1.2-RC3</version>
+			<version>1.1.2-RC4-SNAPSHOT</version>
 		</dependency>
 			
 		<!-- schema dependency -->
@@ -34,6 +51,12 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 			<groupId>${project.groupId}</groupId>
 			<artifactId>ApSeMedicalServicesAdapterIC-Schemas</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>xalan</groupId>
+		    <artifactId>serializer</artifactId>
+		    <version>2.7.1</version>
 		</dependency>
 
 		<!-- soi toolkit dependencies -->
@@ -207,6 +230,31 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
                 </execution>
               </executions>
             </plugin>
+            
+            <plugin>
+			    <artifactId>maven-resources-plugin</artifactId>
+			    <executions>
+			        <execution>
+			            <id>copy-log4j-resource</id>
+			            <phase>prepare-package</phase>
+			            <goals>
+			                <goal>copy-resources</goal>
+			            </goals>
+			            <configuration>
+			                <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+			                <resources>
+			                    <resource>
+			                        <directory>src/environment</directory>
+			                        <includes>
+			                            <include>log4j.xml</include>
+			                            <include>log4j.dtd</include>
+			                        </includes>
+			                    </resource>
+			                </resources>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin>
 		
       </plugins>
 

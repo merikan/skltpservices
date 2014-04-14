@@ -12,8 +12,8 @@
 
     <appender name="ROLLINGFILE" class="org.apache.log4j.RollingFileAppender">
         <param name="file" value="${mule.home}/logs/mule-app-ApSeMedicalServicesAdapterIC.log" />
-        <param name="MaxFileSize" value="1000KB" />
-        <param name="MaxBackupIndex" value="3" />
+        <param name="MaxFileSize" value="20MB" />
+        <param name="MaxBackupIndex" value="5" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d %-5p %-30C - %m%n" />
         </layout> 
@@ -60,34 +60,36 @@
 
     <!-- Message logging using the old Mule <logger/> - element -->
     <logger name="org.mule.api.processor.LoggerMessageProcessor">
-        <level value="INFO" />
+        <level value="ERROR" />
     </logger>
 
     <!-- Message logging using the old Mule <log-component/> - element -->
     <logger name="org.mule.component.simple.LogComponent">
-        <level value="INFO" />
+        <level value="ERROR" />
     </logger>
 
 	<logger name="org.soitoolkit.commons">
-		<level value="INFO" />
+		<level value="ERROR" />
 	</logger>
 	
 	<logger name="se.skltp.adapterservices.apse.apsemedicalservicesadapteric">
-		<level value="INFO" />
+		<level value="ERROR" />
 	</logger>
 
-    <!-- Message logging using soi-toolkit LogTransformer class -->
+    <!--     	
+    	For logging events to QUEUE and Logfile using EventLogger:
+    	
+    	DEBUG puts logevents (with payload) and errorevents on log queue
+    	INFO puts logevents (without payload) and errorevents on log queue
+    	ERROR will only put errorevents on log queue
+    	 
+    -->
 	<logger name="org.soitoolkit.commons.mule.messageLogger">
-		<level value="INFO" />
+		<level value="ERROR" />
 	</logger>
 	
 	<root>
 		<priority value="WARN" />
-		<!--
-		<appender-ref ref="CONSOLE" />
-		-->
 		<appender-ref ref="ROLLINGFILE"/>
-		
-		
 	</root>
 </log4j:configuration>
