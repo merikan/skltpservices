@@ -20,7 +20,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
 	<groupId>se.skltp.adapterservices.se.apotekensservice</groupId>
     <artifactId>ApSeMedicalServicesAdapter</artifactId>
-	<version>2.0.0-RC4-SNAPSHOT</version>
+	<version>2.0.0-RC4</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 
@@ -43,6 +43,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 	<modules>
 		<module>ApSeMedicalServicesAdapterIC-Schemas</module>
 		<module>ApSeMedicalServicesAdapterIC</module>
+		<module>ApSeMedicalServicesAdapterIC-tests</module>
 	</modules>
 
 	<build>
