@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="AXS-HamtaFolkInfo-apse-teststub-service">
-    <global-unknown description="false" unknownName="ApotekenService-axs-HamtaFolkInfo-teststub" index="1" entity-id="global-unknown#1">
-        <content>&lt;simple-service xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot; name=&quot;ApotekenService-axs-HamtaFolkInfo-teststub&quot; address=&quot;${inbound.endpoint.apotekensservice.axs.HamtaFolkInfo.teststub}&quot; transformer-refs=&quot;logReqIn&quot; responseTransformer-refs=&quot;logRespOut&quot; type=&quot;jax-ws&quot; component-class=&quot;se.skltp.adapterservices.apseadapter.axs.hamtafolkinfo.HamtaFolkInfoTestProducer&quot;&gt;
-    &lt;/simple-service&gt;</content>
-    </global-unknown>
-</mule-configuration>
