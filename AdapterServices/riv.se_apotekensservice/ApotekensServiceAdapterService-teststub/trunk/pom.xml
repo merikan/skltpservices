@@ -18,7 +18,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     
     <groupId>se.skltp.adapterservices.se.apotekensservice</groupId>
     <artifactId>ApotekensServiceAdapterService-teststub</artifactId>
-    <version>1.0.0-RC3-SNAPSHOT</version>
+    <version>1.0.0-RC3</version>
     <packaging>mule</packaging>
     <name>ApotekensServiceAdapterService-teststub</name>
 
@@ -33,13 +33,13 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <dependency>
     	<groupId>se.skltp.adapterservices.se.apotekensservice</groupId>
     	<artifactId>ApSeMedicalServicesAdapterIC</artifactId>
-    	<version>2.0.0-RC4-SNAPSHOT</version>
+    	<version>2.0.0-RC4</version>
     	<type>test-jar</type>
     </dependency>
     <dependency>
     	<groupId>se.skltp.adapterservices.se.apotekensservice</groupId>
     	<artifactId>ApSeMedicalServicesAdapterIC</artifactId>
-    	<version>2.0.0-RC4-SNAPSHOT</version>
+    	<version>2.0.0-RC4</version>
     	<classifier>core</classifier>    	
     </dependency>
 	</dependencies> 
