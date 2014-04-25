@@ -13,7 +13,7 @@ import org.apache.commons.io.FileUtils
 import org.dom4j.io.SAXReader
 
 /**
- * This script should help us to generate many services at one time. 
+ * This script should help us to generate many services at one time.
  *
  * PREREQUISITES:
  * This script is depending on the archetype named service-archetype.
@@ -22,12 +22,12 @@ import org.dom4j.io.SAXReader
  *
  * TO RUN:
  * Just execute ./VirtualiseringGenerator.groovy and follow the instruction coming up.
- * 
+ *
  * Version info:
  * A first version is created to solve that we would like to generate several service interactions without to much manual work.
  *
  * TODO:
- * 
+ *
  */
 
 def getAllFilesMatching(direcory, pattern){
@@ -57,7 +57,7 @@ def getAllUniqueRivNameSpaces(wsdlFile){
 
 def getServiceContractNameSpace(xsdFile){
 	def featureKeepAliveServiceContractNameSpace = 'No servicecontract namespace found'
-	
+
 	//Build keep alive feature settings "feature.keepalive.servicecontractnamespace" using . (dots) instead of : (colons)
 	//Ignore minor version number when coming to feature settings
 	new SAXReader().read(xsdFile).getRootElement().declaredNamespaces().grep(~/.*urn:riv.*/).each{ namespace ->
@@ -72,40 +72,40 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 
 	serviceInteractionDirectories.each { serviceInteractionDirectory ->
 
-		def (name, schemaDir) = serviceInteractionDirectory.parent.split("schemas")	
+		def (name, schemaDir) = serviceInteractionDirectory.parent.split("schemas")
 		def artifactId = serviceInteractionDirectory.name - 'Interaction'
-		
+
 		def wsdlFiles = getAllFilesMatching(serviceInteractionDirectory, /.*\.wsdl/)
 		def xsdFiles = getAllFilesMatching(serviceInteractionDirectory, /.*\.xsd/)
-		
+
 		def serviceInteractionNameSpace = getAllUniqueRivNameSpaces(wsdlFiles[0])
 		def serviceNameSpaceArray = serviceInteractionNameSpace.split("\\:")
-		
-		def namespacePrefix = serviceNameSpaceArray[0] + ":" + serviceNameSpaceArray[1]		
+
+		def namespacePrefix = serviceNameSpaceArray[0] + ":" + serviceNameSpaceArray[1]
 		def maindomain = serviceNameSpaceArray[2]
-	
-		def serviceNameSpaceSize=serviceNameSpaceArray.size()-1		
+
+		def serviceNameSpaceSize=serviceNameSpaceArray.size()-1
 		def rivtaVersion = serviceNameSpaceArray[serviceNameSpaceSize]
 		def serviceVersion = serviceNameSpaceArray[serviceNameSpaceSize-1]
 		def serviceName = serviceNameSpaceArray[serviceNameSpaceSize-2]
-		def subdomain=serviceNameSpaceArray[3]	
-		
-		def i=serviceNameSpaceSize-3 
-		for (def y=4; i>=y;y++) { 	
+		def subdomain=serviceNameSpaceArray[3]
+
+		def i=serviceNameSpaceSize-3
+		for (def y=4; i>=y;y++) {
 			subdomain = subdomain + ":" + serviceNameSpaceArray[y]
 		}
 		def subdomainAdress = subdomain.replaceAll(':', '/')
 		def subdomainFlow = subdomain.replaceAll(':', '-')
 		def subdomainGroupId = subdomain.replaceAll(':', '.')
-		
+
 		def serviceRelativePath = "$artifactId/$serviceVersion/$rivtaVersion"
 		def wsdlFileName = wsdlFiles[0].name
-		
+
 		//Version of the service contract e.g Tidbokning 1.1.0
-		def version = '<TODO: tex 1.1.0>'
-		
+		def version = '3.1.0-V1.0-SNAPSHOT'
+
 		def serviceContractNameSpace = getServiceContractNameSpace(xsdFiles[0])
-		
+
 		//För tjänster som skall ha subdomän i ändpunktens adressen eller inte
 		//-DhttpsEndpointAdress=https://\${TP_HOST}:\${TP_PORT}/\${TP_BASE_URI}/$maindomain/$subdomainAdress/$serviceRelativePath
 		//-DhttpEndpointAdress=http://\${TP_HOST}:\${TP_PORT_HTTP}/\${TP_BASE_URI}/$maindomain/$subdomainAdress/$serviceRelativePath
@@ -114,31 +114,31 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 
 		//För tjänster som skall ha möjlighet att ställa in response timeout per tjänstedomän
 		//-DfeatureResponseTimeoutValue=\${feature.featureresponsetimeout.${maindomain}.${subdomain}:\${SERVICE_TIMEOUT_MS}}
-		
-		def mvnCommand = """mvn archetype:generate 
-		-DinteractiveMode=false 
-		-DarchetypeArtifactId=service-archetype 
-		-DarchetypeGroupId=se.skl.tp.archetype 
+
+		def mvnCommand = """mvn archetype:generate
+		-DinteractiveMode=false
+		-DarchetypeArtifactId=service-archetype
+		-DarchetypeGroupId=se.skl.tp.archetype
 		-DarchetypeVersion=1.3
-		-Duser.dir=${targetDir} 
-		-DgroupId=se.skl.skltpservices.${maindomain}.${subdomainGroupId}
-		-DartifactId=${artifactId} 
+		-Duser.dir=${targetDir}
+		-DgroupId=se.skltp.virtualservices.${maindomain}.${subdomainGroupId}
+		-DartifactId=${artifactId}
 		-Dversion=${version}
 		-DvirtualiseringArtifactId=${maindomain}-${subdomainFlow}-${artifactId}-virtualisering
-		-DhttpsEndpointAdress=https://\${TP_HOST}:\${TP_PORT}/\${TP_BASE_URI}/$maindomain/$subdomainAdress/$serviceRelativePath
-		-DhttpEndpointAdress=http://\${TP_HOST}:\${TP_PORT_HTTP}/\${TP_BASE_URI}/$maindomain/$subdomainAdress/$serviceRelativePath
+    -DhttpsEndpointAdress=https://\${TP_HOST}:\${TP_PORT}/\${TP_BASE_URI}/$serviceRelativePath
+    -DhttpEndpointAdress=http://\${TP_HOST}:\${TP_PORT_HTTP}/\${TP_BASE_URI}/$serviceRelativePath
 		-DflowName=${maindomain}-${subdomainFlow}-${artifactId}-${version}-Interaction-virtualisering-flow
 		-DfeatureKeepaliveValue=\${feature.keepalive.${serviceContractNameSpace}:\${feature.keepalive}}
 		-DfeatureResponseTimeoutValue=\${feature.featureresponsetimeout.${maindomain}.${subdomain}:\${SERVICE_TIMEOUT_MS}}
-		-DserviceMethod=${artifactId} 
-		-DserviceWsdlFileDir=classpath:/schemas$schemaDir/${artifactId}Interaction/${wsdlFileName}  
-		-DserviceNamespace=${serviceInteractionNameSpace}  
+		-DserviceMethod=${artifactId}
+		-DserviceWsdlFileDir=classpath:/schemas$schemaDir/${artifactId}Interaction/${wsdlFileName}
+		-DserviceNamespace=${serviceInteractionNameSpace}
 		"""
 		println "$mvnCommand"
-		
+
 		def process = mvnCommand.execute()
 		process.waitFor()
-		
+
 		// Obtain status and output
 		println "RETURN CODE: ${ process.exitValue()}"
 		println "STDOUT: ${process.in.text}"
@@ -148,19 +148,19 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 def copyServiceSchemas(serviceInteractionDirectories, targetDir){
 	serviceInteractionDirectories.each { serviceInteractionDirectory ->
 		def schemasFiles = getAllFilesMatching(serviceInteractionDirectory, /.*\.xsd|.*\.xml|.*\.wsdl/)
-		
-		def (name, parentDir) = serviceInteractionDirectory.parent.split("schemas")		
+
+		def (name, parentDir) = serviceInteractionDirectory.parent.split("schemas")
 
 		def serviceInteraction = serviceInteractionDirectory.name
 		def serviceDirectory = serviceInteraction - 'Interaction'
 		def schemaTargetDir = "${targetDir}/${serviceDirectory}/Virtualisering/src/main/resources/schemas/$parentDir/${serviceInteraction}"
 		new File("${schemaTargetDir}").mkdirs()
-		
-		schemasFiles.each {sourceSchemaFile -> 
+
+		schemasFiles.each {sourceSchemaFile ->
 			def targetSchemaFile = new File("${schemaTargetDir}/$sourceSchemaFile.name")
 			FileUtils.copyFile(sourceSchemaFile, targetSchemaFile)}
-			
-		def interactionsDirectory = serviceInteractionDirectory.parent		
+
+		def interactionsDirectory = serviceInteractionDirectory.parent
 		def interactionsDir = new File("${interactionsDirectory}")
 		def sourceSubSchemaFile = null
 		interactionsDir?.traverse(maxDepth:0,type:FileType.FILES, nameFilter: ~/.*\.xsd$/) {  file ->
@@ -177,17 +177,17 @@ def copyServiceSchemas(serviceInteractionDirectories, targetDir){
 def copyCoreSchemas(serviceInteractionDirectories, coreSchemaDirectory, targetDir){
 	serviceInteractionDirectories.each { serviceInteractionDirectory ->
 		def schemasFiles = getAllFilesMatching(coreSchemaDirectory, /.*\.xsd/)
-		
+
 		def serviceInteraction = serviceInteractionDirectory.name
 		def serviceDirectory = serviceInteraction - 'Interaction'
 		def coreSchemaTargetDir = "${targetDir}/${serviceDirectory}/Virtualisering/src/main/resources/schemas/core_components"
 		new File("${coreSchemaTargetDir}").mkdirs()
-		
-		schemasFiles.each {sourceSchemaFile -> 
+
+		schemasFiles.each {sourceSchemaFile ->
 			def targetSchemaFile = new File("${coreSchemaTargetDir}/$sourceSchemaFile.name")
-			FileUtils.copyFile(sourceSchemaFile, targetSchemaFile)}		
+			FileUtils.copyFile(sourceSchemaFile, targetSchemaFile)}
 	}
-	
+
 }
 
 if( args.size() < 1){
@@ -210,7 +210,7 @@ if( args.size() < 1){
 def sourceDir = new File(args[0])
 def targetDir = "."
 
-new File("pom.xml").delete() 
+new File("pom.xml").delete()
 new File("${targetDir}/pom.xml") << new File("pomtemplate.xml").asWritable()
 
 def serviceInteractionDirectories = getAllDirectoriesMatching(sourceDir,/.*Interaction$/)
