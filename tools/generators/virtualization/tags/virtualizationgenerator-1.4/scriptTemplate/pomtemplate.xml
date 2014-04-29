@@ -34,7 +34,7 @@
 
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
-  <description>Generated with template (archetypeVersion) 1.4-SNAPSHOT</description>
+  <description>Generated with template (archetypeVersion) 1.4</description>
 
   <properties>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
