@@ -28,7 +28,7 @@
   <artifactId>insuranceprocesss-healthreporting-3.1.0</artifactId>
 
   <!-- version of generated virtualization, not the same as version of service contract that is reflected in artifactId. -->
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
 
   <packaging>pom</packaging>
   <name>${project.artifactId}</name>
@@ -40,9 +40,9 @@
   </properties>
   
 	<scm>
-  		<connection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv.insuranceprocess.healthreporting/services/trunk/</connection>
-  		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv.insuranceprocess.healthreporting/services/trunk/</developerConnection>
-  		<url>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv.insuranceprocess.healthreporting/services/trunk/</url>
+  		<connection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv.insuranceprocess.healthreporting/services/tags/insuranceprocesss-healthreporting-3.1.0-1.0</connection>
+  		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv.insuranceprocess.healthreporting/services/tags/insuranceprocesss-healthreporting-3.1.0-1.0</developerConnection>
+  		<url>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv.insuranceprocess.healthreporting/services/tags/insuranceprocesss-healthreporting-3.1.0-1.0</url>
 	</scm>
 
 
