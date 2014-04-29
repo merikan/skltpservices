@@ -101,9 +101,10 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 		def serviceRelativePath = "$artifactId/$serviceVersion/$rivtaVersion"
 		def wsdlFileName = wsdlFiles[0].name
 
-		//Version of the service contract e.g Tidbokning 1.1.0
-		def serviceContarctVersion = '3.1.0'
-    def virtualizationVersion = '1.0-SNAPSHOT'
+		//Version of the service contract e.g 1.1.0 or RC1
+		def serviceContarctVersion = '<serviceContractVersion e.g RC1>'
+    //Version of the generated virtualization, e.g 1.0-SNAPSHOT
+    def virtualizationVersion = '<1.0-SNAPSHOT>'
 
 		def serviceContractNameSpace = getServiceContractNameSpace(xsdFiles[0])
 
@@ -120,7 +121,7 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 		-DinteractiveMode=false
 		-DarchetypeArtifactId=virtualServiceArchetype
 		-DarchetypeGroupId=se.skltp.virtualservices.tools
-		-DarchetypeVersion=1.4-SNAPSHOT
+		-DarchetypeVersion=1.4
 		-Duser.dir=${targetDir}
 		-DgroupId=se.skltp.virtualservices.${maindomain}.${subdomainGroupId}
 		-DartifactId=${artifactId}
