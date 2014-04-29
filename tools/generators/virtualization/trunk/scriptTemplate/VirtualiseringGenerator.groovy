@@ -118,8 +118,8 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 
 		def mvnCommand = """mvn archetype:generate
 		-DinteractiveMode=false
-		-DarchetypeArtifactId=service-archetype
-		-DarchetypeGroupId=se.skl.tp.archetype
+		-DarchetypeArtifactId=virtualServiceArchetype
+		-DarchetypeGroupId=se.skltp.virtualservices.tools
 		-DarchetypeVersion=1.4-SNAPSHOT
 		-Duser.dir=${targetDir}
 		-DgroupId=se.skltp.virtualservices.${maindomain}.${subdomainGroupId}
