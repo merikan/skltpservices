@@ -39,6 +39,25 @@
 	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
+  </plugins>
+    </build>
+  	 <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<tagBase>https://skltpservices.googlecode.com/svn/ServiceInteractions/riv.insuranceprocess.healthreporting/services/tags/</tagBase>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<scm>
+		<connection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv.insuranceprocess.healthreporting/services/trunk/</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/ServiceInteractions/riv.insuranceprocess.healthreporting/services/trunk/</developerConnection>
+		<url>http://skltpservices.googlecode.com/svn/ServiceInteractions/riv.insuranceprocess.healthreporting/services/trunk/</url>
+	</scm>
+
   <!-- Modules to be created for each service -->
   <modules>
     <module>DeleteAnswers</module>
