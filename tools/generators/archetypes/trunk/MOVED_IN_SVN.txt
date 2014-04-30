@@ -1,0 +1,1 @@
+Utvecklingen av script för att generera virtuella tjänster flyttat till http://skltpservices.googlecode.com/svn/tools/generators/virtualization/
