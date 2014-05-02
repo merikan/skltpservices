@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="urn:riv:se.apotekensservice:expo:1"
+           targetNamespace="urn:riv:se.apotekensservice:expo:1"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           version="1.0">
+
+            
+    <xs:annotation>
+        <xs:documentation>
+            Beskrivning: Meddelandetyper som är gemensamma för expo.
+            Revisioner: 2011-04-05, version 1.0
+        </xs:documentation>
+    </xs:annotation>
+
+    
+        
+                
+        <xs:complexType name="ApoteksinformationResponse">
+            <xs:sequence>                
+                <xs:element name="aktorsnamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Officiellt namn för aktör</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="aktorsorgnr" type="xs:long" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Aktörens organisationsnummer.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="allmantelefon" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Telefonnummer för allmänheten</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="besoksadress" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets besöksadress</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="eReceptDjur" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Markering gällande om apoteket kan expediera elektroniska djurrecept.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="fax" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets faxnummer</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="glnKod" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets GLN-kod</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="huvudtypkod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Kod som beskriver huvudverksamheten för expeditionsstället</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="namn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets officiella namn</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="ort" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets besöksort</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="slutdatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Datum för stängning av verksamhet</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="startdatum" type="xs:dateTime" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Datum för start av verksamhet</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+                
+        <xs:complexType name="DosmottagareRequest">
+            <xs:sequence>                
+                <xs:element name="adress" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Adress till dosmottagare.
+<para>Obligatorisk om typ = 'D'.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="apoteksIdDosmottagare" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Apoteks-id för dosmottagare om dosmottagare är av typen apotek.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="arbetsplatskod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Arbetsplatskod till dosmottagare. 
+Är aktuellt om dosmottagare t ex är en distriktsläkarmottagning.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="avdelning" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Avdelning inom dosmottagare.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="dosmottagarId" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Dosmottagarens identitet, dosproducentens identitet för dosmottagaren t ex kundnummer, GLN-kod.
+Unikt inom dosapoteket.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="kommunkod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Kommunkod till vilken dosmottagarens tillhör. Kod enligt SCB.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="lanskod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Länskod till vilken dosmottagaren tillhör. Kod enligt SCB.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="mottagarnamn" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Namn på dosmottagare.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="postnummer" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Postnummer till dosmottagare.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="postort" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Arbetsplatsort till dosmottagare.
+<para>Obligatorisk om typ = 'D'.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="typ" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Typ av dosmottagare, kan antingen vara Apotek (där dospatienterna kan hämta sina dosleveranser) 
+eller direktleverans, t ex vårdboende, distriktssköterska.
+
+Giltiga värden: D (direktleverans) eller A (apotek).</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+                
+        <xs:complexType name="DosmottagareResponse">
+            <xs:sequence>                
+                <xs:element name="adress" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Adress till dosmottagare.
+<para>Obligatorisk om typ = 'D'.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="apoteksIdDosmottagare" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Apoteks-id för dosmottagare om dosmottagare är av typen apotek.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="arbetsplatskod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Arbetsplatskod till dosmottagare. 
+Är aktuellt om dosmottagare t ex är en distriktsläkarmottagning.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="avdelning" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Avdelning inom dosmottagare.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="dosmottagarId" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Dosmottagarens identitet, dosproducentens identitet för dosmottagaren t ex kundnummer, GLN-kod.
+Unikt inom dosapoteket.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="kommunkod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Kommunkod till vilken dosmottagarens tillhör. Kod enligt SCB.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="lanskod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Länskod till vilken dosmottagaren tillhör. Kod enligt SCB.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="mottagarnamn" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Namn på dosmottagare.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="postnummer" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Postnummer till dosmottagare.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="postort" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Arbetsplatsort till dosmottagare.
+<para>Obligatorisk om typ = 'D'.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="typ" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Typ av dosmottagare, kan antingen vara Apotek (där dospatienterna kan hämta sina dosleveranser) 
+eller direktleverans, t ex vårdboende, distriktssköterska.
+
+Giltiga värden: D (direktleverans) eller A (apotek).</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+        
+                
+        <xs:complexType name="ExpeditionsstalleEgetResponse">
+            <xs:sequence>                
+                <xs:element name="aktorsnamn" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Aktörens namn.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="allmTelefon" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets allmänna telefonnummer.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="apoteksId" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>GLN-kod för unik identifiering av apotek.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="besoksAdress" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets besöksadress.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="besoksort" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets ort (besöksort).</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="dosmottagareLista" type="DosmottagareResponse" minOccurs="0" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation>Information om dosmottagare.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="eRecept" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Flagga som anger om expeditionsstället är ett apotek som kan hantera e-recept för besökande privat personer.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="eReceptDjur" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Markering gällande om apoteket kan expediera elektroniska djurrecept.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="faxnummer" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets faxnummer.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="forsamling" type="xs:int" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets församlingstillhörighet, kod enligt SCB.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="huvudOrgTypKod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation><para> Möjliga värden: ADM, AP, DIAP, DJUR, DX, OAP, SA, TVAP </para>
+
+<para> ADM </para>
+<para> En organisatiorisk enhet inom ett företag som har rent
+administrativa uppgifter. </para>
+
+<para> AP </para>
+<para> Apotek för allmänheten - enhet för detaljhandel med läkemedel med
+farmaceutisk bemanning under öppethållandet. </para>
+
+<para> DIAP </para>
+<para> Distansapotek - Större apoteksenhet med ansvar att kunna
+distribuera apoteksvaror direkt till avtalskunder, apoteksombud eller
+privatpersoner </para>
+
+<para> DJUR </para>
+<para> Ett apotek som har utökat djursortiment. 
+</para>
+
+<para> DX </para>
+<para> Dosapotek - enhet för produktion av dosdispenserade läkemedel.
+</para>
+
+<para> OAP </para>
+<para> Övriga apotek - gammal definition av apotek. Bör ej användas. </para>
+
+<para> SA </para>
+<para> Sjukhusapotek - apotek som ger service till slutenvårdsenheter
+</para>
+
+<para> TVAP </para>
+<para> Enhet som på beställning tillverkar specifika individanpassade läkemedel.   
+</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="kommun" type="xs:int" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets kommuntillhörighet, kod enligt SCB.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="kortNamn" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Kortversion på apoteksnamn. Behövs i bla i vårdsystem.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="lan" type="xs:int" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets länstillhörighet, kod enligt SCB.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="namn" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets officiella namn.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="oppetHallandeLista" type="OppethallandeResponse" minOccurs="0" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation>När expeditionsstället har öppet.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="orgNr" type="xs:long" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Aktörens organisationsnummer</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="orgTypADM" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation><para> Kod ADM som beskriver typ av expeditionsställe. </para>
+
+<para> En organisatiorisk enhet inom ett företag som har rent
+administrativa uppgifter. </para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="orgTypDIST" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation><para> Kod DIST som beskriver typ av expeditionsställe. </para>
+
+<para> Distansapotek - Större apoteksenhet med ansvar att kunna
+distribuera apoteksvaror direkt till avtalskunder, apoteksombud eller
+privatpersoner </para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="orgTypDJAP" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation><para> Kod DJAP som beskriver typ av expeditionsställe. </para>
+
+<para> Ett apotek som har utökat djursortiment.
+</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="orgTypDOS" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation><para> Kod DOS som beskriver typ av expeditionsställe. </para>
+
+<para> Dosapotek - enhet för produktion av dosdispenserade läkemedel. </para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="orgTypEA" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation><para> Kod EA som beskriver typ av expeditionsställe. </para>
+
+<para> Apotek för allmänheten - enhet för detaljhandel med läkemedel med
+farmaceutisk bemanning under öppethållandet. </para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="orgTypEH" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation><para> Kod EH som beskriver typ av expeditionsställe. </para>
+<para> En enhet som som kan lämna ut e-handel, dit man kan skicka e-handelspacket.</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="orgTypGSL" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation><para> Kod GSL som beskriver typ av expeditionsställe. </para>
+<para> Alla expeditionställen som säljer sortimentet på 80-listan (t ex
+shopar) ska ha flaggan satt. "General Sales list" - även kallad för
+"80-listan", enbart varor som ej är receptbelagda och som ingår i
+80-sortimentet. Alla expeditionställen som säljer sortimentet på
+80-listan (t ex shopar) ska ha flaggan satt. </para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="orgTypSA" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation><para> Kod SA som beskriver typ av expeditionsställe. </para>
+
+<para> Sjukhusapotek - apotek som ger service till slutenvårdsenheter.
+</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="orgTypTILV" type="xs:boolean" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation><para> Kod TILV som beskriver typ av expeditionsställe. </para>
+
+<para> Enhet som på beställning tillverkar individanpassade specifika läkemedel.
+</para></xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="postAdress" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets postAdress.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="postNr" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets postNr.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="postort" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets postort.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="recepturtelefon" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets receptur telefonnummer.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="slutDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Datum för avslut av verksamhet.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="startDatum" type="xs:dateTime" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Datum för start av verksamhet. Det datum som allmänheten kan använda
+Apoteket.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="statusDate" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets tillståndsstatus ändringsdatum.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="tidigareGlnKod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets tidigare ägares GLN.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="tillstandsstatus" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets tillståndsstatus.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="webbadress" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Webbadress till apotekets webbtjänster. Apotekens Service använder adressen för att skicka notifieringsmeddelanden.
+Används endast av dosproducenter.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+                
+        <xs:complexType name="HamtaApoteksInfoRequest">
+            <xs:sequence>                
+                <xs:element name="glnKod" type="xs:string" nillable="false" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation>Lista med en eller flera GLN-koder som identifierar de expeditionsställen man vill ha information om.
+GLN-koderna i listan ska vara unika.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="tidpunkt" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Om givet så returneras information som gällde vid tidpunkten, annars aktuell information.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+                
+        <xs:complexType name="HamtaApoteksInfoResponse">
+            <xs:sequence>                
+                <xs:element name="apoteksinformationLista" type="ApoteksinformationResponse" nillable="false" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation>Lista innehållande ett eller flera Apoteksinformation.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+                
+        <xs:complexType name="IdentitetRequest">
+            <xs:sequence>                
+                <xs:element name="butikskod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets butikskod.
+Får bara sättas när tjänsten ExpoUppdateraService eller ExpoSkapaService används. 
+Unik för ett organisationsnumret. 
+Flera butikskoder per expeditionsställe är tillåtet.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="exportId" type="xs:boolean" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Obligatorisk för identitet med glnKod.
+
+Måste vara true om eRecept eller eReceptDjur är true. 
+ExportId får ej sättas till true för en butikskod (används bara för GLN).</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="glnKod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets GLN-kod
+Måste sättas på en av identiteterna. 
+Endast en glnkod per expeditionsställe är tillåtet.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+                
+        <xs:complexType name="IdentitetResponse">
+            <xs:sequence>                
+                <xs:element name="butikskod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets butikskod.
+Får bara sättas när tjänsten ExpoUppdateraService eller ExpoSkapaService används. 
+Unik för ett organisationsnumret. 
+Flera butikskoder per expeditionsställe är tillåtet.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="exportId" type="xs:boolean" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Obligatorisk för identitet med glnKod.
+
+Måste vara true om eRecept eller eReceptDjur är true. 
+ExportId får ej sättas till true för en butikskod (används bara för GLN).</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="glnKod" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Expeditionsställets GLN-kod
+Måste sättas på en av identiteterna. 
+Endast en glnkod per expeditionsställe är tillåtet.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+                
+        <xs:complexType name="KontaktpersonRequest">
+            <xs:sequence>                
+                <xs:element name="befattning" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Kontaktpersonens befattning.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="efternamn" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Efternamn på kontaktperson hos aktören.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="epostadress" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Kontaktpersonens e-postadress</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="fornamn" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Förnamn på kontaktperson hos aktören.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="telefonnummer" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Kontaktpersonens telefonnummer.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+                
+        <xs:complexType name="KontaktpersonResponse">
+            <xs:sequence>                
+                <xs:element name="befattning" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Kontaktpersonens befattning.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="efternamn" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Efternamn på kontaktperson hos aktören.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="epostadress" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Kontaktpersonens e-postadress</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="fornamn" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Förnamn på kontaktperson hos aktören.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="telefonnummer" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Kontaktpersonens telefonnummer.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+                
+        <xs:complexType name="OppethallandeRequest">
+            <xs:sequence>                
+                <xs:element name="dagBenamning" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Exempelvis "Nyårsafton".</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="lunchFrom" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Om lunchstängt, "stänger för lunch". 
+Format: HHmm
+H=Timme (0-24)
+m=Minut</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="lunchTom" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Om lunchstängt, "Öppnar igen efter lunch kl".
+Format: HHmm
+H=Timme (0-24)
+m=Minut</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="oppnar" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Öppningstid vardagar/vekodagnr. 
+Format: HHmm
+H=Timme (0-24)
+m=Minut</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="slutDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Sista dagen i en period vid typ N, P eller S.
+Obligatorisk vid typ P, S eller D.
+Om typ D är slutdatum = startdatum.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="stanger" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Stängningstid  vardagar/vekodagnr. Format: HHmm
+H=Timme (0-24)
+m=Minut</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="startDatum" type="xs:dateTime" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Första dagen i en period vid typ N, P eller S.
+Vid typ D anges datum för aktuell dag exv 2010-12-24.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="tfStangtOrsak" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Orsak till tillfällig stängning.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="typ" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Typ av öppethållande. N = Normalt P = avvikande
+under angiven period D = avvikande under angiven
+dag S = tillfälligt stängt under angiven period</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="veckodagnr" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Ett nummer för veckodagen 1-7 för Måndag till
+Söndag, V för vardagar.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+                
+        <xs:complexType name="OppethallandeResponse">
+            <xs:sequence>                
+                <xs:element name="dagBenamning" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Exempelvis "Nyårsafton".</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="lunchFrom" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Om lunchstängt, "stänger för lunch". 
+Format: HHmm
+H=Timme (0-24)
+m=Minut</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="lunchTom" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Om lunchstängt, "Öppnar igen efter lunch kl".
+Format: HHmm
+H=Timme (0-24)
+m=Minut</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="oppnar" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Öppningstid vardagar/vekodagnr. 
+Format: HHmm
+H=Timme (0-24)
+m=Minut</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="slutDatum" type="xs:dateTime" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Sista dagen i en period vid typ N, P eller S.
+Obligatorisk vid typ P, S eller D.
+Om typ D är slutdatum = startdatum.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="stanger" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Stängningstid  vardagar/vekodagnr. Format: HHmm
+H=Timme (0-24)
+m=Minut</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="startDatum" type="xs:dateTime" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Första dagen i en period vid typ N, P eller S.
+Vid typ D anges datum för aktuell dag exv 2010-12-24.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="tfStangtOrsak" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Orsak till tillfällig stängning.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="typ" type="xs:string" nillable="false">
+                    <xs:annotation>
+                        <xs:documentation>Typ av öppethållande. N = Normalt P = avvikande
+under angiven period D = avvikande under angiven
+dag S = tillfälligt stängt under angiven period</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="veckodagnr" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Ett nummer för veckodagen 1-7 för Måndag till
+Söndag, V för vardagar.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+        
+                
+        <xs:complexType name="SokDosmottagareResultatResponse">
+            <xs:sequence>                
+                <xs:element name="apotek" type="HamtaApoteksInfoResponse" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Apoteksinformation för dosproducenten.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                            
+                <xs:element name="dosmottagare" type="DosmottagareResponse" minOccurs="0" maxOccurs="unbounded" />
+            
+            </xs:sequence>
+        </xs:complexType>
+    
+    
+    <xs:complexType name="ApplicationException">
+        <xs:annotation>
+            <xs:documentation>Applikationsfel</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="description" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SystemException">
+        <xs:annotation>
+            <xs:documentation>Systemfel</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="code" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="char">
+        <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
