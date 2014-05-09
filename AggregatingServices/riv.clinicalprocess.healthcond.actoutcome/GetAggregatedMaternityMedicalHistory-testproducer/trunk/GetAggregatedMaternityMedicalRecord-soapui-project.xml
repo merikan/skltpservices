@@ -1,0 +1,1549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="GetAggregatedMaternityMedicalRecord" resourceRoot="" soapui-version="4.6.4" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="GetMaternityMedicalHistoryServiceSoapBinding" type="wsdl" bindingName="{http://v2.getmaternitymedicalhistory.actoutcome.healthcond.clinicalprocess.riv.aggregatingservices.skltp.se/}GetMaternityMedicalHistoryServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:20001/testproducer/clinicalprocess/healthcond/actoutcome/GetMaternityMedicalHistory/2/rivtabp21?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:20001/testproducer/clinicalprocess/healthcond/actoutcome/GetMaternityMedicalHistory/2/rivtabp21?wsdl"><con:part><con:url>http://localhost:20001/testproducer/clinicalprocess/healthcond/actoutcome/GetMaternityMedicalHistory/2/rivtabp21?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="GetMaternityMedicalHistoryService" targetNamespace="http://v2.getmaternitymedicalhistory.actoutcome.healthcond.clinicalprocess.riv.aggregatingservices.skltp.se/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://v2.getmaternitymedicalhistory.actoutcome.healthcond.clinicalprocess.riv.aggregatingservices.skltp.se/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns4="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21">
+  <wsdl:import location="http://localhost:20001/testproducer/clinicalprocess/healthcond/actoutcome/GetMaternityMedicalHistory/2/rivtabp21?wsdl=GetMaternityMedicalHistoryResponderInterface.wsdl" namespace="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21"></wsdl:import>
+  <wsdl:binding name="GetMaternityMedicalHistoryServiceSoapBinding" type="ns1:GetMaternityMedicalHistoryResponderInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetMaternityMedicalHistory">
+      <soap:operation soapAction="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2:GetMaternityMedicalHistory" style="document"/>
+      <wsdl:input name="GetMaternityMedicalHistory">
+        <soap:header message="ns1:GetMaternityMedicalHistory" part="LogicalAddress" use="literal"></soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetMaternityMedicalHistoryResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GetMaternityMedicalHistoryService">
+    <wsdl:port binding="tns:GetMaternityMedicalHistoryServiceSoapBinding" name="GetMaternityMedicalHistoryPort">
+      <soap:address location="http://localhost:20001/testproducer/clinicalprocess/healthcond/actoutcome/GetMaternityMedicalHistory/2/rivtabp21"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:20001/testproducer/clinicalprocess/healthcond/actoutcome/GetMaternityMedicalHistory/2/rivtabp21?wsdl=GetMaternityMedicalHistoryResponderInterface.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="GetMaternityMedicalHistoryResponderInterface" targetNamespace="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns3="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2" xmlns:ns2="urn:riv:itintegration:registry:1" xmlns:ns1="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="urn:riv:itintegration:registry:1" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:riv:itintegration:registry:1">
+      <xs:element name="LogicalAddress" type="xs:string"/>
+      <xs:element name="ServiceContract" type="tns:ServiceContractType"/>
+      <xs:complexType name="ServiceContractType">
+        <xs:sequence>
+          <xs:element name="ServiceContractNamespace" type="xs:anyURI"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="urn:riv:clinicalprocess:healthcond:actoutcome:enums:2" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="ReferralOutcomeTypeCodeEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="SS"/>
+          <xs:enumeration value="SR"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified" targetNamespace="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2" xmlns:ns1="urn:riv:clinicalprocess:healthcond:actoutcome:2">
+      <xs:import namespace="urn:riv:clinicalprocess:healthcond:actoutcome:2"/>
+      <xs:element name="GetMaternityMedicalHistory" type="tns:GetMaternityMedicalHistoryType"/>
+      <xs:element name="GetMaternityMedicalHistoryResponse" type="tns:GetMaternityMedicalHistoryResponseType"/>
+      <xs:complexType name="GetMaternityMedicalHistoryType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="careUnitHSAid" nillable="true" type="xs:string"/>
+          <xs:element name="patientId" type="ns1:PersonIdType"/>
+          <xs:element minOccurs="0" name="timePeriod" type="ns1:DatePeriodType"/>
+          <xs:element minOccurs="0" name="sourceSystemHSAId" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="careContactId" nillable="true" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetMaternityMedicalHistoryResponseType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="maternityMedicalRecord" nillable="true" type="ns1:MaternityMedicalRecordType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified" targetNamespace="urn:riv:clinicalprocess:healthcond:actoutcome:2" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:riv:clinicalprocess:healthcond:actoutcome:2" xmlns:ns1="urn:riv:clinicalprocess:healthcond:actoutcome:enums:2">
+      <xs:import namespace="urn:riv:clinicalprocess:healthcond:actoutcome:enums:2"/>
+      <xs:complexType name="PersonIdType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:string"/>
+          <xs:element name="type" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AnalysisType">
+        <xs:sequence>
+          <xs:element name="analysisId" type="tns:IIType"/>
+          <xs:element minOccurs="0" name="analysisTime" type="tns:TimePeriodType"/>
+          <xs:element minOccurs="0" name="analysisCode" type="tns:CVType"/>
+          <xs:element minOccurs="0" name="analysisText" type="xs:string"/>
+          <xs:element minOccurs="0" name="analysisStatus" type="xs:string"/>
+          <xs:element minOccurs="0" name="analysisComment" type="xs:string"/>
+          <xs:element minOccurs="0" name="specimen" type="xs:string"/>
+          <xs:element minOccurs="0" name="method" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="relationToAnalysis" nillable="true" type="tns:RelationToAnalysisType"/>
+          <xs:element minOccurs="0" name="analysisOutcome" type="tns:AnalysisOutcomeType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="IIType">
+        <xs:sequence>
+          <xs:element name="root" type="xs:string"/>
+          <xs:element minOccurs="0" name="extension" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TimePeriodType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="start" type="xs:string"/>
+          <xs:element minOccurs="0" name="end" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CVType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" type="xs:string"/>
+          <xs:element minOccurs="0" name="codeSystem" type="xs:string"/>
+          <xs:element minOccurs="0" name="codeSystemName" type="xs:string"/>
+          <xs:element minOccurs="0" name="codeSystemVersion" type="xs:string"/>
+          <xs:element minOccurs="0" name="displayName" type="xs:string"/>
+          <xs:element minOccurs="0" name="originalText" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RelationToAnalysisType">
+        <xs:sequence>
+          <xs:element name="analysisId" type="tns:IIType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AnalysisOutcomeType">
+        <xs:sequence>
+          <xs:element name="outcomeValue" type="xs:string"/>
+          <xs:element minOccurs="0" name="outcomeUnit" type="xs:string"/>
+          <xs:element minOccurs="0" name="observationTime" type="xs:string"/>
+          <xs:element name="pathologicalFlag" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="outcomeDescription" type="xs:string"/>
+          <xs:element minOccurs="0" name="referenceInterval" type="xs:string"/>
+          <xs:element minOccurs="0" name="referencePopulation" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="HealthcareProfessionalType">
+        <xs:sequence>
+          <xs:element name="authorTime" type="xs:string"/>
+          <xs:element name="healthcareProfessionalHSAId" type="xs:string"/>
+          <xs:element minOccurs="0" name="healthcareProfessionalName" type="xs:string"/>
+          <xs:element minOccurs="0" name="healthcareProfessionalRoleCode" type="tns:CVType"/>
+          <xs:element name="healthcareProfessionalOrgUnit" type="tns:OrgUnitType"/>
+          <xs:element name="healthcareProfessionalCareUnitHSAId" type="xs:string"/>
+          <xs:element name="healthcareProfessionalCareGiverHSAId" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="OrgUnitType">
+        <xs:sequence>
+          <xs:element name="orgUnitHSAId" type="xs:string"/>
+          <xs:element name="orgUnitName" type="xs:string"/>
+          <xs:element minOccurs="0" name="orgUnitTelecom" type="xs:string"/>
+          <xs:element minOccurs="0" name="orgUnitEmail" type="xs:string"/>
+          <xs:element minOccurs="0" name="orgUnitAddress" type="xs:string"/>
+          <xs:element minOccurs="0" name="orgUnitLocation" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ReferralOutcomeType">
+        <xs:sequence>
+          <xs:element name="referralOutcomeHeader" type="tns:PatientSummaryHeaderType"/>
+          <xs:element name="referralOutcomeBody" type="tns:ReferralOutcomeBodyType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PatientSummaryHeaderType">
+        <xs:sequence>
+          <xs:element name="documentId" type="xs:string"/>
+          <xs:element name="sourceSystemHSAId" type="xs:string"/>
+          <xs:element minOccurs="0" name="documentTitle" type="xs:string"/>
+          <xs:element minOccurs="0" name="documentTime" type="xs:string"/>
+          <xs:element name="patientId" type="tns:PersonIdType"/>
+          <xs:element name="accountableHealthcareProfessional" type="tns:HealthcareProfessionalType"/>
+          <xs:element minOccurs="0" name="legalAuthenticator" type="tns:LegalAuthenticatorType"/>
+          <xs:element name="approvedForPatient" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="nullified" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="nullifiedReason" type="xs:string"/>
+          <xs:element minOccurs="0" name="careContactId" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="LegalAuthenticatorType">
+        <xs:sequence>
+          <xs:element name="signatureTime" type="xs:string"/>
+          <xs:element minOccurs="0" name="legalAuthenticatorHSAId" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ReferralOutcomeBodyType">
+        <xs:sequence>
+          <xs:element name="referralOutcomeTypeCode" type="ns1:ReferralOutcomeTypeCodeEnum"/>
+          <xs:element name="referralOutcomeTitle" type="xs:string"/>
+          <xs:element name="referralOutcomeText" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="clinicalInformation" nillable="true" type="tns:ClinicalInformationType"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="act" nillable="true" type="tns:ActType"/>
+          <xs:element name="referral" type="tns:ReferralType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ClinicalInformationType">
+        <xs:sequence>
+          <xs:element name="clinicalInformationCode" type="tns:ClinicalInformationCodeType"/>
+          <xs:element name="clinicalInformationText" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ClinicalInformationCodeType">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string"/>
+          <xs:element name="codeSystem" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ActType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="actId" type="xs:string"/>
+          <xs:element minOccurs="0" name="actCode" type="tns:ActCodeType"/>
+          <xs:element name="actText" type="xs:string"/>
+          <xs:element minOccurs="0" name="actTime" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="actResult" nillable="true" type="tns:MultimediaType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ActCodeType">
+        <xs:sequence>
+          <xs:element name="code" type="xs:string"/>
+          <xs:element name="codeSystem" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MultimediaType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:string"/>
+          <xs:element name="mediaType" type="xs:string"/>
+          <xs:element minOccurs="0" name="value" type="xs:base64Binary"/>
+          <xs:element minOccurs="0" name="reference" type="xs:anyURI"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ReferralType">
+        <xs:sequence>
+          <xs:element name="referralId" type="xs:string"/>
+          <xs:element name="referralText" type="xs:string"/>
+          <xs:element name="referralTime" type="xs:string"/>
+          <xs:element name="referralAuthor" type="tns:HealthcareProfessionalType"/>
+          <xs:element minOccurs="0" name="careContactId" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ActorType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="hsaId" type="xs:string"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="personTelecom" type="xs:string"/>
+          <xs:element minOccurs="0" name="personEmail" type="xs:string"/>
+          <xs:element minOccurs="0" name="personAddress" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PQType">
+        <xs:sequence>
+          <xs:element name="value" type="xs:double"/>
+          <xs:element name="unit" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PreviousGravidityAndParityType">
+        <xs:sequence>
+          <xs:element name="year" type="xs:int"/>
+          <xs:element name="month" type="xs:int"/>
+          <xs:element minOccurs="0" name="delivery" type="xs:integer"/>
+          <xs:element minOccurs="0" name="healthcareFacility" type="xs:string"/>
+          <xs:element minOccurs="0" name="progress" type="xs:string"/>
+          <xs:element minOccurs="0" name="sex" type="xs:int"/>
+          <xs:element minOccurs="0" name="weightOfChild" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="gestation" type="xs:int"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RegistrationRecordType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="lastMenstrualPeriod" type="xs:string"/>
+          <xs:element minOccurs="0" name="indicationPregnancy" type="xs:string"/>
+          <xs:element minOccurs="0" name="contraceptiveDiscontinued" type="xs:string"/>
+          <xs:element minOccurs="0" name="expectedDayOfDeliveryFromLastMenstrualPeriod" type="xs:string"/>
+          <xs:element minOccurs="0" name="expectedDayOfDeliveryFromUltrasoundScan" type="xs:string"/>
+          <xs:element minOccurs="0" name="expectedDayOfDeliveryFromEmbryonicTransfer" type="xs:string"/>
+          <xs:element minOccurs="0" name="length" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="weight" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="bodyMassIndex" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="infertility" type="xs:decimal"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="previousGravidityAndParity" nillable="true" type="tns:PreviousGravidityAndParityType"/>
+          <xs:element minOccurs="0" name="diseasesThrombosis" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="diseasesEndocineDiseases" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="diseasesRecurrentUrinaryTractInfections" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="diseasesDiabetesMellitus" type="xs:boolean"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="medicationDuringPregnacy" nillable="true" type="tns:MedicationType"/>
+          <xs:element minOccurs="0" name="assessmentAtFirstContactStandardCare" type="xs:boolean"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MedicationType">
+        <xs:sequence>
+          <xs:element name="medicament" type="xs:string"/>
+          <xs:element minOccurs="0" name="dosage" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ECGRecordingType">
+        <xs:sequence>
+          <xs:element name="ecgID" type="xs:string"/>
+          <xs:element minOccurs="0" name="pacemaker" type="xs:boolean"/>
+          <xs:element name="examTimePeriod" type="tns:TimePeriodType"/>
+          <xs:element minOccurs="0" name="ecgStructuredData" type="tns:ECGStructuredDataType"/>
+          <xs:element minOccurs="0" name="ecgDicomData" type="tns:ECGDicomDataType"/>
+          <xs:element minOccurs="0" name="ecgStaticData" type="tns:ECGStaticDataType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ECGStructuredDataType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="usedFilter" nillable="true" type="tns:UsedFilterType"/>
+          <xs:element minOccurs="0" name="heartRate" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="QT" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="QTc" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="PR" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="Paxis" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="QRSAxis" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="Taxis" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="stType" type="tns:STType"/>
+          <xs:element minOccurs="0" name="interpretationAlgorithmName" type="xs:string"/>
+          <xs:element minOccurs="0" name="interpretation" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="UsedFilterType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="filterName" type="xs:string"/>
+          <xs:element minOccurs="0" name="lowerFrequency" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="upperFrequency" type="tns:PQType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="STType">
+        <xs:sequence>
+          <xs:element name="leadName" type="xs:string"/>
+          <xs:element name="stLevel" type="tns:PQType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ECGDicomDataType">
+        <xs:sequence>
+          <xs:element name="demSOP" type="xs:string"/>
+          <xs:element minOccurs="0" name="demValue" type="xs:base64Binary"/>
+          <xs:element minOccurs="0" name="demReference" type="xs:anyURI"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ECGStaticDataType">
+        <xs:sequence>
+          <xs:element name="mediaType" type="xs:string"/>
+          <xs:element minOccurs="0" name="value" type="xs:base64Binary"/>
+          <xs:element minOccurs="0" name="reference" type="xs:anyURI"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="LaboratoryOrderOutcomeType">
+        <xs:sequence>
+          <xs:element name="laboratoryOrderOutcomeHeader" type="tns:PatientSummaryHeaderType"/>
+          <xs:element name="laboratoryOrderOutcomeBody" type="tns:LaboratoryOrderOutcomeBodyType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="LaboratoryOrderOutcomeBodyType">
+        <xs:sequence>
+          <xs:element name="resultType" type="xs:string"/>
+          <xs:element name="registrationTime" type="xs:string"/>
+          <xs:element name="discipline" type="xs:string"/>
+          <xs:element minOccurs="0" name="resultReport" type="xs:string"/>
+          <xs:element minOccurs="0" name="resultComment" type="xs:string"/>
+          <xs:element minOccurs="0" name="accountableHeathcareProfessional" type="tns:HealthcareProfessionalType_LaboratoryOrderOutcomeBody"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="analysis" nillable="true" type="tns:AnalysisType"/>
+          <xs:element name="order" type="tns:OrderType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="HealthcareProfessionalType_LaboratoryOrderOutcomeBody">
+        <xs:sequence>
+          <xs:element name="authorTime" type="xs:string"/>
+          <xs:element name="healthcareProfessionalHSAId" type="xs:string"/>
+          <xs:element minOccurs="0" name="healthcareProfessionalName" type="xs:string"/>
+          <xs:element minOccurs="0" name="healthcareProfessionalRoleCode" type="tns:CVType"/>
+          <xs:element name="healthcareProfessionalOrgUnit" type="tns:OrgUnitType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="OrderType">
+        <xs:sequence>
+          <xs:element name="orderId" type="xs:string"/>
+          <xs:element minOccurs="0" name="orderReason" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="HealthcareProfessionalType_GetReferralOutcome">
+        <xs:sequence>
+          <xs:element name="authorTime" type="xs:string"/>
+          <xs:element minOccurs="0" name="healthcareProfessionalHSAId" type="xs:string"/>
+          <xs:element minOccurs="0" name="healthcareProfessionalName" type="xs:string"/>
+          <xs:element minOccurs="0" name="healthcareProfessionalRoleCode" type="tns:CVType"/>
+          <xs:element minOccurs="0" name="healthcareProfessionalOrgUnit" type="tns:OrgUnitType"/>
+          <xs:element minOccurs="0" name="healthcareProfessionalCareUnitHSAId" type="xs:string"/>
+          <xs:element minOccurs="0" name="healthcareProfessionalCareGiverHSAId" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PregnancyCheckupRecordType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="completeWeeksOfGestation" type="xs:int"/>
+          <xs:element minOccurs="0" name="weight" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="symphysisFundalHeight" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="haemoglobin" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="bloodPressureSystolic" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="bloodPressureDiastolic" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="proteinuria" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="glycosuria" type="tns:PQType"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="fetalPosition" nillable="true" type="xs:integer"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="fetalPresentation" nillable="true" type="xs:integer"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="fetalHeartRate" nillable="true" type="tns:PQType"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="typeOfLeave" nillable="true" type="xs:integer"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="medicationSinceRegistration" nillable="true" type="tns:MedicationType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MaternityMedicalRecordType">
+        <xs:sequence>
+          <xs:element name="maternityMedicalRecordHeader" type="tns:PatientSummaryHeaderType"/>
+          <xs:element name="maternityMedicalRecordBody" type="tns:MaternityMedicalRecordBodyType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MaternityMedicalRecordBodyType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="registrationRecord" type="tns:RegistrationRecordType"/>
+          <xs:element minOccurs="0" name="pregnancyCheckupRecord" type="tns:PregnancyCheckupRecordType"/>
+          <xs:element minOccurs="0" name="postDeliveryRecord" type="tns:PostDeliveryRecordType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PostDeliveryRecordType">
+        <xs:sequence>
+          <xs:element name="motherPostDeliveryRecord" type="tns:MotherPostDeliveryRecordType"/>
+          <xs:element maxOccurs="unbounded" name="childPostDeliveryRecord" type="tns:ChildPostDeliveryRecordType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MotherPostDeliveryRecordType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="bloodPressureSystolic" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="bloodPressureDiastolic" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="haemoglobin" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="bodyTemperature" type="xs:decimal"/>
+          <xs:element minOccurs="0" name="scarsOK" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="sutureRemoved" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="perineumComfortable" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="vulvaVaginaPortioOK" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="uterusContracted" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="uterusNote" type="xs:string"/>
+          <xs:element minOccurs="0" name="breastfeeding" type="xs:boolean"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ChildPostDeliveryRecordType">
+        <xs:sequence>
+          <xs:element name="ordinalNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="weight" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="apgarScore1" type="xs:int"/>
+          <xs:element minOccurs="0" name="apgarScore5" type="xs:int"/>
+          <xs:element minOccurs="0" name="apgarScore10" type="xs:int"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ModalityDataType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="manufacturer" type="xs:string"/>
+          <xs:element minOccurs="0" name="modelName" type="xs:string"/>
+          <xs:element minOccurs="0" name="equipmentId" type="xs:string"/>
+          <xs:element minOccurs="0" name="lineFilter" type="tns:PQType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AuthorOtherRoleType">
+        <xs:sequence>
+          <xs:element name="authorOtherRoleCode" type="xs:string"/>
+          <xs:element name="authorOtherRoleCodeOID" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AuthorType">
+        <xs:sequence>
+          <xs:element name="authorTime" type="xs:string"/>
+          <xs:element name="authorHSAId" type="xs:string"/>
+          <xs:element minOccurs="0" name="authorRoleCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="authorOtherRole" type="tns:AuthorOtherRoleType"/>
+          <xs:element minOccurs="0" name="authorName" type="xs:string"/>
+          <xs:element name="authorOrgUnitHSAid" type="xs:string"/>
+          <xs:element name="authorOrgUnitName" type="xs:string"/>
+          <xs:element minOccurs="0" name="authorOrgUnitAddress" type="xs:string"/>
+          <xs:element name="careUnitHSAid" type="xs:string"/>
+          <xs:element name="careGiverHSAid" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PatientDataType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="patientWeight" type="tns:PQType"/>
+          <xs:element minOccurs="0" name="patientLength" type="tns:PQType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ECGType">
+        <xs:sequence>
+          <xs:element name="ECGHeader" type="tns:PatientSummaryHeaderType"/>
+          <xs:element name="ECGBody" type="tns:ECGBodyType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ECGBodyType">
+        <xs:sequence>
+          <xs:element name="resultType" type="xs:string"/>
+          <xs:element name="resultTime" type="xs:string"/>
+          <xs:element name="resultOpinion" type="xs:string"/>
+          <xs:element minOccurs="0" name="patientData" type="tns:PatientDataType"/>
+          <xs:element minOccurs="0" name="modalityData" type="tns:ModalityDataType"/>
+          <xs:element minOccurs="0" name="ecgRecording" type="tns:ECGRecordingType"/>
+          <xs:element minOccurs="0" name="referral" type="tns:ReferralType"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DatePeriodType">
+        <xs:sequence>
+          <xs:element name="start" type="xs:string"/>
+          <xs:element name="end" type="xs:string"/>
+          <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="GetMaternityMedicalHistory">
+    <wsdl:part element="ns2:LogicalAddress" name="LogicalAddress"></wsdl:part>
+    <wsdl:part element="ns3:GetMaternityMedicalHistory" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetMaternityMedicalHistoryResponse">
+    <wsdl:part element="ns3:GetMaternityMedicalHistoryResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="GetMaternityMedicalHistoryResponderInterface">
+    <wsdl:operation name="GetMaternityMedicalHistory">
+      <wsdl:input message="ns1:GetMaternityMedicalHistory" name="GetMaternityMedicalHistory"></wsdl:input>
+      <wsdl:output message="ns1:GetMaternityMedicalHistoryResponse" name="GetMaternityMedicalHistoryResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:20202/producer_1/teststub/GetMaternityMedicalHistory/2/rivtabp21</con:endpoint><con:endpoint>http://localhost:20202/producer_2/teststub/GetMaternityMedicalHistory/2/rivtabp21</con:endpoint><con:endpoint>http://localhost:20202/producer_3/teststub/GetMaternityMedicalHistory/2/rivtabp21</con:endpoint><con:endpoint>http://localhost:20202/producer_4/teststub/GetMaternityMedicalHistory/2/rivtabp21</con:endpoint><con:endpoint>http://localhost:20202/producer_5/teststub/GetMaternityMedicalHistory/2/rivtabp21</con:endpoint><con:endpoint>https://192.168.19.10:20000/vp/clinicalprocess/healthcond/actoutcome/GetMaternityMedicalHistory/2/rivtabp21</con:endpoint><con:endpoint>https://33.33.33.33:20000/vp/clinicalprocess/healthcond/actoutcome/GetMaternityMedicalHistory/2/rivtabp21</con:endpoint><con:endpoint>https://localhost:20000/vp/clinicalprocess/healthcond/actoutcome/GetMaternityMedicalHistory/2/rivtabp21</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2:GetMaternityMedicalHistory" name="GetMaternityMedicalHistory" bindingOperationName="GetMaternityMedicalHistory" type="Request-Response" outputName="GetMaternityMedicalHistoryResponse" inputName="GetMaternityMedicalHistory" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Magdalena"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="x-vp-sender-idX" value="sid"/>
+  &lt;con:entry key="x-rivta-original-serviceconsumer-hsaidX" value="SKLTP-BOX"/>
+&lt;/xml-fragment></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://192.168.19.10:20000/vp/clinicalprocess/healthcond/actoutcome/GetMaternityMedicalHistory/2/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2" xmlns:urn2="urn:riv:clinicalprocess:healthcond:actoutcome:2">
+   <soapenv:Header>
+      <urn:LogicalAddress>5565594230</urn:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:GetMaternityMedicalHistory>
+         <!--Zero or more repetitions:-->
+         <urn1:careUnitHSAid>HSAID-001</urn1:careUnitHSAid>
+         <urn1:patientId>
+            <urn2:id>194606109108</urn2:id>
+            <urn2:type>1.2.752.129.2.1.3.1</urn2:type>
+            <!--You may enter ANY elements at this point-->
+         </urn1:patientId>
+         <!--Optional:-->
+         <urn1:timePeriod>
+            <urn2:start>20130101</urn2:start>
+            <urn2:end>20131231</urn2:end>
+            <!--You may enter ANY elements at this point-->
+         </urn1:timePeriod>
+         <!--Optional:-->
+         <!-- <urn1:sourceSystemHSAId>?</urn1:sourceSystemHSAId> -->
+         <!--Zero or more repetitions:-->
+         <urn1:careContactId>?</urn1:careContactId>
+         <!--You may enter ANY elements at this point-->
+      </urn1:GetMaternityMedicalHistory>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2:GetMaternityMedicalHistory"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Nina"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="x-rivta-original-serviceconsumer-hsaidX" value="SKLTP-BOX"/>
+  &lt;con:entry key="x-vp-sender-idX" value="sid"/>
+&lt;/xml-fragment></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://192.168.19.10:20000/vp/clinicalprocess/healthcond/actoutcome/GetMaternityMedicalHistory/2/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2" xmlns:urn2="urn:riv:clinicalprocess:healthcond:actoutcome:2">
+   <soapenv:Header>
+      <urn:LogicalAddress>5565594230</urn:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:GetMaternityMedicalHistory>
+         <!--Zero or more repetitions:-->
+         <urn1:careUnitHSAid>HSAID-001</urn1:careUnitHSAid>
+         <urn1:patientId>
+            <urn2:id>197309069289</urn2:id>
+            <urn2:type>1.2.752.129.2.1.3.1</urn2:type>
+            <!--You may enter ANY elements at this point-->
+         </urn1:patientId>
+         <!--Optional:-->
+         <urn1:timePeriod>
+            <urn2:start>20130101</urn2:start>
+            <urn2:end>20131231</urn2:end>
+            <!--You may enter ANY elements at this point-->
+         </urn1:timePeriod>
+      </urn1:GetMaternityMedicalHistory>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2:GetMaternityMedicalHistory"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Frida"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="x-vp-sender-idX" value="sid"/>
+  &lt;con:entry key="x-rivta-original-serviceconsumer-hsaidX" value="SKLTP-BOX"/>
+&lt;/xml-fragment></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://192.168.19.10:20000/vp/clinicalprocess/healthcond/actoutcome/GetMaternityMedicalHistory/2/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2" xmlns:urn2="urn:riv:clinicalprocess:healthcond:actoutcome:2">
+   <soapenv:Header>
+      <urn:LogicalAddress>5565594230</urn:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:GetMaternityMedicalHistory>
+         <urn1:careUnitHSAid>HSAID-001</urn1:careUnitHSAid>
+         <urn1:patientId>
+            <urn2:id>197705232382</urn2:id>
+            <urn2:type>1.2.752.129.2.1.3.1</urn2:type>
+         </urn1:patientId>
+      </urn1:GetMaternityMedicalHistory>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2:GetMaternityMedicalHistory"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Ulla"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="x-vp-sender-idX" value="sid"/>
+  &lt;con:entry key="x-rivta-original-serviceconsumer-hsaidX" value="SKLTP-BOX"/>
+&lt;/xml-fragment></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://192.168.19.10:20000/vp/clinicalprocess/healthcond/actoutcome/GetMaternityMedicalHistory/2/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2" xmlns:urn2="urn:riv:clinicalprocess:healthcond:actoutcome:2">
+   <soapenv:Header>
+      <urn:LogicalAddress>5565594230</urn:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:GetMaternityMedicalHistory>
+         <urn1:careUnitHSAid>HSAID-001</urn1:careUnitHSAid>
+         <urn1:patientId>
+            <urn2:id>198611062384</urn2:id>
+            <urn2:type>1.2.752.129.2.1.3.1</urn2:type>
+         </urn1:patientId>
+      </urn1:GetMaternityMedicalHistory>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2:GetMaternityMedicalHistory"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Gunbritt"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="x-rivta-original-serviceconsumer-hsaidX" value="SKLTP-BOX"/>
+  &lt;con:entry key="x-vp-sender-idX" value="sid"/>
+&lt;/xml-fragment></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://192.168.19.10:20000/vp/clinicalprocess/healthcond/actoutcome/GetMaternityMedicalHistory/2/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2" xmlns:urn2="urn:riv:clinicalprocess:healthcond:actoutcome:2">
+   <soapenv:Header>
+      <urn:LogicalAddress>5565594230</urn:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:GetMaternityMedicalHistory>
+         <!--Zero or more repetitions:-->
+         <urn1:careUnitHSAid>HSAID-001</urn1:careUnitHSAid>
+         <urn1:patientId>
+            <urn2:id>192011189228</urn2:id>
+            <urn2:type>1.2.752.129.2.1.3.1</urn2:type>
+            <!--You may enter ANY elements at this point-->
+         </urn1:patientId>
+         <!--Optional:-->
+         <urn1:timePeriod>
+            <urn2:start>20130101</urn2:start>
+            <urn2:end>20131231</urn2:end>
+            <!--You may enter ANY elements at this point-->
+         </urn1:timePeriod>
+         <!--Optional:-->
+         <urn1:sourceSystemHSAId>?</urn1:sourceSystemHSAId>
+         <!--Zero or more repetitions:-->
+         <urn1:careContactId>?</urn1:careContactId>
+         <!--You may enter ANY elements at this point-->
+      </urn1:GetMaternityMedicalHistory>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistoryResponder:2:GetMaternityMedicalHistory"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="UpdateResponderBinding" type="wsdl" bindingName="{urn:riv:itintegration:engagementindex:Update:1:rivtabp21}UpdateResponderBinding" soapVersion="1_1" anonymous="optional" definition="http://192.168.19.10:8081/skltp-ei/update-service/v1?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://192.168.19.10:8081/skltp-ei/update-service/v1?wsdl"><con:part><con:url>http://192.168.19.10:8081/skltp-ei/update-service/v1?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="UpdateInteraction" targetNamespace="urn:riv:itintegration:engagementindex:Update:1:rivtabp21" xmlns:itr="urn:riv:itintegration:registry:1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tjsi="urn:riv:itintegration:engagementindex:UpdateInitiator:1" xmlns:tjsr="urn:riv:itintegration:engagementindex:UpdateResponder:1" xmlns:tns="urn:riv:itintegration:engagementindex:Update:1:rivtabp21" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema targetNamespace="urn:riv:itintegration:engagementindex:Update:1:rivtabp21">
+      <xs:import namespace="urn:riv:itintegration:engagementindex:UpdateResponder:1" schemaLocation="http://192.168.19.10:8081/skltp-ei/update-service/v1?xsd=UpdateResponder_1.0.xsd"/>
+      <xs:import namespace="urn:riv:itintegration:registry:1" schemaLocation="http://192.168.19.10:8081/skltp-ei/update-service/v1?xsd=../../core_components/itintegration_registry_1.0.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="UpdateResponse">
+    <wsdl:part element="tjsr:UpdateResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateRequest">
+    <wsdl:part element="itr:LogicalAddress" name="LogicalAddress">
+      <wsdl:documentation>The organisation number of the organization owning the targeted engagement index</wsdl:documentation>
+    </wsdl:part>
+    <wsdl:part element="tjsr:Update" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="UpdateResponderInterface">
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateRequest"></wsdl:input>
+      <wsdl:output message="tns:UpdateResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UpdateResponderBinding" type="tns:UpdateResponderInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="urn:riv:itintegration:engagementindex:UpdateResponder:1:Update" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:UpdateRequest" part="LogicalAddress" use="literal"></soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UpdateResponderService">
+    <wsdl:port binding="tns:UpdateResponderBinding" name="UpdateResponderPort">
+      <soap:address location="http://192.168.19.10:8081/skltp-ei/update-service/v1"/>
+    </wsdl:port>
+  </wsdl:service>
+  <xs:annotation>
+    <xs:documentation>Tjänsteinteraktionens namn: UpdateInteraction
+			 Beskrivning: 
+			   Service for adding, updating and removing content to/from engagement index
+			 Revisioner: 
+			 Tjänstedomän: itintegration:engagementindex
+			 Tjänsteinteraktionstyp: Fråga-Svar
+			 WS-profil: RIVTABP21
+			 Förvaltas av: Sveriges Kommuner och Landsting</xs:documentation>
+  </xs:annotation>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://192.168.19.10:8081/skltp-ei/update-service/v1?xsd=UpdateResponder_1.0.xsd</con:url><con:content><![CDATA[<!--Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements. See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership. Sveriges Kommuner och Landsting licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License. You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied. See the License for the
+ specific language governing permissions and limitations
+ under the License.-->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:riv:itintegration:engagementindex:UpdateResponder:1" version="1.0" xmlns:core="urn:riv:itintegration:engagementindex:1" xmlns:tns="urn:riv:itintegration:engagementindex:UpdateResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="urn:riv:itintegration:engagementindex:1" schemaLocation="http://192.168.19.10:8081/skltp-ei/update-service/v1?xsd=../../core_components/itintegration_engagementindex_1.0.xsd"/>
+  <xs:element name="Update" type="tns:UpdateType"/>
+  <xs:element name="UpdateResponse" type="tns:UpdateResponseType"/>
+  <xs:complexType name="UpdateType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="engagementTransaction" type="core:EngagementTransactionType"/>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UpdateResponseType">
+    <xs:sequence>
+      <xs:element name="ResultCode" type="core:ResultCodeEnum"/>
+      <xs:element minOccurs="0" name="comment" type="xs:string"/>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://192.168.19.10:8081/skltp-ei/update-service/v1?xsd=../../core_components/itintegration_engagementindex_1.0.xsd</con:url><con:content><![CDATA[<!--Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements. See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership. Sveriges Kommuner och Landsting licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License. You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied. See the License for the
+ specific language governing permissions and limitations
+ under the License.-->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:riv:itintegration:engagementindex:1" version="1.0" xmlns:tns="urn:riv:itintegration:engagementindex:1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="EngagementTransactionType">
+    <xs:sequence>
+      <xs:element name="deleteFlag" type="xs:boolean"/>
+      <xs:element name="engagement" type="tns:EngagementType"/>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EngagementType">
+    <xs:sequence>
+      <xs:element name="registeredResidentIdentification" type="tns:RegisteredResidentIdentificationType"/>
+      <xs:element name="serviceDomain" type="xs:anyURI"/>
+      <xs:element name="categorization" type="xs:string"/>
+      <xs:element name="logicalAddress" type="xs:string"/>
+      <xs:element name="businessObjectInstanceIdentifier" type="xs:string"/>
+      <xs:element minOccurs="1" name="clinicalProcessInterestId" type="tns:ClinicalProcessInterestIdType"/>
+      <xs:element minOccurs="0" name="mostRecentContent" type="tns:TS"/>
+      <xs:element name="sourceSystem" type="tns:HsaIdType"/>
+      <xs:element minOccurs="0" name="creationTime" type="tns:TS"/>
+      <xs:element minOccurs="0" name="updateTime" type="tns:TS"/>
+      <xs:element name="dataController" type="tns:OrgNoType"/>
+      <xs:element minOccurs="0" name="owner" type="tns:HsaIdType"/>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="HsaIdType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="OrgNoType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="ClinicalProcessInterestIdType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="RegisteredResidentIdentificationType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^[0-9]{8}[0-9pPtTfF][0-9]{3}$"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TS">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[1-9]{1}[0-9]{3}(0[1-9]{1}|1[0-2]{1})([0-2]{1}[0-9]{1}|3[0-1]{1})([0-1]{1}[0-9]{1}|2[0-3]{1})[0-5]{1}[0-9]{1}[0-5]{1}[0-9]{1}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DT">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[1-9]{1}[0-9]{3}(0[1-9]{1}|1[0-2]{1})([0-2]{1}[0-9]{1}|3[0-1]{1})"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ResultCodeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OK"/>
+      <xs:enumeration value="ERROR"/>
+      <xs:enumeration value="INFO"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://192.168.19.10:8081/skltp-ei/update-service/v1?xsd=../../core_components/itintegration_registry_1.0.xsd</con:url><con:content><![CDATA[<xs:schema elementFormDefault="qualified" targetNamespace="urn:riv:itintegration:registry:1" version="1.0" xmlns="urn:riv:itintegration:registry:1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation>Beskrivning: 	Grundl��ggande informationsobjekt f��r dom��nen itintegration:registry (adressering av tj��nster)
+			
+			Revisionshistorik: 2011-06-27 Mats Ekhammar, Callista Enterprise AB
+				Added ServiceContractType
+			
+			Datum:			2011-05-04
+			Beskrivning:	Initial version
+			F��rfattare:		marcus.krantz@callistaenterprise.se</xs:documentation>
+  </xs:annotation>
+  <xs:element name="LogicalAddress" type="LogicalAddressType"/>
+  <xs:element name="ServiceContract" type="ServiceContractType"/>
+  <xs:simpleType name="LogicalAddressType">
+    <xs:annotation>
+      <xs:documentation>Defines the type for logical address according to national reference architecture.
+				Superseeds wsa:To as type for logical address header in RIVTA 2.1.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:complexType name="ServiceContractType">
+    <xs:annotation>
+      <xs:documentation>Type which describes a service contract. Used in interaction GetSupportedServiceContracts.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ServiceContractNamespace" type="xs:anyURI"/>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://192.168.16.210:20000/vp/Update/1/rivtabp21</con:endpoint><con:endpoint>https://192.168.19.10:20000/vp/Update/1/rivtabp21</con:endpoint><con:endpoint>https://33.33.33.33:20000/vp/Update/1/rivtabp21</con:endpoint><con:endpoint>https://qa.esb.ntjp.sjunet.org:20000/vp/Update/1/rivtabp21</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:riv:itintegration:engagementindex:UpdateResponder:1:Update" name="Update" bindingOperationName="Update" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="194606109108 Magdalena Karlgren - Skapa engagemang" outgoingWss="" incomingWss=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://192.168.19.10:20000/vp/Update/1/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:itintegration:engagementindex:UpdateResponder:1" xmlns:urn2="urn:riv:itintegration:engagementindex:1">
+   <soapenv:Header>
+      <urn:LogicalAddress>5565594230</urn:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:Update>
+         <urn1:engagementTransaction>
+            <urn2:deleteFlag>false</urn2:deleteFlag>
+            <urn2:engagement>
+               <urn2:registeredResidentIdentification>194606109108</urn2:registeredResidentIdentification>
+               <urn2:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn2:serviceDomain>
+               <urn2:categorization>utr-mtr</urn2:categorization>
+               <urn2:logicalAddress>LT-HSAPRODUCER1</urn2:logicalAddress>
+               <urn2:businessObjectInstanceIdentifier>NA</urn2:businessObjectInstanceIdentifier>
+               <urn2:clinicalProcessInterestId>NA</urn2:clinicalProcessInterestId>
+               <urn2:sourceSystem>LT-HSAPRODUCER1</urn2:sourceSystem>
+               <urn2:dataController>TEST-DATA-CONTROLLER</urn2:dataController>
+            </urn2:engagement>
+         </urn1:engagementTransaction>
+         <urn1:engagementTransaction>
+            <urn2:deleteFlag>false</urn2:deleteFlag>
+            <urn2:engagement>
+               <urn2:registeredResidentIdentification>194606109108</urn2:registeredResidentIdentification>
+               <urn2:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn2:serviceDomain>
+               <urn2:categorization>utr-mtr</urn2:categorization>
+               <urn2:logicalAddress>LT-HSAPRODUCER2</urn2:logicalAddress>
+               <urn2:businessObjectInstanceIdentifier>NA</urn2:businessObjectInstanceIdentifier>
+               <urn2:clinicalProcessInterestId>NA</urn2:clinicalProcessInterestId>
+               <urn2:sourceSystem>LT-HSAPRODUCER2</urn2:sourceSystem>
+               <urn2:dataController>TEST-DATA-CONTROLLER</urn2:dataController>
+            </urn2:engagement>
+         </urn1:engagementTransaction>
+      </urn1:Update>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:itintegration:engagementindex:UpdateResponder:1:Update"/><con:wsrmConfig version="1.2"/></con:call><con:call name="197309069289 Nina Greger - Skapa engagemang"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://192.168.19.10:20000/vp/Update/1/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:itintegration:engagementindex:UpdateResponder:1" xmlns:urn2="urn:riv:itintegration:engagementindex:1">
+   <soapenv:Header>
+      <urn:LogicalAddress>5565594230</urn:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:Update>
+         <urn1:engagementTransaction>
+            <urn2:deleteFlag>false</urn2:deleteFlag>
+            <urn2:engagement>
+               <urn2:registeredResidentIdentification>197309069289</urn2:registeredResidentIdentification>
+               <urn2:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn2:serviceDomain>
+               <urn2:categorization>utr-mtr</urn2:categorization>
+               <urn2:logicalAddress>LT-HSAPRODUCER1</urn2:logicalAddress>
+               <urn2:businessObjectInstanceIdentifier>NA</urn2:businessObjectInstanceIdentifier>
+               <urn2:clinicalProcessInterestId>NA</urn2:clinicalProcessInterestId>
+               <urn2:sourceSystem>LT-HSAPRODUCER1</urn2:sourceSystem>
+               <urn2:dataController>TEST-DATA-CONTROLLER</urn2:dataController>
+            </urn2:engagement>
+         </urn1:engagementTransaction>
+         <urn1:engagementTransaction>
+            <urn2:deleteFlag>false</urn2:deleteFlag>
+            <urn2:engagement>
+               <urn2:registeredResidentIdentification>197309069289</urn2:registeredResidentIdentification>
+               <urn2:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn2:serviceDomain>
+               <urn2:categorization>utr-mtr</urn2:categorization>
+               <urn2:logicalAddress>LT-HSAPRODUCER2</urn2:logicalAddress>
+               <urn2:businessObjectInstanceIdentifier>NA</urn2:businessObjectInstanceIdentifier>
+               <urn2:clinicalProcessInterestId>NA</urn2:clinicalProcessInterestId>
+               <urn2:sourceSystem>LT-HSAPRODUCER2</urn2:sourceSystem>
+               <urn2:dataController>TEST-DATA-CONTROLLER</urn2:dataController>
+            </urn2:engagement>
+         </urn1:engagementTransaction>
+         <urn1:engagementTransaction>
+            <urn2:deleteFlag>false</urn2:deleteFlag>
+            <urn2:engagement>
+               <urn2:registeredResidentIdentification>197309069289</urn2:registeredResidentIdentification>
+               <urn2:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn2:serviceDomain>
+               <urn2:categorization>utr-mtr</urn2:categorization>
+               <urn2:logicalAddress>LT-HSAPRODUCER4</urn2:logicalAddress>
+               <urn2:businessObjectInstanceIdentifier>NA</urn2:businessObjectInstanceIdentifier>
+               <urn2:clinicalProcessInterestId>NA</urn2:clinicalProcessInterestId>
+               <urn2:sourceSystem>LT-HSAPRODUCER4</urn2:sourceSystem>
+               <urn2:dataController>TEST-DATA-CONTROLLER</urn2:dataController>
+            </urn2:engagement>
+         </urn1:engagementTransaction>
+      </urn1:Update>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:itintegration:engagementindex:UpdateResponder:1:Update"/><con:wsrmConfig version="1.2"/></con:call><con:call name="197705232382 Frida Kranstege - Skapa engagemang"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://192.168.19.10:20000/vp/Update/1/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:itintegration:engagementindex:UpdateResponder:1" xmlns:urn2="urn:riv:itintegration:engagementindex:1">
+   <soapenv:Header>
+      <urn:LogicalAddress>5565594230</urn:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:Update>
+         <urn1:engagementTransaction>
+            <urn2:deleteFlag>false</urn2:deleteFlag>
+            <urn2:engagement>
+               <urn2:registeredResidentIdentification>197705232382</urn2:registeredResidentIdentification>
+               <urn2:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn2:serviceDomain>
+               <urn2:categorization>utr-mtr</urn2:categorization>
+               <urn2:logicalAddress>LT-HSAPRODUCER1</urn2:logicalAddress>
+               <urn2:businessObjectInstanceIdentifier>NA</urn2:businessObjectInstanceIdentifier>
+               <urn2:clinicalProcessInterestId>NA</urn2:clinicalProcessInterestId>
+               <urn2:sourceSystem>LT-HSAPRODUCER1</urn2:sourceSystem>
+               <urn2:dataController>TEST-DATA-CONTROLLER</urn2:dataController>
+            </urn2:engagement>
+         </urn1:engagementTransaction>
+         <urn1:engagementTransaction>
+            <urn2:deleteFlag>false</urn2:deleteFlag>
+            <urn2:engagement>
+               <urn2:registeredResidentIdentification>197705232382</urn2:registeredResidentIdentification>
+               <urn2:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn2:serviceDomain>
+               <urn2:categorization>utr-mtr</urn2:categorization>
+               <urn2:logicalAddress>LT-HSAPRODUCER2</urn2:logicalAddress>
+               <urn2:businessObjectInstanceIdentifier>NA</urn2:businessObjectInstanceIdentifier>
+               <urn2:clinicalProcessInterestId>NA</urn2:clinicalProcessInterestId>
+               <urn2:sourceSystem>LT-HSAPRODUCER2</urn2:sourceSystem>
+               <urn2:dataController>TEST-DATA-CONTROLLER</urn2:dataController>
+            </urn2:engagement>
+         </urn1:engagementTransaction>
+         <urn1:engagementTransaction>
+            <urn2:deleteFlag>false</urn2:deleteFlag>
+            <urn2:engagement>
+               <urn2:registeredResidentIdentification>197705232382</urn2:registeredResidentIdentification>
+               <urn2:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn2:serviceDomain>
+               <urn2:categorization>utr-mtr</urn2:categorization>
+               <urn2:logicalAddress>LT-HSAPRODUCER3</urn2:logicalAddress>
+               <urn2:businessObjectInstanceIdentifier>NA</urn2:businessObjectInstanceIdentifier>
+               <urn2:clinicalProcessInterestId>NA</urn2:clinicalProcessInterestId>
+               <urn2:sourceSystem>LT-HSAPRODUCER3</urn2:sourceSystem>
+               <urn2:dataController>TEST-DATA-CONTROLLER</urn2:dataController>
+            </urn2:engagement>
+         </urn1:engagementTransaction>
+      </urn1:Update>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:itintegration:engagementindex:UpdateResponder:1:Update"/><con:wsrmConfig version="1.2"/></con:call><con:call name="198611062384 Ulla Alm - Skapa engagemang"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://192.168.16.210:20000/vp/Update/1/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:itintegration:engagementindex:UpdateResponder:1" xmlns:urn2="urn:riv:itintegration:engagementindex:1">
+   <soapenv:Header>
+      <urn:LogicalAddress>5565594230</urn:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:Update>
+         <urn1:engagementTransaction>
+            <urn2:deleteFlag>false</urn2:deleteFlag>
+            <urn2:engagement>
+               <urn2:registeredResidentIdentification>198611062384</urn2:registeredResidentIdentification>
+               <urn2:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn2:serviceDomain>
+               <urn2:categorization>utr-mtr</urn2:categorization>
+               <urn2:logicalAddress>LT-HSAPRODUCER1</urn2:logicalAddress>
+               <urn2:businessObjectInstanceIdentifier>NA</urn2:businessObjectInstanceIdentifier>
+               <urn2:clinicalProcessInterestId>NA</urn2:clinicalProcessInterestId>
+               <urn2:sourceSystem>LT-HSAPRODUCER1</urn2:sourceSystem>
+               <urn2:dataController>TEST-DATA-CONTROLLER</urn2:dataController>
+            </urn2:engagement>
+         </urn1:engagementTransaction>
+         <urn1:engagementTransaction>
+            <urn2:deleteFlag>false</urn2:deleteFlag>
+            <urn2:engagement>
+               <urn2:registeredResidentIdentification>198611062384</urn2:registeredResidentIdentification>
+               <urn2:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn2:serviceDomain>
+               <urn2:categorization>utr-mtr</urn2:categorization>
+               <urn2:logicalAddress>LT-HSAPRODUCER2</urn2:logicalAddress>
+               <urn2:businessObjectInstanceIdentifier>NA</urn2:businessObjectInstanceIdentifier>
+               <urn2:clinicalProcessInterestId>NA</urn2:clinicalProcessInterestId>
+               <urn2:sourceSystem>LT-HSAPRODUCER2</urn2:sourceSystem>
+               <urn2:dataController>TEST-DATA-CONTROLLER</urn2:dataController>
+            </urn2:engagement>
+         </urn1:engagementTransaction>
+         <urn1:engagementTransaction>
+            <urn2:deleteFlag>false</urn2:deleteFlag>
+            <urn2:engagement>
+               <urn2:registeredResidentIdentification>198611062384</urn2:registeredResidentIdentification>
+               <urn2:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn2:serviceDomain>
+               <urn2:categorization>utr-mtr</urn2:categorization>
+               <urn2:logicalAddress>LT-HSAPRODUCER3</urn2:logicalAddress>
+               <urn2:businessObjectInstanceIdentifier>NA</urn2:businessObjectInstanceIdentifier>
+               <urn2:clinicalProcessInterestId>NA</urn2:clinicalProcessInterestId>
+               <urn2:sourceSystem>LT-HSAPRODUCER3</urn2:sourceSystem>
+               <urn2:dataController>TEST-DATA-CONTROLLER</urn2:dataController>
+            </urn2:engagement>
+         </urn1:engagementTransaction>
+         <urn1:engagementTransaction>
+            <urn2:deleteFlag>false</urn2:deleteFlag>
+            <urn2:engagement>
+               <urn2:registeredResidentIdentification>198611062384</urn2:registeredResidentIdentification>
+               <urn2:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn2:serviceDomain>
+               <urn2:categorization>utr-mtr</urn2:categorization>
+               <urn2:logicalAddress>LT-HSAPRODUCER4</urn2:logicalAddress>
+               <urn2:businessObjectInstanceIdentifier>NA</urn2:businessObjectInstanceIdentifier>
+               <urn2:clinicalProcessInterestId>NA</urn2:clinicalProcessInterestId>
+               <urn2:sourceSystem>LT-HSAPRODUCER4</urn2:sourceSystem>
+               <urn2:dataController>TEST-DATA-CONTROLLER</urn2:dataController>
+            </urn2:engagement>
+         </urn1:engagementTransaction>
+         <urn1:engagementTransaction>
+            <urn2:deleteFlag>false</urn2:deleteFlag>
+            <urn2:engagement>
+               <urn2:registeredResidentIdentification>198611062384</urn2:registeredResidentIdentification>
+               <urn2:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn2:serviceDomain>
+               <urn2:categorization>utr-mtr</urn2:categorization>
+               <urn2:logicalAddress>LT-HSAPRODUCER5</urn2:logicalAddress>
+               <urn2:businessObjectInstanceIdentifier>NA</urn2:businessObjectInstanceIdentifier>
+               <urn2:clinicalProcessInterestId>NA</urn2:clinicalProcessInterestId>
+               <urn2:sourceSystem>LT-HSAPRODUCER5</urn2:sourceSystem>
+               <urn2:dataController>TEST-DATA-CONTROLLER</urn2:dataController>
+            </urn2:engagement>
+         </urn1:engagementTransaction>
+      </urn1:Update>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:itintegration:engagementindex:UpdateResponder:1:Update"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Copy of 198611062384 Ulla Alm - Skapa engagemang"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://192.168.16.210:20000/vp/Update/1/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:itintegration:engagementindex:UpdateResponder:1" xmlns:urn2="urn:riv:itintegration:engagementindex:1">
+   <soapenv:Header>
+      <urn:LogicalAddress>5565594230</urn:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:Update>
+         <urn1:engagementTransaction>
+            <urn2:deleteFlag>false</urn2:deleteFlag>
+            <urn2:engagement>
+               <urn2:registeredResidentIdentification>196506145173</urn2:registeredResidentIdentification>
+               <urn2:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn2:serviceDomain>
+               <urn2:categorization>utr-mtr</urn2:categorization>
+               <urn2:logicalAddress>LT-HSAPRODUCER1</urn2:logicalAddress>
+               <urn2:businessObjectInstanceIdentifier>NA</urn2:businessObjectInstanceIdentifier>
+               <urn2:clinicalProcessInterestId>NA</urn2:clinicalProcessInterestId>
+               <urn2:sourceSystem>LT-HSAPRODUCER1</urn2:sourceSystem>
+               <urn2:dataController>TEST-DATA-CONTROLLER</urn2:dataController>
+            </urn2:engagement>
+         </urn1:engagementTransaction>
+         <urn1:engagementTransaction>
+            <urn2:deleteFlag>false</urn2:deleteFlag>
+            <urn2:engagement>
+               <urn2:registeredResidentIdentification>194606109108</urn2:registeredResidentIdentification>
+               <urn2:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn2:serviceDomain>
+               <urn2:categorization>utr-mtr</urn2:categorization>
+               <urn2:logicalAddress>LT-HSAPRODUCER2</urn2:logicalAddress>
+               <urn2:businessObjectInstanceIdentifier>NA</urn2:businessObjectInstanceIdentifier>
+               <urn2:clinicalProcessInterestId>NA</urn2:clinicalProcessInterestId>
+               <urn2:sourceSystem>LT-HSAPRODUCER2</urn2:sourceSystem>
+               <urn2:dataController>TEST-DATA-CONTROLLER</urn2:dataController>
+            </urn2:engagement>
+         </urn1:engagementTransaction>
+      </urn1:Update>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username xsi:nil="true"/><con:password xsi:nil="true"/><con:domain xsi:nil="true"/><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:itintegration:engagementindex:UpdateResponder:1:Update"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="FindContentResponderBinding" type="wsdl" bindingName="{urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21}FindContentResponderBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/vp/FindContent/1/rivtabp21?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/vp/FindContent/1/rivtabp21?wsdl"><con:part><con:url>http://localhost:8080/vp/FindContent/1/rivtabp21?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="FindContentInteraction" targetNamespace="urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21" xmlns:itr="urn:riv:itintegration:registry:1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tjsi="urn:riv:itintegration:engagementindex:FindContentInitiator:1" xmlns:tjsr="urn:riv:itintegration:engagementindex:FindContentResponder:1" xmlns:tns="urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema targetNamespace="urn:riv:itintegration:engagementindex:FindContent:1:rivtabp21">
+      <xs:import namespace="urn:riv:itintegration:engagementindex:FindContentResponder:1" schemaLocation="http://localhost:8080/vp/FindContent/1/rivtabp21?xsd=FindContentResponder_1.0.xsd"/>
+      <xs:import namespace="urn:riv:itintegration:registry:1" schemaLocation="http://localhost:8080/vp/FindContent/1/rivtabp21?xsd=../../core_components/itintegration_registry_1.0.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="FindContentResponse">
+    <wsdl:part element="tjsr:FindContentResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="FindContentRequest">
+    <wsdl:part element="itr:LogicalAddress" name="LogicalAddress">
+      <wsdl:documentation>The organisation number of the organization owning the targeted engagement index</wsdl:documentation>
+    </wsdl:part>
+    <wsdl:part element="tjsr:FindContent" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="FindContentResponderInterface">
+    <wsdl:operation name="FindContent">
+      <wsdl:input message="tns:FindContentRequest"></wsdl:input>
+      <wsdl:output message="tns:FindContentResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FindContentResponderBinding" type="tns:FindContentResponderInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="FindContent">
+      <soap:operation soapAction="urn:riv:itintegration:engagementindex:FindContentResponder:1:FindContent" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:FindContentRequest" part="LogicalAddress" use="literal"></soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FindContentResponderService">
+    <wsdl:port binding="tns:FindContentResponderBinding" name="FindContentResponderPort">
+      <soap:address location="http://localhost:8080/vp/FindContent/1/rivtabp21"/>
+    </wsdl:port>
+  </wsdl:service>
+  <xs:annotation>
+    <xs:documentation>Tjänsteinteraktionens namn: FindContentInteraction
+			 Beskrivning: 
+			   Service for searching the content of an engagement index
+			 Revisioner: 
+			 Tjänstedomän: itintegration:engagementindex
+			 Tjänsteinteraktionstyp: Fråga-Svar
+			 WS-profil: RIVTABP21
+			 Förvaltas av: Sveriges Kommuner och Landsting</xs:documentation>
+  </xs:annotation>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:8080/vp/FindContent/1/rivtabp21?xsd=FindContentResponder_1.0.xsd</con:url><con:content><![CDATA[<!--Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements. See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership. Sveriges Kommuner och Landsting licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License. You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied. See the License for the
+ specific language governing permissions and limitations
+ under the License.-->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:riv:itintegration:engagementindex:FindContentResponder:1" version="1.0" xmlns:core="urn:riv:itintegration:engagementindex:1" xmlns:tns="urn:riv:itintegration:engagementindex:FindContentResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="urn:riv:itintegration:engagementindex:1" schemaLocation="http://localhost:8080/vp/FindContent/1/rivtabp21?xsd=../../core_components/itintegration_engagementindex_1.0.xsd"/>
+  <xs:element name="FindContent" type="tns:FindContentType"/>
+  <xs:element name="FindContentResponse" type="tns:FindContentResponseType"/>
+  <xs:complexType name="FindContentType">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="registeredResidentIdentification" type="core:RegisteredResidentIdentificationType"/>
+      <xs:element minOccurs="1" name="serviceDomain" type="xs:anyURI"/>
+      <xs:element minOccurs="0" name="categorization" type="xs:string"/>
+      <xs:element minOccurs="0" name="logicalAddress" type="xs:string"/>
+      <xs:element minOccurs="0" name="businessObjectInstanceIdentifier" type="xs:string"/>
+      <xs:element minOccurs="0" name="clinicalProcessInterestId" type="core:ClinicalProcessInterestIdType"/>
+      <xs:element minOccurs="0" name="mostRecentContent" type="core:TS"/>
+      <xs:element minOccurs="0" name="sourceSystem" type="core:HsaIdType"/>
+      <xs:element minOccurs="0" name="dataController" type="core:OrgNoType"/>
+      <xs:element minOccurs="0" name="owner" type="core:HsaIdType"/>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FindContentResponseType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="engagement" type="core:EngagementType"/>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://localhost:8080/vp/FindContent/1/rivtabp21?xsd=../../core_components/itintegration_engagementindex_1.0.xsd</con:url><con:content><![CDATA[<!--Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements. See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership. Sveriges Kommuner och Landsting licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License. You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied. See the License for the
+ specific language governing permissions and limitations
+ under the License.-->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:riv:itintegration:engagementindex:1" version="1.0" xmlns:tns="urn:riv:itintegration:engagementindex:1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="EngagementTransactionType">
+    <xs:sequence>
+      <xs:element name="deleteFlag" type="xs:boolean"/>
+      <xs:element name="engagement" type="tns:EngagementType"/>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EngagementType">
+    <xs:sequence>
+      <xs:element name="registeredResidentIdentification" type="tns:RegisteredResidentIdentificationType"/>
+      <xs:element name="serviceDomain" type="xs:anyURI"/>
+      <xs:element name="categorization" type="xs:string"/>
+      <xs:element name="logicalAddress" type="xs:string"/>
+      <xs:element name="businessObjectInstanceIdentifier" type="xs:string"/>
+      <xs:element minOccurs="1" name="clinicalProcessInterestId" type="tns:ClinicalProcessInterestIdType"/>
+      <xs:element minOccurs="0" name="mostRecentContent" type="tns:TS"/>
+      <xs:element name="sourceSystem" type="tns:HsaIdType"/>
+      <xs:element minOccurs="0" name="creationTime" type="tns:TS"/>
+      <xs:element minOccurs="0" name="updateTime" type="tns:TS"/>
+      <xs:element name="dataController" type="tns:OrgNoType"/>
+      <xs:element minOccurs="0" name="owner" type="tns:HsaIdType"/>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="HsaIdType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="OrgNoType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="ClinicalProcessInterestIdType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="RegisteredResidentIdentificationType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^[0-9]{8}[0-9pPtTfF][0-9]{3}$"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TS">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[1-9]{1}[0-9]{3}(0[1-9]{1}|1[0-2]{1})([0-2]{1}[0-9]{1}|3[0-1]{1})([0-1]{1}[0-9]{1}|2[0-3]{1})[0-5]{1}[0-9]{1}[0-5]{1}[0-9]{1}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DT">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[1-9]{1}[0-9]{3}(0[1-9]{1}|1[0-2]{1})([0-2]{1}[0-9]{1}|3[0-1]{1})"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ResultCodeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OK"/>
+      <xs:enumeration value="ERROR"/>
+      <xs:enumeration value="INFO"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://localhost:8080/vp/FindContent/1/rivtabp21?xsd=../../core_components/itintegration_registry_1.0.xsd</con:url><con:content><![CDATA[<xs:schema elementFormDefault="qualified" targetNamespace="urn:riv:itintegration:registry:1" version="1.0" xmlns="urn:riv:itintegration:registry:1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation>Beskrivning: 	Grundl��ggande informationsobjekt f��r dom��nen itintegration:registry (adressering av tj��nster)
+			
+			Revisionshistorik: 2011-06-27 Mats Ekhammar, Callista Enterprise AB
+				Added ServiceContractType
+			
+			Datum:			2011-05-04
+			Beskrivning:	Initial version
+			F��rfattare:		marcus.krantz@callistaenterprise.se</xs:documentation>
+  </xs:annotation>
+  <xs:element name="LogicalAddress" type="LogicalAddressType"/>
+  <xs:element name="ServiceContract" type="ServiceContractType"/>
+  <xs:simpleType name="LogicalAddressType">
+    <xs:annotation>
+      <xs:documentation>Defines the type for logical address according to national reference architecture.
+				Superseeds wsa:To as type for logical address header in RIVTA 2.1.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:complexType name="ServiceContractType">
+    <xs:annotation>
+      <xs:documentation>Type which describes a service contract. Used in interaction GetSupportedServiceContracts.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ServiceContractNamespace" type="xs:anyURI"/>
+      <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://192.168.19.10:20000/vp/FindContent/1/rivtabp21</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:riv:itintegration:engagementindex:FindContentResponder:1:FindContent" name="FindContent" bindingOperationName="FindContent" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Ulla Alm"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://192.168.19.10:20000/vp/FindContent/1/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:itintegration:engagementindex:FindContentResponder:1">
+   <soapenv:Header>
+      <urn:LogicalAddress>5565594230</urn:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:FindContent>
+         <urn1:registeredResidentIdentification>198611062384</urn1:registeredResidentIdentification>
+         <urn1:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn1:serviceDomain>
+      </urn1:FindContent>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:itintegration:engagementindex:FindContentResponder:1:FindContent"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Magdalena Karlgren"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://192.168.19.10:20000/vp/FindContent/1/rivtabp21</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:itintegration:engagementindex:FindContentResponder:1">
+   <soapenv:Header>
+      <urn:LogicalAddress>5565594230</urn:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:FindContent>
+         <urn1:registeredResidentIdentification>194606109108</urn1:registeredResidentIdentification>
+         <urn1:serviceDomain>riv:clinicalprocess:healthcond:actoutcome</urn1:serviceDomain>
+      </urn1:FindContent>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:itintegration:engagementindex:FindContentResponder:1:FindContent"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="Sätt upp test"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Sätt upp TAK" searchProperties="true"><con:settings/><con:testStep type="manualTestStep" name="SQL Script för att sätta upp TAK (Manuellt steg)"><con:description>Sätt upp TAK databasen</con:description><con:settings/><con:config xsi:type="con:ManualTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:expectedResult>-- Testerna behöver följande data för att kunna exekvera
+-- Tjänstekontraktet 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21' måste finnas i TAK
+-- Kör scriptet mot tak-schemat i önskad målmiljö
+-- Kör delete scriptet som finns i städa upp efter test när du är klar
+
+-- Sätt upp logiska adressater
+INSERT INTO LogiskAdressat (beskrivning, hsaId, version) VALUES('Används vid lasttester.', 'LT-HSAPRODUCER1', 0);
+INSERT INTO LogiskAdressat (beskrivning, hsaId, version) VALUES('Används vid lasttester.', 'LT-HSAPRODUCER2', 0);
+INSERT INTO LogiskAdressat (beskrivning, hsaId, version) VALUES('Används vid lasttester.', 'LT-HSAPRODUCER3', 0);
+INSERT INTO LogiskAdressat (beskrivning, hsaId, version) VALUES('Används vid lasttester.', 'LT-HSAPRODUCER4', 0);
+INSERT INTO LogiskAdressat (beskrivning, hsaId, version) VALUES('Används vid lasttester. Ska vara uppsatt utan anropsbehörigheter.', 'LT-HSAPRODUCER5', 0);
+
+-- Sätt upp tjänstekomponenter
+INSERT INTO Tjanstekomponent (adress, beskrivning, hsaId, version) VALUES('http://localhost:20202/producer_1/teststub/GetMaternityMedicalHistory/2/rivtabp21', 'Producent för system 1 vid lasttester av Aggregerandetjänst mödravård.', 'LT-HSAProducent_1_Modravard', 0);
+INSERT INTO Tjanstekomponent (adress, beskrivning, hsaId, version) VALUES('http://localhost:20202/producer_2/teststub/GetMaternityMedicalHistory/2/rivtabp21', 'Producent för system 2 vid lasttester av Aggregerandetjänst mödravård.', 'LT-HSAProducent_2_Modravard', 0);
+INSERT INTO Tjanstekomponent (adress, beskrivning, hsaId, version) VALUES('http://localhost:20202/producer_3/teststub/GetMaternityMedicalHistory/2/rivtabp21', 'Producent för system 3 vid lasttester av Aggregerandetjänst mödravård.', 'LT-HSAProducent_3_Modravard', 0);
+INSERT INTO Tjanstekomponent (adress, beskrivning, hsaId, version) VALUES('http://localhost:20202/producer_4/teststub/GetMaternityMedicalHistory/2/rivtabp21', 'Producent för system 4 vid lasttester av Aggregerandetjänst mödravård.', 'LT-HSAProducent_4_Modravard', 0);
+INSERT INTO Tjanstekomponent (adress, beskrivning, hsaId, version) VALUES('http://localhost:20202/producer_5/teststub/GetMaternityMedicalHistory/2/rivtabp21', 'Producent för system 5 vid lasttester av Aggregerandetjänst mödravård.', 'LT-HSAProducent_5_Modravard', 0);
+
+-- Sätt upp logiska adresser
+INSERT INTO LogiskAdress (fromTidpunkt, tomTidpunkt, version, logiskAdressat_id, rivVersion_id, tjanstekontrakt_id, tjansteproducent_id)
+select '2013-10-07', '2113-10-07', 0, adressat.id, riv.id, kontrakt.id, producent.id from LogiskAdressat as adressat, RivVersion as riv,
+Tjanstekontrakt as kontrakt, Tjanstekomponent as producent
+where adressat.hsaId = 'LT-HSAPRODUCER1'
+and riv.namn = 'RIVTABP21'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and producent.hsaId = 'LT-HSAProducent_1_Modravard';
+
+INSERT INTO LogiskAdress (fromTidpunkt, tomTidpunkt, version, logiskAdressat_id, rivVersion_id, tjanstekontrakt_id, tjansteproducent_id)
+select '2013-10-07', '2113-10-07', 0, adressat.id, riv.id, kontrakt.id, producent.id from LogiskAdressat as adressat, RivVersion as riv,
+Tjanstekontrakt as kontrakt, Tjanstekomponent as producent
+where adressat.hsaId = 'LT-HSAPRODUCER2'
+and riv.namn = 'RIVTABP21'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and producent.hsaId = 'LT-HSAProducent_2_Modravard';
+
+INSERT INTO LogiskAdress (fromTidpunkt, tomTidpunkt, version, logiskAdressat_id, rivVersion_id, tjanstekontrakt_id, tjansteproducent_id)
+select '2013-10-07', '2113-10-07', 0, adressat.id, riv.id, kontrakt.id, producent.id from LogiskAdressat as adressat, RivVersion as riv,
+Tjanstekontrakt as kontrakt, Tjanstekomponent as producent
+where adressat.hsaId = 'LT-HSAPRODUCER3'
+and riv.namn = 'RIVTABP21'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and producent.hsaId = 'LT-HSAProducent_3_Modravard';
+
+INSERT INTO LogiskAdress (fromTidpunkt, tomTidpunkt, version, logiskAdressat_id, rivVersion_id, tjanstekontrakt_id, tjansteproducent_id)
+select '2013-10-07', '2113-10-07', 0, adressat.id, riv.id, kontrakt.id, producent.id from LogiskAdressat as adressat, RivVersion as riv,
+Tjanstekontrakt as kontrakt, Tjanstekomponent as producent
+where adressat.hsaId = 'LT-HSAPRODUCER4'
+and riv.namn = 'RIVTABP21'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and producent.hsaId = 'LT-HSAProducent_4_Modravard';
+
+INSERT INTO LogiskAdress (fromTidpunkt, tomTidpunkt, version, logiskAdressat_id, rivVersion_id, tjanstekontrakt_id, tjansteproducent_id)
+select '2013-10-07', '2113-10-07', 0, adressat.id, riv.id, kontrakt.id, producent.id from LogiskAdressat as adressat, RivVersion as riv,
+Tjanstekontrakt as kontrakt, Tjanstekomponent as producent
+where adressat.hsaId = 'LT-HSAPRODUCER5'
+and riv.namn = 'RIVTABP21'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and producent.hsaId = 'LT-HSAProducent_5_Modravard';</con:expectedResult></con:config></con:testStep><con:testStep type="manualTestStep" name="Sätt upp anropsbehörigheter i TAK (SKLTP-Box)"><con:description>Sätt upp anropsbehörigheter för SKLTP-Box miljö</con:description><con:settings/><con:config xsi:type="con:ManualTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:expectedResult>-- =========================================================================== 
+-- Om miljön är SKLTP-BOX sätt då upp anropsbehörigheter med nedanstående
+-- ===========================================================================
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER1'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = 'client';
+
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER2'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = 'client';
+
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER3'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = 'client';
+
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER4'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = 'client';</con:expectedResult></con:config></con:testStep><con:testStep type="manualTestStep" name="Sätt upp anropsbehörigheter i TAK (NTjP TEST)"><con:description>Sätt upp anropsbehörigheter för  NTjP Test miljö</con:description><con:settings/><con:config xsi:type="con:ManualTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:expectedResult>-- =========================================================================== 
+-- Om miljön är NTjP TEST sätt då upp anropsbehörigheter med nedanstående
+-- =========================================================================== 
+
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER1'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = 'HSASERVICES-100M';
+
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER2'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = 'HSASERVICES-100M';
+
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER3'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = 'HSASERVICES-100M';
+
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER4'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = 'HSASERVICES-100M';
+</con:expectedResult></con:config></con:testStep><con:testStep type="manualTestStep" name="Sätt upp anropsbehörigheter i TAK (NTjP QA)"><con:description>Sätt upp anropsbehörigheter för NTjP QA miljö</con:description><con:settings/><con:config xsi:type="con:ManualTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:expectedResult>-- =========================================================================== 
+-- Om miljön är NTjP QA sätt då upp anropsbehörigheter med nedanstående
+-- ===========================================================================
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER1'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = 'HSASERVICES-100S';
+
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER2'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = 'HSASERVICES-100S';
+
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER3'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = 'HSASERVICES-100S';
+
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER4'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = 'HSASERVICES-100S';
+
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER1'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = '5565594230';
+
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER2'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = '5565594230';
+
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER3'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = '5565594230';
+
+INSERT INTO `Anropsbehorighet` (`fromTidpunkt`, `integrationsavtal`, `tomTidpunkt`, `version`, `logiskAdressat_id`, `tjanstekonsument_id`, `tjanstekontrakt_id`)
+select '2013-01-01', 'Integrationstest Aggregerandetjänst mödravård', '2114-12-31', 0, adressat.id, konsument.id, kontrakt.id
+from `LogiskAdressat` as adressat, `Tjanstekontrakt` as kontrakt, `Tjanstekomponent` as konsument
+where adressat.hsaId = 'LT-HSAPRODUCER4'
+and kontrakt.namnrymd = 'urn:riv:clinicalprocess:healthcond:actoutcome:GetMaternityMedicalHistory:2:rivtabp21'
+and konsument.hsaId = '5565594230';
+</con:expectedResult></con:config></con:testStep><con:testStep type="manualTestStep" name="Gör reset av cache"><con:description>$ curl http://localhost:23000/resetcache</con:description><con:settings/><con:config xsi:type="con:ManualTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:expectedResult>Om du är i testmiljön använd:
+http://192.168.19.10:23000/resetcache
+
+Om du är i qa-miljön använd:
+nod1: http://192.168.16.210:23000/resetcache
+nod2: http://192.168.16.212:23000/resetcache
+</con:expectedResult></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Ladda e-index med patienterna" searchProperties="true"><con:description>Ladda engagemangsindex med patienter</con:description><con:settings/><con:testStep type="manualTestStep" name="Förberedelse"><con:settings/><con:config xsi:type="con:ManualTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:expectedResult>Använd klinetcertifikat för att ladda engagemangsindex med information för
+patienterna.</con:expectedResult></con:config></con:testStep><con:testStep type="manualTestStep" name="Kör Update för Magdalena"><con:settings/><con:config xsi:type="con:ManualTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:testStep><con:testStep type="manualTestStep" name="Kör Update för Nina"><con:settings/><con:config xsi:type="con:ManualTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:testStep><con:testStep type="manualTestStep" name="Kör Update för Frida"><con:settings/><con:config xsi:type="con:ManualTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:testStep><con:testStep type="manualTestStep" name="Kör Update för Ulla"><con:settings/><con:config xsi:type="con:ManualTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="Städa upp efter test"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Städa upp TAK" searchProperties="true"><con:settings/><con:testStep type="manualTestStep" name="SQL Script för att städa upp i TAK (Manuellt steg)"><con:description>Rensa upp TAK databasen</con:description><con:settings/><con:config xsi:type="con:ManualTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:expectedResult>-- Detta script tar bort all data  från TAK som behövdes för testerna
+
+-- Ta bort all anropsbehörigheter
+
+DELETE FROM `Anropsbehorighet` WHERE integrationsavtal = 'Integrationstest Aggregerandetjänst mödravård';
+
+-- Ta bort logiska adresser
+DELETE FROM `LogiskAdress`
+WHERE logiskAdressat_id IN (
+ SELECT id FROM `LogiskAdressat` adressat
+ WHERE adressat.hsaId = 'LT-HSAPRODUCER1'
+);
+
+DELETE FROM `LogiskAdress`
+WHERE logiskAdressat_id IN (
+ SELECT id FROM `LogiskAdressat` adressat
+ WHERE adressat.hsaId = 'LT-HSAPRODUCER2'
+);
+
+DELETE FROM `LogiskAdress`
+WHERE logiskAdressat_id IN (
+ SELECT id FROM `LogiskAdressat` adressat
+ WHERE adressat.hsaId = 'LT-HSAPRODUCER3'
+);
+
+DELETE FROM `LogiskAdress`
+WHERE logiskAdressat_id IN (
+ SELECT id FROM `LogiskAdressat` adressat
+ WHERE adressat.hsaId = 'LT-HSAPRODUCER4'
+);
+
+DELETE FROM `LogiskAdress`
+WHERE logiskAdressat_id IN (
+ SELECT id FROM `LogiskAdressat` adressat
+ WHERE adressat.hsaId = 'LT-HSAPRODUCER5'
+);
+
+-- Ta bort all producenter
+Delete FROM `Tjanstekomponent`
+WHERE hsaId = 'LT-HSAProducent_1_Modravard';
+
+Delete FROM `Tjanstekomponent`
+WHERE hsaId = 'LT-HSAProducent_2_Modravard';
+
+Delete FROM `Tjanstekomponent`
+WHERE hsaId = 'LT-HSAProducent_3_Modravard';
+
+Delete FROM `Tjanstekomponent`
+WHERE hsaId = 'LT-HSAProducent_4_Modravard';
+
+Delete FROM `Tjanstekomponent`
+WHERE hsaId = 'LT-HSAProducent_5_Modravard';
+
+-- Ta bort logiska adressater
+DELETE FROM `LogiskAdressat`
+WHERE hsaId = 'LT-HSAPRODUCER1';
+
+DELETE FROM `LogiskAdressat`
+WHERE hsaId = 'LT-HSAPRODUCER2';
+
+DELETE FROM `LogiskAdressat`
+WHERE hsaId = 'LT-HSAPRODUCER3';
+
+DELETE FROM `LogiskAdressat`
+WHERE hsaId = 'LT-HSAPRODUCER4';
+
+DELETE FROM `LogiskAdressat`
+WHERE hsaId = 'LT-HSAPRODUCER5';</con:expectedResult></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/></con:soapui-project>
