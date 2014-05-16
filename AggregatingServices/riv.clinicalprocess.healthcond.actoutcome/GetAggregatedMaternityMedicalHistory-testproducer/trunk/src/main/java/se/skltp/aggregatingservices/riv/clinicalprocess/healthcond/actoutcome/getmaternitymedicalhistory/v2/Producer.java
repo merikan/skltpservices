@@ -29,11 +29,11 @@ import org.apache.cxf.bus.spring.SpringBusFactory;
 
 public class Producer implements Runnable{
 	
-	private static String ENDPOINT_PRODUCER_1 = "http://localhost:20202/producer_1/teststub/GetMaternityMedicalHistory/2/rivtabp21";
-	private static String ENDPOINT_PRODUCER_2 = "http://localhost:20202/producer_2/teststub/GetMaternityMedicalHistory/2/rivtabp21";
-	private static String ENDPOINT_PRODUCER_3 = "http://localhost:20202/producer_3/teststub/GetMaternityMedicalHistory/2/rivtabp21";
-	private static String ENDPOINT_PRODUCER_4 = "http://localhost:20202/producer_4/teststub/GetMaternityMedicalHistory/2/rivtabp21";
-	private static String ENDPOINT_PRODUCER_5 = "http://localhost:20202/producer_5/teststub/GetMaternityMedicalHistory/2/rivtabp21";
+	private static String ENDPOINT_PRODUCER_1 = "http://0.0.0.0:20202/producer_1/teststub/GetMaternityMedicalHistory/2/rivtabp21";
+	private static String ENDPOINT_PRODUCER_2 = "http://0.0.0.0:20202/producer_2/teststub/GetMaternityMedicalHistory/2/rivtabp21";
+	private static String ENDPOINT_PRODUCER_3 = "http://0.0.0.0:20202/producer_3/teststub/GetMaternityMedicalHistory/2/rivtabp21";
+	private static String ENDPOINT_PRODUCER_4 = "http://0.0.0.0:20202/producer_4/teststub/GetMaternityMedicalHistory/2/rivtabp21";
+	private static String ENDPOINT_PRODUCER_5 = "http://0.0.0.0:20202/producer_5/teststub/GetMaternityMedicalHistory/2/rivtabp21";
 	
 	protected Producer(String address, final Object producer) throws Exception {
 		System.out.println("Starting GetMaternityMedicalHistory testproducer with endpoint: " + address);
