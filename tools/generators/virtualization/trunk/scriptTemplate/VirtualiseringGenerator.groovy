@@ -134,6 +134,7 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 		-DserviceMethod=${artifactId}
 		-DserviceWsdlFileDir=classpath:/schemas$schemaDir/${artifactId}Interaction/${wsdlFileName}
 		-DserviceNamespace=${serviceInteractionNameSpace}
+    -DwsdlServiceName=${artifactId}ResponderService"
 		"""
 		println "$mvnCommand"
 
@@ -209,7 +210,7 @@ if( args.size() < 1){
 }
 
 def sourceDir = new File(args[0])
-def targetDir = "."
+def targetDir = new File(".").getAbsolutePath()
 
 new File("pom.xml").delete()
 new File("${targetDir}/pom.xml") << new File("pomtemplate.xml").asWritable()
