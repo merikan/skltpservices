@@ -21,6 +21,9 @@
 		<requiredProperty key="serviceNamespace">
 			<defaultValue>${serviceNamespace}</defaultValue>
 		</requiredProperty>
+		<requiredProperty key="wsdlServiceName">
+			<defaultValue>${wsdlServiceName}</defaultValue>
+		</requiredProperty>
 	</requiredProperties>
 
 	<fileSets>
