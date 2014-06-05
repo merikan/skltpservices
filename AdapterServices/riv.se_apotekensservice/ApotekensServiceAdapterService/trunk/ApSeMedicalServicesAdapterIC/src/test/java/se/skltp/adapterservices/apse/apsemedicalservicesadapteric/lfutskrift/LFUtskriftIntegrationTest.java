@@ -45,6 +45,7 @@ public class LFUtskriftIntegrationTest extends AbstractTestCase {
 	private static final Logger log = LoggerFactory.getLogger(LFUtskriftIntegrationTest.class);
 
 	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("inbound.endpoint.http.apotekensservice.lf.LFUtskrift");
+	private static final String DEFAULT_SERVICE_ADDRESS_ENV2 = getAddress("inbound.endpoint.http.env2.apotekensservice.lf.LFUtskrift");
 	private static final String ERROR_LOG_QUEUE = "SOITOOLKIT.LOG.ERROR";
 	private AbstractJmsTestUtil jmsUtil = null;
  
@@ -94,6 +95,24 @@ public class LFUtskriftIntegrationTest extends AbstractTestCase {
 
 		LFUtskriftResponseType response = new LFUtskriftTestConsumer(
 				DEFAULT_SERVICE_ADDRESS)
+				.citicenRequest(request, to, argosHeader);
+
+		assertNotNull(response);
+		assertEquals(CITIZENREQUEST, response.getPatient().getPersonnummer());
+	}
+	
+	@Test
+	public void testCitizenServiceRequest_happydays_env2() throws Exception {
+		String to = "logicaladdress";
+
+		ArgosHeaderType argosHeader = createCompleteCitizenArgosHeader();
+		
+		LFUtskriftRequestType request = new LFUtskriftRequestType();
+		request.setPersonnummer(CITIZENREQUEST);
+		request.setAnvandarNamn(argosHeader.getFornamn());
+
+		LFUtskriftResponseType response = new LFUtskriftTestConsumer(
+				DEFAULT_SERVICE_ADDRESS_ENV2)
 				.citicenRequest(request, to, argosHeader);
 
 		assertNotNull(response);
