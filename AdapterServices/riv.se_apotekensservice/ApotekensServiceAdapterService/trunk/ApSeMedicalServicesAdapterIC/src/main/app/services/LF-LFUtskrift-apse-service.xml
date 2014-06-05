@@ -88,7 +88,7 @@ version="EE-3.4.1">
 		<transformer ref="ArgosHeaderToSamlTicket" />
 			
 		<https:outbound-endpoint connector-ref="soitoolkit-https-connector"
-			address="${outbound.endpoint.env2.apotekensservice.lf.LasLFVardsystem}"
+			address="${outbound.endpoint.env2.apotekensservice.lf.LFUtskrift}"
 			exchange-pattern="request-response" 
 			responseTimeout="${SERVICE_TIMEOUT_MS}"
 			transformer-refs="addContentTypeXmlUtf8 logReqOut" 
