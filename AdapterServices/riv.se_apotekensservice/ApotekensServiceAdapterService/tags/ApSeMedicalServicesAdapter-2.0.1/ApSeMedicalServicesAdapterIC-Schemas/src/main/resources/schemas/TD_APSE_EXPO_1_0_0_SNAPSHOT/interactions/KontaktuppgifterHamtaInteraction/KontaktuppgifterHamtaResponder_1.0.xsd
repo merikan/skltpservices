@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="urn:riv:se.apotekensservice:expo:KontaktuppgifterHamtaResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:expo="urn:riv:se.apotekensservice:expo:1" targetNamespace="urn:riv:se.apotekensservice:expo:KontaktuppgifterHamtaResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_expo_1.0.xsd" namespace="urn:riv:se.apotekensservice:expo:1"/>
+  <xs:element name="KontaktuppgifterHamta" type="KontaktuppgifterHamtaRequestType"/>
+  <xs:element name="KontaktuppgifterHamtaResponse" type="KontaktuppgifterHamtaResponseType"/>
+  <xs:element name="ApplicationException" type="expo:ApplicationException"/>
+  <xs:element name="SystemException" type="expo:SystemException"/>
+  <xs:complexType name="KontaktuppgifterHamtaRequestType">
+    <xs:sequence>
+      <xs:element name="orgNr" type="xs:long" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Aktörens organisationsnummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="username" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Anropandes stp username.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KontaktuppgifterHamtaResponseType">
+    <xs:sequence>
+      <xs:element name="epostadressServicedesk" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>E-postadress till aktörens servicedesk</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="kontaktpersonLista" maxOccurs="unbounded" type="expo:KontaktpersonResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Kontaktpersoner</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="orgNr" type="xs:long" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Aktörens organisationsnummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="telefonnummerServicedesk" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Telefonnummer till aktörens servicedesk</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
