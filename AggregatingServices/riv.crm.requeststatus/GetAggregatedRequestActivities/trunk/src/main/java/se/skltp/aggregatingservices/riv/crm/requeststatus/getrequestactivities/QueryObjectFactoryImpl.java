@@ -43,7 +43,12 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
 		FindContentType fc = new FindContentType();		
 		fc.setRegisteredResidentIdentification(req.getSubjectOfCareId());
 		fc.setServiceDomain(eiServiceDomain);
-		fc.setCategorization(req.getTypeOfRequest());
+		
+		//A GetRequestActivities request can contain 0..* typeOfRequests, in previous
+		//version (1.0 RC3) it could only contain one. Therefore we need to request all
+		//typeOfRequests from EI and filter the FindContent response in RequestListFactoryImpl. 
+		//fc.setCategorization(req.getTypeOfRequest());
+		
 		QueryObject qo = new QueryObject(fc, req);
 
 		return qo;

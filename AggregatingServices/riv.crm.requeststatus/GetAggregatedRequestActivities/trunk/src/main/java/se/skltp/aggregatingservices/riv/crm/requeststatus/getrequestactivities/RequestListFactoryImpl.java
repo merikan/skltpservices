@@ -29,6 +29,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
 	 * 
 	 * 1. req.fromDate <= ei-engagement.mostRecentContent <= req.toDate
 	 * 2. req.careUnitId.size == 0 or req.careUnitId.contains(ei-engagement.logicalAddress)
+	 * 3. reg.getTypeOfRequest == 0 or req.getTypeOfRequest.contains(ei-engagement.categorization)
 	 * 
 	 * Svarsposter från EI som passerat filtreringen grupperas på fältet sourceSystem samt postens fält logicalAddress (= PDL-enhet) samlas i listan careUnitId per varje sourceSystem
 	 * 
@@ -47,6 +48,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
 		Date reqFrom = parseTs(originalRequest.getFromDate());
 		Date reqTo   = parseTs(originalRequest.getToDate());
 		List<String> reqCareUnitList = originalRequest.getCareUnitId();
+		List<String> reqCategories = originalRequest.getTypeOfRequest();
 
 		FindContentResponseType eiResp = (FindContentResponseType)src;
 		List<EngagementType> inEngagements = eiResp.getEngagement();
@@ -59,7 +61,8 @@ public class RequestListFactoryImpl implements RequestListFactory {
 
 			// Filter
 			if (isBetween(reqFrom, reqTo, inEng.getMostRecentContent()) &&
-				isPartOf(reqCareUnitList, inEng.getLogicalAddress())) {
+				isPartOf(reqCareUnitList, inEng.getLogicalAddress()) &&
+				isCorrectCategory(reqCategories, inEng.getCategorization())) {
 
 				// Add pdlUnit to source system
 				log.debug("Add SS: {} for PDL unit: {}", inEng.getSourceSystem(), inEng.getLogicalAddress());
@@ -84,6 +87,9 @@ public class RequestListFactoryImpl implements RequestListFactory {
 			request.getCareUnitId().addAll(careUnitList);
 			request.setFromDate(originalRequest.getFromDate());
 			request.setToDate(originalRequest.getToDate());
+			
+			//For each careUnit found in EI, add all requestTypes from original request
+			request.getTypeOfRequest().addAll(reqCategories);
 
 			Object[] reqArr = new Object[] {sourceSystem, request};
 			
@@ -93,6 +99,16 @@ public class RequestListFactoryImpl implements RequestListFactory {
 		log.debug("Transformed payload: {}", reqList);
 
 		return reqList;
+	}
+
+	boolean isCorrectCategory(List<String> reqTypeOfRequestList,
+			String categorization) {
+	
+		log.debug("Check if list of requested categories {} contains EI categorization {} ", reqTypeOfRequestList, categorization);
+	
+		if(reqTypeOfRequestList == null || reqTypeOfRequestList.isEmpty()) return true;
+		
+		return reqTypeOfRequestList.contains(categorization);
 	}
 
 	Date parseTs(String ts) {
