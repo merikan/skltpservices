@@ -272,7 +272,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
               <sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
               <wsdlOptions>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_REQUESTSTATUS_1_0_RC3/interactions/GetRequestActivitiesInteraction/GetRequestActivitiesInteraction_1.0_RIVTABP21.wsdl</wsdl>
+                  <wsdl>${schema.path}/TD_REQUESTSTATUS_1_0_1_R/interactions/GetRequestActivitiesInteraction/GetRequestActivitiesInteraction_1.0_RIVTABP21.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
