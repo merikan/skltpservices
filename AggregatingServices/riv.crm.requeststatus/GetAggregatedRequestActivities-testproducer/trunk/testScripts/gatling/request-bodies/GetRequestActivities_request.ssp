@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:crm:requeststatus:GetRequestActivitiesResponder:1">
+   <soapenv:Header>
+      <urn:LogicalAddress>5565594230</urn:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:GetRequestActivities>
+         <urn1:subjectOfCareId><%= patientId %></urn1:subjectOfCareId>
+         <!--You may enter ANY elements at this point-->
+      </urn1:GetRequestActivities>
+   </soapenv:Body>
+</soapenv:Envelope>
