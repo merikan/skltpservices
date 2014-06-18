@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
+	xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.mulesoft.org/schema/mule/core    http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/cxf     http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+		http://www.mulesoft.org/schema/mule/jms     http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+	">
+	
+	<!-- 
+	Add to vp-config-override.properties to launch inside VP.
+	
+	GetRequestActivitiesProducer1_TESTSTUB_INBOUND_URL=http://localhost:20002/producer_1/teststub/GetRequestActivities/1/rivtabp21
+	GetRequestActivitiesProducer2_TESTSTUB_INBOUND_URL=http://localhost:20002/producer_2/teststub/GetRequestActivities/1/rivtabp21
+	GetRequestActivitiesProducer3_TESTSTUB_INBOUND_URL=http://localhost:20002/producer_3/teststub/GetRequestActivities/1/rivtabp21
+	GetRequestActivitiesProducer4_TESTSTUB_INBOUND_URL=http://localhost:20002/producer_4/teststub/GetRequestActivities/1/rivtabp21
+	GetRequestActivitiesProducer5_TESTSTUB_INBOUND_URL=http://localhost:20002/producer_5/teststub/GetRequestActivities/1/rivtabp21
+	 -->
+
+	<simple-service
+		name="GetRequestActivitiesProducer1-teststub-service"
+		address="${GetRequestActivitiesProducer1_TESTSTUB_INBOUND_URL}"
+		component-class="se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.v1.GetRequestActivitiesProducer1"
+		type="jax-ws" />
+	<simple-service
+		name="GetRequestActivitiesProducer2-teststub-service"
+		address="${GetRequestActivitiesProducer2_TESTSTUB_INBOUND_URL}"
+		component-class="se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.v1.GetRequestActivitiesProducer2"
+		type="jax-ws" />
+	<simple-service
+		name="GetRequestActivitiesProducer3-teststub-service"
+		address="${GetRequestActivitiesProducer3_TESTSTUB_INBOUND_URL}"
+		component-class="se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.v1.GetRequestActivitiesProducer3"
+		type="jax-ws" />
+	<simple-service
+		name="GetRequestActivitiesProducer4-teststub-service"
+		address="${GetRequestActivitiesProducer4_TESTSTUB_INBOUND_URL}"
+		component-class="se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.v1.GetRequestActivitiesProducer4"
+		type="jax-ws" />
+	<simple-service
+		name="GetRequestActivitiesProducer5-teststub-service"
+		address="${GetRequestActivitiesProducer5_TESTSTUB_INBOUND_URL}"
+		component-class="se.skltp.aggregatingservices.riv.crm.requeststatus.getrequestactivities.v1.GetRequestActivitiesProducer5"
+		type="jax-ws" />
+</mule>
