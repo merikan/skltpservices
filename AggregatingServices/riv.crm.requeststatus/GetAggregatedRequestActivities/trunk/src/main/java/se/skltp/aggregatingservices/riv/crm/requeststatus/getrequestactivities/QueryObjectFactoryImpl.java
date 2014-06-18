@@ -31,7 +31,6 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
 	 * 
 	 * 1. subjectOfCareId --> registeredResidentIdentification
 	 * 2. "riv:crm:requeststatus" --> serviceDomain
-	 * 3. typeOfRequest --> categorization
 	 */
 	@Override
 	public QueryObject createQueryObject(Node node) {
