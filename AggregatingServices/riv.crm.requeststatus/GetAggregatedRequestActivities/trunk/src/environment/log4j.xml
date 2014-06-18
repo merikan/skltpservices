@@ -72,6 +72,10 @@
 	<logger name="org.soitoolkit.commons.mule.messageLogger">
 		<level value="INFO" />
 	</logger>
+	
+	<logger name="se.skltp.aggregatingservices.riv.crm.requeststatus">
+        <level value="INFO" />
+    </logger>
 
 	<root>
 		<priority value="WARN" />

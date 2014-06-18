@@ -88,6 +88,10 @@
 	<logger name="com.mulesoft.mule.cache">
 		<level value="DEBUG" />
 	</logger>
+	
+	<logger name="se.skltp.aggregatingservices.riv.crm.requeststatus">
+        <level value="DEBUG" />
+    </logger>
 
 	
 	<root>
