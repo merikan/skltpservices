@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 
 import javax.jws.WebService;
 
-import riv.interoperability.headers._1.ActorType;
+import se.riv.interoperability.headers.v1.ActorType;
 import se.riv.crm.scheduling.getsubjectofcareschedule.v1.rivtabp21.GetSubjectOfCareScheduleResponderInterface;
 import se.riv.crm.scheduling.getsubjectofcarescheduleresponder.v1.GetSubjectOfCareScheduleResponseType;
 import se.riv.crm.scheduling.getsubjectofcarescheduleresponder.v1.GetSubjectOfCareScheduleType;
