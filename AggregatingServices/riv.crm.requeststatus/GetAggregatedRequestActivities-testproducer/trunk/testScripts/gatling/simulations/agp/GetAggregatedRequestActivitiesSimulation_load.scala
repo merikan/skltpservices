@@ -7,7 +7,7 @@ import com.excilys.ebi.gatling.http.Headers.Names._
 import akka.util.duration._
 import bootstrap._
 
-class GetAggregatedRequestActivitiesSimulation extends Simulation {
+class GetAggregatedRequestActivitiesSimulation_load extends Simulation {
 
   val testTimeSecs   = 120
   val noOfUsers      = 10
