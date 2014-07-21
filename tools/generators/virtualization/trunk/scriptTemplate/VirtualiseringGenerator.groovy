@@ -126,8 +126,8 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 		-DartifactId=${artifactId}
 		-Dversion=${virtualizationVersion}
 		-DvirtualiseringArtifactId=${maindomain}-${subdomainFlow}-${serviceContarctVersion}-${artifactId}-virtualisering
-    -DhttpsEndpointAdress=https://\${TP_HOST}:\${TP_PORT}/\${TP_BASE_URI}/$serviceRelativePath
-    -DhttpEndpointAdress=http://\${TP_HOST}:\${TP_PORT_HTTP}/\${TP_BASE_URI}/$serviceRelativePath
+    	-DhttpsEndpointAdress=https://\${TP_HOST}:\${TP_PORT}/\${TP_BASE_URI}/$maindomain/$subdomainAdress/$serviceRelativePath
+		-DhttpEndpointAdress=http://\${TP_HOST}:\${TP_PORT_HTTP}/\${TP_BASE_URI}/$maindomain/$subdomainAdress/$serviceRelativePath
 		-DflowName=${maindomain}-${subdomainFlow}-${artifactId}-${serviceContarctVersion}-Interaction-virtualisering-flow
 		-DfeatureKeepaliveValue=\${feature.keepalive.${serviceContractNameSpace}:\${feature.keepalive}}
 		-DfeatureResponseTimeoutValue=\${feature.featureresponsetimeout.${maindomain}.${subdomain}:\${SERVICE_TIMEOUT_MS}}
@@ -198,7 +198,7 @@ if( args.size() < 1){
 	println "core_components"
 	println "interactions"
 	println ""
-	println "To be able to run this tool you need to have the service-archetype installed, found under tools/generators/archetypes."
+	println "To be able to run this tool you need to have the virtualServiceArchetype installed, found under tools/virtualization/[trunk|tags]/virtualServiceArchetype/."
 	println ""
 	println "Required parameters: source directory [sourceDir] \n"
 	println "PARAMETERS DESCRIPTION:"
