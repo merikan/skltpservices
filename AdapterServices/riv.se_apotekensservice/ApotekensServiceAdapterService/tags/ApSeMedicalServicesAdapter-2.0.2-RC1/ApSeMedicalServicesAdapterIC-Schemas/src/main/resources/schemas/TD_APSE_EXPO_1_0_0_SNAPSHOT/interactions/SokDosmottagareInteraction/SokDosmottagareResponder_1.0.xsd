@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="urn:riv:se.apotekensservice:expo:SokDosmottagareResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:expo="urn:riv:se.apotekensservice:expo:1" targetNamespace="urn:riv:se.apotekensservice:expo:SokDosmottagareResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_expo_1.0.xsd" namespace="urn:riv:se.apotekensservice:expo:1"/>
+  <xs:element name="SokDosmottagare" type="SokDosmottagareRequestType"/>
+  <xs:element name="SokDosmottagareResponse" type="SokDosmottagareResponseType"/>
+  <xs:element name="ApplicationException" type="expo:ApplicationException"/>
+  <xs:element name="SystemException" type="expo:SystemException"/>
+  <xs:complexType name="SokDosmottagareRequestType">
+    <xs:sequence>
+      <xs:element name="aktorsnamn" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Aktörens namn. Inledande del av aktörsnamnet kan anges</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="arbetsplatskod" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Arbetsplatskod. Inledande del av arbetsplatskoden kan anges</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dosproducentsNamn" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Dosproducentens namn. Inledande del av dosproducentens kan anges</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="kommunkod" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Kommunkod till vilken dosmottagaren tillhör. 
+Kod enligt SCB.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="mottagarnamn" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Mottagarens namn. Inledande del av mottagarnamn kan anges</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="postort" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Arbetsplatsort till dosmottagare. Inledande del av arbetsplatsorten kan anges</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="typ" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Typ av dosmottagare, kan antingen vara Apotek (där dospatienterna kan hämta sina dosleveranser) 
+eller direktleverans, t ex vårdboende, distriktssköterska.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SokDosmottagareResponseType">
+    <xs:sequence>
+      <xs:element name="resultat" maxOccurs="unbounded" type="expo:SokDosmottagareResultatResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Lista med apotek och kopplade dosmottagare som utdata</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
