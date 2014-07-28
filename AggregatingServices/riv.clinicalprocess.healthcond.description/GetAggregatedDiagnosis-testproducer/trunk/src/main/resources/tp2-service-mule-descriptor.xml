@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
+	xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.mulesoft.org/schema/mule/core    http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/cxf     http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+		http://www.mulesoft.org/schema/mule/jms     http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+	">
+	
+	<!-- 
+	Add to vp-config-override.properties to launch inside VP.
+	
+	GetDiagnosisProducer1_TESTSTUB_INBOUND_URL=http://localhost:20007/producer_1/teststub/GetDiagnosis/2/rivtabp21
+	GetDiagnosisProducer2_TESTSTUB_INBOUND_URL=http://localhost:20007/producer_2/teststub/GetDiagnosis/2/rivtabp21
+	GetDiagnosisProducer3_TESTSTUB_INBOUND_URL=http://localhost:20007/producer_3/teststub/GetDiagnosis/2/rivtabp21
+	GetDiagnosisProducer4_TESTSTUB_INBOUND_URL=http://localhost:20007/producer_4/teststub/GetDiagnosis/2/rivtabp21
+	GetDiagnosisProducer5_TESTSTUB_INBOUND_URL=http://localhost:20007/producer_5/teststub/GetDiagnosis/2/rivtabp21
+	GetDiagnosisProducer6_TESTSTUB_INBOUND_URL=http://localhost:20007/producer_6/teststub/GetDiagnosis/2/rivtabp21
+	 -->
+
+	<simple-service
+		name="GetDiagnosisProducer1-teststub-service"
+		address="${GetDiagnosisProducer1_TESTSTUB_INBOUND_URL}"
+		component-class="se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description.getdiagnosis.v2.Producer1"
+		type="jax-ws" />
+	<simple-service
+		name="GetDiagnosisProducer2-teststub-service"
+		address="${GetDiagnosisProducer2_TESTSTUB_INBOUND_URL}"
+		component-class="se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description.getdiagnosis.v2.Producer2"
+		type="jax-ws" />
+	<simple-service
+		name="GetDiagnosisProducer3-teststub-service"
+		address="${GetDiagnosisProducer3_TESTSTUB_INBOUND_URL}"
+		component-class="se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description.getdiagnosis.v2.Producer3"
+		type="jax-ws" />
+	<simple-service
+		name="GetDiagnosisProducer4-teststub-service"
+		address="${GetDiagnosisProducer4_TESTSTUB_INBOUND_URL}"
+		component-class="se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description.getdiagnosis.v2.Producer4"
+		type="jax-ws" />
+	<simple-service
+		name="GetDiagnosisProducer5-teststub-service"
+		address="${GetDiagnosisProducer5_TESTSTUB_INBOUND_URL}"
+		component-class="se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description.getdiagnosis.v2.Producer5"
+		type="jax-ws" />
+	<simple-service
+		name="GetDiagnosisProducer6-teststub-service"
+		address="${GetDiagnosisProducer6_TESTSTUB_INBOUND_URL}"
+		component-class="se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description.getdiagnosis.v2.Producer6"
+		type="jax-ws" />
+</mule>
