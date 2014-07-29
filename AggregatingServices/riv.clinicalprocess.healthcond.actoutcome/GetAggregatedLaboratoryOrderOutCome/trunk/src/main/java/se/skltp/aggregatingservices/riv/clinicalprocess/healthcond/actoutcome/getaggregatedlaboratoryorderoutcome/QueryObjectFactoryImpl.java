@@ -27,7 +27,7 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
 	}
 
 	/**
-	 * Transformerar GetDiagnosis request till EI FindContent request enligt:
+	 * Transformerar GetLaboratoryOrderOutcome request till EI FindContent request enligt:
 	 * 
 	 * 1. patientId --> registeredResidentIdentification
 	 * 2. "riv:clinicalprocess:healthcond:actoutcome" --> serviceDomain

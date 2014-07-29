@@ -60,12 +60,15 @@ public class RequestListFactoryImpl implements RequestListFactory {
 			// TODO: CHANGE GENERATED CODE - START
 			//if (isBetween(reqFrom, reqTo, inEng.getMostRecentContent()) &&
 			//	isPartOf(reqCareUnitList, inEng.getLogicalAddress())) {
-				
+			
+			//TKB 4.1 Uppdatering av engagemangsindex
+			//LogicalAddress: Samma värde som fältet Source System.
+			
 			if (isPartOf(reqCareUnit, inEng.getLogicalAddress())) {
 			// TODO: CHANGE GENERATED CODE - END
 
 				// Add pdlUnit to source system
-				log.debug("Add SS: {} for PDL unit: {}", inEng.getSourceSystem(), inEng.getLogicalAddress());
+				log.debug("Add source system: {} for PDL unit: {}", inEng.getSourceSystem(), inEng.getLogicalAddress());
 				addPdlUnitToSourceSystem(sourceSystem_pdlUnitList_map, inEng.getSourceSystem(), inEng.getLogicalAddress());
 			}
 		}
@@ -124,7 +127,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
 
 	boolean isPartOf(String careUnitId, String careUnit) {
 		
-		log.debug("Check presence of {} in {}", careUnit, careUnitId);
+		log.debug("Check careunit {} equals expected {}", careUnitId, careUnit);
 		
 		if (StringUtils.isBlank(careUnitId)) return true;
 		
