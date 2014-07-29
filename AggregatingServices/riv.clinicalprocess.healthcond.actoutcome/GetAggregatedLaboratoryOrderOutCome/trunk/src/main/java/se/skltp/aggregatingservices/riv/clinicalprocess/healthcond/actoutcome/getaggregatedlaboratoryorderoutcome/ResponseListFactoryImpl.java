@@ -29,7 +29,7 @@ public class ResponseListFactoryImpl implements ResponseListFactory {
 
 	    if (log.isInfoEnabled()) {
     		String subjectOfCareId = queryObject.getFindContent().getRegisteredResidentIdentification();
-        	log.info("Returning {} aggregated remisstatus for subject of care id {}", aggregatedResponse.getLaboratoryOrderOutcome().size() ,subjectOfCareId);
+        	log.info("Returning {} aggregated laboratory order outcome for subject of care id {}", aggregatedResponse.getLaboratoryOrderOutcome().size() ,subjectOfCareId);
         }
         
         // Since the class GetRequestActivitiesResponseType don't have an @XmlRootElement annotation
