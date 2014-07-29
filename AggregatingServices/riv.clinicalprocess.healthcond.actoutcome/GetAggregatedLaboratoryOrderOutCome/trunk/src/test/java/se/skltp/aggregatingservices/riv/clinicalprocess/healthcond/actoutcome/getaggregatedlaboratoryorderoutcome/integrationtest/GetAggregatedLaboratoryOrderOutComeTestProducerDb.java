@@ -66,10 +66,10 @@ public class GetAggregatedLaboratoryOrderOutComeTestProducerDb extends TestProdu
 		
 		HealthcareProfessionalType hp = new HealthcareProfessionalType(); 
 		hp.setAuthorTime(df.format(new Date()));
-		hp.setHealthcareProfessionalHSAId("HSA123");
+		hp.setHealthcareProfessionalHSAId(logicalAddress);
 		
 		OrgUnitType orgUnitType = new OrgUnitType();
-		orgUnitType.setOrgUnitHSAId("HSA234");
+		orgUnitType.setOrgUnitHSAId(logicalAddress);
 		orgUnitType.setOrgUnitName("Organisation 1");
 		hp.setHealthcareProfessionalOrgUnit(orgUnitType);
 		header.setAccountableHealthcareProfessional(hp);
