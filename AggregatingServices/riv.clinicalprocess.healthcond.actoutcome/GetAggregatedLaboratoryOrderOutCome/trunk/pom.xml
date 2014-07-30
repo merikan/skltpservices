@@ -35,9 +35,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     
     <scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/GetAggregatedLaboratoryOrderOutCome/trunk</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/GetAggregatedLaboratoryOrderOutCome/trunk</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/GetAggregatedLaboratoryOrderOutCome/trunk</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome/trunk/</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome/trunk/</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome/trunk/</url>
     </scm>
     
 	<dependencies>	

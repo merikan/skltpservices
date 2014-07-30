@@ -27,9 +27,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
     <scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
-        <connection>scm:svn:https://my-subversion-server/svn/GetAggregatedLaboratoryOrderOutCome-teststub/trunk</connection>
-        <developerConnection>scm:svn:https://my-subversion-server/svn/GetAggregatedLaboratoryOrderOutCome-teststub/trunk</developerConnection>
-        <url>https://my-subversion-server/svn/GetAggregatedLaboratoryOrderOutCome-teststub/trunk</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-teststub/trunk/</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-teststub/trunk/</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-teststub/trunk/</url>
     </scm>
     
     <distributionManagement>
