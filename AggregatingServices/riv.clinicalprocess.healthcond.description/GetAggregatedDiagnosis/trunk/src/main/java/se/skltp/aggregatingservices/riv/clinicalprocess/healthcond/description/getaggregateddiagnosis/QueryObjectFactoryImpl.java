@@ -31,6 +31,7 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
 	 * 
 	 * 1. patientId --> registeredResidentIdentification
 	 * 2. "riv:clinicalprocess:healthcond:description" --> serviceDomain
+	 * 3. "dia" --> categorization
 	 */
 	@Override
 	public QueryObject createQueryObject(Node node) {
@@ -42,6 +43,14 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
 		FindContentType fc = new FindContentType();		
 		fc.setRegisteredResidentIdentification(request.getPatientId().getId());
 		fc.setServiceDomain(eiServiceDomain);
+		
+		//TKB 3.1	Uppdatering av engagemangsindex
+		//Infomängd enl. Tjänstekontrakt	Värde på Categorization
+		//GetCareDocumentation	voo
+		//GetDiagnosis			dia
+		//GetAlertInformation	upp
+
+		fc.setCategorization(eiCategorization); 
 		
 		QueryObject qo = new QueryObject(fc, request);
 
