@@ -16,7 +16,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <parent>
         <groupId>org.soitoolkit.commons.poms</groupId>
         <artifactId>soitoolkit-default-parent</artifactId>
-        <version>0.6.2-SNAPSHOT</version>
+        <version>0.6.1</version>
     </parent>
     
     <groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description</groupId>
@@ -27,24 +27,10 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
     <scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
-        <connection>scm:svn:https://my-subversion-server/svn/GetAggregatedDiagnosis-teststub/trunk</connection>
-        <developerConnection>scm:svn:https://my-subversion-server/svn/GetAggregatedDiagnosis-teststub/trunk</developerConnection>
-        <url>https://my-subversion-server/svn/GetAggregatedDiagnosis-teststub/trunk</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedDiagnosis-teststub/trunk/</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedDiagnosis-teststub/trunk/</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedDiagnosis-teststub/trunk/</url>
     </scm>
-    
-    <distributionManagement>
-        <!-- TODO: Sample <distributionManagement>-tag, update to reflect you own environment! -->
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>Snapshot Repository</name>
-            <url>http://my-maven-repo-server/repositories/snapshots</url>
-        </snapshotRepository>  
-        <repository>
-            <id>releases</id>
-            <name>Release Repository</name>
-            <url>http://my-maven-repo-server/repositories/releases</url>
-        </repository>
-    </distributionManagement>
 
 	<dependencies>
 	  <!-- dependencies to the integration component that contains the services to stub -->

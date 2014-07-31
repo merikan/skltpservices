@@ -16,7 +16,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <parent>
         <groupId>org.soitoolkit.commons.poms</groupId>
         <artifactId>soitoolkit-default-parent</artifactId>
-        <version>0.6.2-SNAPSHOT</version>
+        <version>0.6.1</version>
     </parent>
     
     <groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description</groupId>
@@ -35,9 +35,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     
     <scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/GetAggregatedDiagnosis/trunk</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/GetAggregatedDiagnosis/trunk</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/GetAggregatedDiagnosis/trunk</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedDiagnosis/trunk/</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedDiagnosis/trunk/</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedDiagnosis/trunk/</url>
     </scm>
     
 	<dependencies>	
