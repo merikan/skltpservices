@@ -6,7 +6,10 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 [soi-toolkit.gen.createDate=2014-07-28T14:11:11.312+02:00]
 [soi-toolkit.gen.artifactId=GetAggregatedLaboratoryOrderOutCome]
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project 
+	xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
   
@@ -18,15 +21,15 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
 	<groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome</groupId>
 	<artifactId>GetAggregatedLaboratoryOrderOutCome-schemas</artifactId>
-	<version>1.0.0-RC1</version>
+	<version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>GetAggregatedLaboratoryOrderOutCome-schemas</name>
 
 	<scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
-		<connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-schemas/tags/GetAggregatedLaboratoryOrderOutCome-schemas-1.0.0-RC1</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-schemas/tags/GetAggregatedLaboratoryOrderOutCome-schemas-1.0.0-RC1</developerConnection>
-		<url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-schemas/tags/GetAggregatedLaboratoryOrderOutCome-schemas-1.0.0-RC1</url>
+		<connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-schemas/trunk/</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-schemas/trunk/</developerConnection>
+		<url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-schemas/trunk/</url>
 	</scm>
 	
 	<distributionManagement>
