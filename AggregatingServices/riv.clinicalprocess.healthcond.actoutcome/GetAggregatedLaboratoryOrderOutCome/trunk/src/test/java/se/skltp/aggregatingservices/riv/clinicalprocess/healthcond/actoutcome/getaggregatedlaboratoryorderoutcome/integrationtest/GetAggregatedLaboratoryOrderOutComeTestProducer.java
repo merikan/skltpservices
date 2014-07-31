@@ -32,7 +32,7 @@ public class GetAggregatedLaboratoryOrderOutComeTestProducer implements GetLabor
         	response = new GetLaboratoryOrderOutcomeResponseType();
         }
         
-        log.info("### Virtual service got {} booknings in the reply from the source system with logical address: {} and patientId: {}", new Object[] {response.getLaboratoryOrderOutcome().size(), logicalAddress, request.getPatientId().getId()});
+        log.info("### Virtual service got {} lab responses in the reply from the source system with logical address: {} and patientId: {}", new Object[] {response.getLaboratoryOrderOutcome().size(), logicalAddress, request.getPatientId().getId()});
 		
 		return response;
 	}
