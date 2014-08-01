@@ -5,7 +5,7 @@
 
 	<groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.actoutcome</groupId>
 	<artifactId>GetAggregatedLaboratoryOrderOutCome-testproducer</artifactId>
-	<version>1.0.0-RC1</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>${project.artifactId}</name>
 	<url>http://maven.apache.org</url>
 	
@@ -26,9 +26,9 @@
 	</properties>
 	
 	<scm>	
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-testproducer/tags/GetAggregatedLaboratoryOrderOutCome-testproducer-1.0.0-RC1</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-testproducer/tags/GetAggregatedLaboratoryOrderOutCome-testproducer-1.0.0-RC1</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-testproducer/tags/GetAggregatedLaboratoryOrderOutCome-testproducer-1.0.0-RC1</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-testproducer/trunk</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-testproducer/trunk</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-testproducer/trunk</url>
     </scm>
 
 	<build>
