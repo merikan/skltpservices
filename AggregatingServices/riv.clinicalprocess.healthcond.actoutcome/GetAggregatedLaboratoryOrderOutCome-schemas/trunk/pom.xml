@@ -18,15 +18,15 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
 	<groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.actoutcome</groupId>
 	<artifactId>GetAggregatedLaboratoryOrderOutCome-schemas</artifactId>
-	<version>1.0.0-RC3-SNAPSHOT</version>
+	<version>1.0.0-RC2</version>
     <packaging>jar</packaging>
     <name>GetAggregatedLaboratoryOrderOutCome-schemas</name>
 
 	<scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
-		<connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-schemas/trunk/</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-schemas/trunk/</developerConnection>
-		<url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-schemas/trunk/</url>
+		<connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-schemas/tags/GetAggregatedLaboratoryOrderOutCome-schemas-1.0.0-RC2</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-schemas/tags/GetAggregatedLaboratoryOrderOutCome-schemas-1.0.0-RC2</developerConnection>
+		<url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-schemas/tags/GetAggregatedLaboratoryOrderOutCome-schemas-1.0.0-RC2</url>
 	</scm>
 	
 <!-- 	<distributionManagement> -->
