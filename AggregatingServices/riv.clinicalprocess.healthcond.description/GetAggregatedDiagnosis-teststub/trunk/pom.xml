@@ -19,7 +19,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
         <version>0.6.1</version>
     </parent>
     
-    <groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description</groupId>
+    <groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.description</groupId>
     <artifactId>GetAggregatedDiagnosis-teststub</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule</packaging>
@@ -35,13 +35,13 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 	<dependencies>
 	  <!-- dependencies to the integration component that contains the services to stub -->
     <dependency>
-    	<groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description</groupId>
+    	<groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.description</groupId>
     	<artifactId>GetAggregatedDiagnosis</artifactId>
     	<version>1.0.0-SNAPSHOT</version>
     	<type>test-jar</type>
     </dependency>
     <dependency>
-    	<groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description</groupId>
+    	<groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.description</groupId>
     	<artifactId>GetAggregatedDiagnosis</artifactId>
     	<version>1.0.0-SNAPSHOT</version>
     	<classifier>core</classifier>    	
