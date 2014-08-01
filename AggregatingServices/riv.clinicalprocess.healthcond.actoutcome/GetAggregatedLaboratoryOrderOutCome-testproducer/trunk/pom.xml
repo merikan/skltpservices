@@ -26,9 +26,9 @@
 	</properties>
 	
 	<scm>	
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-testproducer/trunk</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-testproducer/trunk</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-testproducer/trunk</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-testproducer/trunk/</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-testproducer/trunk/</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-testproducer/trunk/</url>
     </scm>
 
 	<build>
