@@ -18,7 +18,8 @@
  */
 package se.skltp.adapterservices.crm.carelisting.hval24adapter.integrationtests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,12 +32,12 @@ import java.util.ResourceBundle;
 import org.junit.Test;
 import org.mule.api.MuleMessage;
 import org.mule.module.client.MuleClient;
-import org.mule.tck.junit4.FunctionalTestCase;
 import org.mule.transport.http.HttpConnector;
+import org.soitoolkit.commons.mule.test.junit4.AbstractTestCase;
 
 import se.skl.riv.crm.carelistingresponder.v1.getlisting.GetListingResponseType;
 
-public class CarelistingIntegrationTest extends FunctionalTestCase
+public class CarelistingIntegrationTest extends AbstractTestCase
 {
     private String urlCarelist = null;
     private String urlHval = null;
@@ -47,10 +48,10 @@ public class CarelistingIntegrationTest extends FunctionalTestCase
 		urlHval = rb.getString("inbound.http.endpoint.hval24.getlisting.teststub");
 	}
 	
-	@Override
 	protected String getConfigResources()
 	{
 		return 
+			"soitoolkit-mule-jms-connector-activemq-embedded.xml," +
 			"GetListing-hval-service.xml," + 
 			"Hval24Adapter-common.xml," + 
 			"teststub-services/carelisting-teststub-service.xml";
