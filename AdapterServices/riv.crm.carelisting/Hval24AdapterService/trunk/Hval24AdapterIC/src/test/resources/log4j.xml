@@ -18,6 +18,16 @@
             <param name="ConversionPattern" value="%d %-5p %-30C - %m%n" />
         </layout> 
     </appender>
+    
+    <!-- For PingForConfiguration logging only -->
+    <appender name="ROLLINGFILE_MONITORING" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="${mule.home}/logs/mule-app-Hval24Adapter-monitoring.log" />
+        <param name="MaxFileSize" value="1000KB" />
+        <param name="MaxBackupIndex" value="3" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %-30C - %m%n" />
+        </layout> 
+    </appender>
 
 	<!--
 		Loglevels: {OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE, ALL} See:
@@ -72,8 +82,14 @@
 		<level value="INFO" />
 	</logger>
 	
-	<logger name="se.skltp.adapterservices.crm.carelisting.hval24adapter">
+	<!-- Monitoring logs to separate log file, additivity makes sure not logged twice -->
+	<logger name="se.skltp.adapterservices.monitoring" additivity="false">
 		<level value="INFO" />
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+	
+	<logger name="se.skltp.adapterservices.crm.carelisting.hval24adapter">
+		<level value="DEBUG" />
 	</logger>
 
     <!-- Message logging using soi-toolkit LogTransformer class -->
@@ -83,12 +99,12 @@
 	
 	<!-- Level DEBUG: Log http headers transfered during a request/response -->
     <logger name="httpclient.wire.header">
-        <level value="DEBUG"/>
+        <level value="ERROR"/>
     </logger>
 
 	 <!-- Level DEBUG: Log the http content transfered during a request/response -->
     <logger name="httpclient.wire.content">
-        <level value="DEBUG"/>
+        <level value="ERROR"/>
     </logger>
 		
 	<root>

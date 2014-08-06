@@ -29,8 +29,17 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 		<project.build.sourceEncoding>Cp1252</project.build.sourceEncoding>	
 	</properties>
 
-	<!-- soi toolkit dependencies -->
+	
 	<dependencies>	
+	
+		<!-- itintegration monitoring schemas för PingForConfiguration -->
+		<dependency>
+		  	<groupId>se.skltp.itintegration.monitoring</groupId>
+  			<artifactId>ServiceContracts_itintegration_monitoring</artifactId>
+			<version>1.0</version>
+		</dependency>
+	
+		<!-- soi toolkit dependencies -->
 		<dependency>
 		  <groupId>org.soitoolkit.commons.components</groupId>
 			<artifactId>soitoolkit-commons-mule</artifactId>
