@@ -38,6 +38,13 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     </dependencyManagement>
 
 	<dependencies>
+	
+		<!-- itintegration monitoring schemas för PingForConfiguration -->
+		<dependency>
+		  	<groupId>se.skltp.itintegration.monitoring</groupId>
+  			<artifactId>ServiceContracts_itintegration_monitoring</artifactId>
+			<version>1.0</version>
+		</dependency>
 
 		<!-- SKLTP Apse TicketMachine -->
 		<dependency>
