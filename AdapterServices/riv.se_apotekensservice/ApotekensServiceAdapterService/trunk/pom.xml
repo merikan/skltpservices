@@ -20,14 +20,14 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
 	<groupId>se.skltp.adapterservices.se.apotekensservice</groupId>
     <artifactId>ApSeMedicalServicesAdapter</artifactId>
-	<version>2.0.2-RC2</version>
+	<version>2.0.2-RC3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 
 	<scm>
-		<connection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/tags/ApSeMedicalServicesAdapter-2.0.2-RC2</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/tags/ApSeMedicalServicesAdapter-2.0.2-RC2</developerConnection>
-		<url>https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/tags/ApSeMedicalServicesAdapter-2.0.2-RC2</url>
+		<connection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk</developerConnection>
+		<url>https://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk</url>
 	</scm>
 
 	<properties>
