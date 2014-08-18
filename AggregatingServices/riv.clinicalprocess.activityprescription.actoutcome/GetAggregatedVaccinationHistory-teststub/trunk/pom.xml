@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.soitoolkit.commons.poms</groupId>
         <artifactId>soitoolkit-default-parent</artifactId>
-        <version>0.6.1-M2</version>
+        <version>0.6.1</version>
     </parent>
     
     <groupId>se.skltp.aggregatingservices.clinicalprocess.activityprescription.actoutcome</groupId>
@@ -16,8 +16,8 @@
     <name>GetAggregatedVaccinationHistory-teststub</name>
 
     <properties>
-        <skltp.agp.version>1.2.0-RC1</skltp.agp.version>
-        <GetAggregatedVaccinationHistory.version>1.1.0-RC1</GetAggregatedVaccinationHistory.version>
+        <skltp.agp.version>1.2.1-RC1</skltp.agp.version>
+        <GetAggregatedVaccinationHistory.version>1.1.1-SNAPSHOT</GetAggregatedVaccinationHistory.version>
     </properties>
 	
     <dependencies>
