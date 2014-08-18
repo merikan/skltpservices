@@ -6,18 +6,18 @@
     <parent>
         <groupId>org.soitoolkit.commons.poms</groupId>
         <artifactId>soitoolkit-default-parent</artifactId>
-        <version>0.6.1-M2</version>
+        <version>0.6.1</version>
     </parent>
     
     <groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.actoutcome</groupId>
     <artifactId>GetAggregatedMaternityMedicalHistory-teststub</artifactId>
-    <version>1.0.0-RC8-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>mule</packaging>
     <name>GetAggregatedMaternityMedicalHistory-teststub</name>
 
     <properties>
-        <skltp.agp.version>1.2.0</skltp.agp.version>
-        <GetAggregatedMaternityMedicalHistory.version>1.0.0-RC8-SNAPSHOT</GetAggregatedMaternityMedicalHistory.version>
+        <skltp.agp.version>1.2.1-RC1</skltp.agp.version>
+        <GetAggregatedMaternityMedicalHistory.version>1.0.1-SNAPSHOT</GetAggregatedMaternityMedicalHistory.version>
     </properties>
 
     <scm>
