@@ -10,15 +10,6 @@
 		</layout>
 	</appender>
 
-    <appender name="ROLLINGFILE" class="org.apache.log4j.RollingFileAppender">
-        <param name="file" value="${mule.home}/logs/mule-app-GetAggregatedLaboratoryOrderOutCome.log" />
-        <param name="MaxFileSize" value="1000KB" />
-        <param name="MaxBackupIndex" value="3" />
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d %-5p [%t] %-30c - %m%n" />
-        </layout> 
-    </appender>
-
 	<!--
 		Loglevels: {OFF, FATAL, ERROR, WARN, INFO, DEBUG, TRACE, ALL} See:
 		http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/Level.html
@@ -75,6 +66,13 @@
 	<logger name="se.skltp.agp">
 		<level value="INFO" />
 	</logger>
+	
+	<!-- Monitoring logs to separate log file, additivity makes sure not logged twice -->
+    <logger name="se.skltp.agp.monitoring" additivity="false">
+        <level value="INFO" />
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+	
 	
 	<logger name="se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.actoutcome.getaggregatedlaboratoryorderoutcome">
 		<level value="INFO" />
