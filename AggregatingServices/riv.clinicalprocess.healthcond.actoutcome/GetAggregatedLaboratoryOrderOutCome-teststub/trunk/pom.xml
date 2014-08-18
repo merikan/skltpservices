@@ -34,26 +34,26 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <dependency>
     	<groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.actoutcome</groupId>
     	<artifactId>GetAggregatedLaboratoryOrderOutCome</artifactId>
-    	<version>1.0.0-RC1</version>
+    	<version>1.0.0-RC2-SNAPSHOT</version>
     	<type>test-jar</type>
     </dependency>
     <dependency>
     	<groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.actoutcome</groupId>
     	<artifactId>GetAggregatedLaboratoryOrderOutCome</artifactId>
-    	<version>1.0.0-RC1</version>
+    	<version>1.0.0-RC2-SNAPSHOT</version>
     	<classifier>core</classifier>    	
     </dependency>
     
      <dependency>
         <groupId>se.skltp.agp</groupId>
         <artifactId>agp-core</artifactId>
-        <version>1.2.0</version>
+        <version>1.2.1-RC1</version>
       </dependency>
     
     <dependency>
        <groupId>se.skltp.agp</groupId>
        <artifactId>agp-test-common</artifactId>
-       <version>1.2.0</version>
+       <version>1.2.1-RC1</version>
     </dependency>
       
 	</dependencies> 
