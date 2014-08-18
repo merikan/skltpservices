@@ -13,18 +13,18 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <parent>
         <groupId>org.soitoolkit.commons.poms</groupId>
         <artifactId>soitoolkit-default-parent</artifactId>
-        <version>0.6.1-M2</version>
+        <version>0.6.1</version>
     </parent>
     
     <groupId>se.skltp.aggregatingservices.crm.scheduling</groupId>
     <artifactId>GetAggregatedSubjectOfCareSchedule-teststub</artifactId>
-    <version>1.2.0-RC2-SNAPSHOT</version>
+    <version>1.2.2-SNAPSHOT</version>
     <packaging>mule</packaging>
     <name>GetAggregatedSubjectOfCareSchedule-teststub</name>
 
     <properties>
-      <skltp.agp.version>1.2.0-RC1</skltp.agp.version>
-      <GetAggregatedSubjectOfCareSchedule.version>1.2.0-RC1</GetAggregatedSubjectOfCareSchedule.version>
+      <skltp.agp.version>1.2.1-RC1</skltp.agp.version>
+      <GetAggregatedSubjectOfCareSchedule.version>1.2.2-SNAPSHOT</GetAggregatedSubjectOfCareSchedule.version>
     </properties>
 
     <scm>
