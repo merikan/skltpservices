@@ -102,7 +102,7 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 		def wsdlFileName = wsdlFiles[0].name
 
 		//Version of the service contract e.g Tidbokning 1.1.0
-		def serviceContarctVersion = '3.1.0'
+		def serviceContractVersion = '3.1.0'
     def virtualizationVersion = '1.0-SNAPSHOT'
 
 		def serviceContractNameSpace = getServiceContractNameSpace(xsdFiles[0])
@@ -125,10 +125,10 @@ def buildVirtualServices(serviceInteractionDirectories, targetDir){
 		-DgroupId=se.skltp.virtualservices.${maindomain}.${subdomainGroupId}
 		-DartifactId=${artifactId}
 		-Dversion=${virtualizationVersion}
-		-DvirtualiseringArtifactId=${maindomain}-${subdomainFlow}-${serviceContarctVersion}-${artifactId}-virtualisering
+		-DvirtualiseringArtifactId=${maindomain}-${subdomainFlow}-${serviceContractVersion}-${artifactId}-virtualisering
     	-DhttpsEndpointAdress=https://\${TP_HOST}:\${TP_PORT}/\${TP_BASE_URI}/$maindomain/$subdomainAdress/$serviceRelativePath
 		-DhttpEndpointAdress=http://\${TP_HOST}:\${TP_PORT_HTTP}/\${TP_BASE_URI}/$maindomain/$subdomainAdress/$serviceRelativePath
-		-DflowName=${maindomain}-${subdomainFlow}-${artifactId}-${serviceContarctVersion}-Interaction-virtualisering-flow
+		-DflowName=${maindomain}-${subdomainFlow}-${artifactId}-${serviceContractVersion}-Interaction-virtualisering-flow
 		-DfeatureKeepaliveValue=\${feature.keepalive.${serviceContractNameSpace}:\${feature.keepalive}}
 		-DfeatureResponseTimeoutValue=\${feature.featureresponsetimeout.${maindomain}.${subdomain}:\${SERVICE_TIMEOUT_MS}}
 		-DserviceMethod=${artifactId}
