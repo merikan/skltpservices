@@ -22,6 +22,10 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <packaging>mule</packaging>
     <name>GetAggregatedDiagnosis-teststub</name>
 
+    <properties>
+        <skltp.agp.version>1.2.1-RC2</skltp.agp.version>
+    </properties>
+
     <scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
         <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.description/GetAggregatedDiagnosis-teststub/trunk/</connection>
@@ -47,13 +51,13 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
       <dependency>
         <groupId>se.skltp.agp</groupId>
         <artifactId>agp-core</artifactId>
-        <version>1.2.1-RC1</version>
+        <version>${skltp.agp.version}</version>
       </dependency>
     
     <dependency>
        <groupId>se.skltp.agp</groupId>
        <artifactId>agp-test-common</artifactId>
-       <version>1.2.1-RC1</version>
+       <version>${skltp.agp.version}</version>
     </dependency>
 	</dependencies> 
 

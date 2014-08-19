@@ -16,7 +16,7 @@
     <name>GetAggregatedMaternityMedicalHistory-teststub</name>
 
     <properties>
-        <skltp.agp.version>1.2.1-RC1</skltp.agp.version>
+        <skltp.agp.version>1.2.1-RC2</skltp.agp.version>
         <GetAggregatedMaternityMedicalHistory.version>1.0.1-SNAPSHOT</GetAggregatedMaternityMedicalHistory.version>
     </properties>
 
