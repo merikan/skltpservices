@@ -18,7 +18,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     
     <groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.actoutcome</groupId>
     <artifactId>GetAggregatedLaboratoryOrderOutCome</artifactId>
-    <version>1.0.0-RC2</version>
+    <version>1.0.0-RC3-SNAPSHOT</version>
     <packaging>mule</packaging>
     <name>GetAggregatedLaboratoryOrderOutCome</name>
 
@@ -32,9 +32,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     
     <scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome/tags/GetAggregatedLaboratoryOrderOutCome-1.0.0-RC2</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome/tags/GetAggregatedLaboratoryOrderOutCome-1.0.0-RC2</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome/tags/GetAggregatedLaboratoryOrderOutCome-1.0.0-RC2</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome/trunk/</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome/trunk/</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome/trunk/</url>
     </scm>
     
 	<dependencies>	
