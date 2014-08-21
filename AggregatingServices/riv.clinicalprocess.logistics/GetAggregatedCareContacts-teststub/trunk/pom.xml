@@ -11,7 +11,7 @@
     
     <groupId>se.skltp.aggregatingservices.clinicalprocess.logistics.logistics</groupId>
     <artifactId>GetAggregatedCareContacts-teststub</artifactId>
-    <version>1.1.1-SNAPSHOT</version>
+    <version>1.1.1-RC1</version>
     <packaging>mule</packaging>
     <name>GetAggregatedCareContacts-teststub</name>
 
@@ -21,9 +21,9 @@
     </properties>
 
     <scm>
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContacts-teststub/trunk</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContacts-teststub/trunk</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContacts-teststub/trunk</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContacts-teststub/tags/GetAggregatedCareContacts-teststub-1.1.1-RC1</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContacts-teststub/tags/GetAggregatedCareContacts-teststub-1.1.1-RC1</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.logistics/GetAggregatedCareContacts-teststub/tags/GetAggregatedCareContacts-teststub-1.1.1-RC1</url>
     </scm>
 
 
