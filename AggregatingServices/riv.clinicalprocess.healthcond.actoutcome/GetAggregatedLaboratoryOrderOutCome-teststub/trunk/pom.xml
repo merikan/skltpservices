@@ -18,7 +18,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     
     <groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.actoutcome</groupId>
     <artifactId>GetAggregatedLaboratoryOrderOutCome-teststub</artifactId>
-    <version>1.0.0-RC2-SNAPSHOT</version>
+    <version>1.0.0-RC2</version>
     <packaging>mule</packaging>
     <name>GetAggregatedLaboratoryOrderOutCome-teststub</name>
     
@@ -28,9 +28,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
     <scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-teststub/trunk/</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-teststub/trunk/</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-teststub/trunk/</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-teststub/tags/GetAggregatedLaboratoryOrderOutCome-teststub-1.0.0-RC2</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-teststub/tags/GetAggregatedLaboratoryOrderOutCome-teststub-1.0.0-RC2</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedLaboratoryOrderOutCome-teststub/tags/GetAggregatedLaboratoryOrderOutCome-teststub-1.0.0-RC2</url>
     </scm>
 
 	<dependencies>
