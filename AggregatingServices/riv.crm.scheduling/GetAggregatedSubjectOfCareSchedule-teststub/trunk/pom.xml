@@ -24,7 +24,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
     <properties>
       <skltp.agp.version>1.2.1-RC2</skltp.agp.version>
-      <GetAggregatedSubjectOfCareSchedule.version>1.2.2-SNAPSHOT</GetAggregatedSubjectOfCareSchedule.version>
+      <GetAggregatedSubjectOfCareSchedule.version>1.2.2-RC1</GetAggregatedSubjectOfCareSchedule.version>
     </properties>
 
     <scm>
