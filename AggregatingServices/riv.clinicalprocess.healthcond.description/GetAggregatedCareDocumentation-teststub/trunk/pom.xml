@@ -13,7 +13,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <parent>
         <groupId>org.soitoolkit.commons.poms</groupId>
         <artifactId>soitoolkit-default-parent</artifactId>
-        <version>0.6.1-M2</version>
+        <version>0.6.1</version>
     </parent>
     
     <groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.description</groupId>
@@ -24,8 +24,8 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
     
     <properties>
-        <skltp.agp.version>1.2.1-RC2</skltp.agp.version>
-        <GetAggregatedCareDocumentation.version>1.1.1-RC1</GetAggregatedCareDocumentation.version>
+        <skltp.agp.version>1.2.1-RC3</skltp.agp.version>
+        <GetAggregatedCareDocumentation.version>1.1.1-RC2</GetAggregatedCareDocumentation.version>
     </properties>
 
     <scm>
