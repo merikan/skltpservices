@@ -30,8 +30,13 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 	</properties>
 
 	
-	<dependencies>	
-	
+	<dependencies>
+	  <dependency>
+      <groupId>se.skltp.commons</groupId>
+      <artifactId>tp-commons-mule</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+
 		<!-- itintegration monitoring schemas för PingForConfiguration -->
 		<dependency>
 		  	<groupId>se.skltp.itintegration.monitoring</groupId>
