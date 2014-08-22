@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:or="urn:riv:se.apotekensservice:or:1" xmlns="urn:riv:se.apotekensservice:or:GodkannUttagResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:or:GodkannUttagResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_or_1.0.xsd" namespace="urn:riv:se.apotekensservice:or:1"/>
+  <xs:element name="GodkannUttag" type="GodkannUttagRequestType"/>
+  <xs:element name="GodkannUttagResponse" type="GodkannUttagResponseType"/>
+  <xs:element name="ApplicationException" type="or:ApplicationException"/>
+  <xs:element name="SystemException" type="or:SystemException"/>
+  <xs:complexType name="GodkannUttagRequestType">
+    <xs:sequence>
+      <xs:element nillable="false" name="apoteksaktorensExpeditionsId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Apoteksaktörens expeditions-id</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dosunderlagsversion" type="xs:int" minOccurs="0"/>
+      <xs:element nillable="false" name="expeditionsId" type="xs:long">
+        <xs:annotation>
+          <xs:documentation>Apotekens Services expeditions-id</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="expeditionsdatum" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Datum och tid då uttaget skapades</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="expeditionsunderlag" maxOccurs="unbounded" type="or:ExpeditionsunderlagRequest">
+        <xs:annotation>
+          <xs:documentation>Lista innehållande underlag för de uttag som godkänns.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="personnummer" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Giltigt personnummer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="underlagsversion" type="xs:int"/>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GodkannUttagResponseType">
+    <xs:sequence>
+      <xs:element name="dispenseratuttagLista" maxOccurs="unbounded" type="or:DispenseratUttagResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Lista med dispenserade uttag som godkänts.
+Innehåller tillhörande AFF-resultat från godkännandet.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="helforpackningsuttagLista" maxOccurs="unbounded" type="or:HelforpackningsuttagResponse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Lista med helförpackningsuttag som godkänts.
+Innehåller tillhörande AFF-resultat från godkännandet.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="ordinationslista" type="or:OrdinationslistaResponse">
+        <xs:annotation>
+          <xs:documentation>Ordinationslista innehållande ordinationer som påverkats av uttag.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
