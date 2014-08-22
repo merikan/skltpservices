@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:or="urn:riv:se.apotekensservice:or:1" xmlns="urn:riv:se.apotekensservice:or:HamtaProduktionsunderlagResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:or:HamtaProduktionsunderlagResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_or_1.0.xsd" namespace="urn:riv:se.apotekensservice:or:1"/>
+  <xs:element name="HamtaProduktionsunderlag" type="HamtaProduktionsunderlagRequestType"/>
+  <xs:element name="HamtaProduktionsunderlagResponse" type="HamtaProduktionsunderlagResponseType"/>
+  <xs:element name="ApplicationException" type="or:ApplicationException"/>
+  <xs:element name="SystemException" type="or:SystemException"/>
+  <xs:complexType name="HamtaProduktionsunderlagRequestType">
+    <xs:sequence>
+      <xs:element nillable="false" name="personnummer" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Dospatientens personnummer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HamtaProduktionsunderlagResponseType">
+    <xs:sequence>
+      <xs:element nillable="false" name="ordinationslista" type="or:OrdinationslistaResponse">
+        <xs:annotation>
+          <xs:documentation>Ordinationslista</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
