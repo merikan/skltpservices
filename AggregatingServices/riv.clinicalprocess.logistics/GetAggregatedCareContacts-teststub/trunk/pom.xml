@@ -16,8 +16,8 @@
     <name>GetAggregatedCareContacts-teststub</name>
 
      <properties>
-        <skltp.agp.version>1.2.1-RC3</skltp.agp.version>
-        <GetAggregatedCareContacts.version>1.1.1-RC2</GetAggregatedCareContacts.version>
+        <skltp.agp.version>1.2.1-RC4</skltp.agp.version>
+        <GetAggregatedCareContacts.version>1.1.1-RC3</GetAggregatedCareContacts.version>
     </properties>
 
     <scm>
