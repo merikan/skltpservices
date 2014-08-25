@@ -11,13 +11,13 @@
     
     <groupId>se.skltp.aggregatingservices.clinicalprocess.activityprescription.actoutcome</groupId>
     <artifactId>GetAggregatedVaccinationHistory-teststub</artifactId>
-    <version>1.1.1-RC3-SNAPSHOT</version>
+    <version>1.1.1-RC3</version>
     <packaging>mule</packaging>
     <name>GetAggregatedVaccinationHistory-teststub</name>
 
     <properties>
-        <skltp.agp.version>1.2.1-RC3</skltp.agp.version>
-        <GetAggregatedVaccinationHistory.version>1.1.1-RC2</GetAggregatedVaccinationHistory.version>
+        <skltp.agp.version>1.2.1-RC4</skltp.agp.version>
+        <GetAggregatedVaccinationHistory.version>1.1.1-RC3</GetAggregatedVaccinationHistory.version>
     </properties>
 	
     <dependencies>
@@ -188,8 +188,8 @@
 
    <scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.activityprescription.actoutcome/GetAggregatedVaccinationHistory-teststub/trunk</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.activityprescription.actoutcome/GetAggregatedVaccinationHistory-teststub/trunk</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.activityprescription.actoutcome/GetAggregatedVaccinationHistory-teststub/trunk</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.activityprescription.actoutcome/GetAggregatedVaccinationHistory-teststub/tags/GetAggregatedVaccinationHistory-teststub-1.1.1-RC3</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.activityprescription.actoutcome/GetAggregatedVaccinationHistory-teststub/tags/GetAggregatedVaccinationHistory-teststub-1.1.1-RC3</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.activityprescription.actoutcome/GetAggregatedVaccinationHistory-teststub/tags/GetAggregatedVaccinationHistory-teststub-1.1.1-RC3</url>
     </scm>
 </project>
