@@ -16,8 +16,8 @@
     <name>GetAggregatedVaccinationHistory-teststub</name>
 
     <properties>
-        <skltp.agp.version>1.2.1-RC4</skltp.agp.version>
-        <GetAggregatedVaccinationHistory.version>1.1.1-RC3</GetAggregatedVaccinationHistory.version>
+        <skltp.agp.version>1.2.1</skltp.agp.version>
+        <GetAggregatedVaccinationHistory.version>1.1.1</GetAggregatedVaccinationHistory.version>
     </properties>
 	
     <dependencies>
