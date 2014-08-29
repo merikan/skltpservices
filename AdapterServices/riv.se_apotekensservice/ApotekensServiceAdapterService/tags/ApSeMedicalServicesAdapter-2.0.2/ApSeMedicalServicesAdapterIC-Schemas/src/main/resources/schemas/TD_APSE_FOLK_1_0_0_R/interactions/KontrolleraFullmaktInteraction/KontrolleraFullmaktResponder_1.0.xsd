@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:folk="urn:riv:se.apotekensservice:folk:1" xmlns="urn:riv:se.apotekensservice:folk:KontrolleraFullmaktResponder:1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:riv:se.apotekensservice:folk:KontrolleraFullmaktResponder:1" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+  <xs:import schemaLocation="../../core_components/se.apotekensservice_folk_1.0.xsd" namespace="urn:riv:se.apotekensservice:folk:1"/>
+  <xs:element name="KontrolleraFullmakt" type="KontrolleraFullmaktRequestType"/>
+  <xs:element name="KontrolleraFullmaktResponse" type="KontrolleraFullmaktResponseType"/>
+  <xs:element name="ApplicationException" type="folk:ApplicationException"/>
+  <xs:element name="SystemException" type="folk:SystemException"/>
+  <xs:complexType name="KontrolleraFullmaktRequestType">
+    <xs:sequence>
+      <xs:element nillable="false" name="givarePersNr" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Giltigt personnummer för fullmaktsgivare</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="klientinformation" type="folk:KlientinformationRequest">
+        <xs:annotation>
+          <xs:documentation>KlientInformation - innehåller information om anropande klient.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element nillable="false" name="tagarePersNr" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Giltigt personnummer för fullmaktstagare.
+Obligatorisk parameter om fullmaktstagare är privatperson eller anställd på en vårdenhet</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KontrolleraFullmaktResponseType">
+    <xs:sequence>
+      <xs:element nillable="false" name="status" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Återkoppling om giltig fullmakt finns.
+<para>0 = OK - Aktiv fullmakt finns.</para>
+            <para>1 = NOK - Aktiv fullmakt saknas.</para>
+            <para>2 = NOK - Angiven gln-kod för anropande system ogiltig.</para>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:any processContents="lax" maxOccurs="unbounded" namespace="##other" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
