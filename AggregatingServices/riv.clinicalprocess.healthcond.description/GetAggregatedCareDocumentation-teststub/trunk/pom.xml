@@ -24,8 +24,8 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
     
     <properties>
-        <skltp.agp.version>1.2.1-RC4</skltp.agp.version>
-        <GetAggregatedCareDocumentation.version>1.1.1-RC3</GetAggregatedCareDocumentation.version>
+        <skltp.agp.version>1.2.1</skltp.agp.version>
+        <GetAggregatedCareDocumentation.version>1.1.1</GetAggregatedCareDocumentation.version>
     </properties>
 
     <scm>
