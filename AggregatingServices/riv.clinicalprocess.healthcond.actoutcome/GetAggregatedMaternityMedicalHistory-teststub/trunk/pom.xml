@@ -11,7 +11,7 @@
     
     <groupId>se.skltp.aggregatingservices.clinicalprocess.healthcond.actoutcome</groupId>
     <artifactId>GetAggregatedMaternityMedicalHistory-teststub</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
     <packaging>mule</packaging>
     <name>GetAggregatedMaternityMedicalHistory-teststub</name>
 
@@ -21,9 +21,9 @@
     </properties>
 
     <scm>
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedMaternityMedicalHistory-teststub/tags/GetAggregatedMaternityMedicalHistory-teststub-1.0.1</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedMaternityMedicalHistory-teststub/tags/GetAggregatedMaternityMedicalHistory-teststub-1.0.1</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healhtcond.actoutcome/GetAggregatedMaternityMedicalHistory-teststub/tags/GetAggregatedMaternityMedicalHistory-teststub-1.0.1</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedMaternityMedicalHistory-teststub/trunk</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.actoutcome/GetAggregatedMaternityMedicalHistory-teststub/trunk</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healhtcond.actoutcome/GetAggregatedMaternityMedicalHistory-teststub/trunk</url>
     </scm>
   
 
