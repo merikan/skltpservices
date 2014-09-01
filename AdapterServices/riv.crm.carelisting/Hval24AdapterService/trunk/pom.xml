@@ -11,14 +11,14 @@
     
     <groupId>se.skltp.adapterservices.crm.carelisting</groupId>
     <artifactId>Hval24AdapterIC-parent</artifactId>
-    <version>2.0.2</version>
+    <version>2.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
 
 	<scm>
-		<connection>http://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/tags/Hval24AdapterIC-parent-2.0.2</connection>
-		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/tags/Hval24AdapterIC-parent-2.0.2</developerConnection>
-		<url>http://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/tags/Hval24AdapterIC-parent-2.0.2</url>
+		<connection>http://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/trunk</connection>
+		<developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/trunk</developerConnection>
+		<url>http://skltpservices.googlecode.com/svn/AdapterServices/riv.crm.carelisting/Hval24AdapterService/trunk</url>
 	</scm>
 
 	<modules>
