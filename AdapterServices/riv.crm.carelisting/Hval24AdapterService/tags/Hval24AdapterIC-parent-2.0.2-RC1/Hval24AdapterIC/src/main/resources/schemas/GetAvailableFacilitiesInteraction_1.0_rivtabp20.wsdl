@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements. See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership. The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License. You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied. See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ -->
+<wsdl:definitions name="GetAvailableFacilitiesInteraction" 
+	xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tjs="urn:riv:crm:carelisting:GetAvailableFacilitiesResponder:1" 
+	targetNamespace="urn:riv:crm:carelisting:GetAvailableFacilities:1:rivtabp20" xmlns="urn:riv:crm:carelisting:GetAvailableFacilities:1:rivtabp20">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			Beskrivning: Tjänstekontraktet som ingår NationellaListingsstjänten.
+			Revisioner: 2009-06-15 Version 1.0: Uppdelat i flera meddelanden (en per operation) efter 
+							kommentarer ifrån Arkitekturledningen.
+							2009-06-22 version 1.0.1: Plockade bort wsa:Action ifrån wsdl:portType. 
+							2009-12-21 version 1.0.2: Re-design i sammarbete med Modul1, Arkitekturledningen och Mawell. 
+			Tjänstedomän: crm:carelisting. crm=Customer Relationship Management.
+			Tjänsteinteraktionens namn: GetAvailableFacilities.
+			Tjänsteinteraktionstyp: Fråga-Svar.	
+			RIV Tekniska Anvisning: Basic Profile 2.0
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<!-- Egendefinierade typer -->
+	<wsdl:types>
+		<xsd:schema elementFormDefault="qualified">
+			<xsd:import schemaLocation="GetAvailableFacilities_1_0.xsd" 
+				namespace="urn:riv:crm:carelisting:GetAvailableFacilitiesResponder:1" />
+		</xsd:schema>
+		<xsd:schema>
+			<xsd:import schemaLocation="ws-addressing-1.0.xsd"
+				namespace="http://www.w3.org/2005/08/addressing" />
+		</xsd:schema>
+	</wsdl:types>
+
+	<!-- Meddelanden -->
+	<!-- Hämtar tillgängliga tjänsteutövare (vårdenheter). -->
+	<wsdl:message name="getAvailableFacilitiesRequest">
+		<wsdl:part name="LogicalAddress" element="wsa:To" />
+		<wsdl:part name="parameters" element="tjs:getAvailableFacilities" />
+	</wsdl:message>
+	<wsdl:message name="getAvailableFacilitiesResponse">
+		<wsdl:part name="parameters" element="tjs:getAvailableFacilitiesResponse" />
+	</wsdl:message>
+	<wsdl:message name="TechnicalException">
+		<wsdl:part name="parameters" element="tjs:TechnicalException" />
+	</wsdl:message>
+	
+	<!-- Port typer -->
+	<wsdl:portType name="GetAvailableFacilitiesResponderInterface">
+		<wsdl:operation name="getAvailableFacilities">
+			<wsdl:documentation>
+				Hämtar en lista med möjliga vårdenheter som medborgaren kan välja att
+				lista sig på. Logisk adress är till vårdgivare som ska kunna svara på frågan.
+			</wsdl:documentation>
+			<wsdl:input message="getAvailableFacilitiesRequest"/>
+			<wsdl:output message="getAvailableFacilitiesResponse" />
+			<wsdl:fault name="TechnicalException" message="TechnicalException"></wsdl:fault>		
+		</wsdl:operation>
+
+	</wsdl:portType>
+
+	<!-- Bindningar -->
+	<wsdl:binding name="GetAvailableFacilitiesResponderBinding" type="GetAvailableFacilitiesResponderInterface">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+			style="document" />
+		<wsdl:operation name="getAvailableFacilities">
+			<soap:operation soapAction="urn:riv:crm:carelisting:GetAvailableFacilitiesResponder:1:getAvailableFacilities" />
+			<wsdl:input>
+				<soap:header use="literal" message="getAvailableFacilitiesRequest"
+					part="LogicalAddress" />
+				<soap:body use="literal" parts="parameters" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="TechnicalException">
+				<soap:fault use="literal" name="TechnicalException" />
+			</wsdl:fault>			
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<!-- Servicar -->
+	<wsdl:service name="GetAvailableFacilitiesResponderService">
+		<wsdl:port name="GetAvailableFacilitiesResponderPort" binding="GetAvailableFacilitiesResponderBinding">
+			<soap:address location="http://temp.uri/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
