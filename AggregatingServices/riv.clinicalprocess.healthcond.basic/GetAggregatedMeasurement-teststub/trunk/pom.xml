@@ -24,6 +24,11 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule</packaging>
     <name>GetAggregatedMeasurement-teststub</name>
+    
+    <properties>
+        <skltp.agp.version>1.2.1</skltp.agp.version>
+        <GetAggregatedMeasurement.version>1.0.0-SNAPSHOT</GetAggregatedMeasurement.version>
+    </properties>
 
     <scm>
         <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.basic/GetAggregatedMeasurement-teststub/trunk/</connection>
@@ -36,15 +41,25 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     <dependency>
     	<groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic</groupId>
     	<artifactId>GetAggregatedMeasurement</artifactId>
-    	<version>1.0.0-SNAPSHOT</version>
+    	<version>${GetAggregatedMeasurement.version}</version>
     	<type>test-jar</type>
     </dependency>
     <dependency>
     	<groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic</groupId>
     	<artifactId>GetAggregatedMeasurement</artifactId>
-    	<version>1.0.0-SNAPSHOT</version>
+    	<version>${GetAggregatedMeasurement.version}</version>
     	<classifier>core</classifier>    	
     </dependency>
+    <dependency>
+        <groupId>se.skltp.agp</groupId>
+        <artifactId>agp-core</artifactId>
+        <version>${skltp.agp.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>se.skltp.agp</groupId>
+          <artifactId>agp-test-common</artifactId>
+          <version>${skltp.agp.version}</version>
+      </dependency>
 	</dependencies> 
 
     <build>
