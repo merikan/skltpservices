@@ -18,14 +18,14 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
 	<groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic</groupId>
 	<artifactId>GetAggregatedMeasurement-schemas</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>GetAggregatedMeasurement-schemas</name>
 
 	<scm>
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.basic/GetAggregatedMeasurement-schemas/tags/GetAggregatedMeasurement-schemas-1.0.0</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.basic/GetAggregatedMeasurement-schemas/tags/GetAggregatedMeasurement-schemas-1.0.0</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.basic/GetAggregatedMeasurement-schemas/tags/GetAggregatedMeasurement-schemas-1.0.0</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.basic/GetAggregatedMeasurement-schemas/trunk/</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.basic/GetAggregatedMeasurement-schemas/trunk/</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.basic/GetAggregatedMeasurement-schemas/trunk/</url>
     </scm>
 
 	<properties>
