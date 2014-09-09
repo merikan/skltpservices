@@ -27,7 +27,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
     
     <properties>
         <skltp.agp.version>1.2.1</skltp.agp.version>
-        <GetAggregatedMeasurement.version>1.0.0-SNAPSHOT</GetAggregatedMeasurement.version>
+        <GetAggregatedMeasurement.version>1.0.0-RC1</GetAggregatedMeasurement.version>
     </properties>
 
     <scm>
