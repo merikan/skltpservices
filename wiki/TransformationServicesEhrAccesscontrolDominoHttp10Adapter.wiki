@@ -11,6 +11,8 @@ Domino HTTP 1.0 adapter is used to handle the case when a producer is running an
 ----
 *DEPRECATED* from tag version 2.0.0 (built for Mule 3.3.1) see general developer guidelines in SKLTP wiki.
  
+https://skl-tp.atlassian.net/wiki/display/SKLTPservices/AnP+-+DominoHttp10Adapter
+
 =Installation instructions mule 2.2.8=
 
 ==Build from source==
