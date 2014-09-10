@@ -1694,8 +1694,8 @@
       </urn1:FindContent>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:itintegration:engagementindex:FindContentResponder:1:FindContent"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="Testcases not including VP"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC1:Hämta data från bakomliggande producenter" searchProperties="true" id="d3b864f8-0587-4f8d-a327-6d089ffdf3d6"><con:settings/><con:testStep type="request" name="GetMeasurement - Tolvan Tolvansson"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>GetMeasurementResponderBinding</con:interface><con:operation>GetMeasurement</con:operation><con:request name="GetMeasurement - Tolvan Tolvansson" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
-  &lt;con:entry key="x-rivta-original-serviceconsumer-hsaid" value="ORG_SENDERID"/>
   &lt;con:entry key="x-vp-sender-id" value="${#Project#senderId}"/>
+  &lt;con:entry key="x-rivta-original-serviceconsumer-hsaid" value="ORG_SENDERID"/>
 &lt;/xml-fragment></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://${#Project#serviceEndpoint}/GetMeasurementResponder/service/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:clinicalprocess:healthcond:basic:GetMeasurementResponder:1" xmlns:urn2="urn:riv:clinicalprocess:healthcond:basic:1">
    <soapenv:Header>
       <urn:LogicalAddress>5565594230</urn:LogicalAddress>
@@ -1730,7 +1730,7 @@
          <!--Optional:-->
          <urn1:measurementValue>
             <urn2:value>0</urn2:value>
-            <urn2:unit></urn2:unit>
+            <urn2:unit>UNIT</urn2:unit>
             <!--You may enter ANY elements at this point-->
          </urn1:measurementValue>
          <!--Optional:-->
@@ -1800,8 +1800,8 @@ count(/soap:Envelope/soap:Body/ns2:GetMeasurementResponse/ns2:measurement)</path
          </urn1:measurementType>
          <!--Optional:-->
          <urn1:measurementValue>
-            <urn2:value></urn2:value>
-            <urn2:unit></urn2:unit>
+            <urn2:value>0</urn2:value>
+            <urn2:unit>UNIT</urn2:unit>
             <!--You may enter ANY elements at this point-->
          </urn1:measurementValue>
          <!--Optional:-->
@@ -1871,8 +1871,8 @@ count(/soap:Envelope/soap:Body/ns2:GetMeasurementResponse/ns2:measurement)</path
          </urn1:measurementType>
          <!--Optional:-->
          <urn1:measurementValue>
-            <urn2:value></urn2:value>
-            <urn2:unit></urn2:unit>
+            <urn2:value>0</urn2:value>
+            <urn2:unit>UNIT</urn2:unit>
             <!--You may enter ANY elements at this point-->
          </urn1:measurementValue>
          <!--Optional:-->
@@ -1904,9 +1904,11 @@ count(/soap:Envelope/soap:Body/ns2:GetMeasurementResponse/ns2:measurement)</path
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:assertion type="XPath Match" name="ProcessingStatus count"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
 declare namespace tk='urn:riv:interoperability:headers:1';
-count(/soap:Envelope/soap:Header/tk:ProcessingStatus/tk:ProcessingStatusList)</path><content>0</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="XPath Match"><con:configuration><path>declare namespace ns2='urn:riv:clinicalprocess:healthcond:basic:GetMeasurementResponder:1';
+count(/soap:Envelope/soap:Header/tk:ProcessingStatus/tk:ProcessingStatusList)</path><content>0</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="Response count"><con:configuration><path>declare namespace ns2='urn:riv:clinicalprocess:healthcond:basic:GetMeasurementResponder:1';
 declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
-count(/soap:Envelope/soap:Body/ns2:GetMeasurementResponse/ns2:measurement)</path><content>0</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:clinicalprocess:healthcond_basic:GetMeasurementResponder:1:GetMeasurement"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC4: Timeout från system" searchProperties="true" id="e8645862-852c-46c0-9068-281a2c85b676"><con:settings/><con:testStep type="request" name="GetMeasurement - Ulla Alm - Timeout"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>GetMeasurementResponderBinding</con:interface><con:operation>GetMeasurement</con:operation><con:request name="GetMeasurement - Ulla Alm - Timeout" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+count(/soap:Envelope/soap:Body/ns2:GetMeasurementResponse/ns2:measurement)</path><content>0</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="No fault"><con:configuration><path>declare namespace ns2='urn:riv:clinicalprocess:healthcond:basic:GetMeasurementResponder:1';
+declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+count(/soap:Envelope/soap:Body/soap:Fault)</path><content>0</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:riv:clinicalprocess:healthcond_basic:GetMeasurementResponder:1:GetMeasurement"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TC4: Timeout från system" searchProperties="true" id="e8645862-852c-46c0-9068-281a2c85b676"><con:settings/><con:testStep type="request" name="GetMeasurement - Ulla Alm - Timeout"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>GetMeasurementResponderBinding</con:interface><con:operation>GetMeasurement</con:operation><con:request name="GetMeasurement - Ulla Alm - Timeout" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
   &lt;con:entry key="x-rivta-original-serviceconsumer-hsaid" value="ORG_SENDERID"/>
   &lt;con:entry key="x-vp-sender-id" value="${#Project#senderId}"/>
 &lt;/xml-fragment></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://${#Project#serviceEndpoint}/GetMeasurementResponder/service/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:clinicalprocess:healthcond:basic:GetMeasurementResponder:1" xmlns:urn2="urn:riv:clinicalprocess:healthcond:basic:1">
@@ -1942,8 +1944,8 @@ count(/soap:Envelope/soap:Body/ns2:GetMeasurementResponse/ns2:measurement)</path
          </urn1:measurementType>
          <!--Optional:-->
          <urn1:measurementValue>
-            <urn2:value></urn2:value>
-            <urn2:unit></urn2:unit>
+            <urn2:value>0</urn2:value>
+            <urn2:unit>UNIT</urn2:unit>
             <!--You may enter ANY elements at this point-->
          </urn1:measurementValue>
          <!--Optional:-->
@@ -2019,8 +2021,8 @@ count(/soap:Envelope/soap:Body/ns2:GetMeasurementResponse/ns2:measurement)</path
          </urn1:measurementType>
          <!--Optional:-->
          <urn1:measurementValue>
-            <urn2:value></urn2:value>
-            <urn2:unit></urn2:unit>
+            <urn2:value>0</urn2:value>
+            <urn2:unit>UNIT</urn2:unit>
             <!--You may enter ANY elements at this point-->
          </urn1:measurementValue>
          <!--Optional:-->
@@ -2154,8 +2156,8 @@ count(/soap:Envelope/soap:Body/ns1:FindContentResponse/ns1:engagement)</path><co
          </urn1:measurementType>
          <!--Optional:-->
          <urn1:measurementValue>
-            <urn2:value></urn2:value>
-            <urn2:unit></urn2:unit>
+            <urn2:value>0</urn2:value>
+            <urn2:unit>UNIT</urn2:unit>
             <!--You may enter ANY elements at this point-->
          </urn1:measurementValue>
          <!--Optional:-->
@@ -2355,8 +2357,8 @@ declare namespace mule='http://www.muleumo.org/providers/soap/1.0';
          </urn1:measurementType>
          <!--Optional:-->
          <urn1:measurementValue>
-            <urn2:value></urn2:value>
-            <urn2:unit></urn2:unit>
+            <urn2:value>0</urn2:value>
+            <urn2:unit>UNIT</urn2:unit>
             <!--You may enter ANY elements at this point-->
          </urn1:measurementValue>
          <!--Optional:-->
