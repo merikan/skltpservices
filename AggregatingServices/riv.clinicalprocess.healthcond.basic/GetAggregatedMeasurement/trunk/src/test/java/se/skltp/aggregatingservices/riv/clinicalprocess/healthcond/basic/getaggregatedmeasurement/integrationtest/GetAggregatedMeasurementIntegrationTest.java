@@ -76,21 +76,21 @@ public class GetAggregatedMeasurementIntegrationTest extends AbstractAggregateIn
     @Test
     public void test_fault_missing_http_headers() {
     	try {
-			doTest(LOGICAL_ADDRESS, TEST_RR_ID_ZERO_HITS, null, SAMPLE_ORIGINAL_CONSUMER_HSAID, 0);
+			doTest(LOGICAL_ADDRESS, TEST_RR_ID_ZERO_HITS, null, SAMPLE_ORIGINAL_CONSUMER_HSAID, 0, false);
 			fail("This one should fail on missing http header");
 		} catch (SOAPFaultException e) {
 			assertEquals("Mandatory HTTP header x-vp-sender-id is missing", e.getMessage());
 		}
 
     	try {
-	    	doTest(LOGICAL_ADDRESS, TEST_RR_ID_ZERO_HITS, SAMPLE_SENDER_ID, null, 0);		
+	    	doTest(LOGICAL_ADDRESS, TEST_RR_ID_ZERO_HITS, SAMPLE_SENDER_ID, null, 0, false);		
 	       	fail("This one should fail on missing http header");
 		} catch (SOAPFaultException e) {
 			assertEquals("Mandatory HTTP header x-rivta-original-serviceconsumer-hsaid is missing", e.getMessage());
 		}
 
     	try {
-	       	doTest(LOGICAL_ADDRESS, TEST_RR_ID_ZERO_HITS, null, null, 0);		
+	       	doTest(LOGICAL_ADDRESS, TEST_RR_ID_ZERO_HITS, null, null, 0, false);		
 	       	fail("This one should fail on missing http header");
 		} catch (SOAPFaultException e) {
 			assertEquals("Mandatory HTTP headers x-vp-sender-id and x-rivta-original-serviceconsumer-hsaid are missing", e.getMessage());
@@ -104,6 +104,14 @@ public class GetAggregatedMeasurementIntegrationTest extends AbstractAggregateIn
     public void test_ok_one_hit() {
     	
     	List<ProcessingStatusRecordType> statusList = doTest(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_ONE_HIT, 1, new ExpectedTestData(TEST_BO_ID_ONE_HIT, TEST_LOGICAL_ADDRESS_1));
+
+    	assertProcessingStatusDataFromSource(statusList.get(0), TEST_LOGICAL_ADDRESS_1);
+    }
+    
+    @Test
+    public void test_ok_one_hit_all_request_params() {
+    	
+    	List<ProcessingStatusRecordType> statusList = doTestWithAllRequestParams(TEST_LOGICAL_ADDRESS_1, TEST_RR_ID_ONE_HIT, 1, new ExpectedTestData(TEST_BO_ID_ONE_HIT, TEST_LOGICAL_ADDRESS_1));
 
     	assertProcessingStatusDataFromSource(statusList.get(0), TEST_LOGICAL_ADDRESS_1);
     }
@@ -160,7 +168,22 @@ public class GetAggregatedMeasurementIntegrationTest extends AbstractAggregateIn
      * @return
      */
 	private List<ProcessingStatusRecordType> doTest(String logicalAddress, String registeredResidentId, int expectedProcessingStatusSize, ExpectedTestData... testData) {
-		return doTest(logicalAddress, registeredResidentId, SAMPLE_SENDER_ID, SAMPLE_ORIGINAL_CONSUMER_HSAID, expectedProcessingStatusSize, testData);
+		return doTest(logicalAddress, registeredResidentId, SAMPLE_SENDER_ID, SAMPLE_ORIGINAL_CONSUMER_HSAID, expectedProcessingStatusSize, false, testData);
+    }
+	
+	/**
+     * Helper method for performing a call to the aggregating service and perform some common validations of the result.
+     * 
+     * Includes values in all request params.
+     * 
+     * @param logicalAddress
+     * @param registeredResidentId
+     * @param expectedProcessingStatusSize
+     * @param testData
+     * @return
+     */
+	private List<ProcessingStatusRecordType> doTestWithAllRequestParams(String logicalAddress, String registeredResidentId, int expectedProcessingStatusSize, ExpectedTestData... testData) {
+		return doTest(logicalAddress, registeredResidentId, SAMPLE_SENDER_ID, SAMPLE_ORIGINAL_CONSUMER_HSAID, expectedProcessingStatusSize, true, testData);
     }
 
 	/**
@@ -171,16 +194,22 @@ public class GetAggregatedMeasurementIntegrationTest extends AbstractAggregateIn
      * @param senderId
      * @param originalConsumerHsaId
      * @param expectedProcessingStatusSize
+     * @param inclAllReqParams
      * @param testData
      * @return
      */
-	private List<ProcessingStatusRecordType> doTest(String logicalAddress, String registeredResidentId, String senderId, String originalConsumerHsaId, int expectedProcessingStatusSize, ExpectedTestData... testData) {
+	private List<ProcessingStatusRecordType> doTest(String logicalAddress, String registeredResidentId, String senderId, String originalConsumerHsaId, int expectedProcessingStatusSize, boolean inclAllReqParams, ExpectedTestData... testData) {
 
 		// Setup and perform the call to the web service
 		GetAggregatedMeasurementTestConsumer consumer = new GetAggregatedMeasurementTestConsumer(DEFAULT_SERVICE_ADDRESS, senderId ,originalConsumerHsaId);
 		Holder<GetMeasurementResponseType> responseHolder = new Holder<GetMeasurementResponseType>();
 		Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
-    	consumer.callService(logicalAddress, registeredResidentId, processingStatusHolder, responseHolder);
+    	
+		if(inclAllReqParams){	
+			consumer.callServiceIncludeValuesInAllReqParams(logicalAddress, registeredResidentId, "19791017160000", "19791017170000", processingStatusHolder, responseHolder);
+		}else{
+			consumer.callService(logicalAddress, registeredResidentId, processingStatusHolder, responseHolder);
+		}
 
     	// Verify the response size and content
     	GetMeasurementResponseType response = responseHolder.value;

@@ -11,7 +11,9 @@ import org.slf4j.LoggerFactory;
 import se.riv.clinicalprocess.healthcond.basic.getmeasurement.v1.rivtabp21.GetMeasurementResponderInterface;
 import se.riv.clinicalprocess.healthcond.basic.getmeasurementresponder.v1.GetMeasurementResponseType;
 import se.riv.clinicalprocess.healthcond.basic.getmeasurementresponder.v1.GetMeasurementType;
+import se.riv.clinicalprocess.healthcond.basic.v1.CVType;
 import se.riv.clinicalprocess.healthcond.basic.v1.IIType;
+import se.riv.clinicalprocess.healthcond.basic.v1.PQType;
 import se.riv.clinicalprocess.healthcond.basic.v1.TimePeriodType;
 import se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic.getaggregatedmeasurement.GetAggregatedMeasurementMuleServer;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
@@ -52,11 +54,11 @@ public class GetAggregatedMeasurementTestConsumer extends AbstractTestConsumer<G
 
 		// TODO: CHANGE GENERATED CODE - START
 		
-		request.setPatientId(createID(registeredResidentId));
+		request.setPatientId(createID("1.2.752.129.2.1.3.1", registeredResidentId));
 		
 		request.setTime(createTimePeriodType(starTime, endTime));
 		
-		request.setSourceSystemId(createSourceSystemId(logicalAddress));
+		request.setSourceSystemId(createID("1.2.752.129.2.1.4.1", logicalAddress));
 
 		// TODO: CHANGE GENERATED CODE - END
 
@@ -66,12 +68,54 @@ public class GetAggregatedMeasurementTestConsumer extends AbstractTestConsumer<G
 		
 		processingStatusHolder.value = SoapHeaderCxfInterceptor.getLastFoundProcessingStatus();
 	}
+	
+	public void callServiceIncludeValuesInAllReqParams(String logicalAddress, String registeredResidentId, String starTime, String endTime, Holder<ProcessingStatusType> processingStatusHolder, Holder<GetMeasurementResponseType> responseHolder) {
 
-	private IIType createSourceSystemId(String logicalAddress) {
-		IIType iiType = new IIType();
-		iiType.setExtension(logicalAddress);
-		iiType.setRoot("1.2.752.129.2.1.4.1");
-		return iiType;
+		log.debug("Calling GetRequestActivities-soap-service with Registered Resident Id = {}", registeredResidentId);
+		
+		GetMeasurementType request = new GetMeasurementType();
+
+		// TODO: CHANGE GENERATED CODE - START
+		
+		request.setPatientId(createID("1.2.752.129.2.1.3.1", registeredResidentId));
+		
+		request.setTime(createTimePeriodType(starTime, endTime));
+		
+		request.setSourceSystemId(createID("1.2.752.129.2.1.4.1", logicalAddress));
+		
+		request.setMeasurementValue(createMeasurementValue("UNIT", 1.0));
+		
+		request.setCareGiverId(createID("1.2.752.129.2.1.4.1", "HSA-ID-1"));
+		
+		request.setCareUnitId(createID("1.2.752.129.2.1.4.1", "HSA-ID-1"));
+		
+		request.setMeasurementId(createID("1.2.752.129.2.1.2.1", "HSA-ID-1"));
+		
+		request.setMeasurementType(createType());
+		
+		// TODO: CHANGE GENERATED CODE - END
+
+
+		GetMeasurementResponseType response = _service.getMeasurement(logicalAddress, request);
+		responseHolder.value = response;
+		
+		processingStatusHolder.value = SoapHeaderCxfInterceptor.getLastFoundProcessingStatus();
+	}
+
+	private CVType createType() {
+		CVType cvType = new CVType();
+		cvType.setCode("CODE");
+		cvType.setCodeSystem("CODESYSTEM");
+		cvType.setCodeSystemVersion("CODESYSTEMVERSION");
+		cvType.setDisplayName("DISPLAYNAME");
+		return cvType;
+	}
+
+	private PQType createMeasurementValue(String unit, Double value) {
+		PQType pqType = new PQType();
+		pqType.setUnit(unit);
+		pqType.setValue(value);
+		return pqType;
 	}
 
 	private TimePeriodType createTimePeriodType(String starTime, String endTime) {
@@ -81,13 +125,10 @@ public class GetAggregatedMeasurementTestConsumer extends AbstractTestConsumer<G
 		return periodType;
 	}
 
-	private IIType createID(String registeredResidentId) {
+	private IIType createID(String type, String value) {
 		IIType iiType = new IIType();
-		
-		// TKB 6.4.2 Fältregler. För personnummer används OID (1.2.752.129.2.1.3.1).
-		iiType.setRoot("1.2.752.129.2.1.3.1");
-		iiType.setExtension(registeredResidentId);
-		
+		iiType.setRoot(type);
+		iiType.setExtension(value);
 		return iiType;
 	}
 }
