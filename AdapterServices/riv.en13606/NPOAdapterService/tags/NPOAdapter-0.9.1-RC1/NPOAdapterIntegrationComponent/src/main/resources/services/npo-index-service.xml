@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mule
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
+        xmlns="http://www.mulesoft.org/schema/mule/core"
+        xmlns:https="http://www.mulesoft.org/schema/mule/https"
+        xsi:schemaLocation="
+                http://www.mulesoft.org/schema/mule/core    http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+                http://www.mulesoft.org/schema/mule/cxf     http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+                http://www.mulesoft.org/schema/mule/https   http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
+        ">
+
+    <!--
+    Receives NPO specific send index requests. Then NPO and ei update are invoked synchronously.
+    See also the re-used outbound flow "ei-outbound-update-flow".
+    -->
+    <flow name="NPOService-1.1.2">
+
+        <inbound-endpoint address="${IN_ENDPOINT_NPO}"
+                          connector-ref="soitoolkit-http-connector"
+                          transformer-refs="create-correlation-id logReqIn"
+                          responseTransformer-refs="createSoapFaultTransformer logRespOut"
+                          exchange-pattern="request-response">
+
+            <cxf:jaxws-service
+                    namespace="http://nationellpatientoversikt.se"
+                    serviceClass="se.skl.skltpservices.npoadapter.ws.NpoWS"
+                    wsdlLocation="classpath:/interactions/npo/NPO_1.1.2.wsdl" />
+        </inbound-endpoint>
+
+        <set-variable variableName="request" value="#[payload]"/>
+
+        <logger level="INFO" message="=============== Payload: #[variable:request] ==========" />
+
+        <component>
+            <singleton-object class="se.skl.skltpservices.npoadapter.ws.NpoWS"  />
+        </component>
+
+        <set-variable variableName="response" value="#[payload]" />
+
+        <choice>
+            <when expression="${FORWARD_INDEX_TO_NPO} == 'true'">
+
+                <logger level="INFO" message="========= Forward Index To NPO ===========" />
+
+                <set-payload value="#[variable:request]" />
+
+                <https:outbound-endpoint connector-ref="soitoolkit-https-connector"
+                                         address="${OUT_ENDPOINT_NPO}"
+                                         exchange-pattern="request-response"
+                                         responseTimeout="${SERVICE_TIMEOUT_MS}"
+                                         transformer-refs="logReqOut"
+                                         responseTransformer-refs="logRespIn check-response-transformer">
+                    <cxf:jaxws-client port="NPOSoap"
+                                      operation="SendSimpleIndex"
+                                      clientClass="se.nationellpatientoversikt.NPO"
+                                      wsdlLocation="classpath:/interactions/npo/NPO_1.1.2.wsdl" />
+                </https:outbound-endpoint>
+            </when>
+            <otherwise>
+               <echo-component />
+            </otherwise>
+        </choice>
+
+        <set-payload value="#[variable:request]" />
+
+        <logger level="INFO" message="========= Update E-Index ===========" />
+
+        <flow-ref name="UpdateResponderService-1.0-Client" />
+
+        <set-payload value="#[variable:response]" />
+
+        <custom-exception-strategy class="org.soitoolkit.commons.mule.error.ServiceExceptionStrategy"/>
+    </flow>
+
+</mule>
