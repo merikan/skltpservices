@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>schemas</artifactId>
+        <groupId>se.skltp.adapterservices.npoadapter</groupId>
+        <version>0.9.1-RC1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>riv-schemas</artifactId>
+    <properties>
+        <interactionsdir>${basedir}/interactions</interactionsdir>
+        <coredir>${basedir}/core_components</coredir>
+    </properties>
+
+    <dependencies />
+
+    <build>
+
+        <resources>
+            <resource>
+                <targetPath>core_components</targetPath>
+                <directory>${coredir}</directory>
+            </resource>
+            <resource>
+                <targetPath>interactions/GetCareContactsInteraction</targetPath>
+                <directory>${interactionsdir}/GetCareContactsInteraction</directory>
+            </resource>
+            <resource>
+                <targetPath>interactions/GetCareDocumentationInteraction</targetPath>
+                <directory>${interactionsdir}/GetCareDocumentationInteraction</directory>
+            </resource>
+            <resource>
+                <targetPath>interactions/GetEhrExtractInteraction</targetPath>
+                <directory>${interactionsdir}/GetEhrExtractInteraction</directory>
+            </resource>
+            <resource>
+                <targetPath>interactions/UpdateInteraction</targetPath>
+                <directory>${interactionsdir}/UpdateInteraction</directory>
+            </resource>
+            <resource>
+                <targetPath>interactions/GetDiagnosisInteraction</targetPath>
+                <directory>${interactionsdir}/GetDiagnosisInteraction</directory>
+            </resource>
+            <resource>
+                <targetPath>interactions/GetLaboratoryOrderOutcomeInteraction</targetPath>
+                <directory>${interactionsdir}/GetLaboratoryOrderOutcomeInteraction</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-codegen-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <wsdlOptions>
+                                <wsdlOption>
+                                    <wsdl>${interactionsdir}/GetCareContactsInteraction/GetCareContactsInteraction_2.0_RIVTABP21.wsdl</wsdl>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>${interactionsdir}/GetCareDocumentationInteraction/GetCareDocumentationInteraction_2.0_RIVTABP21.wsdl</wsdl>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>${interactionsdir}/GetEhrExtractInteraction/GetEhrExtractInteraction_0.99_RIVTABP21.wsdl</wsdl>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>${interactionsdir}/UpdateInteraction/UpdateInteraction_1.0_RIVTABP21.wsdl</wsdl>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>${interactionsdir}/GetDiagnosisInteraction/GetDiagnosisInteraction_2.0_RIVTABP21.wsdl</wsdl>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>${interactionsdir}/GetLaboratoryOrderOutcomeInteraction/GetLaboratoryOrderOutcomeInteraction_3.0_RIVTABP21.wsdl</wsdl>
+                                </wsdlOption>
+                            </wsdlOptions>
+                        </configuration>
+                        <goals>
+                            <goal>wsdl2java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+</project>
