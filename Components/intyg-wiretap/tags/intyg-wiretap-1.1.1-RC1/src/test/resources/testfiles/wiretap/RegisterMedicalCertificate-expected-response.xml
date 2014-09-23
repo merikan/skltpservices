@@ -1,0 +1,5 @@
+<ns2:RegisterMedicalCertificateResponse xmlns:ns2="urn:riv:insuranceprocess:healthreporting:RegisterMedicalCertificateResponder:3" xmlns:ns3="urn:riv:insuranceprocess:healthreporting:mu7263:3">
+   <ns2:result>
+      <resultCode>OK</resultCode>
+   </ns2:result>
+</ns2:RegisterMedicalCertificateResponse>
