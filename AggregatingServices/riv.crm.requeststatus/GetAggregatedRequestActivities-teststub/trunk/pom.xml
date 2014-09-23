@@ -17,7 +17,7 @@
 
     <properties>
         <skltp.agp.version>1.2.1</skltp.agp.version>
-        <GetAggregatedRequestActivities.version>1.0.1-RC4</GetAggregatedRequestActivities.version>
+        <GetAggregatedRequestActivities.version>1.0.1-RC5</GetAggregatedRequestActivities.version>
     </properties>
 
     <scm>
