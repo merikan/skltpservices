@@ -28,8 +28,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
 	 * Följande villkor måste vara sanna för att en svarspost från EI skall tas med i svaret:
 	 * 
 	 * 1. req.fromDate <= ei-engagement.mostRecentContent <= req.toDate
-	 * 2. req.careUnitId.size == 0 or req.careUnitId.contains(ei-engagement.logicalAddress)
-	 * 3. reg.getTypeOfRequest == 0 or req.getTypeOfRequest.contains(ei-engagement.categorization)
+	 * 2. reg.getTypeOfRequest == 0 or req.getTypeOfRequest.contains(ei-engagement.categorization)
 	 * 
 	 * Svarsposter från EI som passerat filtreringen grupperas på fältet sourceSystem samt postens fält logicalAddress (= PDL-enhet) samlas i listan careUnitId per varje sourceSystem
 	 * 
@@ -37,7 +36,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
 	 * 
 	 * 1. logicalAddress = sourceSystem (systemadressering)
 	 * 2. subjectOfCareId = orginal-request.subjectOfCareId
-	 * 3. careUnitId = listan av PDL-enheter som returnerats från EI för aktuellt source system)
+	 * 3. careUnitId = orginal-request.careUnitId
 	 * 4. fromDate = orginal-request.fromDate
 	 * 5. toDate = orginal-request.toDate
 	 */
@@ -47,7 +46,6 @@ public class RequestListFactoryImpl implements RequestListFactory {
 		GetRequestActivitiesType originalRequest = (GetRequestActivitiesType)qo.getExtraArg();
 		Date reqFrom = parseTs(originalRequest.getFromDate());
 		Date reqTo   = parseTs(originalRequest.getToDate());
-		List<String> reqCareUnitList = originalRequest.getCareUnitId();
 		List<String> reqCategories = originalRequest.getTypeOfRequest();
 
 		FindContentResponseType eiResp = (FindContentResponseType)src;
@@ -61,7 +59,6 @@ public class RequestListFactoryImpl implements RequestListFactory {
 
 			// Filter
 			if (isBetween(reqFrom, reqTo, inEng.getMostRecentContent()) &&
-				isPartOf(reqCareUnitList, inEng.getLogicalAddress()) &&
 				isCorrectCategory(reqCategories, inEng.getCategorization())) {
 
 				// Add pdlUnit to source system
@@ -78,18 +75,17 @@ public class RequestListFactoryImpl implements RequestListFactory {
 		for (Entry<String, List<String>> entry : sourceSystem_pdlUnitList_map.entrySet()) {
 
 			String sourceSystem = entry.getKey();
- 			List<String> careUnitList = entry.getValue();
 
 			if (log.isInfoEnabled()) log.info("Calling source system using logical address {} for subject of care id {}", sourceSystem, originalRequest.getSubjectOfCareId());
 
 			GetRequestActivitiesType request = new GetRequestActivitiesType();
 			request.setSubjectOfCareId(originalRequest.getSubjectOfCareId());
-			request.getCareUnitId().addAll(careUnitList);
+			request.getCareUnitId().addAll(originalRequest.getCareUnitId());
 			request.setFromDate(originalRequest.getFromDate());
 			request.setToDate(originalRequest.getToDate());
 			
 			//For each careUnit found in EI, add all requestTypes from original request
-			request.getTypeOfRequest().addAll(reqCategories);
+			request.getTypeOfRequest().addAll(originalRequest.getTypeOfRequest());
 
 			Object[] reqArr = new Object[] {sourceSystem, request};
 			
@@ -136,15 +132,6 @@ public class RequestListFactoryImpl implements RequestListFactory {
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	boolean isPartOf(List<String> careUnitIdList, String careUnit) {
-		
-		log.debug("Check presence of {} in {}", careUnit, careUnitIdList);
-		
-		if (careUnitIdList == null || careUnitIdList.size() == 0) return true;
-		
-		return careUnitIdList.contains(careUnit);
 	}
 
 	void addPdlUnitToSourceSystem(Map<String, List<String>> sourceSystem_pdlUnitList_map, String sourceSystem, String pdlUnitId) {
