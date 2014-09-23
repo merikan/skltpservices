@@ -11,7 +11,7 @@
     
     <groupId>se.skltp.aggregatingservices.crm.requeststatus</groupId>
     <artifactId>GetAggregatedRequestActivities-teststub</artifactId>
-    <version>1.0.1-RC5-SNAPSHOT</version>
+    <version>1.0.1-RC5</version>
     <packaging>mule</packaging>
     <name>GetAggregatedRequestActivities-teststub</name>
 
@@ -21,9 +21,9 @@
     </properties>
 
     <scm>
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities-teststub/trunk</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities-teststub/trunk</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities-teststub/trunk</url>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities-teststub/tags/GetAggregatedRequestActivities-teststub-1.0.1-RC5</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities-teststub/tags/GetAggregatedRequestActivities-teststub-1.0.1-RC5</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.crm.requeststatus/GetAggregatedRequestActivities-teststub/tags/GetAggregatedRequestActivities-teststub-1.0.1-RC5</url>
     </scm>
   
 
