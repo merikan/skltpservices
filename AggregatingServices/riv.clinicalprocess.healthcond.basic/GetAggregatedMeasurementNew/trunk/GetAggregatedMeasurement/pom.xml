@@ -11,30 +11,20 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 	<modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.soitoolkit.commons.poms</groupId>
-        <artifactId>soitoolkit-default-parent</artifactId>
-        <version>0.6.1</version>
+        <groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic</groupId>
+        <artifactId>GetAggregatedMeasurement-parent</artifactId>
+        <version>1.0.0-RC2-SNAPSHOT</version>
     </parent>
+    
     
     <groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic</groupId>
     <artifactId>GetAggregatedMeasurement</artifactId>
-    <version>1.0.0-RC2-SNAPSHOT</version>
     <packaging>mule</packaging>
     <name>GetAggregatedMeasurement</name>
 
     <properties>
         <skltp.agp.version>1.2.1</skltp.agp.version>
-
-        <!-- Some properties for generating code from XML Schemas (JAX-WS) -->
-        <schema.path>${basedir}/src/main/resources/schemas</schema.path>
-        <cxf.version>2.5.1</cxf.version>
     </properties>
-     
-    <scm>
-        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.basic/GetAggregatedMeasurement/trunk/</connection>
-        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.basic/GetAggregatedMeasurement/trunk/</developerConnection>
-        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.basic/GetAggregatedMeasurement/trunk/</url>
-    </scm>
     
 	<dependencies>	
         <dependency>
