@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOING!
+[soi-toolkit.gen.version=0.6.2-SNAPSHOT]
+[soi-toolkit.gen.type=services]
+[soi-toolkit.gen.createDate=2014-10-06T12:43:33.373+02:00]
+[soi-toolkit.gen.artifactId=GetAggregatedObservation]
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.soitoolkit.commons.poms</groupId>
+        <artifactId>soitoolkit-default-parent</artifactId>
+        <version>0.6.1</version>
+    </parent>
+    
+    <groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic</groupId>
+    <artifactId>GetAggregatedMeasurement-parent</artifactId>
+    <version>1.0.0-RC2</version>
+    <packaging>pom</packaging>
+    <name>GetAggregatedMeasurement-parent</name>
+
+    <scm>
+        <connection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.basic/GetAggregatedMeasurement/tags/GetAggregatedMeasurement-parent-1.0.0-RC2</connection>
+        <developerConnection>scm:svn:https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.basic/GetAggregatedMeasurement/tags/GetAggregatedMeasurement-parent-1.0.0-RC2</developerConnection>
+        <url>https://skltpservices.googlecode.com/svn/AggregatingServices/riv.clinicalprocess.healthcond.basic/GetAggregatedMeasurement/tags/GetAggregatedMeasurement-parent-1.0.0-RC2</url>
+    </scm>
+
+    <modules>
+      <module>GetAggregatedMeasurement</module>
+      <module>GetAggregatedMeasurement-teststub</module>
+
+      <module>GetAggregatedMeasurement-schemas</module>
+
+    </modules>
+  </project>
