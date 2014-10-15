@@ -1,7 +1,7 @@
 package se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic.getaggregatedobservation.integrationtest;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 import static se.skltp.agp.riv.interoperability.headers.v1.CausingAgentEnum.VIRTUALIZATION_PLATFORM;
 import static se.skltp.agp.test.consumer.AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID;
 import static se.skltp.agp.test.consumer.AbstractTestConsumer.SAMPLE_SENDER_ID;
@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
 import se.riv.clinicalprocess.healthcond.basic.getobservationresponder.v1.GetObservationResponseType;
-
+import se.riv.clinicalprocess.healthcond.basic.v1.ObservationType;
 import se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic.getaggregatedobservation.GetAggregatedObservationMuleServer;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusRecordType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
@@ -171,23 +171,17 @@ public class GetAggregatedObservationIntegrationTest extends AbstractAggregateIn
     	GetObservationResponseType response = responseHolder.value;
     	int expextedResponseSize = testData.length;
 
-
-        // TODO: CHANGE GENERATED SAMPLE CODE - START
-        if (1==1) throw new UnsupportedOperationException("Not yet implemented");
-        /*
-
-		assertEquals(expextedResponseSize, response.getRequestActivity().size());
+		assertEquals(expextedResponseSize, response.getObservation().size());
 		
 		for (int i = 0; i < testData.length; i++) {
-			RequestActivityType responseElement = response.getRequestActivity().get(i);
-			assertEquals(registeredResidentId, responseElement.getSubjectOfCareId());		
+			ObservationType responseElement = response.getObservation().get(i);
+			assertEquals(registeredResidentId, responseElement.getPatient().getId().getExtension());		
 
-			assertEquals(testData[i].getExpectedBusinessObjectId(), responseElement.getSenderRequestId());
-			assertEquals(testData[i].getExpectedLogicalAddress(), responseElement.getCareUnit());		
+			// TODO: CHANGE GENERATED CODE - START
+			//assertEquals(testData[i].getExpectedBusinessObjectId(), responseElement.getSenderRequestId());		
+			//assertEquals(testData[i].getExpectedLogicalAddress(), responseElement.getCareUnit());		
+			// TODO: CHANGE GENERATED CODE - END
 		}
-
-        */
-        // TODO: CHANGE GENERATED SAMPLE CODE - END
 
 
     	// Verify the size of the processing status and return it for further analysis

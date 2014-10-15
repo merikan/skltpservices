@@ -21,24 +21,19 @@ public class GetAggregatedObservationTestProducer implements GetObservationRespo
 	}
 
 	public GetObservationResponseType getObservation(String logicalAddress, GetObservationType request) {
-		GetObservationResponseType response = null;
-
-
+	
         // TODO: CHANGE GENERATED SAMPLE CODE - START
-        if (1==1) throw new UnsupportedOperationException("Not yet implemented");
-        /*
+		log.info("### Virtual service for GetObservation call the source system with logical address: {} and patientId: {}", logicalAddress, request.getPatientId().getExtension());
 
-		log.info("### Virtual service for GetObservation call the source system with logical address: {} and patientId: {}", logicalAddress, request.getSubjectOfCareId());
-
-		response = (GetObservationResponseType)testDb.processRequest(logicalAddress, request.getSubjectOfCareId());
+		GetObservationResponseType response = (GetObservationResponseType)testDb.processRequest(logicalAddress, request.getPatientId().getExtension());
         if (response == null) {
         	// Return an empty response object instead of null if nothing is found
         	response = new GetObservationResponseType();
         }
 
-		log.info("### Virtual service got {} booknings in the reply from the source system with logical address: {} and patientId: {}", new Object[] {response.getRequestActivity().size(), logicalAddress, request.getSubjectOfCareId()});
+		log.info("### Virtual service got {} observations in the reply from the source system with logical address: {} and patientId: {}", 
+				new Object[] {response.getObservation().size(), logicalAddress, request.getPatientId().getExtension()});
 
-        */
         // TODO: CHANGE GENERATED SAMPLE CODE - END
 
 

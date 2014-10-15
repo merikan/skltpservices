@@ -1,40 +1,26 @@
 package se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic.getaggregatedobservation;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.junit.Ignore;
-
-import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentResponseType;
-import se.skltp.agp.service.api.QueryObject;
-import se.skltp.agp.service.api.RequestListFactory;
 
 public class RequestListFactoryTest {
 	
-	private RequestListFactory testObject = new RequestListFactoryImpl();
-	
 	@Test
 	public void isPartOf(){
-		List<String> careUnitIdList = Arrays.asList("UNIT1","UNIT2");
-		assertTrue(new RequestListFactoryImpl().isPartOf(careUnitIdList, "UNIT2"));
-		assertTrue(new RequestListFactoryImpl().isPartOf(careUnitIdList, "UNIT1"));
+
+		assertTrue(new RequestListFactoryImpl().isPartOf("UNIT2", "UNIT2"));
 		
-		careUnitIdList = new ArrayList<String>();
-		assertTrue(new RequestListFactoryImpl().isPartOf(careUnitIdList, "UNIT1"));
+		assertTrue(new RequestListFactoryImpl().isPartOf(null, "UNIT2"));
 		
-		careUnitIdList = null;
-		assertTrue(new RequestListFactoryImpl().isPartOf(careUnitIdList, "UNIT1"));
+		assertTrue(new RequestListFactoryImpl().isPartOf("", "UNIT2"));
 	}
 	
 	@Test
 	public void isNotPartOf(){
-		List<String> careUnitIdList = Arrays.asList("UNIT1","UNIT2");
-		assertFalse(new RequestListFactoryImpl().isPartOf(careUnitIdList, "UNIT3"));
-		assertFalse(new RequestListFactoryImpl().isPartOf(careUnitIdList, null));
+		assertFalse(new RequestListFactoryImpl().isPartOf("UNIT2", "UNIT3"));
+		assertFalse(new RequestListFactoryImpl().isPartOf("UNIT2", null));
 	}
 	
 }
