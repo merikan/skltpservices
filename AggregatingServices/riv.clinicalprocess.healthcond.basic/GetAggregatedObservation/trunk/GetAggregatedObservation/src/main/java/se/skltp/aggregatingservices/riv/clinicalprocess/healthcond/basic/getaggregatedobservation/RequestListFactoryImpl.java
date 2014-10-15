@@ -1,13 +1,12 @@
 package se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic.getaggregatedobservation;
 
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.util.ThreadSafeSimpleDateFormat;
@@ -24,42 +23,27 @@ public class RequestListFactoryImpl implements RequestListFactory {
 	private static final ThreadSafeSimpleDateFormat df = new ThreadSafeSimpleDateFormat("YYYYMMDDhhmmss");
 
 	/**
-	 * Filtrera svarsposter från i EI (ei-engagement) baserat parametrar i GetObservation requestet (req).
+	 * Filtrera svarsposter från i EI (ei-engagement) baserat parametrar i GetMeasurement requestet (req).
 	 * Följande villkor måste vara sanna för att en svarspost från EI skall tas med i svaret:
 	 * 
-	 * 1. req.fromDate <= ei-engagement.mostRecentContent <= req.toDate
-	 * 2. req.careUnitId.size == 0 or req.careUnitId.contains(ei-engagement.logicalAddress)
+	 * 1. req.getSourceSystemId == null or req.getSourceSystemId == "" or req.getSourceSystemId == ei-engagement.logicalAddress
 	 * 
 	 * Svarsposter från EI som passerat filtreringen grupperas på fältet sourceSystem samt postens fält logicalAddress (= PDL-enhet) samlas i listan careUnitId per varje sourceSystem
 	 * 
 	 * Ett anrop görs per funnet sourceSystem med följande värden i anropet:
 	 * 
 	 * 1. logicalAddress = sourceSystem (systemadressering)
-	 * 2. subjectOfCareId = orginal-request.subjectOfCareId
-	 * 3. careUnitId = listan av PDL-enheter som returnerats från EI för aktuellt source system)
-	 * 4. fromDate = orginal-request.fromDate
-	 * 5. toDate = orginal-request.toDate
+	 * 2. request = originalRequest (ursprungligt anrop från konsument)
 	 */
+	@Override
 	public List<Object[]> createRequestList(QueryObject qo, FindContentResponseType src) {
 
 		GetObservationType originalRequest = (GetObservationType)qo.getExtraArg();
-
-		// TODO: CHANGE GENERATED SAMPLE CODE - START
-        if (1==1) throw new UnsupportedOperationException("Not yet implemented");
-
-		Date reqFrom = null;
-		Date reqTo   = null;
-		List<String> reqCareUnitList = null;
-
-        /*
-
-		reqFrom = parseTs(originalRequest.getFromDate());
-		reqTo   = parseTs(originalRequest.getToDate());
-		reqCareUnitList = originalRequest.getCareUnitId();
-
-        */
-		// TODO: CHANGE GENERATED SAMPLE CODE - END
-
+		// TODO: CHANGE GENERATED CODE - START
+		//Date reqFrom = parseTs(originalRequest.getFromDate());
+		//Date reqTo   = parseTs(originalRequest.getToDate());
+		String reqCareUnit = originalRequest.getSourceSystemId().getExtension();
+		// TODO: CHANGE GENERATED CODE - END
 
 		FindContentResponseType eiResp = (FindContentResponseType)src;
 		List<EngagementType> inEngagements = eiResp.getEngagement();
@@ -71,17 +55,18 @@ public class RequestListFactoryImpl implements RequestListFactory {
 		for (EngagementType inEng : inEngagements) {
 
 			// Filter
-
-			// TODO: CHANGE GENERATED SAMPLE CODE - START
-            if (1==1) throw new UnsupportedOperationException("Not yet implemented");
-
-			if (isBetween(reqFrom, reqTo, inEng.getMostRecentContent()) &&
-				isPartOf(reqCareUnitList, inEng.getLogicalAddress())) {
-
-			// TODO: CHANGE GENERATED SAMPLE CODE - END
+			// TODO: CHANGE GENERATED CODE - START
+			//if (isBetween(reqFrom, reqTo, inEng.getMostRecentContent()) &&
+			//	isPartOf(reqCareUnitList, inEng.getLogicalAddress())) {
+			
+			//TKB 4.1 Uppdatering av engagemangsindex
+			//LogicalAddress: Samma värde som fältet Source System.
+			
+			if (isPartOf(reqCareUnit, inEng.getLogicalAddress())) {
+			// TODO: CHANGE GENERATED CODE - END
 
 				// Add pdlUnit to source system
-				log.debug("Add SS: {} for PDL unit: {}", inEng.getSourceSystem(), inEng.getLogicalAddress());
+				log.debug("Add source system: {} for PDL unit: {}", inEng.getSourceSystem(), inEng.getLogicalAddress());
 				addPdlUnitToSourceSystem(sourceSystem_pdlUnitList_map, inEng.getSourceSystem(), inEng.getLogicalAddress());
 			}
 		}
@@ -94,25 +79,13 @@ public class RequestListFactoryImpl implements RequestListFactory {
 		for (Entry<String, List<String>> entry : sourceSystem_pdlUnitList_map.entrySet()) {
 
 			String sourceSystem = entry.getKey();
-            GetObservationType request = new GetObservationType();
 
+			if (log.isInfoEnabled()) log.info("Calling source system using logical address {} for patient id {}", sourceSystem, originalRequest.getPatientId().getExtension());
 
-            // TODO: CHANGE GENERATED SAMPLE CODE - START
-            if (1==1) throw new UnsupportedOperationException("Not yet implemented");
-            /*
-
-			if (log.isInfoEnabled()) log.info("Calling source system using logical address {} for subject of care id {}", sourceSystem, originalRequest.getSubjectOfCareId());
-
- 			List<String> careUnitList = entry.getValue();
-
-			request.setSubjectOfCareId(originalRequest.getSubjectOfCareId());
-			request.getCareUnitId().addAll(careUnitList);
-			request.setFromDate(originalRequest.getFromDate());
-			request.setToDate(originalRequest.getToDate());
-
-			*/
-			// TODO: CHANGE GENERATED SAMPLE CODE - END
-
+			// TODO: CHANGE GENERATED CODE - START
+			GetObservationType request = originalRequest;
+			// TODO: CHANGE GENERATED CODE - END
+			
 			Object[] reqArr = new Object[] {sourceSystem, request};
 			
 			reqList.add(reqArr);
@@ -123,40 +96,40 @@ public class RequestListFactoryImpl implements RequestListFactory {
 		return reqList;
 	}
 
-	Date parseTs(String ts) {
-		try {
-			if (ts == null || ts.length() == 0) {
-				return null;
-			} else {
-				return df.parse(ts);
-			}
-		} catch (ParseException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	boolean isBetween(Date from, Date to, String tsStr) {
-		try {
-			if (log.isDebugEnabled()) {
-				log.debug("Is {} between {} and ", new Object[] {tsStr, from, to});
-			}
-			
-			Date ts = df.parse(tsStr);
-			if (from != null && from.after(ts)) return false;
-			if (to != null && to.before(ts)) return false;
-			return true;
-		} catch (ParseException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	boolean isPartOf(List<String> careUnitIdList, String careUnit) {
+//	Date parseTs(String ts) {
+//		try {
+//			if (ts == null || ts.length() == 0) {
+//				return null;
+//			} else {
+//				return df.parse(ts);
+//			}
+//		} catch (ParseException e) {
+//			throw new RuntimeException(e);
+//		}
+//	}
+//
+//	boolean isBetween(Date from, Date to, String tsStr) {
+//		try {
+//			if (log.isDebugEnabled()) {
+//				log.debug("Is {} between {} and ", new Object[] {tsStr, from, to});
+//			}
+//			
+//			Date ts = df.parse(tsStr);
+//			if (from != null && from.after(ts)) return false;
+//			if (to != null && to.before(ts)) return false;
+//			return true;
+//		} catch (ParseException e) {
+//			throw new RuntimeException(e);
+//		}
+//	}
+	
+	boolean isPartOf(String careUnitId, String careUnit) {
 		
-		log.debug("Check presence of {} in {}", careUnit, careUnitIdList);
+		log.debug("Check careunit {} equals expected {}", careUnitId, careUnit);
 		
-		if (careUnitIdList == null || careUnitIdList.size() == 0) return true;
+		if (StringUtils.isBlank(careUnitId)) return true;
 		
-		return careUnitIdList.contains(careUnit);
+		return careUnitId.equals(careUnit);
 	}
 
 	void addPdlUnitToSourceSystem(Map<String, List<String>> sourceSystem_pdlUnitList_map, String sourceSystem, String pdlUnitId) {

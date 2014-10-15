@@ -24,20 +24,15 @@ public class ResponseListFactoryImpl implements ResponseListFactory {
 
 
         // TODO: CHANGE GENERATED SAMPLE CODE - START
-        if (1==1) throw new UnsupportedOperationException("Not yet implemented");
-        /*
-
-	    for (Object object : aggregatedResponseList) {
-	    	GetObservationResponseType response = (GetObservationResponseType)object;
-			aggregatedResponse.getRequestActivity().addAll(response.getRequestActivity());
+		for (Object object : aggregatedResponseList) {
+			GetObservationResponseType response = (GetObservationResponseType)object;
+			aggregatedResponse.getObservation().addAll(response.getObservation());
 		}
 
 	    if (log.isInfoEnabled()) {
-    		String subjectOfCareId = queryObject.getFindContent().getRegisteredResidentIdentification();
-        	log.info("Returning {} aggregated remisstatus for subject of care id {}", aggregatedResponse.getRequestActivity().size() ,subjectOfCareId);
+    		String patientId = queryObject.getFindContent().getRegisteredResidentIdentification();
+        	log.info("Returning {} aggregated observations for patient id {}", aggregatedResponse.getObservation().size() ,patientId);
         }
-
-        */
         // TODO: CHANGE GENERATED SAMPLE CODE - END
 
 
