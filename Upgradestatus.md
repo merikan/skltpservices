@@ -1,0 +1,7 @@
+# Status on the migration to googlecode #
+
+| **Action** | **Status** |
+|:-----------|:-----------|
+| Source code migration | done       |
+| Update links in pom.xml | done       |
+| Move documentation | done       |

@@ -1,0 +1,27 @@
+SKL TP Services
+  * [Aggregated services](AggregatedServices.md)
+    * [How to deploy](HowToDeployAggregatedServices.md)
+  * [Virtual services](VirtualServices.md)
+    * [How to deploy](HowToDeployServices.md)
+    * [Generate virtual services for Service platform](Tools.md)
+    * [Soap UI project for testing](VpSoapUiProjects.md)
+  * [Adapter services](TransformationServices.md)
+    * [clinicalprocess:requestworkflow](TransformationServicesClinicalprocessRequestworkflow.md)
+    * [crm:listing](TransformationServicesCrmListing.md)
+      * [HVAL24](TransformationServicesCrmListingHval.md)
+    * [crm:scheduling](TransformationServicesCrmScheduling.md)
+      * [TakeCare](TransformationServicesCrmSchedulingTakeCare.md)
+    * [insuranceprocess:healthreporting](TransformationServicesInsuranceprocessHealthreporting.md)
+      * [FkEintygAdapter](TransformationServicesInsuranceprocessHealthreportingFK.md)
+        * [Installationsanvisningar](FkEintygAdapter_Installtionsanvisningar.md)
+      * [Wiretap](Wiretap.md)
+        * [Arkitekturbeskrivning](Wiretap_Arkitekturbeskrivning.md)
+        * [Installationsanvisningar](Wiretap_Installtionsanvisningar.md)
+    * [se\_apotekensservice (AXS, etc)](TransformationServicesSeApotekenService.md)
+      * [Apotekens Service](TransformationServicesSeApotekenServiceApotekenService.md)
+    * [ehr:accesscontrol](TransformationServicesEhrAccesscontrol.md)
+      * [DominoHttp10Adapter](TransformationServicesEhrAccesscontrolDominoHttp10Adapter.md)
+
+
+
+  * [FAQ](FAQ.md)

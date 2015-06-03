@@ -1,0 +1,22 @@
+
+
+# Introduction #
+
+
+
+---
+
+**DEPRECATED** from tag version 2.0.0 (built for Mule 3.3.1) see general developer guidelines in SKLTP wiki.
+
+
+# Installation instructions mule 2.2.8 #
+
+## Runtime environment ##
+
+## Download distribution ##
+
+## Build from source ##
+
+## Deploy/Undeploy distribution ##
+
+## Configuration ##

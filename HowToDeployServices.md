@@ -1,0 +1,84 @@
+
+
+# Introduction #
+
+This pages contains instructions on how to deploy an already built service onto the Service Virtualization Platform for Service Oriented integration.
+
+## Before deploying in production ##
+
+Turn off any alarms that will trigger emails and warnings because any of the production servers are shutdown.
+
+## Deploy Steps VP 1.3.x ##
+  1. Download jar/zip file/s containing services from [downloads](http://code.google.com/p/skltpservices/downloads/list)
+  1. If download is a zip, unzip all the containing jars
+  1. Copy jar files to **`$VP_HOME/vp/services/`** directory
+  1. Restart server (one node at the time in QA and Prod) according to TP 1.3.x instructions. Tail the log file: tail -555f `$MULE_HOME/logs/vp.log` at the same time.
+  1. Verify no error occurred during startup in logs, `$MULE_HOME/logs/vp.log`
+
+## Deploy Steps VP 2.x ##
+  1. Download jar/zip file/s containing services from [downloads](http://code.google.com/p/skltpservices/downloads/list)
+  1. If download is a zip, unzip all the containing jars into /home/mule/vpservices\_master where all previous services is stored
+  1. Copy jar files to **`$MULE_HOME/apps/vp-services-{version}/lib`** directory
+  1. Touch mule-config file, eg $MULE\_HOME/apps/vp-services.../vp-config.xml to get the VP-app to restart and reload services. Tail the log file: tail -555f `$MULE_HOME/logs/mule-app-vp.log` at the same time.
+  1. Verify no error occurred during restart in logs, `$MULE_HOME/logs/mule-app-vp.log`
+
+## In case of errors when deploying new services ##
+
+In case the service platform does not start because of the new services deployed
+
+  * Capture the errorlog to use when reporting the error
+  * Remove the newly deployed service
+  * Restart server
+
+## Errors that may occur in logs when deploying ##
+
+Here we try to add errors that may occur during deploy and what to do to solve them.
+
+### Service with the same listener already defined ###
+
+This could be the case when we deploy a new version of an older service.
+
+If a service exist with the same listener already defined you get the following exception. Solution is to remove one of the services with the registered listener or change one of the listeners.
+
+```
+vice{Get-HamtaPatientInfo-service-urn:riv:se.apotekensservice:axs:HamtaPatientInfo:1:rivtabp20}
+INFO  2012-04-04 12:48:18,263 [WrapperListener_start_runner] org.mule.transport.cxf.CxfConnector: Registering listener: Get-HamtaPatientInfo-service-urn:riv:se.apotekensservice:axs:HamtaPatientInfo:1:rivtabp20 on endpointUri: https://192.168.25.82:20000/vp/HamtaPatientInfo/1/rivtabp20
+ERROR 2012-04-04 12:48:18,267 [WrapperListener_start_runner] org.mule.MuleServer: 
+********************************************************************************
+Message               : There is already a listener registered on this connector on endpointUri: https://192.168.25.82:20000/vp/HamtaPatientInfo/1/rivtabp20. Connector that caused exception is: CxfConnector{this=6a4d37e5, started=true, initialised=true, name='connector.cxf.0', disposed=false, numberOfConcurrentTransactedReceivers=4, createMultipleTransactedReceivers=true, connected=true, supportedProtocols=[cxf, cxf:http, cxf:https, cxf:jms, cxf:vm], serviceOverrides=null}
+Type                  : org.mule.api.transport.ConnectorException
+Code                  : MULE_ERROR-68035
+JavaDoc               : http://www.mulesource.org/docs/site/current2/apidocs/org/mule/api/transport/ConnectorException.html
+********************************************************************************
+Exception stack is:
+1. There is already a listener registered on this connector on endpointUri: https://192.168.25.82:20000/vp/HamtaPatientInfo/1/rivtabp20. Connector that caused exception is: CxfConnector{this=6a4d37e5, started=true, initialised=true, name='connector.cxf.0', disposed=false, numberOfConcurrentTransactedReceivers=4, createMultipleTransactedReceivers=true, connected=true, supportedProtocols=[cxf, cxf:http, cxf:https, cxf:jms, cxf:vm], serviceOverrides=null} (org.mule.api.transport.ConnectorException)
+  org.mule.transport.AbstractConnector:1246 (http://www.mulesource.org/docs/site/current2/apidocs/org/mule/api/transport/ConnectorException.html)
+********************************************************************************
+Root Exception stack trace:
+org.mule.api.transport.ConnectorException: There is already a listener registered on this connector on endpointUri: https://192.168.25.82:20000/vp/HamtaPatientInfo/1/rivtabp20. Connector that caused exception is: CxfConnector{this=6a4d37e5, started=true, initialised=true, name='connector.cxf.0', disposed=false, numberOfConcurrentTransactedReceivers=4, createMultipleTransactedReceivers=true, connected=true, supportedProtocols=[cxf, cxf:http, cxf:https, cxf:jms, cxf:vm], serviceOverrides=null}
+	at org.mule.transport.AbstractConnector.registerListener(AbstractConnector.java:1246)
+	at org.mule.service.AbstractService.registerListeners(AbstractService.java:595)
+	at org.mule.service.AbstractService.start(AbstractService.java:316)
+	at org.mule.service.AbstractService.start(AbstractService.java:293)
+	at sun.reflect.GeneratedMethodAccessor37.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.mule.lifecycle.DefaultLifecyclePhase.applyLifecycle(DefaultLifecyclePhase.java:272)
+	at org.mule.lifecycle.DefaultLifecyclePhase.applyLifecycle(DefaultLifecyclePhase.java:128)
+	at org.mule.lifecycle.GenericLifecycleManager.firePhase(GenericLifecycleManager.java:84)
+	at org.mule.DefaultMuleContext.start(DefaultMuleContext.java:186)
+	at org.mule.MuleServer.run(MuleServer.java:267)
+	at org.mule.MuleServer.start(MuleServer.java:252)
+	at org.mule.module.boot.MuleServerWrapper.start(MuleServerWrapper.java:48)
+	at org.tanukisoftware.wrapper.WrapperManager$12.run(WrapperManager.java:3925)
+```
+
+## Verify service from soapUI ##
+
+  * In soapUI go to File => New soapUI Project
+  * Fill in a _Project Name_
+  * Fill in a _Initial WSDL/WADL_ where URL of WSDL is `{inbound-endpoint adress}?wsdl`. The URL can be found in the descriptor file that was created when running the virtualization generator.
+> > For example:
+> > `https://qa.esb.ntjp.sjunet.org:20000/vp/GetSubjectOfCareSchedule/1/rivtabp21?wsdl`
+  * Press OK and wait for the wsdl-file to load and create a request in SoapUI.
+

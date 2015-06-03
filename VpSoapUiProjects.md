@@ -1,0 +1,13 @@
+# Introduction #
+
+This page contains information on how to use SOAPUI. You can also download existing projects in SOAPUI.
+
+
+# Details #
+
+## Getting started with SOAPUI ##
+First thing you need to do is download the latest version of SOAPUI. This can be done here:
+[SOAPUI](http://www.soapui.org/). When it's finished downloading, install the program. Now you're finished to start using the program. Now you can chose to either create new projects or import existing projects.
+
+## Importing projects ##
+You can import an already existing project File/Import project. There are already projects created for the services of Tjänsteplattformen. These can be found here: [downloads](http://code.google.com/p/skltpservices/downloads/list)

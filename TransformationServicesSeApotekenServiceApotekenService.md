@@ -1,0 +1,195 @@
+
+
+# Förutsättningar #
+
+  * Java 1.6 eller senare är installerat. Se [http://www.oracle.com/technetwork/java/javase/index-137561.html](http://www.oracle.com/technetwork/java/javase/index-137561.html) för nedladdning- och installationsanvisningar. Teknisk verifiering har dock endast gjorts med Java SE 6 Update 27.
+
+  * Mule ESB 2.2.8 är installerad. Den här versionen är ej nedladningsbar från Mulesoft men kan byggas från källkod med hjälp av Maven. Källkoden för version 2.2.8 finns tillgänglig på [http://svn.codehaus.org/mule/tags/mule-2.2.8/](http://svn.codehaus.org/mule/tags/mule-2.2.8/)
+
+# Bygga källkoden #
+
+## Checka ut koden ##
+
+Följ instruktionen på https://code.google.com/p/skltpservices/source/checkout
+
+## Lägg till schema filer ##
+Lägg till eller uppdatera schema-filerna (wsdl, xsd från rivta) i
+```
+/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/src/main/resources/schemas
+
+```
+
+## Lägg till tjänster ##
+Om nya tjänster läggs till skapa xml-fil för varje ny tjänst
+```
+/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/src/main/app/services
+
+```
+
+## Uppdatera endpoints för samtliga tjänster ##
+```
+/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/src/environment/ApSeIntegrationComponent-config.properties
+
+```
+
+## Uppdatera pom.xml för schemafiler ##
+```
+/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/pom.xml
+
+Uppdatera pom.xml så att den innehåller korrekta sökvägar till schema-filer och rätt versioner av kontrakt.
+
+```
+
+## Bygga från källkoden ##
+
+```
+cd ApotekensServiceAdapterService/trunk
+
+mvn clean install
+```
+
+## Starta och verifiera  från källkoden ##
+
+Det finns möjlighet att testa tjänsten lokalt genom att starta den med följande kommando
+
+```
+cd ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC
+
+ mvn -PmuleServer
+```
+
+Om allt startar upp korrekt finns följande i konsol-loggen
+
+```
+**********************************************************************
+* Mule ESB and Integration Platform                                  *
+* Version: 2.2.8 Build: 25325                                        *
+* MuleSoft, Inc.                                                     *
+* For more information go to http://www.mulesoft.org                 *
+*                                                                    *
+* Server started: 9/17/13 9:46 PM                                    *
+* Server ID: d778f043-1fd1-11e3-8cb9-01f7cb70d861                    *
+* JDK: 1.6.0_51 (mixed mode)                                         *
+* OS encoding: MacRoman, Mule encoding: UTF-8                        *
+* OS: Mac OS X (10.8.4, x86_64)                                      *
+* Host: xyz-abc.local (192.168.0.125)                          *
+*                                                                    *
+* Agents Running:                                                    *
+*   JMX Agent                                                        *
+**********************************************************************
+```
+
+Och med hjälp av soapUI projekt köra test-anrop. Importera ApSeMedicalServicesAdapter-soapui-project.xml som återfinns i roten på det utcheckade projektet ApotekensServiceAdapterService.
+
+## Deploy ##
+
+De filer som behöver deployas är:
+
+QA
+```
+/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/target/ApSeMedicalServicesAdapterIC-<version>-tests.jar
+```
+
+```
+/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/target/ApSeMedicalServicesAdapterIC-<version>.jar
+```
+
+```
+/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/target/ApSeMedicalServicesAdapterIC-Schemas-<version>.jar 
+```
+
+PROD
+```
+/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/target/ApSeMedicalServicesAdapterIC-<version>.jar
+```
+
+```
+/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC-Schemas/target/ApSeMedicalServicesAdapterIC-Schemas-<version>.jar
+```
+
+# Installationsanvisning mule 2.2.8 #
+
+## Runtime environment ##
+
+See [Adapterplatform](http://code.google.com/p/skltp/wiki/InstallationServiceBridge)
+
+## Ladda ner applikationen ##
+
+Ladda ner applikationen och dess beroenden
+```
+wget https://skltpservices.googlecode.com/files/ApSeMedicalServicesAdapterIC-1.6.6.jar
+wget https://skltpservices.googlecode.com/files/ApSeMedicalServicesAdapterIC-Schemas-1.6.6.jar
+```
+
+Om teststubbar skall installeras, ladda ner dem
+```
+wget https://skltpservices.googlecode.com/files/ApSeMedicalServicesAdapterIC-1.6.6-tests.jar
+```
+
+## Installera applikationen ##
+
+Kopera applikationen och dess beroenden till /services
+```
+cp ApSeMedicalServicesAdapterIC-1.6.6.jar /home/mule/vp/vp-home/tjanstebryggan/services
+cp ApSeMedicalServicesAdapterIC-Schemas-1.6.6.jar /home/mule/vp/vp-home/tjanstebryggan/services
+```
+
+## Starta upp Mule 2.2.8 och verifiera i logfil ##
+
+```
+tail -f /home/mule/vp/mule-standalone-2.2.8/logs/anslutning.log
+/home/mule/vp/mule-standalone-2.2.8/mule start -config tb-config.xml
+```
+
+Om allt startar upp ok ser man följande i loggen
+
+```
+**********************************************************************
+* Mule ESB and Integration Platform                                  *
+* Version: 2.2.8 Build: 25325                                        *
+* MuleSoft, Inc.                                                     *
+* For more information go to http://www.mulesoft.org                 *
+*                                                                    *
+* Server started: 9/17/13 9:46 PM                                    *
+* Server ID: d778f043-1fd1-11e3-8cb9-01f7cb70d861                    *
+* JDK: 1.6.0_51 (mixed mode)                                         *
+* OS encoding: MacRoman, Mule encoding: UTF-8                        *
+* OS: Mac OS X (10.8.4, x86_64)                                      *
+* Host: xyz-abc.local (192.168.0.125)                          *
+*                                                                    *
+* Agents Running:                                                    *
+*   JMX Agent                                                        *
+**********************************************************************
+```
+
+
+## Configuration ##
+
+[Config files](http://skltpservices.googlecode.com/svn/AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk/ApSeMedicalServicesAdapterIC/src/environment/)
+
+
+
+# Build from source #
+
+För att kunna bygga från källkoden behöver man sätta upp minnet som maven har tillgång till
+```
+export MAVEN_OPTS='-Xms512m -Xmx2048m -XX:MaxPermSize=256m -Dfile.encoding=UTF-8'
+```
+
+[Instructions how to checkout source](https://code.google.com/p/skltpservices/source/checkout)
+
+  1. `Build AdapterServices/riv.se_apotekensservice/TicketMachine`
+  1. `Build AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService`
+
+How to build Ticketmachine in trunk
+```
+cd AdapterServices/riv.se_apotekensservice/TicketMachine/trunk
+mvn clean install 
+```
+
+
+How to build `ApotekensServiceAdapterService` in trunk
+```
+cd AdapterServices/riv.se_apotekensservice/ApotekensServiceAdapterService/trunk
+mvn clean install 
+```

@@ -1,0 +1,58 @@
+
+
+# Introduction #
+
+Domino HTTP 1.0 adapter is used to handle the case when a producer is running an application that does not support HTTP 1.1 and therefore can not handle the case that Mule 2.2.8 sends transferencoding chunked. The adapter only forces the outgoing http request to use http 1.0.
+
+
+
+
+---
+
+**DEPRECATED** from tag version 2.0.0 (built for Mule 3.3.1) see general developer guidelines in SKLTP wiki.
+
+https://skl-tp.atlassian.net/wiki/display/SKLTPservices/AnP+-+DominoHttp10Adapter
+
+# Installation instructions mule 2.2.8 #
+
+## Build from source ##
+
+Checkout code and run mvn clean install or mvn clean package.
+
+```
+https://code.google.com/p/skltpservices/source/browse/AdapterServices/riv.ehr.accesscontrol/DominoHttp10Adapter
+```
+
+
+## Deploy/Undeploy distribution ##
+
+Deploy the adapter by
+  1. copying the ehr-accescontrol-schemas found in RIV TA into the folder `<vp-home>/tjanstebryggan/services`.
+  1. copying the DominoHttp10Adapter-1.0.1.jar into the folder `<vp-home>/tjanstebryggan/services`.
+  1. Configure as described below in Configuration
+  1. Restart Mule 2
+
+## Configuration ##
+
+When running in adapter platform on Mule 2 the properties in DominoHttp10Adapter-config.properties needs to be added to the adapter platform config file tb-config.properties.
+
+## Adding endpoints to the adapter ##
+To extend DominoHttp10Adapter with more endpoints you need to add more services to the file:
+
+/AdapterServices/riv.ehr.accesscontrol/DominoHttp10Adapter/trunk/src/main/app/services/AssertCareEngagement-domino-service.xml
+
+Copy a service element and replace the existing number with a new one:
+```
+		<service name="AssertCareEngagement-domino-http-adapter-30">
+			<inbound>
+				<https:inbound-endpoint address="${inbound.endpoint.dominohttpadapter.30}" synchronous="true" />
+			</inbound>
+			<outbound>
+				<pass-through-router>
+					<https:outbound-endpoint synchronous="true" address="${outbound.endpoint.dominohttpadapter.30}" transformer-refs="httpVersionTransformer"/>
+				</pass-through-router>
+			</outbound>
+		</service>	 
+```
+
+A new version of DominoHttp10Adapter needs to be deployed after this change.

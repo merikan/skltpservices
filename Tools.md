@@ -1,0 +1,1 @@
+Sidan flyttad till SKLTP Wiki på https://skl-tp.atlassian.net/wiki/pages/viewpage.action?pageId=9535526

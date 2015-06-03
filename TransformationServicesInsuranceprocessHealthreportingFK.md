@@ -1,0 +1,26 @@
+
+
+# Introduktion #
+
+Denna anpassningstjänst använda för att vården skall kunna kommunicera med Försäkringskassan och vice versa i flödet kring hantering av läkarintyg.
+
+# Release information #
+
+## 1.6.1 ##
+Mule 2
+
+## 2.0.0 ##
+Adapter uppgraderad för att kunna deploys på Mule 3
+
+## 2.0.1 ##
+Tillägg av tjänsten revoke transform
+
+## 2.0.2 ##
+Teststubbar skal kunna konfigureras både för http/https
+Omstrukturering och förtydligande i FkIntegrationComponent-config.properties för att förenkla förvaltning och förståelse
+
+## 2.0.3 ##
+https://code.google.com/p/skltpservices/source/detail?r=2776
+
+# Detaljer #
+  * FkEintygAdapter\_Installtionsanvisningar Installationsanvisning samt konfiguration
